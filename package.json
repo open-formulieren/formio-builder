@@ -1,0 +1,26 @@
+{
+  "name": "@open-formulieren/formio-builder",
+  "version": "0.1.0",
+  "description": "An opinionated Formio webform builder for Open Forms",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/open-formulieren/formio-builder.git"
+  },
+  "keywords": [
+    "formio",
+    "webform",
+    "builder",
+    "react",
+    "typescript"
+  ],
+  "author": "Sergei Maertens <sergei@maykinmedia.nl>",
+  "license": "EUPL-1.2",
+  "bugs": {
+    "url": "https://github.com/open-formulieren/formio-builder/issues"
+  },
+  "homepage": "https://github.com/open-formulieren/formio-builder#readme"
+}
