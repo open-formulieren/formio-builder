@@ -4,7 +4,12 @@
   "description": "An opinionated Formio webform builder for Open Forms",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build": "npm-run-all build:*",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write 'src/**/*'",
+    "checkformat": "prettier --check 'src/**/*'"
   },
   "repository": {
     "type": "git",
@@ -22,5 +27,14 @@
   "bugs": {
     "url": "https://github.com/open-formulieren/formio-builder/issues"
   },
-  "homepage": "https://github.com/open-formulieren/formio-builder#readme"
+  "homepage": "https://github.com/open-formulieren/formio-builder#readme",
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.3"
+  }
 }
