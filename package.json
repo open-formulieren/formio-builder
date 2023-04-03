@@ -2,7 +2,18 @@
   "name": "@open-formulieren/formio-builder",
   "version": "0.1.0",
   "description": "An opinionated Formio webform builder for Open Forms",
-  "main": "lib/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/cjs/index.js"
+    },
+    "./esm/": "./lib/esm/",
+    "./lib/": "./lib/"
+  },
   "scripts": {
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
@@ -11,6 +22,9 @@
     "format": "prettier --write 'src/**/*'",
     "checkformat": "prettier --check 'src/**/*'"
   },
+  "files": [
+    "lib/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/open-formulieren/formio-builder.git"
