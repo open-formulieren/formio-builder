@@ -15,12 +15,15 @@
     "./lib/": "./lib/"
   },
   "scripts": {
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "ttsc",
+    "build:cjs": "ttsc --module commonjs --outDir lib/cjs",
     "build": "npm-run-all build:*",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write 'src/**/*'",
-    "checkformat": "prettier --check 'src/**/*'"
+    "checkformat": "prettier --check 'src/**/*'",
+    "start": "npm run storybook",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "files": [
     "lib/"
@@ -46,12 +49,38 @@
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4",
+    "@formatjs/ts-transformer": "^3.12.0",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/client-api": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/react": "^18.0.33",
+    "babel-loader": "^8.3.0",
+    "babel-plugin-formatjs": "^10.4.0",
     "bootstrap": "^4.5.2",
+    "formiojs": "^4.14.13",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "typescript": "^5.0.3"
+    "storybook": "^6.5.16",
+    "storybook-react-intl": "^1.1.1",
+    "ttypescript": "^1.5.15",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "formik": "^2.2.9",
+    "react-intl": "^6.3.2"
   }
 }
