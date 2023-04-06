@@ -64,6 +64,8 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/lodash.clonedeep": "^4.5.7",
+    "@types/lodash.set": "^4.3.7",
     "@types/react": "^18.0.33",
     "babel-loader": "^8.3.0",
     "babel-plugin-formatjs": "^10.4.0",
@@ -81,6 +83,8 @@
   },
   "dependencies": {
     "formik": "^2.2.9",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.set": "^4.3.2",
     "react-intl": "^6.3.2"
   }
 }
