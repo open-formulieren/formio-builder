@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "lib/esm",
     "module": "esnext",
     "target": "es5",
@@ -16,8 +17,8 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@types": ["./src/types/index"]
+      "@components/*": ["components/*"],
+      "@types": ["types/index"]
     },
     "plugins": [
       {

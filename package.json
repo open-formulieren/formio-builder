@@ -67,6 +67,7 @@
     "@types/lodash.clonedeep": "^4.5.7",
     "@types/lodash.set": "^4.3.7",
     "@types/react": "^18.0.33",
+    "@types/webpack": "^5.28.1",
     "babel-loader": "^8.3.0",
     "babel-plugin-formatjs": "^10.4.0",
     "bootstrap": "^4.5.2",
