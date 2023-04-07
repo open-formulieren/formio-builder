@@ -1,5 +1,6 @@
+import {Tab, TabList, TabPanel, Tabs} from '@components/formio';
+
 import {EditFormDefinition, EditFormProps} from '.';
-import {Tab, TabList, TabPanel, Tabs} from '../components/formio';
 
 /**
  * Form to configure a Formio 'textfield' type component.
