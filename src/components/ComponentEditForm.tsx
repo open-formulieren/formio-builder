@@ -9,7 +9,7 @@ import {EditFormComponentSchema} from '@types';
 import REGISTRY, {Fallback} from '../registry';
 import ComponentPreview from './ComponentPreview';
 
-interface BuilderInfo {
+export interface BuilderInfo {
   title: string;
   group: string;
   icon: string;
