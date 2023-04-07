@@ -56,17 +56,7 @@ const Template = ({
   );
 };
 
-export const Default: ComponentStory<typeof Template> = Template.bind({});
-
-Default.args = {
-  component: {
-    id: 'wekruya',
-    type: 'textfield',
-    label: 'A text field',
-    validate: {
-      required: false,
-    },
-  },
+const defaultArgs = {
   isNew: true,
   otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
   translationsStore: {
@@ -81,5 +71,35 @@ Default.args = {
     icon: 'terminal',
     schema: {placeholder: ''},
     weight: 0,
+  },
+};
+
+export const Default: ComponentStory<typeof Template> = Template.bind({});
+Default.storyName = 'generic';
+
+Default.args = {
+  ...defaultArgs,
+  component: {
+    id: 'wekruya',
+    type: 'textfield',
+    label: 'A text field',
+    validate: {
+      required: false,
+    },
+  },
+};
+
+export const TextField: ComponentStory<typeof Template> = Template.bind({});
+TextField.storyName = 'type: textfield';
+
+TextField.args = {
+  ...defaultArgs,
+  component: {
+    id: 'wekruya',
+    type: 'textfield',
+    label: 'A text field',
+    validate: {
+      required: false,
+    },
   },
 };

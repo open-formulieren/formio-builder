@@ -9,3 +9,4 @@
  * these components - after all, the raison d'être of this library is to make the Open
  * Forms' codebase easier to maintain and tweak.
  */
+export * from './tabs';

@@ -1,10 +1,44 @@
 import {EditFormDefinition, EditFormProps} from '.';
+import {Tab, TabList, TabPanel, Tabs} from '../components/formio';
 
 /**
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
-  return <>TextField!</>;
+  return (
+    <Tabs>
+      <TabList>
+        <Tab>Basis</Tab>
+        <Tab>Locatie</Tab>
+        <Tab>Geavanceerd</Tab>
+        <Tab>Validatie</Tab>
+        <Tab>Registratie</Tab>
+        <Tab>Prefill</Tab>
+        <Tab>Vertalingen</Tab>
+      </TabList>
+
+      {/* Basic tab */}
+      <TabPanel>Basic</TabPanel>
+
+      {/* Location tab */}
+      <TabPanel>Location</TabPanel>
+
+      {/* Advanced tab */}
+      <TabPanel>Advanced</TabPanel>
+
+      {/* Validation tab */}
+      <TabPanel>Validation</TabPanel>
+
+      {/* Registration tab */}
+      <TabPanel>Registration</TabPanel>
+
+      {/* Prefill tab */}
+      <TabPanel>Prefill</TabPanel>
+
+      {/* Translations */}
+      <TabPanel>Translations</TabPanel>
+    </Tabs>
+  );
 };
 
 TextField.defaultValues = {
