@@ -10,3 +10,5 @@
  * Forms' codebase easier to maintain and tweak.
  */
 export * from './tabs';
+export {default as Component} from './component';
+export {default as Tooltip} from './tooltip';
