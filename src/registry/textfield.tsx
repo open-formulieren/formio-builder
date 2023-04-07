@@ -1,3 +1,5 @@
+import {FormattedMessage} from 'react-intl';
+
 import {Tab, TabList, TabPanel, Tabs} from '@components/formio';
 
 import {EditFormDefinition, EditFormProps} from '.';
@@ -9,13 +11,48 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   return (
     <Tabs>
       <TabList>
-        <Tab>Basis</Tab>
-        <Tab>Locatie</Tab>
-        <Tab>Geavanceerd</Tab>
-        <Tab>Validatie</Tab>
-        <Tab>Registratie</Tab>
-        <Tab>Prefill</Tab>
-        <Tab>Vertalingen</Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Basic' tab"
+            defaultMessage="Basic"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Location' tab"
+            defaultMessage="Location"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Advanced' tab"
+            defaultMessage="Advanced"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Validation' tab"
+            defaultMessage="Validation"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Registration' tab"
+            defaultMessage="Registration"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Prefill' tab"
+            defaultMessage="Prefill"
+          />
+        </Tab>
+        <Tab>
+          <FormattedMessage
+            description="Component edit form tab title for 'Translations' tab"
+            defaultMessage="Translations"
+          />
+        </Tab>
       </TabList>
 
       {/* Basic tab */}
