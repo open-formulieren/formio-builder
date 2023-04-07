@@ -3,13 +3,15 @@ import React from 'react';
 import {EditFormComponentSchema} from '@types';
 import {JSONType} from '@types';
 
-interface EditFormDefinition<P> extends React.FC<P> {
+import TextField from './textfield';
+
+export interface EditFormDefinition<P> extends React.FC<P> {
   defaultValues: {
     [key: string]: JSONType;
   };
 }
 
-interface EditFormProps {
+export interface EditFormProps {
   component: EditFormComponentSchema;
 }
 
@@ -23,7 +25,9 @@ interface Registry {
   [key: string]: EditFormDefinition<EditFormProps>;
 }
 
-const REGISTRY: Registry = {};
+const REGISTRY: Registry = {
+  textfield: TextField,
+};
 
 export default REGISTRY;
 export {Fallback};
