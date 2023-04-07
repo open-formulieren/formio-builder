@@ -87,6 +87,6 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.set": "^4.3.2",
     "react-intl": "^6.3.2",
-    "react-tabs": "^6.0.0"
+    "react-tabs": "^4.2.1"
   }
 }
