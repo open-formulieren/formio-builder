@@ -28,6 +28,7 @@ export const Default: ComponentStory<typeof ComponentEditForm> = ({
 Default.args = {
   isNew: true,
   component: {
+    id: 'wekruya',
     type: 'textfield',
     label: 'Text field',
     key: 'textField',

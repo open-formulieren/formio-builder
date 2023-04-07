@@ -1,8 +1,10 @@
 import {Formik} from 'formik';
-import {ComponentSchema} from 'formiojs/types/components/schema';
+import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
 import {FormattedMessage} from 'react-intl';
+
+import {EditFormComponentSchema} from '@types';
 
 import REGISTRY, {Fallback} from '../registry';
 import ComponentPreview from './ComponentPreview';
@@ -12,13 +14,13 @@ interface BuilderInfo {
   group: string;
   icon: string;
   documentation?: string;
-  schema: ComponentSchema;
+  schema: ExtendedComponentSchema;
   weight: number;
 }
 
 export interface ComponentEditFormProps {
   isNew: boolean;
-  component: ComponentSchema;
+  component: EditFormComponentSchema;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;

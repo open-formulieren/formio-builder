@@ -1,6 +1,6 @@
-import {ComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
+import {EditFormComponentSchema} from '@types';
 import {JSONType} from '@types';
 
 interface EditFormDefinition<P> extends React.FC<P> {
@@ -10,7 +10,7 @@ interface EditFormDefinition<P> extends React.FC<P> {
 }
 
 interface EditFormProps {
-  component: ComponentSchema;
+  component: EditFormComponentSchema;
 }
 
 const Fallback: EditFormDefinition<EditFormProps> = ({component: {type}}) => (
