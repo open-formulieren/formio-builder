@@ -10,6 +10,7 @@ export default {
   parameters: {
     modal: {noModal: true},
     formik: {initialValues: {'my-checkbox': false}},
+    docs: {inlineStories: false}, // https://github.com/bbbtech/storybook-formik/issues/51#issuecomment-1136668271
   },
   args: {
     name: 'my-checkbox',
