@@ -45,7 +45,7 @@ Collapsible.play = async ({canvasElement, args}) => {
   const canvas = within(canvasElement);
   await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
 
-  const header = await canvas.findByText(args.title);
+  const header = await canvas.findByText(args.title as string);
   await userEvent.click(header);
   await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
 };
@@ -59,7 +59,7 @@ CollapsibleInitiallyCollapsed.play = async ({canvasElement, args}) => {
   const canvas = within(canvasElement);
   await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
 
-  const header = await canvas.findByText(args.title);
+  const header = await canvas.findByText(args.title as string);
   await userEvent.click(header);
   await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
 };
