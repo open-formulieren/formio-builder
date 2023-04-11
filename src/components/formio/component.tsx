@@ -4,7 +4,7 @@ import React from 'react';
 import Tooltip from './tooltip';
 
 export interface ComponentProps {
-  type: 'textfield' | 'select'; // TODO: can this be inferred from somewhere?
+  type: 'textfield' | 'select' | 'checkbox'; // TODO: can this be inferred from somewhere?
   required?: boolean;
   label?: React.ReactNode;
   tooltip?: string;
