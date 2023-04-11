@@ -10,6 +10,7 @@ import {
   Label,
   Multiple,
   Placeholder,
+  PresentationConfig,
   ReadOnly,
   ShowCharCount,
 } from '@components/builder';
@@ -74,6 +75,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
         <Label />
         <Key />
         <Description />
+        <PresentationConfig />
         <Multiple />
         <Hidden />
         <ClearOnHide />
@@ -117,6 +119,9 @@ TextField.defaultValues = {
   label: '',
   key: '',
   description: '',
+  showInSummary: true,
+  showInEmail: false,
+  showInPDF: true,
   multiple: false,
   hidden: false,
   clearOnHide: true,
