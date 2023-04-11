@@ -9,6 +9,9 @@ module.exports = {
     'storybook-react-intl',
     '@bbbtech/storybook-formik/register',
   ],
+  features: {
+    interactionsDebugger: true,
+  },
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-webpack5',
