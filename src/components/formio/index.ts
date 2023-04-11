@@ -14,3 +14,4 @@ export {default as Component} from './component';
 export {default as Tooltip} from './tooltip';
 export {default as TextField} from './textfield';
 export {default as Checkbox} from './checkbox';
+export {default as Panel} from './panel';
