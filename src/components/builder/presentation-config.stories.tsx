@@ -10,6 +10,8 @@ export default {
   parameters: {
     controls: {hideNoControlsWarning: true},
     docs: {
+      inlineStories: false, // https://github.com/bbbtech/storybook-formik/issues/51#issuecomment-1136668271
+      iframeHeight: 260,
       source: {
         type: 'dynamic',
         excludeDecorators: true,
