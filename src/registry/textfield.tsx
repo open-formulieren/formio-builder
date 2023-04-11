@@ -1,6 +1,18 @@
 import {FormattedMessage, useIntl} from 'react-intl';
 
-import {AutoComplete, Description, Key, Label, Placeholder} from '@components/builder';
+import {
+  AutoComplete,
+  ClearOnHide,
+  Description,
+  Hidden,
+  IsSensitiveData,
+  Key,
+  Label,
+  Multiple,
+  Placeholder,
+  ReadOnly,
+  ShowCharCount,
+} from '@components/builder';
 import {Tab, TabList, TabPanel, Tabs} from '@components/formio';
 import {TextField as BuilderTextField} from '@components/formio';
 
@@ -62,9 +74,15 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
         <Label />
         <Key />
         <Description />
+        <Multiple />
+        <Hidden />
+        <ClearOnHide />
+        <IsSensitiveData />
         <DefaultValue />
         <AutoComplete />
+        <ReadOnly />
         <Placeholder />
+        <ShowCharCount />
       </TabPanel>
 
       {/* Location tab */}
@@ -88,15 +106,33 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   );
 };
 
+/*
+  TODO: find a way to make this declarative - a function introspecting the entire tree
+  and extracting this from 'Field' components perhaps?
+
+  Maybe a component can set an editForm.defaultValue prop? It should inspect the name
+  attribute though and do deep assignment using dot-syntax.
+ */
 TextField.defaultValues = {
+  label: '',
+  key: '',
+  description: '',
+  multiple: false,
+  hidden: false,
+  clearOnHide: true,
+  isSensitiveData: false,
   defaultValue: '',
+  autocomplete: '',
+  disabled: false,
+  placeholder: '',
+  showCharCount: false,
 };
 
 const DefaultValue = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'Default Value' builder field",
-    defaultMessage: 'This will be the initial value for this field, before user interaction.',
+    defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
   return (
     <BuilderTextField
