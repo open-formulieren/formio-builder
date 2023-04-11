@@ -4,7 +4,7 @@ import Component from './component';
 
 export interface TextFieldProps {
   name: string;
-  label?: string;
+  label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
 }

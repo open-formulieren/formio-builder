@@ -6,7 +6,7 @@ import Tooltip from './tooltip';
 export interface ComponentProps {
   type: 'textfield' | 'select'; // TODO: can this be inferred from somewhere?
   required?: boolean;
-  label?: string;
+  label?: React.ReactNode;
   tooltip?: string;
   htmlId?: string;
   children: React.ReactNode;
