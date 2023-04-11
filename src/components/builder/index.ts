@@ -7,3 +7,4 @@
 export {default as Label} from './label';
 export {default as Description} from './description';
 export {default as AutoComplete} from './autocomplete';
+export {default as Placeholder} from './placeholder';
