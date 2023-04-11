@@ -9,7 +9,7 @@ export interface TextFieldProps {
   tooltip?: string;
 }
 
-const TextField: React.FC<TextFieldProps> = ({
+const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   name,
   label,
   required = false,

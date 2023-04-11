@@ -1,4 +1,4 @@
-import {Formik} from 'formik';
+import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
@@ -83,7 +83,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
             </div>
           </div>
 
-          <form className="row" onSubmit={formik.handleSubmit}>
+          <Form className="row">
             <div className="col col-sm-6">
               <div>
                 <div className="formio-component formio-component-label-hidden">
@@ -121,7 +121,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                 </button>
               </div>
             </div>
-          </form>
+          </Form>
         </>
       )}
     </Formik>
