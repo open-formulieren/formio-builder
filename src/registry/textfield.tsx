@@ -1,6 +1,8 @@
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
+import {AutoComplete, Description, Key, Label, Placeholder} from '@components/builder';
 import {Tab, TabList, TabPanel, Tabs} from '@components/formio';
+import {TextField as BuilderTextField} from '@components/formio';
 
 import {EditFormDefinition, EditFormProps} from '.';
 
@@ -56,7 +58,14 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabList>
 
       {/* Basic tab */}
-      <TabPanel>Basic</TabPanel>
+      <TabPanel>
+        <Label />
+        <Key />
+        <Description />
+        <DefaultValue />
+        <AutoComplete />
+        <Placeholder />
+      </TabPanel>
 
       {/* Location tab */}
       <TabPanel>Location</TabPanel>
@@ -81,6 +90,26 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
 
 TextField.defaultValues = {
   defaultValue: '',
+};
+
+const DefaultValue = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'Default Value' builder field",
+    defaultMessage: 'This will be the initial value for this field, before user interaction.',
+  });
+  return (
+    <BuilderTextField
+      name="defaultValue"
+      label={
+        <FormattedMessage
+          description="Component property 'Default value' label"
+          defaultMessage="Default Value"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
 };
 
 export default TextField;
