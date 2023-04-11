@@ -14,8 +14,14 @@ import {
   ReadOnly,
   ShowCharCount,
 } from '@components/builder';
-import {Tab, TabList, TabPanel, Tabs} from '@components/formio';
-import {TextField as BuilderTextField} from '@components/formio';
+import {
+  TextField as BuilderTextField,
+  Checkbox,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+} from '@components/formio';
 
 import {EditFormDefinition, EditFormProps} from '.';
 
@@ -88,7 +94,10 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Location tab */}
-      <TabPanel>Location</TabPanel>
+      <TabPanel>
+        <DeriveStreetName />
+        <DeriveCity />
+      </TabPanel>
 
       {/* Advanced tab */}
       <TabPanel>Advanced</TabPanel>
@@ -116,6 +125,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   attribute though and do deep assignment using dot-syntax.
  */
 TextField.defaultValues = {
+  // basic tab
   label: '',
   key: '',
   description: '',
@@ -131,9 +141,12 @@ TextField.defaultValues = {
   disabled: false,
   placeholder: '',
   showCharCount: false,
+  // location tab
+  deriveStreetName: false,
+  deriveCity: false,
 };
 
-const DefaultValue = () => {
+const DefaultValue: React.FC<{}> = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'Default Value' builder field",
@@ -146,6 +159,48 @@ const DefaultValue = () => {
         <FormattedMessage
           description="Component property 'Default value' label"
           defaultMessage="Default Value"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
+
+const DeriveStreetName: React.FC<{}> = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'deriveStreetName' builder field",
+    defaultMessage:
+      'If the postcode and house number are entered this field will autofill with the street name',
+  });
+  return (
+    <Checkbox
+      name="deriveStreetName"
+      label={
+        <FormattedMessage
+          description="Label for 'deriveStreetName' builder field"
+          defaultMessage="Derive street name"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
+
+const DeriveCity: React.FC<{}> = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'deriveCity' builder field",
+    defaultMessage:
+      'If the postcode and house number are entered this field will autofill with the city',
+  });
+  return (
+    <Checkbox
+      name="deriveCity"
+      label={
+        <FormattedMessage
+          description="Label for 'deriveCity' builder field"
+          defaultMessage="Derive city"
         />
       }
       tooltip={tooltip}
