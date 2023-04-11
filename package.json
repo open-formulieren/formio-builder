@@ -98,6 +98,7 @@
     "lodash.set": "^4.3.2",
     "lodash.uniqueid": "^4.0.1",
     "react-intl": "^6.3.2",
+    "react-select": "^5.7.2",
     "react-tabs": "^4.2.1",
     "react-tooltip": "^5.10.5"
   }
