@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-react-intl',
+    '@bbbtech/storybook-formik/register',
   ],
   framework: '@storybook/react',
   core: {

@@ -3,7 +3,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import Tooltip from './tooltip';
 
 export default {
-  title: 'Formio/Tooltip',
+  title: 'Formio/Utils/Tooltip',
   component: Tooltip,
 } as ComponentMeta<typeof Tooltip>;
 

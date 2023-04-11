@@ -5,7 +5,7 @@ import {userEvent, within} from '@storybook/testing-library';
 import Component from './component';
 
 export default {
-  title: 'Formio/Component (wrapper)',
+  title: 'Formio/Containers/Component',
   component: Component,
   parameters: {
     modal: {noModal: true},

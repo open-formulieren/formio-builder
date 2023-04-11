@@ -3,7 +3,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {Tab, TabList, TabPanel, Tabs} from './tabs';
 
 export default {
-  title: 'Formio/Tabs',
+  title: 'Formio/Containers/Tabs',
   parameters: {
     controls: {hideNoControlsWarning: true},
   },
