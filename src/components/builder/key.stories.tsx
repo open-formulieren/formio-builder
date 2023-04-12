@@ -1,9 +1,8 @@
-import {BuilderContext} from 'context';
-
 import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory, ComponentStoryFn} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {BuilderContext} from 'context';
 
 import Key from './key';
 import Label from './label';

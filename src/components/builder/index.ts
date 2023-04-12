@@ -16,3 +16,4 @@ export {default as IsSensitiveData} from './is-sensitive-data';
 export {default as ReadOnly} from './readonly';
 export {default as ShowCharCount} from './show-char-count';
 export {default as PresentationConfig} from './presentation-config';
+export {default as ComponentSelect} from './component-select';

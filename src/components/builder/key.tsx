@@ -1,11 +1,11 @@
-import {BuilderContext} from 'context';
-import {useFormikContext} from 'formik';
-import {FormikContextType} from 'formik';
+import {FormikContextType, useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import camelCase from 'lodash.camelcase';
 import debounce from 'lodash.debounce';
 import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage} from 'react-intl';
+
+import {BuilderContext} from 'context';
 
 import {TextField} from '../formio';
 
