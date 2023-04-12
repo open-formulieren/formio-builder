@@ -3,6 +3,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {
   AutoComplete,
   ClearOnHide,
+  ComponentSelect,
   Description,
   Hidden,
   IsSensitiveData,
@@ -97,6 +98,8 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       <TabPanel>
         <DeriveStreetName />
         <DeriveCity />
+        <DerivePostcode />
+        <DeriveHouseNumber />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -207,5 +210,33 @@ const DeriveCity: React.FC<{}> = () => {
     />
   );
 };
+
+const DerivePostcode: React.FC<{}> = () => (
+  <ComponentSelect
+    name="derivePostcode"
+    label={
+      <FormattedMessage
+        description="Label for '' builder field"
+        defaultMessage="Postcode component"
+      />
+    }
+    isSearchable
+    isClearable
+  />
+);
+
+const DeriveHouseNumber: React.FC<{}> = () => (
+  <ComponentSelect
+    name="deriveHouseNumber"
+    label={
+      <FormattedMessage
+        description="Label for '' builder field"
+        defaultMessage="House number component"
+      />
+    }
+    isSearchable
+    isClearable
+  />
+);
 
 export default TextField;
