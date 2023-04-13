@@ -17,6 +17,23 @@ export default {
       },
     },
   },
+  args: {
+    isNew: true,
+    otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
+    translationsStore: {
+      nl: {
+        'A select': 'Een dropdown',
+        'A text field': 'Een tekstveld',
+      },
+    },
+    builderInfo: {
+      title: 'Text field',
+      group: 'basic',
+      icon: 'terminal',
+      schema: {placeholder: ''},
+      weight: 0,
+    },
+  },
 } as ComponentMeta<typeof ComponentConfiguration>;
 
 interface TemplateArgs {
@@ -56,29 +73,10 @@ const Template = ({
   );
 };
 
-const defaultArgs = {
-  isNew: true,
-  otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
-  translationsStore: {
-    nl: {
-      'A select': 'Een dropdown',
-      'A text field': 'Een tekstveld',
-    },
-  },
-  builderInfo: {
-    title: 'Text field',
-    group: 'basic',
-    icon: 'terminal',
-    schema: {placeholder: ''},
-    weight: 0,
-  },
-};
-
 export const Default: ComponentStory<typeof Template> = Template.bind({});
 Default.storyName = 'generic';
 
 Default.args = {
-  ...defaultArgs,
   component: {
     id: 'wekruya',
     type: 'textfield',
@@ -93,7 +91,6 @@ export const TextField: ComponentStory<typeof Template> = Template.bind({});
 TextField.storyName = 'type: textfield';
 
 TextField.args = {
-  ...defaultArgs,
   component: {
     id: 'wekruya',
     type: 'textfield',

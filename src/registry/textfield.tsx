@@ -1,3 +1,4 @@
+import {ExtendedComponentSchema} from 'formiojs';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -14,6 +15,7 @@ import {
   PresentationConfig,
   ReadOnly,
   ShowCharCount,
+  SimpleConditional,
 } from '@components/builder';
 import {
   TextField as BuilderTextField,
@@ -103,7 +105,9 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Advanced tab */}
-      <TabPanel>Advanced</TabPanel>
+      <TabPanel>
+        <SimpleConditional />
+      </TabPanel>
 
       {/* Validation tab */}
       <TabPanel>Validation</TabPanel>
@@ -127,7 +131,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   Maybe a component can set an editForm.defaultValue prop? It should inspect the name
   attribute though and do deep assignment using dot-syntax.
  */
-TextField.defaultValues = {
+const defaultValues: ExtendedComponentSchema<string> = {
   // basic tab
   label: '',
   key: '',
@@ -147,7 +151,16 @@ TextField.defaultValues = {
   // location tab
   deriveStreetName: false,
   deriveCity: false,
+  derivePostcode: '',
+  deriveHouseNumber: '',
+  // Advanced tab
+  conditional: {
+    show: undefined,
+    when: '',
+    eq: '',
+  },
 };
+TextField.defaultValues = defaultValues;
 
 const DefaultValue: React.FC<{}> = () => {
   const intl = useIntl();

@@ -1,14 +1,12 @@
+import {ExtendedComponentSchema} from 'formiojs';
 import React from 'react';
 
 import {EditFormComponentSchema} from '@types';
-import {JSONType} from '@types';
 
 import TextField from './textfield';
 
-export interface EditFormDefinition<P> extends React.FC<P> {
-  defaultValues: {
-    [key: string]: JSONType;
-  };
+export interface EditFormDefinition<P, DVT = ExtendedComponentSchema> extends React.FC<P> {
+  defaultValues: DVT;
 }
 
 export interface EditFormProps {
