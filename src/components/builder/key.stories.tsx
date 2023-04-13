@@ -1,28 +1,15 @@
 import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory, ComponentStoryFn} from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
-import {BuilderContext} from 'context';
 
 import Key from './key';
 import Label from './label';
 
-const builderContextDecorator = (Story: ComponentStoryFn<typeof Key>) => (
-  <BuilderContext.Provider
-    value={{
-      uniquifyKey: key => key,
-      getFormComponents: () => [],
-      componentTranslationsRef: {current: null},
-    }}
-  >
-    <Story />
-  </BuilderContext.Provider>
-);
-
 export default {
   title: 'Formio/Builder/Key',
   component: Key,
-  decorators: [withFormik, builderContextDecorator],
+  decorators: [withFormik],
   parameters: {
     controls: {hideNoControlsWarning: true},
     docs: {
@@ -32,6 +19,7 @@ export default {
       },
     },
     modal: {noModal: true},
+    builder: {enableContext: true, defaultComponentTree: []},
     formik: {
       initialValues: {key: ''},
     },
@@ -61,6 +49,29 @@ IsNewDeriveFromLabel.play = async ({canvasElement}) => {
   const keyInput = await canvas.getByLabelText('Property Name');
 
   // derive from label
+  await userEvent.clear(labelInput);
+  await userEvent.type(labelInput, 'My label');
+  await expect(labelInput).toHaveValue('My label');
+  await waitFor(async () => {
+    await expect(keyInput).toHaveValue('myLabel');
+  });
+};
+
+export const DeriveFromLabelButSetManually = WithLabelTemplate.bind({});
+DeriveFromLabelButSetManually.storyName =
+  'New component: derive key from label but specify it manually';
+DeriveFromLabelButSetManually.parameters = {
+  formik: {
+    initialValues: {key: 'textField', label: 'Derive key from label'},
+    initialStatus: {isNew: true},
+  },
+};
+DeriveFromLabelButSetManually.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+  const labelInput = await canvas.getByLabelText('Label');
+  const keyInput = await canvas.getByLabelText('Property Name');
+
+  // derive from label first
   await userEvent.clear(labelInput);
   await userEvent.type(labelInput, 'My label');
   await expect(labelInput).toHaveValue('My label');

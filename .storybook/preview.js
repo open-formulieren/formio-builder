@@ -4,7 +4,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 import '@fortawesome/fontawesome-free/css/all.css';
 
-import {ModalDecorator} from './decorators';
+import {BuilderContextDecorator, ModalDecorator} from './decorators';
 import {reactIntl} from './reactIntl';
 
 export const parameters = {
@@ -23,4 +23,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [ModalDecorator];
+export const decorators = [BuilderContextDecorator, ModalDecorator];

@@ -1,10 +1,7 @@
 import {ExtendedComponentSchema} from 'formiojs';
 
 import withFormik from '@bbbtech/storybook-formik';
-import {PartialStoryFn, StoryContext} from '@storybook/csf';
-import {ReactFramework} from '@storybook/react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {BuilderContext} from 'context';
 
 import ComponentSelect, {ComponentSelectProps} from './component-select';
 
@@ -25,22 +22,10 @@ interface StoryArgs extends ComponentSelectProps {
   componentTree?: ExtendedComponentSchema[];
 }
 
-const builderContextDecorator = (Story: PartialStoryFn<ReactFramework>, context: StoryContext) => (
-  <BuilderContext.Provider
-    value={{
-      uniquifyKey: key => key,
-      getFormComponents: () => context?.args?.componentTree || COMPONENT_TREE,
-      componentTranslationsRef: {current: null},
-    }}
-  >
-    <Story />
-  </BuilderContext.Provider>
-);
-
 export default {
   title: 'Formio/Builder/ComponentSelect',
   component: ComponentSelect,
-  decorators: [withFormik, builderContextDecorator],
+  decorators: [withFormik],
   parameters: {
     controls: {hideNoControlsWarning: true},
     docs: {
@@ -53,6 +38,7 @@ export default {
       iframeHeight: 200,
     },
     modal: {noModal: true},
+    builder: {enableContext: true},
     formik: {
       initialValues: {aComponent: ''},
     },

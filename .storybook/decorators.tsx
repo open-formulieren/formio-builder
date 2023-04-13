@@ -1,5 +1,10 @@
 import React from 'react';
 
+import {PartialStoryFn, StoryContext} from '@storybook/csf';
+import {ReactFramework} from '@storybook/react';
+
+import {BuilderContext} from '../src/context';
+
 export const ModalDecorator = (Story, {parameters}) => {
   if (parameters?.modal?.noModal) return <Story />;
   return (
@@ -19,5 +24,38 @@ export const ModalDecorator = (Story, {parameters}) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const DEFAULT_COMPONENT_TREE = [
+  {type: 'textfield', key: 'text1', label: 'Textfield 1'},
+  {
+    type: 'fieldset',
+    key: 'fieldset1',
+    label: 'Fieldset 1',
+    components: [
+      {type: 'textfield', key: 'text2', label: 'Textfield 2'},
+      {type: 'number', key: 'nested.number1', label: 'Nested number'},
+    ],
+  },
+];
+
+export const BuilderContextDecorator = (
+  Story: PartialStoryFn<ReactFramework>,
+  context: StoryContext
+) => {
+  if (!context.parameters?.builder?.enableContext) return <Story />;
+  const defaultComponentTree =
+    context.parameters.builder?.defaultComponentTree || DEFAULT_COMPONENT_TREE;
+  return (
+    <BuilderContext.Provider
+      value={{
+        uniquifyKey: key => key,
+        getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
+        componentTranslationsRef: {current: null},
+      }}
+    >
+      <Story />
+    </BuilderContext.Provider>
   );
 };
