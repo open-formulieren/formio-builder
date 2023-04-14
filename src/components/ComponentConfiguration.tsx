@@ -23,15 +23,18 @@ export interface ComponentConfigurationProps extends BuilderContextType, Compone
  */
 const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   uniquifyKey,
-  getFormComponents,
   componentTranslationsRef,
+  getFormComponents,
+  getValidatorPlugins,
   isNew,
   component,
   builderInfo,
   onCancel,
   onRemove,
 }) => (
-  <BuilderContext.Provider value={{uniquifyKey, getFormComponents, componentTranslationsRef}}>
+  <BuilderContext.Provider
+    value={{uniquifyKey, componentTranslationsRef, getFormComponents, getValidatorPlugins}}
+  >
     <ComponentEditForm
       isNew={isNew}
       component={component}

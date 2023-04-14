@@ -1,6 +1,8 @@
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
+import {ValidatorOption} from '@components/builder/validate/validator-select';
+
 interface TranslationsMap {
   [key: string]: string;
 }
@@ -15,14 +17,16 @@ interface ComponentTranslationsRef {
 
 export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
-  getFormComponents: () => ExtendedComponentSchema[];
   componentTranslationsRef: ComponentTranslationsRef;
+  getFormComponents: () => ExtendedComponentSchema[];
+  getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
-  getFormComponents: () => [],
   componentTranslationsRef: {current: null},
+  getFormComponents: () => [],
+  getValidatorPlugins: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

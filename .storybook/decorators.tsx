@@ -3,6 +3,7 @@ import React from 'react';
 import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {ReactFramework} from '@storybook/react';
 
+import {ValidatorOption} from '../src/components/builder/validate/validator-select';
 import {BuilderContext} from '../src/context';
 
 export const ModalDecorator = (Story, {parameters}) => {
@@ -40,6 +41,15 @@ const DEFAULT_COMPONENT_TREE = [
   },
 ];
 
+const DEFAULT_VALIDATOR_PLUGINS: ValidatorOption[] = [
+  {id: 'plugin-1', label: 'Plugin 1'},
+  {id: 'plugin-2', label: 'Plugin 2'},
+];
+
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const BuilderContextDecorator = (
   Story: PartialStoryFn<ReactFramework>,
   context: StoryContext
@@ -47,12 +57,18 @@ export const BuilderContextDecorator = (
   if (!context.parameters?.builder?.enableContext) return <Story />;
   const defaultComponentTree =
     context.parameters.builder?.defaultComponentTree || DEFAULT_COMPONENT_TREE;
+  const defaultValidatorPlugins =
+    context.parameters.builder?.defaultValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
   return (
     <BuilderContext.Provider
       value={{
         uniquifyKey: key => key,
-        getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         componentTranslationsRef: {current: null},
+        getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
+        getValidatorPlugins: async () => {
+          await sleep(context.parameters?.builder?.validatorPluginsDelay || 0);
+          return context?.args?.validatorPlugins || defaultValidatorPlugins;
+        },
       }}
     >
       <Story />

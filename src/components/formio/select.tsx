@@ -66,6 +66,7 @@ function Select<
           inputId={htmlId}
           isClearable={isClearable}
           getOptionValue={opt => isOption<Option, Group>(opt) && opt[valueProperty]}
+          className="formio-builder-select"
           {...field}
           {...props}
           onChange={newValue => {
