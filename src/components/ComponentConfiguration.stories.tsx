@@ -6,6 +6,7 @@ import {EditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
+import {ValidatorOption} from './builder/validate/validator-select';
 
 export default {
   title: 'Public API/ComponentConfiguration',
@@ -20,6 +21,11 @@ export default {
   args: {
     isNew: true,
     otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
+    validatorPlugins: [
+      {id: 'phone-intl', label: 'Phone (international)'},
+      {id: 'phone-nl', label: 'Phone (Dutch)'},
+      {id: 'license-plate', label: 'License plate'},
+    ],
     translationsStore: {
       nl: {
         'A select': 'Een dropdown',
@@ -38,12 +44,13 @@ export default {
 
 interface TemplateArgs {
   component: EditFormComponentSchema;
-  otherComponents: ExtendedComponentSchema[];
   translationsStore: {
     [key: string]: {
       [key: string]: string;
     };
   };
+  otherComponents: ExtendedComponentSchema[];
+  validatorPlugins: ValidatorOption[];
   isNew: boolean;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -53,6 +60,7 @@ interface TemplateArgs {
 const Template = ({
   component,
   otherComponents,
+  validatorPlugins,
   translationsStore,
   isNew,
   builderInfo,
@@ -62,8 +70,9 @@ const Template = ({
   return (
     <ComponentConfiguration
       uniquifyKey={(key: string) => key}
-      getFormComponents={() => otherComponents}
       componentTranslationsRef={{current: translationsStore}}
+      getFormComponents={() => otherComponents}
+      getValidatorPlugins={async () => validatorPlugins}
       component={component}
       isNew={isNew}
       builderInfo={builderInfo}

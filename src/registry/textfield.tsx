@@ -113,6 +113,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       {/* Validation tab */}
       <TabPanel>
         <Validate.Required />
+        <Validate.ValidatorPluginSelect />
         <Validate.MaxLength />
         <Validate.RegexValidation />
       </TabPanel>
