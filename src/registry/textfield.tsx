@@ -16,6 +16,7 @@ import {
   ReadOnly,
   ShowCharCount,
   SimpleConditional,
+  Validate,
 } from '@components/builder';
 import {
   TextField as BuilderTextField,
@@ -110,7 +111,9 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Validation tab */}
-      <TabPanel>Validation</TabPanel>
+      <TabPanel>
+        <Validate.Required />
+      </TabPanel>
 
       {/* Registration tab */}
       <TabPanel>Registration</TabPanel>
@@ -158,6 +161,9 @@ const defaultValues: ExtendedComponentSchema<string> = {
     show: undefined,
     when: '',
     eq: '',
+  },
+  validate: {
+    required: false,
   },
 };
 TextField.defaultValues = defaultValues;

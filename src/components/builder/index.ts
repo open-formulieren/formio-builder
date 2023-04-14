@@ -18,3 +18,4 @@ export {default as ShowCharCount} from './show-char-count';
 export {default as PresentationConfig} from './presentation-config';
 export {default as ComponentSelect} from './component-select';
 export {default as SimpleConditional} from './simple-conditional';
+export * as Validate from './validate';
