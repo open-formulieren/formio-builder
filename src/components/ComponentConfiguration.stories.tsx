@@ -26,6 +26,7 @@ export default {
       {id: 'phone-nl', label: 'Phone (Dutch)'},
       {id: 'license-plate', label: 'License plate'},
     ],
+    supportedLanguageCodes: ['nl'],
     translationsStore: {
       nl: {
         'A select': 'Een dropdown',
@@ -44,6 +45,7 @@ export default {
 
 interface TemplateArgs {
   component: EditFormComponentSchema;
+  supportedLanguageCodes: string[];
   translationsStore: {
     [key: string]: {
       [key: string]: string;
@@ -61,6 +63,7 @@ const Template = ({
   component,
   otherComponents,
   validatorPlugins,
+  supportedLanguageCodes,
   translationsStore,
   isNew,
   builderInfo,
@@ -70,6 +73,7 @@ const Template = ({
   return (
     <ComponentConfiguration
       uniquifyKey={(key: string) => key}
+      supportedLanguageCodes={supportedLanguageCodes}
       componentTranslationsRef={{current: translationsStore}}
       getFormComponents={() => otherComponents}
       getValidatorPlugins={async () => validatorPlugins}

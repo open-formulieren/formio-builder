@@ -23,6 +23,7 @@ export interface ComponentConfigurationProps extends BuilderContextType, Compone
  */
 const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   uniquifyKey,
+  supportedLanguageCodes = ['nl', 'en'],
   componentTranslationsRef,
   getFormComponents,
   getValidatorPlugins,
@@ -33,7 +34,13 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   onRemove,
 }) => (
   <BuilderContext.Provider
-    value={{uniquifyKey, componentTranslationsRef, getFormComponents, getValidatorPlugins}}
+    value={{
+      uniquifyKey,
+      supportedLanguageCodes,
+      componentTranslationsRef,
+      getFormComponents,
+      getValidatorPlugins,
+    }}
   >
     <ComponentEditForm
       isNew={isNew}

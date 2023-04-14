@@ -17,6 +17,7 @@ interface ComponentTranslationsRef {
 
 export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
+  supportedLanguageCodes: string[];
   componentTranslationsRef: ComponentTranslationsRef;
   getFormComponents: () => ExtendedComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
@@ -24,6 +25,7 @@ export interface BuilderContextType {
 
 const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
+  supportedLanguageCodes: ['nl', 'en'],
   componentTranslationsRef: {current: null},
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],

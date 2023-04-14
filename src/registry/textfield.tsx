@@ -33,6 +33,7 @@ import {EditFormDefinition, EditFormProps} from '.';
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
+  Validate.useManageValidatorsTranslations(['required', 'maxLength', 'pattern']);
   return (
     <Tabs>
       <TabList>
@@ -116,6 +117,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
         <Validate.ValidatorPluginSelect />
         <Validate.MaxLength />
         <Validate.RegexValidation />
+        <Validate.ValidationErrorTranslations />
       </TabPanel>
 
       {/* Registration tab */}
@@ -165,9 +167,11 @@ const defaultValues: ExtendedComponentSchema<string> = {
     when: '',
     eq: '',
   },
+  // Validation tab
   validate: {
     required: false,
   },
+  translatedErrors: {},
 };
 TextField.defaultValues = defaultValues;
 
