@@ -19,4 +19,4 @@ export {default as Select} from './select';
 export {default as NumberField} from './number';
 export * from './datagrid';
 export {default as DataGrid} from './datagrid';
-// export {default as DataMap} from './datamap;';
+export {default as DataMap} from './datamap';
