@@ -178,7 +178,7 @@ TextField.defaultValues = defaultValues;
 const DefaultValue: React.FC<{}> = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
-    description: "Tooltip for 'Default Value' builder field",
+    description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
   return (
@@ -186,7 +186,7 @@ const DefaultValue: React.FC<{}> = () => {
       name="defaultValue"
       label={
         <FormattedMessage
-          description="Component property 'Default value' label"
+          description="Label for 'defaultValue' builder field"
           defaultMessage="Default Value"
         />
       }
@@ -242,7 +242,7 @@ const DerivePostcode: React.FC<{}> = () => (
     name="derivePostcode"
     label={
       <FormattedMessage
-        description="Label for '' builder field"
+        description="Label for 'derivePostcode' builder field"
         defaultMessage="Postcode component"
       />
     }
@@ -256,7 +256,7 @@ const DeriveHouseNumber: React.FC<{}> = () => (
     name="deriveHouseNumber"
     label={
       <FormattedMessage
-        description="Label for '' builder field"
+        description="Label for 'deriveHouseNumber' builder field"
         defaultMessage="House number component"
       />
     }
