@@ -41,7 +41,8 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const initialValues = cloneDeep(component);
   if (isNew) {
     Object.entries(EditForm.defaultValues).forEach(([key, value]) => {
-      set(initialValues, key, value);
+      const val = component?.[key] || value;
+      set(initialValues, key, val);
     });
   }
 

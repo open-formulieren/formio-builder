@@ -1,7 +1,9 @@
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
+import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {waitFor, within} from '@storybook/testing-library';
 import {EditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
@@ -112,4 +114,17 @@ TextField.args = {
       required: false,
     },
   },
+};
+
+TextField.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+
+  await expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
+  await waitFor(async () => {
+    await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextField');
+  });
+  await expect(canvas.getByLabelText('Description')).toHaveValue('');
+  await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+  await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+  await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 };
