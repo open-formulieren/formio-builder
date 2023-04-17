@@ -30,8 +30,7 @@ jobs:
       id-token: write
 
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && github.event.workflow_run.conclusion == 'success' # Exclude PRs
-    needs: storybook
+    if: github.even_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Setup Pages
         id: pages
