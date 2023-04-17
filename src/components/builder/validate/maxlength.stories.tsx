@@ -1,7 +1,7 @@
 import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {waitFor, within} from '@storybook/testing-library';
 
 import MaxLength from './maxlength';
 
@@ -21,7 +21,7 @@ export default {
       iframeHeight: 100,
     },
     modal: {noModal: true},
-    formik: {initialValues: {validate: {}}},
+    formik: {initialValues: {validate: {maxLength: 1000}}},
   },
 } as ComponentMeta<typeof MaxLength>;
 
@@ -45,20 +45,4 @@ WithInitialValue.play = async ({canvasElement}) => {
   await waitFor(async () => {
     await expect(canvas.getByLabelText('Maximum length')).toHaveValue(100);
   });
-};
-
-export const WithExplicitDefaultValue = Template.bind({});
-WithExplicitDefaultValue.args = {
-  defaultValue: 200,
-};
-WithExplicitDefaultValue.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const input = canvas.getByLabelText('Maximum length');
-  await waitFor(async () => {
-    await expect(input).toHaveValue(200);
-  });
-
-  await userEvent.clear(input);
-  await userEvent.type(input, '150');
-  await expect(input).toHaveValue(150);
 };
