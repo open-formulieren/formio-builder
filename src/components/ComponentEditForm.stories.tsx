@@ -7,7 +7,7 @@ import ComponentEditForm from './ComponentEditForm';
 export default {
   title: 'Edit form/Component edit form',
   component: ComponentEditForm,
-} satisfies ComponentMeta<typeof ComponentEditForm>;
+} as ComponentMeta<typeof ComponentEditForm>;
 
 export const Default: ComponentStory<typeof ComponentEditForm> = ({
   isNew,
