@@ -28,6 +28,8 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   getFormComponents,
   getValidatorPlugins,
   getRegistrationAttributes,
+  getPrefillPlugins,
+  getPrefillAttributes,
   isNew,
   component,
   builderInfo,
@@ -42,6 +44,8 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       getFormComponents,
       getValidatorPlugins,
       getRegistrationAttributes,
+      getPrefillPlugins,
+      getPrefillAttributes,
     }}
   >
     <ComponentEditForm

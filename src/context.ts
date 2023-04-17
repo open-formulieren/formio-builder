@@ -1,6 +1,7 @@
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
+import {PrefillAttributeOption, PrefillPluginOption} from '@components/builder/prefill';
 import {RegistrationAttributeOption} from '@components/builder/registration/registration-attribute';
 import {ValidatorOption} from '@components/builder/validate/validator-select';
 
@@ -23,6 +24,8 @@ export interface BuilderContextType {
   getFormComponents: () => ExtendedComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
+  getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
+  getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -32,6 +35,8 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],
+  getPrefillPlugins: async () => [],
+  getPrefillAttributes: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

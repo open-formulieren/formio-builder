@@ -12,6 +12,7 @@ import {
   Label,
   Multiple,
   Placeholder,
+  Prefill,
   PresentationConfig,
   ReadOnly,
   Registration,
@@ -127,7 +128,9 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Prefill tab */}
-      <TabPanel>Prefill</TabPanel>
+      <TabPanel>
+        <Prefill.PrefillConfiguration />
+      </TabPanel>
 
       {/* Translations */}
       <TabPanel>Translations</TabPanel>
@@ -157,6 +160,7 @@ interface TextFieldSchema extends ComponentSchema<string> {
   registration: {
     attribute: string;
   };
+  prefill: Prefill.PrefillConfig;
 }
 
 /*
@@ -205,6 +209,10 @@ const defaultValues: TextFieldSchema = {
   translatedErrors: {},
   registration: {
     attribute: '',
+  },
+  prefill: {
+    plugin: null,
+    attribute: null,
   },
 };
 TextField.defaultValues = defaultValues;

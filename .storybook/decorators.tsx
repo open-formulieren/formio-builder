@@ -52,6 +52,22 @@ const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'attribute-2', label: 'Attribute 2'},
 ];
 
+const DEFAULT_PREFILL_PLUGINS: ValidatorOption[] = [
+  {id: 'plugin-1', label: 'Plugin 1'},
+  {id: 'plugin-2', label: 'Plugin 2'},
+];
+
+const DEFAULT_PREFILL_ATTRIBUTES: {[key: string]: RegistrationAttributeOption[]} = {
+  'plugin-1': [
+    {id: 'plugin-1-attribute-1', label: 'Plugin 1, attribute 1'},
+    {id: 'plugin-1-attribute-2', label: 'Plugin 1, attribute 2'},
+  ],
+  'plugin-2': [
+    {id: 'plugin-2-attribute-1', label: 'Plugin 2, attribute 1'},
+    {id: 'plugin-2-attribute-2', label: 'Plugin 2, attribute 2'},
+  ],
+};
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -68,6 +84,10 @@ export const BuilderContextDecorator = (
     context.parameters.builder?.defaultValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
   const defaultRegistrationAttributes =
     context.parameters.builder?.defaultRegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
+  const defaultPrefillPlugins =
+    context.parameters.builder?.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
+  const defaultPrefillAttributes =
+    context.parameters.builder?.defaultPrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
   return (
     <BuilderContext.Provider
       value={{
@@ -82,6 +102,15 @@ export const BuilderContextDecorator = (
         getRegistrationAttributes: async () => {
           await sleep(context.parameters?.builder?.registrationAttributesDelay || 0);
           return context?.args?.registrationAttributes || defaultRegistrationAttributes;
+        },
+        getPrefillPlugins: async () => {
+          await sleep(context.parameters?.builder?.prefillPluginsDelay || 0);
+          return context?.args?.prefillPlugins || defaultPrefillPlugins;
+        },
+        getPrefillAttributes: async (plugin: string) => {
+          await sleep(context.parameters?.builder?.prefillPluginsDelay || 0);
+          const container = context?.args?.prefillAttributes || defaultPrefillAttributes;
+          return container?.[plugin] || [{id: '', label: 'no plugins found'}];
         },
       }}
     >

@@ -8,6 +8,7 @@ import {EditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
+import {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import {ValidatorOption} from './builder/validate/validator-select';
 
@@ -34,6 +35,20 @@ export default {
       {id: 'firstName', label: 'First name'},
       {id: 'dob', label: 'Date of Birth'},
     ],
+    prefillPlugins: [
+      {id: 'stuf-bg', label: 'StUF-BG'},
+      {id: 'haalcentraal', label: 'Haal Centraal'},
+    ],
+    prefillAttributes: {
+      'stuf-bg': [
+        {id: 'BSN', label: 'BSN'},
+        {id: 'geslachtsNaam', label: 'Geslachtsnaam'},
+      ],
+      haalcentraal: [
+        {id: 'burgerservicenummer', label: 'BSN'},
+        {id: 'lastName', label: 'Achternaam'},
+      ],
+    },
     supportedLanguageCodes: ['nl'],
     translationsStore: {
       nl: {
@@ -62,6 +77,8 @@ interface TemplateArgs {
   otherComponents: ExtendedComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
+  prefillPlugins: PrefillPluginOption[];
+  prefillAttributes: Record<string, PrefillAttributeOption[]>;
   isNew: boolean;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -73,6 +90,8 @@ const Template = ({
   otherComponents,
   validatorPlugins,
   registrationAttributes,
+  prefillPlugins,
+  prefillAttributes,
   supportedLanguageCodes,
   translationsStore,
   isNew,
@@ -88,6 +107,8 @@ const Template = ({
       getFormComponents={() => otherComponents}
       getValidatorPlugins={async () => validatorPlugins}
       getRegistrationAttributes={async () => registrationAttributes}
+      getPrefillPlugins={async () => prefillPlugins}
+      getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
       component={component}
       isNew={isNew}
       builderInfo={builderInfo}
