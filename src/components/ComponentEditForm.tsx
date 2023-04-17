@@ -36,6 +36,8 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const componentType = component.type || 'OF_MISSING_TYPE';
   const EditForm = REGISTRY[componentType] || Fallback;
 
+  // FIXME: recipes may have non-default values that would be overwritten here with default
+  // values - we need a deep merge & some logic to detect this.
   const initialValues = cloneDeep(component);
   if (isNew) {
     Object.entries(EditForm.defaultValues).forEach(([key, value]) => {

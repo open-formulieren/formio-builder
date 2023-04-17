@@ -1,4 +1,4 @@
-import {ExtendedComponentSchema} from 'formiojs';
+import {ComponentSchema, ValidateOptions} from 'formiojs';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -132,14 +132,36 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   );
 };
 
-/*
-  TODO: find a way to make this declarative - a function introspecting the entire tree
-  and extracting this from 'Field' components perhaps?
+interface TextFieldSchema extends ComponentSchema<string> {
+  showCharCount: boolean;
+  autocomplete: string;
+  validate?: ValidateOptions & {
+    plugins?: string[];
+  };
+  showInSummary: boolean;
+  showInEmail: boolean;
+  showInPDF: boolean;
+  isSensitiveData: boolean;
+  deriveStreetName: boolean;
+  deriveCity: boolean;
+  derivePostcode: string;
+  deriveHouseNumber: string;
+  translatedErrors: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  };
+}
 
-  Maybe a component can set an editForm.defaultValue prop? It should inspect the name
-  attribute though and do deep assignment using dot-syntax.
+/*
+  Making this introspected or declarative doesn't seem advisable, as React is calling
+  React.Children and related API's legacy API - this may get removed in future
+  versions.
+
+  Explicitly specifying the schema and default values is therefore probbaly best, at
+  the cost of some repetition.
  */
-const defaultValues: ExtendedComponentSchema<string> = {
+const defaultValues: TextFieldSchema = {
   // basic tab
   label: '',
   key: '',
@@ -170,6 +192,9 @@ const defaultValues: ExtendedComponentSchema<string> = {
   // Validation tab
   validate: {
     required: false,
+    plugins: [],
+    maxLength: 1000,
+    pattern: '',
   },
   translatedErrors: {},
 };
