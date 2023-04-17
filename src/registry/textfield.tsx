@@ -14,6 +14,7 @@ import {
   Placeholder,
   PresentationConfig,
   ReadOnly,
+  Registration,
   ShowCharCount,
   SimpleConditional,
   Validate,
@@ -121,7 +122,9 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Registration tab */}
-      <TabPanel>Registration</TabPanel>
+      <TabPanel>
+        <Registration.RegistrationAttributeSelect />
+      </TabPanel>
 
       {/* Prefill tab */}
       <TabPanel>Prefill</TabPanel>
@@ -150,6 +153,9 @@ interface TextFieldSchema extends ComponentSchema<string> {
     [key: string]: {
       [key: string]: string;
     };
+  };
+  registration: {
+    attribute: string;
   };
 }
 
@@ -197,6 +203,9 @@ const defaultValues: TextFieldSchema = {
     pattern: '',
   },
   translatedErrors: {},
+  registration: {
+    attribute: '',
+  },
 };
 TextField.defaultValues = defaultValues;
 

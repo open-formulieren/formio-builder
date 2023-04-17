@@ -27,6 +27,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   componentTranslationsRef,
   getFormComponents,
   getValidatorPlugins,
+  getRegistrationAttributes,
   isNew,
   component,
   builderInfo,
@@ -40,6 +41,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       componentTranslationsRef,
       getFormComponents,
       getValidatorPlugins,
+      getRegistrationAttributes,
     }}
   >
     <ComponentEditForm

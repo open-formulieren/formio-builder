@@ -19,3 +19,4 @@ export {default as PresentationConfig} from './presentation-config';
 export {default as ComponentSelect} from './component-select';
 export {default as SimpleConditional} from './simple-conditional';
 export * as Validate from './validate';
+export * as Registration from './registration';

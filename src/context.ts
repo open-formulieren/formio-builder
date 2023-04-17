@@ -1,6 +1,7 @@
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
+import {RegistrationAttributeOption} from '@components/builder/registration/registration-attribute';
 import {ValidatorOption} from '@components/builder/validate/validator-select';
 
 interface TranslationsMap {
@@ -21,6 +22,7 @@ export interface BuilderContextType {
   componentTranslationsRef: ComponentTranslationsRef;
   getFormComponents: () => ExtendedComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
+  getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -29,6 +31,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   componentTranslationsRef: {current: null},
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
+  getRegistrationAttributes: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

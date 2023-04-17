@@ -8,6 +8,7 @@ import {EditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
+import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import {ValidatorOption} from './builder/validate/validator-select';
 
 export default {
@@ -27,6 +28,11 @@ export default {
       {id: 'phone-intl', label: 'Phone (international)'},
       {id: 'phone-nl', label: 'Phone (Dutch)'},
       {id: 'license-plate', label: 'License plate'},
+    ],
+    registrationAttributes: [
+      {id: 'bsn', label: 'BSN'},
+      {id: 'firstName', label: 'First name'},
+      {id: 'dob', label: 'Date of Birth'},
     ],
     supportedLanguageCodes: ['nl'],
     translationsStore: {
@@ -55,6 +61,7 @@ interface TemplateArgs {
   };
   otherComponents: ExtendedComponentSchema[];
   validatorPlugins: ValidatorOption[];
+  registrationAttributes: RegistrationAttributeOption[];
   isNew: boolean;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -65,6 +72,7 @@ const Template = ({
   component,
   otherComponents,
   validatorPlugins,
+  registrationAttributes,
   supportedLanguageCodes,
   translationsStore,
   isNew,
@@ -79,6 +87,7 @@ const Template = ({
       componentTranslationsRef={{current: translationsStore}}
       getFormComponents={() => otherComponents}
       getValidatorPlugins={async () => validatorPlugins}
+      getRegistrationAttributes={async () => registrationAttributes}
       component={component}
       isNew={isNew}
       builderInfo={builderInfo}

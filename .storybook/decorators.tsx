@@ -3,6 +3,7 @@ import React from 'react';
 import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {ReactFramework} from '@storybook/react';
 
+import {RegistrationAttributeOption} from '../src/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '../src/components/builder/validate/validator-select';
 import {BuilderContext} from '../src/context';
 
@@ -46,6 +47,11 @@ const DEFAULT_VALIDATOR_PLUGINS: ValidatorOption[] = [
   {id: 'plugin-2', label: 'Plugin 2'},
 ];
 
+const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
+  {id: 'attribute-1', label: 'Attribute 1'},
+  {id: 'attribute-2', label: 'Attribute 2'},
+];
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -60,6 +66,8 @@ export const BuilderContextDecorator = (
     context.parameters.builder?.defaultComponentTree || DEFAULT_COMPONENT_TREE;
   const defaultValidatorPlugins =
     context.parameters.builder?.defaultValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
+  const defaultRegistrationAttributes =
+    context.parameters.builder?.defaultRegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
   return (
     <BuilderContext.Provider
       value={{
@@ -70,6 +78,10 @@ export const BuilderContextDecorator = (
         getValidatorPlugins: async () => {
           await sleep(context.parameters?.builder?.validatorPluginsDelay || 0);
           return context?.args?.validatorPlugins || defaultValidatorPlugins;
+        },
+        getRegistrationAttributes: async () => {
+          await sleep(context.parameters?.builder?.registrationAttributesDelay || 0);
+          return context?.args?.registrationAttributes || defaultRegistrationAttributes;
         },
       }}
     >
