@@ -13,7 +13,7 @@ on:
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages-${{ github.ref_name }}' # unique builds for branch/tag name
+  group: pages-main
   cancel-in-progress: true
 
 jobs:
@@ -32,6 +32,18 @@ jobs:
     runs-on: ubuntu-latest
     if: github.even_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     steps:
+      - name: Download built storybook artifact from other workflow
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: ci.yml
+          workflow_conclusion: success
+          name: github-pages
+          path: ./storybook-static
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./storybook-static
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v1
