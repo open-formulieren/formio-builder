@@ -1,5 +1,5 @@
-import {ComponentSchema, ValidateOptions} from 'formiojs';
 import {FormattedMessage, useIntl} from 'react-intl';
+import {OpenFormsComponentSchemaBase} from 'types/schemas';
 
 import {
   AutoComplete,
@@ -138,29 +138,13 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   );
 };
 
-interface TextFieldSchema extends ComponentSchema<string> {
+interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
   showCharCount: boolean;
   autocomplete: string;
-  validate?: ValidateOptions & {
-    plugins?: string[];
-  };
-  showInSummary: boolean;
-  showInEmail: boolean;
-  showInPDF: boolean;
-  isSensitiveData: boolean;
   deriveStreetName: boolean;
   deriveCity: boolean;
   derivePostcode: string;
   deriveHouseNumber: string;
-  translatedErrors: {
-    [key: string]: {
-      [key: string]: string;
-    };
-  };
-  registration: {
-    attribute: string;
-  };
-  prefill: Prefill.PrefillConfig;
 }
 
 /*

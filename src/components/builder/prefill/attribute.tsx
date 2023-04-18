@@ -3,11 +3,12 @@ import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 import usePrevious from 'react-use/esm/usePrevious';
+import {PrefillConfig} from 'types/schemas';
 
 import Select from '@components/formio/select';
 import {BuilderContext} from 'context';
 
-import {PrefillAttributeOption, PrefillComponentSchema, PrefillConfig} from './types';
+import {PrefillAttributeOption, PrefillComponentSchema} from './types';
 
 function isAttributeOptions(
   options: PrefillAttributeOption[] | undefined
