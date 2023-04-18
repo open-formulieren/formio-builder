@@ -3,6 +3,7 @@ import React from 'react';
 import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {ReactFramework} from '@storybook/react';
 
+import {PrefillAttributeOption, PrefillPluginOption} from '../src/components/builder/prefill';
 import {RegistrationAttributeOption} from '../src/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '../src/components/builder/validate/validator-select';
 import {BuilderContext} from '../src/context';
@@ -52,12 +53,12 @@ const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'attribute-2', label: 'Attribute 2'},
 ];
 
-const DEFAULT_PREFILL_PLUGINS: ValidatorOption[] = [
+const DEFAULT_PREFILL_PLUGINS: PrefillPluginOption[] = [
   {id: 'plugin-1', label: 'Plugin 1'},
   {id: 'plugin-2', label: 'Plugin 2'},
 ];
 
-const DEFAULT_PREFILL_ATTRIBUTES: {[key: string]: RegistrationAttributeOption[]} = {
+const DEFAULT_PREFILL_ATTRIBUTES: {[key: string]: PrefillAttributeOption[]} = {
   'plugin-1': [
     {id: 'plugin-1-attribute-1', label: 'Plugin 1, attribute 1'},
     {id: 'plugin-1-attribute-2', label: 'Plugin 1, attribute 2'},
