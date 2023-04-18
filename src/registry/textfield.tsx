@@ -36,7 +36,12 @@ import {EditFormDefinition, EditFormProps} from '.';
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
-  Translations.useManageTranslations(['label', 'description', 'defaultValue', 'placeholder']);
+  Translations.useManageTranslations<TextFieldSchema>([
+    'label',
+    'description',
+    'defaultValue',
+    'placeholder',
+  ]);
   Validate.useManageValidatorsTranslations(['required', 'maxLength', 'pattern']);
   return (
     <Tabs>
