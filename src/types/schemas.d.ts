@@ -18,7 +18,16 @@ export interface ExtendedValidateOptions extends ValidateOptions {
   plugins?: string[];
 }
 
-export type OpenFormsComponentSchemaBase<T> = ComponentSchema<T> &
+interface Translation {
+  literal: string;
+  translation: string;
+}
+
+export interface TranslationsContainer {
+  [key: string]: Translation[];
+}
+
+export type OpenFormsComponentSchemaBase<T = any> = ComponentSchema<T> &
   DisplayConfig & {
     validate?: ExtendedValidateOptions;
     isSensitiveData?: boolean;
@@ -26,5 +35,8 @@ export type OpenFormsComponentSchemaBase<T> = ComponentSchema<T> &
     prefill?: PrefillConfig;
     registration: {
       attribute: string;
+    };
+    openForms?: {
+      translations: TranslationsContainer;
     };
   };

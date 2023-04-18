@@ -18,6 +18,7 @@ import {
   Registration,
   ShowCharCount,
   SimpleConditional,
+  Translations,
   Validate,
 } from '@components/builder';
 import {
@@ -35,6 +36,7 @@ import {EditFormDefinition, EditFormProps} from '.';
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
+  Translations.useManageTranslations(['label', 'description', 'defaultValue', 'placeholder']);
   Validate.useManageValidatorsTranslations(['required', 'maxLength', 'pattern']);
   return (
     <Tabs>
@@ -133,7 +135,9 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       </TabPanel>
 
       {/* Translations */}
-      <TabPanel>Translations</TabPanel>
+      <TabPanel>
+        <Translations.ComponentTranslations />
+      </TabPanel>
     </Tabs>
   );
 };
