@@ -79,6 +79,7 @@ export const BuilderContextDecorator = (
 ) => {
   if (!context.parameters?.builder?.enableContext) return <Story />;
   const supportedLanguageCodes = context.parameters.builder?.supportedLanguageCodes || ['nl', 'en'];
+  const translationsStore = context.parameters.builder?.translationsStore || null;
   const defaultComponentTree =
     context.parameters.builder?.defaultComponentTree || DEFAULT_COMPONENT_TREE;
   const defaultValidatorPlugins =
@@ -94,7 +95,7 @@ export const BuilderContextDecorator = (
       value={{
         uniquifyKey: key => key,
         supportedLanguageCodes: supportedLanguageCodes,
-        componentTranslationsRef: {current: null},
+        componentTranslationsRef: {current: translationsStore},
         getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         getValidatorPlugins: async () => {
           await sleep(context.parameters?.builder?.validatorPluginsDelay || 0);

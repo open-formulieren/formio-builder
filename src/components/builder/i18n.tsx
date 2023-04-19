@@ -6,7 +6,7 @@ import {OpenFormsComponentSchemaBase, TranslationsContainer} from 'types/schemas
 import {DataGrid, DataGridRow, Tab, TabList, TabPanel, Tabs, TextField} from '@components/formio';
 import {BuilderContext} from 'context';
 
-type SchemaKey<S> = keyof S & string;
+export type SchemaKey<S> = keyof S & string;
 
 interface PreviousLiterals {
   [key: string]: string;
