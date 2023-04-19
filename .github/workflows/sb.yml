@@ -38,13 +38,15 @@ jobs:
           workflow: ci.yml
           workflow_conclusion: success
           name: github-pages
-          path: ./storybook-static
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./storybook-static
       - name: Unpack artifact
-        run: tar -xvf artifact.tar
+        run: |
+          tree
+          tar -xvf artifact.tar
+          tree
         working-directory: ./storybook-static
 
       - name: Setup Pages
