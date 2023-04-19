@@ -6,6 +6,8 @@ import {OpenFormsComponentSchemaBase, TranslationsContainer} from 'types/schemas
 import {DataGrid, DataGridRow, Tab, TabList, TabPanel, Tabs, TextField} from '@components/formio';
 import {BuilderContext} from 'context';
 
+type SchemaKey<S> = keyof S & string;
+
 interface PreviousLiterals {
   [key: string]: string;
 }
@@ -25,7 +27,7 @@ function getEmptyTranslationsObject(languageCodes: string[]): TranslationsContai
  */
 export function useManageTranslations<
   S extends OpenFormsComponentSchemaBase = OpenFormsComponentSchemaBase
->(forProperties: string[] = []) {
+>(forProperties: SchemaKey<S>[] = []): void {
   const FIELD = 'openForms.translations';
 
   const {componentTranslationsRef, supportedLanguageCodes} = useContext(BuilderContext);
@@ -35,9 +37,9 @@ export function useManageTranslations<
 
   const prevLiteralsRef = useRef<PreviousLiterals>(
     Object.fromEntries(
-      forProperties.map(prop => {
-        const literal: string | undefined = get<S, string>(values, prop);
-        return [prop, literal || ''];
+      forProperties.map(property => {
+        const literal: string | undefined = get<S, string>(values, property);
+        return [property, literal || ''];
       })
     )
   );
@@ -98,12 +100,10 @@ export function useManageTranslations<
     }
 
     for (const property of changed) {
-      prevLiteralsRef.current[property] = get(values, property);
+      prevLiteralsRef.current[property] = get<S, string>(values, property);
     }
     setFieldValue(FIELD, updatedTranslations);
   });
-
-  return null;
 }
 
 interface SingleLanguageTranslationsProps {
