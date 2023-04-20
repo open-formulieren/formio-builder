@@ -30,7 +30,7 @@ import {
   Tabs,
 } from '@components/formio';
 
-import {EditFormDefinition, EditFormProps} from '.';
+import {EditFormDefinition, EditFormProps} from '..';
 
 /**
  * Form to configure a Formio 'textfield' type component.

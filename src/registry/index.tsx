@@ -20,7 +20,9 @@ const Fallback: EditFormDefinition<EditFormProps> = ({component: {type}}) => (
 Fallback.defaultValues = {};
 
 interface Registry {
-  [key: string]: EditFormDefinition<EditFormProps>;
+  [key: string]: {
+    edit: EditFormDefinition<EditFormProps>;
+  };
 }
 
 const REGISTRY: Registry = {
