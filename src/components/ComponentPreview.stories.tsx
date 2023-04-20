@@ -15,6 +15,7 @@ export const Default: ComponentStory<typeof ComponentPreview> = ({component}) =>
 
 Default.args = {
   component: {
+    id: 'foo',
     type: 'textfield',
     label: 'A text field',
     validate: {

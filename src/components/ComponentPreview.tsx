@@ -1,8 +1,7 @@
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {JSONType} from '@types';
+import {ExtendedEditFormComponentSchema, JSONType} from '@types';
 
 interface JSONPreviewProps {
   data: JSONType;
@@ -14,7 +13,7 @@ const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
 );
 
 export interface ComponentPreviewProps {
-  component: ExtendedComponentSchema;
+  component: ExtendedEditFormComponentSchema;
 }
 
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
