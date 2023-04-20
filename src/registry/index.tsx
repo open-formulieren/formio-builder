@@ -1,6 +1,7 @@
 import {ExtendedComponentSchema} from 'formiojs';
 import React from 'react';
 
+import {ComponentPreviewProps} from '@components/ComponentPreview';
 import {EditFormComponentSchema} from '@types';
 
 import TextField from './textfield';
@@ -22,6 +23,7 @@ Fallback.defaultValues = {};
 interface Registry {
   [key: string]: {
     edit: EditFormDefinition<EditFormProps>;
+    preview: React.FC<ComponentPreviewProps>;
   };
 }
 

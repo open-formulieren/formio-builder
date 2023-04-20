@@ -3,6 +3,8 @@ import {FormattedMessage} from 'react-intl';
 
 import {ExtendedEditFormComponentSchema, JSONType} from '@types';
 
+import REGISTRY from '../registry';
+
 interface JSONPreviewProps {
   data: JSONType;
   className?: string;
@@ -16,7 +18,11 @@ export interface ComponentPreviewProps {
   component: ExtendedEditFormComponentSchema;
 }
 
+const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview data={component} />;
+
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
+  const componentType = component.type || 'OF_MISSING_TYPE';
+  const Preview = REGISTRY?.[componentType].preview || Fallback;
   return (
     <div className="card panel preview-panel">
       <div className="card-header">
@@ -26,7 +32,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
       </div>
       <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
         <div className="component-preview">
-          <JSONPreview data={component} />
+          <Preview component={component} />
         </div>
       </div>
     </div>
