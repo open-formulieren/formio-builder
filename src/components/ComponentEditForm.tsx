@@ -36,7 +36,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   onRemove,
 }) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
-  const EditForm = REGISTRY?.[componentType].edit || Fallback;
+  const EditForm = REGISTRY?.[componentType]?.edit || Fallback;
 
   // FIXME: recipes may have non-default values that would be overwritten here with default
   // values - we need a deep merge & some logic to detect this.
@@ -90,9 +90,9 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
             </div>
           </div>
 
-          <Form className="row">
+          <div className="row">
             <div className="col col-sm-6">
-              <div>
+              <Form>
                 <div className="formio-component formio-component-label-hidden">
                   <div className="formio-form">
                     <div className="formio-component-tabs">
@@ -100,14 +100,28 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                     </div>
                   </div>
                 </div>
-              </div>
+                {/*
+                  Required to be able to submit the form with Enter, as the actual submit buttons
+                  are in a different column. Moving the form element to the common ancestor
+                  breaks the ability to isolate the edit and preview forms from each other.
+                 */}
+                <button type="submit" style={{display: 'none'}} />
+              </Form>
             </div>
 
             <div className="col col-sm-6">
               <ComponentPreview component={formik.values} />
 
               <div style={{marginTop: '10px'}}>
-                <button type="submit" className="btn btn-success" style={{marginRight: '10px'}}>
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  style={{marginRight: '10px'}}
+                  onClick={event => {
+                    event.preventDefault();
+                    formik.submitForm();
+                  }}
+                >
                   <FormattedMessage
                     description="Save component configuration button"
                     defaultMessage="Save"
@@ -128,7 +142,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                 </button>
               </div>
             </div>
-          </Form>
+          </div>
         </>
       )}
     </Formik>

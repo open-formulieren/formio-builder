@@ -11,7 +11,9 @@ interface JSONPreviewProps {
 }
 
 const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
-  <pre className={className}>{JSON.stringify(data, null, 2)}</pre>
+  <pre className={className} data-testid="jsonPreview">
+    {JSON.stringify(data, null, 2)}
+  </pre>
 );
 
 export interface ComponentPreviewProps {
@@ -22,7 +24,7 @@ const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview 
 
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
-  const Preview = REGISTRY?.[componentType].preview || Fallback;
+  const Preview = REGISTRY?.[componentType]?.preview || Fallback;
   return (
     <div className="card panel preview-panel">
       <div className="card-header">
@@ -31,7 +33,7 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
         </h4>
       </div>
       <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
-        <div className="component-preview">
+        <div className="component-preview" data-testid="componentPreview">
           <Preview component={component} />
         </div>
       </div>

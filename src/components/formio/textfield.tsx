@@ -1,12 +1,14 @@
 import {Field} from 'formik';
 
 import Component from './component';
+import Description from './description';
 
 export interface TextFieldProps {
   name: string;
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  description?: string;
 }
 
 const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
@@ -14,6 +16,7 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   label,
   required = false,
   tooltip = '',
+  description = '',
   ...props
 }) => {
   const htmlId = `editform-${name}`;
@@ -22,6 +25,7 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
       <div>
         <Field name={name} id={htmlId} as="input" type="text" className="form-control" {...props} />
       </div>
+      {description && <Description text={description} />}
     </Component>
   );
 };
