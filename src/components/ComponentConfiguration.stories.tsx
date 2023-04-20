@@ -3,8 +3,8 @@ import React from 'react';
 
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {waitFor, within} from '@storybook/testing-library';
-import {EditFormComponentSchema} from '@types';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {ExtendedEditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
@@ -67,7 +67,7 @@ export default {
 } as ComponentMeta<typeof ComponentConfiguration>;
 
 interface TemplateArgs {
-  component: EditFormComponentSchema;
+  component: ExtendedEditFormComponentSchema;
   supportedLanguageCodes: string[];
   translationsStore: {
     [key: string]: {
@@ -146,7 +146,7 @@ TextField.args = {
   },
 };
 
-TextField.play = async ({canvasElement}) => {
+TextField.play = async ({canvasElement, args}) => {
   const canvas = within(canvasElement);
 
   await expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
@@ -157,4 +157,14 @@ TextField.play = async ({canvasElement}) => {
   await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
   await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
   await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+  // ensure that changing fields in the edit form properly update the preview
+  const preview = canvas.getByTestId('componentPreview');
+
+  await userEvent.clear(canvas.getByLabelText('Label'));
+  await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+  await within(preview).findByText('Updated preview label');
+
+  const previewInput = within(preview).getByLabelText('Updated preview label');
+  await expect(previewInput).toHaveDisplayValue('');
 };

@@ -1,12 +1,16 @@
-import {Field} from 'formik';
+import {Field, useField} from 'formik';
+import {FormattedMessage} from 'react-intl';
 
 import Component from './component';
+import Description from './description';
 
 export interface TextFieldProps {
   name: string;
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  description?: string;
+  showCharCount?: boolean;
 }
 
 const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
@@ -14,14 +18,27 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   label,
   required = false,
   tooltip = '',
+  description = '',
+  showCharCount = false,
   ...props
 }) => {
+  const [{value}, {touched}] = useField<string | undefined>(name);
   const htmlId = `editform-${name}`;
   return (
     <Component type="textfield" required={required} htmlId={htmlId} label={label} tooltip={tooltip}>
       <div>
         <Field name={name} id={htmlId} as="input" type="text" className="form-control" {...props} />
       </div>
+      {touched && value && (
+        <span className="text-muted">
+          <FormattedMessage
+            description="Character count"
+            defaultMessage="{length} {length, plural, one {character} other {characters}}"
+            values={{length: (value || '').length}}
+          />
+        </span>
+      )}
+      {description && <Description text={description} />}
     </Component>
   );
 };

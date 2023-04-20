@@ -4,7 +4,7 @@ import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
 import {FormattedMessage} from 'react-intl';
 
-import {EditFormComponentSchema} from '@types';
+import {ExtendedEditFormComponentSchema} from '@types';
 
 import REGISTRY, {Fallback} from '../registry';
 import ComponentPreview from './ComponentPreview';
@@ -18,9 +18,11 @@ export interface BuilderInfo {
   weight: number;
 }
 
+type ObjecEntry<T, K extends keyof T = keyof T> = [K, T[K]];
+
 export interface ComponentEditFormProps {
   isNew: boolean;
-  component: EditFormComponentSchema;
+  component: ExtendedEditFormComponentSchema;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -34,16 +36,18 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   onRemove,
 }) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
-  const EditForm = REGISTRY[componentType] || Fallback;
+  const EditForm = REGISTRY?.[componentType]?.edit || Fallback;
 
   // FIXME: recipes may have non-default values that would be overwritten here with default
   // values - we need a deep merge & some logic to detect this.
   const initialValues = cloneDeep(component);
   if (isNew) {
-    Object.entries(EditForm.defaultValues).forEach(([key, value]) => {
-      const val = component?.[key] || value;
-      set(initialValues, key, val);
-    });
+    Object.entries(EditForm.defaultValues).forEach(
+      ([key, value]: ObjecEntry<ExtendedEditFormComponentSchema>) => {
+        const val = component?.[key] || value;
+        set(initialValues, key, val);
+      }
+    );
   }
 
   // Markup (mostly) taken from formio's default templates - there's room for improvement here
@@ -86,9 +90,9 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
             </div>
           </div>
 
-          <Form className="row">
+          <div className="row">
             <div className="col col-sm-6">
-              <div>
+              <Form>
                 <div className="formio-component formio-component-label-hidden">
                   <div className="formio-form">
                     <div className="formio-component-tabs">
@@ -96,14 +100,28 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                     </div>
                   </div>
                 </div>
-              </div>
+                {/*
+                  Required to be able to submit the form with Enter, as the actual submit buttons
+                  are in a different column. Moving the form element to the common ancestor
+                  breaks the ability to isolate the edit and preview forms from each other.
+                 */}
+                <button type="submit" style={{display: 'none'}} />
+              </Form>
             </div>
 
             <div className="col col-sm-6">
               <ComponentPreview component={formik.values} />
 
               <div style={{marginTop: '10px'}}>
-                <button type="submit" className="btn btn-success" style={{marginRight: '10px'}}>
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  style={{marginRight: '10px'}}
+                  onClick={event => {
+                    event.preventDefault();
+                    formik.submitForm();
+                  }}
+                >
                   <FormattedMessage
                     description="Save component configuration button"
                     defaultMessage="Save"
@@ -124,7 +142,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                 </button>
               </div>
             </div>
-          </Form>
+          </div>
         </>
       )}
     </Formik>

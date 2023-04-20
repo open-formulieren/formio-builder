@@ -1,15 +1,20 @@
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
+import {OpenFormsComponentSchemaBase} from './schemas';
+
+export * from './schemas';
+
+export type JSONPrimitive = string | number | boolean | null;
 
 export type JSONType =
-  | string
-  | number
-  | boolean
-  | null
+  | JSONPrimitive
   | JSONType[]
   | {
       [key: string]: JSONType;
     };
 
-export interface EditFormComponentSchema extends ExtendedComponentSchema {
+export interface EditFormComponentSchema extends OpenFormsComponentSchemaBase {
   id: string;
 }
+
+export type ExtendedEditFormComponentSchema = EditFormComponentSchema & {
+  [key: string]: JSONType;
+};

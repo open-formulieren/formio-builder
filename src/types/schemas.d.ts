@@ -4,9 +4,9 @@
 import {ComponentSchema, ValidateOptions} from 'formiojs';
 
 export interface DisplayConfig {
-  showInSummary: boolean;
-  showInEmail: boolean;
-  showInPDF: boolean;
+  showInSummary?: boolean;
+  showInEmail?: boolean;
+  showInPDF?: boolean;
 }
 
 export interface PrefillConfig {
@@ -33,7 +33,7 @@ export type OpenFormsComponentSchemaBase<T = any> = ComponentSchema<T> &
     isSensitiveData?: boolean;
     translatedErrors?: Record<string, Record<string, string>>;
     prefill?: PrefillConfig;
-    registration: {
+    registration?: {
       attribute: string;
     };
     openForms?: {
