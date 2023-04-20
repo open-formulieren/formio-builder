@@ -19,6 +19,7 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
     defaultValue = '',
     validate = {},
     autocomplete,
+    disabled = false,
   } = component;
   const {required = false} = validate;
   const name = key || 'OF_MISSING_KEY';
@@ -32,6 +33,7 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
           placeholder={placeholder}
           required={required}
           autoComplete={(autocomplete as string) || ''}
+          readOnly={disabled}
         />
       </Form>
     </Formik>
