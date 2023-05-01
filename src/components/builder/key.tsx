@@ -23,19 +23,19 @@ interface KeyFormikContextType<T> extends FormikContextType<T> {
   status?: BuilderFormStatus | undefined;
 }
 
-const Key = () => {
+export interface KeyProps {
+  isManuallySetRef: React.MutableRefObject<boolean>;
+  generatedValue: string;
+}
+
+export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] => {
   const {
     values,
     status = {},
     setFieldValue,
-    getFieldProps,
   }: KeyFormikContextType<ExtendedComponentSchema> = useFormikContext<ExtendedComponentSchema>();
   const isManuallySetRef = useRef(false);
-
   const debouncedSetFieldValue = debounce(setFieldValue, 50);
-
-  const name = 'key';
-  const fieldProps = getFieldProps(name);
 
   const {isNew = false} = status;
   const currentKey = values.key;
@@ -52,10 +52,20 @@ const Key = () => {
     };
   }, [setFieldValue, isNew, isManuallySetRef, generatedKey, currentKey]);
 
+  return [isManuallySetRef, generatedKey];
+};
+
+const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
+  const {setFieldValue, getFieldProps}: KeyFormikContextType<ExtendedComponentSchema> =
+    useFormikContext<ExtendedComponentSchema>();
+
+  const name = 'key';
+  const fieldProps = getFieldProps(name);
+
   const onChange = (event: React.ChangeEvent<any>) => {
     const {value} = event.target;
     if (!value) {
-      setFieldValue('key', generatedKey);
+      setFieldValue('key', generatedValue);
       isManuallySetRef.current = false;
     } else {
       isManuallySetRef.current = true;

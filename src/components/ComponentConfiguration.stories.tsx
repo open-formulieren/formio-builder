@@ -3,7 +3,7 @@ import React from 'react';
 
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import {ExtendedEditFormComponentSchema} from '@types';
 
 import ComponentConfiguration from './ComponentConfiguration';
@@ -146,7 +146,7 @@ TextField.args = {
   },
 };
 
-TextField.play = async ({canvasElement, args}) => {
+TextField.play = async ({canvasElement}) => {
   const canvas = within(canvasElement);
 
   await expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
@@ -167,4 +167,14 @@ TextField.play = async ({canvasElement, args}) => {
 
   const previewInput = within(preview).getByLabelText('Updated preview label');
   await expect(previewInput).toHaveDisplayValue('');
+
+  // Ensure that the manually entered key is kept instead of derived from the label,
+  // even when key/label components are not mounted.
+  const keyInput = canvas.getByLabelText('Property Name');
+  await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+  await userEvent.click(canvas.getByRole('tab', {name: 'Location'}));
+  await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+  await userEvent.clear(canvas.getByLabelText('Label'));
+  await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+  await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 };

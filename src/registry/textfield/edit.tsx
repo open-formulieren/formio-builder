@@ -20,6 +20,7 @@ import {
   SimpleConditional,
   Translations,
   Validate,
+  useDeriveComponentKey,
 } from '@components/builder';
 import {
   TextField as BuilderTextField,
@@ -36,6 +37,7 @@ import {EditFormDefinition, EditFormProps} from '..';
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
+  const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   Translations.useManageTranslations<TextFieldSchema>([
     'label',
     'description',
@@ -93,7 +95,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
       {/* Basic tab */}
       <TabPanel>
         <Label />
-        <Key />
+        <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <PresentationConfig />
         <Multiple />
