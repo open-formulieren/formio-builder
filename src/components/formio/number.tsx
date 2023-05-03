@@ -1,4 +1,5 @@
-import {Field} from 'formik';
+import clsx from 'clsx';
+import {Field, useField} from 'formik';
 
 import Component from './component';
 
@@ -16,16 +17,25 @@ const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps> = ({
   tooltip = '',
   ...props
 }) => {
+  const [, {error}] = useField(name);
+  const errors = error ? [error] : [];
   const htmlId = `editform-${name}`;
   return (
-    <Component type="number" required={required} htmlId={htmlId} label={label} tooltip={tooltip}>
+    <Component
+      type="number"
+      required={required}
+      htmlId={htmlId}
+      label={label}
+      tooltip={tooltip}
+      errors={errors}
+    >
       <div>
         <Field
           name={name}
           id={htmlId}
           as="input"
           type="number"
-          className="form-control"
+          className={clsx('form-control', {'is-invalid': errors.length})}
           {...props}
         />
       </div>

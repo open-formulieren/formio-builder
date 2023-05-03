@@ -1,5 +1,7 @@
 import withFormik from '@bbbtech/storybook-formik';
+import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {within} from '@storybook/testing-library';
 
 import Number from './number';
 
@@ -35,4 +37,20 @@ WithToolTip.args = {
   label: 'With tooltip',
   tooltip: 'Hiya!',
   required: false,
+};
+
+export const WithErrors = Template.bind({});
+WithErrors.args = {
+  label: 'With errors',
+};
+WithErrors.parameters = {
+  formik: {
+    initialValues: {'my-number': ''},
+    initialErrors: {'my-number': 'Example error', 'other-field': 'Other error'},
+  },
+};
+WithErrors.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
 };
