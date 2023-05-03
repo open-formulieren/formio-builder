@@ -53,3 +53,19 @@ WithHtmlId.play = async ({canvasElement}) => {
   await userEvent.click(canvas.getByText(labelText));
   await expect(canvas.getByLabelText(labelText)).toHaveFocus();
 };
+
+export const WithErrors = Template.bind([]);
+WithErrors.args = {
+  label: 'Errors must be displayed',
+  type: undefined,
+  children: <input type="text" />,
+  errors: ['Error 1', 'Second error'],
+};
+WithErrors.argTypes = {
+  children: {table: {disable: true}},
+};
+WithErrors.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+  await expect(canvas.queryByText('Error 1')).toBeInTheDocument();
+  await expect(canvas.queryByText('Second error')).toBeInTheDocument();
+};
