@@ -1,3 +1,4 @@
+import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {OpenFormsComponentSchemaBase} from 'types/schemas';
 
@@ -30,14 +31,35 @@ import {
   TabPanel,
   Tabs,
 } from '@components/formio';
+import {getErrorNames} from '@utils/errors';
 
 import {EditFormDefinition, EditFormProps} from '..';
+
+interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
+  showCharCount: boolean;
+  autocomplete: string;
+  deriveStreetName: boolean;
+  deriveCity: boolean;
+  derivePostcode: string;
+  deriveHouseNumber: string;
+}
 
 /**
  * Form to configure a Formio 'textfield' type component.
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
+  const {errors} = useFormikContext();
+
+  const erroredFields = Object.keys(errors).length ? getErrorNames<TextFieldSchema>(errors) : [];
+  // TODO: pattern match instead of just string inclusion?
+  // TODO: move into more generically usuable utility when we implement other component
+  // types
+  const hasAnyError = (...fieldNames: string[]): boolean => {
+    if (!erroredFields.length) return false;
+    return fieldNames.some(name => erroredFields.includes(name));
+  };
+
   Translations.useManageTranslations<TextFieldSchema>([
     'label',
     'description',
@@ -48,43 +70,68 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   return (
     <Tabs>
       <TabList>
-        <Tab>
+        <Tab
+          hasErrors={hasAnyError(
+            'label',
+            'key',
+            'description',
+            'showInSummary',
+            'showInEmail',
+            'showInPDF',
+            'multiple',
+            'hidden',
+            'clearOnHide',
+            'isSensitiveData',
+            'defaultValue',
+            'autocomplete',
+            'disabled',
+            'placeholder',
+            'showCharCount'
+          )}
+        >
           <FormattedMessage
             description="Component edit form tab title for 'Basic' tab"
             defaultMessage="Basic"
           />
         </Tab>
-        <Tab>
+        <Tab
+          hasErrors={hasAnyError(
+            'deriveStreetName',
+            'deriveCity',
+            'derivePostcode',
+            'deriveHouseNumber'
+          )}
+        >
           <FormattedMessage
             description="Component edit form tab title for 'Location' tab"
             defaultMessage="Location"
           />
         </Tab>
-        <Tab>
+        <Tab hasErrors={hasAnyError('conditional')}>
           <FormattedMessage
             description="Component edit form tab title for 'Advanced' tab"
             defaultMessage="Advanced"
           />
         </Tab>
-        <Tab>
+        <Tab hasErrors={hasAnyError('validate')}>
           <FormattedMessage
             description="Component edit form tab title for 'Validation' tab"
             defaultMessage="Validation"
           />
         </Tab>
-        <Tab>
+        <Tab hasErrors={hasAnyError('registration')}>
           <FormattedMessage
             description="Component edit form tab title for 'Registration' tab"
             defaultMessage="Registration"
           />
         </Tab>
-        <Tab>
+        <Tab hasErrors={hasAnyError('prefill')}>
           <FormattedMessage
             description="Component edit form tab title for 'Prefill' tab"
             defaultMessage="Prefill"
           />
         </Tab>
-        <Tab>
+        <Tab hasErrors={hasAnyError('openForms.translations')}>
           <FormattedMessage
             description="Component edit form tab title for 'Translations' tab"
             defaultMessage="Translations"
@@ -148,15 +195,6 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
     </Tabs>
   );
 };
-
-interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
-  showCharCount: boolean;
-  autocomplete: string;
-  deriveStreetName: boolean;
-  deriveCity: boolean;
-  derivePostcode: string;
-  deriveHouseNumber: string;
-}
 
 /*
   Making this introspected or declarative doesn't seem advisable, as React is calling
