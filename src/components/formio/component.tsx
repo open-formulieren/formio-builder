@@ -9,6 +9,7 @@ export interface ComponentProps {
   label?: React.ReactNode;
   tooltip?: string;
   htmlId?: string;
+  errors?: string[];
   children: React.ReactNode;
 }
 
@@ -17,16 +18,15 @@ const Component: React.FC<ComponentProps> = ({
   required = false,
   label,
   tooltip = '',
+  errors = [],
   children,
   ...props
 }) => {
-  const className = clsx(
-    'form-group',
-    'has-feedback',
-    'formio-component',
-    {[`formio-component-${type}`]: type},
-    {required: required}
-  );
+  const className = clsx('form-group', 'has-feedback', 'formio-component', {
+    [`formio-component-${type}`]: type,
+    'has-error': errors.length > 0,
+    required: required,
+  });
   const labelClassName = clsx('col-form-label', {'field-required': required});
   return (
     <div className={className}>
@@ -38,7 +38,13 @@ const Component: React.FC<ComponentProps> = ({
         </label>
       ) : null}
       {children}
-      <div className="formio-errors invalid-feedback"></div>
+      <div className="formio-errors invalid-feedback">
+        {errors.map((error, index) => (
+          <div key={index} className="form-text error">
+            {error}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
