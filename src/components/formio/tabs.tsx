@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import type {
   ReactTabsFunctionComponent,
@@ -7,8 +8,16 @@ import type {
   TabsProps,
 } from 'react-tabs';
 
-const CustomTab: ReactTabsFunctionComponent<TabProps> = ({children, ...props}) => {
-  const linkClassName = props.selected ? 'nav-link active' : 'nav-link';
+const CustomTab: ReactTabsFunctionComponent<TabProps & {hasErrors?: boolean}> = ({
+  children,
+  hasErrors = false,
+  ...props
+}) => {
+  const linkClassName = clsx('nav-link', {
+    active: props.selected,
+    'is-invalid': hasErrors,
+    'tab-error': hasErrors,
+  });
   return (
     <Tab className="nav-item" selectedClassName="active" {...props}>
       <a href="#" onClick={e => e.preventDefault()} className={linkClassName}>
