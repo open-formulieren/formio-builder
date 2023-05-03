@@ -1,5 +1,7 @@
 import withFormik from '@bbbtech/storybook-formik';
+import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {within} from '@storybook/testing-library';
 
 import Checkbox from './checkbox';
 
@@ -30,4 +32,20 @@ export const WithToolTip = Template.bind({});
 WithToolTip.args = {
   label: 'With tooltip',
   tooltip: 'Hiya!',
+};
+
+export const WithErrors = Template.bind({});
+WithErrors.args = {
+  label: 'With errors',
+};
+WithErrors.parameters = {
+  formik: {
+    initialValues: {'my-checkbox': false},
+    initialErrors: {'my-checkbox': 'Example error', 'other-field': 'Other error'},
+  },
+};
+WithErrors.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
 };
