@@ -1,3 +1,4 @@
+import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
@@ -7,8 +8,14 @@ import Component from './component';
 export default {
   title: 'Formio/Containers/Component',
   component: Component,
+  decorators: [withFormik],
   parameters: {
     modal: {noModal: true},
+    // https://github.com/bbbtech/storybook-formik/issues/51#issuecomment-1136668271
+    docs: {
+      inlineStories: false,
+      iframeHeight: 150,
+    },
   },
   args: {
     type: 'textfield',
@@ -55,17 +62,22 @@ WithHtmlId.play = async ({canvasElement}) => {
 };
 
 export const WithErrors = Template.bind([]);
+WithErrors.parameters = {
+  formik: {
+    initialValues: {someField: ''},
+    initialErrors: {someField: 'Some error'},
+  },
+};
 WithErrors.args = {
   label: 'Errors must be displayed',
   type: undefined,
   children: <input type="text" />,
-  errors: ['Error 1', 'Second error'],
+  field: 'someField',
 };
 WithErrors.argTypes = {
   children: {table: {disable: true}},
 };
 WithErrors.play = async ({canvasElement}) => {
   const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Error 1')).toBeInTheDocument();
-  await expect(canvas.queryByText('Second error')).toBeInTheDocument();
+  await expect(canvas.queryByText('Some error')).toBeInTheDocument();
 };

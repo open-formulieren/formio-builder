@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import {Field, useField} from 'formik';
 import {FormattedMessage} from 'react-intl';
 
+import {useValidationErrors} from '@utils/errors';
+
 import Component from './component';
 import Description from './description';
 
@@ -23,20 +25,20 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   showCharCount = false,
   ...props
 }) => {
-  const [{value}, {touched, error}] = useField<string | undefined>(name);
+  const {hasErrors} = useValidationErrors(name);
+  const [{value}, {touched}] = useField<string | undefined>(name);
   const htmlId = `editform-${name}`;
-  const errors = error ? [error] : [];
   if (value === undefined && props.value === undefined) {
     props = {...props, value: ''};
   }
   return (
     <Component
       type="textfield"
+      field={name}
       required={required}
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
-      errors={errors}
     >
       <div>
         <Field
@@ -44,7 +46,7 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
           id={htmlId}
           as="input"
           type="text"
-          className={clsx('form-control', {'is-invalid': errors.length})}
+          className={clsx('form-control', {'is-invalid': hasErrors})}
           {...props}
         />
       </div>

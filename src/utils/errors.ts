@@ -1,4 +1,6 @@
-import {FormikErrors} from 'formik';
+import {FormikErrors, useFormikContext} from 'formik';
+
+import {OpenFormsComponentSchemaBase} from '@types';
 
 export const getErrorNames = <Values = unknown>(errors: FormikErrors<Values>): string[] => {
   const names: string[] = [];
@@ -29,4 +31,19 @@ export const getErrorNames = <Values = unknown>(errors: FormikErrors<Values>): s
     }
   });
   return names;
+};
+
+interface ValidationErrors {
+  hasErrors: boolean;
+  errors: string[];
+}
+
+export const useValidationErrors = (name: string): ValidationErrors => {
+  const {getFieldMeta} = useFormikContext<OpenFormsComponentSchemaBase>();
+  const {error} = name ? getFieldMeta(name) : {error: ''};
+  const errors = name && error ? [error] : [];
+  return {
+    hasErrors: errors.length > 0,
+    errors,
+  };
 };

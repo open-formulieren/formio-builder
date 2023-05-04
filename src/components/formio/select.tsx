@@ -40,8 +40,7 @@ function Select<
   valueProperty = 'value',
   ...props
 }: SelectProps<Option, IsMulti, Group>) {
-  const [field, {error}, {setValue}] = useField(name);
-  const errors = error ? [error] : [];
+  const [field, , {setValue}] = useField(name);
   const htmlId = `editform-${name}`;
 
   let value = undefined;
@@ -63,11 +62,11 @@ function Select<
   return (
     <Component
       type="select"
+      field={name}
       required={required}
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
-      errors={errors}
     >
       <div>
         {/* TODO: add classname/styling for error state */}
