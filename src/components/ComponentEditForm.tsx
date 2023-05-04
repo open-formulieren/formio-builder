@@ -2,7 +2,9 @@ import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {object} from 'zod';
+import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {ExtendedEditFormComponentSchema} from '@types';
 
@@ -35,8 +37,11 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   onCancel,
   onRemove,
 }) => {
+  const intl = useIntl();
+
   const componentType = component.type || 'OF_MISSING_TYPE';
-  const EditForm = REGISTRY?.[componentType]?.edit || Fallback;
+  const registryEntry = REGISTRY?.[componentType] || {edit: Fallback, editSchema: object({})};
+  const {edit: EditForm, editSchema: zodSchema} = registryEntry;
 
   // FIXME: recipes may have non-default values that would be overwritten here with default
   // values - we need a deep merge & some logic to detect this.
@@ -62,6 +67,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
         console.log('submitting', values);
         setSubmitting(false);
       }}
+      validationSchema={toFormikValidationSchema(zodSchema(intl))}
     >
       {formik => (
         <>

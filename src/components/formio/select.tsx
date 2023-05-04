@@ -60,8 +60,16 @@ function Select<
   }
 
   return (
-    <Component type="select" required={required} htmlId={htmlId} label={label} tooltip={tooltip}>
+    <Component
+      type="select"
+      field={name}
+      required={required}
+      htmlId={htmlId}
+      label={label}
+      tooltip={tooltip}
+    >
       <div>
+        {/* TODO: add classname/styling for error state */}
         <ReactSelect
           inputId={htmlId}
           isClearable={isClearable}

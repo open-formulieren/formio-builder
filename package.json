@@ -107,6 +107,8 @@
     "react-select": "^5.7.2",
     "react-tabs": "^4.2.1",
     "react-tooltip": "^5.10.5",
-    "react-use": "^17.4.0"
+    "react-use": "^17.4.0",
+    "zod": "^3.21.4",
+    "zod-formik-adapter": "^1.2.0"
   }
 }

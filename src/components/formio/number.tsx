@@ -1,4 +1,7 @@
+import clsx from 'clsx';
 import {Field} from 'formik';
+
+import {useValidationErrors} from '@utils/errors';
 
 import Component from './component';
 
@@ -16,16 +19,24 @@ const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps> = ({
   tooltip = '',
   ...props
 }) => {
+  const {hasErrors} = useValidationErrors(name);
   const htmlId = `editform-${name}`;
   return (
-    <Component type="number" required={required} htmlId={htmlId} label={label} tooltip={tooltip}>
+    <Component
+      type="number"
+      field={name}
+      required={required}
+      htmlId={htmlId}
+      label={label}
+      tooltip={tooltip}
+    >
       <div>
         <Field
           name={name}
           id={htmlId}
           as="input"
           type="number"
-          className="form-control"
+          className={clsx('form-control', {'is-invalid': hasErrors})}
           {...props}
         />
       </div>

@@ -19,7 +19,8 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@components/*": ["components/*"],
-      "@types": ["types/index"]
+      "@utils/*": ["utils/*"],
+      "@types": ["types/index"],
     },
     "plugins": [
       {

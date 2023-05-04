@@ -100,3 +100,19 @@ ArbitraryOptionShape.play = async ({canvasElement}) => {
   const canvas = within(canvasElement);
   await expect(canvas.getByText('sherlock')).toBeInTheDocument();
 };
+
+export const WithErrors = Template.bind({});
+WithErrors.args = {
+  label: 'With errors',
+};
+WithErrors.parameters = {
+  formik: {
+    initialValues: {'my-select': ''},
+    initialErrors: {'my-select': 'Example error', 'other-field': 'Other error'},
+  },
+};
+WithErrors.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+};
