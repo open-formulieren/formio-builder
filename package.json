@@ -15,9 +15,9 @@
     "./lib/": "./lib/"
   },
   "scripts": {
-    "build:esm": "ttsc -p tsconfig.prod.json",
-    "build:cjs": "ttsc -p tsconfig.prod.json --module commonjs --outDir lib/cjs",
-    "build": "npm-run-all build:* && tsc-alias -p tsconfig.prod.json",
+    "build:esm": "ttsc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "build:cjs": "ttsc -p tsconfig.prod.json --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.prod.json --outDir lib/cjs",
+    "build": "npm-run-all build:*",
     "test": "test-storybook",
     "format": "prettier --write 'src/**/*'",
     "checkformat": "prettier --check 'src/**/*'",
