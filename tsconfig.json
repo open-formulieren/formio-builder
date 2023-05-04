@@ -18,9 +18,7 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@types": ["types/index"],
+      "@/*": ["./*"],
     },
     "plugins": [
       {

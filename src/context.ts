@@ -1,9 +1,9 @@
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
-import {PrefillAttributeOption, PrefillPluginOption} from '@components/builder/prefill';
-import {RegistrationAttributeOption} from '@components/builder/registration/registration-attribute';
-import {ValidatorOption} from '@components/builder/validate/validator-select';
+import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
+import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
+import {ValidatorOption} from '@/components/builder/validate/validator-select';
 
 interface TranslationsMap {
   [key: string]: string;

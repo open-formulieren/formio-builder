@@ -1,5 +1,6 @@
 import {ComponentSchema} from 'formiojs';
-import {PrefillConfig} from 'types/schemas';
+
+import {PrefillConfig} from '@/types/schemas';
 
 export interface PrefillComponentSchema extends ComponentSchema {
   prefill: PrefillConfig;

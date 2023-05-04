@@ -1,8 +1,7 @@
-import {Formik} from 'formik';
-
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {userEvent, within} from '@storybook/testing-library';
+import {Formik} from 'formik';
 
 import ValidationErrorTranslations, {useManageValidatorsTranslations} from './i18n';
 

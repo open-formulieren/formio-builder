@@ -1,6 +1,6 @@
 import {FormattedMessage, useIntl} from 'react-intl';
 
-import {TextField} from '@components/formio';
+import {TextField} from '../../formio';
 
 /*
  * The description contains additional useful information/hints for a given field to

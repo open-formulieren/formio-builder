@@ -2,7 +2,7 @@ import {useFormikContext} from 'formik';
 import {ExtendedComponentSchema, Utils as FormioUtils} from 'formiojs';
 import {useContext} from 'react';
 
-import {BuilderContext} from 'context';
+import {BuilderContext} from '@/context';
 
 import {Select} from '../formio';
 import {SelectProps} from '../formio/select';

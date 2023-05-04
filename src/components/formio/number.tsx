@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {Field} from 'formik';
 
-import {useValidationErrors} from '@utils/errors';
+import {useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 

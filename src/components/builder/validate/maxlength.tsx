@@ -1,6 +1,6 @@
 import {FormattedMessage, useIntl} from 'react-intl';
 
-import {NumberField} from '@components/formio';
+import {NumberField} from '../../formio';
 
 const MaxLength: React.FC = () => {
   const intl = useIntl();

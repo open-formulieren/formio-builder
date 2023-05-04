@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce';
 import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {BuilderContext} from 'context';
+import {BuilderContext} from '@/context';
 
 import {TextField} from '../formio';
 

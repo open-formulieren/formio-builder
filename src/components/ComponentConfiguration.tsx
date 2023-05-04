@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {BuilderContext, BuilderContextType} from '../context';
+import {BuilderContext, BuilderContextType} from '@/context';
+
 import ComponentEditForm, {ComponentEditFormProps} from './ComponentEditForm';
 
 export interface ComponentConfigurationProps extends BuilderContextType, ComponentEditFormProps {}

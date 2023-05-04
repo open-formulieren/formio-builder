@@ -1,10 +1,11 @@
 import {useFormikContext} from 'formik';
 import get from 'lodash.get';
 import {useContext, useEffect, useRef} from 'react';
-import {OpenFormsComponentSchemaBase, TranslationsContainer} from 'types/schemas';
 
-import {DataGrid, DataGridRow, Tab, TabList, TabPanel, Tabs, TextField} from '@components/formio';
-import {BuilderContext} from 'context';
+import {BuilderContext} from '@/context';
+import {OpenFormsComponentSchemaBase, TranslationsContainer} from '@/types/schemas';
+
+import {DataGrid, DataGridRow, Tab, TabList, TabPanel, Tabs, TextField} from '..//formio';
 
 export type SchemaKey<S> = keyof S & string;
 

@@ -1,5 +1,6 @@
-import {Checkbox} from 'components/formio';
 import {FormattedMessage, useIntl} from 'react-intl';
+
+import {Checkbox} from '../../formio';
 
 const Required = () => {
   const intl = useIntl();

@@ -12,7 +12,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "useTabs": false,
-  "importOrder": ["^(@.*)$|^context", "^[./]"],
+  "importOrder": ["^@/.*", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

@@ -1,6 +1,6 @@
 import {FormikErrors, useFormikContext} from 'formik';
 
-import {OpenFormsComponentSchemaBase} from '@types';
+import {OpenFormsComponentSchemaBase} from '@/types';
 
 export const getErrorNames = <Values = unknown>(errors: FormikErrors<Values>): string[] => {
   const names: string[] = [];

@@ -1,10 +1,10 @@
-import {Formik} from 'formik';
-import {OpenFormsComponentSchemaBase} from 'types/schemas';
-
-import {TextField} from '@components/formio';
-import {expect, jest} from '@storybook/jest';
+import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {Formik} from 'formik';
+
+import {TextField} from '@/components/formio';
+import {OpenFormsComponentSchemaBase} from '@/types/schemas';
 
 import {ComponentTranslations, SchemaKey, useManageTranslations} from './i18n';
 

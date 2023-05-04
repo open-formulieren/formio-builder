@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import {useValidationErrors} from '@utils/errors';
+import {useValidationErrors} from '@/utils/errors';
 
 import Tooltip from './tooltip';
 

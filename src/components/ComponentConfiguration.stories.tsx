@@ -1,10 +1,10 @@
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
-import React from 'react';
-
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
-import {ExtendedEditFormComponentSchema} from '@types';
+import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
+import React from 'react';
+
+import {ExtendedEditFormComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';

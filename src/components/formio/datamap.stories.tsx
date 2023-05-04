@@ -1,7 +1,6 @@
-import React from 'react';
-
 import withFormik from '@bbbtech/storybook-formik';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import React from 'react';
 
 import {TextField} from '.';
 import DataMap from './datamap';

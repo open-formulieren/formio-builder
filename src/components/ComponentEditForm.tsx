@@ -6,9 +6,9 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {object} from 'zod';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
-import {ExtendedEditFormComponentSchema} from '@types';
+import REGISTRY, {Fallback} from '@/registry';
+import {ExtendedEditFormComponentSchema} from '@/types';
 
-import REGISTRY, {Fallback} from '../registry';
 import ComponentPreview from './ComponentPreview';
 
 export interface BuilderInfo {

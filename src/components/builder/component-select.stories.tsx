@@ -1,7 +1,6 @@
-import {ExtendedComponentSchema} from 'formiojs';
-
 import withFormik from '@bbbtech/storybook-formik';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {ExtendedComponentSchema} from 'formiojs';
 
 import ComponentSelect, {ComponentSelectProps} from './component-select';
 

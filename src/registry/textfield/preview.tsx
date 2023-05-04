@@ -1,7 +1,7 @@
 import {Form, Formik} from 'formik';
 
-import {ComponentPreviewProps} from '@components/ComponentPreview';
-import {TextField} from '@components/formio';
+import {ComponentPreviewProps} from '@/components/ComponentPreview';
+import {TextField} from '@/components/formio';
 
 /**
  * Show a formio textfield component preview.

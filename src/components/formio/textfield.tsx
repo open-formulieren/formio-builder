@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import {Field, useField} from 'formik';
 import {FormattedMessage} from 'react-intl';
 
-import {useValidationErrors} from '@utils/errors';
+import {useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';

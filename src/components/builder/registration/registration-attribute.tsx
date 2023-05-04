@@ -4,8 +4,8 @@ import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
-import Select from '@components/formio/select';
-import {BuilderContext} from 'context';
+import Select from '@/components/formio/select';
+import {BuilderContext} from '@/context';
 
 export interface RegistrationAttributeOption {
   id: string;

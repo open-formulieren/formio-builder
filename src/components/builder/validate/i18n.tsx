@@ -3,8 +3,9 @@ import isEqual from 'lodash.isequal';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
-import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@components/formio';
-import {BuilderContext} from 'context';
+import {BuilderContext} from '@/context';
+
+import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../..//formio';
 
 type TranslatedErrors = {
   [key: string]: Record<string, string>;

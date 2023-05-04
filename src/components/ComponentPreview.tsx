@@ -2,9 +2,8 @@ import clsx from 'clsx';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {ExtendedEditFormComponentSchema, JSONType} from '@types';
-
-import REGISTRY from '../registry';
+import REGISTRY from '@/registry';
+import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
 
 interface JSONPreviewProps {
   data: JSONType;

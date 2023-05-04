@@ -1,12 +1,11 @@
-import {Formik} from 'formik';
-import {useRef} from 'react';
-
 import withFormik from '@bbbtech/storybook-formik';
 import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {expect, jest} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReactFramework} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {Formik} from 'formik';
+import {useRef} from 'react';
 
 import Key, {useDeriveComponentKey} from './key';
 import Label from './label';

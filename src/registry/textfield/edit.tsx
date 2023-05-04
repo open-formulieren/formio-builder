@@ -1,6 +1,5 @@
 import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {OpenFormsComponentSchemaBase} from 'types/schemas';
 
 import {
   AutoComplete,
@@ -22,7 +21,7 @@ import {
   Translations,
   Validate,
   useDeriveComponentKey,
-} from '@components/builder';
+} from '@/components/builder';
 import {
   TextField as BuilderTextField,
   Checkbox,
@@ -30,8 +29,9 @@ import {
   TabList,
   TabPanel,
   Tabs,
-} from '@components/formio';
-import {getErrorNames} from '@utils/errors';
+} from '@/components/formio';
+import {OpenFormsComponentSchemaBase} from '@/types/schemas';
+import {getErrorNames} from '@/utils/errors';
 
 import {EditFormDefinition, EditFormProps} from '..';
 
