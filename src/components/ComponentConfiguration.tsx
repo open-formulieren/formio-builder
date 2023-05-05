@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {BuilderContext, BuilderContextType} from '@/context';
 
 import ComponentEditForm, {ComponentEditFormProps} from './ComponentEditForm';
