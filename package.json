@@ -23,7 +23,9 @@
     "checkformat": "prettier --check 'src/**/*'",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "makemessages": "formatjs extract",
+    "compilemessages": "formatjs compile"
   },
   "files": [
     "lib/",
