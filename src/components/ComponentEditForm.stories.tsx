@@ -1,5 +1,4 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import React from 'react';
 
 import ComponentEditForm from './ComponentEditForm';
 
@@ -14,6 +13,7 @@ export const Default: ComponentStory<typeof ComponentEditForm> = ({
   builderInfo,
   onCancel,
   onRemove,
+  onSubmit,
 }) => (
   <ComponentEditForm
     isNew={isNew}
@@ -21,6 +21,7 @@ export const Default: ComponentStory<typeof ComponentEditForm> = ({
     builderInfo={builderInfo}
     onCancel={onCancel}
     onRemove={onRemove}
+    onSubmit={onSubmit}
   />
 );
 

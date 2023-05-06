@@ -28,6 +28,7 @@ export interface ComponentEditFormProps {
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSubmit: (component: ExtendedEditFormComponentSchema) => void;
 }
 
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
@@ -36,6 +37,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   builderInfo,
   onCancel,
   onRemove,
+  onSubmit,
 }) => {
   const intl = useIntl();
 
@@ -64,7 +66,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
       initialValues={initialValues}
       initialStatus={{isNew}}
       onSubmit={(values, {setSubmitting}) => {
-        console.log('submitting', values);
+        onSubmit(values);
         setSubmitting(false);
       }}
       validationSchema={toFormikValidationSchema(zodSchema(intl))}

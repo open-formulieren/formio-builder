@@ -19,6 +19,8 @@ export interface ComponentConfigurationProps extends BuilderContextType, Compone
  * @param options.builderInfo              Meta information from the builder configuration for the Formio component.
  * @param options.onCancel                 Callback to invoke when the 'cancel' button is clicked.
  * @param options.onRemove                 Callback to invoke when the 'remove' button is clicked.
+ * @param options.onSubmit                 Callback to invoke when the form is saved. Receives the component
+ *                                         configuration JSON object.
  */
 const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   uniquifyKey,
@@ -34,6 +36,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   builderInfo,
   onCancel,
   onRemove,
+  onSubmit,
 }) => (
   <BuilderContext.Provider
     value={{
@@ -53,6 +56,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       builderInfo={builderInfo}
       onCancel={onCancel}
       onRemove={onRemove}
+      onSubmit={onSubmit}
     />
   </BuilderContext.Provider>
 );

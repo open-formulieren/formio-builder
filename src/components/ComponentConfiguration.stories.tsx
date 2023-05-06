@@ -83,6 +83,7 @@ interface TemplateArgs {
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSubmit: (c: ExtendedEditFormComponentSchema) => void;
 }
 
 const Template = ({
@@ -98,6 +99,7 @@ const Template = ({
   builderInfo,
   onCancel,
   onRemove,
+  onSubmit,
 }: TemplateArgs) => {
   return (
     <ComponentConfiguration
@@ -114,6 +116,7 @@ const Template = ({
       builderInfo={builderInfo}
       onCancel={onCancel}
       onRemove={onRemove}
+      onSubmit={onSubmit}
     />
   );
 };
