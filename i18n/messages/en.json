@@ -1,0 +1,392 @@
+{
+  "+0eHh2": {
+    "defaultMessage": "Property Name",
+    "description": "Component property 'Property Name' label",
+    "originalDefault": "Property Name"
+  },
+  "+XwAuT": {
+    "defaultMessage": "Remove",
+    "description": "Remove component button",
+    "originalDefault": "Remove"
+  },
+  "+q3LGC": {
+    "defaultMessage": "Regular Expression Pattern",
+    "description": "Placeholder for 'validate.pattern' builder field",
+    "originalDefault": "Regular Expression Pattern"
+  },
+  "/XbK4W": {
+    "defaultMessage": "Default Value",
+    "description": "Label for 'defaultValue' builder field",
+    "originalDefault": "Default Value"
+  },
+  "/gcLcC": {
+    "defaultMessage": "Make this component read only.",
+    "description": "Tooltip for 'ReadOnly' builder field",
+    "originalDefault": "Make this component read only."
+  },
+  "/yDnA3": {
+    "defaultMessage": "Whether to show this value in the confirmation PDF",
+    "description": "Tooltip for 'showInPDF' builder field",
+    "originalDefault": "Whether to show this value in the confirmation PDF"
+  },
+  "1WxO/D": {
+    "defaultMessage": "Regular Expression Pattern",
+    "description": "Label for 'validate.pattern' builder field",
+    "originalDefault": "Regular Expression Pattern"
+  },
+  "2k+Mca": {
+    "defaultMessage": "Validation",
+    "description": "Component edit form tab title for 'Validation' tab",
+    "originalDefault": "Validation"
+  },
+  "3LdlNv": {
+    "defaultMessage": "This component should display",
+    "description": "Component property 'conditional.show' label",
+    "originalDefault": "This component should display"
+  },
+  "4/cCvG": {
+    "defaultMessage": "Location",
+    "description": "Component edit form tab title for 'Location' tab",
+    "originalDefault": "Location"
+  },
+  "5DyU8e": {
+    "defaultMessage": "The maximum length requirement this field must meet.",
+    "description": "Tooltip for 'validate.maxLength' builder field",
+    "originalDefault": "The maximum length requirement this field must meet."
+  },
+  "5LxMj7": {
+    "defaultMessage": "Show a live count of the number of characters.",
+    "description": "Tooltip for 'ShowCharCount' builder field",
+    "originalDefault": "Show a live count of the number of characters."
+  },
+  "5dp5j+": {
+    "defaultMessage": "{length} {length, plural, one {character} other {characters}}",
+    "description": "Character count",
+    "originalDefault": "{length} {length, plural, one {character} other {characters}}"
+  },
+  "6F2H6H": {
+    "defaultMessage": "Has the value",
+    "description": "Component property 'conditional.eq' label",
+    "originalDefault": "Has the value"
+  },
+  "6T2dvP": {
+    "defaultMessage": "A required field must be filled in before the form can be submitted.",
+    "description": "Tooltip for 'validate.required' builder field",
+    "originalDefault": "A required field must be filled in before the form can be submitted."
+  },
+  "7T23Pq": {
+    "defaultMessage": "Required",
+    "description": "Label for 'validate.required' builder field",
+    "originalDefault": "Required"
+  },
+  "7XdV9f": {
+    "defaultMessage": "Multiple values",
+    "description": "Label for 'Multiple values' builder field",
+    "originalDefault": "Multiple values"
+  },
+  "ALLoNx": {
+    "defaultMessage": "Simple conditional",
+    "description": "Simple conditional panel title",
+    "originalDefault": "Simple conditional"
+  },
+  "C64ptd": {
+    "defaultMessage": "Maximum length",
+    "description": "Placeholder for 'validate.maxLength' builder field",
+    "originalDefault": "Maximum length"
+  },
+  "CRN74c": {
+    "defaultMessage": "Placeholder",
+    "description": "Placeholder for 'placeholder' builder field",
+    "originalDefault": "Placeholder"
+  },
+  "D0hDzV": {
+    "defaultMessage": "{componentType} component",
+    "description": "Formio builder: component configuration form title",
+    "originalDefault": "{componentType} component"
+  },
+  "D5DCv0": {
+    "defaultMessage": "Custom error messages for this component and their translations",
+    "description": "Tooltip validation error translations panel",
+    "originalDefault": "Custom error messages for this component and their translations"
+  },
+  "Dm3S1P": {
+    "defaultMessage": "Placeholder",
+    "description": "Component property 'Placeholder' label",
+    "originalDefault": "Placeholder"
+  },
+  "Do20MZ": {
+    "defaultMessage": "Basic",
+    "description": "Component edit form tab title for 'Basic' tab",
+    "originalDefault": "Basic"
+  },
+  "EacF3m": {
+    "defaultMessage": "Registration attribute",
+    "description": "Label for 'registration.attribute' builder field",
+    "originalDefault": "Registration attribute"
+  },
+  "ErwGIQ": {
+    "defaultMessage": "Save",
+    "description": "Save component configuration button",
+    "originalDefault": "Save"
+  },
+  "FffJxu": {
+    "defaultMessage": "This will be the initial value for this field before user interaction.",
+    "description": "Tooltip for 'defaultValue' builder field",
+    "originalDefault": "This will be the initial value for this field before user interaction."
+  },
+  "H4sILo": {
+    "defaultMessage": "Derive city",
+    "description": "Label for 'deriveCity' builder field",
+    "originalDefault": "Derive city"
+  },
+  "HNoGb8": {
+    "defaultMessage": "Read only",
+    "description": "Label for 'ReadOnly' builder field",
+    "originalDefault": "Read only"
+  },
+  "JDYF2q": {
+    "defaultMessage": "The data entered in this component will be removed in accordance with the privacy settings.",
+    "description": "Tooltip for 'IsSensitiveData' builder field",
+    "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
+  },
+  "JdwEl7": {
+    "defaultMessage": "JSON",
+    "description": "Component 'JSON' preview mode",
+    "originalDefault": "JSON"
+  },
+  "JneaQM": {
+    "defaultMessage": "Hidden",
+    "description": "Label for 'Hidden' builder field",
+    "originalDefault": "Hidden"
+  },
+  "OlPsaw": {
+    "defaultMessage": "Error code",
+    "description": "Label for translation of validation error code",
+    "originalDefault": "Error code"
+  },
+  "OtGsP8": {
+    "defaultMessage": "Label",
+    "description": "Component property 'Label' label",
+    "originalDefault": "Label"
+  },
+  "Qjl92W": {
+    "defaultMessage": "Preview",
+    "description": "Component preview card title",
+    "originalDefault": "Preview"
+  },
+  "TtqZa0": {
+    "defaultMessage": "The placeholder text that will appear when this field is empty.",
+    "description": "Tooltip for 'placeholder' builder field",
+    "originalDefault": "The placeholder text that will appear when this field is empty."
+  },
+  "UCGSib": {
+    "defaultMessage": "Plugin(s)",
+    "description": "Label for 'validate.plugins' builder field",
+    "originalDefault": "Plugin(s)"
+  },
+  "UGLnLd": {
+    "defaultMessage": "Select the plugin(s) to use for the validation functionality.",
+    "description": "Tooltip for 'validate.plugins' builder field",
+    "originalDefault": "Select the plugin(s) to use for the validation functionality."
+  },
+  "Uv58uI": {
+    "defaultMessage": "Postcode component",
+    "description": "Label for 'derivePostcode' builder field",
+    "originalDefault": "Postcode component"
+  },
+  "V6ClU9": {
+    "defaultMessage": "If the postcode and house number are entered this field will autofill with the city",
+    "description": "Tooltip for 'deriveCity' builder field",
+    "originalDefault": "If the postcode and house number are entered this field will autofill with the city"
+  },
+  "VekFY+": {
+    "defaultMessage": "Autocomplete",
+    "description": "Component property 'Autocomplete' label",
+    "originalDefault": "Autocomplete"
+  },
+  "VyA4fK": {
+    "defaultMessage": "Show in email",
+    "description": "Label for 'showInEmail' builder field",
+    "originalDefault": "Show in email"
+  },
+  "W4PizY": {
+    "defaultMessage": "If the postcode and house number are entered this field will autofill with the street name",
+    "description": "Tooltip for 'deriveStreetName' builder field",
+    "originalDefault": "If the postcode and house number are entered this field will autofill with the street name"
+  },
+  "WDRqIp": {
+    "defaultMessage": "Are there multiple values possible for this field?",
+    "description": "Tooltip for 'Multiple values' builder field",
+    "originalDefault": "Are there multiple values possible for this field?"
+  },
+  "YBY95E": {
+    "defaultMessage": "Manual",
+    "description": "Link to manual title",
+    "originalDefault": "Manual"
+  },
+  "YJpESX": {
+    "defaultMessage": "Advanced",
+    "description": "Component edit form tab title for 'Advanced' tab",
+    "originalDefault": "Advanced"
+  },
+  "YmWeGZ": {
+    "defaultMessage": "Select the plugin to use for the prefill functionality.",
+    "description": "Tooltip for 'prefill.plugin' builder field",
+    "originalDefault": "Select the plugin to use for the prefill functionality."
+  },
+  "asZV7t": {
+    "defaultMessage": "Derive street name",
+    "description": "Label for 'deriveStreetName' builder field",
+    "originalDefault": "Derive street name"
+  },
+  "b/AHC/": {
+    "defaultMessage": "Display in summaries and confirmations",
+    "description": "Presentation configuration panel title",
+    "originalDefault": "Display in summaries and confirmations"
+  },
+  "bYBFBc": {
+    "defaultMessage": "Whether to show this value in the submission summary",
+    "description": "Tooltip for 'showInSummary' builder field",
+    "originalDefault": "Whether to show this value in the submission summary"
+  },
+  "cAC5kL": {
+    "defaultMessage": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!",
+    "description": "Tooltip for 'ClearOnHide' builder field",
+    "originalDefault": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!"
+  },
+  "ce1N0I": {
+    "defaultMessage": "Plugin",
+    "description": "Label for 'prefill.plugin' builder field",
+    "originalDefault": "Plugin"
+  },
+  "dJNdhr": {
+    "defaultMessage": "Cancel",
+    "description": "Cancel component configuration button",
+    "originalDefault": "Cancel"
+  },
+  "dazu9j": {
+    "defaultMessage": "Label is a required field.",
+    "description": "Form builder label field 'required' validation error",
+    "originalDefault": "Label is a required field."
+  },
+  "ddDLRu": {
+    "defaultMessage": "When the form component",
+    "description": "Component property 'conditional.when' label",
+    "originalDefault": "When the form component"
+  },
+  "etny39": {
+    "defaultMessage": "Display options to fill in the field, based on earlier typed values.",
+    "description": "Tooltip for 'autocomplete' builder field",
+    "originalDefault": "Display options to fill in the field, based on earlier typed values."
+  },
+  "fRMCJI": {
+    "defaultMessage": "Prefill",
+    "description": "Component edit form tab title for 'Prefill' tab",
+    "originalDefault": "Prefill"
+  },
+  "fT6Gtt": {
+    "defaultMessage": "Save the value as this attribute in the registration backend system.",
+    "description": "Tooltip for 'registration.attribute' builder field",
+    "originalDefault": "Save the value as this attribute in the registration backend system."
+  },
+  "h0B9Fr": {
+    "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
+    "description": "Form builder 'key' pattern validation error",
+    "originalDefault": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot."
+  },
+  "hJtTwo": {
+    "defaultMessage": "Form",
+    "description": "Component 'Rich' preview mode",
+    "originalDefault": "Form"
+  },
+  "iOADkJ": {
+    "defaultMessage": "Show in summary",
+    "description": "Label for 'showInSummary' builder field",
+    "originalDefault": "Show in summary"
+  },
+  "iX0YPY": {
+    "defaultMessage": "{collapsed, select, true {Expand panel} other {Collapse panel} }",
+    "description": "Panel expand/collapse title",
+    "originalDefault": "{collapsed, select, true {Expand panel} other {Collapse panel} }"
+  },
+  "iqAbXt": {
+    "defaultMessage": "Clear on hide",
+    "description": "Label for 'ClearOnHide' builder field",
+    "originalDefault": "Clear on hide"
+  },
+  "jLg5l6": {
+    "defaultMessage": "House number component",
+    "description": "Label for 'deriveHouseNumber' builder field",
+    "originalDefault": "House number component"
+  },
+  "k9tAyW": {
+    "defaultMessage": "Error message",
+    "description": "Label for translation message for validation error code",
+    "originalDefault": "Error message"
+  },
+  "kkTfpu": {
+    "defaultMessage": "Description",
+    "description": "Component property 'Description' label",
+    "originalDefault": "Description"
+  },
+  "ktjLJK": {
+    "defaultMessage": "Show character counter",
+    "description": "Label for 'ShowCharCount' builder field",
+    "originalDefault": "Show character counter"
+  },
+  "m2oZCk": {
+    "defaultMessage": "Is sensitive data",
+    "description": "Label for 'IsSensitiveData' builder field",
+    "originalDefault": "Is sensitive data"
+  },
+  "pq7q6N": {
+    "defaultMessage": "Show in PDF",
+    "description": "Label for 'showInPDF' builder field",
+    "originalDefault": "Show in PDF"
+  },
+  "r+9rju": {
+    "defaultMessage": "Registration",
+    "description": "Component edit form tab title for 'Registration' tab",
+    "originalDefault": "Registration"
+  },
+  "sgmcmf": {
+    "defaultMessage": "Plugin attribute",
+    "description": "Label for 'prefill.attribute' builder field",
+    "originalDefault": "Plugin attribute"
+  },
+  "tnDJ58": {
+    "defaultMessage": "Whether to show this value in the confirmation email",
+    "description": "Tooltip for 'showInEmail' builder field",
+    "originalDefault": "Whether to show this value in the confirmation email"
+  },
+  "uDSxtY": {
+    "defaultMessage": "Translations",
+    "description": "Component edit form tab title for 'Translations' tab",
+    "originalDefault": "Translations"
+  },
+  "ve3rsH": {
+    "defaultMessage": "Custom error messages",
+    "description": "Title of validation error translations panel",
+    "originalDefault": "Custom error messages"
+  },
+  "vzhWgR": {
+    "defaultMessage": "Specify the attribute holding the pre-fill data.",
+    "description": "Tooltip for 'prefill.attribute' builder field",
+    "originalDefault": "Specify the attribute holding the pre-fill data."
+  },
+  "wZ99FU": {
+    "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",
+    "description": "Tooltip for 'validate.pattern' builder field",
+    "originalDefault": "The regular expression pattern test that the field value must pass before the form can be submitted."
+  },
+  "yD4X2y": {
+    "defaultMessage": "Maximum length",
+    "description": "Label for 'validate.maxLength' builder field",
+    "originalDefault": "Maximum length"
+  },
+  "yQtFln": {
+    "defaultMessage": "Hide a field from the form.",
+    "description": "Tooltip for 'Hidden' builder field",
+    "originalDefault": "Hide a field from the form."
+  }
+}
