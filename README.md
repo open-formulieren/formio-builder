@@ -106,7 +106,7 @@ The builder form is the form + preview shown in the edit component modal.
 - [x] Orchestrate form state with Formik + zod for validation
 - [x] Wire up react-intl for localization
 - [ ] Define and publish Open Forms-specific component type schema's (shared library)
-- [ ] Figure out how to do react-intl message catalog extraction/management for supported languages
+- [x] Figure out how to do react-intl message catalog extraction/management for supported languages
 - [ ] Implement the builder forms for the supported component types
   - [x] `textfield`
   - [ ] `textarea`
