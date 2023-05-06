@@ -1,96 +1,96 @@
 {
   "+0eHh2": {
-    "defaultMessage": "Property Name",
+    "defaultMessage": "Eigenschapnaam",
     "description": "Component property 'Property Name' label",
     "originalDefault": "Property Name"
   },
   "+XwAuT": {
-    "defaultMessage": "Remove",
+    "defaultMessage": "Verwijderen",
     "description": "Remove component button",
     "originalDefault": "Remove"
   },
   "+q3LGC": {
-    "defaultMessage": "Regular Expression Pattern",
+    "defaultMessage": "Reguliere expressie",
     "description": "Placeholder for 'validate.pattern' builder field",
     "originalDefault": "Regular Expression Pattern"
   },
   "/XbK4W": {
-    "defaultMessage": "Default Value",
+    "defaultMessage": "Standaardwaarde",
     "description": "Label for 'defaultValue' builder field",
     "originalDefault": "Default Value"
   },
   "/gcLcC": {
-    "defaultMessage": "Make this component read only.",
+    "defaultMessage": "Maak dit component alleen-lezen",
     "description": "Tooltip for 'ReadOnly' builder field",
     "originalDefault": "Make this component read only."
   },
   "/yDnA3": {
-    "defaultMessage": "Whether to show this value in the confirmation PDF",
+    "defaultMessage": "Geef aan of deze waarde in de (bevestigings-)PDF moet getoond worden. Deze PDF wordt vaak ook als bijlage meegestuurd tijdens de registratie.",
     "description": "Tooltip for 'showInPDF' builder field",
     "originalDefault": "Whether to show this value in the confirmation PDF"
   },
   "1WxO/D": {
-    "defaultMessage": "Regular Expression Pattern",
+    "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular Expression Pattern"
   },
   "2k+Mca": {
-    "defaultMessage": "Validation",
+    "defaultMessage": "Validatie",
     "description": "Component edit form tab title for 'Validation' tab",
     "originalDefault": "Validation"
   },
   "3LdlNv": {
-    "defaultMessage": "This component should display",
+    "defaultMessage": "Dit component moet worden weergegeven",
     "description": "Component property 'conditional.show' label",
     "originalDefault": "This component should display"
   },
   "4/cCvG": {
-    "defaultMessage": "Location",
+    "defaultMessage": "Locatie",
     "description": "Component edit form tab title for 'Location' tab",
     "originalDefault": "Location"
   },
   "5DyU8e": {
-    "defaultMessage": "The maximum length requirement this field must meet.",
+    "defaultMessage": "De maximale toegestane lengte voor dit veld.",
     "description": "Tooltip for 'validate.maxLength' builder field",
     "originalDefault": "The maximum length requirement this field must meet."
   },
   "5LxMj7": {
-    "defaultMessage": "Show a live count of the number of characters.",
+    "defaultMessage": "Toon live het aantal karakters gebruikt in het veld.",
     "description": "Tooltip for 'ShowCharCount' builder field",
     "originalDefault": "Show a live count of the number of characters."
   },
   "5dp5j+": {
-    "defaultMessage": "{length} {length, plural, one {character} other {characters}}",
+    "defaultMessage": "{length} {length, plural, one {karakter} other {karakters}}",
     "description": "Character count",
     "originalDefault": "{length} {length, plural, one {character} other {characters}}"
   },
   "6F2H6H": {
-    "defaultMessage": "Has the value",
+    "defaultMessage": "De waarde heeft:",
     "description": "Component property 'conditional.eq' label",
     "originalDefault": "Has the value"
   },
   "6T2dvP": {
-    "defaultMessage": "A required field must be filled in before the form can be submitted.",
+    "defaultMessage": "Een verplicht veld moet ingevuld worden voor het formulier verstuurd kan worden.",
     "description": "Tooltip for 'validate.required' builder field",
     "originalDefault": "A required field must be filled in before the form can be submitted."
   },
   "7T23Pq": {
-    "defaultMessage": "Required",
+    "defaultMessage": "Verplicht",
     "description": "Label for 'validate.required' builder field",
     "originalDefault": "Required"
   },
   "7XdV9f": {
-    "defaultMessage": "Multiple values",
+    "defaultMessage": "Meerdere waarden",
     "description": "Label for 'Multiple values' builder field",
     "originalDefault": "Multiple values"
   },
   "ALLoNx": {
-    "defaultMessage": "Simple conditional",
+    "defaultMessage": "Eenvoudig",
     "description": "Simple conditional panel title",
     "originalDefault": "Simple conditional"
   },
   "C64ptd": {
-    "defaultMessage": "Maximum length",
+    "defaultMessage": "Maximale lengte",
     "description": "Placeholder for 'validate.maxLength' builder field",
     "originalDefault": "Maximum length"
   },
@@ -100,12 +100,12 @@
     "originalDefault": "Placeholder"
   },
   "D0hDzV": {
-    "defaultMessage": "{componentType} component",
+    "defaultMessage": "{componentType}-component",
     "description": "Formio builder: component configuration form title",
     "originalDefault": "{componentType} component"
   },
   "D5DCv0": {
-    "defaultMessage": "Custom error messages for this component and their translations",
+    "defaultMessage": "Foutmeldingen specifiek voor dit component, inclusief vertalingen",
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
   },
@@ -115,37 +115,37 @@
     "originalDefault": "Placeholder"
   },
   "Do20MZ": {
-    "defaultMessage": "Basic",
+    "defaultMessage": "Basis",
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
   },
   "EacF3m": {
-    "defaultMessage": "Registration attribute",
+    "defaultMessage": "Registratie-attribuut",
     "description": "Label for 'registration.attribute' builder field",
     "originalDefault": "Registration attribute"
   },
   "ErwGIQ": {
-    "defaultMessage": "Save",
+    "defaultMessage": "Opslaan",
     "description": "Save component configuration button",
     "originalDefault": "Save"
   },
   "FffJxu": {
-    "defaultMessage": "This will be the initial value for this field before user interaction.",
+    "defaultMessage": "De beginwaarde voor dit veld, v\u00f3\u00f3r dat gebruikersinteractie plaats vindt.",
     "description": "Tooltip for 'defaultValue' builder field",
     "originalDefault": "This will be the initial value for this field before user interaction."
   },
   "H4sILo": {
-    "defaultMessage": "Derive city",
+    "defaultMessage": "Stad afleiden",
     "description": "Label for 'deriveCity' builder field",
     "originalDefault": "Derive city"
   },
   "HNoGb8": {
-    "defaultMessage": "Read only",
+    "defaultMessage": "Alleen-lezen",
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
   },
   "JDYF2q": {
-    "defaultMessage": "The data entered in this component will be removed in accordance with the privacy settings.",
+    "defaultMessage": "Gegevens opgevoerd in dit component worden geschoond volgens de privacy-instellingen.",
     "description": "Tooltip for 'IsSensitiveData' builder field",
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
@@ -155,12 +155,12 @@
     "originalDefault": "JSON"
   },
   "JneaQM": {
-    "defaultMessage": "Hidden",
+    "defaultMessage": "Verborgen",
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
   },
   "OlPsaw": {
-    "defaultMessage": "Error code",
+    "defaultMessage": "Foutcode",
     "description": "Label for translation of validation error code",
     "originalDefault": "Error code"
   },
@@ -170,12 +170,12 @@
     "originalDefault": "Label"
   },
   "Qjl92W": {
-    "defaultMessage": "Preview",
+    "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
     "originalDefault": "Preview"
   },
   "TtqZa0": {
-    "defaultMessage": "The placeholder text that will appear when this field is empty.",
+    "defaultMessage": "De placeholder-tekst die verschijnt als dit veld leeg is.",
     "description": "Tooltip for 'placeholder' builder field",
     "originalDefault": "The placeholder text that will appear when this field is empty."
   },
@@ -185,72 +185,72 @@
     "originalDefault": "Plugin(s)"
   },
   "UGLnLd": {
-    "defaultMessage": "Select the plugin(s) to use for the validation functionality.",
+    "defaultMessage": "Selecteer de plugin(s) om te gebruiken voor validatie.",
     "description": "Tooltip for 'validate.plugins' builder field",
     "originalDefault": "Select the plugin(s) to use for the validation functionality."
   },
   "Uv58uI": {
-    "defaultMessage": "Postcode component",
+    "defaultMessage": "Postcodecomponent",
     "description": "Label for 'derivePostcode' builder field",
     "originalDefault": "Postcode component"
   },
   "V6ClU9": {
-    "defaultMessage": "If the postcode and house number are entered this field will autofill with the city",
+    "defaultMessage": "Indien de postcode en huisnummer ingevuld zijn, dan wordt automatisch de stad ingevuld.",
     "description": "Tooltip for 'deriveCity' builder field",
     "originalDefault": "If the postcode and house number are entered this field will autofill with the city"
   },
   "VekFY+": {
-    "defaultMessage": "Autocomplete",
+    "defaultMessage": "Automatisch aanvullen",
     "description": "Component property 'Autocomplete' label",
     "originalDefault": "Autocomplete"
   },
   "VyA4fK": {
-    "defaultMessage": "Show in email",
+    "defaultMessage": "Weergeven in bevestigingsmail",
     "description": "Label for 'showInEmail' builder field",
     "originalDefault": "Show in email"
   },
   "W4PizY": {
-    "defaultMessage": "If the postcode and house number are entered this field will autofill with the street name",
+    "defaultMessage": "Indien de postcode en huisnummer ingevuld zijn, dan wordt automatisch de straatnaam ingevuld.",
     "description": "Tooltip for 'deriveStreetName' builder field",
     "originalDefault": "If the postcode and house number are entered this field will autofill with the street name"
   },
   "WDRqIp": {
-    "defaultMessage": "Are there multiple values possible for this field?",
+    "defaultMessage": "Zijn er voor dit veld meerdere waarden mogelijk?",
     "description": "Tooltip for 'Multiple values' builder field",
     "originalDefault": "Are there multiple values possible for this field?"
   },
   "YBY95E": {
-    "defaultMessage": "Manual",
+    "defaultMessage": "Handleiding",
     "description": "Link to manual title",
     "originalDefault": "Manual"
   },
   "YJpESX": {
-    "defaultMessage": "Advanced",
+    "defaultMessage": "Geavanceerd",
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
   },
   "YmWeGZ": {
-    "defaultMessage": "Select the plugin to use for the prefill functionality.",
+    "defaultMessage": "Selecteer de plugin om te gebruiken voor prefill.",
     "description": "Tooltip for 'prefill.plugin' builder field",
     "originalDefault": "Select the plugin to use for the prefill functionality."
   },
   "asZV7t": {
-    "defaultMessage": "Derive street name",
+    "defaultMessage": "Straatnaam afleiden",
     "description": "Label for 'deriveStreetName' builder field",
     "originalDefault": "Derive street name"
   },
   "b/AHC/": {
-    "defaultMessage": "Display in summaries and confirmations",
+    "defaultMessage": "Weergave in overzichten en bevestigingen",
     "description": "Presentation configuration panel title",
     "originalDefault": "Display in summaries and confirmations"
   },
   "bYBFBc": {
-    "defaultMessage": "Whether to show this value in the submission summary",
+    "defaultMessage": "Geef aan of deze waarde in het bevestigscherm moet getoond worden.",
     "description": "Tooltip for 'showInSummary' builder field",
     "originalDefault": "Whether to show this value in the submission summary"
   },
   "cAC5kL": {
-    "defaultMessage": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!",
+    "defaultMessage": "Verwijder de waarde van dit veld van de inzending als dit veld verborgen is. Let op: De waarde van dit veld wordt dan ook niet gebruikt in logica regels!",
     "description": "Tooltip for 'ClearOnHide' builder field",
     "originalDefault": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!"
   },
@@ -260,22 +260,22 @@
     "originalDefault": "Plugin"
   },
   "dJNdhr": {
-    "defaultMessage": "Cancel",
+    "defaultMessage": "Annuleren",
     "description": "Cancel component configuration button",
     "originalDefault": "Cancel"
   },
   "dazu9j": {
-    "defaultMessage": "Label is a required field.",
+    "defaultMessage": "Het verplichte veld Label is niet ingevuld.",
     "description": "Form builder label field 'required' validation error",
     "originalDefault": "Label is a required field."
   },
   "ddDLRu": {
-    "defaultMessage": "When the form component",
+    "defaultMessage": "Als de formuliercomponent",
     "description": "Component property 'conditional.when' label",
     "originalDefault": "When the form component"
   },
   "etny39": {
-    "defaultMessage": "Display options to fill in the field, based on earlier typed values.",
+    "defaultMessage": "Toon opties om dit veld in te vullen, gebaseerd op eerder ingetypte waarden.",
     "description": "Tooltip for 'autocomplete' builder field",
     "originalDefault": "Display options to fill in the field, based on earlier typed values."
   },
@@ -285,107 +285,107 @@
     "originalDefault": "Prefill"
   },
   "fT6Gtt": {
-    "defaultMessage": "Save the value as this attribute in the registration backend system.",
+    "defaultMessage": "Sla de waarde op onder het geselecteerde attribuut in de geselecteerde registratieplugin.",
     "description": "Tooltip for 'registration.attribute' builder field",
     "originalDefault": "Save the value as this attribute in the registration backend system."
   },
   "h0B9Fr": {
-    "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
+    "defaultMessage": "De eigenschapsnaam mag alleen alfanumerieke tekens, onderstrepingstekens, punten en streepjes bevatten en mag niet worden afgesloten met een streepje of punt.",
     "description": "Form builder 'key' pattern validation error",
     "originalDefault": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot."
   },
   "hJtTwo": {
-    "defaultMessage": "Form",
+    "defaultMessage": "Formulierveld",
     "description": "Component 'Rich' preview mode",
     "originalDefault": "Form"
   },
   "iOADkJ": {
-    "defaultMessage": "Show in summary",
+    "defaultMessage": "Weergeven in overzicht",
     "description": "Label for 'showInSummary' builder field",
     "originalDefault": "Show in summary"
   },
   "iX0YPY": {
-    "defaultMessage": "{collapsed, select, true {Expand panel} other {Collapse panel} }",
+    "defaultMessage": "{collapsed, select, true {Uitklappen} other {Inklappen} }",
     "description": "Panel expand/collapse title",
     "originalDefault": "{collapsed, select, true {Expand panel} other {Collapse panel} }"
   },
   "iqAbXt": {
-    "defaultMessage": "Clear on hide",
+    "defaultMessage": "Wissen als veld verborgen is",
     "description": "Label for 'ClearOnHide' builder field",
     "originalDefault": "Clear on hide"
   },
   "jLg5l6": {
-    "defaultMessage": "House number component",
+    "defaultMessage": "Huisnummercomponent",
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
   "k9tAyW": {
-    "defaultMessage": "Error message",
+    "defaultMessage": "Foutmelding",
     "description": "Label for translation message for validation error code",
     "originalDefault": "Error message"
   },
   "kkTfpu": {
-    "defaultMessage": "Description",
+    "defaultMessage": "Beschrijving",
     "description": "Component property 'Description' label",
     "originalDefault": "Description"
   },
   "ktjLJK": {
-    "defaultMessage": "Show character counter",
+    "defaultMessage": "Toon aantal karakters",
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
   },
   "m2oZCk": {
-    "defaultMessage": "Is sensitive data",
+    "defaultMessage": "(Privacy)gevoelige gegevens",
     "description": "Label for 'IsSensitiveData' builder field",
     "originalDefault": "Is sensitive data"
   },
   "pq7q6N": {
-    "defaultMessage": "Show in PDF",
+    "defaultMessage": "Weergeven in PDF",
     "description": "Label for 'showInPDF' builder field",
     "originalDefault": "Show in PDF"
   },
   "r+9rju": {
-    "defaultMessage": "Registration",
+    "defaultMessage": "Registratie",
     "description": "Component edit form tab title for 'Registration' tab",
     "originalDefault": "Registration"
   },
   "sgmcmf": {
-    "defaultMessage": "Plugin attribute",
+    "defaultMessage": "Pluginattribuut",
     "description": "Label for 'prefill.attribute' builder field",
     "originalDefault": "Plugin attribute"
   },
   "tnDJ58": {
-    "defaultMessage": "Whether to show this value in the confirmation email",
+    "defaultMessage": "Geef aan of deze waarde in de bevestigingsmail moet opgenomen worden.",
     "description": "Tooltip for 'showInEmail' builder field",
     "originalDefault": "Whether to show this value in the confirmation email"
   },
   "uDSxtY": {
-    "defaultMessage": "Translations",
+    "defaultMessage": "Vertalingen",
     "description": "Component edit form tab title for 'Translations' tab",
     "originalDefault": "Translations"
   },
   "ve3rsH": {
-    "defaultMessage": "Custom error messages",
+    "defaultMessage": "Foutmeldingen",
     "description": "Title of validation error translations panel",
     "originalDefault": "Custom error messages"
   },
   "vzhWgR": {
-    "defaultMessage": "Specify the attribute holding the pre-fill data.",
+    "defaultMessage": "Geef het attribuut op wat de prefill-gegevens bevat.",
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
   "wZ99FU": {
-    "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",
+    "defaultMessage": "Het patroon van reguliere expressie waar de waarde aan moet voldoen voor het formulier kan verstuurd worden.",
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the field value must pass before the form can be submitted."
   },
   "yD4X2y": {
-    "defaultMessage": "Maximum length",
+    "defaultMessage": "Maximale lengte",
     "description": "Label for 'validate.maxLength' builder field",
     "originalDefault": "Maximum length"
   },
   "yQtFln": {
-    "defaultMessage": "Hide a field from the form.",
+    "defaultMessage": "Verberg een veld in het formulier.",
     "description": "Tooltip for 'Hidden' builder field",
     "originalDefault": "Hide a field from the form."
   }
