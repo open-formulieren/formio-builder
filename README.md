@@ -70,6 +70,30 @@ npm test
 npm run build:esm
 ```
 
+### Managing translations
+
+Any user-facing literals should be
+[defined](https://formatjs.io/docs/getting-started/message-declaration/) as being translatable in
+the code.
+
+To extract these messages, there are utility scripts, intended to be run from the root of the
+repository.
+
+- `./bin/makemessages.sh` - responsible for extracting translations from the code
+- `./bin/find_untranslated_messages.py` - useful to check if you missed any translations
+
+Translations are shipped as assets in the NPM package, in the `i18n` folder. Downstream projects can
+[include](https://formatjs.io/docs/guides/distribute-libraries#declaring-with-a-convention) them
+from there.
+
+**Compilation**
+
+While not directly required, you can compile the messages using:
+
+```bash
+npm run compilemessages
+```
+
 ## Roadmap
 
 ### Builder form
