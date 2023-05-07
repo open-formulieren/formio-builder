@@ -35,6 +35,7 @@ jobs:
       - name: Build Storybook docs
         run: |
           npm ci
+          npm run compilemessages
           npm run build-storybook --quiet
 
       - name: Upload artifact
