@@ -1,6 +1,7 @@
 import {useFormikContext} from 'formik';
 import get from 'lodash.get';
 import {useContext, useEffect, useRef} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {BuilderContext} from '@/context';
 import {OpenFormsComponentSchemaBase, TranslationsContainer} from '@/types/schemas';
@@ -118,7 +119,9 @@ const SingleLanguageTranslations: React.FC<SingleLanguageTranslationsProps> = ({
   return (
     <DataGrid
       name={`openForms.translations.${languageCode}`}
-      label="Vertalingen"
+      label={
+        <FormattedMessage description="Translations datagrid label" defaultMessage="Translations" />
+      }
       tooltip="Translations for literals used in this component."
       columns={['Literal', 'Translation']}
     >

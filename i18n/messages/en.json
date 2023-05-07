@@ -119,6 +119,11 @@
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
   },
+  "E5FZz/": {
+    "defaultMessage": "Translations",
+    "description": "Translations datagrid label",
+    "originalDefault": "Translations"
+  },
   "EacF3m": {
     "defaultMessage": "Registration attribute",
     "description": "Label for 'registration.attribute' builder field",

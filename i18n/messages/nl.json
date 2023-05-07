@@ -119,6 +119,11 @@
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
   },
+  "E5FZz/": {
+    "defaultMessage": "Vertalingen",
+    "description": "Translations datagrid label",
+    "originalDefault": "Translations"
+  },
   "EacF3m": {
     "defaultMessage": "Registratie-attribuut",
     "description": "Label for 'registration.attribute' builder field",
@@ -130,7 +135,7 @@
     "originalDefault": "Save"
   },
   "FffJxu": {
-    "defaultMessage": "De beginwaarde voor dit veld, v\u00f3\u00f3r dat gebruikersinteractie plaats vindt.",
+    "defaultMessage": "De beginwaarde voor dit veld, vóór dat gebruikersinteractie plaats vindt.",
     "description": "Tooltip for 'defaultValue' builder field",
     "originalDefault": "This will be the initial value for this field before user interaction."
   },
