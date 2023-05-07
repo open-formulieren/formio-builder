@@ -3,7 +3,7 @@ const locales = ['en', 'nl'];
 const messages = locales.reduce(
   (acc, lang) => ({
     ...acc,
-    [lang]: {}, // TODO: define default messages?
+    [lang]: require(`../i18n/compiled/${lang}.json`),
   }),
   {}
 );
