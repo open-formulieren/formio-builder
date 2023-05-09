@@ -134,6 +134,11 @@
     "description": "Save component configuration button",
     "originalDefault": "Save"
   },
+  "Fc/emc": {
+    "defaultMessage": "Add another",
+    "description": "'Add another' button text for 'multiple' components",
+    "originalDefault": "Add another"
+  },
   "FffJxu": {
     "defaultMessage": "This will be the initial value for this field before user interaction.",
     "description": "Tooltip for 'defaultValue' builder field",
@@ -263,6 +268,11 @@
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
+  },
+  "d5SKAT": {
+    "defaultMessage": "Remove item",
+    "description": "'Remove item' screenreader button text",
+    "originalDefault": "Remove item"
   },
   "dJNdhr": {
     "defaultMessage": "Cancel",
