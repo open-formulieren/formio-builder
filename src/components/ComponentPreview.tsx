@@ -1,9 +1,15 @@
 import clsx from 'clsx';
+import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import REGISTRY from '@/registry';
 import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
+
+/*
+  Generic JSON Preview
+  -> move to utils?
+ */
 
 interface JSONPreviewProps {
   data: JSONType;
@@ -16,18 +22,38 @@ const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
   </pre>
 );
 
-export interface ComponentPreviewProps {
-  component: ExtendedEditFormComponentSchema;
-}
+/*
+  Fallback component preview component, for when no suitable preview is defined.
+
+  TODO: I think the types currently require this to be defined, so should this even
+  exist? Maybe we should just throw an exception if you're trying to render a component
+  type that's not in the registry?
+ */
 
 const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview data={component} />;
 
-type PreviewState = 'rich' | 'JSON';
+/*
+  Generic preview component
 
-const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
+  The preview component looks at the component.type and looks up the type-specific preview
+  component to render it, all while wrapping it in some builder-specific markup. It also
+  exposes controls to toggle between "WYSWIWYG" and JSON mode.
+
+  It is responsible for (generically) handling the `multiple: true` flavour too.
+ */
+
+export interface ComponentPreviewWrapperProps {
+  component: ExtendedEditFormComponentSchema;
+  initialValues: Record<string, unknown>;
+  children: React.ReactNode;
+}
+
+const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
+  component,
+  initialValues,
+  children,
+}) => {
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
-  const componentType = component.type || 'OF_MISSING_TYPE';
-  const Preview = REGISTRY?.[componentType]?.preview || Fallback;
   return (
     <div className="card panel preview-panel">
       <div className="card-header d-flex justify-content-between align-items-center">
@@ -40,17 +66,39 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
         />
       </div>
       <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
-        <div className="component-preview" data-testid="componentPreview">
-          {previewMode === 'rich' ? (
-            <Preview component={component} />
-          ) : (
-            <JSONPreview data={component} />
-          )}
-        </div>
+        <Formik
+          enableReinitialize
+          initialValues={initialValues}
+          onSubmit={() => {
+            throw new Error("Can't submit preview form");
+          }}
+        >
+          <div className="component-preview" data-testid="componentPreview">
+            {previewMode === 'rich' ? children : <JSONPreview data={component} />}
+          </div>
+        </Formik>
       </div>
     </div>
   );
 };
+
+export interface ComponentPreviewProps {
+  component: ExtendedEditFormComponentSchema;
+}
+
+const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
+  const componentType = component.type || 'OF_MISSING_TYPE';
+  const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
+  const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
+  const initialValues = {[component.key || '']: component.multiple ? [] : defaultValue};
+  return (
+    <ComponentPreviewWrapper component={component} initialValues={initialValues}>
+      <PreviewComponent component={component} />
+    </ComponentPreviewWrapper>
+  );
+};
+
+type PreviewState = 'rich' | 'JSON';
 
 interface PreviewModeToggleProps {
   mode: PreviewState;

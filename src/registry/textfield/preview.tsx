@@ -1,5 +1,3 @@
-import {Form, Formik} from 'formik';
-
 import {ComponentPreviewProps} from '@/components/ComponentPreview';
 import {TextField} from '@/components/formio';
 
@@ -16,29 +14,26 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
     label,
     description,
     placeholder,
-    defaultValue = '',
     validate = {},
     autocomplete,
     disabled = false,
     showCharCount,
+    multiple,
   } = component;
   const {required = false} = validate;
   const name = key || 'OF_MISSING_KEY';
   return (
-    <Formik initialValues={{[name]: defaultValue}} enableReinitialize onSubmit={() => {}}>
-      <Form>
-        <TextField
-          name={name}
-          label={label}
-          description={description}
-          placeholder={placeholder}
-          required={required}
-          autoComplete={(autocomplete as string) || ''}
-          readOnly={disabled}
-          showCharCount={showCharCount as boolean}
-        />
-      </Form>
-    </Formik>
+    <TextField
+      name={name}
+      multiple={!!multiple}
+      label={label}
+      description={description}
+      placeholder={placeholder}
+      required={required}
+      autoComplete={(autocomplete as string) || ''}
+      readOnly={disabled}
+      showCharCount={showCharCount as boolean}
+    />
   );
 };
 
