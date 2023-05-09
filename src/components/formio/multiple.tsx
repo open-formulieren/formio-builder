@@ -46,7 +46,15 @@ const Multiple = <P extends {}, T>(props: MultipleProps<P, T> & CommonInputProps
   const nestedProps = otherProps as unknown as P;
 
   const {getFieldProps} = useFormikContext();
-  const {value: fieldValue} = getFieldProps<T[]>(name);
+  let {value: fieldValue} = getFieldProps<T[]>(name);
+
+  // due to possibly bad value initialization, it's possible the value is undefined or
+  // even a completely different type (because you're switching from multiple false -> true)
+  // TODO: figure out we can figure this at the formik level? this probably depends on render
+  // order though
+  if (!Array.isArray(fieldValue)) {
+    fieldValue = [];
+  }
 
   return (
     <RenderContext.Provider value={{bareInput: true}}>
@@ -55,7 +63,7 @@ const Multiple = <P extends {}, T>(props: MultipleProps<P, T> & CommonInputProps
         {arrayHelpers => (
           <table className="table table-bordered">
             <tbody>
-              {fieldValue.map((_, index) => (
+              {(fieldValue || []).map((_, index) => (
                 <tr key={index}>
                   <td>
                     <WrappedComponent name={`${name}[${index}]`} {...nestedProps} />

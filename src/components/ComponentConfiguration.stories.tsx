@@ -162,13 +162,13 @@ TextField.play = async ({canvasElement}) => {
   await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
   // ensure that changing fields in the edit form properly update the preview
-  const preview = canvas.getByTestId('componentPreview');
+  const preview = within(canvas.getByTestId('componentPreview'));
 
   await userEvent.clear(canvas.getByLabelText('Label'));
   await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-  await within(preview).findByText('Updated preview label');
+  await expect(await preview.findByText('Updated preview label'));
 
-  const previewInput = within(preview).getByLabelText('Updated preview label');
+  const previewInput = preview.getByLabelText('Updated preview label');
   await expect(previewInput).toHaveDisplayValue('');
 
   // Ensure that the manually entered key is kept instead of derived from the label,
@@ -180,4 +180,14 @@ TextField.play = async ({canvasElement}) => {
   await userEvent.clear(canvas.getByLabelText('Label'));
   await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
   await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+
+  // check that toggling the 'multiple' checkbox properly updates the preview and default
+  // value field
+  await userEvent.click(canvas.getByLabelText('Multiple values'));
+  await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
+  await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+  // test for the default value inputs -> these don't have accessible labels/names :(
+  const addButtons = await canvas.getAllByRole('button', {name: 'Add another'});
+  await userEvent.click(addButtons[0]);
+  await expect(await canvas.findByTestId('input-defaultValue[0]'));
 };
