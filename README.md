@@ -53,6 +53,7 @@ nvm use
 2. Start Storybook in dev mode for component development:
 
 ```bash
+npm run compilemessages
 npm start
 ```
 
@@ -88,11 +89,14 @@ from there.
 
 **Compilation**
 
-While not directly required, you can compile the messages using:
+You can compile the messages using:
 
 ```bash
 npm run compilemessages
 ```
+
+This is required for Storybook, as the message catalog is loaded dynamically depending on the active
+locale.
 
 ## Roadmap
 

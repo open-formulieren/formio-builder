@@ -33,13 +33,7 @@ const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
 const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview data={component} />;
 
 /*
-  Generic preview component
-
-  The preview component looks at the component.type and looks up the type-specific preview
-  component to render it, all while wrapping it in some builder-specific markup. It also
-  exposes controls to toggle between "WYSWIWYG" and JSON mode.
-
-  It is responsible for (generically) handling the `multiple: true` flavour too.
+  Generic preview (preview + wrapper with view mode)
  */
 
 export interface ComponentPreviewWrapperProps {
@@ -86,6 +80,15 @@ export interface ComponentPreviewProps {
   component: ExtendedEditFormComponentSchema;
 }
 
+/**
+ * Generic preview
+ *
+ * The preview component looks at the component.type and looks up the type-specific preview
+ * component to render it, all while wrapping it in some builder-specific markup. It also
+ * exposes controls to toggle between "WYSWIWYG" and JSON mode.
+ *
+ * It is also responsible for handling the `multiple: true` variants in a generic way.
+ */
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
   const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;

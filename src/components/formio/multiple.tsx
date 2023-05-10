@@ -80,7 +80,7 @@ const Multiple = <P extends {}, T>(props: MultipleProps<P, T> & CommonInputProps
                           defaultMessage="Remove item"
                         />
                       </span>
-                      <i className="fa fa-times-circle-o" />
+                      <i className="fa fa-times-circle-o" aria-hidden="true" />
                     </button>
                   </td>
                 </tr>
@@ -92,7 +92,7 @@ const Multiple = <P extends {}, T>(props: MultipleProps<P, T> & CommonInputProps
                     className="btn btn-primary formio-button-add-another"
                     onClick={() => arrayHelpers.push(defaultValue)}
                   >
-                    <i className="fa fa-plus"></i>
+                    <i className="fa fa-plus" aria-hidden="true" />
                     <FormattedMessage
                       description="'Add another' button text for 'multiple' components"
                       defaultMessage="Add another"
