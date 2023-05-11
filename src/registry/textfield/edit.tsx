@@ -49,7 +49,7 @@ interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
  */
 const TextField: EditFormDefinition<EditFormProps> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {errors} = useFormikContext();
+  const {values, errors} = useFormikContext<TextFieldSchema>();
 
   const erroredFields = Object.keys(errors).length ? getErrorNames<TextFieldSchema>(errors) : [];
   // TODO: pattern match instead of just string inclusion?
@@ -149,7 +149,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <DefaultValue />
+        <DefaultValue multiple={!!values.multiple} />
         <AutoComplete />
         <ReadOnly />
         <Placeholder />
@@ -250,7 +250,11 @@ const defaultValues: TextFieldSchema = {
 };
 TextField.defaultValues = defaultValues;
 
-const DefaultValue: React.FC<{}> = () => {
+interface DefaultValueProps {
+  multiple: boolean;
+}
+
+const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
@@ -266,6 +270,7 @@ const DefaultValue: React.FC<{}> = () => {
         />
       }
       tooltip={tooltip}
+      multiple={multiple}
     />
   );
 };

@@ -27,6 +27,9 @@ interface Registry {
     edit: EditFormDefinition<EditFormProps>;
     editSchema: (intl: IntlShape) => ZodObject<{}>;
     preview: React.FC<ComponentPreviewProps>;
+    // textfield -> string, numberfield -> number etc. This is used for the formik
+    // initial data
+    defaultValue: unknown;
   };
 }
 

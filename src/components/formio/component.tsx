@@ -3,7 +3,7 @@ import React from 'react';
 
 import {useValidationErrors} from '@/utils/errors';
 
-import Tooltip from './tooltip';
+import ComponentLabel from './component-label';
 
 export interface ComponentProps {
   type: 'textfield' | 'select' | 'checkbox' | 'number' | 'datagrid' | 'datamap'; // TODO: can this be inferred from somewhere?
@@ -30,16 +30,11 @@ const Component: React.FC<ComponentProps> = ({
     'has-error': field && errors.length > 0,
     required: required,
   });
-  const labelClassName = clsx('col-form-label', {'field-required': required});
   return (
     <div className={className}>
-      {label ? (
-        <label htmlFor={props.htmlId || undefined} className={labelClassName}>
-          {label}
-          {tooltip && ' '}
-          <Tooltip text={tooltip} />
-        </label>
-      ) : null}
+      {label && (
+        <ComponentLabel label={label} required={required} htmlId={props.htmlId} tooltip={tooltip} />
+      )}
       {children}
       <div className="formio-errors invalid-feedback">
         {errors.map((error, index) => (

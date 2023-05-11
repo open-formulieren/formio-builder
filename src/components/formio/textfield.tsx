@@ -1,11 +1,14 @@
 import clsx from 'clsx';
-import {Field, useField} from 'formik';
-import {FormattedMessage} from 'react-intl';
+import {Field, useFormikContext} from 'formik';
+import {useContext, useRef} from 'react';
 
+import {RenderContext} from '@/context';
+import CharCount from '@/utils/charcount';
 import {useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';
+import {withMultiple} from './multiple';
 
 export interface TextFieldProps {
   name: string;
@@ -16,7 +19,7 @@ export interface TextFieldProps {
   showCharCount?: boolean;
 }
 
-const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
+export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   name,
   label,
   required = false,
@@ -25,12 +28,47 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
   showCharCount = false,
   ...props
 }) => {
+  const {getFieldProps, getFieldMeta} = useFormikContext();
+  const {value} = getFieldProps<string | undefined>(name);
+  const {touched} = getFieldMeta<string | undefined>(name);
   const {hasErrors} = useValidationErrors(name);
-  const [{value}, {touched}] = useField<string | undefined>(name);
+  // const [{value}, {touched}] = useField<string | undefined>(name);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const {bareInput} = useContext(RenderContext);
+
   const htmlId = `editform-${name}`;
   if (value === undefined && props.value === undefined) {
     props = {...props, value: ''};
   }
+
+  const inputField = (
+    <Field
+      innerRef={inputRef}
+      name={name}
+      id={htmlId}
+      as="input"
+      type="text"
+      className={clsx('form-control', {'is-invalid': hasErrors})}
+      data-testid={`input-${name}`}
+      {...props}
+    />
+  );
+
+  const hasFocus = inputRef.current === document.activeElement;
+  const charCount = showCharCount && (touched || hasFocus) && value && <CharCount value={value} />;
+
+  // 'bare input' is actually a little bit more than just the input, looking at the
+  // vanillay formio implementation.
+  if (bareInput) {
+    return (
+      <>
+        {inputField}
+        {charCount}
+      </>
+    );
+  }
+
+  // default-mode, wrapping the field with label, description etc.
   return (
     <Component
       type="textfield"
@@ -40,28 +78,13 @@ const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
       label={label}
       tooltip={tooltip}
     >
-      <div>
-        <Field
-          name={name}
-          id={htmlId}
-          as="input"
-          type="text"
-          className={clsx('form-control', {'is-invalid': hasErrors})}
-          {...props}
-        />
-      </div>
-      {showCharCount && touched && value && (
-        <span className="text-muted">
-          <FormattedMessage
-            description="Character count"
-            defaultMessage="{length} {length, plural, one {character} other {characters}}"
-            values={{length: (value || '').length}}
-          />
-        </span>
-      )}
+      <div>{inputField}</div>
+      {charCount}
       {description && <Description text={description} />}
     </Component>
   );
 };
 
-export default TextField;
+// make the TextField component 'multiple' capable
+export const TextFieldMultiple = withMultiple(TextField, '');
+export default TextFieldMultiple;
