@@ -191,3 +191,24 @@ TextField.play = async ({canvasElement}) => {
   await userEvent.click(addButtons[0]);
   await expect(await canvas.findByTestId('input-defaultValue[0]'));
 };
+
+export const Email: ComponentStory<typeof Template> = Template.bind({});
+Email.storyName = 'type: email';
+
+Email.args = {
+  component: {
+    id: 'ikrnvhe',
+    type: 'email',
+    label: 'An email field',
+    validate: {
+      required: false,
+    },
+  },
+  builderInfo: {
+    title: 'Email',
+    group: 'basic',
+    icon: 'at',
+    schema: {placeholder: ''},
+    weight: 10,
+  },
+};

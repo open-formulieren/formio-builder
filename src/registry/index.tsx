@@ -6,6 +6,7 @@ import {ZodObject} from 'zod';
 import {ComponentPreviewProps} from '@/components/ComponentPreview';
 import {EditFormComponentSchema} from '@/types';
 
+import Email from './email';
 import TextField from './textfield';
 
 export interface EditFormDefinition<P, DVT = ExtendedComponentSchema> extends React.FC<P> {
@@ -35,6 +36,7 @@ interface Registry {
 
 const REGISTRY: Registry = {
   textfield: TextField,
+  email: Email,
 };
 
 export default REGISTRY;
