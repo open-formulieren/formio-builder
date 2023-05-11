@@ -161,6 +161,7 @@ const defaultValues: EmailSchema = {
   // Validation tab
   validate: {
     required: false,
+    email: true,
     plugins: [],
   },
   translatedErrors: {},

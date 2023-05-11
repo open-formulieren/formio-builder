@@ -202,7 +202,9 @@ Email.args = {
     label: 'An email field',
     validate: {
       required: false,
+      email: true, // FIXME: -> get this in hardcoded?
     },
+    validateOn: 'blur',
   },
   builderInfo: {
     title: 'Email',

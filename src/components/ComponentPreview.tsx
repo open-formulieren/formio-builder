@@ -2,9 +2,12 @@ import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
+import {ZodObject, z} from 'zod';
+import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import REGISTRY from '@/registry';
-import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
+import {ExtendedEditFormComponentSchema, ExtendedValidateOptions, JSONType} from '@/types';
+import VALIDATORS from '@/validators';
 
 /*
   Generic JSON Preview
@@ -39,12 +42,14 @@ const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview 
 export interface ComponentPreviewWrapperProps {
   component: ExtendedEditFormComponentSchema;
   initialValues: Record<string, unknown>;
+  zodSchema?: ZodObject<any>;
   children: React.ReactNode;
 }
 
 const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   component,
   initialValues,
+  zodSchema,
   children,
 }) => {
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
@@ -62,7 +67,10 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
       <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
         <Formik
           enableReinitialize
+          validateOnBlur={component.validateOn === 'blur'}
+          validateOnChange={component.validateOn === 'change'}
           initialValues={initialValues}
+          validationSchema={zodSchema ? toFormikValidationSchema(zodSchema) : undefined}
           onSubmit={() => {
             throw new Error("Can't submit preview form");
           }}
@@ -94,8 +102,25 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
   const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
   const initialValues = {[component.key || '']: component.multiple ? [] : defaultValue};
+
+  let validations: {[key: string]: z.ZodFirstPartySchemaTypes} = {};
+  const {validate = {}} = component;
+  Object.keys(validate).forEach((key: keyof ExtendedValidateOptions) => {
+    if (!VALIDATORS.hasOwnProperty(key)) return;
+    // FIXME -> type cast
+    const schema = VALIDATORS[key as keyof typeof VALIDATORS](component, validate[key]);
+    if (schema === null) return;
+    validations = {...validations, ...schema};
+  });
+
+  const zodSchema = z.object(validations);
+
   return (
-    <ComponentPreviewWrapper component={component} initialValues={initialValues}>
+    <ComponentPreviewWrapper
+      component={component}
+      initialValues={initialValues}
+      zodSchema={zodSchema}
+    >
       <PreviewComponent component={component} />
     </ComponentPreviewWrapper>
   );
