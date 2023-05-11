@@ -45,12 +45,7 @@ const Email: EditFormDefinition<EditFormProps> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<EmailSchema>([
-    'label',
-    'description',
-    'defaultValue',
-    'placeholder',
-  ]);
+  Translations.useManageTranslations<EmailSchema>(['label', 'description', 'defaultValue']);
   Validate.useManageValidatorsTranslations(['required']);
   return (
     <Tabs>

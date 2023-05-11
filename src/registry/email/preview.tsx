@@ -9,17 +9,7 @@ import {TextField} from '@/components/formio';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
-  const {
-    key,
-    label,
-    description,
-    placeholder,
-    validate = {},
-    autocomplete,
-    disabled = false,
-    showCharCount,
-    multiple,
-  } = component;
+  const {key, label, description, validate = {}, autocomplete, multiple} = component;
   const {required = false} = validate;
   const name = key || 'OF_MISSING_KEY';
   return (
@@ -28,11 +18,9 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
       multiple={!!multiple}
       label={label}
       description={description}
-      placeholder={placeholder}
       required={required}
       autoComplete={(autocomplete as string) || ''}
-      readOnly={disabled}
-      showCharCount={showCharCount as boolean}
+      type="email"
     />
   );
 };

@@ -4,6 +4,7 @@ import {
   ZodErrorMap,
   ZodInvalidStringIssue,
   ZodIssueOptionalMessage,
+  literal,
   object,
   string,
 } from 'zod';
@@ -24,6 +25,16 @@ const getErrorMap = (builder: ErrorBuilder): ZodErrorMap => {
   };
   return errorMap;
 };
+
+const Email = string().email();
+const SingleEmail = object({
+  multiple: literal(false),
+}).and(object({defaultValue: Email}));
+const MultipleEmail = object({
+  multiple: literal(true),
+}).and(object({defaultValue: Email.array()}));
+
+const DefaultValue = SingleEmail.or(MultipleEmail);
 
 const schema = (intl: IntlShape) =>
   object({
@@ -51,7 +62,6 @@ const schema = (intl: IntlShape) =>
         return;
       }),
     }).regex(new RegExp('^(\\w|\\w[\\w-.]*\\w)$')),
-    defaultValue: string().email(),
-  });
+  }).and(DefaultValue);
 
 export default schema;
