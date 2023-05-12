@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {ZodObject, z} from 'zod';
+import {ZodObject} from 'zod';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import REGISTRY from '@/registry';
-import {ExtendedEditFormComponentSchema, ExtendedValidateOptions, JSONType} from '@/types';
-import VALIDATORS from '@/validators';
+import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
+import buildZodSchema from '@/validators';
 
 /*
   Generic JSON Preview
@@ -101,19 +101,11 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
   const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
   const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
-  const initialValues = {[component.key || '']: component.multiple ? [] : defaultValue};
+  const key = component.key || 'OF_MISSING_KEY';
+  const initialValues = {[key]: component.multiple ? [] : defaultValue};
 
-  let validations: {[key: string]: z.ZodFirstPartySchemaTypes} = {};
-  const {validate = {}} = component;
-  Object.keys(validate).forEach((key: keyof ExtendedValidateOptions) => {
-    if (!VALIDATORS.hasOwnProperty(key)) return;
-    // FIXME -> type cast
-    const schema = VALIDATORS[key as keyof typeof VALIDATORS](component, validate[key]);
-    if (schema === null) return;
-    validations = {...validations, ...schema};
-  });
-
-  const zodSchema = z.object(validations);
+  // compose the validation schema from the component validators configuration
+  const zodSchema = buildZodSchema(component);
 
   return (
     <ComponentPreviewWrapper
