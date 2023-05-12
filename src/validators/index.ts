@@ -50,8 +50,8 @@ type ValidatorConfiguration = {
 };
 
 const ValidatorConfiguration: ValidatorConfiguration = {
-  textfield: ['required', 'pattern', 'maxLength', 'plugins'],
-  email: ['required', 'email'],
+  textfield: ['pattern', 'maxLength', 'plugins'],
+  email: ['email'],
 };
 
 const buildValidationChain = (component: EditFormComponentSchema) => {
