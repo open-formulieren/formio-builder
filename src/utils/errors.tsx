@@ -2,7 +2,7 @@ import {FormikErrors, useFormikContext} from 'formik';
 
 import {OpenFormsComponentSchemaBase} from '@/types';
 
-export const getErrorNames = <Values = unknown>(errors: FormikErrors<Values>): string[] => {
+export function getErrorNames<Values = unknown>(errors: FormikErrors<Values>): string[] {
   const names: string[] = [];
   Object.entries(errors).forEach(([key, nested]) => {
     // TODO: finish implementation
@@ -31,7 +31,7 @@ export const getErrorNames = <Values = unknown>(errors: FormikErrors<Values>): s
     }
   });
   return names;
-};
+}
 
 interface ValidationErrors {
   hasErrors: boolean;
@@ -47,3 +47,17 @@ export const useValidationErrors = (name: string): ValidationErrors => {
     errors,
   };
 };
+
+export interface ErrorListProps {
+  errors: string[];
+}
+
+export const ErrorList: React.FC<ErrorListProps> = ({errors}) => (
+  <div className="formio-errors invalid-feedback">
+    {errors.map((error, index) => (
+      <div key={index} className="form-text error">
+        {error}
+      </div>
+    ))}
+  </div>
+);

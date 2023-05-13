@@ -4,7 +4,7 @@ import {useContext, useRef} from 'react';
 
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
-import {useValidationErrors} from '@/utils/errors';
+import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';
@@ -31,7 +31,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   const {getFieldProps, getFieldMeta} = useFormikContext();
   const {value} = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
-  const {hasErrors} = useValidationErrors(name);
+  const {errors, hasErrors} = useValidationErrors(name);
   // const [{value}, {touched}] = useField<string | undefined>(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const {bareInput} = useContext(RenderContext);
@@ -64,6 +64,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
       <>
         {inputField}
         {charCount}
+        <ErrorList errors={errors} />
       </>
     );
   }
