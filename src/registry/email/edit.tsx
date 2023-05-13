@@ -1,5 +1,5 @@
 import {useFormikContext} from 'formik';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {
   AutoComplete,
@@ -177,6 +177,11 @@ interface DefaultValueProps {
   multiple: boolean;
 }
 
+export const DEFAULT_VALUE_LABEL = defineMessage({
+  description: "Label for 'defaultValue' builder field",
+  defaultMessage: 'Default Value',
+});
+
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
@@ -187,12 +192,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
     <TextField
       name="defaultValue"
       type="email"
-      label={
-        <FormattedMessage
-          description="Label for 'defaultValue' builder field"
-          defaultMessage="Default Value"
-        />
-      }
+      label={intl.formatMessage(DEFAULT_VALUE_LABEL)}
       tooltip={tooltip}
       multiple={multiple}
     />

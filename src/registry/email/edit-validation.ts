@@ -3,6 +3,8 @@ import {z} from 'zod';
 
 import {buildCommonSchema, getErrorMap, isInvalidStringIssue} from '@/registry/validation';
 
+import {DEFAULT_VALUE_LABEL} from './edit';
+
 const VALIDATION_MESSAGES = defineMessages({
   email: {
     description: 'Invalid email address format validation error',
@@ -15,8 +17,8 @@ const buildDefaultValueSchema = (intl: IntlShape) => {
     .string({
       errorMap: getErrorMap(issue => {
         if (isInvalidStringIssue(issue) && issue.validation === 'email') {
-          // TODO: get the field label from builder localised label!
-          return intl.formatMessage(VALIDATION_MESSAGES.email, {field: 'Default Value'});
+          const fieldLabel = intl.formatMessage(DEFAULT_VALUE_LABEL);
+          return intl.formatMessage(VALIDATION_MESSAGES.email, {field: fieldLabel});
         }
         return;
       }),

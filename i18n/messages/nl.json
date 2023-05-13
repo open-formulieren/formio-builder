@@ -29,6 +29,11 @@
     "description": "Tooltip for 'showInPDF' builder field",
     "originalDefault": "Whether to show this value in the confirmation PDF"
   },
+  "0OP7ho": {
+    "defaultMessage": "Ontvangt bevestigingsmail",
+    "description": "Label for 'confirmationRecipient' builder field",
+    "originalDefault": "Receives confirmation email"
+  },
   "1WxO/D": {
     "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
@@ -179,6 +184,11 @@
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
   },
+  "Q0SS8P": {
+    "defaultMessage": "Ongeldig e-mailadres.",
+    "description": "Invalid email address format validation error",
+    "originalDefault": "{field} must be a valid email."
+  },
   "Qjl92W": {
     "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
@@ -293,6 +303,11 @@
     "defaultMessage": "Toon opties om dit veld in te vullen, gebaseerd op eerder ingetypte waarden.",
     "description": "Tooltip for 'autocomplete' builder field",
     "originalDefault": "Display options to fill in the field, based on earlier typed values."
+  },
+  "ewzHfR": {
+    "defaultMessage": "Het e-mailadres in dit veld ontvangt de bevestigingsmail.",
+    "description": "Tooltip for 'confirmationRecipient' builder field",
+    "originalDefault": "Email-address in this field will receive the confirmation email."
   },
   "fRMCJI": {
     "defaultMessage": "Prefill",
