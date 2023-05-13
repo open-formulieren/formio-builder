@@ -112,7 +112,7 @@ The builder form is the form + preview shown in the edit component modal.
 - [x] Implement generic, bootstrap-based Form.io components to compose forms
 - [x] Orchestrate form state with Formik + zod for validation
 - [x] Wire up react-intl for localization
-- [ ] Define and publish Open Forms-specific component type schema's (shared library)
+- [x] Define and publish Open Forms-specific component type schema's (shared library)
 - [x] Figure out how to do react-intl message catalog extraction/management for supported languages
 - [ ] Implement the builder forms for the supported component types
   - [x] `textfield`
@@ -123,7 +123,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [ ] `radio`
   - [ ] `number`
   - [ ] `currency`
-  - [ ] `email`
+  - [x] `email`
   - [ ] `date`
   - [ ] `datetime`
   - [ ] `time`

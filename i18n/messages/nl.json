@@ -29,6 +29,11 @@
     "description": "Tooltip for 'showInPDF' builder field",
     "originalDefault": "Whether to show this value in the confirmation PDF"
   },
+  "0OP7ho": {
+    "defaultMessage": "Ontvangt bevestigingsmail",
+    "description": "Label for 'confirmationRecipient' builder field",
+    "originalDefault": "Receives confirmation email"
+  },
   "1WxO/D": {
     "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
@@ -124,6 +129,11 @@
     "description": "Translations datagrid label",
     "originalDefault": "Translations"
   },
+  "E5rUfM": {
+    "defaultMessage": "Identifier role",
+    "description": "Label for 'prefill.identifierRole' builder field",
+    "originalDefault": "Identifier role"
+  },
   "EacF3m": {
     "defaultMessage": "Registratie-attribuut",
     "description": "Label for 'registration.attribute' builder field",
@@ -179,10 +189,20 @@
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
   },
+  "Q0SS8P": {
+    "defaultMessage": "Ongeldig e-mailadres.",
+    "description": "Invalid email address format validation error",
+    "originalDefault": "{field} must be a valid email."
+  },
   "Qjl92W": {
     "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
     "originalDefault": "Preview"
+  },
+  "RPzjrJ": {
+    "defaultMessage": "Main",
+    "description": "Label identifier role main",
+    "originalDefault": "Main"
   },
   "TtqZa0": {
     "defaultMessage": "De placeholder-tekst die verschijnt als dit veld leeg is.",
@@ -229,6 +249,11 @@
     "description": "Tooltip for 'Multiple values' builder field",
     "originalDefault": "Are there multiple values possible for this field?"
   },
+  "WkBjB5": {
+    "defaultMessage": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?",
+    "description": "Tooltip for 'prefill.identifierRole' builder field",
+    "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
+  },
   "YBY95E": {
     "defaultMessage": "Handleiding",
     "description": "Link to manual title",
@@ -264,6 +289,11 @@
     "description": "Tooltip for 'ClearOnHide' builder field",
     "originalDefault": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!"
   },
+  "cJnAgZ": {
+    "defaultMessage": "Authorised person",
+    "description": "Label identifier role authorised person",
+    "originalDefault": "Authorised person"
+  },
   "ce1N0I": {
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
@@ -293,6 +323,11 @@
     "defaultMessage": "Toon opties om dit veld in te vullen, gebaseerd op eerder ingetypte waarden.",
     "description": "Tooltip for 'autocomplete' builder field",
     "originalDefault": "Display options to fill in the field, based on earlier typed values."
+  },
+  "ewzHfR": {
+    "defaultMessage": "Het e-mailadres in dit veld ontvangt de bevestigingsmail.",
+    "description": "Tooltip for 'confirmationRecipient' builder field",
+    "originalDefault": "Email-address in this field will receive the confirmation email."
   },
   "fRMCJI": {
     "defaultMessage": "Prefill",
@@ -353,6 +388,11 @@
     "defaultMessage": "(Privacy)gevoelige gegevens",
     "description": "Label for 'IsSensitiveData' builder field",
     "originalDefault": "Is sensitive data"
+  },
+  "nqJbi9": {
+    "defaultMessage": "Tooltip",
+    "description": "Component property 'Tooltip' label",
+    "originalDefault": "Tooltip"
   },
   "pq7q6N": {
     "defaultMessage": "Weergeven in PDF",
