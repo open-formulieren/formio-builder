@@ -1,7 +1,7 @@
 import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import {PrefillAttributeOption, PrefillConfiguration, PrefillPluginOption} from '.';
 
