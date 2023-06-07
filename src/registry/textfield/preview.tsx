@@ -1,3 +1,5 @@
+import {TextFieldComponentSchema} from '@open-formulieren/types';
+
 import {ComponentPreviewProps} from '@/components/ComponentPreview';
 import {TextField} from '@/components/formio';
 
@@ -8,7 +10,7 @@ import {TextField} from '@/components/formio';
  * however at some point this should use the components of
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
-const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
+const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({component}) => {
   const {
     key,
     label,

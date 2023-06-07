@@ -1,3 +1,4 @@
+import {TextFieldComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -30,28 +31,20 @@ import {
   TabPanel,
   Tabs,
 } from '@/components/formio';
-import {OpenFormsComponentSchemaBase} from '@/types/schemas';
 import {getErrorNames} from '@/utils/errors';
 
-import {EditFormDefinition, EditFormProps} from '..';
-
-interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
-  showCharCount: boolean;
-  autocomplete: string;
-  deriveStreetName: boolean;
-  deriveCity: boolean;
-  derivePostcode: string;
-  deriveHouseNumber: string;
-}
+import {EditFormDefinition} from '..';
 
 /**
  * Form to configure a Formio 'textfield' type component.
  */
-const TextField: EditFormDefinition<EditFormProps> = () => {
+const TextField: EditFormDefinition<TextFieldComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<TextFieldSchema>();
+  const {values, errors} = useFormikContext<TextFieldComponentSchema>();
 
-  const erroredFields = Object.keys(errors).length ? getErrorNames<TextFieldSchema>(errors) : [];
+  const erroredFields = Object.keys(errors).length
+    ? getErrorNames<TextFieldComponentSchema>(errors)
+    : [];
   // TODO: pattern match instead of just string inclusion?
   // TODO: move into more generically usuable utility when we implement other component
   // types
@@ -60,7 +53,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<TextFieldSchema>([
+  Translations.useManageTranslations<TextFieldComponentSchema>([
     'label',
     'description',
     'defaultValue',
@@ -204,7 +197,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   Explicitly specifying the schema and default values is therefore probbaly best, at
   the cost of some repetition.
  */
-const defaultValues: TextFieldSchema = {
+TextField.defaultValues = {
   // basic tab
   label: '',
   key: '',
@@ -248,7 +241,6 @@ const defaultValues: TextFieldSchema = {
     attribute: null,
   },
 };
-TextField.defaultValues = defaultValues;
 
 interface DefaultValueProps {
   multiple: boolean;

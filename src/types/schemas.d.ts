@@ -1,7 +1,29 @@
 /**
  * Open Forms specific Formio component schema extensions.
  */
+import {
+  ContentSchema,
+  DateComponentSchema,
+  EmailComponentSchema,
+  NumberComponentSchema,
+  TextFieldComponentSchema,
+} from '@open-formulieren/types';
 import {ComponentSchema, ValidateOptions} from 'formiojs';
+
+export interface FallbackSchema {
+  type?: string;
+}
+
+export type AnyComponentSchema =
+  // inputs
+  | TextFieldComponentSchema
+  | EmailComponentSchema
+  | DateComponentSchema
+  | NumberComponentSchema
+  // layout
+  | ContentSchema;
+
+// OLD
 
 export interface DisplayConfig {
   showInSummary?: boolean;

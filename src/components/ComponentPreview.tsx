@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import REGISTRY from '@/registry';
-import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
+import {AnyComponentSchema, hasOwnProperty} from '@/types';
 
 /*
   Generic JSON Preview
@@ -12,7 +12,7 @@ import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
  */
 
 interface JSONPreviewProps {
-  data: JSONType;
+  data: unknown; // JSON.stringify first argument has an any type in TS itself...
   className?: string;
 }
 
@@ -37,7 +37,7 @@ const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview 
  */
 
 export interface ComponentPreviewWrapperProps {
-  component: ExtendedEditFormComponentSchema;
+  component: AnyComponentSchema;
   initialValues: Record<string, unknown>;
   children: React.ReactNode;
 }
@@ -76,8 +76,8 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   );
 };
 
-export interface ComponentPreviewProps {
-  component: ExtendedEditFormComponentSchema;
+export interface ComponentPreviewProps<S extends AnyComponentSchema = AnyComponentSchema> {
+  component: S;
 }
 
 /**
@@ -94,7 +94,9 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
   const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
   const key = component.key || 'OF_MISSING_KEY';
-  const initialValues = {[key]: component.multiple ? [] : defaultValue};
+
+  const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
+  const initialValues = {[key]: isMultiple ? [] : defaultValue};
 
   return (
     <ComponentPreviewWrapper component={component} initialValues={initialValues}>

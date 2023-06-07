@@ -1,9 +1,9 @@
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
+import {AnyComponentSchema} from '@/types';
 
 /*
   Translations
@@ -29,7 +29,7 @@ export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
   supportedLanguageCodes: string[];
   componentTranslationsRef: ComponentTranslationsRef;
-  getFormComponents: () => ExtendedComponentSchema[];
+  getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;

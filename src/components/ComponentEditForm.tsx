@@ -7,7 +7,7 @@ import {object} from 'zod';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import REGISTRY, {Fallback} from '@/registry';
-import {ExtendedEditFormComponentSchema} from '@/types';
+import {AnyComponentSchema, FallbackSchema} from '@/types';
 
 import ComponentPreview from './ComponentPreview';
 
@@ -24,11 +24,11 @@ type ObjecEntry<T, K extends keyof T = keyof T> = [K, T[K]];
 
 export interface ComponentEditFormProps {
   isNew: boolean;
-  component: ExtendedEditFormComponentSchema;
+  component: AnyComponentSchema;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onSubmit: (component: ExtendedEditFormComponentSchema) => void;
+  onSubmit: (component: AnyComponentSchema | FallbackSchema) => void;
 }
 
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
@@ -42,7 +42,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const intl = useIntl();
 
   const componentType = component.type || 'OF_MISSING_TYPE';
-  const registryEntry = REGISTRY?.[componentType] || {edit: Fallback, editSchema: object({})};
+  const registryEntry = REGISTRY?.[componentType] || {edit: Fallback, editSchema: () => object({})};
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
 
   // FIXME: recipes may have non-default values that would be overwritten here with default
@@ -50,7 +50,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const initialValues = cloneDeep(component);
   if (isNew) {
     Object.entries(EditForm.defaultValues).forEach(
-      ([key, value]: ObjecEntry<ExtendedEditFormComponentSchema>) => {
+      ([key, value]: ObjecEntry<AnyComponentSchema>) => {
         const val = component?.[key] || value;
         set(initialValues, key, val);
       }
@@ -60,7 +60,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   // Markup (mostly) taken from formio's default templates - there's room for improvement here
   // to de-bootstrapify it.
   return (
-    <Formik
+    <Formik<React.ComponentProps<typeof EditForm>['component']>
       validateOnChange={false}
       validateOnBlur
       initialValues={initialValues}
