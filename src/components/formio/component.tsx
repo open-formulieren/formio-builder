@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import {useValidationErrors} from '@/utils/errors';
+import {ErrorList} from '@/utils/errors';
 
 import ComponentLabel from './component-label';
 
@@ -36,13 +37,7 @@ const Component: React.FC<ComponentProps> = ({
         <ComponentLabel label={label} required={required} htmlId={props.htmlId} tooltip={tooltip} />
       )}
       {children}
-      <div className="formio-errors invalid-feedback">
-        {errors.map((error, index) => (
-          <div key={index} className="form-text error">
-            {error}
-          </div>
-        ))}
-      </div>
+      <ErrorList errors={errors} />
     </div>
   );
 };

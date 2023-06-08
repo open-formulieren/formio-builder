@@ -93,7 +93,9 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const componentType = component.type || 'OF_MISSING_TYPE';
   const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
   const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
-  const initialValues = {[component.key || '']: component.multiple ? [] : defaultValue};
+  const key = component.key || 'OF_MISSING_KEY';
+  const initialValues = {[key]: component.multiple ? [] : defaultValue};
+
   return (
     <ComponentPreviewWrapper component={component} initialValues={initialValues}>
       <PreviewComponent component={component} />

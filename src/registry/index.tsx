@@ -1,7 +1,7 @@
 import {ExtendedComponentSchema} from 'formiojs';
 import React from 'react';
 import {IntlShape} from 'react-intl';
-import {ZodObject} from 'zod';
+import {z} from 'zod';
 
 import {ComponentPreviewProps} from '@/components/ComponentPreview';
 import {EditFormComponentSchema} from '@/types';
@@ -25,7 +25,7 @@ Fallback.defaultValues = {};
 interface Registry {
   [key: string]: {
     edit: EditFormDefinition<EditFormProps>;
-    editSchema: (intl: IntlShape) => ZodObject<{}>;
+    editSchema: (intl: IntlShape) => z.ZodFirstPartySchemaTypes;
     preview: React.FC<ComponentPreviewProps>;
     // textfield -> string, numberfield -> number etc. This is used for the formik
     // initial data
