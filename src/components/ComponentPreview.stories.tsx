@@ -111,3 +111,68 @@ TextFieldMultiple.play = async ({canvasElement}) => {
   await expect(canvas.getByTestId('input-textfieldMultiplePreview[0]')).toHaveDisplayValue('');
   await expect(canvas.queryByTestId('input-textfieldMultiplePreview[1]')).not.toBeInTheDocument();
 };
+
+export const Email = Template.bind({});
+Email.args = {
+  component: {
+    type: 'email',
+    id: 'email',
+    key: 'emailPreview',
+    label: 'Email preview',
+    description: 'A preview of the email Formio component',
+    hidden: true, // must be ignored
+  },
+};
+Email.play = async ({canvasElement, args}) => {
+  const canvas = await within(canvasElement);
+
+  // check that the user-controlled content is visible
+  await canvas.findByText('Email preview');
+  await canvas.findByText('A preview of the email Formio component');
+
+  // check that the input name is set correctly
+  const input = await canvas.getByLabelText('Email preview');
+  await expect(input.getAttribute('name')).toBe(args.component.key);
+
+  // check that user can type into the field
+  await userEvent.type(input, 'hello@example.com');
+  await expect(input).toHaveDisplayValue('hello@example.com');
+};
+
+export const EmailMultiple = Template.bind({});
+EmailMultiple.args = {
+  component: {
+    type: 'email',
+    id: 'email',
+    key: 'emailPreview',
+    label: 'Email preview',
+    description: 'Description only once',
+    hidden: true, // must be ignored
+    multiple: true,
+  },
+};
+EmailMultiple.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+
+  // check that new items can be added
+  await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+  const input1 = await canvas.getByTestId<HTMLInputElement>('input-emailPreview[0]');
+  await expect(input1).toHaveDisplayValue('');
+  await expect(input1.type).toEqual('email');
+  // during typing, we want immediate charcount feedback
+  await userEvent.type(input1, 'hello@example.com');
+  await expect(input1).toHaveDisplayValue('hello@example.com');
+
+  // the description should be rendered only once, even with > 1 inputs
+  await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+  const input2 = canvas.getByTestId<HTMLInputElement>('input-emailPreview[1]');
+  await expect(input2).toHaveDisplayValue('');
+  await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+
+  // finally, it should be possible delete rows again
+  const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
+  await expect(removeButtons.length).toBe(2);
+  await userEvent.click(removeButtons[0]);
+  await expect(canvas.getByTestId('input-emailPreview[0]')).toHaveDisplayValue('');
+  await expect(canvas.queryByTestId('input-emailPreview[1]')).not.toBeInTheDocument();
+};
