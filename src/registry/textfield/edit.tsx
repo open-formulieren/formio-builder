@@ -18,6 +18,7 @@ import {
   Registration,
   ShowCharCount,
   SimpleConditional,
+  Tooltip,
   Translations,
   Validate,
   useDeriveComponentKey,
@@ -63,6 +64,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   Translations.useManageTranslations<TextFieldSchema>([
     'label',
     'description',
+    'tooltip',
     'defaultValue',
     'placeholder',
   ]);
@@ -75,6 +77,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
             'label',
             'key',
             'description',
+            'tooltip',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -144,6 +147,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
         <Label />
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
+        <Tooltip />
         <PresentationConfig />
         <Multiple />
         <Hidden />
@@ -209,6 +213,7 @@ const defaultValues: TextFieldSchema = {
   label: '',
   key: '',
   description: '',
+  tooltip: '',
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,

@@ -157,6 +157,7 @@ TextField.play = async ({canvasElement}) => {
     await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextField');
   });
   await expect(canvas.getByLabelText('Description')).toHaveValue('');
+  await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
   await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
   await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
   await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
