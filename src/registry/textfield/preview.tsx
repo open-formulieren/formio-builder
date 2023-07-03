@@ -14,6 +14,7 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
     label,
     description,
     placeholder,
+    tooltip,
     validate = {},
     autocomplete,
     disabled = false,
@@ -28,6 +29,7 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
       multiple={!!multiple}
       label={label}
       description={description}
+      tooltip={tooltip}
       placeholder={placeholder}
       required={required}
       autoComplete={(autocomplete as string) || ''}

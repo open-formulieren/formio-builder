@@ -6,6 +6,7 @@
  */
 export {default as Label} from './label';
 export {default as Description} from './description';
+export {default as Tooltip} from './tooltip';
 export {default as AutoComplete} from './autocomplete';
 export {default as Placeholder} from './placeholder';
 export {default as Key, useDeriveComponentKey} from './key';
