@@ -41,7 +41,7 @@ export default {
       defaultPrefillAttributes: DEFAULT_PREFILL_ATTRIBUTES,
     },
     formik: {
-      initialValues: {prefill: {plugin: null, attribute: null}},
+      initialValues: {prefill: {plugin: null, attribute: null, identifierRole: 'main'}},
     },
   },
 } as ComponentMeta<typeof PrefillConfiguration>;
@@ -128,5 +128,39 @@ ChangingPluginClearsAttribute.play = async ({canvasElement}) => {
   await waitFor(async () => {
     await expect(canvas.queryByText('Plugin 1, attribute 1')).toBeInTheDocument();
     await expect(canvas.queryByText('Plugin 1, attribute 2')).toBeInTheDocument();
+  });
+};
+
+export const ChangingIdentifierRole = Template.bind({});
+ChangingIdentifierRole.parameters = {
+  formik: {
+    initialValues: {
+      prefill: {
+        plugin: 'plugin-2',
+        attribute: 'plugin-2-attribute-1',
+        identifierRole: 'main',
+      },
+    },
+  },
+};
+ChangingIdentifierRole.play = async ({canvasElement}) => {
+  const canvas = within(canvasElement);
+
+  await waitFor(async () => {
+    await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+    await expect(canvas.queryByText('Plugin 2, attribute 1')).toBeInTheDocument();
+    await expect(canvas.queryByText('Main')).toBeInTheDocument();
+  });
+
+  // change the identifier role
+  await canvas.getByLabelText('Identifier role').focus();
+  await userEvent.keyboard('[ArrowDown]');
+  await waitFor(async () => {
+    await expect(canvas.queryByText('Authorised person')).toBeInTheDocument();
+  });
+  await userEvent.click(canvas.getByText('Authorised person'));
+
+  await waitFor(async () => {
+    await expect(canvas.queryByText('Main')).not.toBeInTheDocument();
   });
 };
