@@ -1,10 +1,22 @@
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import Select from '@/components/formio/select';
 
 const IDENTIFIER_ROLE_OPTIONS = [
-  {label: 'Main', value: 'main'},
-  {label: 'Authorised person', value: 'authorised_person'},
+  {
+    label: defineMessage({
+      description: 'Label identifier role main',
+      defaultMessage: 'Main',
+    }),
+    value: 'main',
+  },
+  {
+    label: defineMessage({
+      description: 'Label identifier role authorised person',
+      defaultMessage: 'Authorised person',
+    }),
+    value: 'authorised_person',
+  },
 ];
 
 const PrefillIdentifierRoleSelect: React.FC = () => {
@@ -26,7 +38,10 @@ const PrefillIdentifierRoleSelect: React.FC = () => {
         />
       }
       tooltip={tooltip}
-      options={IDENTIFIER_ROLE_OPTIONS}
+      options={IDENTIFIER_ROLE_OPTIONS.map(item => ({
+        ...item,
+        label: intl.formatMessage(item.label),
+      }))}
     />
   );
 };
