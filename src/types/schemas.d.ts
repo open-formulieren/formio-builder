@@ -12,6 +12,7 @@ export interface DisplayConfig {
 export interface PrefillConfig {
   plugin: string | null;
   attribute: string | null;
+  identifierRole: 'main' | 'authorised_person';
 }
 
 export interface ExtendedValidateOptions extends ValidateOptions {

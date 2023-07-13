@@ -251,6 +251,7 @@ const defaultValues: TextFieldSchema = {
   prefill: {
     plugin: null,
     attribute: null,
+    identifierRole: 'main',
   },
 };
 TextField.defaultValues = defaultValues;
