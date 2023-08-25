@@ -1,5 +1,8 @@
-import {ComponentPreviewProps} from '@/components/ComponentPreview';
+import {TextFieldComponentSchema} from '@open-formulieren/types';
+
 import {TextField} from '@/components/formio';
+
+import {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio textfield component preview.
@@ -8,7 +11,7 @@ import {TextField} from '@/components/formio';
  * however at some point this should use the components of
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
-const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
+const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({component}) => {
   const {
     key,
     label,
@@ -16,25 +19,24 @@ const Preview: React.FC<ComponentPreviewProps> = ({component}) => {
     placeholder,
     tooltip,
     validate = {},
-    autocomplete,
+    autocomplete = '',
     disabled = false,
     showCharCount,
     multiple,
   } = component;
   const {required = false} = validate;
-  const name = key || 'OF_MISSING_KEY';
   return (
     <TextField
-      name={name}
+      name={key}
       multiple={!!multiple}
       label={label}
       description={description}
       tooltip={tooltip}
       placeholder={placeholder}
       required={required}
-      autoComplete={(autocomplete as string) || ''}
+      autoComplete={autocomplete}
       readOnly={disabled}
-      showCharCount={showCharCount as boolean}
+      showCharCount={showCharCount}
     />
   );
 };

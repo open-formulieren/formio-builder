@@ -3,13 +3,12 @@ import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {object} from 'zod';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
-import REGISTRY, {Fallback} from '@/registry';
-import {ExtendedEditFormComponentSchema} from '@/types';
+import {getRegistryEntry, isKnownComponentType} from '@/registry';
+import {AnyComponentSchema, FallbackSchema} from '@/types';
 
-import ComponentPreview from './ComponentPreview';
+import GenericComponentPreview from './ComponentPreview';
 
 export interface BuilderInfo {
   title: string;
@@ -24,11 +23,13 @@ type ObjecEntry<T, K extends keyof T = keyof T> = [K, T[K]];
 
 export interface ComponentEditFormProps {
   isNew: boolean;
-  component: ExtendedEditFormComponentSchema;
+  // it is (currently) possible someone drags a component type into the canvas that we
+  // don't know (yet), so we need to handle FallbackSchema.
+  component: AnyComponentSchema | FallbackSchema;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onSubmit: (component: ExtendedEditFormComponentSchema) => void;
+  onSubmit: (component: AnyComponentSchema | FallbackSchema) => void;
 }
 
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
@@ -41,26 +42,30 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 }) => {
   const intl = useIntl();
 
-  const componentType = component.type || 'OF_MISSING_TYPE';
-  const registryEntry = REGISTRY?.[componentType] || {edit: Fallback, editSchema: object({})};
+  const registryEntry = getRegistryEntry(component);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
 
   // FIXME: recipes may have non-default values that would be overwritten here with default
   // values - we need a deep merge & some logic to detect this.
   const initialValues = cloneDeep(component);
-  if (isNew) {
+  if (isNew && isKnownComponentType(component)) {
     Object.entries(EditForm.defaultValues).forEach(
-      ([key, value]: ObjecEntry<ExtendedEditFormComponentSchema>) => {
+      ([key, value]: ObjecEntry<AnyComponentSchema>) => {
         const val = component?.[key] || value;
         set(initialValues, key, val);
       }
     );
   }
 
+  // we infer the specific schema from the EditForm component obtained from the registry.
+  // This gives a specific schema rather than AnyComponentSchema and allows us to type
+  // check the values accordingly.
+  type ComponentSchema = React.ComponentProps<typeof EditForm>['component'];
+
   // Markup (mostly) taken from formio's default templates - there's room for improvement here
   // to de-bootstrapify it.
   return (
-    <Formik
+    <Formik<ComponentSchema>
       validateOnChange={false}
       validateOnBlur
       initialValues={initialValues}
@@ -118,7 +123,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
             </div>
 
             <div className="col col-sm-6">
-              <ComponentPreview component={formik.values} />
+              <GenericComponentPreview component={formik.values} />
 
               <div style={{marginTop: '10px'}}>
                 <button

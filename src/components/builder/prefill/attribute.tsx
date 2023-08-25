@@ -6,9 +6,8 @@ import usePrevious from 'react-use/esm/usePrevious';
 
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
-import {PrefillConfig} from '@/types/schemas';
 
-import {PrefillAttributeOption, PrefillComponentSchema} from './types';
+import {ComponentWithPrefill, PrefillAttributeOption} from './types';
 
 function isAttributeOptions(
   options: PrefillAttributeOption[] | undefined
@@ -28,8 +27,9 @@ function isAttributeOptions(
 const PrefillAttributeSelect: React.FC = () => {
   const fieldName = 'prefill.attribute';
   const intl = useIntl();
-  const {values, setFieldValue} = useFormikContext<PrefillComponentSchema>();
-  const [{value: attribute}] = useField<PrefillConfig['attribute']>('prefill.attribute');
+  const {values, setFieldValue} = useFormikContext<ComponentWithPrefill>();
+  const [{value: attribute}] =
+    useField<ComponentWithPrefill['prefill']['attribute']>('prefill.attribute');
   const {getPrefillAttributes} = useContext(BuilderContext);
   const {plugin} = values.prefill;
   const previousPlugin = usePrevious(plugin);

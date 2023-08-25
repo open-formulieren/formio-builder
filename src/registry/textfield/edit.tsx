@@ -1,3 +1,4 @@
+import {TextFieldComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -23,36 +24,21 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
-import {
-  TextField as BuilderTextField,
-  Checkbox,
-  Tab,
-  TabList,
-  TabPanel,
-  Tabs,
-} from '@/components/formio';
-import {OpenFormsComponentSchemaBase} from '@/types/schemas';
+import {Checkbox, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
-import {EditFormDefinition, EditFormProps} from '..';
-
-interface TextFieldSchema extends OpenFormsComponentSchemaBase<string> {
-  showCharCount: boolean;
-  autocomplete: string;
-  deriveStreetName: boolean;
-  deriveCity: boolean;
-  derivePostcode: string;
-  deriveHouseNumber: string;
-}
+import {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'textfield' type component.
  */
-const TextField: EditFormDefinition<EditFormProps> = () => {
+const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<TextFieldSchema>();
+  const {values, errors} = useFormikContext<TextFieldComponentSchema>();
 
-  const erroredFields = Object.keys(errors).length ? getErrorNames<TextFieldSchema>(errors) : [];
+  const erroredFields = Object.keys(errors).length
+    ? getErrorNames<TextFieldComponentSchema>(errors)
+    : [];
   // TODO: pattern match instead of just string inclusion?
   // TODO: move into more generically usuable utility when we implement other component
   // types
@@ -61,14 +47,18 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<TextFieldSchema>([
+  Translations.useManageTranslations<TextFieldComponentSchema>([
     'label',
     'description',
     'tooltip',
     'defaultValue',
     'placeholder',
   ]);
-  Validate.useManageValidatorsTranslations(['required', 'maxLength', 'pattern']);
+  Validate.useManageValidatorsTranslations<TextFieldComponentSchema>([
+    'required',
+    'maxLength',
+    'pattern',
+  ]);
   return (
     <Tabs>
       <TabList>
@@ -208,7 +198,7 @@ const TextField: EditFormDefinition<EditFormProps> = () => {
   Explicitly specifying the schema and default values is therefore probbaly best, at
   the cost of some repetition.
  */
-const defaultValues: TextFieldSchema = {
+EditForm.defaultValues = {
   // basic tab
   label: '',
   key: '',
@@ -254,7 +244,6 @@ const defaultValues: TextFieldSchema = {
     identifierRole: 'main',
   },
 };
-TextField.defaultValues = defaultValues;
 
 interface DefaultValueProps {
   multiple: boolean;
@@ -267,7 +256,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
   return (
-    <BuilderTextField
+    <TextField
       name="defaultValue"
       label={
         <FormattedMessage
@@ -351,4 +340,4 @@ const DeriveHouseNumber: React.FC<{}> = () => (
   />
 );
 
-export default TextField;
+export default EditForm;

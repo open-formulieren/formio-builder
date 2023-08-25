@@ -4,9 +4,8 @@ import {userEvent, waitFor, within} from '@storybook/testing-library';
 import {Formik} from 'formik';
 
 import {TextField} from '@/components/formio';
-import {OpenFormsComponentSchemaBase} from '@/types/schemas';
 
-import {ComponentTranslations, SchemaKey, useManageTranslations} from './i18n';
+import {ComponentTranslations, useManageTranslations} from './i18n';
 
 export default {
   title: 'Formio/Builder/i18n/ComponentTranslations',
@@ -43,21 +42,13 @@ export default {
   },
 } as ComponentMeta<typeof ComponentTranslations>;
 
-interface StorySchema extends OpenFormsComponentSchemaBase<string> {
-  translatableField: string;
-  nonTranslatableField: string;
-  nested: {
-    translatableField: string;
-  };
-}
-
 interface BodyProps {
   translatableFields: string[];
 }
 
 const Body: React.FC<BodyProps> = ({translatableFields}) => {
   // FIXME: proper typing with nested keys
-  useManageTranslations<StorySchema>(translatableFields as SchemaKey<StorySchema>[]);
+  useManageTranslations(translatableFields as any);
   return (
     <>
       <TextField name="translatableField" label="Translatable field" />

@@ -3,41 +3,17 @@ import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import REGISTRY from '@/registry';
-import {ExtendedEditFormComponentSchema, JSONType} from '@/types';
+import {getRegistryEntry, isKnownComponentType} from '@/registry';
+import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
-/*
-  Generic JSON Preview
-  -> move to utils?
- */
-
-interface JSONPreviewProps {
-  data: JSONType;
-  className?: string;
-}
-
-const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
-  <pre className={className} data-testid="jsonPreview">
-    {JSON.stringify(data, null, 2)}
-  </pre>
-);
-
-/*
-  Fallback component preview component, for when no suitable preview is defined.
-
-  TODO: I think the types currently require this to be defined, so should this even
-  exist? Maybe we should just throw an exception if you're trying to render a component
-  type that's not in the registry?
- */
-
-const Fallback: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview data={component} />;
+import JSONPreview from './JSONPreview';
 
 /*
   Generic preview (preview + wrapper with view mode)
  */
 
 export interface ComponentPreviewWrapperProps {
-  component: ExtendedEditFormComponentSchema;
+  component: AnyComponentSchema | FallbackSchema;
   initialValues: Record<string, unknown>;
   children: React.ReactNode;
 }
@@ -76,8 +52,8 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   );
 };
 
-export interface ComponentPreviewProps {
-  component: ExtendedEditFormComponentSchema;
+export interface GenericComponentPreviewProps {
+  component: AnyComponentSchema | FallbackSchema;
 }
 
 /**
@@ -89,13 +65,12 @@ export interface ComponentPreviewProps {
  *
  * It is also responsible for handling the `multiple: true` variants in a generic way.
  */
-const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
-  const componentType = component.type || 'OF_MISSING_TYPE';
-  const PreviewComponent = REGISTRY?.[componentType]?.preview || Fallback;
-  const defaultValue = REGISTRY?.[componentType]?.defaultValue || '';
-  const key = component.key || 'OF_MISSING_KEY';
-  const initialValues = {[key]: component.multiple ? [] : defaultValue};
-
+const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({component}) => {
+  const key = isKnownComponentType(component) ? component.key : '';
+  const entry = getRegistryEntry(component);
+  const {preview: PreviewComponent, defaultValue = ''} = entry;
+  const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
+  const initialValues = key ? {[key]: isMultiple ? [] : defaultValue} : {};
   return (
     <ComponentPreviewWrapper component={component} initialValues={initialValues}>
       <PreviewComponent component={component} />
@@ -141,4 +116,4 @@ const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) =
   );
 };
 
-export default ComponentPreview;
+export default GenericComponentPreview;

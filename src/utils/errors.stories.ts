@@ -10,6 +10,19 @@ export default {
   },
 };
 
+// TODO: convert to jest tests
+
+interface Values {
+  toplevel: any;
+  parent: {
+    nested: any;
+  };
+  array: any[];
+  nestedArray: {
+    child: any;
+  }[];
+}
+
 export const GetErrorNames = () => 'no visual aspect, tests only';
 GetErrorNames.play = async () => {
   const errors = {
@@ -21,7 +34,7 @@ GetErrorNames.play = async () => {
     nestedArray: [{child: 'someError'}],
   };
 
-  const names = getErrorNames(errors);
+  const names = getErrorNames<Values>(errors);
 
   expect(names).toEqual(['toplevel', 'parent', 'parent.nested', 'array.1', 'nestedArray.0.child']);
 };

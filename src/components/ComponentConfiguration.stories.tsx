@@ -4,7 +4,7 @@ import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library'
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
-import {ExtendedEditFormComponentSchema} from '@/types';
+import {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
@@ -67,7 +67,7 @@ export default {
 } as ComponentMeta<typeof ComponentConfiguration>;
 
 interface TemplateArgs {
-  component: ExtendedEditFormComponentSchema;
+  component: AnyComponentSchema;
   supportedLanguageCodes: string[];
   translationsStore: {
     [key: string]: {
@@ -83,7 +83,7 @@ interface TemplateArgs {
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onSubmit: (c: ExtendedEditFormComponentSchema) => void;
+  onSubmit: (c: AnyComponentSchema) => void;
 }
 
 const Template = ({

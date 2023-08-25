@@ -25,7 +25,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "makemessages": "formatjs extract",
-    "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled"
+    "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
+    "watch": "ttsc -p tsconfig.prod.json --watch"
   },
   "files": [
     "lib/",
@@ -61,6 +62,7 @@
     "@formatjs/cli": "^6.1.1",
     "@formatjs/ts-transformer": "^3.12.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
+    "@open-formulieren/types": "^0.4.0",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-interactions": "^6.5.16",
