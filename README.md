@@ -11,6 +11,9 @@ This library implements the builder to build
 The [Storybook](https://open-formulieren.github.io/formio-builder/) documentation is available
 online.
 
+The shared types library documentation is available
+[online](https://open-formulieren.github.io/types/).
+
 ## What is the purpose of this library?
 
 It aims to improve the developer experience for the Open Formulieren development team, both by
