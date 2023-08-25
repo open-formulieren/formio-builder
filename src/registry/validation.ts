@@ -1,5 +1,8 @@
 /**
  * Zod schemas for builder form validation.
+ *
+ * TODO: check the zodErrorMap implementation & patterns in the SDK for a default error
+ * map.
  */
 import {IntlShape, defineMessages} from 'react-intl';
 import {z} from 'zod';

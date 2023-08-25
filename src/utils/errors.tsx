@@ -1,11 +1,10 @@
 import {FormikErrors, useFormikContext} from 'formik';
 
-import {OpenFormsComponentSchemaBase} from '@/types';
+import {AnyComponentSchema} from '@/types';
 
 export function getErrorNames<Values = unknown>(errors: FormikErrors<Values>): string[] {
   const names: string[] = [];
   Object.entries(errors).forEach(([key, nested]) => {
-    // TODO: finish implementation
     if (Array.isArray(nested)) {
       const nestedNames = nested.map((item, index) => {
         if (typeof item === 'string') {
@@ -39,7 +38,7 @@ interface ValidationErrors {
 }
 
 export const useValidationErrors = (name: string): ValidationErrors => {
-  const {getFieldMeta} = useFormikContext<OpenFormsComponentSchemaBase>();
+  const {getFieldMeta} = useFormikContext<AnyComponentSchema>();
   const {error} = name ? getFieldMeta(name) : {error: ''};
   const errors = name && error ? [error] : [];
   return {

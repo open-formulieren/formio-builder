@@ -6,7 +6,7 @@ import useAsync from 'react-use/esm/useAsync';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {PrefillComponentSchema, PrefillPluginOption} from './types';
+import {ComponentWithPrefill, PrefillPluginOption} from './types';
 
 function isPluginOptions(
   options: PrefillPluginOption[] | undefined
@@ -25,7 +25,7 @@ function isPluginOptions(
  */
 const PrefillPluginSelect: React.FC = () => {
   const intl = useIntl();
-  const {values} = useFormikContext<PrefillComponentSchema>();
+  const {values} = useFormikContext<ComponentWithPrefill>();
   const {getPrefillPlugins} = useContext(BuilderContext);
 
   const {

@@ -1,10 +1,6 @@
-import {ComponentSchema} from 'formiojs';
+import {PrefillConfig, StrictComponentSchema} from '@open-formulieren/types';
 
-import {PrefillConfig} from '@/types/schemas';
-
-export interface PrefillComponentSchema extends ComponentSchema {
-  prefill: PrefillConfig;
-}
+export type ComponentWithPrefill = StrictComponentSchema<any> & Required<PrefillConfig>;
 
 export interface PrefillPluginOption {
   id: string;

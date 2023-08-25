@@ -1,41 +1,25 @@
-import {ExtendedComponentSchema} from 'formiojs';
-import React from 'react';
-import {IntlShape} from 'react-intl';
-import {z} from 'zod';
+import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
-import {ComponentPreviewProps} from '@/components/ComponentPreview';
-import {EditFormComponentSchema} from '@/types';
-
+import Fallback from './fallback';
 import TextField from './textfield';
+import {Registry, RegistryEntry} from './types';
 
-export interface EditFormDefinition<P, DVT = ExtendedComponentSchema> extends React.FC<P> {
-  defaultValues: DVT;
-}
+export const isKnownComponentType = (
+  component: AnyComponentSchema | FallbackSchema
+): component is AnyComponentSchema => {
+  return Boolean(component.type && hasOwnProperty(REGISTRY, component.type));
+};
 
-export interface EditFormProps {
-  component: EditFormComponentSchema;
-}
-
-const Fallback: EditFormDefinition<EditFormProps> = ({component: {type}}) => (
-  <div>Unknown component type: {type}</div>
-);
-
-Fallback.defaultValues = {};
-
-interface Registry {
-  [key: string]: {
-    edit: EditFormDefinition<EditFormProps>;
-    editSchema: (intl: IntlShape) => z.ZodFirstPartySchemaTypes;
-    preview: React.FC<ComponentPreviewProps>;
-    // textfield -> string, numberfield -> number etc. This is used for the formik
-    // initial data
-    defaultValue: unknown;
-  };
-}
+export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(component: S) => {
+  if (isKnownComponentType(component)) {
+    const entry = REGISTRY[component.type];
+    return entry as RegistryEntry<S>;
+  }
+  return Fallback;
+};
 
 const REGISTRY: Registry = {
   textfield: TextField,
 };
 
 export default REGISTRY;
-export {Fallback};

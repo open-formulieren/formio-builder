@@ -1,3 +1,5 @@
+import {HasValidation, SupportedLocales} from '@open-formulieren/types';
+import {CuratedValidatorNames} from '@open-formulieren/types/lib/formio/validation';
 import {useField} from 'formik';
 import isEqual from 'lodash.isequal';
 import {useContext, useEffect} from 'react';
@@ -5,13 +7,18 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import {BuilderContext} from '@/context';
 
-import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../..//formio';
+import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../../formio';
 
 type TranslatedErrors = {
-  [key: string]: Record<string, string>;
+  [K in SupportedLocales]: Record<string, string>;
 };
 
-export const useManageValidatorsTranslations = (keys: string[] = []): void => {
+type SchemaWithValidation = HasValidation<CuratedValidatorNames>;
+type ValidatorErrorKeys<S extends SchemaWithValidation> = keyof Required<S>['errors'];
+
+export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
+  keys: ValidatorErrorKeys<S>[] = []
+): void {
   const {supportedLanguageCodes} = useContext(BuilderContext);
   const [{value}, , {setValue}] = useField<TranslatedErrors>('translatedErrors');
 
@@ -20,16 +27,16 @@ export const useManageValidatorsTranslations = (keys: string[] = []): void => {
     const newValue = {...value};
     for (const code of supportedLanguageCodes) {
       if (!newValue[code]) newValue[code] = {};
-      for (const key of keys) {
-        if (newValue[code][key] == null) {
-          newValue[code][key] = '';
+      for (let key of keys) {
+        if (newValue[code][key as string] == null) {
+          newValue[code][key as string] = '';
         }
       }
     }
     if (isEqual(newValue, value)) return;
     setValue(newValue);
   }, [keys, value]);
-};
+}
 
 const ValidationErrorTranslations = () => {
   const intl = useIntl();
