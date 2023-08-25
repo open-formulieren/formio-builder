@@ -14,6 +14,7 @@ import {
   PresentationConfig,
   Registration,
   SimpleConditional,
+  Tooltip,
   Translations,
   Validate,
   useDeriveComponentKey,
@@ -44,6 +45,7 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
   Translations.useManageTranslations<EmailComponentSchema>([
     'label',
     'description',
+    'tooltip',
     'defaultValue',
   ]);
   Validate.useManageValidatorsTranslations<EmailComponentSchema>(['required']);
@@ -55,6 +57,7 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
             'label',
             'key',
             'description',
+            'tooltip',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -102,6 +105,7 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
         <Label />
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
+        <Tooltip />
         <PresentationConfig />
         <Multiple />
         <Hidden />

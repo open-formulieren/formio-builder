@@ -12,7 +12,7 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({component}) => {
-  const {key, label, description, validate = {}, autocomplete, multiple} = component;
+  const {key, label, description, tooltip, validate = {}, autocomplete, multiple} = component;
   const {required = false} = validate;
   return (
     <TextField
@@ -20,6 +20,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
       multiple={!!multiple}
       label={label}
       description={description}
+      tooltip={tooltip}
       required={required}
       autoComplete={autocomplete}
       type="email"
