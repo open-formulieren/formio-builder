@@ -2,6 +2,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -9,15 +10,22 @@ module.exports = {
     'storybook-react-intl',
     '@bbbtech/storybook-formik/register',
   ],
+
   features: {
     interactionsDebugger: true,
   },
-  framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5',
+
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
   },
+
   webpackFinal: async (config, {configType}) => {
     config.resolve.plugins = [new TsconfigPathsPlugin()];
     return config;
   },
+
+  docs: {
+    autodocs: true
+  }
 };
