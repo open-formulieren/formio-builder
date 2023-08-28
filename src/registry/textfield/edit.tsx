@@ -4,6 +4,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
   AutoComplete,
+  BuilderTabs,
   ClearOnHide,
   ComponentSelect,
   Description,
@@ -62,7 +63,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
   return (
     <Tabs>
       <TabList>
-        <Tab
+        <BuilderTabs.Basic
           hasErrors={hasAnyError(
             'label',
             'key',
@@ -81,12 +82,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             'placeholder',
             'showCharCount'
           )}
-        >
-          <FormattedMessage
-            description="Component edit form tab title for 'Basic' tab"
-            defaultMessage="Basic"
-          />
-        </Tab>
+        />
         <Tab
           hasErrors={hasAnyError(
             'deriveStreetName',
@@ -100,36 +96,11 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             defaultMessage="Location"
           />
         </Tab>
-        <Tab hasErrors={hasAnyError('conditional')}>
-          <FormattedMessage
-            description="Component edit form tab title for 'Advanced' tab"
-            defaultMessage="Advanced"
-          />
-        </Tab>
-        <Tab hasErrors={hasAnyError('validate')}>
-          <FormattedMessage
-            description="Component edit form tab title for 'Validation' tab"
-            defaultMessage="Validation"
-          />
-        </Tab>
-        <Tab hasErrors={hasAnyError('registration')}>
-          <FormattedMessage
-            description="Component edit form tab title for 'Registration' tab"
-            defaultMessage="Registration"
-          />
-        </Tab>
-        <Tab hasErrors={hasAnyError('prefill')}>
-          <FormattedMessage
-            description="Component edit form tab title for 'Prefill' tab"
-            defaultMessage="Prefill"
-          />
-        </Tab>
-        <Tab hasErrors={hasAnyError('openForms.translations')}>
-          <FormattedMessage
-            description="Component edit form tab title for 'Translations' tab"
-            defaultMessage="Translations"
-          />
-        </Tab>
+        <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
+        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
+        <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
       {/* Basic tab */}
