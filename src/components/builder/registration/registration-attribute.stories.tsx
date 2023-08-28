@@ -1,6 +1,6 @@
 import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
@@ -33,28 +33,29 @@ export default {
   args: {
     registrationAttributes: DEFAULT_REGISTRATION_ATTRIBUTES,
   },
-} as ComponentMeta<typeof RegistrationAttributeSelect>;
+} as Meta<typeof RegistrationAttributeSelect>;
 
-const Template: ComponentStory<typeof RegistrationAttributeSelect> = () => (
-  <RegistrationAttributeSelect />
-);
+const Template: StoryFn<typeof RegistrationAttributeSelect> = () => <RegistrationAttributeSelect />;
 
-export const Default = Template.bind({});
-Default.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const input = await canvas.getByLabelText('Registration attribute');
+export const Default = {
+  render: Template,
 
-  // open the dropdown
-  await input.focus();
-  await userEvent.keyboard('[ArrowDown]');
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const input = await canvas.getByLabelText('Registration attribute');
 
-  await waitFor(async () => {
-    await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
-  });
-  // assert the options are present
-  await waitFor(async () => {
-    await expect(canvas.queryByText('BSN')).toBeInTheDocument();
-    await expect(canvas.queryByText('First name')).toBeInTheDocument();
-    await expect(canvas.queryByText('Date of Birth')).toBeInTheDocument();
-  });
+    // open the dropdown
+    await input.focus();
+    await userEvent.keyboard('[ArrowDown]');
+
+    await waitFor(async () => {
+      await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
+    });
+    // assert the options are present
+    await waitFor(async () => {
+      await expect(canvas.queryByText('BSN')).toBeInTheDocument();
+      await expect(canvas.queryByText('First name')).toBeInTheDocument();
+      await expect(canvas.queryByText('Date of Birth')).toBeInTheDocument();
+    });
+  },
 };

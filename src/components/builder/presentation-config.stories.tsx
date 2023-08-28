@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import PresentationConfig from './presentation-config';
 
@@ -31,15 +31,12 @@ export default {
     exposeShowInEmail: true,
     exposeShowInPDF: true,
   },
-} as ComponentMeta<typeof PresentationConfig>;
+} as Meta<typeof PresentationConfig>;
 
-const Template: ComponentStory<typeof PresentationConfig> = args => (
-  <PresentationConfig {...args} />
-);
+export const AllOptionsExposed = {};
 
-export const AllOptionsExposed = Template.bind({});
-
-export const SubsetOptionsExposed = Template.bind({});
-SubsetOptionsExposed.args = {
-  exposeShowInSummary: false,
+export const SubsetOptionsExposed = {
+  args: {
+    exposeShowInSummary: false,
+  },
 };

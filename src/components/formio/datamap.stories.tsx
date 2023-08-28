@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import React from 'react';
 
 import {TextField} from '.';
@@ -31,10 +31,12 @@ export default {
       63: 'RUS',
     },
   },
-} as ComponentMeta<typeof DataMap>;
+} as Meta<typeof DataMap>;
 
-const Template: ComponentStory<typeof DataMap> = args => (
+const Template: StoryFn<typeof DataMap> = args => (
   <DataMap {...args} valueComponent={<TextField name="driver" label="Driver" />} />
 );
 
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};

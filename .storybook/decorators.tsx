@@ -1,7 +1,5 @@
+import type {StoryContext, StoryFn} from '@storybook/react';
 import React from 'react';
-
-import {PartialStoryFn, StoryContext} from '@storybook/csf';
-import {ReactFramework} from '@storybook/react';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../src/components/builder/prefill';
 import {RegistrationAttributeOption} from '../src/components/builder/registration/registration-attribute';
@@ -73,10 +71,7 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export const BuilderContextDecorator = (
-  Story: PartialStoryFn<ReactFramework>,
-  context: StoryContext
-) => {
+export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) => {
   if (!context.parameters?.builder?.enableContext) return <Story />;
   const supportedLanguageCodes = context.parameters.builder?.supportedLanguageCodes || ['nl', 'en'];
   const translationsStore = context.parameters.builder?.translationsStore || null;

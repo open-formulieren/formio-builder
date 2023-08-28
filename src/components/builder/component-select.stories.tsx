@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import {ExtendedComponentSchema} from 'formiojs';
 
 import ComponentSelect, {ComponentSelectProps} from './component-select';
@@ -50,8 +50,6 @@ export default {
     isClearable: true,
     componentTree: COMPONENT_TREE,
   },
-} as ComponentMeta<typeof ComponentSelect>;
+} as Meta<typeof ComponentSelect>;
 
-const Template: ComponentStory<React.FC<StoryArgs>> = args => <ComponentSelect {...args} />;
-
-export const Default = Template.bind({});
+export const Default = {};

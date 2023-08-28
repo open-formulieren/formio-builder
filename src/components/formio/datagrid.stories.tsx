@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import React from 'react';
 
 import {NumberField, TextField} from '.';
@@ -33,7 +33,7 @@ export default {
       {id: 63, driver: 'RUS', team: 'Mercedes'},
     ],
   },
-} as ComponentMeta<typeof DataGrid>;
+} as Meta<typeof DataGrid>;
 
 interface Driver {
   id: number;
@@ -45,7 +45,7 @@ interface StoryArgs extends DataGridProps {
   f1Drivers: Driver[];
 }
 
-const Template: ComponentStory<React.FC<StoryArgs>> = ({f1Drivers, ...args}) => (
+const Template: StoryFn<React.FC<StoryArgs>> = ({f1Drivers, ...args}) => (
   <DataGrid {...args}>
     {f1Drivers.map((driver, index) => (
       <DataGridRow index={index} key={driver.id}>
@@ -57,15 +57,23 @@ const Template: ComponentStory<React.FC<StoryArgs>> = ({f1Drivers, ...args}) => 
   </DataGrid>
 );
 
-export const Default = Template.bind({});
-
-export const WithoutLabel = Template.bind({});
-WithoutLabel.args = {
-  label: '',
+export const Default = {
+  render: Template,
 };
 
-export const WithToolTip = Template.bind({});
-WithToolTip.args = {
-  label: 'With tooltip',
-  tooltip: 'Hiya!',
+export const WithoutLabel = {
+  render: Template,
+
+  args: {
+    label: '',
+  },
+};
+
+export const WithToolTip = {
+  render: Template,
+
+  args: {
+    label: 'With tooltip',
+    tooltip: 'Hiya!',
+  },
 };

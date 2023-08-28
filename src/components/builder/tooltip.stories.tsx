@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 
 import Tooltip from './tooltip';
 
@@ -18,7 +18,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {tooltip: ''}},
   },
-} as ComponentMeta<typeof Tooltip>;
+} as Meta<typeof Tooltip>;
 
-export const Default: ComponentStory<typeof Tooltip> = () => <Tooltip />;
-Default.args = {};
+export const Default: StoryObj<typeof Tooltip> = {
+  render: () => <Tooltip />,
+  args: {},
+};

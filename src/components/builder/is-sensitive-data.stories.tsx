@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 
 import IsSensitiveData from './is-sensitive-data';
 
@@ -18,7 +18,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {isSensitiveData: false}},
   },
-} as ComponentMeta<typeof IsSensitiveData>;
+} as Meta<typeof IsSensitiveData>;
 
-export const Default: ComponentStory<typeof IsSensitiveData> = () => <IsSensitiveData />;
-Default.args = {};
+export const Default: StoryObj<typeof IsSensitiveData> = {
+  render: () => <IsSensitiveData />,
+  args: {},
+};

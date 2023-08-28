@@ -1,5 +1,5 @@
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import {within} from '@storybook/testing-library';
 
 import ComponentLabel from './component-label';
@@ -16,22 +16,23 @@ export default {
     tooltip: '',
     htmlId: '',
   },
-} as ComponentMeta<typeof ComponentLabel>;
+} as Meta<typeof ComponentLabel>;
 
-const Template: ComponentStory<typeof ComponentLabel> = args => <ComponentLabel {...args} />;
-
-export const Default = Template.bind({});
-Default.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Example label text')).toBeInTheDocument();
+export const Default = {
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText('Example label text')).toBeInTheDocument();
+  },
 };
 
-export const WithTooltip = Template.bind({});
-WithTooltip.args = {
-  tooltip: 'Call me clippy',
+export const WithTooltip = {
+  args: {
+    tooltip: 'Call me clippy',
+  },
 };
 
-export const Required = Template.bind({});
-Required.args = {
-  required: true,
+export const Required = {
+  args: {
+    required: true,
+  },
 };

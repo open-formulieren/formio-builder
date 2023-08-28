@@ -1,5 +1,5 @@
 import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 
 import Description from './description';
 
@@ -18,7 +18,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {description: ''}},
   },
-} as ComponentMeta<typeof Description>;
+} as Meta<typeof Description>;
 
-export const Default: ComponentStory<typeof Description> = () => <Description />;
-Default.args = {};
+export const Default: StoryObj<typeof Description> = {
+  render: () => <Description />,
+  args: {},
+};
