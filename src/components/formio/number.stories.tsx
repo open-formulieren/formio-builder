@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Number from './number';
 
@@ -19,20 +20,22 @@ export default {
   },
 } as Meta<typeof Number>;
 
-export const Required = {
+type Story = StoryObj<typeof Number>;
+
+export const Required: Story = {
   args: {
     required: true,
     label: 'A required number field',
   },
 };
 
-export const WithoutLabel = {
+export const WithoutLabel: Story = {
   args: {
     label: '',
   },
 };
 
-export const WithToolTip = {
+export const WithToolTip: Story = {
   args: {
     label: 'With tooltip',
     tooltip: 'Hiya!',
@@ -40,7 +43,7 @@ export const WithToolTip = {
   },
 };
 
-export const WithErrors = {
+export const WithErrors: Story = {
   args: {
     label: 'With errors',
   },

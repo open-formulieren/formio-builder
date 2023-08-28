@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {waitFor, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import MaxLength from './maxlength';
 
@@ -25,7 +26,9 @@ export default {
   },
 } as Meta<typeof MaxLength>;
 
-export const Default = {
+type Story = StoryObj<typeof MaxLength>;
+
+export const Default: Story = {
   args: {},
 
   play: async ({canvasElement}) => {
@@ -36,7 +39,7 @@ export const Default = {
   },
 };
 
-export const WithInitialValue = {
+export const WithInitialValue: Story = {
   parameters: {
     formik: {initialValues: {validate: {maxLength: 100}}},
   },

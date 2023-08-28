@@ -12,7 +12,6 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-react-intl',
-    // '@bbbtech/storybook-formik/register',
   ],
   docs: {
     autodocs: true,

@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import ReadOnly from './readonly';
 

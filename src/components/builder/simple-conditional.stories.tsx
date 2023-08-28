@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {Meta, StoryFn} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import SimpleConditional from './simple-conditional';
 

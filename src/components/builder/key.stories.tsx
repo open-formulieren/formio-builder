@@ -1,11 +1,10 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {expect, jest} from '@storybook/jest';
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {ReactFramework} from '@storybook/react';
+import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import {Formik} from 'formik';
 import {useRef} from 'react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Key, {useDeriveComponentKey} from './key';
 import Label from './label';
@@ -26,7 +25,9 @@ export default {
   },
 } as Meta<typeof Key>;
 
-export const Standalone: StoryObj<typeof Key> = {
+type Story = StoryObj<typeof Key>;
+
+export const Standalone: Story = {
   render: () => {
     const ref = useRef<boolean>(false);
     return <Key isManuallySetRef={ref} generatedValue="" />;
@@ -41,7 +42,7 @@ export const Standalone: StoryObj<typeof Key> = {
   },
 };
 
-const FormikDecorator = (Story: PartialStoryFn<ReactFramework>, context: StoryContext) => (
+const FormikDecorator = (Story: StoryFn, context: StoryContext) => (
   <Formik
     initialValues={{label: '', key: ''}}
     onSubmit={jest.fn()}
@@ -63,7 +64,7 @@ const LabelAndKey = () => {
 
 const WithLabelTemplate: StoryFn<typeof Key> = () => <LabelAndKey />;
 
-export const IsNewDeriveFromLabel = {
+export const IsNewDeriveFromLabel: Story = {
   render: WithLabelTemplate,
   name: 'New component: derive key from label',
   decorators: [FormikDecorator],
@@ -90,7 +91,7 @@ export const IsNewDeriveFromLabel = {
   },
 };
 
-export const DeriveFromLabelButSetManually = {
+export const DeriveFromLabelButSetManually: Story = {
   render: WithLabelTemplate,
   name: 'New component: derive key from label but specify it manually',
   decorators: [FormikDecorator],
@@ -129,7 +130,7 @@ export const DeriveFromLabelButSetManually = {
   },
 };
 
-export const IsExistingDeriveFromLabel = {
+export const IsExistingDeriveFromLabel: Story = {
   render: WithLabelTemplate,
   name: "Existing component: don't derive key from label",
   decorators: [FormikDecorator],

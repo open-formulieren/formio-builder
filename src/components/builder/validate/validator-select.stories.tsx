@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import ValidatorPluginSelect, {ValidatorOption} from './validator-select';
 
@@ -34,9 +35,11 @@ export default {
   },
 } as Meta<typeof ValidatorPluginSelect>;
 
+type Story = StoryObj<typeof ValidatorPluginSelect>;
+
 const Template: StoryFn<typeof ValidatorPluginSelect> = () => <ValidatorPluginSelect />;
 
-export const Default = {
+export const Default: Story = {
   render: Template,
 
   play: async ({canvasElement}) => {

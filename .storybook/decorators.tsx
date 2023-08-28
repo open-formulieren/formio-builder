@@ -1,4 +1,5 @@
 import type {StoryContext, StoryFn} from '@storybook/react';
+import {Formik} from 'formik';
 import React from 'react';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../src/components/builder/prefill';
@@ -113,5 +114,33 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
     >
       <Story />
     </BuilderContext.Provider>
+  );
+};
+
+export const withFormik = (Story: StoryFn, context: StoryContext) => {
+  const isDisabled = context.parameters?.formik?.disable ?? false;
+  if (isDisabled) {
+    return <Story />;
+  }
+  const initialValues = context.parameters?.formik?.initialValues || {};
+  const initialErrors = context.parameters?.formik?.initialErrors || {};
+  const initialTouched = context.parameters?.formik?.initialTouched || {};
+  const wrapForm = context.parameters?.formik?.wrapForm ?? true;
+  return (
+    <Formik
+      initialValues={initialValues}
+      initialErrors={initialErrors}
+      initialTouched={initialTouched}
+      enableReinitialize
+      onSubmit={(values, formikHelpers) => console.log(values, formikHelpers)}
+    >
+      {wrapForm ? (
+        <form>
+          <Story />
+        </form>
+      ) : (
+        <Story />
+      )}
+    </Formik>
   );
 };

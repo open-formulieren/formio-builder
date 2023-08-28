@@ -1,6 +1,7 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {Meta, StoryFn} from '@storybook/react';
 import React from 'react';
+
+import {withFormik} from '@/sb-decorators';
 
 import {NumberField, TextField} from '.';
 import DataGrid, {DataGridProps, DataGridRow} from './datagrid';

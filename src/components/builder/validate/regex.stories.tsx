@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import RegexValidation from './regex';
 
@@ -25,4 +26,6 @@ export default {
   },
 } as Meta<typeof RegexValidation>;
 
-export const Default = {};
+type Story = StoryObj<typeof RegexValidation>;
+
+export const Default: Story = {};

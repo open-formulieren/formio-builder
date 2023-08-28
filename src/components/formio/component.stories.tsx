@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Component from './component';
 
@@ -22,13 +23,15 @@ export default {
   },
 } as Meta<typeof Component>;
 
+type Story = StoryObj<typeof Component>;
+
 const Template: StoryFn<typeof Component> = args => (
   <Component {...args}>
     <div>{args.children || '<any children />'}</div>
   </Component>
 );
 
-export const Required = {
+export const Required: Story = {
   render: Template,
 
   args: {
@@ -37,7 +40,7 @@ export const Required = {
   },
 };
 
-export const WithoutLabel = {
+export const WithoutLabel: Story = {
   render: Template,
 
   args: {
@@ -45,7 +48,7 @@ export const WithoutLabel = {
   },
 };
 
-export const WithToolTip = {
+export const WithToolTip: Story = {
   render: Template,
 
   args: {
@@ -55,7 +58,7 @@ export const WithToolTip = {
   },
 };
 
-export const WithHtmlId = {
+export const WithHtmlId: Story = {
   render: Template,
 
   args: {
@@ -74,7 +77,7 @@ export const WithHtmlId = {
   },
 };
 
-export const WithErrors = Template.bind([]);
+export const WithErrors: Story = Template.bind([]);
 WithErrors.parameters = {
   formik: {
     initialValues: {someField: ''},

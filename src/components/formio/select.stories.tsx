@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Select from './select';
 
@@ -36,20 +37,22 @@ export default {
   },
 } as Meta<typeof Select>;
 
-export const Required = {
+type Story = StoryObj<typeof Select>;
+
+export const Required: Story = {
   args: {
     required: true,
     label: 'A required select',
   },
 };
 
-export const WithoutLabel = {
+export const WithoutLabel: Story = {
   args: {
     label: '',
   },
 };
 
-export const WithToolTip = {
+export const WithToolTip: Story = {
   args: {
     label: 'With tooltip',
     tooltip: 'Hiya!',
@@ -57,13 +60,13 @@ export const WithToolTip = {
   },
 };
 
-export const Clearable = {
+export const Clearable: Story = {
   args: {
     isClearable: true,
   },
 };
 
-export const Multi = {
+export const Multi: Story = {
   parameters: {
     formik: {
       initialValues: {'my-select': ['opt-1', 'opt-3']},
@@ -87,7 +90,7 @@ export const Multi = {
   },
 };
 
-export const ArbitraryOptionShape = {
+export const ArbitraryOptionShape: Story = {
   parameters: {
     formik: {
       initialValues: {'my-select': 2},
@@ -109,7 +112,7 @@ export const ArbitraryOptionShape = {
   },
 };
 
-export const WithErrors = {
+export const WithErrors: Story = {
   args: {
     label: 'With errors',
   },

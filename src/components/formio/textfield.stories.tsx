@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import TextField from './textfield';
 
@@ -19,20 +20,22 @@ export default {
   },
 } as Meta<typeof TextField>;
 
-export const Required = {
+type Story = StoryObj<typeof TextField>;
+
+export const Required: Story = {
   args: {
     required: true,
     label: 'A required textfield',
   },
 };
 
-export const WithoutLabel = {
+export const WithoutLabel: Story = {
   args: {
     label: '',
   },
 };
 
-export const WithToolTip = {
+export const WithToolTip: Story = {
   args: {
     label: 'With tooltip',
     tooltip: 'Hiya!',
@@ -40,7 +43,7 @@ export const WithToolTip = {
   },
 };
 
-export const Multiple = {
+export const Multiple: Story = {
   args: {
     label: 'Multiple inputs',
     description: 'Array of strings instead of a single string value',
@@ -82,7 +85,7 @@ export const Multiple = {
   },
 };
 
-export const WithErrors = {
+export const WithErrors: Story = {
   args: {
     label: 'With errors',
   },

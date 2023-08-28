@@ -1,12 +1,11 @@
 import {FormattedMessage} from 'react-intl';
+import type {ReactTabsFunctionComponent, TabProps} from 'react-tabs';
 
 import {Tab} from '@/components/formio';
 
-export interface TabProps {
-  hasErrors: boolean;
-}
+type TabWithContent = ReactTabsFunctionComponent<TabProps & {hasErrors: boolean}>;
 
-export const Basic: React.FC<TabProps> = props => (
+const Basic: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Basic' tab"
@@ -14,8 +13,9 @@ export const Basic: React.FC<TabProps> = props => (
     />
   </Tab>
 );
+Basic.tabsRole = 'Tab';
 
-export const Advanced: React.FC<TabProps> = props => (
+const Advanced: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Advanced' tab"
@@ -23,7 +23,9 @@ export const Advanced: React.FC<TabProps> = props => (
     />
   </Tab>
 );
-export const Validation: React.FC<TabProps> = props => (
+Advanced.tabsRole = 'Tab';
+
+const Validation: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Validation' tab"
@@ -31,7 +33,9 @@ export const Validation: React.FC<TabProps> = props => (
     />
   </Tab>
 );
-export const Registration: React.FC<TabProps> = props => (
+Validation.tabsRole = 'Tab';
+
+const Registration: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Registration' tab"
@@ -39,7 +43,9 @@ export const Registration: React.FC<TabProps> = props => (
     />
   </Tab>
 );
-export const Prefill: React.FC<TabProps> = props => (
+Registration.tabsRole = 'Tab';
+
+const Prefill: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Prefill' tab"
@@ -47,7 +53,9 @@ export const Prefill: React.FC<TabProps> = props => (
     />
   </Tab>
 );
-export const Translations: React.FC<TabProps> = props => (
+Prefill.tabsRole = 'Tab';
+
+const Translations: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
       description="Component edit form tab title for 'Translations' tab"
@@ -55,3 +63,6 @@ export const Translations: React.FC<TabProps> = props => (
     />
   </Tab>
 );
+Translations.tabsRole = 'Tab';
+
+export {Basic, Advanced, Validation, Registration, Prefill, Translations};

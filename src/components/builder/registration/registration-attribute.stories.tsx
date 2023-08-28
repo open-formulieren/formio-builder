@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
 
@@ -35,9 +36,11 @@ export default {
   },
 } as Meta<typeof RegistrationAttributeSelect>;
 
+type Story = StoryObj<typeof RegistrationAttributeSelect>;
+
 const Template: StoryFn<typeof RegistrationAttributeSelect> = () => <RegistrationAttributeSelect />;
 
-export const Default = {
+export const Default: Story = {
   render: Template,
 
   play: async ({canvasElement}) => {

@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import PresentationConfig from './presentation-config';
 

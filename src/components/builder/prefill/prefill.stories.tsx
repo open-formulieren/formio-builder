@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import {PrefillAttributeOption, PrefillConfiguration, PrefillPluginOption} from '.';
 
@@ -46,13 +47,15 @@ export default {
   },
 } as Meta<typeof PrefillConfiguration>;
 
+type Story = StoryObj<typeof PrefillConfiguration>;
+
 const Template: StoryFn<typeof PrefillConfiguration> = () => <PrefillConfiguration />;
 
-export const Default = {
+export const Default: Story = {
   render: Template,
 };
 
-export const PluginBlankNoAttributes = {
+export const PluginBlankNoAttributes: Story = {
   render: Template,
 
   play: async ({canvasElement}) => {
@@ -75,7 +78,7 @@ export const PluginBlankNoAttributes = {
   },
 };
 
-export const SelectingPluginFetchesAttributes = {
+export const SelectingPluginFetchesAttributes: Story = {
   render: Template,
 
   play: async ({canvasElement}) => {
@@ -99,7 +102,7 @@ export const SelectingPluginFetchesAttributes = {
   },
 };
 
-export const ChangingPluginClearsAttribute = {
+export const ChangingPluginClearsAttribute: Story = {
   render: Template,
 
   parameters: {
@@ -143,7 +146,7 @@ export const ChangingPluginClearsAttribute = {
   },
 };
 
-export const ChangingIdentifierRole = {
+export const ChangingIdentifierRole: Story = {
   render: Template,
 
   parameters: {

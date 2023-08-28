@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Checkbox from './checkbox';
 
@@ -21,20 +22,22 @@ export default {
   },
 } as Meta<typeof Checkbox>;
 
-export const Default = {
+type Story = StoryObj<typeof Checkbox>;
+
+export const Default: Story = {
   args: {
     label: 'Labeled checkbox',
   },
 };
 
-export const WithToolTip = {
+export const WithToolTip: Story = {
   args: {
     label: 'With tooltip',
     tooltip: 'Hiya!',
   },
 };
 
-export const WithErrors = {
+export const WithErrors: Story = {
   args: {
     label: 'With errors',
   },
