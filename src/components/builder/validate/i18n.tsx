@@ -1,5 +1,4 @@
-import {HasValidation, SupportedLocales} from '@open-formulieren/types';
-import {CuratedValidatorNames} from '@open-formulieren/types/lib/formio/validation';
+import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formulieren/types';
 import {useField} from 'formik';
 import isEqual from 'lodash.isequal';
 import {useContext, useEffect} from 'react';
@@ -9,29 +8,21 @@ import {BuilderContext} from '@/context';
 
 import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../../formio';
 
-type TranslatedErrors = {
-  [K in SupportedLocales]: Record<string, string>;
-};
-
-type SchemaWithValidation = HasValidation<CuratedValidatorNames>;
-type ValidatorErrorKeys<S extends SchemaWithValidation> = keyof Required<S>['errors'];
-
 export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
-  keys: ValidatorErrorKeys<S>[] = []
+  keys: PossibleValidatorErrorKeys<S>[]
 ): void {
   const {supportedLanguageCodes} = useContext(BuilderContext);
-  const [{value}, , {setValue}] = useField<TranslatedErrors>('translatedErrors');
+  const [{value}, , {setValue}] = useField<S['translatedErrors']>('translatedErrors');
 
   // set any missing translations
   useEffect(() => {
+    if (!value) {
+      throw new Error('Missing default (Formik) value for `translatedErrors`!');
+    }
     const newValue = {...value};
+    const emptyDefaults = Object.fromEntries(keys.map(k => [k, '']));
     for (const code of supportedLanguageCodes) {
-      if (!newValue[code]) newValue[code] = {};
-      for (let key of keys) {
-        if (newValue[code][key as string] == null) {
-          newValue[code][key as string] = '';
-        }
-      }
+      newValue[code] = {...emptyDefaults, ...newValue[code]};
     }
     if (isEqual(newValue, value)) return;
     setValue(newValue);
