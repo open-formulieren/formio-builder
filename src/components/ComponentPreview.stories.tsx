@@ -1,5 +1,5 @@
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
 
 import ComponentPreview from './ComponentPreview';
@@ -9,11 +9,13 @@ export default {
   component: ComponentPreview,
 } as Meta<typeof ComponentPreview>;
 
+type Story = StoryObj<typeof ComponentPreview>;
+
 const Template: StoryFn<typeof ComponentPreview> = ({component}) => (
   <ComponentPreview component={component} />
 );
 
-export const Default = {
+export const Default: Story = {
   render: Template,
 
   args: {
@@ -28,7 +30,7 @@ export const Default = {
   },
 };
 
-export const Fallback = {
+export const Fallback: Story = {
   render: Template,
 
   args: {
@@ -36,16 +38,16 @@ export const Fallback = {
       id: 'fallback',
       // should never accidentally be an actual type
       type: '85230383-896e-40ce-a1a9-35a090b73f17',
-    },
+    } as any,
   },
 
   play: async ({canvasElement}) => {
-    const canvas = await within(canvasElement);
+    const canvas = within(canvasElement);
     await canvas.findByTestId('jsonPreview');
   },
 };
 
-export const TextField = {
+export const TextField: Story = {
   render: Template,
 
   args: {
@@ -62,14 +64,15 @@ export const TextField = {
   },
 
   play: async ({canvasElement, args}) => {
-    const canvas = await within(canvasElement);
+    const canvas = within(canvasElement);
 
     // check that the user-controlled content is visible
     await canvas.findByText('Textfield preview');
     await canvas.findByText('A preview of the textfield Formio component');
 
     // check that the input name is set correctly
-    const input = await canvas.getByLabelText('Textfield preview');
+    const input = canvas.getByLabelText('Textfield preview');
+    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
@@ -78,7 +81,7 @@ export const TextField = {
   },
 };
 
-export const TextFieldMultiple = {
+export const TextFieldMultiple: Story = {
   render: Template,
 
   parameters: {
@@ -128,7 +131,7 @@ export const TextFieldMultiple = {
   },
 };
 
-export const Email = {
+export const Email: Story = {
   render: Template,
 
   args: {
@@ -143,14 +146,15 @@ export const Email = {
   },
 
   play: async ({canvasElement, args}) => {
-    const canvas = await within(canvasElement);
+    const canvas = within(canvasElement);
 
     // check that the user-controlled content is visible
     await canvas.findByText('Email preview');
     await canvas.findByText('A preview of the email Formio component');
 
     // check that the input name is set correctly
-    const input = await canvas.getByLabelText('Email preview');
+    const input = canvas.getByLabelText('Email preview');
+    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
@@ -159,7 +163,7 @@ export const Email = {
   },
 };
 
-export const EmailMultiple = {
+export const EmailMultiple: Story = {
   render: Template,
 
   args: {
@@ -198,5 +202,84 @@ export const EmailMultiple = {
     await userEvent.click(removeButtons[0]);
     await expect(canvas.getByTestId('input-emailPreview[0]')).toHaveDisplayValue('');
     await expect(canvas.queryByTestId('input-emailPreview[1]')).not.toBeInTheDocument();
+  },
+};
+
+export const NumberField: Story = {
+  render: Template,
+
+  args: {
+    component: {
+      type: 'number',
+      id: 'number',
+      key: 'numberPreview',
+      label: 'Number preview',
+      description: 'A preview of the number Formio component',
+      hidden: true, // must be ignored
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Number preview');
+    await canvas.findByText('A preview of the number Formio component');
+
+    // check that the input name is set correctly
+    const input = canvas.getByLabelText('Number preview');
+    // @ts-ignore
+    await expect(input.getAttribute('name')).toBe(args.component.key);
+
+    // check that user can type into the field
+    await userEvent.type(input, '-3.14');
+    await expect(input).toHaveDisplayValue('-3.14');
+  },
+};
+
+export const NumberFieldMultiple: Story = {
+  render: Template,
+
+  parameters: {
+    formik: {
+      initialValues: {
+        numberFieldMultiplePreview: [],
+      },
+    },
+  },
+
+  args: {
+    component: {
+      type: 'number',
+      id: 'numberFieldMultiple',
+      key: 'numberFieldMultiplePreview',
+      label: 'numberField multiple preview',
+      multiple: true,
+      description: 'Description only once',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that new items can be added
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input1 = await canvas.getByTestId('input-numberFieldMultiplePreview[0]');
+    await expect(input1).toHaveDisplayValue('');
+
+    // the description should be rendered only once, even with > 1 inputs
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input2 = canvas.getByTestId('input-numberFieldMultiplePreview[1]');
+    await expect(input2).toHaveDisplayValue('');
+    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+
+    // finally, it should be possible delete rows again
+    const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
+    await expect(removeButtons.length).toBe(2);
+    await userEvent.click(removeButtons[0]);
+    await expect(canvas.getByTestId('input-numberFieldMultiplePreview[0]')).toHaveDisplayValue('');
+    await expect(
+      canvas.queryByTestId('input-numberFieldMultiplePreview[1]')
+    ).not.toBeInTheDocument();
   },
 };
