@@ -81,6 +81,7 @@
     "@types/lodash.set": "^4.3.7",
     "@types/lodash.uniqueid": "^4.0.7",
     "@types/react": "^18.0.33",
+    "@types/sanitize-html": "^2.9.0",
     "@types/webpack": "^5.28.1",
     "babel-loader": "^8.3.0",
     "babel-plugin-formatjs": "^10.4.0",
@@ -113,6 +114,7 @@
     "react-tabs": "^4.2.1",
     "react-tooltip": "^5.10.5",
     "react-use": "^17.4.0",
+    "sanitize-html": "^2.11.0",
     "zod": "^3.21.4",
     "zod-formik-adapter": "^1.2.0"
   }

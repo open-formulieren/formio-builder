@@ -2,6 +2,7 @@ import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 import Email from './email';
 import Fallback from './fallback';
+import NumberField from './number';
 import TextField from './textfield';
 import {Registry, RegistryEntry} from './types';
 
@@ -22,6 +23,7 @@ export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(
 const REGISTRY: Registry = {
   textfield: TextField,
   email: Email,
+  number: NumberField,
 };
 
 export default REGISTRY;
