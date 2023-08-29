@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import SimpleConditional from './simple-conditional';
 
@@ -46,8 +47,10 @@ export default {
   args: {
     componentTree: COMPONENT_TREE,
   },
-} as ComponentMeta<typeof SimpleConditional>;
+} as Meta<typeof SimpleConditional>;
 
-const Template: ComponentStory<typeof SimpleConditional> = () => <SimpleConditional />;
+const Template: StoryFn<typeof SimpleConditional> = () => <SimpleConditional />;
 
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};

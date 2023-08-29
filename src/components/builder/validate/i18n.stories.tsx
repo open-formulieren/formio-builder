@@ -1,5 +1,5 @@
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
 import {Formik} from 'formik';
 
@@ -33,7 +33,7 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof ValidationErrorTranslations>;
+} as Meta<typeof ValidationErrorTranslations>;
 
 interface BodyProps {
   errorCodes: string[];
@@ -49,7 +49,7 @@ interface StoryArgs {
   translatedErrors: Record<string, Record<string, string>>;
 }
 
-const Template: ComponentStory<React.FC<StoryArgs>> = ({errorCodes, translatedErrors}) => {
+const Template: StoryFn<React.FC<StoryArgs>> = ({errorCodes, translatedErrors}) => {
   return (
     <Formik initialValues={{translatedErrors}} onSubmit={console.log}>
       <Body errorCodes={errorCodes} />
@@ -57,22 +57,25 @@ const Template: ComponentStory<React.FC<StoryArgs>> = ({errorCodes, translatedEr
   );
 };
 
-export const Default = Template.bind({});
-Default.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
+export const Default = {
+  render: Template,
 
-  await expect(canvas.queryByText('NL')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('EN')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('DE')).not.toBeInTheDocument();
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
 
-  await userEvent.click(canvas.getByText('Custom error messages'));
-  await expect(canvas.getByText('NL')).toBeInTheDocument();
-  await expect(canvas.getByText('EN')).toBeInTheDocument();
-  await expect(canvas.getByText('DE')).toBeInTheDocument();
+    await expect(canvas.queryByText('NL')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('EN')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('DE')).not.toBeInTheDocument();
 
-  await expect(canvas.queryByDisplayValue('Dit veld is verplicht.')).toBeInTheDocument();
-  await expect(canvas.queryByDisplayValue('This field is required.')).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByText('Custom error messages'));
+    await expect(canvas.getByText('NL')).toBeInTheDocument();
+    await expect(canvas.getByText('EN')).toBeInTheDocument();
+    await expect(canvas.getByText('DE')).toBeInTheDocument();
 
-  await userEvent.click(canvas.getByText('EN'));
-  await expect(canvas.queryByDisplayValue('This field is required.')).toBeInTheDocument();
+    await expect(canvas.queryByDisplayValue('Dit veld is verplicht.')).toBeInTheDocument();
+    await expect(canvas.queryByDisplayValue('This field is required.')).not.toBeInTheDocument();
+
+    await userEvent.click(canvas.getByText('EN'));
+    await expect(canvas.queryByDisplayValue('This field is required.')).toBeInTheDocument();
+  },
 };

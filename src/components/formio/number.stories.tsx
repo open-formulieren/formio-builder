@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Number from './number';
 
@@ -17,40 +18,46 @@ export default {
   args: {
     name: 'my-number',
   },
-} as ComponentMeta<typeof Number>;
+} as Meta<typeof Number>;
 
-const Template: ComponentStory<typeof Number> = args => <Number {...args} />;
+type Story = StoryObj<typeof Number>;
 
-export const Required = Template.bind({});
-Required.args = {
-  required: true,
-  label: 'A required number field',
-};
-
-export const WithoutLabel = Template.bind({});
-WithoutLabel.args = {
-  label: '',
-};
-
-export const WithToolTip = Template.bind({});
-WithToolTip.args = {
-  label: 'With tooltip',
-  tooltip: 'Hiya!',
-  required: false,
-};
-
-export const WithErrors = Template.bind({});
-WithErrors.args = {
-  label: 'With errors',
-};
-WithErrors.parameters = {
-  formik: {
-    initialValues: {'my-number': ''},
-    initialErrors: {'my-number': 'Example error', 'other-field': 'Other error'},
+export const Required: Story = {
+  args: {
+    required: true,
+    label: 'A required number field',
   },
 };
-WithErrors.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+
+export const WithoutLabel: Story = {
+  args: {
+    label: '',
+  },
+};
+
+export const WithToolTip: Story = {
+  args: {
+    label: 'With tooltip',
+    tooltip: 'Hiya!',
+    required: false,
+  },
+};
+
+export const WithErrors: Story = {
+  args: {
+    label: 'With errors',
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-number': ''},
+      initialErrors: {'my-number': 'Example error', 'other-field': 'Other error'},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+  },
 };

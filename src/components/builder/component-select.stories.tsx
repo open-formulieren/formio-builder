@@ -1,8 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {ExtendedComponentSchema} from 'formiojs';
+import {Meta, StoryObj} from '@storybook/react';
 
-import ComponentSelect, {ComponentSelectProps} from './component-select';
+import {withFormik} from '@/sb-decorators';
+
+import ComponentSelect from './component-select';
 
 const COMPONENT_TREE = [
   {type: 'textfield', key: 'text1', label: 'Textfield 1'},
@@ -17,9 +17,7 @@ const COMPONENT_TREE = [
   },
 ];
 
-interface StoryArgs extends ComponentSelectProps {
-  componentTree?: ExtendedComponentSchema[];
-}
+type Story = StoryObj<typeof ComponentSelect>;
 
 export default {
   title: 'Formio/Builder/ComponentSelect',
@@ -50,8 +48,6 @@ export default {
     isClearable: true,
     componentTree: COMPONENT_TREE,
   },
-} as ComponentMeta<typeof ComponentSelect>;
+} as Meta<typeof ComponentSelect>;
 
-const Template: ComponentStory<React.FC<StoryArgs>> = args => <ComponentSelect {...args} />;
-
-export const Default = Template.bind({});
+export const Default: Story = {};

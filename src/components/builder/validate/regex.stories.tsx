@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import RegexValidation from './regex';
 
@@ -23,8 +24,8 @@ export default {
       initialValues: {validate: {pattern: ''}},
     },
   },
-} as ComponentMeta<typeof RegexValidation>;
+} as Meta<typeof RegexValidation>;
 
-const Template: ComponentStory<typeof RegexValidation> = args => <RegexValidation {...args} />;
+type Story = StoryObj<typeof RegexValidation>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

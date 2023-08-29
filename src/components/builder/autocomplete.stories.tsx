@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import AutoComplete from './autocomplete';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {autocomplete: ''}},
   },
-} as ComponentMeta<typeof AutoComplete>;
+} as Meta<typeof AutoComplete>;
 
-export const Default: ComponentStory<typeof AutoComplete> = () => <AutoComplete />;
-Default.args = {};
+export const Default: StoryObj<typeof AutoComplete> = {
+  render: () => <AutoComplete />,
+  args: {},
+};

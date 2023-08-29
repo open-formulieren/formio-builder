@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Checkbox from './checkbox';
 
@@ -19,33 +20,38 @@ export default {
     label: '',
     tooltip: '',
   },
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
-const Template: ComponentStory<typeof Checkbox> = args => <Checkbox {...args} />;
+type Story = StoryObj<typeof Checkbox>;
 
-export const Default = Template.bind({});
-Default.args = {
-  label: 'Labeled checkbox',
-};
-
-export const WithToolTip = Template.bind({});
-WithToolTip.args = {
-  label: 'With tooltip',
-  tooltip: 'Hiya!',
-};
-
-export const WithErrors = Template.bind({});
-WithErrors.args = {
-  label: 'With errors',
-};
-WithErrors.parameters = {
-  formik: {
-    initialValues: {'my-checkbox': false},
-    initialErrors: {'my-checkbox': 'Example error', 'other-field': 'Other error'},
+export const Default: Story = {
+  args: {
+    label: 'Labeled checkbox',
   },
 };
-WithErrors.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+
+export const WithToolTip: Story = {
+  args: {
+    label: 'With tooltip',
+    tooltip: 'Hiya!',
+  },
+};
+
+export const WithErrors: Story = {
+  args: {
+    label: 'With errors',
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-checkbox': false},
+      initialErrors: {'my-checkbox': 'Example error', 'other-field': 'Other error'},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+  },
 };

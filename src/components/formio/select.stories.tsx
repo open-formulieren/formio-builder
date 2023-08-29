@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import Select from './select';
 
@@ -34,85 +35,98 @@ export default {
       {value: 'opt-2', label: 'Option 2'},
     ],
   },
-} as ComponentMeta<typeof Select>;
+} as Meta<typeof Select>;
 
-const Template: ComponentStory<typeof Select> = args => <Select {...args} />;
+type Story = StoryObj<typeof Select>;
 
-export const Required = Template.bind({});
-Required.args = {
-  required: true,
-  label: 'A required select',
-};
-
-export const WithoutLabel = Template.bind({});
-WithoutLabel.args = {
-  label: '',
-};
-
-export const WithToolTip = Template.bind({});
-WithToolTip.args = {
-  label: 'With tooltip',
-  tooltip: 'Hiya!',
-  required: false,
-};
-
-export const Clearable = Template.bind({});
-Clearable.args = {
-  isClearable: true,
-};
-
-export const Multi = Template.bind({});
-Multi.parameters = {
-  formik: {
-    initialValues: {'my-select': ['opt-1', 'opt-3']},
+export const Required: Story = {
+  args: {
+    required: true,
+    label: 'A required select',
   },
 };
-Multi.args = {
-  isMulti: true,
-  options: [
-    {value: 'opt-1', label: 'Option 1'},
-    {value: 'opt-2', label: 'Option 2'},
-    {value: 'opt-3', label: 'Option 3'},
-  ],
-};
-Multi.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Option 1')).toBeInTheDocument();
-  await expect(canvas.queryByText('Option 2')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('Option 3')).toBeInTheDocument();
-};
 
-export const ArbitraryOptionShape = Template.bind({});
-ArbitraryOptionShape.parameters = {
-  formik: {
-    initialValues: {'my-select': 2},
+export const WithoutLabel: Story = {
+  args: {
+    label: '',
   },
 };
-ArbitraryOptionShape.args = {
-  options: [
-    {id: 1, username: 'peterparker'},
-    {id: 2, username: 'sherlock'},
-  ],
-  valueProperty: 'id',
-  getOptionLabel: opt => opt.username,
-};
-ArbitraryOptionShape.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.getByText('sherlock')).toBeInTheDocument();
-};
 
-export const WithErrors = Template.bind({});
-WithErrors.args = {
-  label: 'With errors',
-};
-WithErrors.parameters = {
-  formik: {
-    initialValues: {'my-select': ''},
-    initialErrors: {'my-select': 'Example error', 'other-field': 'Other error'},
+export const WithToolTip: Story = {
+  args: {
+    label: 'With tooltip',
+    tooltip: 'Hiya!',
+    required: false,
   },
 };
-WithErrors.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-  await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+
+export const Clearable: Story = {
+  args: {
+    isClearable: true,
+  },
+};
+
+export const Multi: Story = {
+  parameters: {
+    formik: {
+      initialValues: {'my-select': ['opt-1', 'opt-3']},
+    },
+  },
+
+  args: {
+    isMulti: true,
+    options: [
+      {value: 'opt-1', label: 'Option 1'},
+      {value: 'opt-2', label: 'Option 2'},
+      {value: 'opt-3', label: 'Option 3'},
+    ],
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText('Option 1')).toBeInTheDocument();
+    await expect(canvas.queryByText('Option 2')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('Option 3')).toBeInTheDocument();
+  },
+};
+
+export const ArbitraryOptionShape: Story = {
+  parameters: {
+    formik: {
+      initialValues: {'my-select': 2},
+    },
+  },
+
+  args: {
+    options: [
+      {id: 1, username: 'peterparker'},
+      {id: 2, username: 'sherlock'},
+    ],
+    valueProperty: 'id',
+    getOptionLabel: opt => opt.username,
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('sherlock')).toBeInTheDocument();
+  },
+};
+
+export const WithErrors: Story = {
+  args: {
+    label: 'With errors',
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-select': ''},
+      initialErrors: {'my-select': 'Example error', 'other-field': 'Other error'},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+  },
 };

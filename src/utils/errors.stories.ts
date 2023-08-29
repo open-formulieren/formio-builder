@@ -23,18 +23,27 @@ interface Values {
   }[];
 }
 
-export const GetErrorNames = () => 'no visual aspect, tests only';
-GetErrorNames.play = async () => {
-  const errors = {
-    toplevel: 'someError',
-    parent: {
-      nested: 'someError,',
-    },
-    array: ['', 'someError'],
-    nestedArray: [{child: 'someError'}],
-  };
+export const GetErrorNames = {
+  render: () => 'no visual aspect, tests only',
 
-  const names = getErrorNames<Values>(errors);
+  play: async () => {
+    const errors = {
+      toplevel: 'someError',
+      parent: {
+        nested: 'someError,',
+      },
+      array: ['', 'someError'],
+      nestedArray: [{child: 'someError'}],
+    };
 
-  expect(names).toEqual(['toplevel', 'parent', 'parent.nested', 'array.1', 'nestedArray.0.child']);
+    const names = getErrorNames<Values>(errors);
+
+    expect(names).toEqual([
+      'toplevel',
+      'parent',
+      'parent.nested',
+      'array.1',
+      'nestedArray.0.child',
+    ]);
+  },
 };

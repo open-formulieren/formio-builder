@@ -1,5 +1,5 @@
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
 
 import Panel, {PanelProps} from './panel';
@@ -20,46 +20,59 @@ export default {
     initialCollapsed: false,
     nestedContent: 'Panel body',
   },
-} as ComponentMeta<typeof Panel>;
+} as Meta<typeof Panel>;
 
 interface StoryArgs extends PanelProps {
   nestedContent: string;
 }
 
-const Template: ComponentStory<React.FC<StoryArgs>> = args => (
+const Template: StoryFn<React.FC<StoryArgs>> = args => (
   <Panel {...args}>{args.nestedContent}</Panel>
 );
 
-export const Default = Template.bind({});
-
-export const WithTooltip = Template.bind({});
-WithTooltip.args = {
-  tooltip: 'I am a tooltip!',
+export const Default = {
+  render: Template,
 };
 
-export const Collapsible = Template.bind({});
-Collapsible.args = {
-  collapsible: true,
-};
-Collapsible.play = async ({canvasElement, args}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
+export const WithTooltip = {
+  render: Template,
 
-  const header = await canvas.findByText(args.title as string);
-  await userEvent.click(header);
-  await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
+  args: {
+    tooltip: 'I am a tooltip!',
+  },
 };
 
-export const CollapsibleInitiallyCollapsed = Template.bind({});
-CollapsibleInitiallyCollapsed.args = {
-  collapsible: true,
-  initialCollapsed: true,
-};
-CollapsibleInitiallyCollapsed.play = async ({canvasElement, args}) => {
-  const canvas = within(canvasElement);
-  await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
+export const Collapsible = {
+  render: Template,
 
-  const header = await canvas.findByText(args.title as string);
-  await userEvent.click(header);
-  await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
+  args: {
+    collapsible: true,
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
+
+    const header = await canvas.findByText(args.title as string);
+    await userEvent.click(header);
+    await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
+  },
+};
+
+export const CollapsibleInitiallyCollapsed = {
+  render: Template,
+
+  args: {
+    collapsible: true,
+    initialCollapsed: true,
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText(args.nestedContent)).not.toBeInTheDocument();
+
+    const header = await canvas.findByText(args.title as string);
+    await userEvent.click(header);
+    await expect(canvas.queryByText(args.nestedContent)).toBeInTheDocument();
+  },
 };

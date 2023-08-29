@@ -1,4 +1,4 @@
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {Tab, TabList, TabPanel, Tabs} from './tabs';
 
@@ -8,9 +8,9 @@ export default {
     controls: {hideNoControlsWarning: true},
     modal: {noModal: true},
   },
-} as ComponentMeta<typeof Tabs>;
+} as Meta<typeof Tabs>;
 
-export const Default: ComponentStory<typeof Tabs> = () => (
+export const Default: StoryFn<typeof Tabs> = () => (
   <Tabs>
     <TabList>
       <Tab>Tab 1</Tab>
@@ -22,7 +22,7 @@ export const Default: ComponentStory<typeof Tabs> = () => (
   </Tabs>
 );
 
-export const WithErrors: ComponentStory<typeof Tabs> = () => (
+export const WithErrors: StoryFn<typeof Tabs> = () => (
   <Tabs>
     <TabList>
       <Tab>Tab 1</Tab>

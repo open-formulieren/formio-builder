@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import ReadOnly from './readonly';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {disabled: false}},
   },
-} as ComponentMeta<typeof ReadOnly>;
+} as Meta<typeof ReadOnly>;
 
-export const Default: ComponentStory<typeof ReadOnly> = () => <ReadOnly />;
-Default.args = {};
+export const Default: StoryObj<typeof ReadOnly> = {
+  render: () => <ReadOnly />,
+  args: {},
+};

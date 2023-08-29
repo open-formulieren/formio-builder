@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Placeholder from './placeholder';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {placeholder: ''}},
   },
-} as ComponentMeta<typeof Placeholder>;
+} as Meta<typeof Placeholder>;
 
-export const Default: ComponentStory<typeof Placeholder> = () => <Placeholder />;
-Default.args = {};
+export const Default: StoryObj<typeof Placeholder> = {
+  render: () => <Placeholder />,
+  args: {},
+};

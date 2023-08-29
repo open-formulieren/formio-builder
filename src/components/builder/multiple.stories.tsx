@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Multiple from './multiple';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {multiple: false}},
   },
-} as ComponentMeta<typeof Multiple>;
+} as Meta<typeof Multiple>;
 
-export const Default: ComponentStory<typeof Multiple> = () => <Multiple />;
-Default.args = {};
+export const Default: StoryObj<typeof Multiple> = {
+  render: () => <Multiple />,
+  args: {},
+};

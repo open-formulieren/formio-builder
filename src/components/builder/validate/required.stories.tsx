@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Required from './required';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {validate: {required: false}}},
   },
-} as ComponentMeta<typeof Required>;
+} as Meta<typeof Required>;
 
-export const Default: ComponentStory<typeof Required> = () => <Required />;
-Default.args = {};
+export const Default: StoryObj<typeof Required> = {
+  render: () => <Required />,
+  args: {},
+};

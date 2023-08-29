@@ -1,7 +1,8 @@
-import withFormik from '@bbbtech/storybook-formik';
 import {expect} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
+
+import {withFormik} from '@/sb-decorators';
 
 import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
 
@@ -33,28 +34,31 @@ export default {
   args: {
     registrationAttributes: DEFAULT_REGISTRATION_ATTRIBUTES,
   },
-} as ComponentMeta<typeof RegistrationAttributeSelect>;
+} as Meta<typeof RegistrationAttributeSelect>;
 
-const Template: ComponentStory<typeof RegistrationAttributeSelect> = () => (
-  <RegistrationAttributeSelect />
-);
+type Story = StoryObj<typeof RegistrationAttributeSelect>;
 
-export const Default = Template.bind({});
-Default.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const input = await canvas.getByLabelText('Registration attribute');
+const Template: StoryFn<typeof RegistrationAttributeSelect> = () => <RegistrationAttributeSelect />;
 
-  // open the dropdown
-  await input.focus();
-  await userEvent.keyboard('[ArrowDown]');
+export const Default: Story = {
+  render: Template,
 
-  await waitFor(async () => {
-    await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
-  });
-  // assert the options are present
-  await waitFor(async () => {
-    await expect(canvas.queryByText('BSN')).toBeInTheDocument();
-    await expect(canvas.queryByText('First name')).toBeInTheDocument();
-    await expect(canvas.queryByText('Date of Birth')).toBeInTheDocument();
-  });
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const input = await canvas.getByLabelText('Registration attribute');
+
+    // open the dropdown
+    await input.focus();
+    await userEvent.keyboard('[ArrowDown]');
+
+    await waitFor(async () => {
+      await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
+    });
+    // assert the options are present
+    await waitFor(async () => {
+      await expect(canvas.queryByText('BSN')).toBeInTheDocument();
+      await expect(canvas.queryByText('First name')).toBeInTheDocument();
+      await expect(canvas.queryByText('Date of Birth')).toBeInTheDocument();
+    });
+  },
 };

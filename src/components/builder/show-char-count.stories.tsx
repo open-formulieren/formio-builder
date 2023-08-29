@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import ShowCharCount from './show-char-count';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {showCharCount: false}},
   },
-} as ComponentMeta<typeof ShowCharCount>;
+} as Meta<typeof ShowCharCount>;
 
-export const Default: ComponentStory<typeof ShowCharCount> = () => <ShowCharCount />;
-Default.args = {};
+export const Default: StoryObj<typeof ShowCharCount> = {
+  render: () => <ShowCharCount />,
+  args: {},
+};

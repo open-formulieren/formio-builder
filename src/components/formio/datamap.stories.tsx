@@ -1,6 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import React from 'react';
+import {Meta, StoryFn} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import {TextField} from '.';
 import DataMap from './datamap';
@@ -11,6 +11,16 @@ export default {
   decorators: [withFormik],
   parameters: {
     modal: {noModal: true},
+    formik: {
+      initialValues: {
+        f1Drivers: {
+          33: 'VER',
+          11: 'PER',
+          44: 'HAM',
+          63: 'RUS',
+        },
+      },
+    },
     docs: {
       source: {
         type: 'dynamic',
@@ -24,17 +34,13 @@ export default {
   args: {
     name: 'f1Drivers',
     keyLabel: 'Number',
-    f1Drivers: {
-      33: 'VER',
-      11: 'PER',
-      44: 'HAM',
-      63: 'RUS',
-    },
   },
-} as ComponentMeta<typeof DataMap>;
+} as Meta<typeof DataMap>;
 
-const Template: ComponentStory<typeof DataMap> = args => (
+const Template: StoryFn<typeof DataMap> = args => (
   <DataMap {...args} valueComponent={<TextField name="driver" label="Driver" />} />
 );
 
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
+};

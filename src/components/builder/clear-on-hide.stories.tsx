@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import ClearOnHide from './clear-on-hide';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {clearOnHide: false}},
   },
-} as ComponentMeta<typeof ClearOnHide>;
+} as Meta<typeof ClearOnHide>;
 
-export const Default: ComponentStory<typeof ClearOnHide> = () => <ClearOnHide />;
-Default.args = {};
+export const Default: StoryObj<typeof ClearOnHide> = {
+  render: () => <ClearOnHide />,
+  args: {},
+};

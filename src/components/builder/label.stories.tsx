@@ -1,5 +1,6 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Label from './label';
 
@@ -18,7 +19,9 @@ export default {
     modal: {noModal: true},
     formik: {initialValues: {label: ''}},
   },
-} as ComponentMeta<typeof Label>;
+} as Meta<typeof Label>;
 
-export const Default: ComponentStory<typeof Label> = () => <Label />;
-Default.args = {};
+export const Default: StoryObj<typeof Label> = {
+  render: () => <Label />,
+  args: {},
+};

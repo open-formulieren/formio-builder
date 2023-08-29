@@ -1,11 +1,10 @@
-import withFormik from '@bbbtech/storybook-formik';
-import {PartialStoryFn, StoryContext} from '@storybook/csf';
 import {expect, jest} from '@storybook/jest';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {ReactFramework} from '@storybook/react';
+import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import {Formik} from 'formik';
 import {useRef} from 'react';
+
+import {withFormik} from '@/sb-decorators';
 
 import Key, {useDeriveComponentKey} from './key';
 import Label from './label';
@@ -24,20 +23,26 @@ export default {
     modal: {noModal: true},
     builder: {enableContext: true, defaultComponentTree: []},
   },
-} as ComponentMeta<typeof Key>;
+} as Meta<typeof Key>;
 
-export const Standalone: ComponentStory<typeof Key> = () => {
-  const ref = useRef<boolean>(false);
-  return <Key isManuallySetRef={ref} generatedValue="" />;
-};
-Standalone.decorators = [withFormik];
-Standalone.parameters = {
-  formik: {
-    initialValues: {key: ''},
+type Story = StoryObj<typeof Key>;
+
+export const Standalone: Story = {
+  render: () => {
+    const ref = useRef<boolean>(false);
+    return <Key isManuallySetRef={ref} generatedValue="" />;
+  },
+
+  decorators: [withFormik],
+
+  parameters: {
+    formik: {
+      initialValues: {key: ''},
+    },
   },
 };
 
-const FormikDecorator = (Story: PartialStoryFn<ReactFramework>, context: StoryContext) => (
+const FormikDecorator = (Story: StoryFn, context: StoryContext) => (
   <Formik
     initialValues={{label: '', key: ''}}
     onSubmit={jest.fn()}
@@ -57,84 +62,95 @@ const LabelAndKey = () => {
   );
 };
 
-const WithLabelTemplate: ComponentStory<typeof Key> = () => <LabelAndKey />;
+const WithLabelTemplate: StoryFn<typeof Key> = () => <LabelAndKey />;
 
-export const IsNewDeriveFromLabel = WithLabelTemplate.bind({});
-IsNewDeriveFromLabel.storyName = 'New component: derive key from label';
-IsNewDeriveFromLabel.decorators = [FormikDecorator];
-IsNewDeriveFromLabel.parameters = {
-  formik: {
-    initialValues: {key: 'defaultKey', label: 'Derive key from label'},
-    initialStatus: {isNew: true},
+export const IsNewDeriveFromLabel: Story = {
+  render: WithLabelTemplate,
+  name: 'New component: derive key from label',
+  decorators: [FormikDecorator],
+
+  parameters: {
+    formik: {
+      initialValues: {key: 'defaultKey', label: 'Derive key from label'},
+      initialStatus: {isNew: true},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const labelInput = await canvas.getByLabelText('Label');
+    const keyInput = await canvas.getByLabelText('Property Name');
+
+    // derive from label
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, 'My label');
+    await expect(labelInput).toHaveValue('My label');
+    await waitFor(async () => {
+      await expect(keyInput).toHaveValue('myLabel');
+    });
   },
 };
-IsNewDeriveFromLabel.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const labelInput = await canvas.getByLabelText('Label');
-  const keyInput = await canvas.getByLabelText('Property Name');
 
-  // derive from label
-  await userEvent.clear(labelInput);
-  await userEvent.type(labelInput, 'My label');
-  await expect(labelInput).toHaveValue('My label');
-  await waitFor(async () => {
-    await expect(keyInput).toHaveValue('myLabel');
-  });
-};
+export const DeriveFromLabelButSetManually: Story = {
+  render: WithLabelTemplate,
+  name: 'New component: derive key from label but specify it manually',
+  decorators: [FormikDecorator],
 
-export const DeriveFromLabelButSetManually = WithLabelTemplate.bind({});
-DeriveFromLabelButSetManually.storyName =
-  'New component: derive key from label but specify it manually';
-DeriveFromLabelButSetManually.decorators = [FormikDecorator];
-DeriveFromLabelButSetManually.parameters = {
-  formik: {
-    initialValues: {key: 'textField', label: 'Derive key from label'},
-    initialStatus: {isNew: true},
+  parameters: {
+    formik: {
+      initialValues: {key: 'textField', label: 'Derive key from label'},
+      initialStatus: {isNew: true},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const labelInput = await canvas.getByLabelText('Label');
+    const keyInput = await canvas.getByLabelText('Property Name');
+
+    // derive from label first
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, 'My label');
+    await expect(labelInput).toHaveValue('My label');
+    await waitFor(async () => {
+      await expect(keyInput).toHaveValue('myLabel');
+    });
+
+    // manually set the key, modifiying the label may then not touch the key anymore
+    // this uses fireEvent since clear resets to calculated value again and select + paste
+    // doesn't seem obvious
+    // FIXME: if you can 'select all text + replace with paste/type' -> be my guest!
+    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, 'Updated label');
+    await expect(labelInput).toHaveValue('Updated label');
+    await waitFor(async () => {
+      await expect(keyInput).toHaveValue('customKey');
+    });
   },
 };
-DeriveFromLabelButSetManually.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const labelInput = await canvas.getByLabelText('Label');
-  const keyInput = await canvas.getByLabelText('Property Name');
 
-  // derive from label first
-  await userEvent.clear(labelInput);
-  await userEvent.type(labelInput, 'My label');
-  await expect(labelInput).toHaveValue('My label');
-  await waitFor(async () => {
-    await expect(keyInput).toHaveValue('myLabel');
-  });
+export const IsExistingDeriveFromLabel: Story = {
+  render: WithLabelTemplate,
+  name: "Existing component: don't derive key from label",
+  decorators: [FormikDecorator],
 
-  // manually set the key, modifiying the label may then not touch the key anymore
-  // this uses fireEvent since clear resets to calculated value again and select + paste
-  // doesn't seem obvious
-  // FIXME: if you can 'select all text + replace with paste/type' -> be my guest!
-  await fireEvent.change(keyInput, {target: {value: 'customKey'}});
-  await userEvent.clear(labelInput);
-  await userEvent.type(labelInput, 'Updated label');
-  await expect(labelInput).toHaveValue('Updated label');
-  await waitFor(async () => {
-    await expect(keyInput).toHaveValue('customKey');
-  });
-};
-
-export const IsExistingDeriveFromLabel = WithLabelTemplate.bind({});
-IsExistingDeriveFromLabel.storyName = "Existing component: don't derive key from label";
-IsExistingDeriveFromLabel.decorators = [FormikDecorator];
-IsExistingDeriveFromLabel.parameters = {
-  formik: {
-    initialValues: {key: 'explicitlySetKey', label: 'Key not derived from label'},
-    initialStatus: {isNew: false},
+  parameters: {
+    formik: {
+      initialValues: {key: 'explicitlySetKey', label: 'Key not derived from label'},
+      initialStatus: {isNew: false},
+    },
   },
-};
-IsExistingDeriveFromLabel.play = async ({canvasElement}) => {
-  const canvas = within(canvasElement);
-  const labelInput = await canvas.getByLabelText('Label');
 
-  await userEvent.clear(labelInput);
-  await userEvent.type(labelInput, 'My label');
-  await expect(labelInput).toHaveValue('My label');
-  await waitFor(async () => {
-    await expect(canvas.getByLabelText('Property Name')).toHaveValue('explicitlySetKey');
-  });
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const labelInput = await canvas.getByLabelText('Label');
+
+    await userEvent.clear(labelInput);
+    await userEvent.type(labelInput, 'My label');
+    await expect(labelInput).toHaveValue('My label');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('explicitlySetKey');
+    });
+  },
 };
