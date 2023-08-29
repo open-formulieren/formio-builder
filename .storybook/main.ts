@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     'storybook-react-intl',
   ],
   docs: {
-    autodocs: true,
+    autodocs: 'tag',
   },
   webpackFinal: async (config, {configType}) => {
     if (!config.resolve) {
