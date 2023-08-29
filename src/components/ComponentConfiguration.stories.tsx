@@ -1,7 +1,7 @@
+import {SupportedLocales} from '@open-formulieren/types';
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
 import {AnyComponentSchema} from '@/types';
@@ -68,13 +68,13 @@ export default {
 
 interface TemplateArgs {
   component: AnyComponentSchema;
-  supportedLanguageCodes: string[];
+  supportedLanguageCodes: SupportedLocales[];
   translationsStore: {
     [key: string]: {
       [key: string]: string;
     };
   };
-  otherComponents: ExtendedComponentSchema[];
+  otherComponents: AnyComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
@@ -86,7 +86,7 @@ interface TemplateArgs {
   onSubmit: (c: AnyComponentSchema) => void;
 }
 
-const Template = ({
+const Template: StoryFn<TemplateArgs> = ({
   component,
   otherComponents,
   validatorPlugins,
@@ -100,28 +100,28 @@ const Template = ({
   onCancel,
   onRemove,
   onSubmit,
-}: TemplateArgs) => {
-  return (
-    <ComponentConfiguration
-      uniquifyKey={(key: string) => key}
-      supportedLanguageCodes={supportedLanguageCodes}
-      componentTranslationsRef={{current: translationsStore}}
-      getFormComponents={() => otherComponents}
-      getValidatorPlugins={async () => validatorPlugins}
-      getRegistrationAttributes={async () => registrationAttributes}
-      getPrefillPlugins={async () => prefillPlugins}
-      getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
-      component={component}
-      isNew={isNew}
-      builderInfo={builderInfo}
-      onCancel={onCancel}
-      onRemove={onRemove}
-      onSubmit={onSubmit}
-    />
-  );
-};
+}: TemplateArgs) => (
+  <ComponentConfiguration
+    uniquifyKey={(key: string) => key}
+    supportedLanguageCodes={supportedLanguageCodes}
+    componentTranslationsRef={{current: translationsStore}}
+    getFormComponents={() => otherComponents}
+    getValidatorPlugins={async () => validatorPlugins}
+    getRegistrationAttributes={async () => registrationAttributes}
+    getPrefillPlugins={async () => prefillPlugins}
+    getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
+    component={component}
+    isNew={isNew}
+    builderInfo={builderInfo}
+    onCancel={onCancel}
+    onRemove={onRemove}
+    onSubmit={onSubmit}
+  />
+);
 
-export const Default: StoryObj<typeof Template> = {
+type Story = StoryObj<typeof Template>;
+
+export const Default: Story = {
   render: Template,
   name: 'generic',
 
@@ -129,6 +129,7 @@ export const Default: StoryObj<typeof Template> = {
     component: {
       id: 'wekruya',
       type: 'textfield',
+      key: 'textfield',
       label: 'A text field',
       validate: {
         required: false,
@@ -137,7 +138,7 @@ export const Default: StoryObj<typeof Template> = {
   },
 };
 
-export const TextField: StoryObj<typeof Template> = {
+export const TextField: Story = {
   render: Template,
   name: 'type: textfield',
 
@@ -145,6 +146,7 @@ export const TextField: StoryObj<typeof Template> = {
     component: {
       id: 'wekruya',
       type: 'textfield',
+      key: 'textfield',
       label: 'A text field',
       validate: {
         required: false,
@@ -197,7 +199,7 @@ export const TextField: StoryObj<typeof Template> = {
   },
 };
 
-export const Email: StoryObj<typeof Template> = {
+export const Email: Story = {
   render: Template,
   name: 'type: email',
 
@@ -205,6 +207,7 @@ export const Email: StoryObj<typeof Template> = {
     component: {
       id: 'ikrnvhe',
       type: 'email',
+      key: 'email',
       label: 'An email field',
       validate: {
         required: false,
