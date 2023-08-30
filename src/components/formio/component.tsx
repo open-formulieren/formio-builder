@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import {AnyComponentSchema} from '@/types';
 import {useValidationErrors} from '@/utils/errors';
 import {ErrorList} from '@/utils/errors';
 
 import ComponentLabel from './component-label';
 
 export interface ComponentProps {
-  type: 'textfield' | 'select' | 'checkbox' | 'number' | 'datagrid' | 'datamap'; // TODO: can this be inferred from somewhere?
+  // XXX: eventually (most) of these literals will be included in AnyComponentType
+  type: AnyComponentSchema['type'] | 'checkbox' | 'datagrid' | 'datamap' | 'select';
   field?: string;
   required?: boolean;
   label?: React.ReactNode;
