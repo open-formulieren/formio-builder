@@ -10,7 +10,6 @@ import {
   IsSensitiveData,
   Key,
   Label,
-  Multiple,
   PresentationConfig,
   Registration,
   SimpleConditional,
@@ -30,7 +29,7 @@ import {EditFormDefinition} from '../types';
  */
 const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<NumberComponentSchema>();
+  const {errors} = useFormikContext<NumberComponentSchema>();
 
   const erroredFields = Object.keys(errors).length
     ? getErrorNames<NumberComponentSchema>(errors)
@@ -65,7 +64,6 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
             'showInSummary',
             'showInEmail',
             'showInPDF',
-            'multiple',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -89,11 +87,10 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
         <Tooltip />
         <Suffix />
         <PresentationConfig />
-        <Multiple />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <DefaultValue multiple={!!values.multiple} />
+        <DefaultValue />
         <DecimalLimit />
         <AllowNegative />
       </TabPanel>
@@ -134,7 +131,6 @@ EditForm.defaultValues = {
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,
-  multiple: false,
   hidden: false,
   clearOnHide: true,
   isSensitiveData: false,
@@ -162,11 +158,7 @@ EditForm.defaultValues = {
   },
 };
 
-interface DefaultValueProps {
-  multiple: boolean;
-}
-
-const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
+const DefaultValue: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
@@ -182,7 +174,6 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
         />
       }
       tooltip={tooltip}
-      multiple={multiple}
     />
   );
 };

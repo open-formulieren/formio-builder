@@ -339,25 +339,5 @@ export const NumberField: Story = {
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
-
-    // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
-    await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
-    // test for the default value inputs -> these don't have accessible labels/names :(
-    const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
-    await userEvent.click(addButtons[0]);
-    await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
-    });
-
-    // check that default value is e-mail validated
-    const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('number');
-    await userEvent.type(defaultInput0, 'invalid');
-    // fireEvent.blur doesn't seem to do anything? -> just click the button to add another one,
-    // that also removes focus from the input
-    await userEvent.click(addButtons[0]);
   },
 };
