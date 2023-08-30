@@ -286,7 +286,7 @@ export const Email: Story = {
 
 export const NumberField: Story = {
   render: Template,
-  name: 'type: numberfield',
+  name: 'type: number',
 
   args: {
     component: {
@@ -341,5 +341,30 @@ export const NumberField: Story = {
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+  },
+};
+
+export const DateField: Story = {
+  render: Template,
+  name: 'type: date',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'date',
+      key: 'date',
+      label: 'A date field',
+      validate: {
+        required: false,
+      },
+    },
+
+    builderInfo: {
+      title: 'Date Field',
+      icon: 'calendar',
+      group: 'basic',
+      weight: 10,
+      schema: {},
+    },
   },
 };
