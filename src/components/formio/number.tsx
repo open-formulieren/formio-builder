@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import {Field} from 'formik';
-import {useContext} from 'react';
+import {Field, useFormikContext} from 'formik';
+import {ChangeEvent, useContext} from 'react';
 
 import {RenderContext} from '@/context';
 import {ErrorList, useValidationErrors} from '@/utils/errors';
@@ -19,6 +19,10 @@ export interface NumberProps {
   suffix?: string;
 }
 
+// Preferably we'd use null instead of undefined (the latter does not get JSON serialized),
+// but form.io's schema's typically don't account for null.
+type NumberFieldValue = number | undefined;
+
 export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps> = ({
   name,
   label,
@@ -28,8 +32,13 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   suffix = '',
   ...props
 }) => {
+  const {getFieldProps, getFieldHelpers} = useFormikContext<unknown>();
   const {errors, hasErrors} = useValidationErrors(name);
   const {bareInput} = useContext(RenderContext);
+
+  // ensure that the empty string is normalized to 'undefined' for number fields.
+  const {value, onChange: formikOnChange} = getFieldProps<NumberFieldValue>(name);
+  const {setValue} = getFieldHelpers<NumberFieldValue>(name);
 
   const htmlId = `editform-${name}`;
 
@@ -43,6 +52,17 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
         className={clsx('form-control', {'is-invalid': hasErrors})}
         data-testid={`input-${name}`}
         {...props}
+        value={value ?? ''}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          const {value} = event.target;
+          formikOnChange(event);
+          // normalize to be *not* a string in the state. React & browsers follow the
+          // HTML which states that the value must be an empty string for empty inputs,
+          // even if it's a number input.
+          if (value === '') {
+            setValue(undefined);
+          }
+        }}
       />
     </Wrapper>
   );
