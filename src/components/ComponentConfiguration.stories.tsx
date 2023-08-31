@@ -180,7 +180,9 @@ export const TextField: Story = {
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
     const keyInput = canvas.getByLabelText('Property Name');
-    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+    // not have any value, which triggers the generate-key-from-label behaviour.
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.click(canvas.getByRole('tab', {name: 'Location'}));
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
