@@ -19,6 +19,7 @@ export {default as ShowCharCount} from './show-char-count';
 export {default as PresentationConfig} from './presentation-config';
 export {default as ComponentSelect} from './component-select';
 export {default as SimpleConditional} from './simple-conditional';
+export {default as Suffix} from './suffix';
 export * as Validate from './validate';
 export * as Registration from './registration';
 export * as Prefill from './prefill';

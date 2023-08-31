@@ -1,7 +1,7 @@
+import {SupportedLocales} from '@open-formulieren/types';
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import React from 'react';
 
 import {AnyComponentSchema} from '@/types';
@@ -68,13 +68,13 @@ export default {
 
 interface TemplateArgs {
   component: AnyComponentSchema;
-  supportedLanguageCodes: string[];
+  supportedLanguageCodes: SupportedLocales[];
   translationsStore: {
     [key: string]: {
       [key: string]: string;
     };
   };
-  otherComponents: ExtendedComponentSchema[];
+  otherComponents: AnyComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
@@ -86,7 +86,7 @@ interface TemplateArgs {
   onSubmit: (c: AnyComponentSchema) => void;
 }
 
-const Template = ({
+const Template: StoryFn<TemplateArgs> = ({
   component,
   otherComponents,
   validatorPlugins,
@@ -100,28 +100,28 @@ const Template = ({
   onCancel,
   onRemove,
   onSubmit,
-}: TemplateArgs) => {
-  return (
-    <ComponentConfiguration
-      uniquifyKey={(key: string) => key}
-      supportedLanguageCodes={supportedLanguageCodes}
-      componentTranslationsRef={{current: translationsStore}}
-      getFormComponents={() => otherComponents}
-      getValidatorPlugins={async () => validatorPlugins}
-      getRegistrationAttributes={async () => registrationAttributes}
-      getPrefillPlugins={async () => prefillPlugins}
-      getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
-      component={component}
-      isNew={isNew}
-      builderInfo={builderInfo}
-      onCancel={onCancel}
-      onRemove={onRemove}
-      onSubmit={onSubmit}
-    />
-  );
-};
+}: TemplateArgs) => (
+  <ComponentConfiguration
+    uniquifyKey={(key: string) => key}
+    supportedLanguageCodes={supportedLanguageCodes}
+    componentTranslationsRef={{current: translationsStore}}
+    getFormComponents={() => otherComponents}
+    getValidatorPlugins={async () => validatorPlugins}
+    getRegistrationAttributes={async () => registrationAttributes}
+    getPrefillPlugins={async () => prefillPlugins}
+    getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
+    component={component}
+    isNew={isNew}
+    builderInfo={builderInfo}
+    onCancel={onCancel}
+    onRemove={onRemove}
+    onSubmit={onSubmit}
+  />
+);
 
-export const Default: StoryObj<typeof Template> = {
+type Story = StoryObj<typeof Template>;
+
+export const Default: Story = {
   render: Template,
   name: 'generic',
 
@@ -129,6 +129,7 @@ export const Default: StoryObj<typeof Template> = {
     component: {
       id: 'wekruya',
       type: 'textfield',
+      key: 'textfield',
       label: 'A text field',
       validate: {
         required: false,
@@ -137,7 +138,7 @@ export const Default: StoryObj<typeof Template> = {
   },
 };
 
-export const TextField: StoryObj<typeof Template> = {
+export const TextField: Story = {
   render: Template,
   name: 'type: textfield',
 
@@ -145,6 +146,7 @@ export const TextField: StoryObj<typeof Template> = {
     component: {
       id: 'wekruya',
       type: 'textfield',
+      key: 'textfield',
       label: 'A text field',
       validate: {
         required: false,
@@ -170,7 +172,7 @@ export const TextField: StoryObj<typeof Template> = {
 
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-    await expect(await preview.findByText('Updated preview label'));
+    expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText('Updated preview label');
     await expect(previewInput).toHaveDisplayValue('');
@@ -178,7 +180,9 @@ export const TextField: StoryObj<typeof Template> = {
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
     const keyInput = canvas.getByLabelText('Property Name');
-    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+    // not have any value, which triggers the generate-key-from-label behaviour.
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.click(canvas.getByRole('tab', {name: 'Location'}));
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
@@ -191,13 +195,13 @@ export const TextField: StoryObj<typeof Template> = {
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
-    const addButtons = await canvas.getAllByRole('button', {name: 'Add another'});
+    const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
-    await expect(await canvas.findByTestId('input-defaultValue[0]'));
+    expect(await canvas.findByTestId('input-defaultValue[0]'));
   },
 };
 
-export const Email: StoryObj<typeof Template> = {
+export const Email: Story = {
   render: Template,
   name: 'type: email',
 
@@ -205,6 +209,7 @@ export const Email: StoryObj<typeof Template> = {
     component: {
       id: 'ikrnvhe',
       type: 'email',
+      key: 'email',
       label: 'An email field',
       validate: {
         required: false,
@@ -260,14 +265,14 @@ export const Email: StoryObj<typeof Template> = {
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
-    const addButtons = await canvas.getAllByRole('button', {name: 'Add another'});
+    const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
       await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
-    const defaultInput0 = await canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
+    const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
     await expect(defaultInput0.type).toEqual('email');
     await userEvent.type(defaultInput0, 'invalid');
     // fireEvent.blur doesn't seem to do anything? -> just click the button to add another one,
@@ -276,5 +281,65 @@ export const Email: StoryObj<typeof Template> = {
     await waitFor(async () => {
       await expect(await canvas.findByText('Default Value must be a valid email.')).toBeVisible();
     });
+  },
+};
+
+export const NumberField: Story = {
+  render: Template,
+  name: 'type: numberfield',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'number',
+      key: 'number',
+      label: 'A number field',
+      validate: {
+        required: false,
+      },
+    },
+
+    builderInfo: {
+      title: 'Number',
+      group: 'basic',
+      icon: 'hashtag',
+      schema: {placeholder: ''},
+      weight: 30,
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A number field');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aNumberField');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+
+    // ensure that changing fields in the edit form properly update the preview
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label'));
+
+    const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
+    await expect(previewInput).toHaveDisplayValue('');
+    await expect(previewInput.type).toEqual('number');
+
+    // Ensure that the manually entered key is kept instead of derived from the label,
+    // even when key/label components are not mounted.
+    const keyInput = canvas.getByLabelText('Property Name');
+    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
   },
 };
