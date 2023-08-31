@@ -252,7 +252,7 @@ export const Email: Story = {
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
     const keyInput = canvas.getByLabelText('Property Name');
-    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
@@ -335,7 +335,7 @@ export const NumberField: Story = {
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
     const keyInput = canvas.getByLabelText('Property Name');
-    await fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
