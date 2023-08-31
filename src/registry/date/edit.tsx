@@ -25,6 +25,8 @@ import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {EditFormDefinition} from '@/registry/types';
 import {getErrorNames} from '@/utils/errors';
 
+import DateConstraintValidation from './validation';
+
 /**
  * Form to configure a Formio 'date' type component.
  */
@@ -96,7 +98,8 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
       <TabPanel>
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
-        {/* TODO advanced validation */}
+        <DateConstraintValidation constraint="minDate" />
+        <DateConstraintValidation constraint="maxDate" />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
       {/* Registration tab */}
@@ -157,28 +160,8 @@ EditForm.defaultValues = {
   },
   openForms: {
     translations: {},
-    minDate: {
-      mode: '',
-      includeToday: null,
-      operator: 'add',
-      variable: 'now',
-      delta: {
-        years: null,
-        months: null,
-        days: null,
-      },
-    },
-    maxDate: {
-      mode: '',
-      includeToday: null,
-      operator: 'add',
-      variable: 'now',
-      delta: {
-        years: null,
-        months: null,
-        days: null,
-      },
-    },
+    minDate: {mode: ''},
+    maxDate: {mode: ''},
   },
   // Registration tab
   registration: {
