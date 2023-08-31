@@ -41,11 +41,6 @@ export const DateField: React.FC<JSX.IntrinsicElements['input'] & DateFieldProps
       data-testid={`input-${name}`}
       // text fallback - use ISO-8601
       pattern="\d{4}-\d{2}-\d{2}"
-      // otherwise the error background image overlaps with calendar icons... even though
-      // all other inputs have the same problem with actual input text if it's long enough :(
-      style={{
-        paddingRight: '2em',
-      }}
       {...props}
     />
   );
