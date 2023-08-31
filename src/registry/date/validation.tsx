@@ -53,7 +53,7 @@ const ALL_DATE_CONSTRAINT_MODE_OPTIONS: Array<{
   },
 ];
 
-interface DateConstraintProps {
+export interface DateConstraintProps {
   constraint: DateConstraintKey;
 }
 
@@ -110,7 +110,7 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
         foo: 'bar',
       })}
       collapsible
-      initialCollapsed
+      initialCollapsed={false}
     >
       <ModeSelect constraint={constraint} />
     </Panel>
