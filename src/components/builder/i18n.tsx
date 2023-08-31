@@ -37,6 +37,9 @@ function getEmptyTranslationsObject<T extends SupportedLocales[]>(
  *
  *   useManageTranslations<TextFieldSchema>(['label', 'description', 'defaultValue']);
  *
+ * @todo: only consider field names where the value is a string -> translating defaultValue
+ *   number makes no sense
+ *
  * @param forProperties Array of form field names to monitor for translation.
  */
 export function useManageTranslations<S extends AnyComponentSchema = AnyComponentSchema>(
