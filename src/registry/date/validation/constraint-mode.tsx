@@ -55,7 +55,7 @@ const DEFAULT_VALUES: {
   future: {includeToday: false},
   past: {includeToday: false},
   relativeToVariable: {
-    variable: '',
+    variable: 'now',
     delta: {
       years: null,
       months: null,
