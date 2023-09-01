@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {within} from '@storybook/testing-library';
+import {userEvent, within} from '@storybook/testing-library';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -125,6 +125,7 @@ export const RelativeToVariable: Story = {
         openForms: {
           minDate: {
             mode: 'relativeToVariable',
+            variable: 'now',
             delta: {
               years: null,
               months: null,
@@ -138,12 +139,23 @@ export const RelativeToVariable: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
     expect(await canvas.findByText('Relative to variable')).toBeVisible();
-    const operator = await canvas.findByLabelText('Add/subtract duration');
-    expect(operator).toBeVisible();
-    expect(await canvas.findByText('Add')).toBeVisible();
+
+    await step('Configuring the operator', async () => {
+      const operator = await canvas.findByLabelText('Add/subtract duration');
+      expect(operator).toBeVisible();
+      expect(await canvas.findByText('Add')).toBeVisible();
+    });
+
+    await step('Configuring the variable', async () => {
+      const variableInput = await canvas.findByLabelText('Variable');
+      expect(variableInput).toBeVisible();
+      userEvent.clear(variableInput);
+      await userEvent.type(variableInput, 'someOtherKey');
+      expect(variableInput).toHaveDisplayValue('someOtherKey');
+    });
   },
 };
