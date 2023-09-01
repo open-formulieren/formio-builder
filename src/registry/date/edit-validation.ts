@@ -1,7 +1,7 @@
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
-import {buildCommonSchema} from '@/registry/validation';
+import {buildCommonSchema, buildKeySchema} from '@/registry/validation';
 
 const dateSchema = z.coerce.date().optional();
 
@@ -17,9 +17,39 @@ const multipleValueSchema = z
 
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
 
-const dateSpecific = z.object({});
+const noMode = z.object({mode: z.literal('')});
+const future = z.object({
+  mode: z.literal('future'),
+  includeToday: z.boolean(),
+});
+const past = z.object({
+  mode: z.literal('past'),
+  includeToday: z.boolean(),
+});
+
+const buildRelativeToVariable = (intl: IntlShape) =>
+  z.object({
+    mode: z.literal('relativeToVariable'),
+    operator: z.literal('add').or(z.literal('subtract')),
+    variable: buildKeySchema(intl),
+    delta: z.object({
+      years: z.null().or(z.number().int().gte(0)).optional(),
+      months: z.null().or(z.number().int().gte(0)).optional(),
+      days: z.null().or(z.number().int().gte(0)).optional(),
+    }),
+  });
+
+const buildDateSpecific = (intl: IntlShape) =>
+  z.object({
+    openForms: z
+      .object({
+        minDate: z.union([noMode, future, buildRelativeToVariable(intl)]),
+        maxDate: z.union([noMode, past, buildRelativeToVariable(intl)]),
+      })
+      .optional(),
+  });
 
 const schema = (intl: IntlShape) =>
-  buildCommonSchema(intl).and(defaultValueSchema).and(dateSpecific);
+  buildCommonSchema(intl).and(defaultValueSchema).and(buildDateSpecific(intl));
 
 export default schema;
