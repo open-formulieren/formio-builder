@@ -35,6 +35,12 @@ export default {
   args: {
     constraint: 'minDate',
   },
+  argTypes: {
+    constraint: {
+      options: ['minDate', 'maxDate'],
+      control: {type: 'inline-radio'},
+    },
+  },
 } as Meta<typeof DateConstraintValidation>;
 
 type Story = StoryObj<typeof DateConstraintValidation>;
