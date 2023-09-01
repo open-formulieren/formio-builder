@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import {Field} from 'formik';
+import {Field, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
 import {RenderContext} from '@/context';
@@ -25,10 +25,13 @@ export const DateField: React.FC<JSX.IntrinsicElements['input'] & DateFieldProps
   description = '',
   ...props
 }) => {
+  const {getFieldProps} = useFormikContext();
   const {bareInput} = useContext(RenderContext);
   const {errors, hasErrors} = useValidationErrors(name);
 
   const htmlId = `editform-${name}`;
+
+  const {value} = getFieldProps<string | undefined | null>(name);
 
   // let's not bother with date pickers - use the native browser date input instead.
   const inputField = (
@@ -41,6 +44,7 @@ export const DateField: React.FC<JSX.IntrinsicElements['input'] & DateFieldProps
       data-testid={`input-${name}`}
       // text fallback - use ISO-8601
       pattern="\d{4}-\d{2}-\d{2}"
+      value={value ?? ''}
       {...props}
     />
   );

@@ -9,7 +9,7 @@ import {
   useIntl,
 } from 'react-intl';
 
-import {Panel, Select} from '@/components/formio';
+import {DateField, Panel, Select} from '@/components/formio';
 import {FilterByValueType} from '@/types';
 
 // A bunch of derived types from the DateComponentSchema that makes working with the
@@ -118,7 +118,49 @@ const ModeSelect: React.FC<DateConstraintProps> = ({constraint}) => {
         const mode: AllModes = event.target.value ?? '';
         const emptyDefaults = {mode, ...DEFAULT_VALUES[mode]};
         setFieldValue(`openForms.${constraint}`, emptyDefaults);
+        // whenever the mode *changes*, clear the datePicker fixed value to prevent
+        // stale values from being in the form state while visually hidden
+        setFieldValue(`datePicker.${constraint}`, null);
       }}
+    />
+  );
+};
+
+type FixedValueTranslations = {
+  label: MessageDescriptor;
+  tooltip: MessageDescriptor;
+};
+
+const FIXED_VALUE_MESSAGES: Record<DateConstraintKey, FixedValueTranslations> = {
+  minDate: defineMessages({
+    label: {
+      description: "Date field 'minDate' fixed value label",
+      defaultMessage: 'Minimum date',
+    },
+    tooltip: {
+      description: "Date field 'minDate' fixed value tooltip",
+      defaultMessage: 'The minimum date that can be picked.',
+    },
+  }),
+  maxDate: defineMessages({
+    label: {
+      description: "Date field 'maxDate' fixed value label",
+      defaultMessage: 'Maximum date',
+    },
+    tooltip: {
+      description: "Date field 'maxDate' fixed value tooltip",
+      defaultMessage: 'The maximum date that can be picked.',
+    },
+  }),
+};
+
+const FixedValueDateField: React.FC<DateConstraintProps> = ({constraint}) => {
+  const intl = useIntl();
+  return (
+    <DateField
+      name={`datePicker.${constraint}`}
+      label={intl.formatMessage(FIXED_VALUE_MESSAGES[constraint].label)}
+      tooltip={intl.formatMessage(FIXED_VALUE_MESSAGES[constraint].tooltip)}
     />
   );
 };
@@ -137,20 +179,19 @@ const PANEL_TITLES: Record<DateConstraintKey, MessageDescriptor> = defineMessage
 const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) => {
   const intl = useIntl();
   const {values} = useFormikContext<DateComponentSchema>();
-  const hasMode = !!values?.openForms?.[constraint]?.mode;
-
-  console.log(values?.openForms?.[constraint]);
-
+  const mode = values?.openForms?.[constraint]?.mode || '';
+  console.log(values);
   return (
     <Panel
       title={intl.formatMessage(PANEL_TITLES[constraint], {
-        configured: String(hasMode),
+        configured: String(mode !== ''),
         foo: 'bar',
       })}
       collapsible
       initialCollapsed={false}
     >
       <ModeSelect constraint={constraint} />
+      {mode === 'fixedValue' && <FixedValueDateField constraint={constraint} />}
     </Panel>
   );
 };
