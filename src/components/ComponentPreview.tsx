@@ -66,11 +66,21 @@ export interface GenericComponentPreviewProps {
  * It is also responsible for handling the `multiple: true` variants in a generic way.
  */
 const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({component}) => {
+  console.log(component);
+
   const key = isKnownComponentType(component) ? component.key : '';
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
   const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-  const initialValues = key ? {[key]: isMultiple ? [] : defaultValue} : {};
+
+  const previewDefaultValue = isMultiple
+    ? component.defaultValue ?? []
+    : component.defaultValue ?? defaultValue;
+
+  console.log(previewDefaultValue);
+
+  const initialValues = key ? {[key]: previewDefaultValue} : {};
+
   return (
     <ComponentPreviewWrapper component={component} initialValues={initialValues}>
       <PreviewComponent component={component} />
