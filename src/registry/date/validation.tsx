@@ -9,7 +9,7 @@ import {
   useIntl,
 } from 'react-intl';
 
-import {DateField, Panel, Select} from '@/components/formio';
+import {Checkbox, DateField, Panel, Select} from '@/components/formio';
 import {FilterByValueType} from '@/types';
 
 // A bunch of derived types from the DateComponentSchema that makes working with the
@@ -165,6 +165,26 @@ const FixedValueDateField: React.FC<DateConstraintProps> = ({constraint}) => {
   );
 };
 
+const IncludeToday: React.FC<DateConstraintProps> = ({constraint}) => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'date constraint includeToday' builder validation field",
+    defaultMessage: 'If checked, the current day is an allowed value.',
+  });
+  return (
+    <Checkbox
+      name={`openForms.${constraint}.includeToday`}
+      label={
+        <FormattedMessage
+          description="Label for 'date constraint includeToday' builder validation field"
+          defaultMessage="Including today"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
+
 const PANEL_TITLES: Record<DateConstraintKey, MessageDescriptor> = defineMessages({
   minDate: {
     description: "Date field 'minDate' validation panel title",
@@ -192,6 +212,7 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
     >
       <ModeSelect constraint={constraint} />
       {mode === 'fixedValue' && <FixedValueDateField constraint={constraint} />}
+      {['future', 'past'].includes(mode) && <IncludeToday constraint={constraint} />}
     </Panel>
   );
 };

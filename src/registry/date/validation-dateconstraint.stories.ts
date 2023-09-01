@@ -75,3 +75,39 @@ export const FixedValue: Story = {
     expect(datefield).toHaveDisplayValue('2023-01-01');
   },
 };
+
+export const FutureOrPastIncludingToday: Story = {
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          minDate: {
+            mode: 'future',
+            includeToday: true,
+          },
+          maxDate: {mode: ''},
+        },
+        datePicker: {
+          showWeeks: true,
+          startingDay: 0,
+          initDate: '',
+          minMode: 'day',
+          maxMode: 'year',
+          yearRows: 4,
+          yearColumns: 5,
+          minDate: '2023-01-01',
+          maxDate: null,
+        },
+      },
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    expect(await canvas.findByText('In the future')).toBeVisible();
+    const checkbox = await canvas.findByLabelText('Including today');
+    expect(checkbox).toBeVisible();
+    expect(checkbox).toBeChecked();
+  },
+};
