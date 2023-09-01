@@ -75,6 +75,9 @@ export const FixedValue: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
+    // Expand the panel
+    await userEvent.click(canvas.getByText(/date/));
+
     expect(await canvas.findByText('Fixed value')).toBeVisible();
     const datefield = await canvas.findByLabelText('Minimum date');
     expect(datefield).toBeVisible();
@@ -111,6 +114,9 @@ export const FutureOrPastIncludingToday: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
+    // Expand the panel
+    await userEvent.click(canvas.getByText(/date/));
+
     expect(await canvas.findByText('In the future')).toBeVisible();
     const checkbox = await canvas.findByLabelText('Including today');
     expect(checkbox).toBeVisible();
@@ -142,6 +148,9 @@ export const RelativeToVariable: Story = {
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
+    // Expand the panel
+    await userEvent.click(canvas.getByText(/date/));
+
     expect(await canvas.findByText('Relative to variable')).toBeVisible();
 
     await step('Configuring the operator', async () => {
@@ -156,6 +165,23 @@ export const RelativeToVariable: Story = {
       userEvent.clear(variableInput);
       await userEvent.type(variableInput, 'someOtherKey');
       expect(variableInput).toHaveDisplayValue('someOtherKey');
+    });
+
+    await step('Configuring the delta', async () => {
+      const yearInput = await canvas.findByLabelText('Years');
+      expect(yearInput).toBeVisible();
+      await userEvent.type(yearInput, '3');
+      expect(yearInput).toHaveValue(3);
+
+      const monthInput = await canvas.findByLabelText('Months');
+      expect(monthInput).toBeVisible();
+      await userEvent.type(monthInput, '1');
+      expect(monthInput).toHaveValue(1);
+
+      const dayInput = await canvas.findByLabelText('Days');
+      expect(dayInput).toBeVisible();
+      await userEvent.type(dayInput, '0');
+      expect(dayInput).toHaveValue(0);
     });
   },
 };

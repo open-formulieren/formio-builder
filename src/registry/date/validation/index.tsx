@@ -29,12 +29,11 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
   const intl = useIntl();
   const {values} = useFormikContext<DateComponentSchema>();
   const mode = values?.openForms?.[constraint]?.mode || '';
-  console.log(values);
   return (
     <Panel
       title={intl.formatMessage(PANEL_TITLES[constraint], {configured: String(mode !== '')})}
       collapsible
-      initialCollapsed={false}
+      initialCollapsed
     >
       <ModeSelect constraint={constraint} />
       {mode === 'fixedValue' && <FixedValueDateField constraint={constraint} />}

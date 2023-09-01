@@ -1,6 +1,6 @@
 import {FormattedMessage, useIntl} from 'react-intl';
 
-import {Select, TextField} from '@/components/formio';
+import {NumberField, Select, TextField} from '@/components/formio';
 
 import {DateConstraintKey} from './types';
 
@@ -72,20 +72,112 @@ const Variable: React.FC<VariableProps> = ({name}) => {
   );
 };
 
+export interface YearsProps {
+  name: `openForms.${DateConstraintKey}.delta.years`;
+}
+
+const Years: React.FC<YearsProps> = ({name}) => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'delta.years' in relative delta date constraint validation",
+    defaultMessage: 'Number of years. Empty values are ignored.',
+  });
+  return (
+    <NumberField
+      name={name}
+      label={
+        <FormattedMessage
+          description="Label for 'delta.years' in relative delta date constraint validation"
+          defaultMessage="Years"
+        />
+      }
+      tooltip={tooltip}
+      step={1}
+      min={0}
+    />
+  );
+};
+
+export interface MonthsProps {
+  name: `openForms.${DateConstraintKey}.delta.months`;
+}
+
+const Months: React.FC<MonthsProps> = ({name}) => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'delta.months' in relative delta date constraint validation",
+    defaultMessage: 'Number of months. Empty values are ignored.',
+  });
+  return (
+    <NumberField
+      name={name}
+      label={
+        <FormattedMessage
+          description="Label for 'delta.months' in relative delta date constraint validation"
+          defaultMessage="Months"
+        />
+      }
+      tooltip={tooltip}
+      step={1}
+      min={0}
+    />
+  );
+};
+
+export interface DaysProps {
+  name: `openForms.${DateConstraintKey}.delta.days`;
+}
+
+const Days: React.FC<DaysProps> = ({name}) => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'delta.days' in relative delta date constraint validation",
+    defaultMessage: 'Number of days. Empty values are ignored.',
+  });
+  return (
+    <NumberField
+      name={name}
+      label={
+        <FormattedMessage
+          description="Label for 'delta.days' in relative delta date constraint validation"
+          defaultMessage="Days"
+        />
+      }
+      tooltip={tooltip}
+      step={1}
+      min={0}
+    />
+  );
+};
+
 export interface RelativeDeltaProps {
   constraint: DateConstraintKey;
 }
 
 const RelativeDelta: React.FC<RelativeDeltaProps> = ({constraint}) => {
   return (
-    <div className="row">
-      <div className="col-md-6 col-xs-12">
-        <OperatorSelect name={`openForms.${constraint}.operator`} />
+    <>
+      <div className="row">
+        <div className="col-md-6 col-xs-12">
+          <OperatorSelect name={`openForms.${constraint}.operator`} />
+        </div>
+        <div className="col-md-6 col-xs-12">
+          <Variable name={`openForms.${constraint}.variable`} />
+        </div>
       </div>
-      <div className="col-md-6 col-xs-12">
-        <Variable name={`openForms.${constraint}.variable`} />
+
+      <div className="row">
+        <div className="col-md-4 col-xs-12">
+          <Years name={`openForms.${constraint}.delta.years`} />
+        </div>
+        <div className="col-md-4 col-xs-12">
+          <Months name={`openForms.${constraint}.delta.months`} />
+        </div>
+        <div className="col-md-4 col-xs-12">
+          <Days name={`openForms.${constraint}.delta.days`} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
