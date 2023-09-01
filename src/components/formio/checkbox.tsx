@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import {Field} from 'formik';
+import {Field, FormikHandlers, useFormikContext} from 'formik';
 
 import {useValidationErrors} from '@/utils/errors';
 
@@ -10,9 +10,12 @@ export interface CheckboxProps {
   name: string;
   label?: React.ReactNode;
   tooltip?: string;
+  onChange?: FormikHandlers['handleChange'];
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({name, label, tooltip = ''}) => {
+const Checkbox: React.FC<CheckboxProps> = ({name, label, tooltip = '', onChange}) => {
+  const {getFieldProps} = useFormikContext();
+  const {onChange: formikOnChange} = getFieldProps(name);
   const {hasErrors} = useValidationErrors(name);
   return (
     <Component field={name} type="checkbox">
@@ -23,6 +26,10 @@ const Checkbox: React.FC<CheckboxProps> = ({name, label, tooltip = ''}) => {
             as="input"
             type="checkbox"
             className={clsx('form-check-input', {'is-invalid': hasErrors})}
+            onChange={(e: React.ChangeEvent<any>) => {
+              formikOnChange(e);
+              onChange?.(e);
+            }}
           />
           <span>{label}</span>
           {tooltip && ' '}

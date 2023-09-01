@@ -84,7 +84,7 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple />
+        <Multiple<EmailComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />

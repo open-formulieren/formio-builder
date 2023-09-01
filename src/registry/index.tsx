@@ -16,7 +16,7 @@ export const isKnownComponentType = (
 export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(component: S) => {
   if (isKnownComponentType(component)) {
     const entry = REGISTRY[component.type];
-    return entry as RegistryEntry<S>;
+    return entry as RegistryEntry<AnyComponentSchema>;
   }
   return Fallback;
 };
@@ -28,4 +28,5 @@ const REGISTRY: Registry = {
   date: DateField,
 };
 
+export {Fallback};
 export default REGISTRY;
