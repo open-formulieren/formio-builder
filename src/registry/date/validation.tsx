@@ -185,6 +185,57 @@ const IncludeToday: React.FC<DateConstraintProps> = ({constraint}) => {
   );
 };
 
+export interface OperatorSelectProps {
+  name: `openForms.${DateConstraintKey}.operator`;
+}
+
+const OperatorSelect: React.FC<OperatorSelectProps> = ({name}) => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'operator' in relative delta date constraint validation",
+    defaultMessage: 'Specify whether to add or subtract a time delta to/from the variable.',
+  });
+  return (
+    <Select
+      name={name}
+      label={
+        <FormattedMessage
+          description="Label for 'operator' in relative delta date constraint validation"
+          defaultMessage="Add/subtract duration"
+        />
+      }
+      tooltip={tooltip}
+      options={[
+        {
+          value: 'add',
+          label: intl.formatMessage({
+            description: "Operator 'add' option label",
+            defaultMessage: 'Add',
+          }),
+        },
+        {
+          value: 'subtract',
+          label: intl.formatMessage({
+            description: "Operator 'subtract' option label",
+            defaultMessage: 'Subtract',
+          }),
+        },
+      ]}
+    />
+  );
+};
+
+const RelativeDelta: React.FC<DateConstraintProps> = ({constraint}) => {
+  return (
+    <div className="row">
+      <div className="col-md-6 col-xs-12">
+        <OperatorSelect name={`openForms.${constraint}.operator`} />
+      </div>
+      <div className="col-md-6 col-xs-12">Col 2</div>
+    </div>
+  );
+};
+
 const PANEL_TITLES: Record<DateConstraintKey, MessageDescriptor> = defineMessages({
   minDate: {
     description: "Date field 'minDate' validation panel title",
@@ -213,6 +264,7 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
       <ModeSelect constraint={constraint} />
       {mode === 'fixedValue' && <FixedValueDateField constraint={constraint} />}
       {['future', 'past'].includes(mode) && <IncludeToday constraint={constraint} />}
+      {mode === 'relativeToVariable' && <RelativeDelta constraint={constraint} />}
     </Panel>
   );
 };

@@ -39,7 +39,7 @@ export default {
 
 type Story = StoryObj<typeof DateConstraintValidation>;
 
-export const Default: Story = {};
+export const InitialState: Story = {};
 
 export const FixedValue: Story = {
   parameters: {
@@ -109,5 +109,35 @@ export const FutureOrPastIncludingToday: Story = {
     const checkbox = await canvas.findByLabelText('Including today');
     expect(checkbox).toBeVisible();
     expect(checkbox).toBeChecked();
+  },
+};
+
+export const RelativeToVariable: Story = {
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          minDate: {
+            mode: 'relativeToVariable',
+            delta: {
+              years: null,
+              months: null,
+              days: null,
+            },
+            operator: 'add',
+          },
+          maxDate: {mode: ''},
+        },
+      },
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    expect(await canvas.findByText('Relative to variable')).toBeVisible();
+    const operator = await canvas.findByLabelText('Add/subtract duration');
+    expect(operator).toBeVisible();
+    expect(await canvas.findByText('Add')).toBeVisible();
   },
 };
