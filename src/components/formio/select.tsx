@@ -18,6 +18,7 @@ export interface SelectProps<
   tooltip?: string;
   isClearable?: boolean;
   valueProperty?: string;
+  onChange?: (event: {target: {name: string; value: any}}) => void;
 }
 
 function isOption<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
@@ -38,6 +39,7 @@ function Select<
   tooltip = '',
   isClearable = false,
   valueProperty = 'value',
+  onChange,
   ...props
 }: SelectProps<Option, IsMulti, Group>) {
   const [field, , {setValue}] = useField(name);
@@ -83,6 +85,7 @@ function Select<
             const rawValues = normalized.map(val => val?.[valueProperty] ?? null);
             const rawValue = isSingle ? rawValues[0] : rawValues;
             setValue(rawValue);
+            onChange?.({target: {name, value: rawValue}});
           }}
           value={value}
         />

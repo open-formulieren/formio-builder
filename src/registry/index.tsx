@@ -1,5 +1,6 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import DateField from './date';
 import Email from './email';
 import Fallback from './fallback';
 import NumberField from './number';
@@ -24,6 +25,7 @@ const REGISTRY: Registry = {
   textfield: TextField,
   email: Email,
   number: NumberField,
+  date: DateField,
 };
 
 export default REGISTRY;
