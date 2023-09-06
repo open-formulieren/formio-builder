@@ -73,7 +73,6 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
-        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
