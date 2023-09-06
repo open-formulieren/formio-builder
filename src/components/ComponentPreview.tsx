@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {getRegistryEntry, isKnownComponentType} from '@/registry';
+import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 import JSONPreview from './JSONPreview';
@@ -70,10 +70,23 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
   const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-  const initialValues = key ? {[key]: isMultiple ? [] : defaultValue} : {};
+  const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
+    ? component.defaultValue
+    : defaultValue;
+
+  const previewDefaultValue = isMultiple
+    ? componentDefaultValue ?? []
+    : componentDefaultValue ?? defaultValue;
+
+  const initialValues = key ? {[key]: previewDefaultValue} : {};
+
   return (
     <ComponentPreviewWrapper component={component} initialValues={initialValues}>
-      <PreviewComponent component={component} />
+      {isKnownComponentType(component) ? (
+        <PreviewComponent component={component} />
+      ) : (
+        <Fallback.preview component={component} />
+      )}
     </ComponentPreviewWrapper>
   );
 };

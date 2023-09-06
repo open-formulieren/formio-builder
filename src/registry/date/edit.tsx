@@ -83,7 +83,7 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple />
+        <Multiple<DateComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />

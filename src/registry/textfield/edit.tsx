@@ -110,7 +110,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple />
+        <Multiple<TextFieldComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
