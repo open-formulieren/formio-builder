@@ -16,10 +16,11 @@ export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
 
   // set any missing translations
   useEffect(() => {
-    if (!value) {
-      throw new Error('Missing default (Formik) value for `translatedErrors`!');
-    }
-    const newValue = {...value};
+    const newValue = value
+      ? {...value}
+      : (Object.fromEntries(supportedLanguageCodes.map(code => [code, {}])) as NonNullable<
+          S['translatedErrors']
+        >);
     const emptyDefaults = Object.fromEntries(keys.map(k => [k, '']));
     for (const code of supportedLanguageCodes) {
       newValue[code] = {...emptyDefaults, ...newValue[code]};
