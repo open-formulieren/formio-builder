@@ -1,7 +1,7 @@
 import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
-import set from 'lodash.set';
+import merge from 'lodash.merge';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
@@ -18,8 +18,6 @@ export interface BuilderInfo {
   schema: ExtendedComponentSchema;
   weight: number;
 }
-
-type ObjecEntry<T, K extends keyof T = keyof T> = [K, T[K]];
 
 export interface ComponentEditFormProps {
   isNew: boolean;
@@ -45,16 +43,9 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const registryEntry = getRegistryEntry(component);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
 
-  // FIXME: recipes may have non-default values that would be overwritten here with default
-  // values - we need a deep merge & some logic to detect this.
-  const initialValues = cloneDeep(component);
+  let initialValues = cloneDeep(component);
   if (isNew && isKnownComponentType(component)) {
-    Object.entries(EditForm.defaultValues).forEach(
-      ([key, value]: ObjecEntry<AnyComponentSchema>) => {
-        const val = component?.[key] || value;
-        set(initialValues, key, val);
-      }
-    );
+    initialValues = merge(EditForm.defaultValues, initialValues);
   }
 
   // we infer the specific schema from the EditForm component obtained from the registry.
