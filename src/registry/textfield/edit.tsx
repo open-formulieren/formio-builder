@@ -25,6 +25,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
@@ -34,6 +35,7 @@ import {EditFormDefinition} from '../types';
  * Form to configure a Formio 'textfield' type component.
  */
 const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
+  const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values, errors} = useFormikContext<TextFieldComponentSchema>();
 
@@ -48,13 +50,6 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<TextFieldComponentSchema>([
-    'label',
-    'description',
-    'tooltip',
-    'defaultValue',
-    'placeholder',
-  ]);
   Validate.useManageValidatorsTranslations<TextFieldComponentSchema>([
     'required',
     'maxLength',
@@ -155,7 +150,15 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
 
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations />
+        <Translations.ComponentTranslations<TextFieldComponentSchema>
+          propertyLabels={{
+            label: intl.formatMessage(LABELS.label),
+            description: intl.formatMessage(LABELS.description),
+            tooltip: intl.formatMessage(LABELS.tooltip),
+            defaultValue: intl.formatMessage(LABELS.defaultValue),
+            placeholder: intl.formatMessage(LABELS.placeholder),
+          }}
+        />
       </TabPanel>
     </Tabs>
   );
@@ -229,12 +232,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   return (
     <TextField
       name="defaultValue"
-      label={
-        <FormattedMessage
-          description="Label for 'defaultValue' builder field"
-          defaultMessage="Default Value"
-        />
-      }
+      label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
       multiple={multiple}
     />

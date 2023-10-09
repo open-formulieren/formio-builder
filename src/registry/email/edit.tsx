@@ -1,6 +1,6 @@
 import {EmailComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
   AutoComplete,
@@ -20,6 +20,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
@@ -29,6 +30,7 @@ import {EditFormDefinition} from '../types';
  * Form to configure a Formio 'email' type component.
  */
 const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
+  const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values, errors} = useFormikContext<EmailComponentSchema>();
 
@@ -43,12 +45,6 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<EmailComponentSchema>([
-    'label',
-    'description',
-    'tooltip',
-    'defaultValue',
-  ]);
   Validate.useManageValidatorsTranslations<EmailComponentSchema>(['required']);
   return (
     <Tabs>
@@ -111,7 +107,13 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
 
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations />
+        <Translations.ComponentTranslations<EmailComponentSchema>
+          propertyLabels={{
+            label: intl.formatMessage(LABELS.label),
+            description: intl.formatMessage(LABELS.description),
+            tooltip: intl.formatMessage(LABELS.tooltip),
+          }}
+        />
       </TabPanel>
     </Tabs>
   );
@@ -156,11 +158,6 @@ interface DefaultValueProps {
   multiple: boolean;
 }
 
-export const DEFAULT_VALUE_LABEL = defineMessage({
-  description: "Label for 'defaultValue' builder field",
-  defaultMessage: 'Default Value',
-});
-
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
@@ -171,7 +168,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
     <TextField
       name="defaultValue"
       type="email"
-      label={intl.formatMessage(DEFAULT_VALUE_LABEL)}
+      label={intl.formatMessage(LABELS.defaultValue)}
       tooltip={tooltip}
       multiple={multiple}
     />

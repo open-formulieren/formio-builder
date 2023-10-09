@@ -17,6 +17,7 @@
     "strictBindCallApply": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
     "paths": {
       "@/*": ["./*"],
       "@/sb-decorators": ["../.storybook/decorators.tsx"],
