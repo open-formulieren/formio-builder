@@ -154,7 +154,7 @@ export const TextField: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
@@ -198,6 +198,9 @@ export const TextField: Story = {
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     expect(await canvas.findByTestId('input-defaultValue[0]'));
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
   },
 };
 
@@ -225,7 +228,7 @@ export const Email: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('An email field');
@@ -281,6 +284,10 @@ export const Email: Story = {
     await waitFor(async () => {
       await expect(await canvas.findByText('Default Value must be a valid email.')).toBeVisible();
     });
+
+    await userEvent.type(defaultInput0, '@example.com');
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
   },
 };
 
@@ -308,7 +315,7 @@ export const NumberField: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A number field');
@@ -341,6 +348,9 @@ export const NumberField: Story = {
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
   },
 };
 
@@ -368,7 +378,7 @@ export const DateField: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A date field');
@@ -419,6 +429,9 @@ export const DateField: Story = {
     await expect(defaultInput0.type).toEqual('date');
     // userEvent.type does not reliably work with date input, and the native browser
     // datepicker helps in enforcing only valid dates.
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
   },
 };
 
@@ -446,7 +459,7 @@ export const DateTimeField: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A datetime field');
@@ -496,5 +509,8 @@ export const DateTimeField: Story = {
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
     await expect(defaultInput0.type).toEqual('datetime-local');
     // userEvent.type does not reliably work with datetime-local input
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
   },
 };
