@@ -17,6 +17,7 @@ export {default as TextField} from './textfield';
 export {default as Checkbox} from './checkbox';
 export {default as DateField} from './datefield';
 export {default as DateTimeField} from './datetimefield';
+export {default as TimeField} from './timefield';
 export {default as Panel} from './panel';
 export {default as Select} from './select';
 export {default as NumberField} from './number';
