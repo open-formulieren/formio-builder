@@ -71,7 +71,9 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.Validation
+          hasErrors={hasAnyError('validate', 'openForms.minDate', 'openForms.maxDate')}
+        />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
         <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />

@@ -17,7 +17,8 @@ const multipleValueSchema = z
 
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
 
-const noMode = z.object({mode: z.literal('')});
+// formik (deliberately) turns empty string into undefined
+const noMode = z.object({mode: z.union([z.literal(undefined), z.literal('')])});
 const future = z.object({
   mode: z.literal('future'),
 });
