@@ -236,3 +236,72 @@ export const NumberField: Story = {
     await expect(input).toHaveDisplayValue('-3.14');
   },
 };
+
+export const DateField: Story = {
+  render: Template,
+
+  args: {
+    component: {
+      type: 'date',
+      id: 'date',
+      key: 'datePreview',
+      label: 'Date preview',
+      description: 'A preview of the date Formio component',
+      hidden: true, // must be ignored
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Date preview');
+    await canvas.findByText('A preview of the date Formio component');
+
+    // check that the input name is set correctly
+    const input = canvas.getByLabelText('Date preview');
+    // @ts-ignore
+    await expect(input.getAttribute('name')).toBe(args.component.key);
+
+    // typing into native date inputs is not reliable, so no such checks here
+  },
+};
+
+export const DateFieldMultiple: Story = {
+  render: Template,
+
+  args: {
+    component: {
+      type: 'date',
+      id: 'date',
+      key: 'datePreview',
+      label: 'Date preview',
+      description: 'Description only once',
+      hidden: true, // must be ignored
+      multiple: true,
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that new items can be added
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input1 = canvas.getByTestId<HTMLInputElement>('input-datePreview[0]');
+    await expect(input1).toHaveDisplayValue('');
+    await expect(input1.type).toEqual('date');
+
+    // the description should be rendered only once, even with > 1 inputs
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input2 = canvas.getByTestId<HTMLInputElement>('input-datePreview[1]');
+    await expect(input2).toHaveDisplayValue('');
+    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+
+    // finally, it should be possible delete rows again
+    const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
+    await expect(removeButtons.length).toBe(2);
+    await userEvent.click(removeButtons[0]);
+    await expect(canvas.getByTestId('input-datePreview[0]')).toHaveDisplayValue('');
+    await expect(canvas.queryByTestId('input-datePreview[1]')).not.toBeInTheDocument();
+  },
+};
