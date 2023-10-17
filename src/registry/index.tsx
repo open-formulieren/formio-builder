@@ -1,6 +1,7 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 import DateField from './date';
+import DateTimeField from './datetime';
 import Email from './email';
 import Fallback from './fallback';
 import NumberField from './number';
@@ -26,6 +27,7 @@ const REGISTRY: Registry = {
   email: Email,
   number: NumberField,
   date: DateField,
+  datetime: DateTimeField,
 };
 
 export {Fallback};
