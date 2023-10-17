@@ -514,3 +514,31 @@ export const DateTimeField: Story = {
     expect(args.onSubmit).toHaveBeenCalled();
   },
 };
+
+export const TimeField: Story = {
+  render: Template,
+  name: 'type: time',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'time',
+      inputType: 'text',
+      format: 'HH:mm',
+      validateOn: 'blur',
+      key: 'time',
+      label: 'A time field',
+      validate: {
+        required: false,
+      },
+    },
+
+    builderInfo: {
+      title: 'Time Field',
+      icon: 'clock-o',
+      group: 'basic',
+      weight: 10,
+      schema: {},
+    },
+  },
+};

@@ -6,6 +6,7 @@ import Email from './email';
 import Fallback from './fallback';
 import NumberField from './number';
 import TextField from './textfield';
+import TimeField from './time';
 import {Registry, RegistryEntry} from './types';
 
 export const isKnownComponentType = (
@@ -28,6 +29,7 @@ const REGISTRY: Registry = {
   number: NumberField,
   date: DateField,
   datetime: DateTimeField,
+  time: TimeField,
 };
 
 export {Fallback};

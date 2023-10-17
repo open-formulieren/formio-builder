@@ -64,7 +64,7 @@ export const DateTimeField: React.FC<JSX.IntrinsicElements['input'] & DateTimeFi
   // default-mode, wrapping the field with label, description etc.
   return (
     <Component
-      type="date"
+      type="datetime"
       field={name}
       required={required}
       htmlId={htmlId}

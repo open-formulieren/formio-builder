@@ -40,7 +40,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
       name={name}
       id={htmlId}
       as="input"
-      type="time-local"
+      type="time"
       className={clsx('form-control', {'is-invalid': hasErrors})}
       data-testid={`input-${name}`}
       // text fallback - use HH:mm
@@ -64,7 +64,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
   // default-mode, wrapping the field with label, description etc.
   return (
     <Component
-      type="date"
+      type="time"
       field={name}
       required={required}
       htmlId={htmlId}
