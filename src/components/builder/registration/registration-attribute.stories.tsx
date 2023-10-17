@@ -45,20 +45,17 @@ export const Default: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    const input = await canvas.getByLabelText('Registration attribute');
+    const input = canvas.getByLabelText('Registration attribute');
 
     // open the dropdown
-    await input.focus();
+    input.focus();
     await userEvent.keyboard('[ArrowDown]');
 
+    // wait for options to load
     await waitFor(async () => {
-      await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
+      expect(await canvas.findByText('BSN')).toBeVisible();
     });
-    // assert the options are present
-    await waitFor(async () => {
-      await expect(canvas.queryByText('BSN')).toBeInTheDocument();
-      await expect(canvas.queryByText('First name')).toBeInTheDocument();
-      await expect(canvas.queryByText('Date of Birth')).toBeInTheDocument();
-    });
+    expect(canvas.getByText('First name')).toBeVisible();
+    expect(canvas.getByText('Date of Birth')).toBeVisible();
   },
 };

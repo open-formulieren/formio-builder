@@ -65,7 +65,7 @@ export const FixedValue: Story = {
           maxMode: 'year',
           yearRows: 4,
           yearColumns: 5,
-          minDate: '2023-01-01',
+          minDate: '2023-01-01T16:00',
           maxDate: null,
         },
       },
@@ -81,7 +81,7 @@ export const FixedValue: Story = {
     expect(await canvas.findByText('Fixed value')).toBeVisible();
     const datefield = await canvas.findByLabelText('Minimum date');
     expect(datefield).toBeVisible();
-    expect(datefield).toHaveDisplayValue('2023-01-01');
+    expect(datefield).toHaveDisplayValue('2023-01-01T16:00');
   },
 };
 
