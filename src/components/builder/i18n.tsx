@@ -77,8 +77,8 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
                   />
                 }
                 tooltip={intl.formatMessage({
-                  defaultMessage: 'Translations for literals used in this component.',
                   description: 'Tooltip for component translations.',
+                  defaultMessage: 'Translations for literals used in this component.',
                 })}
               />
             </td>

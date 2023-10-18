@@ -117,7 +117,7 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
             suffix: intl.formatMessage({
               description: "Component translations 'suffix' property label",
-              defaultMessage: 'Suffix (kind of value indicator)',
+              defaultMessage: 'Suffix (e.g. m²)',
             }),
           }}
         />
