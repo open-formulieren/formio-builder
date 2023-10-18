@@ -443,3 +443,80 @@ export const TimeFieldMultiple: Story = {
     await expect(canvas.queryByTestId('input-timePreview[1]')).not.toBeInTheDocument();
   },
 };
+
+export const Postcode: Story = {
+  name: 'Postcode (deprecated)',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'postcode',
+      id: 'postcode',
+      key: 'postcodePreview',
+      label: 'Postcode preview',
+      description: 'A preview of the postcode Formio component',
+      hidden: true, // must be ignored
+      inputMask: '9999 AA',
+      validate: {
+        pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
+      },
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Postcode preview');
+    await canvas.findByText('A preview of the postcode Formio component');
+
+    // check that the input name is set correctly
+    const input = canvas.getByLabelText('Postcode preview');
+    // @ts-ignore
+    await expect(input.getAttribute('name')).toBe(args.component.key);
+
+    expect(input).toHaveAttribute('placeholder', '____ __');
+    await userEvent.type(input, '1015 CJ');
+    expect(input).toHaveDisplayValue('1015 CJ');
+  },
+};
+
+export const PostcodeMultiple: Story = {
+  name: 'Postcode (deprecated) Multiple',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'postcode',
+      id: 'postcode',
+      key: 'postcodePreview',
+      label: 'Postcode preview',
+      description: 'Description only once',
+      hidden: true, // must be ignored
+      multiple: true,
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that new items can be added
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input1 = canvas.getByTestId<HTMLInputElement>('input-postcodePreview[0]');
+    await expect(input1).toHaveDisplayValue('');
+    await expect(input1.type).toEqual('text');
+
+    // the description should be rendered only once, even with > 1 inputs
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input2 = canvas.getByTestId<HTMLInputElement>('input-postcodePreview[1]');
+    await expect(input2).toHaveDisplayValue('');
+    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+
+    // finally, it should be possible delete rows again
+    const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
+    await expect(removeButtons.length).toBe(2);
+    await userEvent.click(removeButtons[0]);
+    await expect(canvas.getByTestId('input-postcodePreview[0]')).toHaveDisplayValue('');
+    await expect(canvas.queryByTestId('input-postcodePreview[1]')).not.toBeInTheDocument();
+  },
+};
