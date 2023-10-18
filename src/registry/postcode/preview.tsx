@@ -3,10 +3,11 @@ import {PostcodeComponentSchema} from '@open-formulieren/types';
 import {TextField} from '@/components/formio';
 
 import {ComponentPreviewProps} from '../types';
+import {POSTCODE_REGEX} from './constants';
 
 const defaultValidate = {
   required: false,
-  pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
+  pattern: POSTCODE_REGEX,
 };
 
 /**

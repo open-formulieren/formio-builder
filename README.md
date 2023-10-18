@@ -128,7 +128,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `datetime`
   - [ ] `time`
   - [ ] `phoneNumber`
-  - [ ] `postcode`
+  - [x] `postcode`
   - [ ] `file`
   - [ ] `iban`
   - [ ] `licenseplate`
