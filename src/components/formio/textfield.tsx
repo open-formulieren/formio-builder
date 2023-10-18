@@ -5,6 +5,7 @@ import {useContext, useRef} from 'react';
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
 import {ErrorList, useValidationErrors} from '@/utils/errors';
+import {applyInputMask} from '@/utils/inputmask';
 
 import Component from './component';
 import Description from './description';
@@ -17,6 +18,7 @@ export interface TextFieldProps {
   tooltip?: string;
   description?: string;
   showCharCount?: boolean;
+  inputMask?: string;
 }
 
 export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
@@ -26,6 +28,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   tooltip = '',
   description = '',
   showCharCount = false,
+  inputMask,
   ...props
 }) => {
   const {getFieldProps, getFieldMeta} = useFormikContext();
@@ -39,6 +42,16 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   const htmlId = `editform-${name}`;
   if (value === undefined && props.value === undefined) {
     props = {...props, value: ''};
+  }
+
+  // XXX: this is only accepted in the form builder to get to (close to) vanilla form
+  // builder feature parity - setting the value with mask placeholders is bad for
+  // accessibility.
+  //
+  // It also turns out to be too much effort to get the masking working for preview
+  // purposes, so that is deliberately "not working".
+  if (!props.value && inputMask && !props.placeholder) {
+    props.placeholder = applyInputMask('', inputMask);
   }
 
   const inputField = (
