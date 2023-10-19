@@ -5,6 +5,7 @@ import DateTimeField from './datetime';
 import Email from './email';
 import Fallback from './fallback';
 import NumberField from './number';
+import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import TextField from './textfield';
 import TimeField from './time';
@@ -31,6 +32,7 @@ const REGISTRY: Registry = {
   date: DateField,
   datetime: DateTimeField,
   time: TimeField,
+  phoneNumber: PhoneNumber,
   postcode: Postcode,
 };
 
