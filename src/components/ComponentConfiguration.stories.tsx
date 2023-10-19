@@ -679,3 +679,26 @@ export const Postcode: Story = {
     expect(args.onSubmit).toHaveBeenCalled();
   },
 };
+
+export const PhoneNumber: Story = {
+  render: Template,
+  name: 'type: phoneNumber',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'phoneNumber',
+      inputMask: null,
+      key: 'phoneNumber',
+      label: 'A phone number field',
+    },
+
+    builderInfo: {
+      title: 'Phone number',
+      icon: 'phone-square',
+      group: 'basic',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
