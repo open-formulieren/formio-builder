@@ -19,6 +19,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {LABELS} from '@/components/builder/messages';
 import {Checkbox, NumberField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
@@ -28,6 +29,7 @@ import {EditFormDefinition} from '../types';
  * Form to configure a Formio 'number' type component.
  */
 const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
+  const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {errors} = useFormikContext<NumberComponentSchema>();
 
@@ -42,14 +44,6 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<NumberComponentSchema>([
-    'label',
-    'description',
-    'tooltip',
-    // XXX: enable translation in backend? Need to be careful though, HTML escaping
-    // will mess up any <sup>/<sub> tags that *are* supported.
-    // 'suffix',
-  ]);
   Validate.useManageValidatorsTranslations<NumberComponentSchema>(['required', 'min', 'max']);
 
   return (
@@ -116,7 +110,17 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
 
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations />
+        <Translations.ComponentTranslations<NumberComponentSchema>
+          propertyLabels={{
+            label: intl.formatMessage(LABELS.label),
+            description: intl.formatMessage(LABELS.description),
+            tooltip: intl.formatMessage(LABELS.tooltip),
+            suffix: intl.formatMessage({
+              description: "Component translations 'suffix' property label",
+              defaultMessage: 'Suffix (e.g. m²)',
+            }),
+          }}
+        />
       </TabPanel>
     </Tabs>
   );
@@ -167,12 +171,7 @@ const DefaultValue: React.FC = () => {
   return (
     <NumberField
       name="defaultValue"
-      label={
-        <FormattedMessage
-          description="Label for 'defaultValue' builder field"
-          defaultMessage="Default Value"
-        />
-      }
+      label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
     />
   );

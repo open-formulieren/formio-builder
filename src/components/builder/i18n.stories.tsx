@@ -1,11 +1,11 @@
 import {expect} from '@storybook/jest';
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {userEvent, waitFor, within} from '@storybook/testing-library';
 import {Formik} from 'formik';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentTranslations, useManageTranslations} from './i18n';
+import {ComponentTranslations} from './i18n';
 
 export default {
   title: 'Formio/Builder/i18n/ComponentTranslations',
@@ -21,83 +21,91 @@ export default {
     modal: {noModal: true},
     builder: {
       enableContext: true,
+      // 'de' is not part of the languages type, but this is fine at runtime
       supportedLanguageCodes: ['nl', 'en', 'de'],
-      translationsStore: {
-        nl: {
-          'Literal 1': 'Vertaling 1',
-        },
-        en: {},
-        de: {},
-      },
     },
   },
   args: {
-    translatableFields: ['translatableField', 'nested.translatableField'],
+    fieldLabels: {
+      label: 'Label',
+      description: 'Description',
+    },
+
     initialValues: {
-      translatableField: 'Literal 1',
+      label: 'Hi there {{ firstName }}',
       nonTranslatableField: '',
-      nested: {translatableField: ''},
-      openForms: {translations: {}},
+      openForms: {
+        translations: {
+          nl: {
+            label: 'Hallo daar, {{ firstName }}',
+          },
+        },
+      },
     },
   },
 } as Meta<typeof ComponentTranslations>;
 
 interface BodyProps {
-  translatableFields: string[];
+  fieldLabels: {
+    label: string;
+    description: string;
+  };
 }
 
-const Body: React.FC<BodyProps> = ({translatableFields}) => {
-  // FIXME: proper typing with nested keys
-  useManageTranslations(translatableFields as any);
+interface DummyComponent {
+  type: 'textfield';
+  key: string;
+  id: string;
+  label: string;
+  description: string;
+}
+
+const Body: React.FC<BodyProps> = ({fieldLabels}) => {
   return (
     <>
-      <TextField name="translatableField" label="Translatable field" />
+      <TextField name="label" label="Label" />
+      <TextField name="description" label="Description" />
       <TextField name="nonTranslatableField" label="Non-translatable field" />
-      <TextField name="nested.translatableField" label="Nested translatable field" />
-      <ComponentTranslations />
+      <ComponentTranslations<DummyComponent> propertyLabels={fieldLabels} />
     </>
   );
 };
 
-interface StoryArgs {
-  translatableFields: string[];
+interface StoryArgs extends BodyProps {
   initialValues: {
     [key: string]: any;
   };
 }
 
-const Template: StoryFn<React.FC<StoryArgs>> = ({translatableFields, initialValues}) => (
+type Story = StoryObj<StoryArgs>;
+
+const render: StoryFn<React.FC<StoryArgs>> = ({fieldLabels, initialValues}) => (
   <Formik enableReinitialize initialValues={initialValues} onSubmit={console.log}>
-    <Body translatableFields={translatableFields} />
+    <Body fieldLabels={fieldLabels} />
   </Formik>
 );
 
-export const Default = {
-  render: Template,
+export const Default: Story = {
+  render: render,
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    // Translations component should initialize/synchronize with available literals and
-    // translations from the store.
+    // Translations component must display the registered/existing translations.
+    const translationField1 = canvas.getByLabelText('Translation for "label"');
+    expect(translationField1).toBeVisible();
+
+    const translationField2 = canvas.queryByLabelText('Translation for "nonTranslatableField"');
+    expect(translationField2).toBeNull();
+
     await waitFor(async () => {
-      const literal1Inputs = canvas.queryAllByDisplayValue('Literal 1');
-      expect(literal1Inputs).toHaveLength(2);
-      await canvas.findByDisplayValue('Vertaling 1');
+      const literal1Reference = canvas.getByText('Hi there {{ firstName }}');
+      expect(literal1Reference).toBeVisible();
+      await canvas.findByDisplayValue('Hallo daar, {{ firstName }}');
     });
 
     // Enter a value in the non-translatable field
     await userEvent.type(canvas.getByLabelText('Non-translatable field'), 'Literal 2');
-    await waitFor(async () => {
-      const literal2Inputs = canvas.queryAllByDisplayValue('Literal 2');
-      expect(literal2Inputs).toHaveLength(1);
-    });
-
-    // Enter a value for the nested translatable field
-    await userEvent.type(canvas.getByLabelText('Nested translatable field'), 'Literal 3');
-    await waitFor(async () => {
-      const literal3Inputs = canvas.queryAllByDisplayValue('Literal 3');
-      expect(literal3Inputs).toHaveLength(2);
-    });
+    expect(translationField2).toBeNull();
   },
 };

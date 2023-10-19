@@ -21,6 +21,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {LABELS} from '@/components/builder/messages';
 import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {EditFormDefinition} from '@/registry/types';
 import {getErrorNames} from '@/utils/errors';
@@ -31,6 +32,7 @@ import DateConstraintValidation from './validation';
  * Form to configure a Formio 'date' type component.
  */
 const EditForm: EditFormDefinition<DateComponentSchema> = () => {
+  const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {
     values: {multiple = false},
@@ -46,7 +48,6 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Translations.useManageTranslations<DateComponentSchema>(['label', 'description', 'tooltip']);
   Validate.useManageValidatorsTranslations<DateComponentSchema>(['required']);
 
   return (
@@ -112,7 +113,13 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
       </TabPanel>
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations />
+        <Translations.ComponentTranslations<DateComponentSchema>
+          propertyLabels={{
+            label: intl.formatMessage(LABELS.label),
+            description: intl.formatMessage(LABELS.description),
+            tooltip: intl.formatMessage(LABELS.tooltip),
+          }}
+        />
       </TabPanel>
     </Tabs>
   );
@@ -188,12 +195,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   return (
     <DateField
       name="defaultValue"
-      label={
-        <FormattedMessage
-          description="Label for 'defaultValue' builder field"
-          defaultMessage="Default Value"
-        />
-      }
+      label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
       multiple={multiple}
     />
