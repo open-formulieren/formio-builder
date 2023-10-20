@@ -27,7 +27,7 @@ import {getErrorNames} from '@/utils/errors';
 import {EditFormDefinition} from '../types';
 
 /**
- * Form to configure a Formio 'postcode' type component.
+ * Form to configure a Formio 'phoneNumber' type component.
  *
  * @todo - replace with a preset of textfield?
  */
