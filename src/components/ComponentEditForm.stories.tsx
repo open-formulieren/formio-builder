@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, within} from '@storybook/testing-library';
 
 import ComponentEditForm from './ComponentEditForm';
 
@@ -75,7 +75,9 @@ export const EditJSON: Story = {
 
     let componentJSON: any;
     await step('Open JSON edit', async () => {
-      await userEvent.click(canvas.getByText('Edit JSON'));
+      // https://github.com/testing-library/user-event/issues/1149 applies to radio and
+      // checkbox inputs
+      fireEvent.click(canvas.getByText('Edit JSON'));
       componentJSON = JSON.parse(
         canvas.getByLabelText<HTMLTextAreaElement>('Edit component JSON').value
       );
