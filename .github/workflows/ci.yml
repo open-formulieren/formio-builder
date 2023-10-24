@@ -87,8 +87,17 @@ jobs:
         run: npm run checkformat
 
   tests:
-    name: Run Storybook tests
+    name: Run Storybook tests (${{ matrix.browser }})
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser:
+          - chromium
+          - firefox
+          - webkit
+
     needs:
       - storybook
 
@@ -119,7 +128,7 @@ jobs:
           cd storybook-static/ && tar -xvf artifact.tar && cd ..
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --quiet" \
-            "npx wait-on -l http://127.0.0.1:6006 && npm test"
+            "npx wait-on -l http://127.0.0.1:6006 && npm test -- --browsers ${{ matrix.browser }}"
 
   deploy:
     runs-on: ubuntu-latest
