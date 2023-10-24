@@ -121,14 +121,14 @@ The builder form is the form + preview shown in the edit component modal.
   - [ ] `selectboxes`
   - [ ] `select`
   - [ ] `radio`
-  - [ ] `number`
+  - [x] `number`
   - [ ] `currency`
   - [x] `email`
-  - [ ] `date`
-  - [ ] `datetime`
-  - [ ] `time`
-  - [ ] `phoneNumber`
-  - [ ] `postcode`
+  - [x] `date`
+  - [x] `datetime`
+  - [x] `time`
+  - [x] `phoneNumber`
+  - [x] `postcode`
   - [ ] `file`
   - [ ] `iban`
   - [ ] `licenseplate`

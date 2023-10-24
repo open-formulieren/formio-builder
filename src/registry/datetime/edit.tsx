@@ -1,4 +1,4 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import {DateTimeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -22,33 +22,33 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
+import {DateTimeField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {EditFormDefinition} from '@/registry/types';
 import {getErrorNames} from '@/utils/errors';
 
-import DateConstraintValidation from './validation';
+import DateTimeConstraintValidation from './validation';
 
 /**
  * Form to configure a Formio 'date' type component.
  */
-const EditForm: EditFormDefinition<DateComponentSchema> = () => {
+const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {
     values: {multiple = false},
     errors,
-  } = useFormikContext<DateComponentSchema>();
+  } = useFormikContext<DateTimeComponentSchema>();
 
   const erroredFields = Object.keys(errors).length ? getErrorNames(errors) : [];
   // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
+  // TODO: move into more generically usable utility when we implement other component
   // types
   const hasAnyError = (...fieldNames: string[]): boolean => {
     if (!erroredFields.length) return false;
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Validate.useManageValidatorsTranslations<DateComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations<DateTimeComponentSchema>(['required']);
 
   return (
     <Tabs>
@@ -86,7 +86,7 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<DateComponentSchema> />
+        <Multiple<DateTimeComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
@@ -101,8 +101,8 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
       <TabPanel>
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
-        <DateConstraintValidation constraint="minDate" />
-        <DateConstraintValidation constraint="maxDate" />
+        <DateTimeConstraintValidation constraint="minDate" />
+        <DateTimeConstraintValidation constraint="maxDate" />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
       {/* Registration tab */}
@@ -115,7 +115,7 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
       </TabPanel>
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations<DateComponentSchema>
+        <Translations.ComponentTranslations<DateTimeComponentSchema>
           propertyLabels={{
             label: intl.formatMessage(LABELS.label),
             description: intl.formatMessage(LABELS.description),
@@ -195,7 +195,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
   return (
-    <DateField
+    <DateTimeField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}

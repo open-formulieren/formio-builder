@@ -21,11 +21,9 @@ const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
 const noMode = z.object({mode: z.union([z.literal(undefined), z.literal('')])});
 const future = z.object({
   mode: z.literal('future'),
-  includeToday: z.boolean(),
 });
 const past = z.object({
   mode: z.literal('past'),
-  includeToday: z.boolean(),
 });
 
 const buildRelativeToVariable = (intl: IntlShape) =>

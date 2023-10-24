@@ -1,4 +1,4 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import {TimeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -11,7 +11,6 @@ import {
   Key,
   Label,
   Multiple,
-  Prefill,
   PresentationConfig,
   ReadOnly,
   Registration,
@@ -22,22 +21,20 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
+import {TabList, TabPanel, Tabs, TimeField} from '@/components/formio';
 import {EditFormDefinition} from '@/registry/types';
 import {getErrorNames} from '@/utils/errors';
-
-import DateConstraintValidation from './validation';
 
 /**
  * Form to configure a Formio 'date' type component.
  */
-const EditForm: EditFormDefinition<DateComponentSchema> = () => {
+const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {
     values: {multiple = false},
     errors,
-  } = useFormikContext<DateComponentSchema>();
+  } = useFormikContext<TimeComponentSchema>();
 
   const erroredFields = Object.keys(errors).length ? getErrorNames(errors) : [];
   // TODO: pattern match instead of just string inclusion?
@@ -48,7 +45,14 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Validate.useManageValidatorsTranslations<DateComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations<TimeComponentSchema>([
+    'required',
+    'minTime',
+    'maxTime',
+    'invalid_time',
+  ]);
+
+  console.log(errors);
 
   return (
     <Tabs>
@@ -71,11 +75,8 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation
-          hasErrors={hasAnyError('validate', 'openForms.minDate', 'openForms.maxDate')}
-        />
+        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
-        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -86,7 +87,7 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<DateComponentSchema> />
+        <Multiple<TimeComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
@@ -101,21 +102,17 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
       <TabPanel>
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
-        <DateConstraintValidation constraint="minDate" />
-        <DateConstraintValidation constraint="maxDate" />
+        <MinTime />
+        <MaxTime />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
       {/* Registration tab */}
       <TabPanel>
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
-      {/* Prefill tab */}
-      <TabPanel>
-        <Prefill.PrefillConfiguration />
-      </TabPanel>
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations<DateComponentSchema>
+        <Translations.ComponentTranslations<TimeComponentSchema>
           propertyLabels={{
             label: intl.formatMessage(LABELS.label),
             description: intl.formatMessage(LABELS.description),
@@ -128,6 +125,9 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
 };
 
 EditForm.defaultValues = {
+  format: 'HH:mm',
+  validateOn: 'blur',
+  inputType: 'text',
   // basic tab
   label: '',
   key: '',
@@ -152,35 +152,16 @@ EditForm.defaultValues = {
   validate: {
     required: false,
     plugins: [],
+    minTime: '',
+    maxTime: '',
   },
   translatedErrors: {},
-  // Defaults from https://github.com/formio/formio.js/blob/
-  // bebc2ad73cad138a6de0a8247df47f0085a314cc/src/components/datetime/DateTime.js#L22
-  datePicker: {
-    showWeeks: true,
-    startingDay: 0,
-    initDate: '',
-    minMode: 'day',
-    maxMode: 'year',
-    yearRows: 4,
-    yearColumns: 5,
-    minDate: null,
-    maxDate: null,
-  },
   openForms: {
     translations: {},
-    minDate: {mode: ''},
-    maxDate: {mode: ''},
   },
   // Registration tab
   registration: {
     attribute: '',
-  },
-  // Prefill tab
-  prefill: {
-    plugin: null,
-    attribute: null,
-    identifierRole: 'main',
   },
 };
 
@@ -195,11 +176,51 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
   return (
-    <DateField
+    <TimeField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
       multiple={multiple}
+    />
+  );
+};
+
+const MinTime: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.minTime' builder field",
+    defaultMessage: 'The earliest possible value that can be entered.',
+  });
+  return (
+    <TimeField
+      name="validate.minTime"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.minTime' builder field"
+          defaultMessage="Minimum time"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
+
+const MaxTime: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.maxTime' builder field",
+    defaultMessage: 'The latest possible value that can be entered.',
+  });
+  return (
+    <TimeField
+      name="validate.maxTime"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.maxTime' builder field"
+          defaultMessage="Maximum time"
+        />
+      }
+      tooltip={tooltip}
     />
   );
 };

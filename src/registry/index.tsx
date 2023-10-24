@@ -1,10 +1,14 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 import DateField from './date';
+import DateTimeField from './datetime';
 import Email from './email';
 import Fallback from './fallback';
 import NumberField from './number';
+import PhoneNumber from './phonenumber';
+import Postcode from './postcode';
 import TextField from './textfield';
+import TimeField from './time';
 import {Registry, RegistryEntry} from './types';
 
 export const isKnownComponentType = (
@@ -26,6 +30,10 @@ const REGISTRY: Registry = {
   email: Email,
   number: NumberField,
   date: DateField,
+  datetime: DateTimeField,
+  time: TimeField,
+  phoneNumber: PhoneNumber,
+  postcode: Postcode,
 };
 
 export {Fallback};
