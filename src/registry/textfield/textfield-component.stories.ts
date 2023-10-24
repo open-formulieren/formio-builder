@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -48,7 +48,7 @@ export const PreviewInitialValues: Story = {
     });
 
     await step('Toggle to multi=true', async () => {
-      await userEvent.click(canvas.getByLabelText('Multiple values'));
+      fireEvent.click(canvas.getByLabelText('Multiple values'));
       // the single defaultValue should become the first element in the multiple array
       await editForm.findByDisplayValue('Show me in preview!');
     });
@@ -61,7 +61,7 @@ export const PreviewInitialValues: Story = {
     });
 
     await step('Toggle back to multi=false', async () => {
-      await userEvent.click(canvas.getByLabelText('Multiple values'));
+      fireEvent.click(canvas.getByLabelText('Multiple values'));
       // the single defaultValue should become the first element in the multiple array
       await editForm.findByDisplayValue('Show me in preview!');
       expect(editForm.queryByDisplayValue('Second item')).not.toBeInTheDocument();

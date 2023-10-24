@@ -188,10 +188,10 @@ export const TextField: Story = {
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
-
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -263,8 +263,9 @@ export const Email: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -413,8 +414,9 @@ export const DateField: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -494,8 +496,9 @@ export const DateTimeField: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -577,8 +580,9 @@ export const TimeField: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -660,8 +664,9 @@ export const Postcode: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
@@ -737,8 +742,9 @@ export const PhoneNumber: Story = {
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
-    // value field
-    await userEvent.click(canvas.getByLabelText('Multiple values'));
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
     await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
