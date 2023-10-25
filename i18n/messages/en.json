@@ -24,6 +24,11 @@
     "description": "Tooltip for 'ReadOnly' builder field",
     "originalDefault": "Make this component read only."
   },
+  "/iusiS": {
+    "defaultMessage": "The maximum value this field can have before the form can be submitted.",
+    "description": "Tooltip for 'validate.max' builder field",
+    "originalDefault": "The maximum value this field can have before the form can be submitted."
+  },
   "/yDnA3": {
     "defaultMessage": "Whether to show this value in the confirmation PDF",
     "description": "Tooltip for 'showInPDF' builder field",
@@ -34,25 +39,65 @@
     "description": "Label for 'confirmationRecipient' builder field",
     "originalDefault": "Receives confirmation email"
   },
+  "0gbtNe": {
+    "defaultMessage": "Months",
+    "description": "Label for 'delta.months' in relative delta date constraint validation",
+    "originalDefault": "Months"
+  },
   "1WxO/D": {
     "defaultMessage": "Regular Expression Pattern",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular Expression Pattern"
+  },
+  "2/2h2C": {
+    "defaultMessage": "The minimum value this field can have before the form can be submitted.",
+    "description": "Tooltip for 'validate.min' builder field",
+    "originalDefault": "The minimum value this field can have before the form can be submitted."
   },
   "2k+Mca": {
     "defaultMessage": "Validation",
     "description": "Component edit form tab title for 'Validation' tab",
     "originalDefault": "Validation"
   },
+  "3+WIVB": {
+    "defaultMessage": "Maximum value",
+    "description": "Label for 'validate.max' builder field",
+    "originalDefault": "Maximum value"
+  },
+  "3LEg1l": {
+    "defaultMessage": "Allow negative values.",
+    "description": "Tooltip for 'allowNegative' builder field",
+    "originalDefault": "Allow negative values."
+  },
   "3LdlNv": {
     "defaultMessage": "This component should display",
     "description": "Component property 'conditional.show' label",
     "originalDefault": "This component should display"
   },
+  "3RUomu": {
+    "defaultMessage": "Maximum value",
+    "description": "Placeholder for 'validate.max' builder field",
+    "originalDefault": "Maximum value"
+  },
   "4/cCvG": {
     "defaultMessage": "Location",
     "description": "Component edit form tab title for 'Location' tab",
     "originalDefault": "Location"
+  },
+  "45IQhq": {
+    "defaultMessage": "Fixed value",
+    "description": "Date constraint mode 'fixedValue' label",
+    "originalDefault": "Fixed value"
+  },
+  "4CuHYk": {
+    "defaultMessage": "{field} must be a valid postcode.",
+    "description": "Invalid postcode format validation error",
+    "originalDefault": "{field} must be a valid postcode."
+  },
+  "4DkoO5": {
+    "defaultMessage": "Days",
+    "description": "Label for 'delta.days' in relative delta date constraint validation",
+    "originalDefault": "Days"
   },
   "5DyU8e": {
     "defaultMessage": "The maximum length requirement this field must meet.",
@@ -64,10 +109,20 @@
     "description": "Tooltip for 'ShowCharCount' builder field",
     "originalDefault": "Show a live count of the number of characters."
   },
+  "5XOrxo": {
+    "defaultMessage": "Number of months. Empty values are ignored.",
+    "description": "Tooltip for 'delta.months' in relative delta date constraint validation",
+    "originalDefault": "Number of months. Empty values are ignored."
+  },
   "5dp5j+": {
     "defaultMessage": "{length} {length, plural, one {character} other {characters}}",
     "description": "Character count",
     "originalDefault": "{length} {length, plural, one {character} other {characters}}"
+  },
+  "5yP7G/": {
+    "defaultMessage": "Maximum time",
+    "description": "Label for 'validate.maxTime' builder field",
+    "originalDefault": "Maximum time"
   },
   "6F2H6H": {
     "defaultMessage": "Has the value",
@@ -79,20 +134,60 @@
     "description": "Tooltip for 'validate.required' builder field",
     "originalDefault": "A required field must be filled in before the form can be submitted."
   },
+  "7Ldfn+": {
+    "defaultMessage": "Relative to variable",
+    "description": "Date constraint mode 'relativeToVariable' label",
+    "originalDefault": "Relative to variable"
+  },
   "7T23Pq": {
     "defaultMessage": "Required",
     "description": "Label for 'validate.required' builder field",
     "originalDefault": "Required"
+  },
+  "7Uh91A": {
+    "defaultMessage": "Maximum date",
+    "description": "Date field 'maxDate' fixed value label",
+    "originalDefault": "Maximum date"
   },
   "7XdV9f": {
     "defaultMessage": "Multiple values",
     "description": "Label for 'Multiple values' builder field",
     "originalDefault": "Multiple values"
   },
+  "7b9pD8": {
+    "defaultMessage": "Years",
+    "description": "Label for 'delta.years' in relative delta date constraint validation",
+    "originalDefault": "Years"
+  },
+  "9lk1eS": {
+    "defaultMessage": "Subtract",
+    "description": "Operator 'subtract' option label",
+    "originalDefault": "Subtract"
+  },
+  "AClYLf": {
+    "defaultMessage": "If checked, the current day is an allowed value.",
+    "description": "Tooltip for 'date constraint includeToday' builder validation field",
+    "originalDefault": "If checked, the current day is an allowed value."
+  },
   "ALLoNx": {
     "defaultMessage": "Simple conditional",
     "description": "Simple conditional panel title",
     "originalDefault": "Simple conditional"
+  },
+  "B1ONuu": {
+    "defaultMessage": "Location",
+    "description": "Translations: location column header",
+    "originalDefault": "Location"
+  },
+  "BGZD6J": {
+    "defaultMessage": "Minimum value",
+    "description": "Placeholder for 'validate.min' builder field",
+    "originalDefault": "Minimum value"
+  },
+  "BvRBef": {
+    "defaultMessage": "Decimal places",
+    "description": "Label for 'decimalLimit' builder field",
+    "originalDefault": "Decimal places"
   },
   "C64ptd": {
     "defaultMessage": "Maximum length",
@@ -134,10 +229,25 @@
     "description": "Label for 'prefill.identifierRole' builder field",
     "originalDefault": "Identifier role"
   },
+  "E8Tuiq": {
+    "defaultMessage": "Allow negative values",
+    "description": "Label for 'allowNegative' builder field",
+    "originalDefault": "Allow negative values"
+  },
   "EacF3m": {
     "defaultMessage": "Registration attribute",
     "description": "Label for 'registration.attribute' builder field",
     "originalDefault": "Registration attribute"
+  },
+  "EgAnxH": {
+    "defaultMessage": "Translation for \"{field}\"",
+    "description": "Accessible label for component property translation field",
+    "originalDefault": "Translation for \"{field}\""
+  },
+  "EkVNqG": {
+    "defaultMessage": "Variable",
+    "description": "Label for 'variable' in relative delta date constraint validation",
+    "originalDefault": "Variable"
   },
   "ErwGIQ": {
     "defaultMessage": "Save",
@@ -179,6 +289,11 @@
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
   },
+  "Nsifca": {
+    "defaultMessage": "The maximum date that can be picked.",
+    "description": "Date field 'maxDate' fixed value tooltip",
+    "originalDefault": "The maximum date that can be picked."
+  },
   "OlPsaw": {
     "defaultMessage": "Error code",
     "description": "Label for translation of validation error code",
@@ -188,6 +303,11 @@
     "defaultMessage": "Label",
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
+  },
+  "PhXIai": {
+    "defaultMessage": "Number of years. Empty values are ignored.",
+    "description": "Tooltip for 'delta.years' in relative delta date constraint validation",
+    "originalDefault": "Number of years. Empty values are ignored."
   },
   "Q0SS8P": {
     "defaultMessage": "{field} must be a valid email.",
@@ -199,10 +319,30 @@
     "description": "Component preview card title",
     "originalDefault": "Preview"
   },
+  "RN628y": {
+    "defaultMessage": "Translations for literals used in this component.",
+    "description": "Tooltip for component translations.",
+    "originalDefault": "Translations for literals used in this component."
+  },
   "RPzjrJ": {
     "defaultMessage": "Main",
     "description": "Label identifier role main",
     "originalDefault": "Main"
+  },
+  "SEXqhC": {
+    "defaultMessage": "Mode preset",
+    "description": "Label for 'date constraint mode' builder field",
+    "originalDefault": "Mode preset"
+  },
+  "SH67gH": {
+    "defaultMessage": "In the future",
+    "description": "Date constraint mode 'future' label",
+    "originalDefault": "In the future"
+  },
+  "TCNvqa": {
+    "defaultMessage": "Minimum date",
+    "description": "Date field 'minDate' fixed value label",
+    "originalDefault": "Minimum date"
   },
   "TtqZa0": {
     "defaultMessage": "The placeholder text that will appear when this field is empty.",
@@ -219,6 +359,11 @@
     "description": "Tooltip for 'validate.plugins' builder field",
     "originalDefault": "Select the plugin(s) to use for the validation functionality."
   },
+  "Un5b5T": {
+    "defaultMessage": "Minimum time",
+    "description": "Label for 'validate.minTime' builder field",
+    "originalDefault": "Minimum time"
+  },
   "Uv58uI": {
     "defaultMessage": "Postcode component",
     "description": "Label for 'derivePostcode' builder field",
@@ -228,6 +373,11 @@
     "defaultMessage": "If the postcode and house number are entered this field will autofill with the city",
     "description": "Tooltip for 'deriveCity' builder field",
     "originalDefault": "If the postcode and house number are entered this field will autofill with the city"
+  },
+  "VX9nvG": {
+    "defaultMessage": "Maximum date {configured, select, false {(not set)} other {}}",
+    "description": "Date field 'maxDate' validation panel title",
+    "originalDefault": "Maximum date {configured, select, false {(not set)} other {}}"
   },
   "VekFY+": {
     "defaultMessage": "Autocomplete",
@@ -239,6 +389,11 @@
     "description": "Label for 'showInEmail' builder field",
     "originalDefault": "Show in email"
   },
+  "W0AAhq": {
+    "defaultMessage": "Add",
+    "description": "Operator 'add' option label",
+    "originalDefault": "Add"
+  },
   "W4PizY": {
     "defaultMessage": "If the postcode and house number are entered this field will autofill with the street name",
     "description": "Tooltip for 'deriveStreetName' builder field",
@@ -248,6 +403,11 @@
     "defaultMessage": "Are there multiple values possible for this field?",
     "description": "Tooltip for 'Multiple values' builder field",
     "originalDefault": "Are there multiple values possible for this field?"
+  },
+  "WZJG0y": {
+    "defaultMessage": "In the past",
+    "description": "Date constraint mode 'past' label",
+    "originalDefault": "In the past"
   },
   "WkBjB5": {
     "defaultMessage": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?",
@@ -284,20 +444,40 @@
     "description": "Tooltip for 'showInSummary' builder field",
     "originalDefault": "Whether to show this value in the submission summary"
   },
+  "bvY9oJ": {
+    "defaultMessage": "Provide the key of a static, component, or user defined variable.",
+    "description": "Tooltip for 'variable' in relative delta date constraint validation",
+    "originalDefault": "Provide the key of a static, component, or user defined variable."
+  },
   "cAC5kL": {
     "defaultMessage": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!",
     "description": "Tooltip for 'ClearOnHide' builder field",
     "originalDefault": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!"
+  },
+  "cAio/J": {
+    "defaultMessage": "A short indicator to discribe the field value, e.g. <example></example>.",
+    "description": "Label for 'suffix' builder field",
+    "originalDefault": "A short indicator to discribe the field value, e.g. <example></example>."
   },
   "cJnAgZ": {
     "defaultMessage": "Authorised person",
     "description": "Label identifier role authorised person",
     "originalDefault": "Authorised person"
   },
+  "cQvPLh": {
+    "defaultMessage": "Number of days. Empty values are ignored.",
+    "description": "Tooltip for 'delta.days' in relative delta date constraint validation",
+    "originalDefault": "Number of days. Empty values are ignored."
+  },
   "ce1N0I": {
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
+  },
+  "czUDSQ": {
+    "defaultMessage": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported.",
+    "description": "Tooltip for 'suffix' builder field",
+    "originalDefault": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported."
   },
   "d5SKAT": {
     "defaultMessage": "Remove item",
@@ -318,6 +498,16 @@
     "defaultMessage": "When the form component",
     "description": "Component property 'conditional.when' label",
     "originalDefault": "When the form component"
+  },
+  "dvlFuk": {
+    "defaultMessage": "Minimum date {configured, select, false {(not set)} other {}}",
+    "description": "Date field 'minDate' validation panel title",
+    "originalDefault": "Minimum date {configured, select, false {(not set)} other {}}"
+  },
+  "eg8uKC": {
+    "defaultMessage": "The latest possible value that can be entered.",
+    "description": "Tooltip for 'validate.maxTime' builder field",
+    "originalDefault": "The latest possible value that can be entered."
   },
   "etny39": {
     "defaultMessage": "Display options to fill in the field, based on earlier typed values.",
@@ -379,20 +569,55 @@
     "description": "Component property 'Description' label",
     "originalDefault": "Description"
   },
+  "klYCow": {
+    "defaultMessage": "The time must a valid time in the HH:mm format.",
+    "description": "Error message for invalid 24h time input",
+    "originalDefault": "The time must a valid time in the HH:mm format."
+  },
   "ktjLJK": {
     "defaultMessage": "Show character counter",
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
+  },
+  "lKijv2": {
+    "defaultMessage": "Including today",
+    "description": "Label for 'date constraint includeToday' builder validation field",
+    "originalDefault": "Including today"
+  },
+  "lVEpR9": {
+    "defaultMessage": "The minimum date that can be picked.",
+    "description": "Date field 'minDate' fixed value tooltip",
+    "originalDefault": "The minimum date that can be picked."
+  },
+  "m20av3": {
+    "defaultMessage": "The maximum number of decimal places.",
+    "description": "Tooltip for 'decimalLimit' builder field",
+    "originalDefault": "The maximum number of decimal places."
   },
   "m2oZCk": {
     "defaultMessage": "Is sensitive data",
     "description": "Label for 'IsSensitiveData' builder field",
     "originalDefault": "Is sensitive data"
   },
+  "mMn7K3": {
+    "defaultMessage": "Specify whether to add or subtract a time delta to/from the variable.",
+    "description": "Tooltip for 'operator' in relative delta date constraint validation",
+    "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
+  },
   "nqJbi9": {
     "defaultMessage": "Tooltip",
     "description": "Component property 'Tooltip' label",
     "originalDefault": "Tooltip"
+  },
+  "oWJX5K": {
+    "defaultMessage": "Suffix (e.g. m²)",
+    "description": "Component translations 'suffix' property label",
+    "originalDefault": "Suffix (e.g. m²)"
+  },
+  "pDJBaK": {
+    "defaultMessage": "Minimum value",
+    "description": "Label for 'validate.min' builder field",
+    "originalDefault": "Minimum value"
   },
   "pq7q6N": {
     "defaultMessage": "Show in PDF",
@@ -409,6 +634,11 @@
     "description": "Label for 'prefill.attribute' builder field",
     "originalDefault": "Plugin attribute"
   },
+  "tU1UVF": {
+    "defaultMessage": "The earliest possible value that can be entered.",
+    "description": "Tooltip for 'validate.minTime' builder field",
+    "originalDefault": "The earliest possible value that can be entered."
+  },
   "tnDJ58": {
     "defaultMessage": "Whether to show this value in the confirmation email",
     "description": "Tooltip for 'showInEmail' builder field",
@@ -418,6 +648,11 @@
     "defaultMessage": "Translations",
     "description": "Component edit form tab title for 'Translations' tab",
     "originalDefault": "Translations"
+  },
+  "vRVMpe": {
+    "defaultMessage": "Value",
+    "description": "Translations: property column header",
+    "originalDefault": "Value"
   },
   "ve3rsH": {
     "defaultMessage": "Custom error messages",
@@ -434,10 +669,20 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the field value must pass before the form can be submitted."
   },
+  "xI6md8": {
+    "defaultMessage": "Add/subtract duration",
+    "description": "Label for 'operator' in relative delta date constraint validation",
+    "originalDefault": "Add/subtract duration"
+  },
   "yD4X2y": {
     "defaultMessage": "Maximum length",
     "description": "Label for 'validate.maxLength' builder field",
     "originalDefault": "Maximum length"
+  },
+  "yL9Ql7": {
+    "defaultMessage": "Translations",
+    "description": "Translations: translation column header",
+    "originalDefault": "Translations"
   },
   "yQtFln": {
     "defaultMessage": "Hide a field from the form.",
