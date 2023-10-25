@@ -1,5 +1,5 @@
 interface DescriptionProps {
-  text: string;
+  text: React.ReactNode;
 }
 
 const Description: React.FC<DescriptionProps> = ({text}) => {

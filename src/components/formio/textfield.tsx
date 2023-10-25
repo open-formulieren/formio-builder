@@ -16,7 +16,7 @@ export interface TextFieldProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
-  description?: string;
+  description?: React.ReactNode;
   showCharCount?: boolean;
   inputMask?: string;
 }

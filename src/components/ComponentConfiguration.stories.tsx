@@ -4,6 +4,7 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import React from 'react';
 
+import {DEFAULT_FILE_TYPES} from '@/../.storybook/decorators';
 import {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
@@ -50,6 +51,7 @@ export default {
       ],
     },
     supportedLanguageCodes: ['nl'],
+    fileTypes: DEFAULT_FILE_TYPES,
     translationsStore: {
       nl: {
         'A select': 'Een dropdown',
@@ -79,6 +81,7 @@ interface TemplateArgs {
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
+  fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -95,6 +98,7 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillAttributes,
   supportedLanguageCodes,
   translationsStore,
+  fileTypes,
   isNew,
   builderInfo,
   onCancel,
@@ -110,6 +114,8 @@ const Template: StoryFn<TemplateArgs> = ({
     getRegistrationAttributes={async () => registrationAttributes}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
+    getFileTypes={async () => fileTypes}
+    serverUploadLimit="50MB"
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
@@ -784,5 +790,11 @@ export const FileUpload: Story = {
       weight: 10,
       schema: {},
     },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('link', {name: 'File'}));
   },
 };

@@ -30,7 +30,7 @@ import Description from './description';
 */
 export interface CommonInputProps extends ComponentLabelProps {
   name: string;
-  description?: string;
+  description?: React.ReactNode;
 }
 
 export interface MultipleProps<P extends {}, T extends unknown> {

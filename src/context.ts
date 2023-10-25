@@ -35,6 +35,13 @@ export interface BuilderContextType {
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
+  getFileTypes: () => Promise<
+    Array<{
+      value: string;
+      label: string;
+    }>
+  >;
+  serverUploadLimit: string;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -46,6 +53,8 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getRegistrationAttributes: async () => [],
   getPrefillPlugins: async () => [],
   getPrefillAttributes: async () => [],
+  getFileTypes: async () => [],
+  serverUploadLimit: '(unknown)',
 });
 
 BuilderContext.displayName = 'BuilderContext';

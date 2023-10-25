@@ -19,10 +19,11 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
+import FileTabFields from './file-tab';
 
 /**
  * Form to configure a Formio 'file' type component.
@@ -65,7 +66,9 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
-        <Tab hasErrors={hasAnyError('file')}>
+        <Tab
+          hasErrors={hasAnyError('file', 'useConfigFiletypes', 'fileMaxSize', 'maxNumberOfFiles')}
+        >
           <FormattedMessage
             description="Component edit form tab title for 'File' tab"
             defaultMessage="File"
@@ -100,7 +103,9 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
       </TabPanel>
 
       {/* File tab */}
-      <TabPanel></TabPanel>
+      <TabPanel>
+        <FileTabFields />
+      </TabPanel>
 
       {/* Registration tab */}
       <TabPanel>TODO</TabPanel>
@@ -119,9 +124,15 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
   );
 };
 
+/**
+ *
+ * @todo options.withCredentials: true seems to be set somewhere -> session cookie
+ *   needs to be sent by the SDK/client!
+ */
 EditForm.defaultValues = {
   storage: 'url',
   url: '',
+
   // basic tab
   label: '',
   key: '',
@@ -151,7 +162,8 @@ EditForm.defaultValues = {
     type: [],
     allowedTypesLabels: [],
   },
-  filePattern: '',
+  filePattern: '*',
+  useConfigFiletypes: false,
   // registration tab
   registration: {
     informatieobjecttype: '',

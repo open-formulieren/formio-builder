@@ -68,6 +68,79 @@ const DEFAULT_PREFILL_ATTRIBUTES: {[key: string]: PrefillAttributeOption[]} = {
   ],
 };
 
+export const DEFAULT_FILE_TYPES = [
+  {
+    label: 'any filetype',
+    value: '*',
+  },
+  {
+    label: '.heic',
+    value: 'image/heic',
+  },
+  {
+    label: '.png',
+    value: 'image/png',
+  },
+  {
+    label: '.jpg',
+    value: 'image/jpeg',
+  },
+  {
+    label: '.pdf',
+    value: 'application/pdf',
+  },
+  {
+    label: '.xls',
+    value: 'application/vnd.ms-excel',
+  },
+  {
+    label: '.xlsx',
+    value: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  },
+  {
+    label: '.csv',
+    value: 'text/csv',
+  },
+  {
+    label: '.txt',
+    value: 'text/plain',
+  },
+  {
+    label: '.doc',
+    value: 'application/msword',
+  },
+  {
+    label: '.docx',
+    value: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  },
+  {
+    label: 'Open Office',
+    value:
+      'application/vnd.oasis.opendocument.*,application/vnd.stardivision.*,application/vnd.sun.xml.*',
+  },
+  {
+    label: '.zip',
+    value: 'application/zip',
+  },
+  {
+    label: '.rar',
+    value: 'application/vnd.rar',
+  },
+  {
+    label: '.tar',
+    value: 'application/x-tar',
+  },
+  {
+    label: '.msg',
+    value: 'application/vnd.ms-outlook',
+  },
+  {
+    label: '.dwg',
+    value:
+      'application/acad.dwg,application/autocad_dwg.dwg,application/dwg.dwg,application/x-acad.dwg,application/x-autocad.dwg,application/x-dwg.dwg,drawing/dwg.dwg,image/vnd.dwg,image/x-dwg.dwg',
+  },
+];
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -86,6 +159,8 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
     context.parameters.builder?.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
   const defaultPrefillAttributes =
     context.parameters.builder?.defaultPrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
+  const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
+
   return (
     <BuilderContext.Provider
       value={{
@@ -110,6 +185,10 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
           const container = context?.args?.prefillAttributes || defaultPrefillAttributes;
           return container?.[plugin] || [{id: '', label: 'no plugins found'}];
         },
+        getFileTypes: async () => {
+          return context?.args?.fileTypes || defaultFileTypes;
+        },
+        serverUploadLimit: '50MB',
       }}
     >
       <Story />

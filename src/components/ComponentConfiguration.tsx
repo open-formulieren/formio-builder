@@ -31,6 +31,8 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   getRegistrationAttributes,
   getPrefillPlugins,
   getPrefillAttributes,
+  getFileTypes,
+  serverUploadLimit,
   isNew,
   component,
   builderInfo,
@@ -48,6 +50,8 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       getRegistrationAttributes,
       getPrefillPlugins,
       getPrefillAttributes,
+      getFileTypes,
+      serverUploadLimit,
     }}
   >
     <ComponentEditForm
