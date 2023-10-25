@@ -756,3 +756,33 @@ export const PhoneNumber: Story = {
     expect(args.onSubmit).toHaveBeenCalled();
   },
 };
+
+export const FileUpload: Story = {
+  render: Template,
+  name: 'type: file',
+
+  args: {
+    component: {
+      id: 'kiweljhr',
+      storage: 'url',
+      url: '',
+      type: 'file',
+      key: 'file',
+      label: 'A file upload',
+      file: {
+        name: '',
+        type: [],
+        allowedTypesLabels: [],
+      },
+      filePattern: '',
+    },
+
+    builderInfo: {
+      title: 'File upload',
+      icon: '',
+      group: 'file',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
