@@ -4,6 +4,7 @@ import DateField from './date';
 import DateTimeField from './datetime';
 import Email from './email';
 import Fallback from './fallback';
+import FileUpload from './file';
 import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
@@ -34,6 +35,7 @@ const REGISTRY: Registry = {
   time: TimeField,
   phoneNumber: PhoneNumber,
   postcode: Postcode,
+  file: FileUpload,
 };
 
 export {Fallback};

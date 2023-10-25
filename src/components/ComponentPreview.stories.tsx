@@ -592,3 +592,26 @@ export const PhoneNumberMultiple: Story = {
     await expect(canvas.queryByTestId('input-phoneNumberPreview[1]')).not.toBeInTheDocument();
   },
 };
+
+export const File: Story = {
+  name: 'File upload',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'file',
+      id: 'file',
+      key: 'filePreview',
+      label: 'File upload preview',
+      description: 'A preview of the file Formio component',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('File upload preview');
+    await canvas.findByText('A preview of the file Formio component');
+  },
+};
