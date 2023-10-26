@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import JSONEdit from './JSONEdit';
 import JSONPreview from './JSONPreview';
 
 /*
@@ -23,6 +24,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   initialValues,
   children,
 }) => {
+  const intl = useIntl();
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
   return (
     <div className="card panel preview-panel">
@@ -36,17 +38,28 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
         />
       </div>
       <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
-        <Formik
-          enableReinitialize
-          initialValues={initialValues}
-          onSubmit={() => {
-            throw new Error("Can't submit preview form");
-          }}
-        >
-          <div className="component-preview" data-testid="componentPreview">
-            {previewMode === 'rich' ? children : <JSONPreview data={component} />}
-          </div>
-        </Formik>
+        {previewMode === 'editJSON' ? (
+          <JSONEdit
+            data={component}
+            rows={10}
+            aria-label={intl.formatMessage({
+              description: 'Accessible label for builder preview JSON edit field',
+              defaultMessage: 'Edit component JSON',
+            })}
+          />
+        ) : (
+          <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            onSubmit={() => {
+              throw new Error("Can't submit preview form");
+            }}
+          >
+            <div className="component-preview" data-testid="componentPreview">
+              {previewMode === 'rich' ? children : <JSONPreview data={component} />}
+            </div>
+          </Formik>
+        )}
       </div>
     </div>
   );
@@ -91,7 +104,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   );
 };
 
-type PreviewState = 'rich' | 'JSON';
+type PreviewState = 'rich' | 'JSON' | 'editJSON';
 
 interface PreviewModeToggleProps {
   mode: PreviewState;
@@ -101,6 +114,7 @@ interface PreviewModeToggleProps {
 const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) => {
   const isRichPreview = mode === 'rich';
   const isJSONPreview = mode === 'JSON';
+  const isEditJSONPreview = mode === 'editJSON';
   return (
     <div className="btn-group btn-group-toggle">
       <label className={clsx('btn', 'btn-sm', 'btn-light', {active: isRichPreview})}>
@@ -124,6 +138,20 @@ const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) =
           onChange={onChange}
         />
         <FormattedMessage description="Component 'JSON' preview mode" defaultMessage="JSON" />
+      </label>
+      <label className={clsx('btn', 'btn-sm', 'btn-light', {active: isEditJSONPreview})}>
+        <input
+          type="radio"
+          name="previewMode"
+          value="editJSON"
+          autoComplete="off"
+          checked={isEditJSONPreview}
+          onChange={onChange}
+        />
+        <FormattedMessage
+          description="Component 'editJSON' preview mode"
+          defaultMessage="Edit JSON"
+        />
       </label>
     </div>
   );
