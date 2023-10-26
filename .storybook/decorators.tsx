@@ -1,11 +1,11 @@
 import type {StoryContext, StoryFn} from '@storybook/react';
 import {Formik} from 'formik';
-import React from 'react';
+
+import {BuilderContext, DocumentTypeOption} from '@/context';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../src/components/builder/prefill';
 import {RegistrationAttributeOption} from '../src/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '../src/components/builder/validate/validator-select';
-import {BuilderContext} from '../src/context';
 
 export const ModalDecorator = (Story, {parameters}) => {
   if (parameters?.modal?.noModal) return <Story />;
@@ -141,6 +141,60 @@ export const DEFAULT_FILE_TYPES = [
   },
 ];
 
+const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
+  {
+    backendLabel: '',
+    catalogus: {
+      domein: 'VTH',
+    },
+    informatieobjecttype: {
+      url: 'https://example.com/iotype/123',
+      omschrijving: 'Vergunning',
+    },
+  },
+  {
+    backendLabel: 'Open Zaak',
+    catalogus: {
+      domein: 'VTH',
+    },
+    informatieobjecttype: {
+      url: 'https://example.com/iotype/456',
+      omschrijving: 'Vergunning',
+    },
+  },
+  {
+    backendLabel: 'Open Zaak',
+    catalogus: {
+      domein: 'VTH',
+    },
+    informatieobjecttype: {
+      url: 'https://example.com/iotype/789',
+      omschrijving: 'Ontheffing',
+    },
+  },
+  {
+    backendLabel: 'Open Zaak',
+    catalogus: {
+      domein: 'SOC',
+    },
+    informatieobjecttype: {
+      url: 'https://example.com/iotype/abc',
+      omschrijving: 'Aanvraag',
+    },
+  },
+];
+
+const CONFIDENTIALITY_LEVELS = [
+  {label: 'Openbaar', value: 'openbaar'},
+  {label: 'Beperkt openbaar', value: 'beperkt_openbaar'},
+  {label: 'Intern', value: 'intern'},
+  {label: 'Zaakvertrouwelijk', value: 'zaakvertrouwelijk'},
+  {label: 'Vertrouwelijk', value: 'vertrouwelijk'},
+  {label: 'Confidentieel', value: 'confidentieel'},
+  {label: 'Geheim', value: 'geheim'},
+  {label: 'Zeer geheim', value: 'zeer_geheim'},
+];
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -160,7 +214,8 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
   const defaultPrefillAttributes =
     context.parameters.builder?.defaultPrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
-
+  const defaultdocumentTypes =
+    context.parameters.builder?.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES;
   return (
     <BuilderContext.Provider
       value={{
@@ -189,6 +244,8 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
           return context?.args?.fileTypes || defaultFileTypes;
         },
         serverUploadLimit: '50MB',
+        getDocumentTypes: async () => context?.args?.documentTypes || defaultdocumentTypes,
+        getConfidentialityLevels: async () => CONFIDENTIALITY_LEVELS,
       }}
     >
       <Story />
