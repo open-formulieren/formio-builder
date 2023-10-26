@@ -792,9 +792,41 @@ export const FileUpload: Story = {
     },
   },
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByRole('link', {name: 'File'}));
+    await step('Basic tab', async () => {
+      await expect(canvas.getByLabelText('Label')).toHaveValue('A file upload');
+      await waitFor(async () => {
+        await expect(canvas.getByLabelText('Property Name')).toHaveValue('aFileUpload');
+      });
+
+      await expect(canvas.getByLabelText('Description')).toHaveValue('');
+      await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+      await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+      await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+      await expect(canvas.getByLabelText('Multiple values')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+      await expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
+    });
+
+    await step('File tab', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'File'}));
+
+      await expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
+      await expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
+
+      // check that the file types are visible
+      canvas.getByLabelText('File types').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await waitFor(async () => {
+        await expect(canvas.queryByText('any filetype')).toBeVisible();
+      });
+      await expect(canvas.queryByText('.pdf')).toBeVisible();
+      await userEvent.keyboard('[Escape]');
+    });
   },
 };

@@ -67,7 +67,13 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <Tab
-          hasErrors={hasAnyError('file', 'useConfigFiletypes', 'fileMaxSize', 'maxNumberOfFiles')}
+          hasErrors={hasAnyError(
+            'file',
+            'useConfigFiletypes',
+            'of',
+            'fileMaxSize',
+            'maxNumberOfFiles'
+          )}
         >
           <FormattedMessage
             description="Component edit form tab title for 'File' tab"
@@ -132,6 +138,9 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
 EditForm.defaultValues = {
   storage: 'url',
   url: '',
+  // TODO -> add to type definition!
+  // options: '{"withCredentials": true}',
+  // webcam: false,
 
   // basic tab
   label: '',
@@ -164,6 +173,17 @@ EditForm.defaultValues = {
   },
   filePattern: '*',
   useConfigFiletypes: false,
+  of: {
+    image: {
+      resize: {
+        apply: false,
+        width: 2000,
+        height: 2000,
+      },
+    },
+  },
+  fileMaxSize: '10MB',
+  maxNumberOfFiles: null,
   // registration tab
   registration: {
     informatieobjecttype: '',
