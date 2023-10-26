@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {userEvent, within} from '@storybook/testing-library';
 
 import {BuilderContextDecorator, withFormik} from '@/sb-decorators';
 
@@ -35,10 +35,45 @@ export default {
 
 type Story = StoryObj<typeof RegistrationTabFields>;
 
-export const RegistrationTab: Story = {
-  name: 'Registration tab',
+export const DocumentTypes: Story = {
+  name: 'Registration tab - document types',
 
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
+
+    const documentTypeSelect = canvas.getByLabelText('Information object type');
+    documentTypeSelect.focus();
+    await userEvent.keyboard('[ArrowDown]');
+
+    await step('Option group labels', async () => {
+      expect(await canvas.findByText('VTH', {exact: true})).toBeVisible();
+      expect(canvas.getByText('Open Zaak > VTH', {exact: true})).toBeVisible();
+      expect(canvas.getByText('Open Zaak > SOC', {exact: true})).toBeVisible();
+    });
+
+    await step('Option labels', async () => {
+      expect(canvas.queryAllByText('Vergunning')).toHaveLength(2);
+      expect(canvas.queryAllByText('Ontheffing')).toHaveLength(1);
+      expect(canvas.queryAllByText('Aanvraag')).toHaveLength(1);
+    });
+  },
+};
+
+export const ConfidentialityLevels: Story = {
+  name: 'Registration tab - confidentiality levels',
+
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const documentTypeSelect = canvas.getByLabelText('Confidentiality level');
+    documentTypeSelect.focus();
+    await userEvent.keyboard('[ArrowDown]');
+
+    await step('Option labels', async () => {
+      expect(canvas.queryByText('Openbaar')).toBeVisible();
+      expect(canvas.queryByText('Beperkt openbaar')).toBeVisible();
+      expect(canvas.queryByText('Zaakvertrouwelijk')).toBeVisible();
+      // there are more, but the backend provides this list via the context mechanism.
+    });
   },
 };

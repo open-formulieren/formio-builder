@@ -70,7 +70,6 @@ const DocumentTypeSelect: React.FC<{}> = () => {
       tooltip={tooltip}
       isLoading={loading}
       isClearable
-      isMulti
       options={groupDocumentTypeOptions(options || [])}
     />
   );
@@ -127,9 +126,8 @@ const ConfidentialityLevelSelect: React.FC<{}> = () => {
       tooltip={tooltip}
       isLoading={loading}
       isClearable
-      isMulti
       options={options}
-      valueProperty="url"
+      valueProperty="value"
     />
   );
 };

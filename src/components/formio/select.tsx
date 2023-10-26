@@ -1,7 +1,11 @@
 import {useField} from 'formik';
 import React from 'react';
 import ReactSelect from 'react-select';
-import type {GroupBase, Props as RSProps} from 'react-select/dist/declarations/src';
+import type {
+  GroupBase,
+  OptionsOrGroups,
+  Props as RSProps,
+} from 'react-select/dist/declarations/src';
 
 import Component from './component';
 
@@ -27,6 +31,40 @@ function isOption<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
   return (opt as Group).options === undefined;
 }
 
+function isOptionGroup<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
+  opt: Option | Group
+): opt is Group {
+  return (opt as Group).options !== undefined;
+}
+
+function extractSelectedValue<Option extends {[key: string]: any}, Group extends GroupBase<Option>>(
+  options: OptionsOrGroups<Option, Group>,
+  currentValue: any,
+  isSingle: boolean,
+  valueProperty: string = 'value'
+): any {
+  // normalize everything to arrays, for isSingle -> return the first (and only) element.
+  const normalizedCurrentValue: any[] = isSingle ? [currentValue] : currentValue;
+  const value: any[] = [];
+
+  const valueTest = (opt: Option) => normalizedCurrentValue.includes(opt[valueProperty]);
+
+  for (const optionOrGroup of options) {
+    if (isOption<Option, Group>(optionOrGroup) && valueTest(optionOrGroup)) {
+      value.push(optionOrGroup);
+    }
+    if (isOptionGroup<Option, Group>(optionOrGroup)) {
+      for (const option of optionOrGroup.options) {
+        if (valueTest(option)) {
+          value.push(option);
+        }
+      }
+    }
+  }
+  // if no value is set an isSingle is true -> returns undefined, as intended
+  return isSingle ? value[0] : value;
+}
+
 // can't use React.FC with generics
 function Select<
   Option extends {[key: string]: any},
@@ -49,16 +87,12 @@ function Select<
   if (props.options) {
     const currentValue = field.value;
     const isSingle = !Array.isArray(currentValue);
-    if (isSingle) {
-      value =
-        props.options.find(
-          opt => isOption<Option, Group>(opt) && opt[valueProperty] === currentValue
-        ) || null;
-    } else {
-      value = props.options.filter(
-        opt => isOption<Option, Group>(opt) && currentValue.includes(opt[valueProperty])
-      );
-    }
+    value = extractSelectedValue<Option, Group>(
+      props.options,
+      currentValue,
+      isSingle,
+      valueProperty
+    );
   }
 
   return (
