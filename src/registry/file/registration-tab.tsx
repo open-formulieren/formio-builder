@@ -92,6 +92,7 @@ const SourceOrganisation = () => {
         />
       }
       tooltip={tooltip}
+      inputMode="numeric"
     />
   );
 };

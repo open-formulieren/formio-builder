@@ -141,7 +141,7 @@ export const DEFAULT_FILE_TYPES = [
   },
 ];
 
-const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
+export const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
   {
     backendLabel: '',
     catalogus: {
@@ -184,7 +184,7 @@ const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
   },
 ];
 
-const CONFIDENTIALITY_LEVELS = [
+export const CONFIDENTIALITY_LEVELS = [
   {label: 'Openbaar', value: 'openbaar'},
   {label: 'Beperkt openbaar', value: 'beperkt_openbaar'},
   {label: 'Intern', value: 'intern'},

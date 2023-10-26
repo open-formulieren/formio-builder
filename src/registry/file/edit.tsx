@@ -24,6 +24,7 @@ import {getErrorNames} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import FileTabFields from './file-tab';
+import RegistrationTabFields from './registration-tab';
 
 /**
  * Form to configure a Formio 'file' type component.
@@ -114,7 +115,9 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
       </TabPanel>
 
       {/* Registration tab */}
-      <TabPanel>TODO</TabPanel>
+      <TabPanel>
+        <RegistrationTabFields />
+      </TabPanel>
 
       {/* Translations */}
       <TabPanel>

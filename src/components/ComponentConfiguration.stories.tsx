@@ -4,7 +4,11 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import React from 'react';
 
-import {DEFAULT_FILE_TYPES} from '@/../.storybook/decorators';
+import {
+  CONFIDENTIALITY_LEVELS,
+  DEFAULT_DOCUMENT_TYPES,
+  DEFAULT_FILE_TYPES,
+} from '@/../.storybook/decorators';
 import {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
@@ -116,6 +120,8 @@ const Template: StoryFn<TemplateArgs> = ({
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
     getFileTypes={async () => fileTypes}
     serverUploadLimit="50MB"
+    getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
+    getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
