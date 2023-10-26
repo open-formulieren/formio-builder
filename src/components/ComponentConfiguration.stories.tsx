@@ -792,7 +792,7 @@ export const FileUpload: Story = {
     },
   },
 
-  play: async ({canvasElement, step}) => {
+  play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
     await step('Basic tab', async () => {
@@ -826,7 +826,69 @@ export const FileUpload: Story = {
         await expect(canvas.queryByText('any filetype')).toBeVisible();
       });
       await expect(canvas.queryByText('.pdf')).toBeVisible();
-      await userEvent.keyboard('[Escape]');
+      await userEvent.click(canvas.getByText('.jpg'));
+    });
+
+    await step('Submit configuration', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      // See EditForm.defaultValues for the defaults
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        type: 'file',
+        id: 'kiweljhr',
+        storage: 'url',
+        url: '',
+        // basic tab
+        label: 'A file upload',
+        key: 'aFileUpload',
+        description: '',
+        tooltip: '',
+        showInSummary: true,
+        showInEmail: false,
+        showInPDF: true,
+        multiple: false,
+        hidden: false,
+        clearOnHide: true,
+        isSensitiveData: true,
+        // Advanced tab
+        conditional: {
+          show: undefined,
+          when: '',
+          eq: '',
+        },
+        // Validation tab
+        validate: {
+          required: false,
+        },
+        translatedErrors: {
+          nl: {required: ''},
+        },
+        // file tab
+        file: {
+          name: '',
+          type: ['image/jpeg'],
+          allowedTypesLabels: ['.jpg'], // derived from file.type
+        },
+        filePattern: 'image/jpeg', // derived from file.type
+        useConfigFiletypes: false,
+        of: {
+          image: {
+            resize: {
+              apply: false,
+              width: 2000,
+              height: 2000,
+            },
+          },
+        },
+        fileMaxSize: '10MB',
+        maxNumberOfFiles: null,
+        // registration tab
+        registration: {
+          informatieobjecttype: '',
+          bronorganisatie: '',
+          docVertrouwelijkheidaanduiding: '',
+          titel: '',
+        },
+      });
     });
   },
 };

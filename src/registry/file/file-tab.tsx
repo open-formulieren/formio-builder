@@ -136,8 +136,7 @@ const FileMaxSize = () => {
   const {serverUploadLimit} = useContext(BuilderContext);
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'fileMaxSize' builder field",
-    defaultMessage:
-      'When this is checked, the filetypes configured in the global settings will be used.',
+    defaultMessage: 'The maximum size of a single file to upload.',
   });
 
   return (
