@@ -2,9 +2,11 @@ import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import merge from 'lodash.merge';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
+import {BuilderContext} from '@/context';
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema} from '@/types';
 
@@ -39,6 +41,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   onSubmit,
 }) => {
   const intl = useIntl();
+  const builderContext = useContext(BuilderContext);
 
   const registryEntry = getRegistryEntry(component);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
@@ -65,7 +68,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
         onSubmit(values);
         setSubmitting(false);
       }}
-      validationSchema={toFormikValidationSchema(zodSchema(intl))}
+      validationSchema={toFormikValidationSchema(zodSchema(intl, builderContext))}
     >
       {formik => {
         const component = formik.values;

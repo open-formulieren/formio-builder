@@ -1,6 +1,7 @@
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
+import {BuilderContextType} from '@/context';
 import {AnyComponentSchema, FallbackSchema} from '@/types';
 
 // Edit form
@@ -26,7 +27,7 @@ export type Preview<S extends AnyComponentSchema | FallbackSchema> = React.FC<
 
 export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
   edit: EditFormDefinition<S>;
-  editSchema: (intl: IntlShape) => z.ZodFirstPartySchemaTypes;
+  editSchema: (intl: IntlShape, builderContext: BuilderContextType) => z.ZodFirstPartySchemaTypes;
   preview: Preview<S>;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data

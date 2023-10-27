@@ -1,9 +1,8 @@
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
+import {BuilderContextType} from '@/context';
 import {buildCommonSchema} from '@/registry/validation';
-
-const SERVER_LIMIT = '50MB';
 
 // Reference: formio's file component translateScalars method, but without the weird
 // units that don't make sense for files...
@@ -40,8 +39,9 @@ const ofSchema = z.object({
     .optional(),
 });
 
-const buildFileMaxSizeSchema = (intl: IntlShape) => {
-  const serverLimitInBytes = getSizeInBytes(SERVER_LIMIT) ?? Number.MAX_SAFE_INTEGER;
+const buildFileMaxSizeSchema = (intl: IntlShape, builderContext: BuilderContextType) => {
+  const {serverUploadLimit} = builderContext;
+  const serverLimitInBytes = getSizeInBytes(serverUploadLimit) ?? Number.MAX_SAFE_INTEGER;
   return z
     .string()
     .transform((val, ctx) => {
@@ -66,13 +66,17 @@ const buildFileMaxSizeSchema = (intl: IntlShape) => {
     });
 };
 
-const buildFileSchema = (intl: IntlShape) =>
+const buildFileSchema = (intl: IntlShape, builderContext: BuilderContextType) =>
   z.object({
     of: ofSchema.optional(),
     maxNumberOfFiles: z.union([z.null(), z.number().int().positive().optional()]),
-    fileMaxSize: buildFileMaxSizeSchema(intl).optional(),
+    fileMaxSize: buildFileMaxSizeSchema(intl, builderContext).optional(),
   });
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(buildFileSchema(intl));
+const schema = (intl: IntlShape, builderContext: BuilderContextType) => {
+  const common = buildCommonSchema(intl);
+  const fileSpecific = buildFileSchema(intl, builderContext);
+  return common.and(fileSpecific);
+};
 
 export default schema;
