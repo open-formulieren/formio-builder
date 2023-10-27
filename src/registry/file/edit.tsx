@@ -141,9 +141,8 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
 EditForm.defaultValues = {
   storage: 'url',
   url: '',
-  // TODO -> add to type definition!
-  // options: '{"withCredentials": true}',
-  // webcam: false,
+  options: {withCredentials: true},
+  webcam: false,
 
   // basic tab
   label: '',

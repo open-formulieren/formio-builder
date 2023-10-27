@@ -841,6 +841,8 @@ export const FileUpload: Story = {
       expect(args.onSubmit).toHaveBeenCalledWith({
         type: 'file',
         id: 'kiweljhr',
+        webcam: false,
+        options: {withCredentials: true},
         storage: 'url',
         url: '',
         // basic tab
