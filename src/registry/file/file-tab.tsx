@@ -8,25 +8,6 @@ import useAsync from 'react-use/esm/useAsync';
 import {Checkbox, Component, NumberField, Select, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
-// // lifted from formio's file component in 4.13.x
-// const translateScalars(str) {
-//   if (typeof str === 'string') {
-//     if (str.search(/kb/i) === str.length - 2) {
-//       return parseFloat(str.substring(0, str.length - 2) * 1024);
-//     }
-//     if (str.search(/mb/i) === str.length - 2) {
-//       return parseFloat(str.substring(0, str.length - 2) * 1024 * 1024);
-//     }
-//     if (str.search(/gb/i) === str.length - 2) {
-//       return parseFloat(str.substring(0, str.length - 2) * 1024 * 1024 * 1024);
-//     }
-//     if (str.search(/b/i) === str.length - 1) {
-//       return parseFloat(str.substring(0, str.length - 1));
-//     }
-//   }
-//   return str;
-// }
-
 const hasImageMimeType = (mimetypes: string[]): boolean =>
   mimetypes.some(mimeType => mimeType.startsWith('image/') || mimeType === '*');
 
