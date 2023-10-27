@@ -158,3 +158,23 @@ export const ValidMaxFileSize: Story = {
     });
   },
 };
+
+export const ValidateMaxFileSizeAgainstServerValue: Story = {
+  name: 'validate fileMaxSize against serverUploadLimit',
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('link', {name: 'File'}));
+    const fileSize = canvas.getByLabelText('Maximum file size');
+
+    await userEvent.clear(fileSize);
+    await userEvent.type(fileSize, '100MB');
+    await userEvent.keyboard('[Tab]');
+    expect(
+      await canvas.findByText(
+        "Specify a file size that's less than or equal to the server upload limit."
+      )
+    ).toBeVisible();
+  },
+};
