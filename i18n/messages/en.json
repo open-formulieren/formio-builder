@@ -9,6 +9,11 @@
     "description": "Remove component button",
     "originalDefault": "Remove"
   },
+  "+e1pgl": {
+    "defaultMessage": "Resize image",
+    "description": "Label for 'of.image.resize.apply' builder field",
+    "originalDefault": "Resize image"
+  },
   "+q3LGC": {
     "defaultMessage": "Regular Expression Pattern",
     "description": "Placeholder for 'validate.pattern' builder field",
@@ -44,15 +49,35 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
+  "0gmZ4c": {
+    "defaultMessage": "Edit component JSON",
+    "description": "Accessible label for builder preview JSON edit field",
+    "originalDefault": "Edit component JSON"
+  },
+  "1Vvryq": {
+    "defaultMessage": "File name template",
+    "description": "Label for 'file.name' builder field",
+    "originalDefault": "File name template"
+  },
   "1WxO/D": {
     "defaultMessage": "Regular Expression Pattern",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular Expression Pattern"
   },
+  "1pC7IP": {
+    "defaultMessage": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename.",
+    "description": "Tooltip for 'file.name' builder field",
+    "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
+  },
   "2/2h2C": {
     "defaultMessage": "The minimum value this field can have before the form can be submitted.",
     "description": "Tooltip for 'validate.min' builder field",
     "originalDefault": "The minimum value this field can have before the form can be submitted."
+  },
+  "2ajYIp": {
+    "defaultMessage": "Note that the server upload limit is {serverUploadLimit}.",
+    "description": "Description for 'fileMaxSize' builder field",
+    "originalDefault": "Note that the server upload limit is {serverUploadLimit}."
   },
   "2k+Mca": {
     "defaultMessage": "Validation",
@@ -99,6 +124,16 @@
     "description": "Label for 'delta.days' in relative delta date constraint validation",
     "originalDefault": "Days"
   },
+  "4HBnrF": {
+    "defaultMessage": "Drag or <browse>select</browse> files to upload.",
+    "description": "file component: drag/select files to upload text",
+    "originalDefault": "Drag or <browse>select</browse> files to upload."
+  },
+  "5/jkH9": {
+    "defaultMessage": "Specify a file size less than or equal to the server upload limit.",
+    "description": "File component 'fileMaxSize' greater than server limit",
+    "originalDefault": "Specify a file size less than or equal to the server upload limit."
+  },
   "5DyU8e": {
     "defaultMessage": "The maximum length requirement this field must meet.",
     "description": "Tooltip for 'validate.maxLength' builder field",
@@ -119,6 +154,11 @@
     "description": "Character count",
     "originalDefault": "{length} {length, plural, one {character} other {characters}}"
   },
+  "5y8Yt4": {
+    "defaultMessage": "Save the attachment in the Documents API with this InformatieObjectType. If unspecified, the registration plugin defaults are used.",
+    "description": "Tooltip for 'registration.informatieobjecttype' builder field",
+    "originalDefault": "Save the attachment in the Documents API with this InformatieObjectType. If unspecified, the registration plugin defaults are used."
+  },
   "5yP7G/": {
     "defaultMessage": "Maximum time",
     "description": "Label for 'validate.maxTime' builder field",
@@ -133,6 +173,11 @@
     "defaultMessage": "A required field must be filled in before the form can be submitted.",
     "description": "Tooltip for 'validate.required' builder field",
     "originalDefault": "A required field must be filled in before the form can be submitted."
+  },
+  "6XG2pL": {
+    "defaultMessage": "Confidentiality level",
+    "description": "Label for 'registration.docVertrouwelijkheidaanduiding' builder field",
+    "originalDefault": "Confidentiality level"
   },
   "7Ldfn+": {
     "defaultMessage": "Relative to variable",
@@ -174,6 +219,11 @@
     "description": "Simple conditional panel title",
     "originalDefault": "Simple conditional"
   },
+  "Ax7r1y": {
+    "defaultMessage": "File types",
+    "description": "Label for 'file.type' builder field",
+    "originalDefault": "File types"
+  },
   "B1ONuu": {
     "defaultMessage": "Location",
     "description": "Translations: location column header",
@@ -193,6 +243,11 @@
     "defaultMessage": "Maximum length",
     "description": "Placeholder for 'validate.maxLength' builder field",
     "originalDefault": "Maximum length"
+  },
+  "CG/va1": {
+    "defaultMessage": "Maximum file size",
+    "description": "Label for 'fileMaxSize' builder field",
+    "originalDefault": "Maximum file size"
   },
   "CRN74c": {
     "defaultMessage": "Placeholder",
@@ -284,10 +339,20 @@
     "description": "Component 'JSON' preview mode",
     "originalDefault": "JSON"
   },
+  "JnAJoU": {
+    "defaultMessage": "Use globally configured filetypes",
+    "description": "Label for 'useConfigFiletypes' builder field",
+    "originalDefault": "Use globally configured filetypes"
+  },
   "JneaQM": {
     "defaultMessage": "Hidden",
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
+  },
+  "KrJ+rN": {
+    "defaultMessage": "The maximum number of files that can be uploaded.",
+    "description": "Tooltip for 'maxNumberOfFiles' builder field",
+    "originalDefault": "The maximum number of files that can be uploaded."
   },
   "Nsifca": {
     "defaultMessage": "The maximum date that can be picked.",
@@ -314,6 +379,11 @@
     "description": "Invalid email address format validation error",
     "originalDefault": "{field} must be a valid email."
   },
+  "QW32Dd": {
+    "defaultMessage": "Specify a positive, non-zero file size without decimals, e.g. 10MB.",
+    "description": "File component 'fileMaxSize' validation error",
+    "originalDefault": "Specify a positive, non-zero file size without decimals, e.g. 10MB."
+  },
   "Qjl92W": {
     "defaultMessage": "Preview",
     "description": "Component preview card title",
@@ -329,10 +399,20 @@
     "description": "Label identifier role main",
     "originalDefault": "Main"
   },
+  "RxmRzd": {
+    "defaultMessage": "When this is checked, the filetypes configured in the global settings will be used.",
+    "description": "Tooltip for 'useConfigFiletypes' builder field",
+    "originalDefault": "When this is checked, the filetypes configured in the global settings will be used."
+  },
   "SEXqhC": {
     "defaultMessage": "Mode preset",
     "description": "Label for 'date constraint mode' builder field",
     "originalDefault": "Mode preset"
+  },
+  "SEu4I2": {
+    "defaultMessage": "Title",
+    "description": "Label for 'registration.titel' builder field",
+    "originalDefault": "Title"
   },
   "SH67gH": {
     "defaultMessage": "In the future",
@@ -368,6 +448,11 @@
     "defaultMessage": "Postcode component",
     "description": "Label for 'derivePostcode' builder field",
     "originalDefault": "Postcode component"
+  },
+  "UxTJsK": {
+    "defaultMessage": "File",
+    "description": "Component edit form tab title for 'File' tab",
+    "originalDefault": "File"
   },
   "V6ClU9": {
     "defaultMessage": "If the postcode and house number are entered this field will autofill with the city",
@@ -414,6 +499,21 @@
     "description": "Tooltip for 'prefill.identifierRole' builder field",
     "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
   },
+  "XXRiTx": {
+    "defaultMessage": "File name",
+    "description": "file component preview: file name column header",
+    "originalDefault": "File name"
+  },
+  "Y4oNhH": {
+    "defaultMessage": "Maximum width",
+    "description": "Label for 'of.image.resize.width' builder field",
+    "originalDefault": "Maximum width"
+  },
+  "Y8cmP1": {
+    "defaultMessage": "Size",
+    "description": "file component preview: file size column header",
+    "originalDefault": "Size"
+  },
   "YBY95E": {
     "defaultMessage": "Manual",
     "description": "Link to manual title",
@@ -428,6 +528,11 @@
     "defaultMessage": "Select the plugin to use for the prefill functionality.",
     "description": "Tooltip for 'prefill.plugin' builder field",
     "originalDefault": "Select the plugin to use for the prefill functionality."
+  },
+  "aBADYT": {
+    "defaultMessage": "Maximum number of files",
+    "description": "Label for 'maxNumberOfFiles' builder field",
+    "originalDefault": "Maximum number of files"
   },
   "asZV7t": {
     "defaultMessage": "Derive street name",
@@ -473,6 +578,11 @@
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
+  },
+  "ctoEdl": {
+    "defaultMessage": "The name under which the INFORMATIEOBJECT is formally known.",
+    "description": "Tooltip for 'registration.titel' builder field",
+    "originalDefault": "The name under which the INFORMATIEOBJECT is formally known."
   },
   "czUDSQ": {
     "defaultMessage": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported.",
@@ -529,6 +639,16 @@
     "description": "Tooltip for 'registration.attribute' builder field",
     "originalDefault": "Save the value as this attribute in the registration backend system."
   },
+  "fX5VwA": {
+    "defaultMessage": "The maximum size of a single file to upload.",
+    "description": "Tooltip for 'fileMaxSize' builder field",
+    "originalDefault": "The maximum size of a single file to upload."
+  },
+  "fY/8xt": {
+    "defaultMessage": "Information object type",
+    "description": "Label for 'registration.informatieobjecttype' builder field",
+    "originalDefault": "Information object type"
+  },
   "h0B9Fr": {
     "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
     "description": "Form builder 'key' pattern validation error",
@@ -538,6 +658,11 @@
     "defaultMessage": "Form",
     "description": "Component 'Rich' preview mode",
     "originalDefault": "Form"
+  },
+  "hduHvs": {
+    "defaultMessage": "(optional)",
+    "description": "placeholder for 'file.name' builder field",
+    "originalDefault": "(optional)"
   },
   "iOADkJ": {
     "defaultMessage": "Show in summary",
@@ -604,6 +729,16 @@
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
   },
+  "n9T2Oy": {
+    "defaultMessage": "When this is checked, any uploaded image(s) will be resized.",
+    "description": "Tooltip for 'of.image.resize.apply' builder field",
+    "originalDefault": "When this is checked, any uploaded image(s) will be resized."
+  },
+  "nW5g1S": {
+    "defaultMessage": "Bronorganisatie",
+    "description": "Label for 'registration.bronorganisatie' builder field",
+    "originalDefault": "Bronorganisatie"
+  },
   "nqJbi9": {
     "defaultMessage": "Tooltip",
     "description": "Component property 'Tooltip' label",
@@ -659,6 +794,11 @@
     "description": "Title of validation error translations panel",
     "originalDefault": "Custom error messages"
   },
+  "vlY36U": {
+    "defaultMessage": "Indication of the level to which extent the INFORMATIEOBJECT is meant to be public.",
+    "description": "Tooltip for 'registration.docVertrouwelijkheidaanduiding' builder field",
+    "originalDefault": "Indication of the level to which extent the INFORMATIEOBJECT is meant to be public."
+  },
   "vzhWgR": {
     "defaultMessage": "Specify the attribute holding the pre-fill data.",
     "description": "Tooltip for 'prefill.attribute' builder field",
@@ -674,6 +814,11 @@
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
   },
+  "xnRkUj": {
+    "defaultMessage": "Edit JSON",
+    "description": "Component 'editJSON' preview mode",
+    "originalDefault": "Edit JSON"
+  },
   "yD4X2y": {
     "defaultMessage": "Maximum length",
     "description": "Label for 'validate.maxLength' builder field",
@@ -684,9 +829,19 @@
     "description": "Translations: translation column header",
     "originalDefault": "Translations"
   },
+  "yQUV3M": {
+    "defaultMessage": "RSIN of the organization which creates the ENKELVOUDIGINFORMATIEOBJECT.",
+    "description": "Tooltip for 'registration.bronorganisatie' builder field",
+    "originalDefault": "RSIN of the organization which creates the ENKELVOUDIGINFORMATIEOBJECT."
+  },
   "yQtFln": {
     "defaultMessage": "Hide a field from the form.",
     "description": "Tooltip for 'Hidden' builder field",
     "originalDefault": "Hide a field from the form."
+  },
+  "yujuQr": {
+    "defaultMessage": "Maximum height",
+    "description": "Label for 'of.image.resize.height' builder field",
+    "originalDefault": "Maximum height"
   }
 }
