@@ -4,6 +4,11 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import React from 'react';
 
+import {
+  CONFIDENTIALITY_LEVELS,
+  DEFAULT_DOCUMENT_TYPES,
+  DEFAULT_FILE_TYPES,
+} from '@/../.storybook/decorators';
 import {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
@@ -50,6 +55,7 @@ export default {
       ],
     },
     supportedLanguageCodes: ['nl'],
+    fileTypes: DEFAULT_FILE_TYPES,
     translationsStore: {
       nl: {
         'A select': 'Een dropdown',
@@ -79,6 +85,7 @@ interface TemplateArgs {
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
+  fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -95,6 +102,7 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillAttributes,
   supportedLanguageCodes,
   translationsStore,
+  fileTypes,
   isNew,
   builderInfo,
   onCancel,
@@ -110,6 +118,10 @@ const Template: StoryFn<TemplateArgs> = ({
     getRegistrationAttributes={async () => registrationAttributes}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
+    getFileTypes={async () => fileTypes}
+    serverUploadLimit="50MB"
+    getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
+    getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
@@ -754,5 +766,137 @@ export const PhoneNumber: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
+  },
+};
+
+export const FileUpload: Story = {
+  render: Template,
+  name: 'type: file',
+
+  args: {
+    component: {
+      id: 'kiweljhr',
+      storage: 'url',
+      url: '',
+      type: 'file',
+      key: 'file',
+      label: 'A file upload',
+      file: {
+        name: '',
+        type: [],
+        allowedTypesLabels: [],
+      },
+      filePattern: '',
+    },
+
+    builderInfo: {
+      title: 'File upload',
+      icon: '',
+      group: 'file',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await step('Basic tab', async () => {
+      await expect(canvas.getByLabelText('Label')).toHaveValue('A file upload');
+      await waitFor(async () => {
+        await expect(canvas.getByLabelText('Property Name')).toHaveValue('aFileUpload');
+      });
+
+      await expect(canvas.getByLabelText('Description')).toHaveValue('');
+      await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+      await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+      await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+      await expect(canvas.getByLabelText('Multiple values')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+      await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+      await expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
+    });
+
+    await step('File tab', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'File'}));
+
+      await expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
+      await expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
+
+      // check that the file types are visible
+      canvas.getByLabelText('File types').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await waitFor(async () => {
+        await expect(canvas.queryByText('any filetype')).toBeVisible();
+      });
+      await expect(canvas.queryByText('.pdf')).toBeVisible();
+      await userEvent.click(canvas.getByText('.jpg'));
+    });
+
+    await step('Submit configuration', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      // See EditForm.defaultValues for the defaults
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        type: 'file',
+        id: 'kiweljhr',
+        webcam: false,
+        options: {withCredentials: true},
+        storage: 'url',
+        url: '',
+        // basic tab
+        label: 'A file upload',
+        key: 'aFileUpload',
+        description: '',
+        tooltip: '',
+        showInSummary: true,
+        showInEmail: false,
+        showInPDF: true,
+        multiple: false,
+        hidden: false,
+        clearOnHide: true,
+        isSensitiveData: true,
+        // Advanced tab
+        conditional: {
+          show: undefined,
+          when: '',
+          eq: '',
+        },
+        // Validation tab
+        validate: {
+          required: false,
+        },
+        translatedErrors: {
+          nl: {required: ''},
+        },
+        // file tab
+        file: {
+          name: '',
+          type: ['image/jpeg'],
+          allowedTypesLabels: ['.jpg'], // derived from file.type
+        },
+        filePattern: 'image/jpeg', // derived from file.type
+        useConfigFiletypes: false,
+        of: {
+          image: {
+            resize: {
+              apply: false,
+              width: 2000,
+              height: 2000,
+            },
+          },
+        },
+        fileMaxSize: '10MB',
+        maxNumberOfFiles: null,
+        // registration tab
+        registration: {
+          informatieobjecttype: '',
+          bronorganisatie: '',
+          docVertrouwelijkheidaanduiding: '',
+          titel: '',
+        },
+      });
+    });
   },
 };

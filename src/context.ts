@@ -23,6 +23,31 @@ interface ComponentTranslationsRef {
 }
 
 /*
+  Generic select options
+ */
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+/*
+  ZGW Document types integration
+
+  This datastructure is created by the Open Forms backend which takes the registration
+  backends on the form into account.
+ */
+export interface DocumentTypeOption {
+  backendLabel: string;
+  catalogus: {
+    domein: string;
+  };
+  informatieobjecttype: {
+    url: string;
+    omschrijving: string;
+  };
+}
+
+/*
   Builder
  */
 
@@ -35,6 +60,10 @@ export interface BuilderContextType {
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
+  getFileTypes: () => Promise<SelectOption[]>;
+  serverUploadLimit: string;
+  getDocumentTypes: () => Promise<Array<DocumentTypeOption>>;
+  getConfidentialityLevels: () => Promise<SelectOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -46,6 +75,10 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getRegistrationAttributes: async () => [],
   getPrefillPlugins: async () => [],
   getPrefillAttributes: async () => [],
+  getFileTypes: async () => [],
+  serverUploadLimit: '(unknown)',
+  getDocumentTypes: async () => [],
+  getConfidentialityLevels: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

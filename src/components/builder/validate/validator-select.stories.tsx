@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {userEvent, within} from '@storybook/testing-library';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -27,7 +27,7 @@ export default {
       iframeHeight: 200,
     },
     modal: {noModal: true},
-    builder: {enableContext: true, validatorPluginsDelay: 100},
+    builder: {enableContext: true, validatorPluginsDelay: 500},
     formik: {initialValues: {validate: {plugins: []}}},
   },
   args: {
@@ -42,21 +42,22 @@ const Template: StoryFn<typeof ValidatorPluginSelect> = () => <ValidatorPluginSe
 export const Default: Story = {
   render: Template,
 
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
-    const input = await canvas.getByLabelText('Plugin(s)');
+    const input = canvas.getByLabelText('Plugin(s)');
 
     // open the dropdown
-    await input.focus();
+    input.focus();
     await userEvent.keyboard('[ArrowDown]');
 
-    await waitFor(async () => {
-      await expect(canvas.queryByText('Loading...')).toBeInTheDocument();
+    await step('Loading items from backend', async () => {
+      await expect(await canvas.findByText('Loading...')).toBeInTheDocument();
     });
-    // assert the options are present
-    await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 1')).toBeInTheDocument();
-      await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+
+    await step('Check available options displayed', async () => {
+      // assert the options are present
+      await expect(await canvas.findByText('Plugin 1')).toBeInTheDocument();
+      await expect(await canvas.findByText('Plugin 2')).toBeInTheDocument();
     });
   },
 };
