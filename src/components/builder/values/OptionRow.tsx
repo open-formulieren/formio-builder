@@ -1,4 +1,6 @@
-import {FieldArrayRenderProps} from 'formik';
+import {Option} from '@open-formulieren/types/lib/formio/common';
+import {FieldArrayRenderProps, useFormikContext} from 'formik';
+import camelCase from 'lodash.camelcase';
 import {useIntl} from 'react-intl';
 
 import {TextField} from '@/components/formio';
@@ -12,6 +14,19 @@ export interface OptionRowProps {
 const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
   const intl = useIntl();
   const fieldNamePrefix = `${name}[${index}]`;
+  const {getFieldProps, getFieldHelpers} = useFormikContext();
+
+  const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {value: option} = getFieldProps<Option>(fieldNamePrefix);
+    const oldDerivedValue = camelCase(option.label);
+    // do nothing if an option value is set and the value is different from the
+    // label-derived value.
+    if (option.value && option.value != oldDerivedValue) return;
+    const derivedValue = camelCase(event.target.value);
+    const {setValue} = getFieldHelpers<Option['value']>(`${fieldNamePrefix}.value`);
+    setValue(derivedValue);
+  };
+
   return (
     <>
       <td>
@@ -34,6 +49,7 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
             description: 'Accessible label for option label',
             defaultMessage: 'Option label',
           })}
+          onChange={onLabelChange}
         />
       </td>
 

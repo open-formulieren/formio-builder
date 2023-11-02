@@ -77,3 +77,47 @@ export const RemoveOption: Story = {
     expect(optionValues[0]).toHaveDisplayValue('keizersgracht');
   },
 };
+
+export const ValueDerivedFromLabel: Story = {
+  parameters: {
+    formik: {
+      initialValues: {
+        values: [
+          {
+            value: '',
+            label: '',
+          },
+        ],
+      },
+    },
+  },
+
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const label = canvas.getByLabelText('Option label');
+
+    await step('Derive value from label when value is unset', async () => {
+      await userEvent.type(label, 'The first option');
+
+      expect(canvas.getByLabelText('Option value')).toHaveDisplayValue('theFirstOption');
+    });
+
+    await step('Clearing the label clears the derived value', async () => {
+      await userEvent.clear(label);
+      expect(canvas.getByLabelText('Option value')).toHaveDisplayValue('');
+    });
+
+    await step('Explicit value is not overwritten', async () => {
+      const optionValue = canvas.getByLabelText('Option value');
+      await userEvent.type(optionValue, 'explicit value');
+      await userEvent.type(label, 'First option');
+      expect(optionValue).toHaveDisplayValue('explicit value');
+    });
+
+    await step('Clearing the label does not clear the explicit value', async () => {
+      await userEvent.clear(label);
+      expect(canvas.getByLabelText('Option value')).toHaveDisplayValue('explicit value');
+    });
+  },
+};
