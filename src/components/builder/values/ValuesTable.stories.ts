@@ -25,6 +25,9 @@ export default {
   args: {
     name: 'values',
   },
+  argTypes: {
+    name: {table: {disable: true}},
+  },
 } as Meta<typeof ValuesTable>;
 
 type Story = StoryObj<typeof ValuesTable>;
@@ -119,5 +122,33 @@ export const ValueDerivedFromLabel: Story = {
       await userEvent.clear(label);
       expect(canvas.getByLabelText('Option value')).toHaveDisplayValue('explicit value');
     });
+  },
+};
+
+export const ReorderOptions: Story = {
+  parameters: {
+    controls: {hideNoControlsWarning: true},
+    modal: {noModal: true},
+    formik: {
+      initialValues: {
+        values: [
+          {value: 'mediahaven', label: 'Mediahaven'},
+          {value: 'keizersgracht', label: 'Keizersgracht'},
+          {value: 'sloterdijk', label: 'sloterdijk'},
+        ],
+      },
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getAllByRole('textbox', {name: 'Option label'})).toHaveLength(3);
+
+    const middleUpButton = canvas.getAllByRole('button', {name: 'Move up'})[1];
+    await userEvent.click(middleUpButton);
+
+    const firstOptionLabel = canvas.getAllByRole('textbox', {name: 'Option label'})[0];
+    expect(firstOptionLabel).toHaveDisplayValue('Keizersgracht');
   },
 };

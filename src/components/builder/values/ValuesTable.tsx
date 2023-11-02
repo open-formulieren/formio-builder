@@ -68,7 +68,6 @@ const ValuesTable: React.FC<ValuesTableProps> = ({name}) => {
               <tr>
                 <td colSpan={4}>
                   <button
-                    tabIndex={0}
                     type="button"
                     className="btn btn-primary formio-button-add-row"
                     onClick={() =>

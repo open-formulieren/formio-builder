@@ -1,9 +1,42 @@
+import {css} from '@emotion/css';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {FieldArrayRenderProps, useFormikContext} from 'formik';
 import camelCase from 'lodash.camelcase';
 import {useIntl} from 'react-intl';
 
 import {TextField} from '@/components/formio';
+
+const ICONS_CELL = css`
+  vertical-align: middle !important;
+`;
+
+const SORT_ICONS = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    all: unset;
+    padding-inline: 0.2em;
+    line-height: 0;
+
+    :not(:disabled) {
+      cursor: pointer;
+    }
+
+    :disabled {
+      color: #999;
+    }
+
+    :focus-visible .fa {
+      // bootstrap focus styles
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+  }
+`;
 
 export interface OptionRowProps {
   name: string;
@@ -15,6 +48,7 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
   const intl = useIntl();
   const fieldNamePrefix = `${name}[${index}]`;
   const {getFieldProps, getFieldHelpers} = useFormikContext();
+  const numOptions = getFieldProps<Option[]>(name).value?.length || 0;
 
   const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value: option} = getFieldProps<Option>(fieldNamePrefix);
@@ -29,17 +63,31 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
 
   return (
     <>
-      <td>
-        {/* TODO: minimum viable would be icons to move row up/down, d&d is too much work */}
-        <button
-          className="formio-drag-button btn btn-default fa fa-bars"
-          type="button"
-          aria-label={intl.formatMessage({
-            description: 'Options table: drag and drop button for single option row',
-            defaultMessage: 'Reorder option',
-          })}
-          onMouseDown={() => alert('drag & drop not implemented yet')}
-        />
+      <td className={ICONS_CELL}>
+        <div className={SORT_ICONS}>
+          <button
+            type="button"
+            aria-label={intl.formatMessage({
+              description: 'Options table: move option up',
+              defaultMessage: 'Move up',
+            })}
+            onClick={() => arrayHelpers.move(index, index - 1)}
+            disabled={index === 0}
+          >
+            <i className="fa fa-chevron-up" />
+          </button>
+          <button
+            type="button"
+            aria-label={intl.formatMessage({
+              description: 'Options table: move option down',
+              defaultMessage: 'Move down',
+            })}
+            onClick={() => arrayHelpers.move(index, index + 1)}
+            disabled={index === numOptions - 1}
+          >
+            <i className="fa fa-chevron-down" />
+          </button>
+        </div>
       </td>
 
       <td>
@@ -67,7 +115,6 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
         <button
           type="button"
           className="btn btn-secondary formio-button-remove-row"
-          tabIndex={0}
           aria-label={intl.formatMessage({
             description: 'Values table: accessible label to remove an option',
             defaultMessage: 'Remove',
