@@ -1,5 +1,6 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
 import Email from './email';
@@ -36,6 +37,7 @@ const REGISTRY: Registry = {
   phoneNumber: PhoneNumber,
   postcode: Postcode,
   file: FileUpload,
+  currency: Currency,
 };
 
 export {Fallback};

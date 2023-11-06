@@ -1,19 +1,19 @@
-import {NumberComponentSchema} from '@open-formulieren/types';
+import {CurrencyComponentSchema} from '@open-formulieren/types';
 
 import {NumberField} from '@/components/formio';
 
 import {ComponentPreviewProps} from '../types';
 
 /**
- * Show a formio number component preview.
+ * Show a formio currency component preview.
  *
  * NOTE: for the time being, this is rendered in the default Formio bootstrap style,
  * however at some point this should use the components of
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
-const Preview: React.FC<ComponentPreviewProps<NumberComponentSchema>> = ({component}) => {
+const Preview: React.FC<ComponentPreviewProps<CurrencyComponentSchema>> = ({component}) => {
   // FIXME: incorporate decimalLimit and allowNegative
-  const {key, label, description, tooltip, validate = {}, suffix = ''} = component;
+  const {key, label, description, tooltip, validate = {}} = component;
   const {required = false} = validate;
   return (
     <NumberField
@@ -22,7 +22,6 @@ const Preview: React.FC<ComponentPreviewProps<NumberComponentSchema>> = ({compon
       description={description}
       tooltip={tooltip}
       required={required}
-      suffix={suffix}
     />
   );
 };

@@ -8,17 +8,9 @@ import {buildCommonSchema} from '@/registry/validation';
 // validate.max or defaultValue
 const numberSchema = z.number().finite().optional();
 
-// case for when component.multiple=false
-const singleValueSchema = z
-  .object({multiple: z.literal(false)})
-  .and(z.object({defaultValue: numberSchema}));
-
-// case for when component.multiple=true
-const multipleValueSchema = z
-  .object({multiple: z.literal(true)})
-  .and(z.object({defaultValue: numberSchema.array()}));
-
-const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
+const defaultValueSchema = z.object({
+  defaultValue: numberSchema,
+});
 
 const numberSpecific = z.object({
   decimalLimit: z.number().int().positive().optional(),
