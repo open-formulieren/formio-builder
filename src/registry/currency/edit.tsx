@@ -13,7 +13,6 @@ import {
   PresentationConfig,
   Registration,
   SimpleConditional,
-  Suffix,
   Tooltip,
   Translations,
   Validate,
