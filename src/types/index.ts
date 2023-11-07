@@ -1,4 +1,5 @@
 export * from './schemas';
+export * from './paths';
 
 // https://fettblog.eu/typescript-hasownproperty/
 export function hasOwnProperty<X extends {}, Y extends PropertyKey>(

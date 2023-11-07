@@ -6,9 +6,13 @@ import {withFormik} from '@/../.storybook/decorators';
 
 import ValuesTable from './ValuesTable';
 
+const ValuesTableComponent = ValuesTable<{
+  values: Option[];
+}>;
+
 export default {
   title: 'Formio/Builder/ValuesTable',
-  component: ValuesTable,
+  component: ValuesTableComponent,
   decorators: [withFormik],
   parameters: {
     controls: {hideNoControlsWarning: true},
@@ -28,9 +32,9 @@ export default {
   argTypes: {
     name: {table: {disable: true}},
   },
-} as Meta<typeof ValuesTable>;
+} as Meta<typeof ValuesTableComponent>;
 
-type Story = StoryObj<typeof ValuesTable>;
+type Story = StoryObj<typeof ValuesTableComponent>;
 
 export const Default: Story = {
   play: async ({canvasElement}) => {

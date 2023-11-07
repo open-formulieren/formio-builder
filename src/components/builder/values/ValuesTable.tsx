@@ -3,14 +3,15 @@ import {FieldArray, useFormikContext} from 'formik';
 import {FormattedMessage} from 'react-intl';
 
 import {Component} from '@/components/formio';
+import {PathsForValueType} from '@/types';
 
 import OptionRow from './OptionRow';
 
-export interface ValuesTableProps {
+export interface ValuesTableProps<S> {
   /**
    * Name of the field holding the (component) values, e.g. `values` or `data.values`.
    */
-  name: string;
+  name: PathsForValueType<S, Option[]> & string;
 }
 
 /**
@@ -18,7 +19,7 @@ export interface ValuesTableProps {
  *
  * @todo - automatically set option value from label unless explicitly provided.
  */
-const ValuesTable: React.FC<ValuesTableProps> = ({name}) => {
+function ValuesTable<S>({name}: ValuesTableProps<S>) {
   const {getFieldProps} = useFormikContext();
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
 
@@ -92,6 +93,6 @@ const ValuesTable: React.FC<ValuesTableProps> = ({name}) => {
       </FieldArray>
     </Component>
   );
-};
+}
 
 export default ValuesTable;
