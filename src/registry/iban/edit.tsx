@@ -45,9 +45,7 @@ const EditForm: EditFormDefinition<IbanComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Validate.useManageValidatorsTranslations<IbanComponentSchema>([
-    'required',
-  ]);
+  Validate.useManageValidatorsTranslations<IbanComponentSchema>(['required']);
   return (
     <Tabs>
       <TabList>
@@ -66,7 +64,7 @@ const EditForm: EditFormDefinition<IbanComponentSchema> = () => {
             'isSensitiveData',
             'defaultValue',
             'disabled',
-            'placeholder',
+            'placeholder'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
