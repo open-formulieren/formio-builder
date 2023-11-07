@@ -12,7 +12,6 @@ import {
   Label,
   Multiple,
   PresentationConfig,
-  ReadOnly,
   Registration,
   SimpleConditional,
   Tooltip,
@@ -85,7 +84,6 @@ const EditForm: EditFormDefinition<IbanComponentSchema> = () => {
         <ClearOnHide />
         <IsSensitiveData />
         <DefaultValue multiple={!!values.multiple} />
-        <ReadOnly />
       </TabPanel>
 
       {/* Advanced tab */}

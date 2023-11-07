@@ -12,7 +12,6 @@ import {
   Label,
   Multiple,
   PresentationConfig,
-  ReadOnly,
   Registration,
   SimpleConditional,
   Tooltip,
@@ -84,7 +83,6 @@ const EditForm: EditFormDefinition<LicensePlateComponentSchema> = () => {
         <ClearOnHide />
         <IsSensitiveData />
         <DefaultValue multiple={!!values.multiple} />
-        <ReadOnly />
       </TabPanel>
 
       {/* Advanced tab */}
