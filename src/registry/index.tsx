@@ -7,6 +7,7 @@ import Email from './email';
 import Fallback from './fallback';
 import FileUpload from './file';
 import Iban from './iban';
+import Licenseplate from './licenseplate';
 import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
@@ -41,6 +42,7 @@ const REGISTRY: Registry = {
   currency: Currency,
   // Special types:
   iban: Iban,
+  licenseplate: Licenseplate,
 };
 
 export {Fallback};
