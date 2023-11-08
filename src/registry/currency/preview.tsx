@@ -22,6 +22,7 @@ const Preview: React.FC<ComponentPreviewProps<CurrencyComponentSchema>> = ({comp
       description={description}
       tooltip={tooltip}
       required={required}
+      prefix="€"
     />
   );
 };

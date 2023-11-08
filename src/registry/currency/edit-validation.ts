@@ -8,20 +8,10 @@ import {buildCommonSchema} from '@/registry/validation';
 // validate.max or defaultValue
 const currencySchema = z.number().finite().optional();
 
-// case for when component.multiple=false
-const singleValueSchema = z
-  .object({multiple: z.literal(false)})
-  .and(z.object({defaultValue: currencySchema}));
-
-// case for when component.multiple=true
-const multipleValueSchema = z
-  .object({multiple: z.literal(true)})
-  .and(z.object({defaultValue: currencySchema.array()}));
-
-const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
+const defaultValueSchema = z.object({defaultValue: currencySchema});
 
 const currencySpecific = z.object({
-  decimalLimit: z.number().int().positive().optional(),
+  decimalLimit: z.union(Array.from({length: 11}, (_, i) => z.literal(i)) as any).optional(),
   validate: z
     .object({
       min: currencySchema,

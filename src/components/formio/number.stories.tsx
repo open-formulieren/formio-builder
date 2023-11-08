@@ -43,6 +43,13 @@ export const WithToolTip: Story = {
   },
 };
 
+export const WithPrefix: Story = {
+  args: {
+    label: 'With prefix',
+    prefix: 'm<sup>3</sup>',
+  },
+};
+
 export const WithSuffix: Story = {
   args: {
     label: 'With suffix',

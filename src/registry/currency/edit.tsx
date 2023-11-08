@@ -120,6 +120,7 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
 };
 
 EditForm.defaultValues = {
+  currency: 'EUR',
   // basic tab
   label: '',
   key: '',
@@ -134,7 +135,6 @@ EditForm.defaultValues = {
   defaultValue: undefined,
   decimalLimit: undefined,
   allowNegative: false,
-  currency: 'EUR',
   // Advanced tab
   conditional: {
     show: undefined,
@@ -166,6 +166,7 @@ const DefaultValue: React.FC = () => {
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
+      prefix="€"
     />
   );
 };
