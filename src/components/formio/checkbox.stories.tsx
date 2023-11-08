@@ -37,6 +37,13 @@ export const WithToolTip: Story = {
   },
 };
 
+export const WithDescription: Story = {
+  args: {
+    label: 'With description',
+    description: 'A description',
+  },
+};
+
 export const WithErrors: Story = {
   args: {
     label: 'With errors',
