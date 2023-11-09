@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {withFormik} from '@/sb-decorators';
@@ -42,7 +42,9 @@ export const ValidateDeltaConstraintConfiguration: Story = {
     await step('Navigate to validation tab and open maxDate configuration', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getByText(/Maximum date/));
-      expect(await canvas.findByText('Mode preset')).toBeVisible();
+      await waitFor(async () => {
+        expect(await canvas.findByText('Mode preset')).toBeVisible();
+      });
     });
 
     await step('Configure relative to variable', async () => {
