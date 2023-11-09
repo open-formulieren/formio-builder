@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -66,8 +66,10 @@ export const ResizeOptions: Story = {
 
       await userEvent.keyboard('[Tab]');
 
-      expect(await canvas.findByText('Number must be greater than 0')).toBeVisible();
-      expect(await canvas.findByText('Expected integer, received float')).toBeVisible();
+      await waitFor(async () => {
+        expect(await canvas.findByText('Number must be greater than 0')).toBeVisible();
+        expect(await canvas.findByText('Expected integer, received float')).toBeVisible();
+      });
     });
   },
 };
@@ -82,7 +84,9 @@ export const MaxNumberOfFiles: Story = {
     await userEvent.type(canvas.getByLabelText('Maximum number of files'), '0');
     await userEvent.keyboard('[Tab]');
 
-    expect(await canvas.findByText('Number must be greater than 0')).toBeVisible();
+    await waitFor(async () => {
+      expect(await canvas.findByText('Number must be greater than 0')).toBeVisible();
+    });
   },
 };
 
