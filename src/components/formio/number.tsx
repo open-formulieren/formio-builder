@@ -90,7 +90,7 @@ const Wrapper: React.FC<WrapperProps> = ({prefix, suffix, children}) => {
   return (
     <div className="input-group">
       {prefix && (
-        <div className="input-group-append">
+        <div className="input-group-prepend">
           <Affix className="input-group-text">{prefix}</Affix>
         </div>
       )}
