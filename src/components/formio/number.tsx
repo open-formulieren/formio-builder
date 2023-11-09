@@ -14,6 +14,7 @@ export interface NumberProps {
   required?: boolean;
   tooltip?: string;
   description?: string;
+  prefix?: string;
   suffix?: string;
 }
 
@@ -27,6 +28,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   required = false,
   tooltip = '',
   description = '',
+  prefix = '',
   suffix = '',
   ...props
 }) => {
@@ -49,7 +51,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
       tooltip={tooltip}
     >
       <div>
-        <Wrapper suffix={suffix}>
+        <Wrapper suffix={suffix} prefix={prefix}>
           <Field
             name={name}
             id={htmlId}
@@ -78,18 +80,26 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
 };
 
 interface WrapperProps {
-  suffix: string;
+  prefix?: string;
+  suffix?: string;
   children: React.ReactNode;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({suffix, children}) => {
-  if (!suffix) return <>{children}</>;
+const Wrapper: React.FC<WrapperProps> = ({prefix, suffix, children}) => {
+  if (!(prefix || suffix)) return <>{children}</>;
   return (
     <div className="input-group">
+      {prefix && (
+        <div className="input-group-prepend">
+          <Affix className="input-group-text">{prefix}</Affix>
+        </div>
+      )}
       {children}
-      <div className="input-group-append">
-        <Affix className="input-group-text">{suffix}</Affix>
-      </div>
+      {suffix && (
+        <div className="input-group-append">
+          <Affix className="input-group-text">{suffix}</Affix>
+        </div>
+      )}
     </div>
   );
 };
