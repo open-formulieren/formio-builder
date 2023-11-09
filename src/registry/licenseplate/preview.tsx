@@ -13,7 +13,7 @@ import {ComponentPreviewProps} from '../types';
  */
 const Preview: React.FC<ComponentPreviewProps<LicensePlateComponentSchema>> = ({component}) => {
   const {key, label, description, tooltip, validate, multiple} = component;
-  
+
   const {required = false} = validate;
   return (
     <TextField
