@@ -17,7 +17,18 @@ export interface ValuesTableProps<S> {
 /**
  * Manage a set of option values/labels for a component.
  *
- * @todo - automatically set option value from label unless explicitly provided.
+ * Formio typically allows you to specify manual options/values for preset options,
+ * like the dropdown for a select, the values + labels for a radio choice or multiple
+ * checkboxes.
+ *
+ * This component is a generic component, you must use it by passing the relevant
+ * concrete schema for `name` prop autocomplete and type checking, e.g.:
+ *
+ *
+ *     <ValuesTable<SelectComponentSchema> name="data.values" />
+ *
+ * Translations for every option label are (to be) managed in a dedicated translations
+ * component.
  */
 function ValuesTable<S>({name}: ValuesTableProps<S>) {
   const {getFieldProps} = useFormikContext();

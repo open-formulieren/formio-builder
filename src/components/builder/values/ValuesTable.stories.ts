@@ -32,6 +32,7 @@ export default {
   argTypes: {
     name: {table: {disable: true}},
   },
+  tags: ['autodocs'],
 } as Meta<typeof ValuesTableComponent>;
 
 type Story = StoryObj<typeof ValuesTableComponent>;
