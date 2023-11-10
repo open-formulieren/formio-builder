@@ -61,9 +61,7 @@ const EditForm: EditFormDefinition<IbanComponentSchema> = () => {
             'hidden',
             'clearOnHide',
             'isSensitiveData',
-            'defaultValue',
-            'disabled',
-            'placeholder'
+            'defaultValue'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -137,9 +135,7 @@ EditForm.defaultValues = {
   multiple: false,
   hidden: false,
   clearOnHide: true,
-  isSensitiveData: false,
-  defaultValue: '',
-  placeholder: '',
+  isSensitiveData: true,
   // Advanced tab
   conditional: {
     show: undefined,

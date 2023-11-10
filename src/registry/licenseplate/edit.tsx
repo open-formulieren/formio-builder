@@ -61,8 +61,7 @@ const EditForm: EditFormDefinition<LicensePlateComponentSchema> = () => {
             'hidden',
             'clearOnHide',
             'isSensitiveData',
-            'defaultValue',
-            'disabled'
+            'defaultValue'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -136,7 +135,7 @@ EditForm.defaultValues = {
   multiple: false,
   hidden: false,
   clearOnHide: true,
-  isSensitiveData: false,
+  isSensitiveData: true,
   defaultValue: '',
   // Advanced tab
   conditional: {
