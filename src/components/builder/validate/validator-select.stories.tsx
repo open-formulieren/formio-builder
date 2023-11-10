@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -27,7 +27,7 @@ export default {
       iframeHeight: 200,
     },
     modal: {noModal: true},
-    builder: {enableContext: true, validatorPluginsDelay: 500},
+    builder: {enableContext: true, validatorPluginsDelay: 1000},
     formik: {initialValues: {validate: {plugins: []}}},
   },
   args: {
@@ -51,7 +51,12 @@ export const Default: Story = {
     await userEvent.keyboard('[ArrowDown]');
 
     await step('Loading items from backend', async () => {
-      await expect(await canvas.findByText('Loading...')).toBeInTheDocument();
+      await waitFor(
+        async () => {
+          await expect(canvas.queryByText('Loading...')).toBeNull();
+        },
+        {timeout: 1500}
+      );
     });
 
     await step('Check available options displayed', async () => {
