@@ -47,7 +47,7 @@ export const Default: Story = {
     const input = canvas.getByLabelText('Plugin(s)');
 
     // open the dropdown
-    input.focus();
+    await userEvent.click(input);
     await userEvent.keyboard('[ArrowDown]');
 
     await step('Check available options displayed', async () => {

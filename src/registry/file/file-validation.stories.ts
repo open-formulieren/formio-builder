@@ -103,33 +103,39 @@ export const MaxFileSize: Story = {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '-10MB');
       await userEvent.keyboard('[Tab]');
-      expect(
-        await canvas.findByText(
-          'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-        )
-      ).toBeVisible();
+      await waitFor(async () => {
+        expect(
+          await canvas.findByText(
+            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
+          )
+        ).toBeVisible();
+      });
     });
 
     await step('Decimal file size (period)', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '10.5MB');
       await userEvent.keyboard('[Tab]');
-      expect(
-        await canvas.findByText(
-          'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-        )
-      ).toBeVisible();
+      await waitFor(async () => {
+        expect(
+          await canvas.findByText(
+            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
+          )
+        ).toBeVisible();
+      });
     });
 
     await step('Decimal file size (comma)', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '10,5 MB');
       await userEvent.keyboard('[Tab]');
-      expect(
-        await canvas.findByText(
-          'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-        )
-      ).toBeVisible();
+      await waitFor(async () => {
+        expect(
+          await canvas.findByText(
+            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
+          )
+        ).toBeVisible();
+      });
     });
   },
 };
@@ -147,18 +153,22 @@ export const ValidMaxFileSize: Story = {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '15    mb');
       await userEvent.keyboard('[Tab]');
-      expect(
-        canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
-      ).not.toBeInTheDocument();
+      await waitFor(async () => {
+        expect(
+          canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
+        ).not.toBeInTheDocument();
+      });
     });
 
     await step('Accept non-MB values', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '200 KB');
       await userEvent.keyboard('[Tab]');
-      expect(
-        canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
-      ).not.toBeInTheDocument();
+      await waitFor(async () => {
+        expect(
+          canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
+        ).not.toBeInTheDocument();
+      });
     });
   },
 };
