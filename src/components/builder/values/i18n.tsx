@@ -1,7 +1,7 @@
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
-import {useIntl} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {TextField} from '@/components/formio';
 import {PathsForValueType} from '@/types';
@@ -30,6 +30,15 @@ function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
   return (
     // Same markup as ComponentTranslations<S> body
     <tbody>
+      <tr>
+        <th colSpan={3} style={{textAlign: 'end'}}>
+          <FormattedMessage
+            description="Values/options translations table header"
+            defaultMessage="Choice/option translations"
+          />
+        </th>
+      </tr>
+
       {options.map(({value, label}, index) => (
         <tr key={`option-${index}`}>
           <td>

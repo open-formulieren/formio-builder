@@ -18,13 +18,6 @@ export default {
   render: args => (
     <Component type="datagrid">
       <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th style={{width: '20%'}}>Location</th>
-            <th style={{width: '35%'}}>Value</th>
-            <th style={{borderTop: 'none'}}>Translations</th>
-          </tr>
-        </thead>
         <ValuesTranslationsComponent {...args} />
       </table>
     </Component>
