@@ -17,15 +17,6 @@ export default {
   decorators: [withFormik],
   parameters: {
     controls: {hideNoControlsWarning: true},
-    docs: {
-      source: {
-        type: 'dynamic',
-        excludeDecorators: true,
-      },
-      // https://github.com/bbbtech/storybook-formik/issues/51#issuecomment-1136668271
-      inlineStories: false,
-      iframeHeight: 200,
-    },
     modal: {noModal: true},
     builder: {enableContext: true, validatorPluginsDelay: 300},
     formik: {initialValues: {validate: {plugins: []}}},
@@ -56,7 +47,7 @@ export const Default: Story = {
         async () => {
           await expect(await canvas.findByText('Plugin 1')).toBeInTheDocument();
         },
-        {timeout: 500}
+        {container: canvasElement}
       );
       await expect(await canvas.findByText('Plugin 2')).toBeInTheDocument();
     });
