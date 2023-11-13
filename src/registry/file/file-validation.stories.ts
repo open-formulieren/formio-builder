@@ -44,6 +44,8 @@ export const ResizeOptions: Story = {
   name: 'resize options',
 
   play: async ({canvasElement, step}) => {
+    console.log('halp?');
+
     const canvas = within(canvasElement);
 
     await step('Configure image file types', async () => {
