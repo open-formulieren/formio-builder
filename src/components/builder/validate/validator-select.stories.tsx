@@ -27,7 +27,7 @@ export default {
       iframeHeight: 200,
     },
     modal: {noModal: true},
-    builder: {enableContext: true, validatorPluginsDelay: 1000},
+    builder: {enableContext: true, validatorPluginsDelay: 300},
     formik: {initialValues: {validate: {plugins: []}}},
   },
   args: {
@@ -50,18 +50,14 @@ export const Default: Story = {
     input.focus();
     await userEvent.keyboard('[ArrowDown]');
 
-    await step('Loading items from backend', async () => {
-      await waitFor(
-        async () => {
-          await expect(canvas.queryByText('Loading...')).toBeNull();
-        },
-        {timeout: 1500}
-      );
-    });
-
     await step('Check available options displayed', async () => {
       // assert the options are present
-      await expect(await canvas.findByText('Plugin 1')).toBeInTheDocument();
+      await waitFor(
+        async () => {
+          await expect(await canvas.findByText('Plugin 1')).toBeInTheDocument();
+        },
+        {timeout: 500}
+      );
       await expect(await canvas.findByText('Plugin 2')).toBeInTheDocument();
     });
   },
