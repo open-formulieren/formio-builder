@@ -175,8 +175,12 @@ export const ValidateMaxFileSizeAgainstServerValue: Story = {
     await userEvent.clear(fileSize);
     await userEvent.type(fileSize, '100MB');
     await userEvent.keyboard('[Tab]');
-    expect(
-      await canvas.findByText('Specify a file size less than or equal to the server upload limit.')
-    ).toBeVisible();
+    await waitFor(async () => {
+      expect(
+        await canvas.findByText(
+          'Specify a file size less than or equal to the server upload limit.'
+        )
+      ).toBeVisible();
+    });
   },
 };
