@@ -1,14 +1,12 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {withFormik} from '@/sb-decorators';
 
 export default {
   title: 'Builder components/DateField',
   component: ComponentEditForm,
-  decorators: [withFormik],
   parameters: {},
   args: {
     isNew: true,
@@ -42,7 +40,9 @@ export const ValidateDeltaConstraintConfiguration: Story = {
     await step('Navigate to validation tab and open maxDate configuration', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getByText(/Maximum date/));
-      expect(await canvas.findByText('Mode preset')).toBeVisible();
+      await waitFor(async () => {
+        expect(await canvas.findByText('Mode preset')).toBeVisible();
+      });
     });
 
     await step('Configure relative to variable', async () => {
@@ -74,7 +74,9 @@ export const ValidateDeltaConstraintConfiguration: Story = {
     });
 
     await step('Check the validation errors', async () => {
-      expect(await canvas.findByText(/The property name must only contain/)).toBeVisible();
+      await waitFor(async () => {
+        expect(await canvas.findByText(/The property name must only contain/)).toBeVisible();
+      });
       expect(await canvas.findByText('Expected integer, received float')).toBeVisible();
       expect(await canvas.findByText('Number must be greater than or equal to 0')).toBeVisible();
     });

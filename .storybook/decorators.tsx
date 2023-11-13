@@ -271,7 +271,7 @@ export const withFormik = (Story: StoryFn, context: StoryContext) => {
       onSubmit={(values, formikHelpers) => console.log(values, formikHelpers)}
     >
       {wrapForm ? (
-        <form>
+        <form id="storybook-withFormik-decorator-form">
           <Story />
         </form>
       ) : (
