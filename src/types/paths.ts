@@ -7,7 +7,7 @@ type ExcludeBareObject<T> = T extends Record<string, unknown>
   : never;
 
 /**
- * Constructs a union of possible paths into a given object type.
+ * Constructs a union of possible paths (as dotted strings) into a given object type.
  *
  * This is intended to take any of the `AnyComponentSchema` members and use it to
  * perform prop validation in React components, for example.
@@ -78,10 +78,6 @@ export type GetValueAtPath<T, Path extends string> = T extends T
     ? T[Path]
     : never
   : never;
-
-export type PathsAndValueType<T> = {
-  [K in Paths<T> as K extends string ? K : never]: GetValueAtPath<T, K>;
-};
 
 export type PathsForValueType<T, V> = keyof {
   [P in Paths<T> as GetValueAtPath<T, P> extends V ? P : never]: true;
