@@ -25,3 +25,4 @@ export * as Registration from './registration';
 export * as Prefill from './prefill';
 export * as Translations from './i18n';
 export * as BuilderTabs from './tabs';
+export * from './values';

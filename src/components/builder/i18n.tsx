@@ -1,7 +1,8 @@
 import {css} from '@emotion/css';
-import {OFExtensions} from '@open-formulieren/types';
+import {OFExtensions, SupportedLocales} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {useFormikContext} from 'formik';
+import React from 'react';
 import {useContext, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -21,6 +22,7 @@ export interface ComponentTranslationsProps<S extends AnyComponentSchema> {
   propertyLabels: {
     [key in ExtractTranslatableProperties<S>]: string;
   };
+  children?: React.ReactNode;
 }
 
 // XXX: once we've moved away from bootstrap/formio 'component library', this fix and
@@ -47,8 +49,18 @@ const TABS_OFFSET = css`
   margin-right: -1px;
 `;
 
+export interface ComponentTranslationsContextType {
+  activeLanguage: SupportedLocales;
+}
+
+export const ComponentTranslationsContext = React.createContext<ComponentTranslationsContextType>({
+  activeLanguage: 'nl',
+});
+ComponentTranslationsContext.displayName = 'ComponentTranslationsContext';
+
 export function ComponentTranslations<S extends AnyComponentSchema>({
   propertyLabels,
+  children,
 }: ComponentTranslationsProps<S>) {
   const intl = useIntl();
   const {supportedLanguageCodes} = useContext(BuilderContext);
@@ -153,6 +165,11 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
             </tr>
           ))}
         </tbody>
+        {children && (
+          <ComponentTranslationsContext.Provider value={{activeLanguage}}>
+            {children}
+          </ComponentTranslationsContext.Provider>
+        )}
       </table>
     </Component>
   );

@@ -19,6 +19,7 @@ export interface TextFieldProps {
   description?: React.ReactNode;
   showCharCount?: boolean;
   inputMask?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
@@ -29,10 +30,11 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   description = '',
   showCharCount = false,
   inputMask,
+  onChange,
   ...props
 }) => {
   const {getFieldProps, getFieldMeta} = useFormikContext();
-  const {value} = getFieldProps<string | undefined>(name);
+  const {value, onChange: formikOnChange} = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
   const {errors, hasErrors} = useValidationErrors(name);
   // const [{value}, {touched}] = useField<string | undefined>(name);
@@ -63,6 +65,10 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
       type="text"
       className={clsx('form-control', {'is-invalid': hasErrors})}
       data-testid={`input-${name}`}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        formikOnChange(event);
+        onChange?.(event);
+      }}
       {...props}
     />
   );

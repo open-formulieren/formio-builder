@@ -1,7 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/v4-shims.css';
 import {Preview} from '@storybook/react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'formiojs/dist/formio.builder.css';
 import 'react-tooltip/dist/react-tooltip.css';
 
