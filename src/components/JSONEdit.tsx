@@ -1,3 +1,4 @@
+import {JSONObject} from '@open-formulieren/types/lib/types';
 import clsx from 'clsx';
 import {useFormikContext} from 'formik';
 import {TextareaHTMLAttributes, useRef, useState} from 'react';
@@ -5,11 +6,13 @@ import {TextareaHTMLAttributes, useRef, useState} from 'react';
 interface JSONEditProps {
   data: unknown; // JSON.stringify first argument has the 'any' type in TS itself...
   className?: string;
+  name?: string;
 }
 
 const JSONEdit: React.FC<JSONEditProps & TextareaHTMLAttributes<HTMLTextAreaElement>> = ({
   data,
   className = 'form-control',
+  name = '',
   ...props
 }) => {
   const dataAsJSON = JSON.stringify(data, null, 2);
@@ -17,7 +20,11 @@ const JSONEdit: React.FC<JSONEditProps & TextareaHTMLAttributes<HTMLTextAreaElem
 
   const [value, setValue] = useState(dataAsJSON);
   const [JSONValid, setJSONValid] = useState(true);
-  const {setValues} = useFormikContext();
+  const {setValues, setFieldValue} = useFormikContext();
+
+  // if no name is provided, replace the entire form state, otherwise only set a
+  // specific value
+  const updateValue = name ? (v: JSONObject) => setFieldValue(name, v) : setValues;
 
   // synchronize external state changes
   const isFocused = inputRef.current == document.activeElement;
@@ -37,7 +44,8 @@ const JSONEdit: React.FC<JSONEditProps & TextareaHTMLAttributes<HTMLTextAreaElem
       setJSONValid(false);
       return;
     }
-    setValues(updatedData);
+
+    updateValue(updatedData);
   };
   return (
     <>
