@@ -10,7 +10,7 @@ import ComponentLabel from './component-label';
 
 export interface ComponentProps {
   // XXX: eventually (most) of these literals will be included in AnyComponentType
-  type: AnyComponentSchema['type'] | 'checkbox' | 'datagrid' | 'datamap' | 'select' | 'columns';
+  type: AnyComponentSchema['type'] | 'datagrid' | 'datamap' | 'select' | 'columns' | 'textarea';
   field?: string;
   required?: boolean;
   label?: React.ReactNode;
