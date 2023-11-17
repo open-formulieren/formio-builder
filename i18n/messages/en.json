@@ -4,6 +4,11 @@
     "description": "Component property 'Property Name' label",
     "originalDefault": "Property Name"
   },
+  "+9x9sg": {
+    "defaultMessage": "From variable",
+    "description": "Data source option label for value 'variable'",
+    "originalDefault": "From variable"
+  },
   "+XwAuT": {
     "defaultMessage": "Remove",
     "description": "Remove component button",
@@ -154,6 +159,11 @@
     "description": "Character count",
     "originalDefault": "{length} {length, plural, one {character} other {characters}}"
   },
+  "5xNPpS": {
+    "defaultMessage": "Option label",
+    "description": "Accessible label for option label",
+    "originalDefault": "Option label"
+  },
   "5y8Yt4": {
     "defaultMessage": "Save the attachment in the Documents API with this InformatieObjectType. If unspecified, the registration plugin defaults are used.",
     "description": "Tooltip for 'registration.informatieobjecttype' builder field",
@@ -234,10 +244,20 @@
     "description": "Placeholder for 'validate.min' builder field",
     "originalDefault": "Minimum value"
   },
+  "BKe/DT": {
+    "defaultMessage": "The option value is a required field.",
+    "description": "Form builder option value required error",
+    "originalDefault": "The option value is a required field."
+  },
   "BvRBef": {
     "defaultMessage": "Decimal places",
     "description": "Label for 'decimalLimit' builder field",
     "originalDefault": "Decimal places"
+  },
+  "C48xJT": {
+    "defaultMessage": "Items expression",
+    "description": "Label for 'openForms.itemsExpression' builder field",
+    "originalDefault": "Items expression"
   },
   "C64ptd": {
     "defaultMessage": "Maximum length",
@@ -263,6 +283,11 @@
     "defaultMessage": "Custom error messages for this component and their translations",
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
+  },
+  "DJWATl": {
+    "defaultMessage": "The values that can be picked for this field. Values are the text that is submitted with the form data. Labels are the text next to radio buttons, checkboxes and options in dropdowns.",
+    "description": "Tooltip for 'values' builder field",
+    "originalDefault": "The values that can be picked for this field. Values are the text that is submitted with the form data. Labels are the text next to radio buttons, checkboxes and options in dropdowns."
   },
   "Dm3S1P": {
     "defaultMessage": "Placeholder",
@@ -309,6 +334,11 @@
     "description": "Save component configuration button",
     "originalDefault": "Save"
   },
+  "FOlQaP": {
+    "defaultMessage": "Label",
+    "description": "Option label table header/label",
+    "originalDefault": "Label"
+  },
   "Fc/emc": {
     "defaultMessage": "Add another",
     "description": "'Add another' button text for 'multiple' components",
@@ -329,6 +359,11 @@
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
   },
+  "IOko1U": {
+    "defaultMessage": "Remove",
+    "description": "Values table: accessible label to remove an option",
+    "originalDefault": "Remove"
+  },
   "JDYF2q": {
     "defaultMessage": "The data entered in this component will be removed in accordance with the privacy settings.",
     "description": "Tooltip for 'IsSensitiveData' builder field",
@@ -348,6 +383,11 @@
     "defaultMessage": "Hidden",
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
+  },
+  "Kj8P8I": {
+    "defaultMessage": "Option value",
+    "description": "Accessible label for option value",
+    "originalDefault": "Option value"
   },
   "KrJ+rN": {
     "defaultMessage": "The maximum number of files that can be uploaded.",
@@ -399,6 +439,11 @@
     "description": "Label identifier role main",
     "originalDefault": "Main"
   },
+  "RuAQwk": {
+    "defaultMessage": "Add/remove",
+    "description": "Option add/remove table header/label",
+    "originalDefault": "Add/remove"
+  },
   "RxmRzd": {
     "defaultMessage": "When this is checked, the filetypes configured in the global settings will be used.",
     "description": "Tooltip for 'useConfigFiletypes' builder field",
@@ -438,6 +483,16 @@
     "defaultMessage": "Select the plugin(s) to use for the validation functionality.",
     "description": "Tooltip for 'validate.plugins' builder field",
     "originalDefault": "Select the plugin(s) to use for the validation functionality."
+  },
+  "UlVtQd": {
+    "defaultMessage": "Move up",
+    "description": "Options table: move option up",
+    "originalDefault": "Move up"
+  },
+  "UmLruQ": {
+    "defaultMessage": "Data source",
+    "description": "Label for 'openForms.dataSrc' builder field",
+    "originalDefault": "Data source"
   },
   "Un5b5T": {
     "defaultMessage": "Minimum time",
@@ -533,6 +588,11 @@
     "defaultMessage": "Maximum number of files",
     "description": "Label for 'maxNumberOfFiles' builder field",
     "originalDefault": "Maximum number of files"
+  },
+  "arAMAF": {
+    "defaultMessage": "The option label is a required field.",
+    "description": "Form builder option label required error",
+    "originalDefault": "The option label is a required field."
   },
   "asZV7t": {
     "defaultMessage": "Derive street name",
@@ -649,6 +709,11 @@
     "description": "Label for 'registration.informatieobjecttype' builder field",
     "originalDefault": "Information object type"
   },
+  "fe3wyn": {
+    "defaultMessage": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component.",
+    "description": "Description for the 'openForms.itemsExpression' builder field",
+    "originalDefault": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component."
+  },
   "h0B9Fr": {
     "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
     "description": "Form builder 'key' pattern validation error",
@@ -679,15 +744,30 @@
     "description": "Label for 'ClearOnHide' builder field",
     "originalDefault": "Clear on hide"
   },
+  "j2vQH3": {
+    "defaultMessage": "Values",
+    "description": "Label for the 'values' builder field",
+    "originalDefault": "Values"
+  },
   "jLg5l6": {
     "defaultMessage": "House number component",
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
+  "k1+ljn": {
+    "defaultMessage": "Move down",
+    "description": "Options table: move option down",
+    "originalDefault": "Move down"
+  },
   "k9tAyW": {
     "defaultMessage": "Error message",
     "description": "Label for translation message for validation error code",
     "originalDefault": "Error message"
+  },
+  "kg/eh1": {
+    "defaultMessage": "Choice/option translations",
+    "description": "Values/options translations table header",
+    "originalDefault": "Choice/option translations"
   },
   "kkTfpu": {
     "defaultMessage": "Description",
@@ -749,10 +829,20 @@
     "description": "Component translations 'suffix' property label",
     "originalDefault": "Suffix (e.g. m²)"
   },
+  "p7g2h+": {
+    "defaultMessage": "Add another",
+    "description": "Add another option button label",
+    "originalDefault": "Add another"
+  },
   "pDJBaK": {
     "defaultMessage": "Minimum value",
     "description": "Label for 'validate.min' builder field",
     "originalDefault": "Minimum value"
+  },
+  "paY2Oa": {
+    "defaultMessage": "Options from expression: <code>{expression}</code>",
+    "description": "Selectboxes dummy option for itemsExpression",
+    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "pq7q6N": {
     "defaultMessage": "Show in PDF",
@@ -763,6 +853,11 @@
     "defaultMessage": "Registration",
     "description": "Component edit form tab title for 'Registration' tab",
     "originalDefault": "Registration"
+  },
+  "sU/n0S": {
+    "defaultMessage": "Manually fill in",
+    "description": "Data source option label for value 'manual'",
+    "originalDefault": "Manually fill in"
   },
   "sgmcmf": {
     "defaultMessage": "Plugin attribute",
@@ -804,6 +899,16 @@
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
+  "wOq8Pb": {
+    "defaultMessage": "Translation for option with value \"{value}\"",
+    "description": "Accessible label for option label translation field",
+    "originalDefault": "Translation for option with value \"{value}\""
+  },
+  "wRNK2B": {
+    "defaultMessage": "Value",
+    "description": "Option value table header/label",
+    "originalDefault": "Value"
+  },
   "wZ99FU": {
     "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",
     "description": "Tooltip for 'validate.pattern' builder field",
@@ -838,6 +943,11 @@
     "defaultMessage": "Hide a field from the form.",
     "description": "Tooltip for 'Hidden' builder field",
     "originalDefault": "Hide a field from the form."
+  },
+  "ySkT14": {
+    "defaultMessage": "How to specify the available options.",
+    "description": "Tooltip for 'openForms.dataSrc' builder field",
+    "originalDefault": "How to specify the available options."
   },
   "yujuQr": {
     "defaultMessage": "Maximum height",
