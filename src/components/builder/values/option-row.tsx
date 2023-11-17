@@ -115,6 +115,8 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
         <button
           type="button"
           className="btn btn-secondary formio-button-remove-row"
+          // TODO: in new design -> implement this in a proper accessible way
+          disabled={numOptions <= 1}
           aria-label={intl.formatMessage({
             description: 'Values table: accessible label to remove an option',
             defaultMessage: 'Remove',

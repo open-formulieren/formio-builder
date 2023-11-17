@@ -5,4 +5,5 @@
  *  - selectboxes
  *  - radio
  */
-export {default as ValuesTable} from './ValuesTable';
+export {default as ValuesTable} from './values-table';
+export {default as ValuesTranslations} from './i18n';

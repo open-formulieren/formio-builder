@@ -22,7 +22,7 @@ export interface ValuesTranslationsProps<S> {
  * `ComponentTranslations` so that all translations are managed in a single
  * tab.
  */
-function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
+export function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
   const intl = useIntl();
   const {activeLanguage} = useContext(ComponentTranslationsContext);
   const {getFieldProps} = useFormikContext<S>();
