@@ -12,7 +12,7 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<IbanComponentSchema>> = ({component}) => {
-  const {key, label, description, placeholder, tooltip, validate = {}, multiple} = component;
+  const {key, label, description, tooltip, validate = {}, multiple} = component;
   const {required = false} = validate;
   return (
     <TextField
@@ -21,7 +21,6 @@ const Preview: React.FC<ComponentPreviewProps<IbanComponentSchema>> = ({componen
       label={label}
       description={description}
       tooltip={tooltip}
-      placeholder={placeholder}
       required={required}
     />
   );
