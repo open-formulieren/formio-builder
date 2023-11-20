@@ -1109,3 +1109,205 @@ export const SelectBoxes: Story = {
     });
   },
 };
+
+export const Radio: Story = {
+  render: Template,
+  name: 'type: radio',
+
+  args: {
+    component: {
+      id: 'wqimsadk',
+      type: 'radio',
+      key: 'radio',
+      label: 'A radio field',
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      values: [],
+      defaultValue: '',
+    },
+
+    builderInfo: {
+      title: 'Radio',
+      icon: 'dot-circle-o',
+      group: 'basic',
+      weight: 100,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const editForm = within(canvas.getByTestId('componentEditForm'));
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A radio field');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aRadioField');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label'));
+
+    const previewInput = preview.getByRole('radio');
+    await expect(previewInput).toBeChecked(); // matches '' value
+
+    // Ensure that the manually entered key is kept instead of derived from the label,
+    // even when key/label components are not mounted.
+    const keyInput = canvas.getByLabelText('Property Name');
+    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+    // not have any value, which triggers the generate-key-from-label behaviour.
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+
+    await step('Set up manual options', async () => {
+      // enter some possible options
+      const firstOptionLabelInput = canvas.getByLabelText('Option label');
+      expect(firstOptionLabelInput).toHaveDisplayValue('');
+      await userEvent.type(firstOptionLabelInput, 'Option label 1');
+      const firstOptionValue = canvas.getByLabelText('Option value');
+      await waitFor(() => expect(firstOptionValue).toHaveDisplayValue('optionLabel1'));
+
+      // add a second option
+      await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+      const optionLabels = canvas.queryAllByLabelText('Option label');
+      const optionValues = canvas.queryAllByLabelText('Option value');
+      expect(optionLabels).toHaveLength(2);
+      expect(optionValues).toHaveLength(2);
+      await userEvent.type(optionValues[1], 'manualValue');
+      await userEvent.type(optionLabels[1], 'Second option');
+
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        id: 'wqimsadk',
+        type: 'radio',
+        // basic tab
+        label: 'Other label',
+        key: 'customKey',
+        description: '',
+        tooltip: '',
+        showInSummary: true,
+        showInEmail: false,
+        showInPDF: true,
+        hidden: false,
+        clearOnHide: true,
+        isSensitiveData: false,
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [
+          {
+            value: 'optionLabel1',
+            label: 'Option label 1',
+          },
+          {
+            value: 'manualValue',
+            label: 'Second option',
+            openForms: {translations: {}},
+          },
+        ],
+        defaultValue: '',
+        // Advanced tab
+        conditional: {
+          show: undefined,
+          when: '',
+          eq: '',
+        },
+        // Validation tab
+        validate: {
+          required: false,
+          plugins: [],
+        },
+        translatedErrors: {
+          nl: {required: ''},
+        },
+        // registration tab
+        registration: {
+          attribute: '',
+        },
+      });
+      // @ts-expect-error
+      args.onSubmit.mockClear();
+    });
+
+    await step('Option labels are translatable', async () => {
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // check that the option labels are in the translations table
+      expect(await editForm.findByText('Option label 1')).toBeVisible();
+      expect(await editForm.findByText('Second option')).toBeVisible();
+    });
+
+    await step('Set up itemsExpression for options', async () => {
+      await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+
+      canvas.getByLabelText('Data source').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await userEvent.click(await canvas.findByText('From variable'));
+      const itemsExpressionInput = canvas.getByLabelText('Items expression');
+      await userEvent.clear(itemsExpressionInput);
+      // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
+      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
+      await userEvent.type(itemsExpressionInput, expression);
+
+      await expect(editForm.queryByLabelText('Default value')).toBeNull();
+      await expect(preview.getByRole('radio', {name: /Options from expression:/})).toBeVisible();
+
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        id: 'wqimsadk',
+        type: 'radio',
+        // basic tab
+        label: 'Other label',
+        key: 'customKey',
+        description: '',
+        tooltip: '',
+        showInSummary: true,
+        showInEmail: false,
+        showInPDF: true,
+        hidden: false,
+        clearOnHide: true,
+        isSensitiveData: false,
+        openForms: {
+          dataSrc: 'variable',
+          itemsExpression: {var: 'someVar'},
+          translations: {},
+        },
+        defaultValue: '',
+        // Advanced tab
+        conditional: {
+          show: undefined,
+          when: '',
+          eq: '',
+        },
+        // Validation tab
+        validate: {
+          required: false,
+          plugins: [],
+        },
+        translatedErrors: {
+          nl: {required: ''},
+        },
+        // registration tab
+        registration: {
+          attribute: '',
+        },
+      });
+      // @ts-expect-error
+      args.onSubmit.mockClear();
+    });
+  },
+};

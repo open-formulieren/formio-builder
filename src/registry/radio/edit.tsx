@@ -61,7 +61,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
   // Ensure that form state is reset if the values source changes.
   useLayoutEffect(() => {
     if (dataSrc !== 'variable' || isEqual(defaultValue, {})) return;
-    setFieldValue('defaultValue', {});
+    setFieldValue('defaultValue', '');
   }, [dataSrc]);
 
   return (
