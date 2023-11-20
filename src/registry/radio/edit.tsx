@@ -24,7 +24,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {SelectBoxes, TabList, TabPanel, Tabs} from '@/components/formio';
+import {Radio, TabList, TabPanel, Tabs} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -187,7 +187,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
   });
 
   return (
-    <SelectBoxes
+    <Radio
       name="defaultValue"
       options={options}
       label={<FormattedMessage {...LABELS.defaultValue} />}

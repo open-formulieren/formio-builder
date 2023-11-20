@@ -1,7 +1,7 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
-import {SelectBoxes} from '@/components/formio';
+import {Radio} from '@/components/formio';
 
 import {ComponentPreviewProps} from '../types';
 import {checkIsManualOptions} from './helpers';
@@ -36,7 +36,7 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
         },
       ];
   return (
-    <SelectBoxes
+    <Radio
       name={key}
       options={options}
       label={label}
