@@ -34,7 +34,6 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   const {value, onChange: formikOnChange} = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
   const {errors, hasErrors} = useValidationErrors(name);
-  // const [{value}, {touched}] = useField<string | undefined>(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const {bareInput} = useContext(RenderContext);
 
