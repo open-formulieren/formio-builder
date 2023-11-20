@@ -117,21 +117,21 @@ The builder form is the form + preview shown in the edit component modal.
 - [ ] Implement the builder forms for the supported component types
   - [x] `textfield`
   - [ ] `textarea`
-  - [ ] `checkbox`
-  - [ ] `selectboxes`
+  - [x] `checkbox`
+  - [x] `selectboxes`
   - [ ] `select`
   - [ ] `radio`
   - [x] `number`
-  - [ ] `currency`
+  - [x] `currency`
   - [x] `email`
   - [x] `date`
   - [x] `datetime`
   - [x] `time`
   - [x] `phoneNumber`
   - [x] `postcode`
-  - [ ] `file`
-  - [ ] `iban`
-  - [ ] `licenseplate`
+  - [x] `file`
+  - [x] `iban`
+  - [x] `licenseplate`
   - [ ] `bsn`
   - [ ] `npFamilyMembers`
   - [ ] `signature`
