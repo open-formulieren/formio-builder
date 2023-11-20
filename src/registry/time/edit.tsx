@@ -52,8 +52,6 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
     'invalid_time',
   ]);
 
-  console.log(errors);
-
   return (
     <Tabs>
       <TabList>

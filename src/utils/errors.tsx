@@ -7,6 +7,11 @@ export function getErrorNames<Values = unknown>(errors: FormikErrors<Values>): s
   Object.entries(errors).forEach(([key, nested]) => {
     if (Array.isArray(nested)) {
       const nestedNames = nested.map((item, index) => {
+        // ArrayField and arrayHelpers does some questionable things, see Github issue:
+        // https://github.com/jaredpalmer/formik/issues/1811#issuecomment-552029935
+        if (item === undefined) {
+          return [];
+        }
         if (typeof item === 'string') {
           if (item) {
             return [`${key}.${index}`];

@@ -11,6 +11,7 @@ import Licenseplate from './licenseplate';
 import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
+import Selectboxes from './selectboxes';
 import TextField from './textfield';
 import TimeField from './time';
 import {Registry, RegistryEntry} from './types';
@@ -39,6 +40,7 @@ const REGISTRY: Registry = {
   phoneNumber: PhoneNumber,
   postcode: Postcode,
   file: FileUpload,
+  selectboxes: Selectboxes,
   currency: Currency,
   // Special types:
   iban: Iban,

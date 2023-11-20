@@ -74,6 +74,46 @@ export const buildCommonSchema = (intl: IntlShape) =>
     key: buildKeySchema(intl),
   });
 
+// From https://zod.dev/?id=json-type
+const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
+type Literal = z.infer<typeof literalSchema>;
+type Json = Literal | {[key: string]: Json} | Json[];
+export const jsonSchema: z.ZodType<Json> = z.lazy(() =>
+  z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)])
+);
+
+// Maps to @open-formulieren/types common.ts Option type.
+const optionTranslationSchema = z.object({
+  label: z.string(),
+});
+
+export const optionSchema = (intl: IntlShape) =>
+  z.object({
+    value: z
+      .string({
+        required_error: intl.formatMessage({
+          description: 'Form builder option value required error',
+          defaultMessage: 'The option value is a required field.',
+        }),
+      })
+      .min(1),
+    label: z
+      .string({
+        required_error: intl.formatMessage({
+          description: 'Form builder option label required error',
+          defaultMessage: 'The option label is a required field.',
+        }),
+      })
+      .min(1),
+    openForms: z
+      .object({
+        // zod doesn't seem to be able to use our supportedLanguageCodes for z.object keys,
+        // they need to be defined statically. So, 'record' it is.
+        translations: z.record(optionTranslationSchema.optional()),
+      })
+      .optional(),
+  });
+
 /*
 Helpers
  */

@@ -13,7 +13,7 @@ const ValuesTranslationsComponent = ValuesTranslations<{
 }>;
 
 export default {
-  title: 'Formio/Builder/ValuesTable/Translations',
+  title: 'Formio/Builder/Values/Translations',
   component: ValuesTranslationsComponent,
   render: args => (
     <Component type="datagrid">

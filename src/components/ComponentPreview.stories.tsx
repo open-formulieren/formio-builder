@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, within} from '@storybook/testing-library';
 
 import ComponentPreview from './ComponentPreview';
 
@@ -613,5 +613,74 @@ export const File: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('File upload preview');
     await canvas.findByText('A preview of the file Formio component');
+  },
+};
+
+export const SelectBoxes: Story = {
+  name: 'Selectboxes manual values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'selectboxes',
+      id: 'selectboxes',
+      key: 'selectboxesPreview',
+      label: 'Selectboxes preview',
+      description: 'A preview of the selectboxes Formio component',
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      values: [
+        {
+          value: 'option1',
+          label: 'Option 1',
+        },
+        {
+          value: 'option2',
+          label: 'Option 2',
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Selectboxes preview');
+    await canvas.findByText('A preview of the selectboxes Formio component');
+
+    // check that the input name is set correctly
+    const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
+    // @ts-ignore
+    await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
+
+    // check the toggle state of a checkbox
+    await expect(firstOptionInput).not.toBeChecked();
+    // https://github.com/testing-library/user-event/issues/1149 applies to radio and
+    // checkbox inputs
+    fireEvent.click(canvas.getByText('Option 1'));
+    await expect(firstOptionInput).toBeChecked();
+  },
+};
+
+export const SelectBoxesVariable: Story = {
+  name: 'Selectboxes variable for values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'selectboxes',
+      id: 'selectboxes',
+      key: 'selectboxesPreview',
+      label: 'Selectboxes preview',
+      description: 'A preview of the selectboxes Formio component',
+      openForms: {
+        dataSrc: 'variable',
+        itemsExpression: {var: 'foo'},
+        translations: {},
+      },
+    },
   },
 };

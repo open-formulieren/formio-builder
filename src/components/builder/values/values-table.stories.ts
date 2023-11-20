@@ -3,16 +3,16 @@ import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
 import {userEvent, within} from '@storybook/testing-library';
 
-import {withFormik} from '@/../.storybook/decorators';
+import {withFormik} from '@/sb-decorators';
 
-import ValuesTable from './ValuesTable';
+import ValuesTable from './values-table';
 
 const ValuesTableComponent = ValuesTable<{
   values: Option[];
 }>;
 
 export default {
-  title: 'Formio/Builder/ValuesTable',
+  title: 'Formio/Builder/Values/Table',
   component: ValuesTableComponent,
   decorators: [withFormik],
   parameters: {

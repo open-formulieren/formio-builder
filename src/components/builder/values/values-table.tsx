@@ -1,11 +1,11 @@
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {FieldArray, useFormikContext} from 'formik';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {Component} from '@/components/formio';
 import {PathsForValueType} from '@/types';
 
-import OptionRow from './OptionRow';
+import OptionRow from './option-row';
 
 export interface ValuesTableProps<S> {
   /**
@@ -31,11 +31,29 @@ export interface ValuesTableProps<S> {
  * component.
  */
 function ValuesTable<S>({name}: ValuesTableProps<S>) {
+  const intl = useIntl();
   const {getFieldProps} = useFormikContext();
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
 
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'values' builder field",
+    defaultMessage: `The values that can be picked for this field. Values are the text
+    that is submitted with the form data. Labels are the text next to radio buttons,
+    checkboxes and options in dropdowns.
+    `,
+  });
+
   return (
-    <Component type="datagrid">
+    <Component
+      type="datagrid"
+      label={
+        <FormattedMessage
+          description="Label for the 'values' builder field"
+          defaultMessage="Values"
+        />
+      }
+      tooltip={tooltip}
+    >
       <FieldArray name={name}>
         {arrayHelpers => (
           <table className="table table-bordered">
@@ -43,7 +61,7 @@ function ValuesTable<S>({name}: ValuesTableProps<S>) {
               <tr>
                 <th />
 
-                <th>
+                <th className="field-required">
                   <FormattedMessage
                     description="Option label table header/label"
                     defaultMessage="Label"

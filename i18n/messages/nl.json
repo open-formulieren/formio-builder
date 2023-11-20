@@ -4,6 +4,11 @@
     "description": "Component property 'Property Name' label",
     "originalDefault": "Property Name"
   },
+  "+9x9sg": {
+    "defaultMessage": "Gebruik variabele",
+    "description": "Data source option label for value 'variable'",
+    "originalDefault": "From variable"
+  },
   "+XwAuT": {
     "defaultMessage": "Verwijderen",
     "description": "Remove component button",
@@ -65,7 +70,7 @@
     "originalDefault": "Regular Expression Pattern"
   },
   "1pC7IP": {
-    "defaultMessage": "Specifieer een template voor de naam van het/de ge\u00fcploade bestand(en). <code>'{{ fileName }}'</code> bevat de oorspronkelijke bestandsnaam.",
+    "defaultMessage": "Specifieer een template voor de naam van het/de geüploade bestand(en). <code>'{{ fileName }}'</code> bevat de oorspronkelijke bestandsnaam.",
     "description": "Tooltip for 'file.name' builder field",
     "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
   },
@@ -154,6 +159,11 @@
     "description": "Character count",
     "originalDefault": "{length} {length, plural, one {character} other {characters}}"
   },
+  "5xNPpS": {
+    "defaultMessage": "Optielabel",
+    "description": "Accessible label for option label",
+    "originalDefault": "Option label"
+  },
   "5y8Yt4": {
     "defaultMessage": "Sla het bestand op in de Documenten API met dit documenttype. Indien leeg, dan worden algemene instellingen gebruikt.",
     "description": "Tooltip for 'registration.informatieobjecttype' builder field",
@@ -234,10 +244,20 @@
     "description": "Placeholder for 'validate.min' builder field",
     "originalDefault": "Minimum value"
   },
+  "BKe/DT": {
+    "defaultMessage": "De optiewaarde is een verplicht veld.",
+    "description": "Form builder option value required error",
+    "originalDefault": "The option value is a required field."
+  },
   "BvRBef": {
     "defaultMessage": "Decimalen",
     "description": "Label for 'decimalLimit' builder field",
     "originalDefault": "Decimal places"
+  },
+  "C48xJT": {
+    "defaultMessage": "Opties-expressie",
+    "description": "Label for 'openForms.itemsExpression' builder field",
+    "originalDefault": "Items expression"
   },
   "C64ptd": {
     "defaultMessage": "Maximale lengte",
@@ -264,6 +284,11 @@
     "defaultMessage": "Foutmeldingen specifiek voor dit component, inclusief vertalingen",
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
+  },
+  "DJWATl": {
+    "defaultMessage": "De mogelijke keuzeopties voor dit veld. De waarden worden in de formuliergegevens opgeslagen. De labels zijn de teksten die aan de gebruiker getoond worden.",
+    "description": "Tooltip for 'values' builder field",
+    "originalDefault": "The values that can be picked for this field. Values are the text that is submitted with the form data. Labels are the text next to radio buttons, checkboxes and options in dropdowns."
   },
   "Dm3S1P": {
     "defaultMessage": "Placeholder",
@@ -311,6 +336,12 @@
     "description": "Save component configuration button",
     "originalDefault": "Save"
   },
+  "FOlQaP": {
+    "defaultMessage": "Label",
+    "description": "Option label table header/label",
+    "isTranslated": true,
+    "originalDefault": "Label"
+  },
   "Fc/emc": {
     "defaultMessage": "Nog één toevoegen",
     "description": "'Add another' button text for 'multiple' components",
@@ -330,6 +361,11 @@
     "defaultMessage": "Alleen-lezen",
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
+  },
+  "IOko1U": {
+    "defaultMessage": "Verwijderen",
+    "description": "Values table: accessible label to remove an option",
+    "originalDefault": "Remove"
   },
   "JDYF2q": {
     "defaultMessage": "Gegevens opgevoerd in dit component worden geschoond volgens de privacy-instellingen.",
@@ -351,6 +387,11 @@
     "defaultMessage": "Verborgen",
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
+  },
+  "Kj8P8I": {
+    "defaultMessage": "Optiewaarde",
+    "description": "Accessible label for option value",
+    "originalDefault": "Option value"
   },
   "KrJ+rN": {
     "defaultMessage": "Het maximaal aantal bestanden die mogen geüpload worden.",
@@ -403,6 +444,11 @@
     "description": "Label identifier role main",
     "originalDefault": "Main"
   },
+  "RuAQwk": {
+    "defaultMessage": "Verwijderen",
+    "description": "Option add/remove table header/label",
+    "originalDefault": "Add/remove"
+  },
   "RxmRzd": {
     "defaultMessage": "Indien ingeschakeld, gebruik dan de algemene instellingen voor toegestane bestandstypen.",
     "description": "Tooltip for 'useConfigFiletypes' builder field",
@@ -443,6 +489,16 @@
     "defaultMessage": "Selecteer de plugin(s) om te gebruiken voor validatie.",
     "description": "Tooltip for 'validate.plugins' builder field",
     "originalDefault": "Select the plugin(s) to use for the validation functionality."
+  },
+  "UlVtQd": {
+    "defaultMessage": "Omhoog",
+    "description": "Options table: move option up",
+    "originalDefault": "Move up"
+  },
+  "UmLruQ": {
+    "defaultMessage": "Keuzeopties",
+    "description": "Label for 'openForms.dataSrc' builder field",
+    "originalDefault": "Data source"
   },
   "Un5b5T": {
     "defaultMessage": "Minimale tijd",
@@ -538,6 +594,11 @@
     "defaultMessage": "Maximum aantal bestanden",
     "description": "Label for 'maxNumberOfFiles' builder field",
     "originalDefault": "Maximum number of files"
+  },
+  "arAMAF": {
+    "defaultMessage": "Het optielabel is een verplicht veld.",
+    "description": "Form builder option label required error",
+    "originalDefault": "The option label is a required field."
   },
   "asZV7t": {
     "defaultMessage": "Straatnaam afleiden",
@@ -656,6 +717,11 @@
     "description": "Label for 'registration.informatieobjecttype' builder field",
     "originalDefault": "Information object type"
   },
+  "fe3wyn": {
+    "defaultMessage": "Geef een JsonLogic expressie voor de lijst van mogelijke opties. Evaluatie van de expressie moet een lijst teruggeven, waarbij elk element een lijst (array) is van [waarde, label] combinaties.",
+    "description": "Description for the 'openForms.itemsExpression' builder field",
+    "originalDefault": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component."
+  },
   "h0B9Fr": {
     "defaultMessage": "De eigenschapsnaam mag alleen alfanumerieke tekens, onderstrepingstekens, punten en streepjes bevatten en mag niet worden afgesloten met een streepje of punt.",
     "description": "Form builder 'key' pattern validation error",
@@ -686,15 +752,30 @@
     "description": "Label for 'ClearOnHide' builder field",
     "originalDefault": "Clear on hide"
   },
+  "j2vQH3": {
+    "defaultMessage": "Waarden",
+    "description": "Label for the 'values' builder field",
+    "originalDefault": "Values"
+  },
   "jLg5l6": {
     "defaultMessage": "Huisnummercomponent",
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
+  "k1+ljn": {
+    "defaultMessage": "Omlaag",
+    "description": "Options table: move option down",
+    "originalDefault": "Move down"
+  },
   "k9tAyW": {
     "defaultMessage": "Foutmelding",
     "description": "Label for translation message for validation error code",
     "originalDefault": "Error message"
+  },
+  "kg/eh1": {
+    "defaultMessage": "Waardenvertalingen",
+    "description": "Values/options translations table header",
+    "originalDefault": "Choice/option translations"
   },
   "kkTfpu": {
     "defaultMessage": "Beschrijving",
@@ -758,10 +839,20 @@
     "description": "Component translations 'suffix' property label",
     "originalDefault": "Suffix (e.g. m²)"
   },
+  "p7g2h+": {
+    "defaultMessage": "Nog één toevoegen",
+    "description": "Add another option button label",
+    "originalDefault": "Add another"
+  },
   "pDJBaK": {
     "defaultMessage": "Minimale waarde",
     "description": "Label for 'validate.min' builder field",
     "originalDefault": "Minimum value"
+  },
+  "paY2Oa": {
+    "defaultMessage": "Waarden via de expressie: <code>{expression}</code>",
+    "description": "Selectboxes dummy option for itemsExpression",
+    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "pq7q6N": {
     "defaultMessage": "Weergeven in PDF",
@@ -772,6 +863,11 @@
     "defaultMessage": "Registratie",
     "description": "Component edit form tab title for 'Registration' tab",
     "originalDefault": "Registration"
+  },
+  "sU/n0S": {
+    "defaultMessage": "Handmatig opvoeren",
+    "description": "Data source option label for value 'manual'",
+    "originalDefault": "Manually fill in"
   },
   "sgmcmf": {
     "defaultMessage": "Pluginattribuut",
@@ -813,6 +909,16 @@
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
+  "wOq8Pb": {
+    "defaultMessage": "Vertaling voor het label van de optie met waarde \"{value}\"",
+    "description": "Accessible label for option label translation field",
+    "originalDefault": "Translation for option with value \"{value}\""
+  },
+  "wRNK2B": {
+    "defaultMessage": "Waarde",
+    "description": "Option value table header/label",
+    "originalDefault": "Value"
+  },
   "wZ99FU": {
     "defaultMessage": "Het patroon van reguliere expressie waar de waarde aan moet voldoen voor het formulier kan verstuurd worden.",
     "description": "Tooltip for 'validate.pattern' builder field",
@@ -847,6 +953,11 @@
     "defaultMessage": "Verberg een veld in het formulier.",
     "description": "Tooltip for 'Hidden' builder field",
     "originalDefault": "Hide a field from the form."
+  },
+  "ySkT14": {
+    "defaultMessage": "Selecteer een databron voor de keuzeopties.",
+    "description": "Tooltip for 'openForms.dataSrc' builder field",
+    "originalDefault": "How to specify the available options."
   },
   "yujuQr": {
     "defaultMessage": "Maximale hoogte",
