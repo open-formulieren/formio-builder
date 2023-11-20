@@ -21,6 +21,7 @@ export {default as TimeField} from './timefield';
 export {default as Panel} from './panel';
 export {default as Select} from './select';
 export {default as SelectBoxes} from './selectboxes';
+export {default as Radio} from './radio';
 export {default as NumberField} from './number';
 export {default as TextArea} from './textarea';
 export * from './datagrid';
