@@ -44,7 +44,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
       inputRef.current.style.height = 'inherit';
       inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
     }
-  }, [value]);
+  }, [autoExpand, value]);
 
   const htmlId = `editform-${name}`;
   if (value === undefined && props.value === undefined) {

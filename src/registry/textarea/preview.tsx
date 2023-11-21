@@ -23,7 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
     disabled = false,
     multiple,
     showCharCount,
-    rows = 3,
+    rows,
     autoExpand = false,
   } = component;
   const {required = false} = validate;

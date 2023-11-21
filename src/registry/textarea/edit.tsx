@@ -93,7 +93,7 @@ const EditForm: EditFormDefinition<TextareaComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <DefaultValue multiple={!!values.multiple} rows={values.rows} />
+        <DefaultValue multiple={!!values.multiple} />
         <AutoComplete />
         <ReadOnly />
         <Placeholder />
@@ -181,10 +181,9 @@ EditForm.defaultValues = {
 
 interface DefaultValueProps {
   multiple: boolean;
-  rows: number;
 }
 
-const DefaultValue: React.FC<DefaultValueProps> = ({multiple, rows}) => {
+const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
@@ -196,7 +195,6 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple, rows}) => {
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
       multiple={multiple}
-      rows={rows}
     />
   );
 };
@@ -206,7 +204,7 @@ const AutoExpand: React.FC<{}> = () => {
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'AutoExpand' builder field",
     defaultMessage:
-      "This will make the text area auto expand it's height as the user is typing into the area.",
+      'This will make the text area auto expand its height as the user is typing into the area.',
   });
   return (
     <Checkbox
