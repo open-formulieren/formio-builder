@@ -13,6 +13,7 @@ import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import Radio from './radio';
+import Select from './select';
 import Selectboxes from './selectboxes';
 import Textarea from './textarea';
 import TextField from './textfield';
@@ -45,6 +46,7 @@ const REGISTRY: Registry = {
   postcode: Postcode,
   file: FileUpload,
   selectboxes: Selectboxes,
+  select: Select,
   currency: Currency,
   radio: Radio,
   // Special types:

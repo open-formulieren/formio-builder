@@ -8,6 +8,7 @@ import type {
 } from 'react-select/dist/declarations/src';
 
 import Component from './component';
+import Description from './description';
 
 // See https://react-select.com/typescript
 
@@ -20,6 +21,7 @@ export interface SelectProps<
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  description?: string;
   isClearable?: boolean;
   valueProperty?: string;
   onChange?: (event: {target: {name: string; value: any}}) => void;
@@ -75,6 +77,7 @@ function Select<
   label,
   required = false,
   tooltip = '',
+  description = '',
   isClearable = false,
   valueProperty = 'value',
   onChange,
@@ -124,6 +127,7 @@ function Select<
           value={value}
         />
       </div>
+      {description && <Description text={description} />}
     </Component>
   );
 }
