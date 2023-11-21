@@ -21,9 +21,10 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
     validate = {},
     autocomplete = '',
     disabled = false,
-    showCharCount,
     multiple,
+    showCharCount,
     rows = 3,
+    autoExpand = false,
   } = component;
   const {required = false} = validate;
   return (
@@ -38,6 +39,7 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
       autoComplete={autocomplete}
       readOnly={disabled}
       showCharCount={showCharCount}
+      autoExpand={autoExpand}
       rows={rows}
     />
   );

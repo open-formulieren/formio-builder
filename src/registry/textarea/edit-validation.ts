@@ -15,10 +15,12 @@ const multipleValueSchema = z
   .object({multiple: z.literal(true)})
   .and(z.object({defaultValue: textareaSchema.array()}));
 
+// Omit `autoExpand` as it will be set in the UI via a checkbox
 const textareaSpecific = z.object({
   validate: z.object({
-    maxLength: z.number(),
+    maxLength: z.number().int().gte(1).optional(),
   }),
+  rows: z.number().int().gte(1),
 });
 
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);

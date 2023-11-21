@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {useContext, useRef} from 'react';
+import {useContext, useLayoutEffect, useRef} from 'react';
 
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
@@ -17,6 +17,7 @@ export interface TextAreaProps {
   tooltip?: string;
   description?: React.ReactNode;
   showCharCount?: boolean;
+  autoExpand?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -27,6 +28,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   tooltip = '',
   description = '',
   showCharCount = false,
+  autoExpand = false,
   onChange,
   ...props
 }) => {
@@ -36,6 +38,13 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   const {errors, hasErrors} = useValidationErrors(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const {bareInput} = useContext(RenderContext);
+
+  useLayoutEffect(() => {
+    if (autoExpand && inputRef.current) {
+      inputRef.current.style.height = 'inherit';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+  }, [value]);
 
   const htmlId = `editform-${name}`;
   if (value === undefined && props.value === undefined) {
