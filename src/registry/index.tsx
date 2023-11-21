@@ -12,6 +12,7 @@ import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import Selectboxes from './selectboxes';
+import Textarea from './textarea';
 import TextField from './textfield';
 import TimeField from './time';
 import {Registry, RegistryEntry} from './types';
@@ -33,6 +34,7 @@ export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(
 const REGISTRY: Registry = {
   textfield: TextField,
   email: Email,
+  textarea: Textarea,
   number: NumberField,
   date: DateField,
   datetime: DateTimeField,

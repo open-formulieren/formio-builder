@@ -367,6 +367,81 @@ export const NumberField: Story = {
   },
 };
 
+export const Textarea: Story = {
+  render: Template,
+  name: 'type: textarea',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'textarea',
+      key: 'textarea',
+      label: 'A textarea field',
+      autoExpand: false,
+      rows: 3,
+      validate: {
+        required: false,
+      },
+    },
+
+    builderInfo: {
+      title: 'Textarea',
+      group: 'basic',
+      icon: 'hashtag',
+      schema: {placeholder: ''},
+      weight: 30,
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A textarea field');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextareaField');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label'));
+
+    const previewInput = preview.getByLabelText('Updated preview label');
+    await expect(previewInput).toHaveDisplayValue('');
+
+    // Ensure that the manually entered key is kept instead of derived from the label,
+    // even when key/label components are not mounted.
+    const keyInput = canvas.getByLabelText('Property Name');
+    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+    // not have any value, which triggers the generate-key-from-label behaviour.
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    // check that toggling the 'multiple' checkbox properly updates the preview and default
+    // value field. We use fireEvent because firefox borks on userEvent.click, see:
+    // https://github.com/testing-library/user-event/issues/1149
+    fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
+    await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
+    await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // test for the default value inputs -> these don't have accessible labels/names :(
+    const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
+    await userEvent.click(addButtons[0]);
+    expect(await canvas.findByTestId('input-defaultValue[0]'));
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
+  },
+};
+
 export const DateField: Story = {
   render: Template,
   name: 'type: date',
