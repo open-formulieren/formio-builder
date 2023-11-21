@@ -684,3 +684,72 @@ export const SelectBoxesVariable: Story = {
     },
   },
 };
+
+export const Radio: Story = {
+  name: 'Radio manual values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'radio',
+      id: 'radio',
+      key: 'radioPreview',
+      label: 'Radio preview',
+      description: 'A preview of the radio Formio component',
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      values: [
+        {
+          value: 'option1',
+          label: 'Option 1',
+        },
+        {
+          value: 'option2',
+          label: 'Option 2',
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Radio preview');
+    await canvas.findByText('A preview of the radio Formio component');
+
+    // check that the input name is set correctly
+    const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
+    // @ts-ignore
+    await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
+
+    // check the toggle state of a checkbox
+    await expect(firstOptionInput).not.toBeChecked();
+    // https://github.com/testing-library/user-event/issues/1149 applies to radio and
+    // checkbox inputs
+    fireEvent.click(canvas.getByText('Option 1'));
+    await expect(firstOptionInput).toBeChecked();
+  },
+};
+
+export const RadioVariable: Story = {
+  name: 'Radio variable for values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'radio',
+      id: 'radio',
+      key: 'radioPreview',
+      label: 'Radio preview',
+      description: 'A preview of the radio Formio component',
+      openForms: {
+        dataSrc: 'variable',
+        itemsExpression: {var: 'foo'},
+        translations: {},
+      },
+    },
+  },
+};
