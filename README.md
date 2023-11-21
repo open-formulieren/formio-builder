@@ -120,7 +120,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `checkbox`
   - [x] `selectboxes`
   - [ ] `select`
-  - [ ] `radio`
+  - [x] `radio`
   - [x] `number`
   - [x] `currency`
   - [x] `email`
