@@ -37,7 +37,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
           onChange={event => setpreviewMode(event.target.value as PreviewState)}
         />
       </div>
-      <div className="card-body" style={{maxHeight: '45vh', overflow: 'auto'}}>
+      <div className="card-body">
         {previewMode === 'editJSON' ? (
           <JSONEdit
             data={component}
@@ -56,7 +56,11 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
             }}
           >
             <div className="component-preview" data-testid="componentPreview">
-              {previewMode === 'rich' ? children : <JSONPreview data={component} />}
+              {previewMode === 'rich' ? (
+                children
+              ) : (
+                <JSONPreview data={component} style={{maxBlockSize: '45vh'}} />
+              )}
             </div>
           </Formik>
         )}
