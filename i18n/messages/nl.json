@@ -398,6 +398,16 @@
     "description": "Tooltip for 'maxNumberOfFiles' builder field",
     "originalDefault": "The maximum number of files that can be uploaded."
   },
+  "KwatvH": {
+    "defaultMessage": "Het aantal regels voor dit tekstvlak.",
+    "description": "Tooltip for 'NumberOfRows' builder field",
+    "originalDefault": "The number of rows for this text area."
+  },
+  "LJckD5": {
+    "defaultMessage": "Maak automatisch groter",
+    "description": "Label for 'AutoExpand' builder field",
+    "originalDefault": "Auto Expand"
+  },
   "Nsifca": {
     "defaultMessage": "De maximale datum die gekozen kan worden.",
     "description": "Date field 'maxDate' fixed value tooltip",
@@ -762,6 +772,11 @@
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
+  "jV58dA": {
+    "defaultMessage": "Dit zorgt ervoor dat het tekstvlak automatisch groter wordt wanneer de gebruiker tekst invoert.",
+    "description": "Tooltip for 'AutoExpand' builder field",
+    "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
+  },
   "k1+ljn": {
     "defaultMessage": "Omlaag",
     "description": "Options table: move option down",
@@ -848,6 +863,11 @@
     "defaultMessage": "Minimale waarde",
     "description": "Label for 'validate.min' builder field",
     "originalDefault": "Minimum value"
+  },
+  "pDVNSf": {
+    "defaultMessage": "Aantal rijen",
+    "description": "Label for 'NumberOfRows' builder field",
+    "originalDefault": "Number of rows"
   },
   "paY2Oa": {
     "defaultMessage": "Waarden via de expressie: <code>{expression}</code>",

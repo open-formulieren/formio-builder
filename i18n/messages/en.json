@@ -394,6 +394,16 @@
     "description": "Tooltip for 'maxNumberOfFiles' builder field",
     "originalDefault": "The maximum number of files that can be uploaded."
   },
+  "KwatvH": {
+    "defaultMessage": "The number of rows for this text area.",
+    "description": "Tooltip for 'NumberOfRows' builder field",
+    "originalDefault": "The number of rows for this text area."
+  },
+  "LJckD5": {
+    "defaultMessage": "Auto Expand",
+    "description": "Label for 'AutoExpand' builder field",
+    "originalDefault": "Auto Expand"
+  },
   "Nsifca": {
     "defaultMessage": "The maximum date that can be picked.",
     "description": "Date field 'maxDate' fixed value tooltip",
@@ -754,6 +764,11 @@
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
+  "jV58dA": {
+    "defaultMessage": "This will make the text area auto expand its height as the user is typing into the area.",
+    "description": "Tooltip for 'AutoExpand' builder field",
+    "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
+  },
   "k1+ljn": {
     "defaultMessage": "Move down",
     "description": "Options table: move option down",
@@ -838,6 +853,11 @@
     "defaultMessage": "Minimum value",
     "description": "Label for 'validate.min' builder field",
     "originalDefault": "Minimum value"
+  },
+  "pDVNSf": {
+    "defaultMessage": "Number of rows",
+    "description": "Label for 'NumberOfRows' builder field",
+    "originalDefault": "Number of rows"
   },
   "paY2Oa": {
     "defaultMessage": "Options from expression: <code>{expression}</code>",
