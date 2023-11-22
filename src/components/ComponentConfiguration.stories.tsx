@@ -912,6 +912,11 @@ export const FileUpload: Story = {
       });
       await expect(canvas.queryByText('.pdf')).toBeVisible();
       await userEvent.click(canvas.getByText('.jpg'));
+      // wait for dropdown to close and selected option to be visible;
+      await waitFor(async () => {
+        await expect(canvas.queryByText('.pdf')).toBeNull();
+      });
+      await expect(canvas.queryByText('.jpg')).toBeVisible();
     });
 
     await step('Submit configuration', async () => {
