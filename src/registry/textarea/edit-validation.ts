@@ -20,7 +20,7 @@ const textareaSpecific = z.object({
   validate: z.object({
     maxLength: z.number().int().gte(1).optional(),
   }),
-  rows: z.number().int().gte(1),
+  rows: z.number().int().gte(1).optional(),
 });
 
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
