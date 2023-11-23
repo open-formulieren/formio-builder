@@ -1683,9 +1683,72 @@ export const BSN: Story = {
       await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
-    // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
     await expect(defaultInput0.type).toEqual('text');
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    expect(args.onSubmit).toHaveBeenCalled();
+  },
+};
+
+export const Checkbox: Story = {
+  render: Template,
+  name: 'type: checkbox',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'checkbox',
+      key: 'checkbox',
+      label: 'A checkbox field',
+      validate: {
+        required: false,
+      },
+      defaultValue: false,
+    },
+
+    builderInfo: {
+      title: 'Checkbox',
+      icon: 'check-square',
+      group: 'basic',
+      weight: 50,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A checkbox field');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCheckboxField');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+
+    // ensure that changing fields in the edit form properly update the preview
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label'));
+
+    const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
+    await expect(previewInput).not.toBeChecked();
+    await expect(previewInput.type).toEqual('checkbox');
+
+    // Ensure that the manually entered key is kept instead of derived from the label,
+    // even when key/label components are not mounted.
+    const keyInput = canvas.getByLabelText('Property Name');
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
