@@ -1,6 +1,7 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 import BSN from './bsn';
+import Checkbox from './checkbox';
 import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
@@ -37,14 +38,15 @@ export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(
 const REGISTRY: Registry = {
   textfield: TextField,
   email: Email,
-  textarea: Textarea,
-  number: NumberField,
   date: DateField,
   datetime: DateTimeField,
   time: TimeField,
   phoneNumber: PhoneNumber,
   postcode: Postcode,
   file: FileUpload,
+  textarea: Textarea,
+  number: NumberField,
+  checkbox: Checkbox,
   selectboxes: Selectboxes,
   select: Select,
   currency: Currency,
