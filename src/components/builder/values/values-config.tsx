@@ -8,6 +8,14 @@ import {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
 import ValuesTable, {ValuesTableProps} from './values-table';
 
+/**
+ * Check if the dotted `path` exists on `obj`.
+ *
+ * @example
+ * ```
+ * isNestedKeySet({my: {path: 'irrelevant'}}, 'my.path') // true
+ * ```
+ */
 function isNestedKeySet(obj: {}, path: string): boolean {
   const bits = path.split('.');
   for (const bit of bits) {

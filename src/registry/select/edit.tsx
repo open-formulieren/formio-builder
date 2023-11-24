@@ -41,6 +41,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
   const {
     openForms: {dataSrc},
     defaultValue,
+    multiple,
   } = values;
 
   const erroredFields = Object.keys(errors).length
@@ -61,8 +62,9 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
 
   // Ensure that form state is reset if the values source changes.
   useLayoutEffect(() => {
-    if (dataSrc !== 'variable' || isEqual(defaultValue, {})) return;
-    setFieldValue('defaultValue', '');
+    const emptyDefaultValue = multiple ? [] : '';
+    if (dataSrc !== 'variable' || isEqual(defaultValue, emptyDefaultValue)) return;
+    setFieldValue('defaultValue', emptyDefaultValue);
   }, [dataSrc]);
 
   return (
