@@ -1,5 +1,6 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import BSN from './bsn';
 import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
@@ -49,6 +50,7 @@ const REGISTRY: Registry = {
   // Special types:
   iban: Iban,
   licenseplate: Licenseplate,
+  bsn: BSN,
 };
 
 export {Fallback};

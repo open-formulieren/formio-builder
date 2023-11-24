@@ -753,3 +753,77 @@ export const RadioVariable: Story = {
     },
   },
 };
+
+export const BSN: Story = {
+  name: 'BSN',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'bsn',
+      id: 'bsn',
+      key: 'bsnPreview',
+      label: 'BSN preview',
+      description: 'A preview of the BSN Formio component',
+      hidden: true, // must be ignored
+      inputMask: '999999999',
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('BSN preview');
+    await canvas.findByText('A preview of the BSN Formio component');
+
+    // check that the input name is set correctly
+    const input = canvas.getByLabelText('BSN preview');
+    // @ts-ignore
+    await expect(input.getAttribute('name')).toBe(args.component.key);
+
+    expect(input).toHaveAttribute('placeholder', '_________');
+    await userEvent.type(input, '123456789');
+    expect(input).toHaveDisplayValue('123456789');
+  },
+};
+
+export const BSNMultiple: Story = {
+  name: 'BSN Multiple',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'bsn',
+      id: 'bsn',
+      key: 'bsnPreview',
+      label: 'BSN preview',
+      description: 'Description only once',
+      hidden: true, // must be ignored
+      multiple: true,
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that new items can be added
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input1 = canvas.getByTestId<HTMLInputElement>('input-bsnPreview[0]');
+    await expect(input1).toHaveDisplayValue('');
+    await expect(input1.type).toEqual('text');
+
+    // the description should be rendered only once, even with > 1 inputs
+    await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
+    const input2 = canvas.getByTestId<HTMLInputElement>('input-bsnPreview[1]');
+    await expect(input2).toHaveDisplayValue('');
+    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+
+    // finally, it should be possible delete rows again
+    const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
+    await expect(removeButtons.length).toBe(2);
+    await userEvent.click(removeButtons[0]);
+    await expect(canvas.getByTestId('input-bsnPreview[0]')).toHaveDisplayValue('');
+    await expect(canvas.queryByTestId('input-bsnPreview[1]')).not.toBeInTheDocument();
+  },
+};
