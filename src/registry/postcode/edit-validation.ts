@@ -7,7 +7,7 @@ import {buildCommonSchema, getErrorMap, isInvalidStringIssue} from '@/registry/v
 import {POSTCODE_REGEX} from './constants';
 
 const VALIDATION_MESSAGES = defineMessages({
-  email: {
+  postcode: {
     description: 'Invalid postcode format validation error',
     defaultMessage: '{field} must be a valid postcode.',
   },
@@ -19,7 +19,7 @@ const buildDefaultValueSchema = (intl: IntlShape) => {
       errorMap: getErrorMap(issue => {
         if (isInvalidStringIssue(issue) && issue.validation === 'regex') {
           const fieldLabel = intl.formatMessage(LABELS.defaultValue);
-          return intl.formatMessage(VALIDATION_MESSAGES.email, {field: fieldLabel});
+          return intl.formatMessage(VALIDATION_MESSAGES.postcode, {field: fieldLabel});
         }
         return;
       }),
