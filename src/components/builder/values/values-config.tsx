@@ -1,10 +1,33 @@
 import {useFormikContext} from 'formik';
 import {useLayoutEffect} from 'react';
 
+import {hasOwnProperty} from '@/types';
+
 import ItemsExpression from './items-expression';
 import {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
 import ValuesTable, {ValuesTableProps} from './values-table';
+
+/**
+ * Check if the dotted `path` exists on `obj`.
+ *
+ * @example
+ * ```
+ * isNestedKeySet({my: {path: 'irrelevant'}}, 'my.path') // true
+ * ```
+ */
+function isNestedKeySet(obj: {}, path: string): boolean {
+  const bits = path.split('.');
+  for (const bit of bits) {
+    // as soon as any node does not have the respective path set, exit, the full deep
+    // path will then also not be set.
+    if (!hasOwnProperty(obj, bit)) {
+      return false;
+    }
+    obj = obj[bit] as {};
+  }
+  return true;
+}
 
 export interface ValuesConfigProps<T> {
   name: ValuesTableProps<T>['name'];
@@ -32,13 +55,13 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({name}: ValuesConfigPr
         if (values.openForms.hasOwnProperty('itemsExpression')) {
           setFieldValue('openForms.itemsExpression', undefined);
         }
-        if (!values.hasOwnProperty(name)) {
+        if (!isNestedKeySet(values, name)) {
           setFieldValue(name, [{value: '', label: '', openForms: {translations: {}}}]);
         }
         break;
       }
       case 'variable': {
-        if (values.hasOwnProperty(name)) {
+        if (isNestedKeySet(values, name)) {
           setFieldValue(name, undefined);
         }
         break;

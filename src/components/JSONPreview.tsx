@@ -3,8 +3,12 @@ interface JSONPreviewProps {
   className?: string;
 }
 
-const JSONPreview: React.FC<JSONPreviewProps> = ({data, className = ''}) => (
-  <pre className={className} data-testid="jsonPreview">
+const JSONPreview: React.FC<JSONPreviewProps & JSX.IntrinsicElements['pre']> = ({
+  data,
+  className = '',
+  ...props
+}) => (
+  <pre className={className} data-testid="jsonPreview" {...props}>
     {JSON.stringify(data, null, 2)}
   </pre>
 );

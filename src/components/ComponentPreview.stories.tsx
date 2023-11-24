@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentPreview from './ComponentPreview';
 
@@ -617,7 +617,7 @@ export const File: Story = {
 };
 
 export const SelectBoxes: Story = {
-  name: 'Selectboxes manual values',
+  name: 'Selectboxes: manual values',
   render: Template,
 
   args: {
@@ -666,7 +666,7 @@ export const SelectBoxes: Story = {
 };
 
 export const SelectBoxesVariable: Story = {
-  name: 'Selectboxes variable for values',
+  name: 'Selectboxes: variable for values',
   render: Template,
 
   args: {
@@ -686,7 +686,7 @@ export const SelectBoxesVariable: Story = {
 };
 
 export const Radio: Story = {
-  name: 'Radio manual values',
+  name: 'Radio: manual values',
   render: Template,
 
   args: {
@@ -735,7 +735,7 @@ export const Radio: Story = {
 };
 
 export const RadioVariable: Story = {
-  name: 'Radio variable for values',
+  name: 'Radio: variable for values',
   render: Template,
 
   args: {
@@ -745,6 +745,171 @@ export const RadioVariable: Story = {
       key: 'radioPreview',
       label: 'Radio preview',
       description: 'A preview of the radio Formio component',
+      openForms: {
+        dataSrc: 'variable',
+        itemsExpression: {var: 'foo'},
+        translations: {},
+      },
+    },
+  },
+};
+
+/**
+ * A select component with manually specified options. Only a single option may be picked.
+ */
+export const Select: Story = {
+  name: 'Select: manual values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'select',
+      id: 'select',
+      key: 'selectPreview',
+      label: 'Select preview',
+      description: 'A preview of the select Formio component',
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      dataSrc: 'values',
+      data: {
+        values: [
+          {
+            value: 'option1',
+            label: 'Option 1',
+          },
+          {
+            value: 'option2',
+            label: 'Option 2',
+          },
+        ],
+      },
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Select preview');
+    await canvas.findByText('A preview of the select Formio component');
+
+    // we expect no options to be selected
+    await expect(canvas.queryByText('Option 1')).toBeNull();
+    await expect(canvas.queryByText('Option 2')).toBeNull();
+
+    // opening the dropdown displays the options
+    // @ts-expect-error
+    canvas.getByLabelText(args.component.label).focus();
+    await userEvent.keyboard('[ArrowDown]');
+    await waitFor(async () => {
+      await expect(await canvas.findByText('Option 1')).toBeVisible();
+    });
+    await expect(await canvas.findByText('Option 2')).toBeVisible();
+
+    // selecting an option by clicking it displays it as selected
+    await userEvent.click(canvas.getByText('Option 2'));
+    // wait for the option list to be closed
+    await waitFor(async () => {
+      await expect(canvas.queryByRole('listbox')).toBeNull();
+    });
+    // selected value should still be displayed
+    await expect(await canvas.findByText('Option 2')).toBeVisible();
+  },
+};
+
+/**
+ * A select component with manually specified options. Multiple options may be picked.
+ */
+export const SelectMultiple: Story = {
+  name: 'Select: manual values, multiple',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'select',
+      id: 'select',
+      key: 'selectPreview',
+      label: 'Select preview',
+      description: 'A preview of the select Formio component',
+      multiple: true,
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      dataSrc: 'values',
+      data: {
+        values: [
+          {
+            value: 'option1',
+            label: 'Option 1',
+          },
+          {
+            value: 'option2',
+            label: 'Option 2',
+          },
+          {
+            value: 'option3',
+            label: 'Option 3',
+          },
+        ],
+      },
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Select preview');
+    await canvas.findByText('A preview of the select Formio component');
+
+    // we expect no options to be selected
+    await expect(canvas.queryByText('Option 1')).toBeNull();
+    await expect(canvas.queryByText('Option 2')).toBeNull();
+
+    // opening the dropdown displays the options, select two of them
+    // @ts-expect-error
+    const searchInput = canvas.getByLabelText(args.component.label);
+    searchInput.focus();
+    await userEvent.keyboard('[ArrowDown]');
+    await waitFor(async () => {
+      await userEvent.click(await canvas.findByText('Option 3'));
+    });
+    searchInput.focus();
+    await userEvent.keyboard('[ArrowDown]');
+    await waitFor(async () => {
+      await userEvent.click(await canvas.findByText('Option 1'));
+    });
+    // wait for the option list to be closed
+    await waitFor(async () => {
+      await expect(canvas.queryByRole('listbox')).toBeNull();
+    });
+    // selected values should still be displayed
+    await waitFor(async () => {
+      await expect(await canvas.findByText('Option 1')).toBeVisible();
+    });
+    await waitFor(async () => {
+      await expect(await canvas.findByText('Option 3')).toBeVisible();
+    });
+  },
+};
+
+/**
+ * A select component with an expression to build the option list in the backend.
+ */
+export const SelectVariable: Story = {
+  name: 'Select: variable for values',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'select',
+      id: 'select',
+      key: 'selectPreview',
+      label: 'Select preview',
+      description: 'A preview of the select Formio component',
       openForms: {
         dataSrc: 'variable',
         itemsExpression: {var: 'foo'},

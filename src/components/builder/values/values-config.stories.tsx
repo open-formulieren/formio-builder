@@ -1,4 +1,8 @@
-import {RadioComponentSchema, SelectboxesComponentSchema} from '@open-formulieren/types';
+import {
+  RadioComponentSchema,
+  SelectComponentSchema,
+  SelectboxesComponentSchema,
+} from '@open-formulieren/types';
 import {expect, jest} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
@@ -33,6 +37,7 @@ export default {
 
 type SelectboxesStory = StoryObj<typeof ValuesConfig<SelectboxesComponentSchema>>;
 type RadioStory = StoryObj<typeof ValuesConfig<RadioComponentSchema>>;
+type SelectStory = StoryObj<typeof ValuesConfig<SelectComponentSchema>>;
 
 /**
  * Variant pinned to the `SelectboxesComponentSchema` component type.
@@ -221,7 +226,7 @@ export const RadioManual: RadioStory = {
   },
 };
 
-export const Radioiable: RadioStory = {
+export const RadioVariable: RadioStory = {
   decorators: [withFormik],
   parameters: {
     formik: {
@@ -230,6 +235,58 @@ export const Radioiable: RadioStory = {
           dataSrc: 'variable',
           itemsExpression: {var: 'someVariable'},
         },
+      },
+    },
+  },
+};
+
+/**
+ * Variant pinned to the `SelectComponentSchema` component type.
+ */
+export const Select: SelectStory = {
+  decorators: [withFormik],
+  args: {
+    name: 'data.values',
+  },
+};
+
+export const SelectManual: SelectStory = {
+  ...Select,
+
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'manual',
+        },
+        data: {
+          values: [
+            {
+              value: 'a',
+              label: 'A',
+            },
+            {
+              value: 'b',
+              label: 'B',
+            },
+          ],
+        },
+      },
+    },
+  },
+};
+
+export const SelectVariable: SelectStory = {
+  ...Select,
+
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'variable',
+          itemsExpression: {var: 'someVariable'},
+        },
+        data: {},
       },
     },
   },
