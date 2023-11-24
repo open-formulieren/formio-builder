@@ -1,5 +1,6 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import Address from './address';
 import BSN from './bsn';
 import Checkbox from './checkbox';
 import Currency from './currency';
@@ -52,6 +53,8 @@ const REGISTRY: Registry = {
   select: Select,
   currency: Currency,
   radio: Radio,
+  // Composed types:
+  address: Address,
   // Special types:
   iban: Iban,
   licenseplate: Licenseplate,

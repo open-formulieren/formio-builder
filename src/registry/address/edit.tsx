@@ -1,6 +1,6 @@
 import {AddressComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {useIntl} from 'react-intl';
 
 import {
   BuilderTabs,
@@ -10,7 +10,6 @@ import {
   IsSensitiveData,
   Key,
   Label,
-  Multiple,
   PresentationConfig,
   Registration,
   SimpleConditional,
@@ -20,18 +19,18 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {getErrorNames} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
 /**
- * Form to configure a Formio 'licenseplate' type component.
+ * Form to configure a Formio 'address' type component.
  */
 const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<AddressComponentSchema>();
+  const {errors} = useFormikContext<AddressComponentSchema>();
 
   const erroredFields = Object.keys(errors).length
     ? getErrorNames<AddressComponentSchema>(errors)
@@ -77,11 +76,9 @@ const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<AddressComponentSchema> />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <DefaultValue />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -132,7 +129,6 @@ EditForm.defaultValues = {
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,
-  multiple: false,
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
@@ -158,23 +154,6 @@ EditForm.defaultValues = {
   registration: {
     attribute: '',
   },
-};
-
-
-const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
-  const intl = useIntl();
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'defaultValue' builder field",
-    defaultMessage: 'This will be the initial value for this field before user interaction.',
-  });
-  return (
-    <TextField
-      name="defaultValue"
-      label={<FormattedMessage {...LABELS.defaultValue} />}
-      tooltip={tooltip}
-      multiple={multiple}
-    />
-  );
 };
 
 export default EditForm;

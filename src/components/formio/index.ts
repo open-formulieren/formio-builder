@@ -27,3 +27,4 @@ export {default as TextArea} from './textarea';
 export * from './datagrid';
 export {default as DataGrid} from './datagrid';
 export {default as DataMap} from './datamap';
+export {default as FieldSet} from './fieldset';
