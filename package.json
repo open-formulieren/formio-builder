@@ -113,6 +113,7 @@
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/css": "^11.11.2",
     "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
+    "@open-formulieren/infernologic": "^0.1.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "clsx": "^1.2.1",
     "formik": "^2.4.5",
