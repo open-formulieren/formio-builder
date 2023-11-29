@@ -116,10 +116,10 @@ The builder form is the form + preview shown in the edit component modal.
 - [x] Figure out how to do react-intl message catalog extraction/management for supported languages
 - [ ] Implement the builder forms for the supported component types
   - [x] `textfield`
-  - [ ] `textarea`
+  - [x] `textarea`
   - [x] `checkbox`
   - [x] `selectboxes`
-  - [ ] `select`
+  - [x] `select`
   - [x] `radio`
   - [x] `number`
   - [x] `currency`
@@ -132,7 +132,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `file`
   - [x] `iban`
   - [x] `licenseplate`
-  - [ ] `bsn`
+  - [x] `bsn`
   - [ ] `npFamilyMembers`
   - [ ] `signature`
   - [ ] `coSign`
