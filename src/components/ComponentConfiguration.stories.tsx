@@ -2118,3 +2118,25 @@ export const Address: Story = {
     expect(args.onSubmit).toHaveBeenCalled();
   },
 };
+
+export const Columns: Story = {
+  render: Template,
+  name: 'type: columns',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'columns',
+      key: 'columns',
+      columns: [],
+    },
+
+    builderInfo: {
+      title: 'Columns',
+      icon: 'columns',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
