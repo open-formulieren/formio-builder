@@ -1,10 +1,10 @@
 import {Column, ColumnsComponentSchema} from '@open-formulieren/types';
-import {FieldArray, FieldArrayRenderProps, useFormikContext} from 'formik';
+import {Field, FieldArray, FieldArrayRenderProps, useFormikContext} from 'formik';
 import {useContext, useRef} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {ClearOnHide, Hidden, Key} from '@/components/builder';
-import {Component, NumberField} from '@/components/formio';
+import {Component} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import {EditFormDefinition} from '../types';
@@ -56,25 +56,45 @@ const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
   const intl = useIntl();
   const {getFieldProps} = useFormikContext();
   const numCols = getFieldProps<Column[]>('columns').value?.length || 0;
+
+  const prefix = `columns.${index}`;
+  const {value: column} = getFieldProps<Column>(prefix);
+
   return (
     <>
-      <td>
-        <NumberField
-          name={`columns.${index}.size`}
-          aria-label={intl.formatMessage({
-            description: 'Accessible label for column size',
-            defaultMessage: 'Column size, value between 1 and 12.',
-          })}
-        />
+      <td style={{verticalAlign: 'middle'}}>
+        <div style={{display: 'flex', gap: '1em'}}>
+          <Field
+            as="input"
+            type="range"
+            name={`${prefix}.size`}
+            className="form-control-range"
+            min={1}
+            max={12}
+            aria-label={intl.formatMessage({
+              description: 'Accessible label for column size',
+              defaultMessage: 'Column size, value between 1 and 12.',
+            })}
+          />
+          <span style={{flexShrink: '0'}}>{column.size} / 12</span>
+        </div>
       </td>
-      <td>
-        <NumberField
-          name={`columns.${index}.sizeMobile`}
-          aria-label={intl.formatMessage({
-            description: 'Accessible label for column mobile size',
-            defaultMessage: 'Column size on mobile, value between 1 and 4.',
-          })}
-        />
+      <td style={{verticalAlign: 'middle'}}>
+        <div style={{display: 'flex', gap: '1em'}}>
+          <Field
+            as="input"
+            type="range"
+            name={`${prefix}.sizeMobile`}
+            className="form-control-range"
+            min={1}
+            max={4}
+            aria-label={intl.formatMessage({
+              description: 'Accessible label for column mobile size',
+              defaultMessage: 'Column size on mobile, value between 1 and 4.',
+            })}
+          />
+          <span style={{flexShrink: '0'}}>{column.sizeMobile} / 4</span>
+        </div>
       </td>
       <td>
         <button
