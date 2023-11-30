@@ -134,9 +134,9 @@ EditForm.defaultValues = {
   isSensitiveData: true,
   defaultValue: {
     postcode: '',
-    housenumber: '',
-    houseletter: '',
-    housenumberaddition: '',
+    houseNumber: '',
+    houseLetter: '',
+    houseNumberAddition: '',
   },
   // Advanced tab
   conditional: {
@@ -149,7 +149,6 @@ EditForm.defaultValues = {
     required: false,
     plugins: [],
   },
-  validateOn: 'blur',
   translatedErrors: {},
   registration: {
     attribute: '',

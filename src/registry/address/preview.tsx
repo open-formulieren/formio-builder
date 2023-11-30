@@ -35,7 +35,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressComponentSchema>> = ({compo
         required={required}
       />
       <TextField
-        name={`${key}.housenumber`}
+        name={`${key}.houseNumber`}
         label={
           <FormattedMessage
             description="Label for address housenumber"
@@ -45,7 +45,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressComponentSchema>> = ({compo
         required={required}
       />
       <TextField
-        name={`${key}.houseletter`}
+        name={`${key}.houseLetter`}
         label={
           <FormattedMessage
             description="Label for address houseletter"
@@ -55,7 +55,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressComponentSchema>> = ({compo
         inputMask="A"
       />
       <TextField
-        name={`${key}.housenumberaddition`}
+        name={`${key}.houseNumberAddition`}
         label={
           <FormattedMessage
             description="Label for address housenumberaddition"

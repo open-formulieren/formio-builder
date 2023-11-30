@@ -53,13 +53,12 @@ const REGISTRY: Registry = {
   select: Select,
   currency: Currency,
   radio: Radio,
-  // Composed types:
-  address: Address,
   // Special types:
   iban: Iban,
   licenseplate: Licenseplate,
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
+  address: Address,
 };
 
 export {Fallback};
