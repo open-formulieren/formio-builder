@@ -53,14 +53,12 @@ const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
-            'showInSummary',
-            'showInEmail',
-            'showInPDF',
-            'multiple',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
-            'defaultValue'
+            'showInSummary',
+            'showInEmail',
+            'showInPDF'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />

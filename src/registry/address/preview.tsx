@@ -17,14 +17,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressComponentSchema>> = ({compo
 
   const {required = false} = validate;
   return (
-    <FieldSet
-      type="address"
-      field={key}
-      required={required}
-      htmlId={`editform-${key}`}
-      label={label}
-      tooltip={tooltip}
-    >
+    <FieldSet field={key} label={label} tooltip={tooltip}>
       {description && <Description text={description} />}
       <TextField
         name={`${key}.postcode`}
