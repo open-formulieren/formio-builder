@@ -1979,3 +1979,81 @@ export const LicensePlate: Story = {
     expect(args.onSubmit).toHaveBeenCalled();
   },
 };
+
+export const NpFamilyMembers: Story = {
+  render: Template,
+  name: 'type: npFamilyMembers',
+
+  args: {
+    component: {
+      id: 'wqimsadk',
+      type: 'npFamilyMembers',
+      key: 'npFamilyMembers',
+      label: 'An npFamilyMembers field',
+      includeChildren: true,
+      includePartners: false,
+    },
+
+    builderInfo: {
+      title: 'Family members',
+      icon: 'users',
+      group: 'basic',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('An npFamilyMembers field');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anNpFamilyMembersField');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    await expect(await preview.findByText('Updated preview label'));
+
+    // Ensure that the manually entered key is kept instead of derived from the label,
+    // even when key/label components are not mounted.
+    const keyInput = canvas.getByLabelText('Property Name');
+    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+    // not have any value, which triggers the generate-key-from-label behaviour.
+    fireEvent.change(keyInput, {target: {value: 'customKey'}});
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+
+    await step('Toggling options updates preview', async () => {
+      const childrenCheckbox = await preview.findByLabelText('Child 1');
+      await expect(childrenCheckbox).toBeVisible();
+      await expect(childrenCheckbox).not.toBeChecked();
+
+      let partnersCheckbox = preview.queryByLabelText('Partner 1');
+      await expect(partnersCheckbox).toBeNull();
+
+      const partnersOption = canvas.getByLabelText('Include partners');
+      fireEvent.click(partnersOption);
+      await waitFor(async () => {
+        await expect(partnersOption).toBeChecked();
+      });
+      partnersCheckbox = await preview.findByLabelText('Partner 1');
+      await expect(partnersCheckbox).toBeVisible();
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      await expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

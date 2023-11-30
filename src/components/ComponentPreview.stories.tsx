@@ -992,3 +992,33 @@ export const BSNMultiple: Story = {
     await expect(canvas.queryByTestId('input-bsnPreview[1]')).not.toBeInTheDocument();
   },
 };
+
+export const NpFamilyMembers: Story = {
+  name: 'Family members',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'npFamilyMembers',
+      id: 'npFamilyMembers',
+      key: 'npFamilyMembersPreview',
+      label: 'Family members preview',
+      description: 'A preview of the family members Formio component',
+      hidden: true, // must be ignored
+      includeChildren: true,
+      includePartners: true,
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Family members preview');
+    await canvas.findByText('A preview of the family members Formio component');
+
+    // check that the checkboxes are rendered
+    const checkboxes = await canvas.findAllByRole('checkbox');
+    await expect(checkboxes).toHaveLength(2);
+  },
+};

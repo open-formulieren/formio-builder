@@ -10,6 +10,7 @@ import Fallback from './fallback';
 import FileUpload from './file';
 import Iban from './iban';
 import Licenseplate from './licenseplate';
+import NpFamilyMembers from './npFamilyMembers';
 import NumberField from './number';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
@@ -55,6 +56,7 @@ const REGISTRY: Registry = {
   iban: Iban,
   licenseplate: Licenseplate,
   bsn: BSN,
+  npFamilyMembers: NpFamilyMembers,
 };
 
 export {Fallback};

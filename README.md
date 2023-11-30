@@ -133,7 +133,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `iban`
   - [x] `licenseplate`
   - [x] `bsn`
-  - [ ] `npFamilyMembers`
+  - [x] `npFamilyMembers`
   - [ ] `signature`
   - [ ] `coSign`
   - [ ] `map`
