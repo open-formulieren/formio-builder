@@ -2,6 +2,10 @@ import type {StorybookConfig} from '@storybook/react-webpack5';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
+  core: {
+    disableTelemetry: true,
+    disableWhatsNewNotifications: true,
+  },
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
