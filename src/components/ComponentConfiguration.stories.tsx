@@ -2139,4 +2139,60 @@ export const Columns: Story = {
       schema: {},
     },
   },
+
+  play: async ({canvasElement, args, step}) => {
+    const canvas = within(canvasElement);
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await step('Label is not relevant for columns', async () => {
+      const labelInput = canvas.queryByLabelText('Label');
+      expect(labelInput).toBeNull();
+    });
+
+    await step('Sliders for column widths', async () => {
+      const defaultSliders = await canvas.findAllByRole('slider', {
+        name: 'Column size, value between 1 and 12.',
+      });
+      expect(defaultSliders).toHaveLength(2);
+      expect(defaultSliders[0]).toHaveDisplayValue('6');
+      expect(defaultSliders[1]).toHaveDisplayValue('6');
+
+      const mobileSliders = await canvas.findAllByRole('slider', {
+        name: 'Column size on mobile, value between 1 and 4.',
+      });
+      expect(mobileSliders).toHaveLength(2);
+      expect(mobileSliders[0]).toHaveDisplayValue('4');
+      expect(mobileSliders[1]).toHaveDisplayValue('4');
+    });
+
+    await step('Add third column', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Add column'}));
+      await preview.findByText('Column 3/3');
+    });
+
+    await step('Add column and configure widths', async () => {
+      // sadly not supported yet in testing-library
+      // https://github.com/testing-library/user-event/issues/871
+      const sliders = await canvas.findAllByRole('slider', {
+        name: 'Column size, value between 1 and 12.',
+      });
+      expect(sliders).toHaveLength(3);
+      expect(sliders[0]).toHaveDisplayValue('6');
+
+      // set column 1 width to 3
+      fireEvent.change(sliders[0], {target: {value: 3}});
+      expect(sliders[0]).toHaveDisplayValue('3');
+      // set column 2 width to 2
+      fireEvent.change(sliders[1], {target: {value: 2}});
+      expect(sliders[1]).toHaveDisplayValue('2');
+      // set column 3 width to 7
+      fireEvent.change(sliders[2], {target: {value: 7}});
+      expect(sliders[2]).toHaveDisplayValue('7');
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      await expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
 };
