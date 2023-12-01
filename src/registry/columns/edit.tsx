@@ -54,7 +54,7 @@ interface ColumnProps {
 
 const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
   const intl = useIntl();
-  const {getFieldProps} = useFormikContext();
+  const {getFieldProps} = useFormikContext<ColumnsComponentSchema>();
   const numCols = getFieldProps<Column[]>('columns').value?.length || 0;
 
   const prefix = `columns.${index}`;
@@ -127,6 +127,7 @@ const Columns: React.FC = () => {
   return (
     <Component
       type="datagrid"
+      field="columns"
       label={
         <FormattedMessage
           description="Label for the 'columns' builder field"
