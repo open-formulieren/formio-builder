@@ -1065,3 +1065,35 @@ export const Columns: Story = {
     });
   },
 };
+
+export const FieldSet: Story = {
+  name: 'FieldSet',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'fieldset',
+      key: 'fieldset',
+      label: 'A fieldset preview',
+      hidden: true, // must be ignored
+      components: [
+        // we do not display the nested components
+        {
+          id: 'someTextField',
+          key: 'someTextField',
+          type: 'textfield',
+          label: 'Nested text field',
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('A fieldset preview');
+    await expect(canvas.queryByText('Nested text field')).toBeNull();
+  },
+};
