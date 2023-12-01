@@ -139,8 +139,8 @@ The builder form is the form + preview shown in the edit component modal.
   - [ ] `map`
   - [ ] `editgrid`
   - [ ] `content`
-  - [ ] `fieldset`
-  - [ ] `columns`
+  - [x] `fieldset`
+  - [x] `columns`
 
 ### Builder
 
