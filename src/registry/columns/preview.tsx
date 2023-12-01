@@ -48,7 +48,7 @@ const ViewportToggle: React.FC<ViewportToggleProps> = ({mobile, onChange}) => {
 const PREVIEW_GRID = css`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-column-gap: 10px;
+  column-gap: 10px;
   margin-block-start: 1em;
 
   background-size: 50px 50px;
@@ -67,8 +67,8 @@ const PREVIEW_GRID = css`
 
 const PREVIEW_GRID_MOBILE = css`
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 14px;
+  column-gap: 10px;
+  row-gap: 14px;
   margin-block-start: 1em;
   max-inline-size: 50%;
   margin-inline: auto;
