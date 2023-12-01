@@ -2,10 +2,11 @@ import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
+import {POSTCODE_REGEX} from '../postcode/constants';
 
 // Constraints taken from the BRK API (apart from postcode which comes from our postcode component)
 const addressSchema = z.object({
-  postcode: z.string().regex(/^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$/),
+  postcode: z.string().regex(new RegExp(POSTCODE_REGEX)),
   houseNumber: z.string().regex(/^\d{1,5}$/),
   houseLetter: z.string().regex(/^[a-zA-Z]$/),
   houseNumberAddition: z
