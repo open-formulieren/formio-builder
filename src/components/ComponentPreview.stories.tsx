@@ -1022,3 +1022,46 @@ export const NpFamilyMembers: Story = {
     await expect(checkboxes).toHaveLength(2);
   },
 };
+
+export const Columns: Story = {
+  name: 'Columns',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'columns',
+      key: 'columns',
+      columns: [
+        {
+          size: 4,
+          sizeMobile: 4,
+          components: [],
+        },
+        {
+          size: 4,
+          sizeMobile: 2,
+          components: [],
+        },
+        {
+          size: 4,
+          sizeMobile: 2,
+          components: [],
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await canvas.findByText('Column 1');
+    await canvas.findByText('Column 2');
+    await canvas.findByText('Column 3');
+
+    await step('Switch to mobile preview', async () => {
+      const mobileRadio = canvas.getByText('Mobile');
+      await userEvent.click(mobileRadio);
+    });
+  },
+};

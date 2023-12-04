@@ -3,6 +3,7 @@ import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 import Address from './address';
 import BSN from './bsn';
 import Checkbox from './checkbox';
+import Columns from './columns';
 import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
@@ -59,6 +60,8 @@ const REGISTRY: Registry = {
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
   address: Address,
+  // layout
+  columns: Columns,
 };
 
 export {Fallback};
