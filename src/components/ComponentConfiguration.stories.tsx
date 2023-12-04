@@ -2167,7 +2167,7 @@ export const Columns: Story = {
 
     await step('Add third column', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Add column'}));
-      await preview.findByText('Column 3/3');
+      await preview.findByText('Column 3');
     });
 
     await step('Add column and configure widths', async () => {

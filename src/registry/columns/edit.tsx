@@ -1,6 +1,6 @@
 import {Column, ColumnsComponentSchema} from '@open-formulieren/types';
 import {Field, FieldArray, FieldArrayRenderProps, useFormikContext} from 'formik';
-import {useContext, useRef} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {ClearOnHide, Hidden, Key} from '@/components/builder';
@@ -54,7 +54,7 @@ interface ColumnProps {
 
 const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
   const intl = useIntl();
-  const {getFieldProps} = useFormikContext<ColumnsComponentSchema>();
+  const {getFieldProps, setFieldError} = useFormikContext<ColumnsComponentSchema>();
   const numCols = getFieldProps<Column[]>('columns').value?.length || 0;
 
   const prefix = `columns.${index}`;
@@ -106,7 +106,14 @@ const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
             description: 'Columns table: accessible label to remove a column',
             defaultMessage: 'Remove',
           })}
-          onClick={() => arrayHelpers.remove(index)}
+          onClick={() => {
+            arrayHelpers.remove(index);
+            // Reset possible array-level validation error, to work around the mangled
+            // validation errors. This effectively masks the problem described in
+            // https://github.com/jaredpalmer/formik/issues/3352, it does not *solve*
+            // it. A fresh submit attempt will re-run validation.
+            setFieldError('columns', undefined);
+          }}
         >
           <i className="fa fa-times-circle-o" />
         </button>
@@ -117,13 +124,21 @@ const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
 
 const Columns: React.FC = () => {
   const intl = useIntl();
-  const {getFieldProps} = useFormikContext();
+  const {getFieldProps, validateField} = useFormikContext();
   const {value: columns = []} = getFieldProps<Column[] | undefined>('columns');
+  const [mustValidate, setMustValidate] = useState(false);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'columns' builder field",
     defaultMessage: 'Specify the size of each column. The sum of all the widths should be 100%.',
   });
+
+  useEffect(() => {
+    if (!mustValidate) return;
+    validateField('columns');
+    setMustValidate(false);
+  }, [mustValidate, validateField]);
+
   return (
     <Component
       type="datagrid"
@@ -180,13 +195,14 @@ const Columns: React.FC = () => {
                   <button
                     type="button"
                     className="btn btn-primary formio-button-add-row"
-                    onClick={() =>
+                    onClick={() => {
                       arrayHelpers.push({
                         size: 6,
                         sizeMobile: 4,
                         components: [],
-                      } satisfies Column)
-                    }
+                      } satisfies Column);
+                      setMustValidate(true);
+                    }}
                   >
                     <i className="fa fa-plus" aria-hidden="true" />
                     <FormattedMessage

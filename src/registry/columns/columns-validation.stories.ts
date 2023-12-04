@@ -42,7 +42,7 @@ export const SumOfColumnSizes: Story = {
 
     // add a third column
     await userEvent.click(canvas.getByRole('button', {name: 'Add column'}));
-    await preview.findByText('Column 3/3');
+    await preview.findByText('Column 3');
 
     // set the column widths to total size > 12
     const sliders = await canvas.findAllByRole('slider', {

@@ -111,10 +111,9 @@ const Preview: React.FC<ComponentPreviewProps<ColumnsComponentSchema>> = ({compo
           >
             <FormattedMessage
               description="Column preview column description"
-              defaultMessage="Column {number}/{total}"
+              defaultMessage="Column {number}"
               values={{
                 number: index + 1,
-                total: columns.length,
               }}
             />
           </div>

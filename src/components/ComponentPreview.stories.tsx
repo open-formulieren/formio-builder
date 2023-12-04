@@ -1055,9 +1055,9 @@ export const Columns: Story = {
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
-    await canvas.findByText('Column 1/3');
-    await canvas.findByText('Column 2/3');
-    await canvas.findByText('Column 3/3');
+    await canvas.findByText('Column 1');
+    await canvas.findByText('Column 2');
+    await canvas.findByText('Column 3');
 
     await step('Switch to mobile preview', async () => {
       const mobileRadio = canvas.getByText('Mobile');
