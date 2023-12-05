@@ -2086,7 +2086,7 @@ export const AddressNL: Story = {
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A Dutch address');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anAddress');
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aDutchAddress');
     });
     await expect(canvas.getByLabelText('Description')).toHaveValue('');
     await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
