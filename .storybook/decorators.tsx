@@ -15,6 +15,9 @@ import {
   DEFAULT_VALIDATOR_PLUGINS,
   sleep,
 } from '@/tests/sharedUtils';
+import {VariableDefinition, createTypeCheck} from '@/utils/jsonlogic';
+
+import static_variables from '../src/components/static_variables.json';
 
 export const ModalDecorator: Decorator = (Story, {parameters}) => {
   if (parameters?.modal?.noModal) return <Story />;
@@ -55,6 +58,8 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
   const defaultdocumentTypes =
     context.parameters.builder?.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES;
+  const components = context?.args?.componentTree || defaultComponentTree;
+  const staticVariables = static_variables as VariableDefinition[]; // source is inferred as string not as ""
 
   return (
     <BuilderContext.Provider
@@ -63,7 +68,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
         componentTranslationsRef: {current: translationsStore},
-        getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
+        getFormComponents: () => components,
         getValidatorPlugins: async () => {
           await sleep(context.parameters?.builder?.validatorPluginsDelay || 0);
           return context?.args?.validatorPlugins || defaultValidatorPlugins;
@@ -88,6 +93,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         getDocumentTypes: async () => context?.args?.documentTypes || defaultdocumentTypes,
         getConfidentialityLevels: async () => CONFIDENTIALITY_LEVELS,
         getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
+        validateLogic: createTypeCheck({components, staticVariables}),
       }}
     >
       <Story />

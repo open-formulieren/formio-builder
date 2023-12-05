@@ -1,5 +1,5 @@
-import {ContentComponentSchema, SupportedLocales} from '@open-formulieren/types';
-import {expect} from '@storybook/jest';
+import {SupportedLocales} from '@open-formulieren/types';
+import {expect, jest} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 import React from 'react';
@@ -12,12 +12,14 @@ import {
   DEFAULT_FILE_TYPES,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
+import {VariableDefinition, createTypeCheck} from '@/utils/jsonlogic';
 
 import ComponentConfiguration from './ComponentConfiguration';
 import {BuilderInfo} from './ComponentEditForm';
 import {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import {ValidatorOption} from './builder/validate/validator-select';
+import static_variables from './static_variables.json';
 
 export default {
   title: 'Public API/ComponentConfiguration',
@@ -32,6 +34,7 @@ export default {
   args: {
     isNew: true,
     otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
+    variableDefinitions: static_variables,
     validatorPlugins: [
       {id: 'phone-intl', label: 'Phone (international)'},
       {id: 'phone-nl', label: 'Phone (Dutch)'},
@@ -71,6 +74,7 @@ export default {
       schema: {placeholder: ''},
       weight: 0,
     },
+    onSubmit: jest.fn(),
   },
 } as Meta<typeof ComponentConfiguration>;
 
@@ -83,6 +87,7 @@ interface TemplateArgs {
     };
   };
   otherComponents: AnyComponentSchema[];
+  variableDefinitions: VariableDefinition[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
@@ -98,6 +103,7 @@ interface TemplateArgs {
 const Template: StoryFn<TemplateArgs> = ({
   component,
   otherComponents,
+  variableDefinitions,
   validatorPlugins,
   registrationAttributes,
   prefillPlugins,
@@ -117,6 +123,10 @@ const Template: StoryFn<TemplateArgs> = ({
     richTextColors={DEFAULT_COLORS}
     componentTranslationsRef={{current: translationsStore}}
     getFormComponents={() => otherComponents}
+    validateLogic={createTypeCheck({
+      formVariables: variableDefinitions,
+      components: otherComponents,
+    })}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}
     getPrefillPlugins={async () => prefillPlugins}
@@ -1142,13 +1152,17 @@ export const SelectBoxes: Story = {
       const itemsExpressionInput = canvas.getByLabelText('Items expression');
       await userEvent.clear(itemsExpressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
+      const expression = '{"var": "current_year"}'.replace(/[{[]/g, '$&$&');
       await userEvent.type(itemsExpressionInput, expression);
 
       await expect(editForm.queryByLabelText('Default value')).toBeNull();
       await expect(preview.getByRole('checkbox', {name: /Options from expression:/})).toBeVisible();
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(itemsExpressionInput).toHaveAttribute('aria-invalid', 'true');
+      expect(itemsExpressionInput).toHaveAttribute('aria-errormessage');
+      const errorMessageId = itemsExpressionInput.getAttribute('aria-errormessage') ?? '';
+      expect(document.getElementById(errorMessageId)).toBeVisible();
       expect(args.onSubmit).toHaveBeenCalledWith({
         id: 'wqimsadk',
         type: 'selectboxes',
@@ -1165,7 +1179,7 @@ export const SelectBoxes: Story = {
         isSensitiveData: false,
         openForms: {
           dataSrc: 'variable',
-          itemsExpression: {var: 'someVar'},
+          itemsExpression: {var: 'current_year'}, // valid JSON, invalid expression
           translations: {},
         },
         defaultValue: {},

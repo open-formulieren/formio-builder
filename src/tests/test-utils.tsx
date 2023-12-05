@@ -23,6 +23,7 @@ import {
   sleep,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
+import {VariableDefinition, createTypeCheck} from '@/utils/jsonlogic';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
 import {RegistrationAttributeOption} from '../components/builder/registration/registration-attribute';
@@ -40,6 +41,7 @@ interface BuilderOptions {
   documentTypes: DocumentTypeOption[];
   confidentialityLevels: SelectOption[];
   registrationAttributesDelay: number;
+  staticVariables: VariableDefinition[];
 }
 
 interface contextRenderOptions {
@@ -94,6 +96,10 @@ const contextRender = (
               getConfidentialityLevels: async () =>
                 builderOptions.confidentialityLevels || CONFIDENTIALITY_LEVELS,
               getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
+              validateLogic: createTypeCheck({
+                components: builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
+                staticVariables: builderOptions.staticVariables,
+              }),
             }}
           >
             {children}

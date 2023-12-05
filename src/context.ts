@@ -8,6 +8,8 @@ import type {ColorOption} from '@/registry/content/rich-text';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
+import {JsonLogicTypeChecker, createTypeCheck} from './utils/jsonlogic';
+
 /*
   Translations
  */
@@ -59,6 +61,7 @@ export interface BuilderContextType {
   richTextColors: ColorOption[];
   componentTranslationsRef: ComponentTranslationsRef;
   getFormComponents: () => AnyComponentSchema[];
+  validateLogic: JsonLogicTypeChecker;
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
@@ -76,6 +79,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   richTextColors: [],
   componentTranslationsRef: {current: null},
   getFormComponents: () => [],
+  validateLogic: createTypeCheck(),
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],
   getPrefillPlugins: async () => [],
