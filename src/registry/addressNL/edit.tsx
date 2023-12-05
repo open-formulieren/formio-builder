@@ -1,4 +1,4 @@
-import {AddressComponentSchema} from '@open-formulieren/types';
+import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useIntl} from 'react-intl';
 
@@ -27,13 +27,13 @@ import {EditFormDefinition} from '../types';
 /**
  * Form to configure a Formio 'address' type component.
  */
-const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
+const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {errors} = useFormikContext<AddressComponentSchema>();
+  const {errors} = useFormikContext<AddressNLComponentSchema>();
 
   const erroredFields = Object.keys(errors).length
-    ? getErrorNames<AddressComponentSchema>(errors)
+    ? getErrorNames<AddressNLComponentSchema>(errors)
     : [];
   // TODO: pattern match instead of just string inclusion?
   // TODO: move into more generically usuable utility when we implement other component
@@ -43,7 +43,7 @@ const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
     return fieldNames.some(name => erroredFields.includes(name));
   };
 
-  Validate.useManageValidatorsTranslations<AddressComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations<AddressNLComponentSchema>(['required']);
   return (
     <Tabs>
       <TabList>
@@ -98,7 +98,7 @@ const EditForm: EditFormDefinition<AddressComponentSchema> = () => {
 
       {/* Translations */}
       <TabPanel>
-        <Translations.ComponentTranslations<AddressComponentSchema>
+        <Translations.ComponentTranslations<AddressNLComponentSchema>
           propertyLabels={{
             label: intl.formatMessage(LABELS.label),
             description: intl.formatMessage(LABELS.description),

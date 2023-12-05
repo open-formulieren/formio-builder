@@ -1,6 +1,6 @@
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
-import Address from './address';
+import AddressNL from './addressNL';
 import BSN from './bsn';
 import Checkbox from './checkbox';
 import Columns from './columns';
@@ -59,7 +59,7 @@ const REGISTRY: Registry = {
   licenseplate: Licenseplate,
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
-  address: Address,
+  addressNL: AddressNL,
   // layout
   columns: Columns,
 };

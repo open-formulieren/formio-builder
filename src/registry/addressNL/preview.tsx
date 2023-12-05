@@ -1,4 +1,4 @@
-import {AddressComponentSchema} from '@open-formulieren/types';
+import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';
@@ -12,7 +12,7 @@ import {ComponentPreviewProps} from '../types';
  * however at some point this should use the components of
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
-const Preview: React.FC<ComponentPreviewProps<AddressComponentSchema>> = ({component}) => {
+const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({component}) => {
   const {key, label, description, tooltip, validate = {}} = component;
 
   const {required = false} = validate;

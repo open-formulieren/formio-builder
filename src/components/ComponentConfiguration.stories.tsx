@@ -2058,16 +2058,16 @@ export const NpFamilyMembers: Story = {
   },
 };
 
-export const Address: Story = {
+export const AddressNL: Story = {
   render: Template,
   name: 'type: address',
 
   args: {
     component: {
       id: 'wekruya',
-      type: 'address',
+      type: 'addressNL',
       key: 'address',
-      label: 'An address',
+      label: 'A Dutch address',
       validate: {
         required: false,
       },
@@ -2084,9 +2084,9 @@ export const Address: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('An address');
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A Dutch address');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anAddress');
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aDutchAddress');
     });
     await expect(canvas.getByLabelText('Description')).toHaveValue('');
     await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
