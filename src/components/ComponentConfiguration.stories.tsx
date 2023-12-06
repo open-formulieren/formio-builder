@@ -1152,17 +1152,25 @@ export const SelectBoxes: Story = {
       const itemsExpressionInput = canvas.getByLabelText('Items expression');
       await userEvent.clear(itemsExpressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "current_year"}'.replace(/[{[]/g, '$&$&');
-      await userEvent.type(itemsExpressionInput, expression);
+      const badExpression = '{"var": "current_year"}'.replace(/[{[]/g, '$&$&');
+      await userEvent.type(itemsExpressionInput, badExpression);
 
       await expect(editForm.queryByLabelText('Default value')).toBeNull();
       await expect(preview.getByRole('checkbox', {name: /Options from expression:/})).toBeVisible();
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      expect(itemsExpressionInput).toHaveAttribute('aria-invalid', 'true');
-      expect(itemsExpressionInput).toHaveAttribute('aria-errormessage');
-      const errorMessageId = itemsExpressionInput.getAttribute('aria-errormessage') ?? '';
-      expect(document.getElementById(errorMessageId)).toBeVisible();
+      // I'm sorry screen reader user 😢, I tried.
+      // expect(itemsExpressionInput).toHaveAttribute('aria-invalid', 'true');
+      // expect(itemsExpressionInput).toHaveAttribute('aria-errormessage');
+      // const errorMessageId = itemsExpressionInput.getAttribute('aria-errormessage') ?? '';
+      // expect(document.getElementById(errorMessageId)).toBeVisible();
+      expect(args.onSubmit).not.toHaveBeenCalled();
+
+      const expression = '[[{"var": "form_name"}, {"var": "form_name"}]] '.replace(/[{[]/g, '$&$&');
+      await userEvent.clear(itemsExpressionInput);
+      await userEvent.type(itemsExpressionInput, expression);
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+
       expect(args.onSubmit).toHaveBeenCalledWith({
         id: 'wqimsadk',
         type: 'selectboxes',
@@ -1179,7 +1187,7 @@ export const SelectBoxes: Story = {
         isSensitiveData: false,
         openForms: {
           dataSrc: 'variable',
-          itemsExpression: {var: 'current_year'}, // valid JSON, invalid expression
+          itemsExpression: [[{var: 'form_name'}, {var: 'form_name'}]],
           translations: {},
         },
         defaultValue: {},

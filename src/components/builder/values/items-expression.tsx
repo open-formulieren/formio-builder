@@ -1,5 +1,5 @@
-import {type JSONObject} from '@open-formulieren/types/lib/types';
-import {useFormikContext} from 'formik';
+import {type JSONObject, type JSONValue} from '@open-formulieren/types/lib/types';
+import {Field, useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 
@@ -36,13 +36,13 @@ export const ItemsExpression: React.FC = () => {
       }
     >
       <div>
-        <JSONEdit
+        <Field
           name={NAME}
-          data={value}
-          rows={3}
-          id={htmlId}
-          validateLogic={logic => validateLogic(logic, [['', '']])}
-        />
+          validateOnChange={true}
+          validate={(logic: JSONValue) => validateLogic(logic, [['', '']])}
+        >
+          {() => <JSONEdit name={NAME} data={value} rows={3} id={htmlId} />}
+        </Field>
       </div>
 
       <Description

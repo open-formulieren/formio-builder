@@ -20,7 +20,7 @@ const JSONEdit: React.FC<JSONEditProps & TextareaHTMLAttributes<HTMLTextAreaElem
 
   const [value, setValue] = useState(dataAsJSON);
   const [JSONValid, setJSONValid] = useState(true);
-  const {setValues, setFieldValue} = useFormikContext();
+  const {setValues, setFieldValue, validateField} = useFormikContext();
 
   // if no name is provided, replace the entire form state, otherwise only set a
   // specific value
@@ -46,6 +46,7 @@ const JSONEdit: React.FC<JSONEditProps & TextareaHTMLAttributes<HTMLTextAreaElem
     }
 
     updateValue(updatedData);
+    name && validateField(name);
   };
   return (
     <>

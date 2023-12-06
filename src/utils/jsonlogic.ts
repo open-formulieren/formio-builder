@@ -7,9 +7,9 @@ import {type JSONObject, type JSONValue} from '@open-formulieren/types/lib/types
 import {type AnyComponentSchema} from '@/types';
 
 /**
- * @param {object | array | number | string} logic - JsonLogic expression
- * @param {object | array | number | string} expected - example value from expected result type e.g. [["label", "value"]]
- * @returns {string} - error message or '' if type checks
+ * @param logic - JsonLogic expression
+ * @param expected - example value from expected result type e.g. [["label", "value"]]
+ * @returns  error message or '' if type checks
  */
 export type JsonLogicTypeChecker = (logic: JSONValue, expected?: JSONValue) => string;
 
@@ -31,7 +31,7 @@ interface ServiceFetchConfiguration {
   path: string;
   method: 'GET' | 'POST';
   headers: Record<string, string>;
-  query_params: Record<string, string>;
+  query_params: Record<string, string[]>;
   body: string | null;
   data_mapping_type: 'JsonLogic' | 'jq';
   mapping_expression: unknown;
@@ -113,7 +113,7 @@ const dataTypeForComponent = (
   component:
     | AnyComponentSchema
     | {
-        type: 'map' | 'editgrid' | 'password' | 'signature'; // Not yet implemented in this builder
+        type: 'map' | 'editgrid' | 'password' | 'signature'; // TODO remove when these are present in AnyComponentSchema
         multiple?: boolean;
         defaultValue: JSONValue;
       }
