@@ -2196,3 +2196,75 @@ export const Columns: Story = {
     });
   },
 };
+
+export const FieldSet: Story = {
+  render: Template,
+  name: 'type: fieldset',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'fieldset',
+      key: 'fieldset',
+      label: 'A field set',
+      hideHeader: false,
+      components: [],
+    },
+
+    builderInfo: {
+      title: 'Field set',
+      icon: 'th-large',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A field set');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aFieldSet');
+    });
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+    await expect(canvas.getByLabelText('Hide fieldset header')).not.toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label'));
+
+    const previewInput = preview.getByText('Updated preview label');
+    await expect(previewInput).toBeVisible();
+
+    await step('Manually edit key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+      // not have any value, which triggers the generate-key-from-label behaviour.
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Toggle hideHeader', async () => {
+      // check that toggling the 'hideHeader' checkbox properly updates the preview. We
+      // use fireEvent because firefox borks on userEvent.click, see:
+      // https://github.com/testing-library/user-event/issues/1149
+      fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Hide fieldset header'));
+      await waitFor(() => expect(preview.queryByText('A field set')).toBeNull());
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

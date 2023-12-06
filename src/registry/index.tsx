@@ -9,6 +9,7 @@ import DateField from './date';
 import DateTimeField from './datetime';
 import Email from './email';
 import Fallback from './fallback';
+import FieldSet from './fieldset';
 import FileUpload from './file';
 import Iban from './iban';
 import Licenseplate from './licenseplate';
@@ -62,6 +63,7 @@ const REGISTRY: Registry = {
   addressNL: AddressNL,
   // layout
   columns: Columns,
+  fieldset: FieldSet,
 };
 
 export {Fallback};
