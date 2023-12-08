@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {render, screen} from '@/test-utils';
+import {contextRender, screen} from '@/test-utils';
 
 describe('Manual values: must have at least one non-empty value', () => {
   const args = {
@@ -27,7 +27,7 @@ describe('Manual values: must have at least one non-empty value', () => {
     },
   };
 
-  render(<ComponentEditForm {...args} />);
+  contextRender(<ComponentEditForm {...args} />);
 
   test('Option values and labels are required fields', async () => {
     const labelInput = screen.getByLabelText('Option label');

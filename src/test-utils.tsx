@@ -1,6 +1,8 @@
 import {SupportedLocales} from '@open-formulieren/types';
 import {render as rtlRender} from '@testing-library/react';
 import type {RenderOptions, RenderResult} from '@testing-library/react';
+import {Formik} from 'formik';
+import type {FormikErrors, FormikTouched, FormikValues} from 'formik';
 import React from 'react';
 import {IntlProvider} from 'react-intl';
 
@@ -198,7 +200,7 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const render = (
+const contextRender = (
   ui: React.ReactElement,
   enableContext: boolean = true,
   locale: string = 'en',
@@ -255,8 +257,48 @@ const render = (
   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
 };
 
+interface FormikOptions {
+  initialValues: FormikValues;
+  initialErrors: FormikErrors<unknown>;
+  initialTouched: FormikTouched<unknown>;
+  wrapForm: boolean;
+}
+
+const formikRender = (
+  ui: React.ReactElement,
+  disable: boolean = false,
+  locale: string = 'en',
+  formikOptions: Partial<FormikOptions> = {},
+  renderOptions: RenderOptions = {}
+): RenderResult => {
+  function Wrapper({children}: {children: React.ReactElement}) {
+    return (
+      <IntlProvider locale={locale}>
+        {disable ? (
+          <>{children}</>
+        ) : (
+          <Formik
+            initialValues={formikOptions.initialValues || {}}
+            initialErrors={formikOptions.initialErrors || {}}
+            initialTouched={formikOptions.initialTouched || {}}
+            enableReinitialize
+            onSubmit={(values, formikHelpers) => console.log(values, formikHelpers)}
+          >
+            {formikOptions.wrapForm ? (
+              <form id="formik-render-form">{children}</form>
+            ) : (
+              <>{children}</>
+            )}
+          </Formik>
+        )}
+      </IntlProvider>
+    );
+  }
+  return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
+};
+
 // re-export everything
 export * from '@testing-library/react';
 
-// override render method
-export {render};
+// Add extra exports
+export {contextRender, formikRender};
