@@ -2268,3 +2268,85 @@ export const FieldSet: Story = {
     });
   },
 };
+
+export const EditGrid: Story = {
+  render: Template,
+  name: 'type: editgrid',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'editgrid',
+      key: 'editgrid',
+      label: 'A repeating group',
+      hideLabel: false,
+      groupLabel: 'Group',
+      disableAddingRemovingRows: false,
+      components: [],
+    },
+
+    builderInfo: {
+      title: 'Repeating group',
+      icon: 'repeat',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A repeating group');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aRepeatingGroup');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Group label')).toHaveValue('Group');
+    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+    await expect(canvas.getByLabelText('Hide label')).not.toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.clear(canvas.getByLabelText('Label'));
+    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+    expect(await preview.findByText('Updated preview label')).toBeVisible();
+
+    await step('Manually edit key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
+      // not have any value, which triggers the generate-key-from-label behaviour.
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Toggle hideLabel', async () => {
+      // check that toggling the 'hideLabel' checkbox properly updates the preview. We
+      // use fireEvent because firefox borks on userEvent.click, see:
+      // https://github.com/testing-library/user-event/issues/1149
+      fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Hide label'));
+      await waitFor(() => expect(preview.queryByText('Updated preview label')).toBeNull());
+    });
+
+    await step('Change group label', async () => {
+      const groupLabelInput = canvas.getByLabelText('Group label');
+      await userEvent.clear(groupLabelInput);
+      await userEvent.type(groupLabelInput, 'Duckling');
+      await expect(await preview.findByText('Duckling 1')).toBeVisible();
+      await expect(await preview.findByText('Duckling 2')).toBeVisible();
+      await expect(await preview.findByText('Duckling 3')).toBeVisible();
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

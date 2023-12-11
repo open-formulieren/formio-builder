@@ -1097,3 +1097,39 @@ export const FieldSet: Story = {
     await expect(canvas.queryByText('Nested text field')).toBeNull();
   },
 };
+
+export const EditGrid: Story = {
+  name: 'EditGrid',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'editgrid',
+      key: 'editgrid',
+      label: 'A repeating group preview',
+      groupLabel: 'Item',
+      hidden: true, // must be ignored
+      components: [
+        // we do not display the nested components
+        {
+          id: 'someTextField',
+          key: 'someTextField',
+          type: 'textfield',
+          label: 'Nested text field',
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('A repeating group preview');
+    await canvas.findByText('Item 1');
+    await canvas.findByText('Item 2');
+    await canvas.findByText('Item 3');
+    await expect(canvas.queryByText('Nested text field')).toBeNull();
+  },
+};

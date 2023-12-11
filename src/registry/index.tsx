@@ -7,6 +7,7 @@ import Columns from './columns';
 import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
+import EditGrid from './editgrid';
 import Email from './email';
 import Fallback from './fallback';
 import FieldSet from './fieldset';
@@ -61,6 +62,7 @@ const REGISTRY: Registry = {
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
   addressNL: AddressNL,
+  editgrid: EditGrid,
   // layout
   columns: Columns,
   fieldset: FieldSet,
