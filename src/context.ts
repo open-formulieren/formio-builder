@@ -4,6 +4,7 @@ import React from 'react';
 import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
+import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
 /*
@@ -64,6 +65,7 @@ export interface BuilderContextType {
   serverUploadLimit: string;
   getDocumentTypes: () => Promise<Array<DocumentTypeOption>>;
   getConfidentialityLevels: () => Promise<SelectOption[]>;
+  getAuthPlugins: () => Promise<AuthPluginOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -79,6 +81,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   serverUploadLimit: '(unknown)',
   getDocumentTypes: async () => [],
   getConfidentialityLevels: async () => [],
+  getAuthPlugins: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

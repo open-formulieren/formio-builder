@@ -1133,3 +1133,28 @@ export const EditGrid: Story = {
     await expect(canvas.queryByText('Nested text field')).toBeNull();
   },
 };
+
+export const CosignV1: Story = {
+  name: 'Cosign v1',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'coSign',
+      key: 'coSign',
+      label: 'A cosign v1 preview',
+      hidden: true, // must be ignored
+      authPlugin: 'digid',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('A cosign v1 preview');
+    const previewBtn = canvas.getByRole('button', {name: 'Cosign (digid)'});
+    await waitFor(() => expect(previewBtn).toBeVisible());
+  },
+};
