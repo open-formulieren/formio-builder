@@ -6,7 +6,7 @@ import {buildCommonSchema} from '@/registry/validation';
 import {POSTCODE_REGEX} from '../postcode/constants';
 
 // Constraints taken from the BRK API (apart from postcode which comes from our postcode component)
-const addresNLsSchema = z.object({
+const addressNLSchema = z.object({
   postcode: z.string().regex(new RegExp(POSTCODE_REGEX)).optional(),
   houseNumber: z
     .string()
@@ -22,7 +22,7 @@ const addresNLsSchema = z.object({
     .optional(),
 });
 
-const defaultValueSchema = z.object({defaultValue: addresNLsSchema});
+const defaultValueSchema = z.object({defaultValue: addressNLSchema});
 
 const schema = (intl: IntlShape) => buildCommonSchema(intl).and(defaultValueSchema);
 
