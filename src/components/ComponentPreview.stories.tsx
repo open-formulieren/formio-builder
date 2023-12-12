@@ -1204,7 +1204,9 @@ export const Signature: Story = {
     const canvas = within(canvasElement);
 
     // check that the user-controlled content is visible
-    expect(await canvas.findByText('A signature preview')).toBeVisible();
-    expect(await canvas.findByText('Draw above')).toBeVisible();
+    await waitFor(async () => {
+      await expect(await canvas.findByText('A signature preview')).toBeVisible();
+      await expect(await canvas.findByText('Draw above')).toBeVisible();
+    });
   },
 };
