@@ -96,19 +96,12 @@ function isAuthPluginOptions(
   return options !== undefined;
 }
 
-const AuthPlugin: React.FC = () => {
-  const intl = useIntl();
+export const AuthPlugin: React.FC = () => {
   const {getAuthPlugins} = useContext(BuilderContext);
-
   const {value: options, loading, error} = useAsync(async () => await getAuthPlugins(), []);
   if (error) {
     throw error;
   }
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'authPlugin' builder field",
-    defaultMessage: `Which authentication method the co-signer must use. Note that this
-    must be an authentication method available on the form.`,
-  });
   const _options = isAuthPluginOptions(options) ? options : [];
   return (
     <Select
@@ -119,7 +112,13 @@ const AuthPlugin: React.FC = () => {
           defaultMessage="Authentication method"
         />
       }
-      tooltip={tooltip}
+      description={
+        <FormattedMessage
+          description="Description for 'authPlugin' builder field"
+          defaultMessage={`Which authentication method the co-signer must use. Note that
+          this must be an authentication method available on the form.`}
+        />
+      }
       isLoading={loading}
       options={_options}
       valueProperty="id"

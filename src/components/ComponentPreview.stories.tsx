@@ -1158,3 +1158,29 @@ export const CosignV1: Story = {
     await waitFor(() => expect(previewBtn).toBeVisible());
   },
 };
+
+export const CosignV2: Story = {
+  name: 'Cosign v2',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'cosign',
+      key: 'cosign',
+      label: 'A cosign v2 preview',
+      hidden: true, // must be ignored
+      authPlugin: 'digid',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('A cosign v2 preview');
+    const previewInput = canvas.getByRole<HTMLInputElement>('textbox');
+    await waitFor(() => expect(previewInput).toBeVisible());
+    await expect(previewInput.type).toBe('email');
+  },
+};
