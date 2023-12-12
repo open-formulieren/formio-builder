@@ -103,10 +103,8 @@ jobs:
       - name: Run tests
         run: |
           npm run test:jest
-        env:
-          CI: 'true'
 
-  tests:
+  tests-storybook:
     name: Run Storybook tests (${{ matrix.browser }})
     runs-on: ubuntu-latest
 

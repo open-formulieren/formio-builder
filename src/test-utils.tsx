@@ -297,7 +297,7 @@ const formikRender = (
   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
 };
 
-// re-export everything
+// re-export everything (see https://testing-library.com/docs/react-testing-library/setup/#custom-render)
 export * from '@testing-library/react';
 
 // Add extra exports
