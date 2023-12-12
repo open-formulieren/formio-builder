@@ -207,7 +207,7 @@ const contextRender = (
   builderOptions: Partial<BuilderOptions> = {},
   renderOptions: RenderOptions = {}
 ): RenderResult => {
-  function Wrapper({children}: {children: React.ReactElement}) {
+  function Wrapper({children}: {children: React.ReactNode}) {
     return (
       <IntlProvider locale={locale}>
         {!enableContext ? (

@@ -20,7 +20,7 @@
     "noErrorTruncation": true,
     "paths": {
       "@/*": ["./*"],
-      "@/sb-decorators": ["../.storybook/decorators.tsx"],
+      "@/sb-decorators": ["../.storybook/decorators.tsx"]
     },
     "plugins": [
       {
@@ -31,8 +31,8 @@
         "ast": true
       }
     ],
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src"],
-  "exclude": ["node_modules", "lib"],
+  "exclude": ["node_modules", "lib"]
 }

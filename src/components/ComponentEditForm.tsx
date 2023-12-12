@@ -27,18 +27,18 @@ export interface ComponentEditFormProps {
   // don't know (yet), so we need to handle FallbackSchema.
   component: AnyComponentSchema | FallbackSchema;
   builderInfo: BuilderInfo;
-  onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onRemove?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onSubmit?: (component: AnyComponentSchema | FallbackSchema) => void;
+  onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSubmit: (component: AnyComponentSchema | FallbackSchema) => void;
 }
 
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   isNew,
   component,
   builderInfo,
-  onCancel = () => {},
-  onRemove = () => {},
-  onSubmit = () => {},
+  onCancel,
+  onRemove,
+  onSubmit,
 }) => {
   const intl = useIntl();
   const builderContext = useContext(BuilderContext);

@@ -102,7 +102,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npm run test-jest
+          npm run test:jest
         env:
           CI: 'true'
 
@@ -148,7 +148,7 @@ jobs:
           cd storybook-static/ && tar -xvf artifact.tar && cd ..
           npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
             "npx http-server storybook-static --port 6006 --quiet" \
-            "npx wait-on -l http://127.0.0.1:6006 && npm test -- --browsers ${{ matrix.browser }}"
+            "npx wait-on -l http://127.0.0.1:6006 && npm run test:storybook -- --browsers ${{ matrix.browser }}"
 
   deploy:
     runs-on: ubuntu-latest
