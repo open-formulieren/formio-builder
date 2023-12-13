@@ -2183,13 +2183,13 @@ export const Columns: Story = {
 
       // set column 1 width to 3
       fireEvent.change(sliders[0], {target: {value: 3}});
-      expect(sliders[0]).toHaveDisplayValue('3');
+      await waitFor(() => expect(sliders[0]).toHaveDisplayValue('3'));
       // set column 2 width to 2
       fireEvent.change(sliders[1], {target: {value: 2}});
-      expect(sliders[1]).toHaveDisplayValue('2');
+      await waitFor(() => expect(sliders[1]).toHaveDisplayValue('2'));
       // set column 3 width to 7
       fireEvent.change(sliders[2], {target: {value: 7}});
-      expect(sliders[2]).toHaveDisplayValue('7');
+      await waitFor(() => expect(sliders[2]).toHaveDisplayValue('7'));
     });
 
     await step('Submit form', async () => {
