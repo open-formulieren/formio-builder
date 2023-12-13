@@ -21,8 +21,8 @@
     "test": "npm-run-all test:*",
     "test:storybook": "test-storybook",
     "test:jest": "jest",
-    "format": "prettier --write 'src/**/*'",
-    "checkformat": "prettier --check 'src/**/*'",
+    "format": "prettier --write 'src/**/*' '.storybook/**/*'",
+    "checkformat": "prettier --check 'src/**/*' '.storybook/**/*'",
     "start": "npm run storybook",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -137,7 +137,7 @@
       "/node_modules/(?!uuid)/"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/src/tests/setupTests.js"
     ],
     "testEnvironment": "jsdom"
   },

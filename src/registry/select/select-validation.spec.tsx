@@ -1,21 +1,26 @@
+import {SelectComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {contextRender, screen} from '@/test-utils';
+import {contextRender, screen} from '@/tests/test-utils';
 
-describe('Manual values: must have at least one non-empty value', () => {
+test('Option values and labels are required fields', async () => {
   const component = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
+    dataSrc: 'values',
     openForms: {
       dataSrc: 'manual',
       translations: {},
     },
-    values: [{value: '', label: ''}],
+    data: {
+      values: [{value: '', label: ''}],
+    },
     defaultValue: '',
-  };
+  } satisfies SelectComponentSchema;
+
   const builderInfo = {
     title: 'Select',
     icon: 'th-list',
@@ -23,24 +28,21 @@ describe('Manual values: must have at least one non-empty value', () => {
     weight: 70,
     schema: {},
   };
+  contextRender(
+    <ComponentEditForm
+      isNew
+      component={component}
+      builderInfo={builderInfo}
+      onCancel={jest.fn()}
+      onRemove={jest.fn()}
+      onSubmit={jest.fn()}
+    />
+  );
 
-  test('Option values and labels are required fields', async () => {
-    contextRender(
-      <ComponentEditForm
-        isNew
-        component={component}
-        builderInfo={builderInfo}
-        onCancel={jest.fn()}
-        onRemove={jest.fn()}
-        onSubmit={jest.fn()}
-      />
-    );
-
-    const labelInput = screen.getByLabelText('Option label');
-    await userEvent.type(labelInput, 'Foo');
-    await userEvent.clear(labelInput);
-    await userEvent.keyboard('[Tab]');
-    await expect(await screen.findByText('The option label is a required field.')).toBeVisible();
-    await expect(await screen.findByText('The option value is a required field.')).toBeVisible();
-  });
+  const labelInput = screen.getByLabelText('Option label');
+  await userEvent.type(labelInput, 'Foo');
+  await userEvent.clear(labelInput);
+  await userEvent.keyboard('[Tab]');
+  await expect(await screen.findByText('The option label is a required field.')).toBeVisible();
+  await expect(await screen.findByText('The option value is a required field.')).toBeVisible();
 });

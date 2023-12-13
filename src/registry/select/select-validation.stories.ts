@@ -19,11 +19,14 @@ export default {
       type: 'select',
       key: 'select',
       label: 'A select field',
+      dataSrc: 'values',
       openForms: {
         dataSrc: 'manual',
         translations: {},
       },
-      values: [{value: '', label: ''}],
+      data: {
+        values: [{value: '', label: ''}],
+      },
       defaultValue: '',
     },
 
