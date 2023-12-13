@@ -1,4 +1,4 @@
-import type {StoryContext, StoryFn} from '@storybook/react';
+import type {Decorator} from '@storybook/react';
 import {Formik} from 'formik';
 
 import {BuilderContext, DocumentTypeOption} from '@/context';
@@ -6,8 +6,9 @@ import {BuilderContext, DocumentTypeOption} from '@/context';
 import {PrefillAttributeOption, PrefillPluginOption} from '../src/components/builder/prefill';
 import {RegistrationAttributeOption} from '../src/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '../src/components/builder/validate/validator-select';
+import {AuthPluginOption} from '../src/registry/cosignV1/edit';
 
-export const ModalDecorator = (Story, {parameters}) => {
+export const ModalDecorator: Decorator = (Story, {parameters}) => {
   if (parameters?.modal?.noModal) return <Story />;
   return (
     <div
@@ -195,11 +196,22 @@ export const CONFIDENTIALITY_LEVELS = [
   {label: 'Zeer geheim', value: 'zeer_geheim'},
 ];
 
+export const DEFAULT_AUTH_PLUGINS: AuthPluginOption[] = [
+  {
+    id: 'digid',
+    label: 'DigiD, provides: bsn',
+  },
+  {
+    id: 'eherkenning',
+    label: 'eHerkenning, provides: kvk',
+  },
+];
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) => {
+export const BuilderContextDecorator: Decorator = (Story, context) => {
   if (!context.parameters?.builder?.enableContext) return <Story />;
   const supportedLanguageCodes = context.parameters.builder?.supportedLanguageCodes || ['nl', 'en'];
   const translationsStore = context.parameters.builder?.translationsStore || null;
@@ -216,6 +228,7 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
   const defaultdocumentTypes =
     context.parameters.builder?.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES;
+
   return (
     <BuilderContext.Provider
       value={{
@@ -246,6 +259,7 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
         serverUploadLimit: '50MB',
         getDocumentTypes: async () => context?.args?.documentTypes || defaultdocumentTypes,
         getConfidentialityLevels: async () => CONFIDENTIALITY_LEVELS,
+        getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
       }}
     >
       <Story />
@@ -253,7 +267,7 @@ export const BuilderContextDecorator = (Story: StoryFn, context: StoryContext) =
   );
 };
 
-export const withFormik = (Story: StoryFn, context: StoryContext) => {
+export const withFormik: Decorator = (Story, context) => {
   const isDisabled = context.parameters?.formik?.disable ?? false;
   if (isDisabled) {
     return <Story />;

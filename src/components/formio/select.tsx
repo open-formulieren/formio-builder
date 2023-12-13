@@ -21,7 +21,7 @@ export interface SelectProps<
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
-  description?: string;
+  description?: React.ReactNode;
   isClearable?: boolean;
   valueProperty?: string;
   onChange?: (event: {target: {name: string; value: any}}) => void;

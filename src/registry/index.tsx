@@ -4,6 +4,8 @@ import AddressNL from './addressNL';
 import BSN from './bsn';
 import Checkbox from './checkbox';
 import Columns from './columns';
+import CosignV1 from './cosignV1';
+import CosignV2 from './cosignV2';
 import Currency from './currency';
 import DateField from './date';
 import DateTimeField from './datetime';
@@ -61,11 +63,14 @@ const REGISTRY: Registry = {
   licenseplate: Licenseplate,
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
+  cosign: CosignV2,
   addressNL: AddressNL,
   editgrid: EditGrid,
   // layout
   columns: Columns,
   fieldset: FieldSet,
+  // deprecated
+  coSign: CosignV1,
 };
 
 export {Fallback};

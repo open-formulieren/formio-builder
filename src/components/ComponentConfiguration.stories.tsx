@@ -6,6 +6,7 @@ import React from 'react';
 
 import {
   CONFIDENTIALITY_LEVELS,
+  DEFAULT_AUTH_PLUGINS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
 } from '@/../.storybook/decorators';
@@ -122,6 +123,7 @@ const Template: StoryFn<TemplateArgs> = ({
     serverUploadLimit="50MB"
     getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
     getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
+    getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
@@ -2342,6 +2344,135 @@ export const EditGrid: Story = {
       await expect(await preview.findByText('Duckling 1')).toBeVisible();
       await expect(await preview.findByText('Duckling 2')).toBeVisible();
       await expect(await preview.findByText('Duckling 3')).toBeVisible();
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};
+
+export const CosignV1: Story = {
+  render: Template,
+  name: 'type: coSign (cosign v1)',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'coSign',
+      key: 'coSign',
+      label: 'A cosign v1',
+      authPlugin: 'digid',
+    },
+    builderInfo: {
+      title: 'Co-sign (old)',
+      icon: 'id-card-o',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v1');
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+
+    // ensure that changing fields in the edit form properly update the preview
+    await step('Change authPlugin', async () => {
+      canvas.getByLabelText('Authentication method').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await waitFor(async () => {
+        const eHerkenningOption = canvas.getByText('eHerkenning, provides: kvk');
+        await expect(eHerkenningOption).toBeVisible();
+        await userEvent.click(eHerkenningOption);
+      });
+      await waitFor(async () => {
+        const previewBtn = preview.getByRole('button', {name: 'Cosign (eherkenning)'});
+        await expect(previewBtn).toBeVisible();
+      });
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};
+
+export const CosignV2: Story = {
+  render: Template,
+  name: 'type: cosign (cosign v2)',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'cosign',
+      key: 'cosign',
+      label: 'A cosign v2',
+      authPlugin: 'digid',
+      validateOn: 'blur',
+    },
+    builderInfo: {
+      title: 'Cosign',
+      icon: 'pen-nib',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v2');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCosignV2');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+
+    // ensure that changing fields in the edit form properly update the preview
+    await step('Change label', async () => {
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+      await expect(await preview.findByText('Updated preview label'));
+
+      const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
+      await expect(previewInput).toHaveDisplayValue('');
+      await expect(previewInput.type).toEqual('email');
+    });
+
+    await step('Change key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+      await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Auth plugin options shown', async () => {
+      canvas.getByLabelText('Authentication method').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await waitFor(async () => {
+        const eHerkenningOption = canvas.getByText('eHerkenning, provides: kvk');
+        await expect(eHerkenningOption).toBeVisible();
+        await userEvent.click(eHerkenningOption);
+      });
     });
 
     await step('Submit form', async () => {

@@ -35,6 +35,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   serverUploadLimit,
   getDocumentTypes,
   getConfidentialityLevels,
+  getAuthPlugins,
   isNew,
   component,
   builderInfo,
@@ -56,6 +57,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       serverUploadLimit,
       getDocumentTypes,
       getConfidentialityLevels,
+      getAuthPlugins,
     }}
   >
     <ComponentEditForm
