@@ -4,6 +4,7 @@ import {Formik} from 'formik';
 import {BuilderContext} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
+  DEFAULT_AUTH_PLUGINS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
@@ -11,10 +12,8 @@ import {
   DEFAULT_PREFILL_PLUGINS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_VALIDATOR_PLUGINS,
-  DEFAULT_AUTH_PLUGINS,
   sleep,
 } from '@/tests/sharedUtils';
-
 
 export const ModalDecorator: Decorator = (Story, {parameters}) => {
   if (parameters?.modal?.noModal) return <Story />;

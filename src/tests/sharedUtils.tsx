@@ -7,7 +7,6 @@ import {RegistrationAttributeOption} from '../components/builder/registration/re
 import {ValidatorOption} from '../components/builder/validate/validator-select';
 import {AuthPluginOption} from '../registry/cosignV1/edit';
 
-
 export const DEFAULT_COMPONENT_TREE: AnyComponentSchema[] = [
   {type: 'textfield', key: 'text1', label: 'Textfield 1', id: 'id1'},
   {
@@ -175,7 +174,6 @@ export const CONFIDENTIALITY_LEVELS: SelectOption[] = [
   {label: 'Geheim', value: 'geheim'},
   {label: 'Zeer geheim', value: 'zeer_geheim'},
 ];
-
 
 export const DEFAULT_AUTH_PLUGINS: AuthPluginOption[] = [
   {
