@@ -29,32 +29,32 @@ import {ValidatorOption} from '../components/builder/validate/validator-select';
 interface BuilderOptions {
   supportedLanguageCodes: SupportedLocales[];
   componentTranslationsRef: ComponentTranslationsRef;
-  ComponentTree: AnyComponentSchema[];
-  ValidatorPlugins: ValidatorOption[];
-  RegistrationAttributes: RegistrationAttributeOption[];
-  PrefillPlugins: PrefillPluginOption[];
-  PrefillAttributes: {[key: string]: PrefillAttributeOption[]};
-  FileTypes: SelectOption[];
+  componentTree: AnyComponentSchema[];
+  validatorPlugins: ValidatorOption[];
+  registrationAttributes: RegistrationAttributeOption[];
+  prefillPlugins: PrefillPluginOption[];
+  prefillAttributes: {[key: string]: PrefillAttributeOption[]};
+  fileTypes: SelectOption[];
   documentTypes: DocumentTypeOption[];
-  ConfidentialityLevels: SelectOption[];
+  confidentialityLevels: SelectOption[];
   registrationAttributesDelay: number;
 }
 
 interface contextRenderOptions {
-  enableContext: boolean;
-  locale: string;
-  builderOptions: Partial<BuilderOptions>;
-  renderOptions: RenderOptions;
+  enableContext?: boolean;
+  locale?: string;
+  builderOptions?: Partial<BuilderOptions>;
+  renderOptions?: RenderOptions;
 }
 
 const contextRender = (
   ui: React.ReactElement,
-  {enableContext, locale, builderOptions, renderOptions}: contextRenderOptions = {
-    enableContext: true,
-    locale: 'en',
-    builderOptions: {},
-    renderOptions: {},
-  }
+  {
+    enableContext = true,
+    locale = 'en',
+    builderOptions = {},
+    renderOptions = {},
+  }: contextRenderOptions
 ): RenderResult => {
   function Wrapper({children}: {children: React.ReactNode}) {
     return (
@@ -67,29 +67,29 @@ const contextRender = (
               uniquifyKey: key => key,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               componentTranslationsRef: builderOptions.componentTranslationsRef || {current: null},
-              getFormComponents: () => builderOptions.ComponentTree || DEFAULT_COMPONENT_TREE,
+              getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return builderOptions.ValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
+                return builderOptions.validatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
               },
               getRegistrationAttributes: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return builderOptions.RegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
+                return builderOptions.registrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
               },
               getPrefillPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return builderOptions.PrefillPlugins || DEFAULT_PREFILL_PLUGINS;
+                return builderOptions.prefillPlugins || DEFAULT_PREFILL_PLUGINS;
               },
               getPrefillAttributes: async plugin => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                const container = builderOptions.PrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
+                const container = builderOptions.prefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
                 return container?.[plugin] || [{id: '', label: 'no plugins found'}];
               },
-              getFileTypes: async () => builderOptions.FileTypes || DEFAULT_FILE_TYPES,
+              getFileTypes: async () => builderOptions.fileTypes || DEFAULT_FILE_TYPES,
               serverUploadLimit: '50MB',
               getDocumentTypes: async () => builderOptions.documentTypes || DEFAULT_DOCUMENT_TYPES,
               getConfidentialityLevels: async () =>
-                builderOptions.ConfidentialityLevels || CONFIDENTIALITY_LEVELS,
+                builderOptions.confidentialityLevels || CONFIDENTIALITY_LEVELS,
               getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
             }}
           >

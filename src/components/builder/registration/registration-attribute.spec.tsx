@@ -29,8 +29,10 @@ test('Available registration attributes are retrieved via context', async () => 
     {
       enableContext: true,
       locale: 'en',
-      registrationAttributes: REGISTRATION_ATTRIBUTES,
-      registrationAttributesDelay: 100,
+      builderOptions: {
+        registrationAttributes: REGISTRATION_ATTRIBUTES,
+        registrationAttributesDelay: 100,
+      },
     }
   );
 
