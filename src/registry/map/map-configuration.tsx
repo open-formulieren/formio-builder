@@ -57,7 +57,7 @@ const Longitude: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'initialCenter.lng' builder field",
-    defaultMessage: 'Latitude coordinate of the initial center point of the map.',
+    defaultMessage: 'Longitude coordinate of the initial center point of the map.',
   });
   return (
     <NumberField
