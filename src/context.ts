@@ -19,7 +19,7 @@ interface TranslationsStore {
   [key: string]: TranslationsMap;
 }
 
-interface ComponentTranslationsRef {
+export interface ComponentTranslationsRef {
   current: null | TranslationsStore;
 }
 

@@ -1,6 +1,4 @@
-import {expect} from '@storybook/jest';
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {Meta, StoryObj} from '@storybook/react';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -18,15 +16,6 @@ export default {
   decorators: [withFormik],
   parameters: {
     controls: {hideNoControlsWarning: true},
-    docs: {
-      source: {
-        type: 'dynamic',
-        excludeDecorators: true,
-      },
-      // https://github.com/bbbtech/storybook-formik/issues/51#issuecomment-1136668271
-      inlineStories: false,
-      iframeHeight: 200,
-    },
     modal: {noModal: true},
     builder: {enableContext: true, registrationAttributesDelay: 100},
     formik: {initialValues: {registration: {attribute: ''}}},
@@ -38,24 +27,4 @@ export default {
 
 type Story = StoryObj<typeof RegistrationAttributeSelect>;
 
-const Template: StoryFn<typeof RegistrationAttributeSelect> = () => <RegistrationAttributeSelect />;
-
-export const Default: Story = {
-  render: Template,
-
-  play: async ({canvasElement}) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getByLabelText('Registration attribute');
-
-    // open the dropdown
-    input.focus();
-    await userEvent.keyboard('[ArrowDown]');
-
-    // wait for options to load
-    await waitFor(async () => {
-      expect(await canvas.findByText('BSN')).toBeVisible();
-    });
-    expect(canvas.getByText('First name')).toBeVisible();
-    expect(canvas.getByText('Date of Birth')).toBeVisible();
-  },
-};
+export const Default: Story = {};

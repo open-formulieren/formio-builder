@@ -20,7 +20,7 @@
     "noErrorTruncation": true,
     "paths": {
       "@/*": ["./*"],
-      "@/sb-decorators": ["../.storybook/decorators.tsx"],
+      "@/sb-decorators": ["../.storybook/decorators.tsx"]
     },
     "plugins": [
       {

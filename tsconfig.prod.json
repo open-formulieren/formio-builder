@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig",
-  "exclude": ["node_modules", "lib", "**/*.stories.*"]
+  "exclude": ["node_modules", "lib", "**/*.stories.*", "**/*.spec.*", "src/tests"]
 }
