@@ -54,7 +54,7 @@ const contextRender = (
     locale = 'en',
     builderOptions = {},
     renderOptions = {},
-  }: contextRenderOptions
+  }: contextRenderOptions = {}
 ): RenderResult => {
   function Wrapper({children}: {children: React.ReactNode}) {
     return (
