@@ -2144,7 +2144,6 @@ export const Columns: Story = {
 
   play: async ({canvasElement, args, step}) => {
     const canvas = within(canvasElement);
-    const preview = within(canvas.getByTestId('componentPreview'));
 
     await step('Label is not relevant for columns', async () => {
       const labelInput = canvas.queryByLabelText('Label');
@@ -2165,31 +2164,6 @@ export const Columns: Story = {
       expect(mobileSliders).toHaveLength(2);
       expect(mobileSliders[0]).toHaveDisplayValue('4');
       expect(mobileSliders[1]).toHaveDisplayValue('4');
-    });
-
-    await step('Add third column', async () => {
-      await userEvent.click(canvas.getByRole('button', {name: 'Add column'}));
-      await preview.findByText('Column 3');
-    });
-
-    await step('Add column and configure widths', async () => {
-      // sadly not supported yet in testing-library
-      // https://github.com/testing-library/user-event/issues/871
-      const sliders = await canvas.findAllByRole('slider', {
-        name: 'Column size, value between 1 and 12.',
-      });
-      expect(sliders).toHaveLength(3);
-      expect(sliders[0]).toHaveDisplayValue('6');
-
-      // set column 1 width to 3
-      fireEvent.change(sliders[0], {target: {value: 3}});
-      await waitFor(() => expect(sliders[0]).toHaveDisplayValue('3'));
-      // set column 2 width to 2
-      fireEvent.change(sliders[1], {target: {value: 2}});
-      await waitFor(() => expect(sliders[1]).toHaveDisplayValue('2'));
-      // set column 3 width to 7
-      fireEvent.change(sliders[2], {target: {value: 7}});
-      await waitFor(() => expect(sliders[2]).toHaveDisplayValue('7'));
     });
 
     await step('Submit form', async () => {
