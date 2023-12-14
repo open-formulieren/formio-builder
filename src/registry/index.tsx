@@ -16,6 +16,7 @@ import FieldSet from './fieldset';
 import FileUpload from './file';
 import Iban from './iban';
 import Licenseplate from './licenseplate';
+import LeafletMap from './map';
 import NpFamilyMembers from './npFamilyMembers';
 import NumberField from './number';
 import PhoneNumber from './phonenumber';
@@ -67,6 +68,7 @@ const REGISTRY: Registry = {
   signature: Signature,
   cosign: CosignV2,
   addressNL: AddressNL,
+  map: LeafletMap,
   editgrid: EditGrid,
   // layout
   columns: Columns,

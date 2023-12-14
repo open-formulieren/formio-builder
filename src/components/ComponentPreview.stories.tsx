@@ -1210,3 +1210,31 @@ export const Signature: Story = {
     });
   },
 };
+
+export const LeafletMap: Story = {
+  name: 'Map',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map preview',
+      hidden: true, // must be ignored
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await waitFor(async () => {
+      await expect(await canvas.findByText('A map preview')).toBeVisible();
+    });
+
+    // the map should be rendered, with zoom controls
+    await expect(await canvas.findByRole('button', {name: 'Zoom in'})).toBeVisible();
+    await expect(await canvas.findByRole('button', {name: 'Zoom out'})).toBeVisible();
+  },
+};
