@@ -29,23 +29,32 @@ import {ValidatorOption} from '../components/builder/validate/validator-select';
 interface BuilderOptions {
   supportedLanguageCodes: SupportedLocales[];
   componentTranslationsRef: ComponentTranslationsRef;
-  defaultComponentTree: AnyComponentSchema[];
-  defaultValidatorPlugins: ValidatorOption[];
-  defaultRegistrationAttributes: RegistrationAttributeOption[];
-  defaultPrefillPlugins: PrefillPluginOption[];
-  defaultPrefillAttributes: {[key: string]: PrefillAttributeOption[]};
-  defaultFileTypes: SelectOption[];
-  defaultdocumentTypes: DocumentTypeOption[];
-  defaultConfidentialityLevels: SelectOption[];
+  ComponentTree: AnyComponentSchema[];
+  ValidatorPlugins: ValidatorOption[];
+  RegistrationAttributes: RegistrationAttributeOption[];
+  PrefillPlugins: PrefillPluginOption[];
+  PrefillAttributes: {[key: string]: PrefillAttributeOption[]};
+  FileTypes: SelectOption[];
+  documentTypes: DocumentTypeOption[];
+  ConfidentialityLevels: SelectOption[];
   registrationAttributesDelay: number;
+}
+
+interface contextRenderOptions {
+  enableContext: boolean;
+  locale: string;
+  builderOptions: Partial<BuilderOptions>;
+  renderOptions: RenderOptions;
 }
 
 const contextRender = (
   ui: React.ReactElement,
-  enableContext: boolean = true,
-  locale: string = 'en',
-  builderOptions: Partial<BuilderOptions> = {},
-  renderOptions: RenderOptions = {}
+  {enableContext, locale, builderOptions, renderOptions}: contextRenderOptions = {
+    enableContext: true,
+    locale: 'en',
+    builderOptions: {},
+    renderOptions: {},
+  }
 ): RenderResult => {
   function Wrapper({children}: {children: React.ReactNode}) {
     return (
@@ -58,34 +67,29 @@ const contextRender = (
               uniquifyKey: key => key,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               componentTranslationsRef: builderOptions.componentTranslationsRef || {current: null},
-              getFormComponents: () =>
-                builderOptions.defaultComponentTree || DEFAULT_COMPONENT_TREE,
+              getFormComponents: () => builderOptions.ComponentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return builderOptions.defaultValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
+                return builderOptions.ValidatorPlugins || DEFAULT_VALIDATOR_PLUGINS;
               },
               getRegistrationAttributes: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return (
-                  builderOptions.defaultRegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES
-                );
+                return builderOptions.RegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
               },
               getPrefillPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                return builderOptions.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
+                return builderOptions.PrefillPlugins || DEFAULT_PREFILL_PLUGINS;
               },
               getPrefillAttributes: async plugin => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
-                const container =
-                  builderOptions.defaultPrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
+                const container = builderOptions.PrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
                 return container?.[plugin] || [{id: '', label: 'no plugins found'}];
               },
-              getFileTypes: async () => builderOptions.defaultFileTypes || DEFAULT_FILE_TYPES,
+              getFileTypes: async () => builderOptions.FileTypes || DEFAULT_FILE_TYPES,
               serverUploadLimit: '50MB',
-              getDocumentTypes: async () =>
-                builderOptions.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES,
+              getDocumentTypes: async () => builderOptions.documentTypes || DEFAULT_DOCUMENT_TYPES,
               getConfidentialityLevels: async () =>
-                builderOptions.defaultConfidentialityLevels || CONFIDENTIALITY_LEVELS,
+                builderOptions.ConfidentialityLevels || CONFIDENTIALITY_LEVELS,
               getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
             }}
           >
@@ -105,12 +109,21 @@ interface FormikOptions {
   wrapForm: boolean;
 }
 
+interface formikRenderOptions {
+  disable: boolean;
+  locale: string;
+  formikOptions: Partial<FormikOptions>;
+  renderOptions: RenderOptions;
+}
+
 const formikRender = (
   ui: React.ReactElement,
-  disable: boolean = false,
-  locale: string = 'en',
-  formikOptions: Partial<FormikOptions> = {},
-  renderOptions: RenderOptions = {}
+  {disable, locale, formikOptions, renderOptions}: formikRenderOptions = {
+    disable: false,
+    locale: 'en',
+    formikOptions: {},
+    renderOptions: {},
+  }
 ): RenderResult => {
   function Wrapper({children}: {children: React.ReactElement}) {
     return (

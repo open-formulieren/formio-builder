@@ -26,13 +26,14 @@ test('Available registration attributes are retrieved via context', async () => 
     <Formik onSubmit={jest.fn()} initialValues={{registration: {attribute: ''}}}>
       <RegistrationAttributeSelect />
     </Formik>,
-    true,
-    'en',
     {
-      defaultRegistrationAttributes: REGISTRATION_ATTRIBUTES,
+      enableContext: true,
+      locale: 'en',
+      registrationAttributes: REGISTRATION_ATTRIBUTES,
       registrationAttributesDelay: 100,
     }
   );
+
   // open the dropdown
   const input = await screen.findByLabelText('Registration attribute');
   input.focus();
