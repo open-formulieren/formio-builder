@@ -2520,3 +2520,67 @@ export const Signature: Story = {
     });
   },
 };
+
+export const LeafletMap: Story = {
+  render: Template,
+  name: 'type: map',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+    },
+
+    builderInfo: {
+      title: 'Map',
+      icon: 'map',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const preview = within(canvas.getByTestId('componentPreview'));
+
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A map');
+    await waitFor(async () => {
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aMap');
+    });
+    await expect(canvas.getByLabelText('Description')).toHaveValue('');
+    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    await expect(canvas.queryByLabelText('Default value')).not.toBeInTheDocument();
+    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+
+    // ensure that changing fields in the edit form properly update the preview
+    await step('Change label', async () => {
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
+      await expect(await preview.findByText('Updated preview label')).toBeVisible();
+    });
+
+    await step('Change key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+      await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

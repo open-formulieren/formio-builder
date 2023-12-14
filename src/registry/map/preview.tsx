@@ -1,10 +1,25 @@
 import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
 import {MapComponentSchema} from '@open-formulieren/types';
-import {MapContainer, TileLayer} from 'react-leaflet';
+import {useLayoutEffect} from 'react';
+import {MapContainer, TileLayer, useMap} from 'react-leaflet';
 
 import {Component, Description} from '@/components/formio';
 
 import {ComponentPreviewProps} from '../types';
+
+interface MapViewProps {
+  lat: number;
+  lng: number;
+  zoom: number;
+}
+
+const MapView: React.FC<MapViewProps> = ({lat, lng, zoom}) => {
+  const map = useMap();
+  useLayoutEffect(() => {
+    map.setView([lat, lng], zoom);
+  }, [map, lat, lng, zoom]);
+  return null;
+};
 
 /**
  * Show a formio map component preview.
@@ -25,7 +40,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
   } = component;
   const {required = false} = validate;
   const {lat = 52.1326332, lng = 5.291266} = initialCenter;
-
+  const zoom = defaultZoom ?? 8;
   return (
     <Component
       type={component.type}
@@ -39,7 +54,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         crs={CRS_RD}
         attributionControl
         center={[lat, lng]}
-        zoom={defaultZoom ?? 8}
+        zoom={zoom}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -47,6 +62,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         }}
       >
         <TileLayer {...TILE_LAYER_RD} />
+        <MapView lat={lat} lng={lng} zoom={zoom} />
       </MapContainer>
       {description && <Description text={description} />}
     </Component>

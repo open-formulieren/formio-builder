@@ -13,7 +13,7 @@ export interface NumberProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
-  description?: string;
+  description?: React.ReactNode;
   prefix?: string;
   suffix?: string;
 }

@@ -25,7 +25,7 @@ const buildConfigurationSchema = (intl: IntlShape) =>
             description: 'Validation error for partial coordinates (lat, lng) configuration',
             defaultMessage: 'You need to configure both longitude and latitude.',
           }),
-          path: ['initialCenter', missing],
+          path: [missing],
         });
       })
       .optional(),
