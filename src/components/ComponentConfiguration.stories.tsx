@@ -9,7 +9,7 @@ import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
-} from '@/../.storybook/decorators';
+} from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
