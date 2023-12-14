@@ -4,7 +4,16 @@ import userEvent from '@testing-library/user-event';
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {contextRender, screen} from '@/tests/test-utils';
 
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+
+afterAll(() => {
+  jest.useRealTimers();
+});
+
 test('Option values and labels are required fields', async () => {
+  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
   const component = {
     id: 'wqimsadk',
     type: 'select',
@@ -40,9 +49,9 @@ test('Option values and labels are required fields', async () => {
   );
 
   const labelInput = screen.getByLabelText('Option label');
-  await userEvent.type(labelInput, 'Foo');
-  await userEvent.clear(labelInput);
-  await userEvent.keyboard('[Tab]');
-  await expect(await screen.findByText('The option label is a required field.')).toBeVisible();
-  await expect(await screen.findByText('The option value is a required field.')).toBeVisible();
+  await user.type(labelInput, 'Foo');
+  await user.clear(labelInput);
+  await user.keyboard('[Tab]');
+  expect(await screen.findByText('The option label is a required field.')).toBeVisible();
+  expect(await screen.findByText('The option value is a required field.')).toBeVisible();
 });

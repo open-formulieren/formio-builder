@@ -10,6 +10,7 @@ import {BuilderContext} from '@/context';
 import type {ComponentTranslationsRef, DocumentTypeOption, SelectOption} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
+  DEFAULT_AUTH_PLUGINS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
@@ -85,6 +86,7 @@ const contextRender = (
                 builderOptions.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES,
               getConfidentialityLevels: async () =>
                 builderOptions.defaultConfidentialityLevels || CONFIDENTIALITY_LEVELS,
+              getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
             }}
           >
             {children}
