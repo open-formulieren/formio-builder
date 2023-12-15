@@ -15,6 +15,8 @@ export default {
   args: {
     isNew: true,
     component: {
+      webcam: false,
+      options: {withCredentials: true},
       id: 'kiweljhr',
       storage: 'url',
       url: '',
