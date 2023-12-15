@@ -1,6 +1,12 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, waitForElementToBeRemoved, within} from '@storybook/testing-library';
+import {
+  fireEvent,
+  userEvent,
+  waitFor,
+  waitForElementToBeRemoved,
+  within,
+} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -87,7 +93,7 @@ export const UsingGlobalConfig: Story = {
       });
       await Promise.all([
         waitForElementToBeRemoved(panelTitle),
-        userEvent.click(canvas.getByText('Use globally configured map component settings')),
+        fireEvent.click(canvas.getByLabelText('Use globally configured map component settings')),
       ]);
       expect(canvas.getByLabelText('Use globally configured map component settings')).toBeChecked();
     });
