@@ -1184,3 +1184,29 @@ export const CosignV2: Story = {
     await expect(previewInput.type).toBe('email');
   },
 };
+
+export const Signature: Story = {
+  name: 'Signature',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'signature',
+      key: 'signature',
+      label: 'A signature preview',
+      hidden: true, // must be ignored
+      footer: 'Draw above',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await waitFor(async () => {
+      await expect(await canvas.findByText('A signature preview')).toBeVisible();
+      await expect(await canvas.findByText('Draw above')).toBeVisible();
+    });
+  },
+};

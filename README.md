@@ -134,7 +134,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `licenseplate`
   - [x] `bsn`
   - [x] `npFamilyMembers`
-  - [ ] `signature`
+  - [x] `signature`
   - [x] `coSign`
   - [ ] `map`
   - [x] `editgrid`

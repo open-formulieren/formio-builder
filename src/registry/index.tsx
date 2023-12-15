@@ -23,6 +23,7 @@ import Postcode from './postcode';
 import Radio from './radio';
 import Select from './select';
 import Selectboxes from './selectboxes';
+import Signature from './signature';
 import Textarea from './textarea';
 import TextField from './textfield';
 import TimeField from './time';
@@ -63,6 +64,7 @@ const REGISTRY: Registry = {
   licenseplate: Licenseplate,
   bsn: BSN,
   npFamilyMembers: NpFamilyMembers,
+  signature: Signature,
   cosign: CosignV2,
   addressNL: AddressNL,
   editgrid: EditGrid,
