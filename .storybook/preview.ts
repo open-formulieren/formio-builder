@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-free/css/v4-shims.css';
 import {Preview} from '@storybook/react';
 import 'formiojs/dist/formio.builder.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import 'leaflet/dist/leaflet.css';
 
 import {BuilderContextDecorator, ModalDecorator} from './decorators';
 import {reactIntl} from './reactIntl';
