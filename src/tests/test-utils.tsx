@@ -5,6 +5,7 @@ import {Formik} from 'formik';
 import type {FormikErrors, FormikTouched, FormikValues} from 'formik';
 import React from 'react';
 import {IntlProvider} from 'react-intl';
+import {createIntl, createIntlCache} from 'react-intl';
 
 import {BuilderContext} from '@/context';
 import type {ComponentTranslationsRef, DocumentTypeOption, SelectOption} from '@/context';
@@ -151,8 +152,12 @@ const formikRender = (
   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions});
 };
 
+// whenever you need an IntlShape, use dummyIntl
+const cache = createIntlCache();
+const dummyIntl = createIntl({locale: 'en', messages: {}}, cache);
+
 // re-export everything (see https://testing-library.com/docs/react-testing-library/setup/#custom-render)
 export * from '@testing-library/react';
 
 // Add extra exports
-export {contextRender, formikRender};
+export {contextRender, formikRender, dummyIntl};
