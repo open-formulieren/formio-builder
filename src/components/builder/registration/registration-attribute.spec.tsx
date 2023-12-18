@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import {Formik} from 'formik';
 
-import {contextRender, screen} from '@/tests/test-utils';
+import {act, contextRender, screen} from '@/tests/test-utils';
 
 import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
 
@@ -38,8 +38,10 @@ test('Available registration attributes are retrieved via context', async () => 
 
   // open the dropdown
   const input = await screen.findByLabelText('Registration attribute');
-  input.focus();
-  await user.keyboard('[ArrowDown]');
+  await act(async () => {
+    input.focus();
+    await user.keyboard('[ArrowDown]');
+  });
 
   // options are loaded async, while doing network IO the loading state is displayed
   expect(await screen.findByText('Loading...')).toBeVisible();

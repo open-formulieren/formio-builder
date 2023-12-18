@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, within} from '@storybook/testing-library';
+import {userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -41,7 +41,7 @@ type Story = StoryObj<typeof ComponentEditForm>;
 
 export const ManualMinimumOneValue: Story = {
   name: 'Manual values: must have at least one non-empty value',
-  play: async ({canvasElement, step}) => {
+  play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
     await step('Option values and labels are required fields', async () => {
@@ -52,9 +52,20 @@ export const ManualMinimumOneValue: Story = {
       const labelInput = canvas.getByLabelText('Option label');
       await userEvent.type(labelInput, 'Foo');
       await userEvent.clear(labelInput);
-      await userEvent.keyboard('[Tab]');
-      await expect(await canvas.findByText('The option label is a required field.')).toBeVisible();
-      await expect(await canvas.findByText('The option value is a required field.')).toBeVisible();
+
+      // submit to (reliably?) trigger validation
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).not.toHaveBeenCalled();
+
+      await waitFor(async () => {
+        await expect(
+          await canvas.findByText('The option label is a required field.')
+        ).toBeVisible();
+
+        await expect(
+          await canvas.findByText('The option value is a required field.')
+        ).toBeVisible();
+      });
     });
   },
 };

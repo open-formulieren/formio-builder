@@ -126,7 +126,10 @@ export const SelectBoxesResetState: StoryObj<{
     await step('Nothing selected', async () => {
       await doSubmit();
 
-      await expect(args.onSubmit).toHaveBeenCalledWith({openForms: {dataSrc: ''}});
+      await waitFor(() => {
+        expect(args.onSubmit).toHaveBeenCalledWith({openForms: {dataSrc: ''}});
+      });
+
       // @ts-expect-error jest mocks + TS doesn't play nice together
       args.onSubmit.mockClear();
     });
@@ -142,9 +145,11 @@ export const SelectBoxesResetState: StoryObj<{
       await expect(addBtn).toBeVisible();
 
       await doSubmit();
-      await expect(args.onSubmit).toHaveBeenCalledWith({
-        openForms: {dataSrc: 'manual'},
-        values: [{value: '', label: '', openForms: {translations: {}}}],
+      await waitFor(() => {
+        expect(args.onSubmit).toHaveBeenCalledWith({
+          openForms: {dataSrc: 'manual'},
+          values: [{value: '', label: '', openForms: {translations: {}}}],
+        });
       });
       // @ts-expect-error jest mocks + TS doesn't play nice together
       args.onSubmit.mockClear();
@@ -165,11 +170,13 @@ export const SelectBoxesResetState: StoryObj<{
       await userEvent.type(expressionInput, expression);
 
       await doSubmit();
-      await expect(args.onSubmit).toHaveBeenCalledWith({
-        openForms: {
-          dataSrc: 'variable',
-          itemsExpression: {var: 'someVar'},
-        },
+      await waitFor(() => {
+        expect(args.onSubmit).toHaveBeenCalledWith({
+          openForms: {
+            dataSrc: 'variable',
+            itemsExpression: {var: 'someVar'},
+          },
+        });
       });
       // @ts-expect-error jest mocks + TS doesn't play nice together
       args.onSubmit.mockClear();
@@ -185,10 +192,12 @@ export const SelectBoxesResetState: StoryObj<{
       await expect(await canvas.findByText('Manually fill in')).toBeVisible();
 
       await doSubmit();
-      await expect(args.onSubmit).toHaveBeenCalledWith({
-        openForms: {dataSrc: 'manual'},
-        // all pre-existing items have been cleared and we ensure there's at least 1 item
-        values: [{value: '', label: '', openForms: {translations: {}}}],
+      await waitFor(() => {
+        expect(args.onSubmit).toHaveBeenCalledWith({
+          openForms: {dataSrc: 'manual'},
+          // all pre-existing items have been cleared and we ensure there's at least 1 item
+          values: [{value: '', label: '', openForms: {translations: {}}}],
+        });
       });
       // @ts-expect-error jest mocks + TS doesn't play nice together
       args.onSubmit.mockClear();

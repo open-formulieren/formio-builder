@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -44,7 +44,9 @@ export const PreviewInitialValues: Story = {
       await userEvent.type(defaultValue, 'Show me in preview!');
 
       const previewInput = preview.getByRole('textbox');
-      expect(previewInput).toHaveDisplayValue('Show me in preview!');
+      await waitFor(() => {
+        expect(previewInput).toHaveDisplayValue('Show me in preview!');
+      });
     });
 
     await step('Toggle to multi=true', async () => {
