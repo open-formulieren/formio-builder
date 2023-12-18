@@ -60,19 +60,25 @@ export const PluginBlankNoAttributes: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
+    const pluginInput = canvas.getByLabelText('Plugin');
 
-    await canvas.getByLabelText('Plugin').focus();
-    await userEvent.keyboard('[ArrowDown]');
+    await waitFor(
+      async () => {
+        await userEvent.keyboard('[Esc]');
+        pluginInput.focus();
+        await userEvent.keyboard('[ArrowDown]');
+        expect(canvas.queryByText('Plugin 1')).toBeInTheDocument();
+        expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+      },
+      {timeout: 1500, container: canvasElement}
+    );
+
+    const attributeInput = canvas.getByLabelText('Plugin attribute');
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 1')).toBeInTheDocument();
-      await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
-    });
-
-    await canvas.getByLabelText('Plugin attribute').focus();
-    await userEvent.keyboard('[ArrowDown]');
-
-    await waitFor(async () => {
+      await userEvent.keyboard('[Esc]');
+      attributeInput.focus();
+      await userEvent.keyboard('[ArrowDown]');
       await expect(canvas.queryByText('No options')).toBeInTheDocument();
     });
   },

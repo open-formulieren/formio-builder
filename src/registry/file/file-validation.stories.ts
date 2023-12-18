@@ -96,18 +96,23 @@ export const MaxFileSize: Story = {
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
+    const doSubmit = async () => {
+      const btn = canvas.getByRole('button', {name: 'Save'});
+      await userEvent.click(btn);
+    };
+
     await userEvent.click(canvas.getByRole('link', {name: 'File'}));
     const fileSize = canvas.getByLabelText('Maximum file size');
 
     await step('Negative file size', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '-10MB');
-      await userEvent.keyboard('[Tab]');
-      await waitFor(async () => {
+
+      await doSubmit();
+
+      await waitFor(() => {
         expect(
-          await canvas.findByText(
-            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-          )
+          canvas.getByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
         ).toBeVisible();
       });
     });
@@ -115,12 +120,12 @@ export const MaxFileSize: Story = {
     await step('Decimal file size (period)', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '10.5MB');
-      await userEvent.keyboard('[Tab]');
-      await waitFor(async () => {
+
+      await doSubmit();
+
+      await waitFor(() => {
         expect(
-          await canvas.findByText(
-            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-          )
+          canvas.getByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
         ).toBeVisible();
       });
     });
@@ -128,12 +133,12 @@ export const MaxFileSize: Story = {
     await step('Decimal file size (comma)', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '10,5 MB');
-      await userEvent.keyboard('[Tab]');
-      await waitFor(async () => {
+
+      await doSubmit();
+
+      await waitFor(() => {
         expect(
-          await canvas.findByText(
-            'Specify a positive, non-zero file size without decimals, e.g. 10MB.'
-          )
+          canvas.getByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
         ).toBeVisible();
       });
     });
