@@ -3,7 +3,7 @@ import {waitFor} from '@storybook/testing-library';
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {act, contextRender, fireEvent, screen} from '@/tests/test-utils';
+import {contextRender, fireEvent, screen} from '@/tests/test-utils';
 
 beforeAll(() => {
   jest.useFakeTimers();
@@ -57,11 +57,9 @@ test('(Added) column width sliders configure the width', async () => {
   expect(sliders[2]).toHaveDisplayValue('7');
 
   // check that the columns are configured in the submission data
-  await act(async () => {
-    await user.click(screen.getByRole('button', {name: 'Save'}));
-    await waitFor(() => {
-      expect(onSubmit).toHaveBeenCalled();
-    });
+  await user.click(screen.getByRole('button', {name: 'Save'}));
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalled();
   });
 
   const submittedComponent: ColumnsComponentSchema = onSubmit.mock.calls[0][0];
