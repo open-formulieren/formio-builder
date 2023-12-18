@@ -33,23 +33,19 @@ const Template: StoryFn<typeof ValidatorPluginSelect> = () => <ValidatorPluginSe
 export const Default: Story = {
   render: Template,
 
-  play: async ({canvasElement, step}) => {
+  play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
     const input = canvas.getByLabelText('Plugin(s)');
 
-    // open the dropdown
-    await userEvent.click(input);
-    await userEvent.keyboard('[ArrowDown]');
-
-    await step('Check available options displayed', async () => {
-      // assert the options are present
-      await waitFor(
-        async () => {
-          await expect(await canvas.findByText('Plugin 1')).toBeInTheDocument();
-        },
-        {container: canvasElement}
-      );
-      await expect(await canvas.findByText('Plugin 2')).toBeInTheDocument();
-    });
+    await waitFor(
+      async () => {
+        await userEvent.keyboard('[Esc]');
+        input.focus();
+        await userEvent.keyboard('[ArrowDown]');
+        expect(canvas.getByText('Plugin 1')).toBeInTheDocument();
+      },
+      {timeout: 1500, container: canvasElement}
+    );
+    expect(canvas.getByText('Plugin 2')).toBeInTheDocument();
   },
 };
