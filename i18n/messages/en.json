@@ -39,6 +39,11 @@
     "description": "Tooltip for 'validate.max' builder field",
     "originalDefault": "The maximum value this field can have before the form can be submitted."
   },
+  "/stTVr": {
+    "defaultMessage": "Set the text of the 'Save row' button.",
+    "description": "Tooltip for 'saveRow' builder field",
+    "originalDefault": "Set the text of the 'Save row' button."
+  },
   "/yDnA3": {
     "defaultMessage": "Whether to show this value in the confirmation PDF",
     "description": "Tooltip for 'showInPDF' builder field",
@@ -48,6 +53,11 @@
     "defaultMessage": "Receives confirmation email",
     "description": "Label for 'confirmationRecipient' builder field",
     "originalDefault": "Receives confirmation email"
+  },
+  "0TGt4t": {
+    "defaultMessage": "{groupLabel} 2",
+    "description": "Edit grid preview content description",
+    "originalDefault": "{groupLabel} 2"
   },
   "0gbtNe": {
     "defaultMessage": "Months",
@@ -78,6 +88,11 @@
     "defaultMessage": "The minimum value this field can have before the form can be submitted.",
     "description": "Tooltip for 'validate.min' builder field",
     "originalDefault": "The minimum value this field can have before the form can be submitted."
+  },
+  "2Lg8Vc": {
+    "defaultMessage": "Hide fieldset header",
+    "description": "Label for 'hideHeader' builder field",
+    "originalDefault": "Hide fieldset header"
   },
   "2ajYIp": {
     "defaultMessage": "Note that the server upload limit is {serverUploadLimit}.",
@@ -214,6 +229,11 @@
     "description": "Label for 'delta.years' in relative delta date constraint validation",
     "originalDefault": "Years"
   },
+  "7qqbU9": {
+    "defaultMessage": "{groupLabel} 1",
+    "description": "Edit grid preview content description",
+    "originalDefault": "{groupLabel} 1"
+  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -224,15 +244,30 @@
     "description": "Tooltip for 'date constraint includeToday' builder validation field",
     "originalDefault": "If checked, the current day is an allowed value."
   },
+  "ADTla/": {
+    "defaultMessage": "Latitude coordinate of the initial center point of the map.",
+    "description": "Tooltip for 'initialCenter.lat' builder field",
+    "originalDefault": "Latitude coordinate of the initial center point of the map."
+  },
   "ALLoNx": {
     "defaultMessage": "Simple conditional",
     "description": "Simple conditional panel title",
     "originalDefault": "Simple conditional"
   },
+  "AMqUHx": {
+    "defaultMessage": "Check if you want to hide/disable the 'Add Another' and 'Remove row' buttons.",
+    "description": "Tooltip for 'disableAddingRemovingRows' builder field",
+    "originalDefault": "Check if you want to hide/disable the 'Add Another' and 'Remove row' buttons."
+  },
   "Ax7r1y": {
     "defaultMessage": "File types",
     "description": "Label for 'file.type' builder field",
     "originalDefault": "File types"
+  },
+  "AyOwJl": {
+    "defaultMessage": "'Remove row' text",
+    "description": "Label for 'removeRow' builder field",
+    "originalDefault": "'Remove row' text"
   },
   "B1ONuu": {
     "defaultMessage": "Location",
@@ -248,6 +283,11 @@
     "defaultMessage": "The option value is a required field.",
     "description": "Form builder option value required error",
     "originalDefault": "The option value is a required field."
+  },
+  "BR10QN": {
+    "defaultMessage": "Add/remove",
+    "description": "Column add/remove table header/label",
+    "originalDefault": "Add/remove"
   },
   "BvRBef": {
     "defaultMessage": "Decimal places",
@@ -299,6 +339,11 @@
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
   },
+  "E/biiX": {
+    "defaultMessage": "Button labels",
+    "description": "Edit grid button texts panel title",
+    "originalDefault": "Button labels"
+  },
   "E5FZz/": {
     "defaultMessage": "Translations",
     "description": "Translations datagrid label",
@@ -349,6 +394,16 @@
     "description": "Tooltip for 'defaultValue' builder field",
     "originalDefault": "This will be the initial value for this field before user interaction."
   },
+  "Fn2vnC": {
+    "defaultMessage": "Column sizes",
+    "description": "Label for the 'columns' builder field",
+    "originalDefault": "Column sizes"
+  },
+  "GjumK9": {
+    "defaultMessage": "Specify the size of each column. The sum of all the widths should be 100%.",
+    "description": "Tooltip for 'columns' builder field",
+    "originalDefault": "Specify the size of each column. The sum of all the widths should be 100%."
+  },
   "H4sILo": {
     "defaultMessage": "Derive city",
     "description": "Label for 'deriveCity' builder field",
@@ -358,6 +413,11 @@
     "defaultMessage": "Read only",
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
+  },
+  "I7lkuw": {
+    "defaultMessage": "Child 1",
+    "description": "npFamilyMembers dummy option for child",
+    "originalDefault": "Child 1"
   },
   "IOko1U": {
     "defaultMessage": "Remove",
@@ -384,6 +444,16 @@
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
   },
+  "KMbfsU": {
+    "defaultMessage": "Size (mobile)",
+    "description": "Column mobile size table header/label",
+    "originalDefault": "Size (mobile)"
+  },
+  "Kdgpxf": {
+    "defaultMessage": "Longitude coordinate of the initial center point of the map.",
+    "description": "Tooltip for 'initialCenter.lng' builder field",
+    "originalDefault": "Longitude coordinate of the initial center point of the map."
+  },
   "Kj8P8I": {
     "defaultMessage": "Option value",
     "description": "Accessible label for option value",
@@ -404,10 +474,25 @@
     "description": "Label for 'AutoExpand' builder field",
     "originalDefault": "Auto Expand"
   },
+  "LZc4TN": {
+    "defaultMessage": "Longitude",
+    "description": "Label for 'initialCenter.lng' builder field",
+    "originalDefault": "Longitude"
+  },
+  "MTdKuN": {
+    "defaultMessage": "Disable adding or removing groups",
+    "description": "Label for 'disableAddingRemovingRows' builder field",
+    "originalDefault": "Disable adding or removing groups"
+  },
   "Nsifca": {
     "defaultMessage": "The maximum date that can be picked.",
     "description": "Date field 'maxDate' fixed value tooltip",
     "originalDefault": "The maximum date that can be picked."
+  },
+  "NudLUt": {
+    "defaultMessage": "A short instruction shown below the signature pad.",
+    "description": "Tooltip for 'footer' builder field",
+    "originalDefault": "A short instruction shown below the signature pad."
   },
   "OlPsaw": {
     "defaultMessage": "Error code",
@@ -438,6 +523,11 @@
     "defaultMessage": "Preview",
     "description": "Component preview card title",
     "originalDefault": "Preview"
+  },
+  "R/XadM": {
+    "defaultMessage": "You need to configure both longitude and latitude.",
+    "description": "Validation error for partial coordinates (lat, lng) configuration",
+    "originalDefault": "You need to configure both longitude and latitude."
   },
   "RN628y": {
     "defaultMessage": "Translations for literals used in this component.",
@@ -474,6 +564,11 @@
     "description": "Date constraint mode 'future' label",
     "originalDefault": "In the future"
   },
+  "Su4nqf": {
+    "defaultMessage": "Which authentication method the co-signer must use. Note that this must be an authentication method available on the form.",
+    "description": "Description for 'authPlugin' builder field",
+    "originalDefault": "Which authentication method the co-signer must use. Note that this must be an authentication method available on the form."
+  },
   "TCNvqa": {
     "defaultMessage": "Minimum date",
     "description": "Date field 'minDate' fixed value label",
@@ -494,6 +589,11 @@
     "description": "Tooltip for 'validate.plugins' builder field",
     "originalDefault": "Select the plugin(s) to use for the validation functionality."
   },
+  "UJTIZU": {
+    "defaultMessage": "Zoom level for the map when it initially loads.",
+    "description": "Tooltip for 'defaultZoom' builder field",
+    "originalDefault": "Zoom level for the map when it initially loads."
+  },
   "UlVtQd": {
     "defaultMessage": "Move up",
     "description": "Options table: move option up",
@@ -508,6 +608,11 @@
     "defaultMessage": "Minimum time",
     "description": "Label for 'validate.minTime' builder field",
     "originalDefault": "Minimum time"
+  },
+  "Uu+81U": {
+    "defaultMessage": "Cosign ({authPlugin})",
+    "description": "Preview of cosign v1: login button label",
+    "originalDefault": "Cosign ({authPlugin})"
   },
   "Uv58uI": {
     "defaultMessage": "Postcode component",
@@ -533,6 +638,11 @@
     "defaultMessage": "Autocomplete",
     "description": "Component property 'Autocomplete' label",
     "originalDefault": "Autocomplete"
+  },
+  "VhCwEK": {
+    "defaultMessage": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ...",
+    "description": "Tooltip for 'groupLabel' builder field",
+    "originalDefault": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ..."
   },
   "VyA4fK": {
     "defaultMessage": "Show in email",
@@ -564,10 +674,20 @@
     "description": "Tooltip for 'prefill.identifierRole' builder field",
     "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
   },
+  "XWsNZ9": {
+    "defaultMessage": "Default",
+    "description": "Columns 'desktop' preview viewport",
+    "originalDefault": "Default"
+  },
   "XXRiTx": {
     "defaultMessage": "File name",
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
+  },
+  "Xj1uvL": {
+    "defaultMessage": "Remove",
+    "description": "Columns table: accessible label to remove a column",
+    "originalDefault": "Remove"
   },
   "Y4oNhH": {
     "defaultMessage": "Maximum width",
@@ -594,6 +714,11 @@
     "description": "Tooltip for 'prefill.plugin' builder field",
     "originalDefault": "Select the plugin to use for the prefill functionality."
   },
+  "ZOytnI": {
+    "defaultMessage": "Whether to add partners information to the component.",
+    "description": "Tooltip for 'includePartners' builder field",
+    "originalDefault": "Whether to add partners information to the component."
+  },
   "aBADYT": {
     "defaultMessage": "Maximum number of files",
     "description": "Label for 'maxNumberOfFiles' builder field",
@@ -613,6 +738,11 @@
     "defaultMessage": "Display in summaries and confirmations",
     "description": "Presentation configuration panel title",
     "originalDefault": "Display in summaries and confirmations"
+  },
+  "b5Bxb/": {
+    "defaultMessage": "House letter addition",
+    "description": "Label for address houseletter",
+    "originalDefault": "House letter addition"
   },
   "bYBFBc": {
     "defaultMessage": "Whether to show this value in the submission summary",
@@ -659,6 +789,11 @@
     "description": "Tooltip for 'suffix' builder field",
     "originalDefault": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported."
   },
+  "d3V6A+": {
+    "defaultMessage": "Display",
+    "description": "Component edit form tab title for 'Display' tab",
+    "originalDefault": "Display"
+  },
   "d5SKAT": {
     "defaultMessage": "Remove item",
     "description": "'Remove item' screenreader button text",
@@ -668,6 +803,11 @@
     "defaultMessage": "Cancel",
     "description": "Cancel component configuration button",
     "originalDefault": "Cancel"
+  },
+  "dWWO3N": {
+    "defaultMessage": "Hide label",
+    "description": "Label for 'hideLabel' builder field",
+    "originalDefault": "Hide label"
   },
   "dazu9j": {
     "defaultMessage": "Label is a required field.",
@@ -684,10 +824,30 @@
     "description": "Date field 'minDate' validation panel title",
     "originalDefault": "Minimum date {configured, select, false {(not set)} other {}}"
   },
+  "e6SsfR": {
+    "defaultMessage": "Map configuration",
+    "description": "Map configuration panel title",
+    "originalDefault": "Map configuration"
+  },
+  "eUowhH": {
+    "defaultMessage": "'Save row' text",
+    "description": "Label for 'saveRow' builder field",
+    "originalDefault": "'Save row' text"
+  },
+  "ee4oWr": {
+    "defaultMessage": "Add column",
+    "description": "Add another column button label",
+    "originalDefault": "Add column"
+  },
   "eg8uKC": {
     "defaultMessage": "The latest possible value that can be entered.",
     "description": "Tooltip for 'validate.maxTime' builder field",
     "originalDefault": "The latest possible value that can be entered."
+  },
+  "ehP4dQ": {
+    "defaultMessage": "Group label",
+    "description": "Label for 'groupLabel' builder field",
+    "originalDefault": "Group label"
   },
   "etny39": {
     "defaultMessage": "Display options to fill in the field, based on earlier typed values.",
@@ -719,15 +879,35 @@
     "description": "Label for 'registration.informatieobjecttype' builder field",
     "originalDefault": "Information object type"
   },
+  "fagx6e": {
+    "defaultMessage": "Hide the title/label of this component in the form.",
+    "description": "Tooltip for 'hideLabel' builder field",
+    "originalDefault": "Hide the title/label of this component in the form."
+  },
   "fe3wyn": {
     "defaultMessage": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component.",
     "description": "Description for the 'openForms.itemsExpression' builder field",
     "originalDefault": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component."
   },
+  "gCQtSJ": {
+    "defaultMessage": "Set the text of the 'Remove row' button.",
+    "description": "Tooltip for 'removeRow' builder field",
+    "originalDefault": "Set the text of the 'Remove row' button."
+  },
+  "guySt0": {
+    "defaultMessage": "Postcode",
+    "description": "Label for address postcode",
+    "originalDefault": "Postcode"
+  },
   "h0B9Fr": {
     "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
     "description": "Form builder 'key' pattern validation error",
     "originalDefault": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot."
+  },
+  "h2ZNhM": {
+    "defaultMessage": "Fieldset content",
+    "description": "Fieldset preview content description",
+    "originalDefault": "Fieldset content"
   },
   "hJtTwo": {
     "defaultMessage": "Form",
@@ -738,6 +918,11 @@
     "defaultMessage": "(optional)",
     "description": "placeholder for 'file.name' builder field",
     "originalDefault": "(optional)"
+  },
+  "hwsnj9": {
+    "defaultMessage": "Mobile",
+    "description": "Columns 'mobile' preview viewport",
+    "originalDefault": "Mobile"
   },
   "iOADkJ": {
     "defaultMessage": "Show in summary",
@@ -769,6 +954,16 @@
     "description": "Tooltip for 'AutoExpand' builder field",
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
   },
+  "jiDz2v": {
+    "defaultMessage": "Value in decimal degrees, between -90 and +90.",
+    "description": "Description for 'initialCenter.lat' builder field",
+    "originalDefault": "Value in decimal degrees, between -90 and +90."
+  },
+  "jnHPfU": {
+    "defaultMessage": "Latitude",
+    "description": "Label for 'initialCenter.lat' builder field",
+    "originalDefault": "Latitude"
+  },
   "k1+ljn": {
     "defaultMessage": "Move down",
     "description": "Options table: move option down",
@@ -799,15 +994,30 @@
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
   },
+  "kw2jNc": {
+    "defaultMessage": "Options from expression: <code>{expression}</code>",
+    "description": "Radio dummy option for itemsExpression",
+    "originalDefault": "Options from expression: <code>{expression}</code>"
+  },
   "lKijv2": {
     "defaultMessage": "Including today",
     "description": "Label for 'date constraint includeToday' builder validation field",
     "originalDefault": "Including today"
   },
+  "lOSmt+": {
+    "defaultMessage": "Authentication method",
+    "description": "Label for 'authPlugin' builder field",
+    "originalDefault": "Authentication method"
+  },
   "lVEpR9": {
     "defaultMessage": "The minimum date that can be picked.",
     "description": "Date field 'minDate' fixed value tooltip",
     "originalDefault": "The minimum date that can be picked."
+  },
+  "loKqis": {
+    "defaultMessage": "Partner 1",
+    "description": "npFamilyMembers dummy option for partner",
+    "originalDefault": "Partner 1"
   },
   "m20av3": {
     "defaultMessage": "The maximum number of decimal places.",
@@ -824,10 +1034,30 @@
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
   },
+  "mf9eF+": {
+    "defaultMessage": "House number",
+    "description": "Label for address housenumber",
+    "originalDefault": "House number"
+  },
+  "mpzdoT": {
+    "defaultMessage": "The sum of column sizes may not exceed 12.",
+    "description": "Validation error for column sizes exceeding total value of 12",
+    "originalDefault": "The sum of column sizes may not exceed 12."
+  },
   "n9T2Oy": {
     "defaultMessage": "When this is checked, any uploaded image(s) will be resized.",
     "description": "Tooltip for 'of.image.resize.apply' builder field",
     "originalDefault": "When this is checked, any uploaded image(s) will be resized."
+  },
+  "nC9GEx": {
+    "defaultMessage": "Whether to add children information to the component.",
+    "description": "Tooltip for 'includeChildren' builder field",
+    "originalDefault": "Whether to add children information to the component."
+  },
+  "nSRkSW": {
+    "defaultMessage": "Size",
+    "description": "Column size table header/label",
+    "originalDefault": "Size"
   },
   "nW5g1S": {
     "defaultMessage": "Bronorganisatie",
@@ -839,10 +1069,25 @@
     "description": "Component property 'Tooltip' label",
     "originalDefault": "Tooltip"
   },
+  "o5Mfn3": {
+    "defaultMessage": "Include children",
+    "description": "Label for 'includeChildren' builder field",
+    "originalDefault": "Include children"
+  },
+  "o83CBr": {
+    "defaultMessage": "Set the text of the 'Add Another' button.",
+    "description": "Tooltip for 'addAnother' builder field",
+    "originalDefault": "Set the text of the 'Add Another' button."
+  },
   "oWJX5K": {
     "defaultMessage": "Suffix (e.g. m²)",
     "description": "Component translations 'suffix' property label",
     "originalDefault": "Suffix (e.g. m²)"
+  },
+  "oXOxWz": {
+    "defaultMessage": "When this is checked, the map component settings configured in the global configuration will be used.",
+    "description": "Tooltip for 'useConfigDefaultMapSettings' builder field",
+    "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
   "p7g2h+": {
     "defaultMessage": "Add another",
@@ -859,20 +1104,40 @@
     "description": "Label for 'NumberOfRows' builder field",
     "originalDefault": "Number of rows"
   },
+  "pT5jx/": {
+    "defaultMessage": "Column size on mobile, value between 1 and 4.",
+    "description": "Accessible label for column mobile size",
+    "originalDefault": "Column size on mobile, value between 1 and 4."
+  },
   "paY2Oa": {
     "defaultMessage": "Options from expression: <code>{expression}</code>",
     "description": "Selectboxes dummy option for itemsExpression",
     "originalDefault": "Options from expression: <code>{expression}</code>"
+  },
+  "pfdsz9": {
+    "defaultMessage": "House number addition",
+    "description": "Label for address housenumberaddition",
+    "originalDefault": "House number addition"
   },
   "pq7q6N": {
     "defaultMessage": "Show in PDF",
     "description": "Label for 'showInPDF' builder field",
     "originalDefault": "Show in PDF"
   },
+  "qmBAmr": {
+    "defaultMessage": "Include partners",
+    "description": "Label for 'includePartners' builder field",
+    "originalDefault": "Include partners"
+  },
   "r+9rju": {
     "defaultMessage": "Registration",
     "description": "Component edit form tab title for 'Registration' tab",
     "originalDefault": "Registration"
+  },
+  "rkJLBr": {
+    "defaultMessage": "'Add another' text",
+    "description": "Label for 'addAnother' builder field",
+    "originalDefault": "'Add another' text"
   },
   "sU/n0S": {
     "defaultMessage": "Manually fill in",
@@ -884,6 +1149,11 @@
     "description": "Label for 'prefill.attribute' builder field",
     "originalDefault": "Plugin attribute"
   },
+  "smPv/m": {
+    "defaultMessage": "{groupLabel} 3",
+    "description": "Edit grid preview content description",
+    "originalDefault": "{groupLabel} 3"
+  },
   "tU1UVF": {
     "defaultMessage": "The earliest possible value that can be entered.",
     "description": "Tooltip for 'validate.minTime' builder field",
@@ -894,10 +1164,20 @@
     "description": "Tooltip for 'showInEmail' builder field",
     "originalDefault": "Whether to show this value in the confirmation email"
   },
+  "u5XYQh": {
+    "defaultMessage": "Footer",
+    "description": "Component property 'footer' label",
+    "originalDefault": "Footer"
+  },
   "uDSxtY": {
     "defaultMessage": "Translations",
     "description": "Component edit form tab title for 'Translations' tab",
     "originalDefault": "Translations"
+  },
+  "unjdIB": {
+    "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
+    "description": "Tooltip for 'hideHeader' builder field",
+    "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
   },
   "vRVMpe": {
     "defaultMessage": "Value",
@@ -929,6 +1209,16 @@
     "description": "Option value table header/label",
     "originalDefault": "Value"
   },
+  "wVYRMC": {
+    "defaultMessage": "Column {number}",
+    "description": "Column preview column description",
+    "originalDefault": "Column {number}"
+  },
+  "wVoT0I": {
+    "defaultMessage": "Options from expression: <code>{expression}</code>",
+    "description": "Select dummy option for itemsExpression",
+    "originalDefault": "Options from expression: <code>{expression}</code>"
+  },
   "wZ99FU": {
     "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",
     "description": "Tooltip for 'validate.pattern' builder field",
@@ -943,6 +1233,11 @@
     "defaultMessage": "Edit JSON",
     "description": "Component 'editJSON' preview mode",
     "originalDefault": "Edit JSON"
+  },
+  "xxVNeU": {
+    "defaultMessage": "Zoom level",
+    "description": "Label for 'defaultZoom' builder field",
+    "originalDefault": "Zoom level"
   },
   "yD4X2y": {
     "defaultMessage": "Maximum length",
@@ -969,9 +1264,24 @@
     "description": "Tooltip for 'openForms.dataSrc' builder field",
     "originalDefault": "How to specify the available options."
   },
+  "yrz/oC": {
+    "defaultMessage": "Column size, value between 1 and 12.",
+    "description": "Accessible label for column size",
+    "originalDefault": "Column size, value between 1 and 12."
+  },
   "yujuQr": {
     "defaultMessage": "Maximum height",
     "description": "Label for 'of.image.resize.height' builder field",
     "originalDefault": "Maximum height"
+  },
+  "z45pcO": {
+    "defaultMessage": "Value in decimal degrees, between -180 and +180.",
+    "description": "Description for 'initialCenter.lng' builder field",
+    "originalDefault": "Value in decimal degrees, between -180 and +180."
+  },
+  "z7HXSS": {
+    "defaultMessage": "Use globally configured map component settings",
+    "description": "Label for 'useConfigDefaultMapSettings' builder field",
+    "originalDefault": "Use globally configured map component settings"
   }
 }
