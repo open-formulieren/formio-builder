@@ -75,7 +75,7 @@
     "@storybook/test-runner": "^0.16.0",
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "^12.1.5",
+    "@testing-library/react": "^14.1.2",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/leaflet": "^1.9.8",
     "@types/lodash.camelcase": "^4.3.7",
@@ -85,7 +85,7 @@
     "@types/lodash.merge": "^4.6.7",
     "@types/lodash.uniqueid": "^4.0.7",
     "@types/proj4leaflet": "^1.0.10",
-    "@types/react": "^18.0.33",
+    "@types/react": "^18.2.45",
     "@types/react-signature-canvas": "^1.0.5",
     "@types/sanitize-html": "^2.9.0",
     "@types/signature_pad": "^2.3.6",
@@ -99,8 +99,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "storybook": "^7.6.3",
     "storybook-react-intl": "^2.0.10",
     "tsc-alias": "^1.8.6",
@@ -148,8 +148,5 @@
       "<rootDir>/src/tests/setupTests.js"
     ],
     "testEnvironment": "jsdom"
-  },
-  "overrides": {
-    "@types/react": "^18.0.33"
   }
 }
