@@ -25,6 +25,7 @@ export interface ComponentConfigurationProps extends BuilderContextType, Compone
 const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   uniquifyKey,
   supportedLanguageCodes = ['nl', 'en'],
+  richTextColors,
   componentTranslationsRef,
   getFormComponents,
   getValidatorPlugins,
@@ -47,6 +48,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
     value={{
       uniquifyKey,
       supportedLanguageCodes,
+      richTextColors,
       componentTranslationsRef,
       getFormComponents,
       getValidatorPlugins,

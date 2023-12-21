@@ -1,5 +1,6 @@
 // This module contains shared utilities and constants between Jest and Storybook.
 import type {DocumentTypeOption, SelectOption} from '@/context';
+import {ColorOption} from '@/registry/content/rich-text';
 import {AnyComponentSchema} from '@/types';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
@@ -183,6 +184,69 @@ export const DEFAULT_AUTH_PLUGINS: AuthPluginOption[] = [
   {
     id: 'eherkenning',
     label: 'eHerkenning, provides: kvk',
+  },
+];
+
+export const DEFAULT_COLORS: ColorOption[] = [
+  {
+    color: '#4ce699',
+    label: 'Aquamarine',
+  },
+  {
+    color: '#000000',
+    label: 'Black',
+  },
+  {
+    color: '#4c4ce6',
+    label: 'Blue',
+  },
+  {
+    color: '#4c4c4c',
+    label: 'Dim grey',
+  },
+  {
+    color: '#4ce64c',
+    label: 'Green',
+  },
+  {
+    color: '#999999',
+    label: 'Grey',
+  },
+  {
+    color: '#4c99e6',
+    label: 'Light blue',
+  },
+  {
+    color: '#99e64c',
+    label: 'Light green',
+  },
+  {
+    color: '#e6e6e6',
+    label: 'Light grey',
+  },
+  {
+    color: '#e6994c',
+    label: 'Orange',
+  },
+  {
+    color: '#994ce6',
+    label: 'Purple',
+  },
+  {
+    color: '#e64c4c',
+    label: 'Red',
+  },
+  {
+    color: '#4ce6e6',
+    label: 'Turquoise',
+  },
+  {
+    color: '#ffffff',
+    label: 'White',
+  },
+  {
+    color: '#e6e64c',
+    label: 'Yellow',
   },
 ];
 

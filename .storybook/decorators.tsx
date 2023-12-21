@@ -5,6 +5,7 @@ import {BuilderContext} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
+  DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
@@ -60,6 +61,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
       value={{
         uniquifyKey: key => key,
         supportedLanguageCodes: supportedLanguageCodes,
+        richTextColors: DEFAULT_COLORS,
         componentTranslationsRef: {current: translationsStore},
         getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         getValidatorPlugins: async () => {

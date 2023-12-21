@@ -12,6 +12,7 @@ import type {ComponentTranslationsRef, DocumentTypeOption, SelectOption} from '@
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
+  DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
@@ -67,6 +68,7 @@ const contextRender = (
             value={{
               uniquifyKey: key => key,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
+              richTextColors: DEFAULT_COLORS,
               componentTranslationsRef: builderOptions.componentTranslationsRef || {current: null},
               getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {

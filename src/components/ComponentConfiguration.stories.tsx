@@ -7,6 +7,7 @@ import React from 'react';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
+  DEFAULT_COLORS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
 } from '@/tests/sharedUtils';
@@ -113,6 +114,7 @@ const Template: StoryFn<TemplateArgs> = ({
   <ComponentConfiguration
     uniquifyKey={(key: string) => key}
     supportedLanguageCodes={supportedLanguageCodes}
+    richTextColors={DEFAULT_COLORS}
     componentTranslationsRef={{current: translationsStore}}
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}

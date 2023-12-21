@@ -4,6 +4,7 @@ import React from 'react';
 import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
+import type {ColorOption} from '@/registry/content/rich-text';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
@@ -55,6 +56,7 @@ export interface DocumentTypeOption {
 export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
   supportedLanguageCodes: SupportedLocales[];
+  richTextColors: ColorOption[];
   componentTranslationsRef: ComponentTranslationsRef;
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
@@ -71,6 +73,7 @@ export interface BuilderContextType {
 const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
   supportedLanguageCodes: ['nl', 'en'],
+  richTextColors: [],
   componentTranslationsRef: {current: null},
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
