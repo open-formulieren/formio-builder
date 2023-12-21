@@ -40,14 +40,13 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
   };
 
   const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
-  const htmlFieldName = `openForms.translations.${defaultLanguageCode}.html`;
 
   // Synchronize the default/first language tab value to the main `html` field.
   useEffect(() => {
     const currentValue = values.openForms?.translations?.[defaultLanguageCode]?.html;
     if (currentValue === undefined && values.html) {
       // if we have a 'html' value, but no default translation -> store the default translation
-      setFieldValue(htmlFieldName, values.html);
+      setFieldValue(`openForms.translations.${defaultLanguageCode}.html`, values.html);
     } else if (values.html !== currentValue) {
       // otherwise sync the value of the translation field to the main field.
       setFieldValue('html', currentValue);
@@ -56,7 +55,7 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
 
   return (
     <>
-      <RichText name={htmlFieldName} required />
+      <RichTextTranslations />
       <Tabs>
         <TabList>
           <Tab
@@ -160,6 +159,38 @@ const CustomClass: React.FC = () => {
       options={options}
       valueProperty="id"
     />
+  );
+};
+
+const RichTextTranslations: React.FC = () => {
+  const {supportedLanguageCodes} = useContext(BuilderContext);
+  const {errors} = useFormikContext<ContentComponentSchema>();
+
+  const erroredFields = Object.keys(errors).length
+    ? getErrorNames<ContentComponentSchema>(errors)
+    : [];
+  // TODO: pattern match instead of just string inclusion?
+  // TODO: move into more generically usuable utility when we implement other component
+  // types
+  const hasAnyError = (...fieldNames: string[]): boolean => {
+    if (!erroredFields.length) return false;
+    return fieldNames.some(name => erroredFields.includes(name));
+  };
+
+  return (
+    <Tabs>
+      <TabList>
+        {supportedLanguageCodes.map(code => (
+          <Tab hasErrors={hasAnyError(`openForms.translations.${code}`)}>{code.toUpperCase()}</Tab>
+        ))}
+      </TabList>
+
+      {supportedLanguageCodes.map((code, index) => (
+        <TabPanel>
+          <RichText name={`openForms.translations.${code}.html`} required={index === 0} />
+        </TabPanel>
+      ))}
+    </Tabs>
   );
 };
 
