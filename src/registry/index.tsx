@@ -4,6 +4,7 @@ import AddressNL from './addressNL';
 import BSN from './bsn';
 import Checkbox from './checkbox';
 import Columns from './columns';
+import Content from './content';
 import CosignV1 from './cosignV1';
 import CosignV2 from './cosignV2';
 import Currency from './currency';
@@ -71,6 +72,7 @@ const REGISTRY: Registry = {
   map: LeafletMap,
   editgrid: EditGrid,
   // layout
+  content: Content,
   columns: Columns,
   fieldset: FieldSet,
   // deprecated

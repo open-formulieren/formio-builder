@@ -2586,3 +2586,25 @@ export const LeafletMap: Story = {
     });
   },
 };
+
+export const Content: Story = {
+  render: Template,
+  name: 'type: content',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'content',
+      key: 'content',
+      html: '<p>Hello storybook</p>',
+    },
+
+    builderInfo: {
+      title: 'Content',
+      icon: 'html5',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
