@@ -1,6 +1,6 @@
 import {ContentComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {useContext, useRef} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {
@@ -24,9 +24,9 @@ import RichText from './rich-text';
  * value is populated from that field (TODO: implement this).
  */
 const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
-  const {uniquifyKey} = useContext(BuilderContext);
+  const {uniquifyKey, supportedLanguageCodes} = useContext(BuilderContext);
   const isKeyManuallySetRef = useRef(false);
-  const {values, errors} = useFormikContext<ContentComponentSchema>();
+  const {values, errors, setFieldValue} = useFormikContext<ContentComponentSchema>();
   const generatedKey = uniquifyKey(values.key);
   const erroredFields = Object.keys(errors).length
     ? getErrorNames<ContentComponentSchema>(errors)
@@ -38,9 +38,25 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
     if (!erroredFields.length) return false;
     return fieldNames.some(name => erroredFields.includes(name));
   };
+
+  const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
+  const htmlFieldName = `openForms.translations.${defaultLanguageCode}.html`;
+
+  // Synchronize the default/first language tab value to the main `html` field.
+  useEffect(() => {
+    const currentValue = values.openForms?.translations?.[defaultLanguageCode]?.html;
+    if (currentValue === undefined && values.html) {
+      // if we have a 'html' value, but no default translation -> store the default translation
+      setFieldValue(htmlFieldName, values.html);
+    } else if (values.html !== currentValue) {
+      // otherwise sync the value of the translation field to the main field.
+      setFieldValue('html', currentValue);
+    }
+  });
+
   return (
     <>
-      <RichText name="html" required />
+      <RichText name={htmlFieldName} required />
       <Tabs>
         <TabList>
           <Tab

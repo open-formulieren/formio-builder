@@ -1,4 +1,4 @@
-import {SupportedLocales} from '@open-formulieren/types';
+import {ContentComponentSchema, SupportedLocales} from '@open-formulieren/types';
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
@@ -2606,5 +2606,43 @@ export const Content: Story = {
       weight: 10,
       schema: {},
     },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    // Testing this seems to be impossible because of the lack of support for contentEditable
+    // divs :(
+    // await step('Edit content', async () => {
+    //   await userEvent.type(...);
+    // });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        id: 'wekruya',
+        type: 'content',
+        label: '',
+        html: '<p>Hello storybook</p>',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Hello storybook</p>',
+            },
+          },
+        },
+        key: 'content',
+        hidden: false,
+        showInSummary: false,
+        showInEmail: false,
+        showInPDF: true,
+        customClass: '',
+        conditional: {
+          eq: '',
+          show: undefined,
+          when: '',
+        },
+      } satisfies ContentComponentSchema);
+    });
   },
 };
