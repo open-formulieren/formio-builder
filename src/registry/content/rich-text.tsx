@@ -7,6 +7,7 @@
  * incorporate our domain-specific variables/constructs for a better editing experience.
  */
 import {CKEditor} from '@ckeditor/ckeditor5-react';
+import {css} from '@emotion/css';
 import ClassicEditor from '@open-formulieren/ckeditor5-build-classic';
 import {useField} from 'formik';
 import {useContext} from 'react';
@@ -25,6 +26,16 @@ export interface RichTextProps {
   required?: boolean;
 }
 
+const EDITOR_STYLES = css`
+  .ck.ck-content {
+    /* formula taken from formio's ckeditor build */
+    min-block-size: var(
+      --of-ckeditor-min-block-size,
+      calc(var(--of-ckeditor-rows, 3) * 31px + 14px)
+    );
+  }
+`;
+
 /**
  * A rich text editor based on CKEditor 5.
  *
@@ -36,7 +47,7 @@ const RichText: React.FC<RichTextProps> = ({name, required}) => {
   const {richTextColors} = useContext(BuilderContext);
   const [props, , helpers] = useField<string>(name);
   return (
-    <Component type="content" field={name} required={required}>
+    <Component type="content" field={name} required={required} className={EDITOR_STYLES}>
       <CKEditor
         editor={ClassicEditor}
         config={{
