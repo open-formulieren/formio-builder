@@ -28,7 +28,7 @@ export type Preview<S extends AnyComponentSchema | FallbackSchema> = React.FC<
 export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
   edit: EditFormDefinition<S>;
   editSchema: (intl: IntlShape, builderContext: BuilderContextType) => z.ZodFirstPartySchemaTypes;
-  preview: Preview<S>;
+  preview: Preview<S> | null;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...

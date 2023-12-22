@@ -86,6 +86,9 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   const key = isKnownComponentType(component) ? component.key : '';
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
+  if (PreviewComponent === null) {
+    return null;
+  }
   const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
   const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
     ? component.defaultValue

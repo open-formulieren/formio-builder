@@ -138,7 +138,7 @@ The builder form is the form + preview shown in the edit component modal.
   - [x] `coSign`
   - [x] `map`
   - [x] `editgrid`
-  - [ ] `content`
+  - [x] `content`
   - [x] `fieldset`
   - [x] `columns`
 

@@ -114,6 +114,7 @@ function Select<
           isClearable={isClearable}
           getOptionValue={opt => isOption<Option, Group>(opt) && opt[valueProperty]}
           className="formio-builder-select"
+          menuPlacement="auto"
           {...field}
           {...props}
           onChange={newValue => {

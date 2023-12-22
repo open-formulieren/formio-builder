@@ -17,11 +17,11 @@ export interface ComponentPreviewProps {
 
 const Preview: React.FC<ComponentPreviewProps> = ({component}) => <JSONPreview data={component} />;
 
-const Fallback: RegistryEntry<FallbackSchema> = {
+const Fallback = {
   edit: EditForm,
   editSchema: () => z.object({}),
   preview: Preview,
   defaultValue: undefined,
-};
+} satisfies RegistryEntry<FallbackSchema>;
 
 export default Fallback;

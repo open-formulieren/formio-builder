@@ -1,4 +1,4 @@
-import {SupportedLocales} from '@open-formulieren/types';
+import {ContentComponentSchema, SupportedLocales} from '@open-formulieren/types';
 import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
@@ -7,6 +7,7 @@ import React from 'react';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
+  DEFAULT_COLORS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
 } from '@/tests/sharedUtils';
@@ -113,6 +114,7 @@ const Template: StoryFn<TemplateArgs> = ({
   <ComponentConfiguration
     uniquifyKey={(key: string) => key}
     supportedLanguageCodes={supportedLanguageCodes}
+    richTextColors={DEFAULT_COLORS}
     componentTranslationsRef={{current: translationsStore}}
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
@@ -2581,6 +2583,66 @@ export const LeafletMap: Story = {
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};
+
+export const Content: Story = {
+  render: Template,
+  name: 'type: content',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'content',
+      key: 'content',
+      html: '<p>Hello storybook</p>',
+    },
+
+    builderInfo: {
+      title: 'Content',
+      icon: 'html5',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    // Testing this seems to be impossible because of the lack of support for contentEditable
+    // divs :(
+    // await step('Edit content', async () => {
+    //   await userEvent.type(...);
+    // });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        id: 'wekruya',
+        type: 'content',
+        label: '',
+        html: '<p>Hello storybook</p>',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Hello storybook</p>',
+            },
+          },
+        },
+        key: 'content',
+        hidden: false,
+        showInSummary: false,
+        showInEmail: false,
+        showInPDF: true,
+        customClass: '',
+        conditional: {
+          eq: '',
+          show: undefined,
+          when: '',
+        },
+      } satisfies ContentComponentSchema);
     });
   },
 };

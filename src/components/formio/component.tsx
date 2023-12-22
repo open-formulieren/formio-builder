@@ -17,6 +17,7 @@ export interface ComponentProps {
   tooltip?: string;
   htmlId?: string;
   children: React.ReactNode;
+  className?: string;
 }
 
 // Fix the overlapping icons/text when the error icon is shown.
@@ -35,6 +36,7 @@ const Component: React.FC<ComponentProps> = ({
   label,
   tooltip = '',
   children,
+  className: extraClassName = '',
   ...props
 }) => {
   const {errors} = useValidationErrors(field);
@@ -42,6 +44,7 @@ const Component: React.FC<ComponentProps> = ({
     [`formio-component-${type}`]: type,
     'has-error': field && errors.length > 0,
     required: required,
+    [extraClassName]: !!extraClassName,
   });
   return (
     <div className={className}>

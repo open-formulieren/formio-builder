@@ -2,7 +2,7 @@ import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import cloneDeep from 'lodash.clonedeep';
 import merge from 'lodash.merge';
-import {useContext} from 'react';
+import {PropsWithChildren, useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
@@ -32,6 +32,35 @@ export interface ComponentEditFormProps {
   onSubmit: (component: AnyComponentSchema | FallbackSchema) => void;
 }
 
+type ButtonRowProps = Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
+  onSubmit: () => void;
+};
+
+const ButtonRow: React.FC<ButtonRowProps> = ({onSubmit, onCancel, onRemove}) => (
+  <div style={{marginTop: '10px'}}>
+    <button
+      type="submit"
+      className="btn btn-success"
+      style={{marginRight: '10px'}}
+      onClick={event => {
+        event.preventDefault();
+        onSubmit();
+      }}
+    >
+      <FormattedMessage description="Save component configuration button" defaultMessage="Save" />
+    </button>
+    <button className="btn btn-secondary" style={{marginRight: '10px'}} onClick={onCancel}>
+      <FormattedMessage
+        description="Cancel component configuration button"
+        defaultMessage="Cancel"
+      />
+    </button>
+    <button className="btn btn-danger" onClick={onRemove}>
+      <FormattedMessage description="Remove component button" defaultMessage="Remove" />
+    </button>
+  </div>
+);
+
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   isNew,
   component,
@@ -45,6 +74,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 
   const registryEntry = getRegistryEntry(component);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
+  const hasPreview = registryEntry.preview !== null;
 
   let initialValues = cloneDeep(component);
   if (isNew && isKnownComponentType(component)) {
@@ -55,6 +85,8 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   // This gives a specific schema rather than AnyComponentSchema and allows us to type
   // check the values accordingly.
   type ComponentSchema = React.ComponentProps<typeof EditForm>['component'];
+
+  const Wrapper = hasPreview ? LayoutWithPreview : LayoutWithoutPreview;
 
   // Markup (mostly) taken from formio's default templates - there's room for improvement here
   // to de-bootstrapify it.
@@ -100,7 +132,12 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
             </div>
 
             <div className="row">
-              <div className="col col-sm-6">
+              <Wrapper
+                onSubmit={formik.submitForm}
+                onCancel={onCancel}
+                onRemove={onRemove}
+                component={component}
+              >
                 <Form data-testid="componentEditForm">
                   <div className="formio-component formio-component-label-hidden">
                     <div className="formio-form">
@@ -120,44 +157,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                    */}
                   <button type="submit" style={{display: 'none'}} />
                 </Form>
-              </div>
-
-              <div className="col col-sm-6">
-                <GenericComponentPreview component={formik.values} />
-
-                <div style={{marginTop: '10px'}}>
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    style={{marginRight: '10px'}}
-                    onClick={event => {
-                      event.preventDefault();
-                      formik.submitForm();
-                    }}
-                  >
-                    <FormattedMessage
-                      description="Save component configuration button"
-                      defaultMessage="Save"
-                    />
-                  </button>
-                  <button
-                    className="btn btn-secondary"
-                    style={{marginRight: '10px'}}
-                    onClick={onCancel}
-                  >
-                    <FormattedMessage
-                      description="Cancel component configuration button"
-                      defaultMessage="Cancel"
-                    />
-                  </button>
-                  <button className="btn btn-danger" onClick={onRemove}>
-                    <FormattedMessage
-                      description="Remove component button"
-                      defaultMessage="Remove"
-                    />
-                  </button>
-                </div>
-              </div>
+              </Wrapper>
             </div>
           </>
         );
@@ -165,5 +165,42 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
     </Formik>
   );
 };
+
+type EditFormLayoutProps = PropsWithChildren<
+  Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
+    onSubmit: () => void;
+    component: AnyComponentSchema | FallbackSchema;
+  }
+>;
+
+const LayoutWithPreview: React.FC<EditFormLayoutProps> = ({
+  children,
+  onSubmit,
+  onCancel,
+  onRemove,
+  component,
+}) => (
+  <>
+    <div className="col col-sm-6">{children}</div>
+    <div className="col col-sm-6">
+      <GenericComponentPreview component={component} />
+      <ButtonRow onSubmit={onSubmit} onCancel={onCancel} onRemove={onRemove} />
+    </div>
+  </>
+);
+
+const LayoutWithoutPreview: React.FC<EditFormLayoutProps> = ({
+  children,
+  onSubmit,
+  onCancel,
+  onRemove,
+}) => (
+  <>
+    <div className="col col-sm-12">
+      {children}
+      <ButtonRow onSubmit={onSubmit} onCancel={onCancel} onRemove={onRemove} />
+    </div>
+  </>
+);
 
 export default ComponentEditForm;
