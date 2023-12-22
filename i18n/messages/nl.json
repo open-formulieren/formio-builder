@@ -125,6 +125,12 @@
     "description": "Placeholder for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
+  "3h215E": {
+    "defaultMessage": "Weergavestijl",
+    "description": "Label for 'customClass' builder field",
+    "isTranslated": true,
+    "originalDefault": "CSS class"
+  },
   "4/cCvG": {
     "defaultMessage": "Locatie",
     "description": "Component edit form tab title for 'Location' tab",
@@ -683,6 +689,12 @@
     "description": "Tooltip for 'prefill.identifierRole' builder field",
     "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
   },
+  "XMV3t2": {
+    "defaultMessage": "Info",
+    "description": "Label for content component CSS class 'info' option",
+    "isTranslated": true,
+    "originalDefault": "Info"
+  },
   "XWsNZ9": {
     "defaultMessage": "Standaard",
     "description": "Columns 'desktop' preview viewport",
@@ -742,6 +754,11 @@
     "defaultMessage": "Straatnaam afleiden",
     "description": "Label for 'deriveStreetName' builder field",
     "originalDefault": "Derive street name"
+  },
+  "axygDt": {
+    "defaultMessage": "Waarschuwing",
+    "description": "Label for content component CSS class 'warning' option",
+    "originalDefault": "Warning"
   },
   "b/AHC/": {
     "defaultMessage": "Weergave in overzichten en bevestigingen",
@@ -945,6 +962,11 @@
     "defaultMessage": "{collapsed, select, true {Uitklappen} other {Inklappen} }",
     "description": "Panel expand/collapse title",
     "originalDefault": "{collapsed, select, true {Expand panel} other {Collapse panel} }"
+  },
+  "ifG3sd": {
+    "defaultMessage": "Succes",
+    "description": "Label for content component CSS class 'success' option",
+    "originalDefault": "Success"
   },
   "iqAbXt": {
     "defaultMessage": "Wissen als veld verborgen is",
@@ -1190,6 +1212,11 @@
     "defaultMessage": "Vertalingen",
     "description": "Component edit form tab title for 'Translations' tab",
     "originalDefault": "Translations"
+  },
+  "uVVO4b": {
+    "defaultMessage": "Fout",
+    "description": "Label for content component CSS class 'error' option",
+    "originalDefault": "Error"
   },
   "unjdIB": {
     "defaultMessage": "Verberg de koptekst en de lijn boven de veldengroep in het formulier.",
