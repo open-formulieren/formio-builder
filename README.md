@@ -114,33 +114,8 @@ The builder form is the form + preview shown in the edit component modal.
 - [x] Wire up react-intl for localization
 - [x] Define and publish Open Forms-specific component type schema's (shared library)
 - [x] Figure out how to do react-intl message catalog extraction/management for supported languages
-- [ ] Implement the builder forms for the supported component types
-  - [x] `textfield`
-  - [x] `textarea`
-  - [x] `checkbox`
-  - [x] `selectboxes`
-  - [x] `select`
-  - [x] `radio`
-  - [x] `number`
-  - [x] `currency`
-  - [x] `email`
-  - [x] `date`
-  - [x] `datetime`
-  - [x] `time`
-  - [x] `phoneNumber`
-  - [x] `postcode`
-  - [x] `file`
-  - [x] `iban`
-  - [x] `licenseplate`
-  - [x] `bsn`
-  - [x] `npFamilyMembers`
-  - [x] `signature`
-  - [x] `coSign`
-  - [x] `map`
-  - [x] `editgrid`
-  - [x] `content`
-  - [x] `fieldset`
-  - [x] `columns`
+- [x] Implement the builder forms for the supported component types
+- [ ] Use smarter (rich text) editor make using form variables more user friendly
 
 ### Builder
 
