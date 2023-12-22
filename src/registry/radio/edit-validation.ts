@@ -1,7 +1,8 @@
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
-import {buildCommonSchema, jsonSchema, optionSchema} from '@/registry/validation';
+import {BuilderContextType} from '@/context';
+import {buildCommonSchema, itemsExpressionSchema, optionSchema} from '@/registry/validation';
 
 import {EditSchema} from '../types';
 
@@ -10,16 +11,16 @@ import {EditSchema} from '../types';
 // object :(
 // so we mark each aspect as optional so that *when* it is provided, we can run the
 // validation
-const buildValuesSchema = (intl: IntlShape) =>
+const buildValuesSchema = (intl: IntlShape, builderContext: BuilderContextType) =>
   z.object({
     values: optionSchema(intl).array().min(1).optional(),
     openForms: z.object({
       dataSrc: z.union([z.literal('manual'), z.literal('variable')]),
-      // TODO: wire up infernologic type checking
-      itemsExpression: jsonSchema.optional(),
+      itemsExpression: itemsExpressionSchema(builderContext).optional(),
     }),
   });
 
-const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildValuesSchema(intl));
+const schema: EditSchema = ({intl, builderContext}) =>
+  buildCommonSchema(intl).and(buildValuesSchema(intl, builderContext));
 
 export default schema;

@@ -7,6 +7,8 @@
 import {IntlShape, defineMessages} from 'react-intl';
 import {z} from 'zod';
 
+import type {BuilderContextType} from '@/context';
+
 /*
   Validation message definitions.
  */
@@ -136,3 +138,19 @@ export const getErrorMap = (builder: ErrorBuilder): z.ZodErrorMap => {
   };
   return errorMap;
 };
+
+/*
+Related to jsonLogic
+ */
+
+export const itemsExpressionSchema = (builderContext: BuilderContextType) =>
+  jsonSchema.superRefine((val, ctx) => {
+    const result = builderContext.validateLogic(val, [['', '']]);
+    if (result !== '') {
+      // TODO adapt once the InferNoLogic API uses exceptions
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: result,
+      });
+    }
+  });

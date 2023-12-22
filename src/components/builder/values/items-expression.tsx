@@ -1,11 +1,9 @@
-import {type JSONObject, type JSONValue} from '@open-formulieren/types/lib/types';
-import {Field, useFormikContext} from 'formik';
-import {useContext} from 'react';
+import type {JSONObject} from '@open-formulieren/types/lib/types';
+import {useFormikContext} from 'formik';
 import {FormattedMessage} from 'react-intl';
 
 import JSONEdit from '@/components/JSONEdit';
 import {Component, Description} from '@/components/formio';
-import {BuilderContext} from '@/context';
 
 const NAME = 'openForms.itemsExpression';
 
@@ -18,8 +16,6 @@ const NAME = 'openForms.itemsExpression';
 export const ItemsExpression: React.FC = () => {
   const {getFieldProps} = useFormikContext();
   const {value = ''} = getFieldProps<JSONObject | string | undefined>(NAME);
-
-  const {validateLogic} = useContext(BuilderContext);
 
   const htmlId = `editform-${NAME}`;
   return (
@@ -36,13 +32,7 @@ export const ItemsExpression: React.FC = () => {
       }
     >
       <div>
-        <Field
-          name={NAME}
-          validateOnChange={true}
-          validate={(logic: JSONValue) => validateLogic(logic, [['', '']])}
-        >
-          {() => <JSONEdit name={NAME} data={value} rows={3} id={htmlId} />}
-        </Field>
+        <JSONEdit name={NAME} data={value} rows={3} id={htmlId} />
       </div>
 
       <Description

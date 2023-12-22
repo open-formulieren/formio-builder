@@ -1,10 +1,10 @@
 /**
  * JsonLogic type checking utility functions
  */
-import {infer} from '@open-formulieren/infernologic';
-import {type JSONObject, type JSONValue} from '@open-formulieren/types/lib/types';
+import {infer} from '@open-formulieren/infernologic/lib';
+import type {JSONObject, JSONValue} from '@open-formulieren/types/lib/types';
 
-import {type AnyComponentSchema} from '@/types';
+import type {AnyComponentSchema} from '@/types';
 
 /**
  * @param logic - JsonLogic expression
@@ -109,25 +109,19 @@ const dataTypeForVariableDefinition = ({initialValue, dataType}: VariableDefinit
         boolean: true,
       }[dataType];
 
-const dataTypeForComponent = (
-  component:
-    | AnyComponentSchema
-    | {
-        type: 'map' | 'editgrid' | 'password' | 'signature'; // TODO remove when these are present in AnyComponentSchema
-        multiple?: boolean;
-        defaultValue: JSONValue;
-      }
-): JSONValue => {
+const dataTypeForComponent = (component: AnyComponentSchema): JSONValue => {
   // For now return example values as accepted by InferNoLogic
   // But example values cannot distinguish arrays from tuples!
   const value = {
-    address: {
+    addressNL: {
       postcode: '',
       houseNumber: '',
       houseLetter: '',
       houseNumberAddition: '',
     },
     currency: 1,
+    cosign: 'string',
+    coSign: '', // Actually never
     number: 1,
     checkbox: true,
     //@ts-ignore selectboxes always have component.defaultValue (this does work when rewritten as a lengthy switch/case)
