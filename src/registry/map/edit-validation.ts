@@ -4,6 +4,8 @@ import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 const buildConfigurationSchema = (intl: IntlShape) =>
   z.object({
     defaultZoom: z.number().int().lte(TILE_LAYER_RD.maxZoom).gte(TILE_LAYER_RD.minZoom).optional(),
@@ -42,6 +44,6 @@ const buildMapSchema = (intl: IntlShape) =>
       z.object({useConfigDefaultMapSettings: z.literal(false)}).and(buildConfigurationSchema(intl))
     );
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(buildMapSchema(intl));
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildMapSchema(intl));
 
 export default schema;

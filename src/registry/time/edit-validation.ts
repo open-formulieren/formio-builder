@@ -3,6 +3,8 @@ import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 const buildTime24hSchema = (intl: IntlShape) =>
   z.string().refine(
     value => {
@@ -46,7 +48,7 @@ const buildTimeSpecific = (intl: IntlShape) =>
       .optional(),
   });
 
-const schema = (intl: IntlShape) => {
+const schema: EditSchema = ({intl}) => {
   const commonSchema = buildCommonSchema(intl);
   const defaultValueSchema = buildSingleValueSchema(intl).or(buildMultipleValueSchema(intl));
   return commonSchema.and(defaultValueSchema).and(buildTimeSpecific(intl));

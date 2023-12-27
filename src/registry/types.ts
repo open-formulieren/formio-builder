@@ -23,11 +23,18 @@ export type Preview<S extends AnyComponentSchema | FallbackSchema> = React.FC<
   ComponentPreviewProps<S>
 >;
 
+export interface EditSchemaArgs {
+  intl: IntlShape;
+  builderContext: BuilderContextType;
+}
+
+export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
+
 // Registry entry
 
 export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
   edit: EditFormDefinition<S>;
-  editSchema: (intl: IntlShape, builderContext: BuilderContextType) => z.ZodFirstPartySchemaTypes;
+  editSchema: EditSchema;
   preview: Preview<S> | null;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data

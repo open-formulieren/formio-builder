@@ -4,6 +4,8 @@ import {z} from 'zod';
 import {LABELS} from '@/components/builder/messages';
 import {buildCommonSchema, getErrorMap, isInvalidStringIssue} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 const VALIDATION_MESSAGES = defineMessages({
   email: {
     description: 'Invalid email address format validation error',
@@ -38,6 +40,6 @@ const buildDefaultValueSchema = (intl: IntlShape) => {
   return singleValueSchema.or(multipleValueSchema);
 };
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(buildDefaultValueSchema(intl));
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildDefaultValueSchema(intl));
 
 export default schema;

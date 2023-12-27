@@ -1,9 +1,9 @@
-import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
 import {POSTCODE_REGEX} from '../postcode/constants';
+import {EditSchema} from '../types';
 
 // Constraints taken from the BRK API (apart from postcode which comes from our postcode component)
 const addressNLSchema = z.object({
@@ -24,6 +24,6 @@ const addressNLSchema = z.object({
 
 const defaultValueSchema = z.object({defaultValue: addressNLSchema});
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(defaultValueSchema);
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(defaultValueSchema);
 
 export default schema;
