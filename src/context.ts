@@ -9,22 +9,6 @@ import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
 /*
-  Translations
- */
-
-interface TranslationsMap {
-  [key: string]: string;
-}
-
-interface TranslationsStore {
-  [key: string]: TranslationsMap;
-}
-
-export interface ComponentTranslationsRef {
-  current: null | TranslationsStore;
-}
-
-/*
   Generic select options
  */
 export interface SelectOption {
@@ -57,7 +41,6 @@ export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
-  componentTranslationsRef: ComponentTranslationsRef;
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
@@ -74,7 +57,6 @@ const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
-  componentTranslationsRef: {current: null},
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],
