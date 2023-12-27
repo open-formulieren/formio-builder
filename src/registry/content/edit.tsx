@@ -181,12 +181,14 @@ const RichTextTranslations: React.FC = () => {
     <Tabs>
       <TabList>
         {supportedLanguageCodes.map(code => (
-          <Tab hasErrors={hasAnyError(`openForms.translations.${code}`)}>{code.toUpperCase()}</Tab>
+          <Tab key={code} hasErrors={hasAnyError(`openForms.translations.${code}`)}>
+            {code.toUpperCase()}
+          </Tab>
         ))}
       </TabList>
 
       {supportedLanguageCodes.map((code, index) => (
-        <TabPanel>
+        <TabPanel key={code}>
           <RichText name={`openForms.translations.${code}.html`} required={index === 0} />
         </TabPanel>
       ))}
