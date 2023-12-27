@@ -1,7 +1,8 @@
-import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
+
+import {EditSchema} from '../types';
 
 const textareaSchema = z.string().optional();
 
@@ -25,7 +26,7 @@ const textareaSpecific = z.object({
 
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
 
-const schema = (intl: IntlShape) =>
+const schema: EditSchema = ({intl}) =>
   buildCommonSchema(intl).and(textareaSpecific).and(defaultValueSchema);
 
 export default schema;

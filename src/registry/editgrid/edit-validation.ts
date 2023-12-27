@@ -1,7 +1,7 @@
-import {IntlShape} from 'react-intl';
-
 import {buildCommonSchema} from '@/registry/validation';
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl);
+import {EditSchema} from '../types';
+
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl);
 
 export default schema;

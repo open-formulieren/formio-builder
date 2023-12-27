@@ -3,6 +3,8 @@ import {z} from 'zod';
 
 import {buildCommonSchema, buildKeySchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 const dateSchema = z.coerce.date().optional();
 
 // case for when component.multiple=false
@@ -50,7 +52,7 @@ const buildDateSpecific = (intl: IntlShape) =>
       .optional(),
   });
 
-const schema = (intl: IntlShape) =>
+const schema: EditSchema = ({intl}) =>
   buildCommonSchema(intl).and(defaultValueSchema).and(buildDateSpecific(intl));
 
 export default schema;

@@ -4,6 +4,8 @@ import {z} from 'zod';
 import {BuilderContextType} from '@/context';
 import {buildCommonSchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 // Reference: formio's file component translateScalars method, but without the weird
 // units that don't make sense for files...
 const TRANSFORMATIONS = {
@@ -73,7 +75,7 @@ const buildFileSchema = (intl: IntlShape, builderContext: BuilderContextType) =>
     fileMaxSize: buildFileMaxSizeSchema(intl, builderContext).optional(),
   });
 
-const schema = (intl: IntlShape, builderContext: BuilderContextType) => {
+const schema: EditSchema = ({intl, builderContext}) => {
   const common = buildCommonSchema(intl);
   const fileSpecific = buildFileSchema(intl, builderContext);
   return common.and(fileSpecific);

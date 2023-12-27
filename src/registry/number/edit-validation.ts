@@ -1,7 +1,8 @@
-import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
+
+import {EditSchema} from '../types';
 
 // undefined (optional) for unspecified, otherwise a finite numeric value. Note that
 // null would be nicer, but formio's schema does not support null for validate.min,
@@ -22,7 +23,7 @@ const numberSpecific = z.object({
     .optional(),
 });
 
-const schema = (intl: IntlShape) =>
+const schema: EditSchema = ({intl}) =>
   buildCommonSchema(intl).and(defaultValueSchema).and(numberSpecific);
 
 export default schema;

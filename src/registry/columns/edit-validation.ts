@@ -3,6 +3,8 @@ import {z} from 'zod';
 
 import {buildKeySchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 const buildColumnsSchema = (intl: IntlShape) =>
   z
     .array(
@@ -30,7 +32,7 @@ const buildColumnsSchema = (intl: IntlShape) =>
       }
     );
 
-const schema = (intl: IntlShape) =>
+const schema: EditSchema = ({intl}) =>
   z.object({
     key: buildKeySchema(intl),
     columns: buildColumnsSchema(intl),

@@ -1,7 +1,8 @@
-import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
+
+import {EditSchema} from '../types';
 
 const passwordSchema = z.string().optional();
 
@@ -16,6 +17,6 @@ const multipleValueSchema = z
   .and(z.object({defaultValue: passwordSchema.array()}));
 const defaultValueSchema = singleValueSchema.or(multipleValueSchema);
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(defaultValueSchema);
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(defaultValueSchema);
 
 export default schema;

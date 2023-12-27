@@ -3,6 +3,8 @@ import {z} from 'zod';
 
 import {buildCommonSchema, jsonSchema, optionSchema} from '@/registry/validation';
 
+import {EditSchema} from '../types';
+
 // z.object(...).or(z.object(...)) based on openForms.dataSrc doesn't seem to work,
 // looks like the union validation only works if the discriminator is in the top level
 // object :(
@@ -22,6 +24,6 @@ const buildValuesSchema = (intl: IntlShape) =>
     }),
   });
 
-const schema = (intl: IntlShape) => buildCommonSchema(intl).and(buildValuesSchema(intl));
+const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildValuesSchema(intl));
 
 export default schema;
