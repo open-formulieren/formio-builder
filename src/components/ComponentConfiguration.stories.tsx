@@ -1,4 +1,5 @@
 import {SupportedLocales} from '@open-formulieren/types';
+import {ContentComponentSchema} from '@open-formulieren/types';
 import {expect, jest} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
