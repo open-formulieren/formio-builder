@@ -2,6 +2,7 @@
  * JsonLogic type checking utility functions
  */
 import {infer} from '@open-formulieren/infernologic/lib';
+import type {InferenceResult} from '@open-formulieren/infernologic/lib';
 import type {JSONObject, JSONValue} from '@open-formulieren/types/lib/types';
 
 import type {AnyComponentSchema} from '@/types';
@@ -11,7 +12,7 @@ import type {AnyComponentSchema} from '@/types';
  * @param expected - example value from expected result type e.g. [["label", "value"]]
  * @returns  error message or '' if type checks
  */
-export type JsonLogicTypeChecker = (logic: JSONValue, expected?: JSONValue) => string;
+export type JsonLogicTypeChecker = (logic: JSONValue, expected?: JSONValue) => InferenceResult;
 
 type DataType =
   | 'string'
@@ -88,8 +89,7 @@ export const createTypeCheck = ({
   return (logic, expected = undefined) => {
     // We don't evaluate logic, we just look at types.
     // "===" forces the logic expression align with the expectancy if defined
-    const result = infer(expected !== undefined ? {'===': [logic, expected]} : logic, data);
-    return result.startsWith('result type:') ? '' : result;
+    return infer(expected !== undefined ? {'===': [logic, expected]} : logic, data);
   };
 };
 

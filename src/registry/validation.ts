@@ -4,6 +4,7 @@
  * TODO: check the zodErrorMap implementation & patterns in the SDK for a default error
  * map.
  */
+import {InferenceError} from '@open-formulieren/infernologic/lib/exceptions';
 import {IntlShape, defineMessages} from 'react-intl';
 import {z} from 'zod';
 
@@ -145,12 +146,19 @@ Related to jsonLogic
 
 export const itemsExpressionSchema = (builderContext: BuilderContextType) =>
   jsonSchema.superRefine((val, ctx) => {
-    const result = builderContext.validateLogic(val, [['', '']]);
-    if (result !== '') {
-      // TODO adapt once the InferNoLogic API uses exceptions
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: result,
-      });
+    try {
+      builderContext.validateLogic(val, [['', '']]);
+    } catch (error) {
+      if (error instanceof InferenceError) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Invalid JSON Logic: ${error.message}`,
+        });
+      } else {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Something went wrong when validating items expression: ${error.message}`,
+        });
+      }
     }
   });
