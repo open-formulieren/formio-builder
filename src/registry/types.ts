@@ -37,6 +37,5 @@ export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
 // Registry made up of registry entries, one for each possible component schema
 
 export type Registry = {
-  // TODO: remove optional behaviour when all types are implemented
-  [S in AnyComponentSchema as S['type']]?: RegistryEntry<S>;
+  [S in AnyComponentSchema as S['type']]: RegistryEntry<S>;
 };
