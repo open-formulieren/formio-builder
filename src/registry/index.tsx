@@ -20,6 +20,7 @@ import Licenseplate from './licenseplate';
 import LeafletMap from './map';
 import NpFamilyMembers from './npFamilyMembers';
 import NumberField from './number';
+import Password from './password';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import Radio from './radio';
@@ -77,6 +78,7 @@ const REGISTRY: Registry = {
   fieldset: FieldSet,
   // deprecated
   coSign: CosignV1,
+  password: Password,
 };
 
 export {Fallback};
