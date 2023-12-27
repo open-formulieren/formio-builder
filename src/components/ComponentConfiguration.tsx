@@ -13,7 +13,6 @@ export interface ComponentConfigurationProps extends BuilderContextType, Compone
  *
  * @param options.uniquifyKey              Function to make component key unique in the context of all existing components.
  * @param options.getFormComponents        Function returning all other Formio components in the builder context.
- * @param options.componentTranslationsRef Object containing the existing translations from other components, keyed by language code. Each entry is a map of literal => translation.
  * @param options.isNew                    Whether the Formio component is a new component being added or an existing being edited.
  * @param options.component                The (starter) schema of the Formio component being edited.
  * @param options.builderInfo              Meta information from the builder configuration for the Formio component.
@@ -26,7 +25,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   uniquifyKey,
   supportedLanguageCodes = ['nl', 'en'],
   richTextColors,
-  componentTranslationsRef,
   getFormComponents,
   getValidatorPlugins,
   getRegistrationAttributes,
@@ -49,7 +47,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       uniquifyKey,
       supportedLanguageCodes,
       richTextColors,
-      componentTranslationsRef,
       getFormComponents,
       getValidatorPlugins,
       getRegistrationAttributes,

@@ -22,13 +22,6 @@ import {ValidatorOption} from './builder/validate/validator-select';
 export default {
   title: 'Public API/ComponentConfiguration',
   component: ComponentConfiguration,
-  argTypes: {
-    componentTranslationsRef: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   args: {
     isNew: true,
     otherComponents: [{type: 'select', label: 'A select', key: 'aSelect'}],
@@ -58,12 +51,6 @@ export default {
     },
     supportedLanguageCodes: ['nl'],
     fileTypes: DEFAULT_FILE_TYPES,
-    translationsStore: {
-      nl: {
-        'A select': 'Een dropdown',
-        'A text field': 'Een tekstveld',
-      },
-    },
     builderInfo: {
       title: 'Text field',
       group: 'basic',
@@ -77,11 +64,6 @@ export default {
 interface TemplateArgs {
   component: AnyComponentSchema;
   supportedLanguageCodes: SupportedLocales[];
-  translationsStore: {
-    [key: string]: {
-      [key: string]: string;
-    };
-  };
   otherComponents: AnyComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
@@ -103,7 +85,6 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillPlugins,
   prefillAttributes,
   supportedLanguageCodes,
-  translationsStore,
   fileTypes,
   isNew,
   builderInfo,
@@ -115,7 +96,6 @@ const Template: StoryFn<TemplateArgs> = ({
     uniquifyKey={(key: string) => key}
     supportedLanguageCodes={supportedLanguageCodes}
     richTextColors={DEFAULT_COLORS}
-    componentTranslationsRef={{current: translationsStore}}
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}

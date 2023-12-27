@@ -8,7 +8,7 @@ import {IntlProvider} from 'react-intl';
 import {createIntl, createIntlCache} from 'react-intl';
 
 import {BuilderContext} from '@/context';
-import type {ComponentTranslationsRef, DocumentTypeOption, SelectOption} from '@/context';
+import type {DocumentTypeOption, SelectOption} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -30,7 +30,6 @@ import {ValidatorOption} from '../components/builder/validate/validator-select';
 
 interface BuilderOptions {
   supportedLanguageCodes: SupportedLocales[];
-  componentTranslationsRef: ComponentTranslationsRef;
   componentTree: AnyComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
@@ -69,7 +68,6 @@ const contextRender = (
               uniquifyKey: key => key,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               richTextColors: DEFAULT_COLORS,
-              componentTranslationsRef: builderOptions.componentTranslationsRef || {current: null},
               getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
