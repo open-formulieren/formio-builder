@@ -100,7 +100,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
         onSubmit(values);
         setSubmitting(false);
       }}
-      validationSchema={toFormikValidationSchema(zodSchema(intl, builderContext))}
+      validationSchema={toFormikValidationSchema(zodSchema({intl, builderContext}))}
     >
       {formik => {
         const component = formik.values;
