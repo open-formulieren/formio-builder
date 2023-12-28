@@ -138,7 +138,7 @@ EditForm.defaultValues = {
   hidden: false,
   clearOnHide: true,
   isSensitiveData: false,
-  defaultValue: undefined,
+  defaultValue: null,
   decimalLimit: undefined,
   allowNegative: false,
   suffix: '',
