@@ -10,7 +10,7 @@ import {EditSchema} from '../types';
 const numberSchema = z.number().finite().optional();
 
 const defaultValueSchema = z.object({
-  defaultValue: numberSchema,
+  defaultValue: numberSchema.or(z.null()),
 });
 
 const numberSpecific = z.object({

@@ -7,7 +7,7 @@ import React from 'react';
 import {IntlProvider} from 'react-intl';
 import {createIntl, createIntlCache} from 'react-intl';
 
-import {BuilderContext} from '@/context';
+import {BuilderContext, BuilderContextType} from '@/context';
 import type {DocumentTypeOption, SelectOption} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
@@ -156,8 +156,24 @@ const formikRender = (
 const cache = createIntlCache();
 const dummyIntl = createIntl({locale: 'en', messages: {}}, cache);
 
+const dummyBuilderContext = {
+  uniquifyKey: (key: string) => key,
+  supportedLanguageCodes: ['nl', 'en'],
+  richTextColors: [],
+  getFormComponents: () => [],
+  getValidatorPlugins: async () => [],
+  getRegistrationAttributes: async () => [],
+  getPrefillPlugins: async () => [],
+  getPrefillAttributes: async () => [],
+  getFileTypes: async () => [],
+  serverUploadLimit: '(unknown)',
+  getDocumentTypes: async () => [],
+  getConfidentialityLevels: async () => [],
+  getAuthPlugins: async () => [],
+} satisfies BuilderContextType;
+
 // re-export everything (see https://testing-library.com/docs/react-testing-library/setup/#custom-render)
 export * from '@testing-library/react';
 
 // Add extra exports
-export {contextRender, formikRender, dummyIntl};
+export {contextRender, formikRender, dummyIntl, dummyBuilderContext};

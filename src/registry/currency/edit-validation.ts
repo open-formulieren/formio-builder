@@ -9,7 +9,7 @@ import {EditSchema} from '../types';
 // validate.max or defaultValue
 const currencySchema = z.number().finite().optional();
 
-const defaultValueSchema = z.object({defaultValue: currencySchema});
+const defaultValueSchema = z.object({defaultValue: currencySchema.or(z.null())});
 
 const currencySpecific = z.object({
   decimalLimit: z.union(Array.from({length: 11}, (_, i) => z.literal(i)) as any).optional(),
