@@ -6,26 +6,23 @@ This library implements the builder to build
 
 [![Run CI build and tests](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml)
 
-:construction: This library is currently under heavy development :construction:
+**Documentation/demo**
 
-The [Storybook](https://open-formulieren.github.io/formio-builder/) documentation is available
-online.
-
-The shared types library documentation is available
-[online](https://open-formulieren.github.io/types/).
+- [Storybook](https://open-formulieren.github.io/formio-builder/) documentation and reference.
+- Shared types library documentation:
+  [`@open-formulieren/types`](https://open-formulieren.github.io/types/).
 
 ## What is the purpose of this library?
 
-It aims to improve the developer experience for the Open Formulieren development team, both by
-making the builder form definition more declarative/direct and obvious, and by using techniques
-absolving the need to reason about when to re-render state in the DOM.
+Improving the developer experience for the Open Formulieren development team, by making the builder
+form definition more declarative and removing levels of abstraction, while maintaining re-use of
+components and common configurations.
 
-Open Forms adds a number of extensions directly in the builder, parts of which are derived from
-earlier inputs and require synchronization of certain state. Historically, this has proven to cause
-a large number of bugs, annoyances and extremely complex code where we were essentially fighting
-Form.io itself.
+We use third party form and validation libraries so that we can more easily reason about our form
+component configuration without being constrained by Formio.js itself. Using Typescript, we can also
+enforce certain behaviours at compile-time.
 
-This library is NOT intended to be a competing library of Form.io's own form builder:
+This library is **NOT** intended to be a competing library of Form.io's own form builder:
 
 - it does not implement all the Form.io features, only the ones actively used and exposed in Open
   Forms
@@ -41,9 +38,9 @@ For (code) contributions that do fit the goals of this library, please follow th
 
 - Create an issue with a description of the problem or required feature
 - Reference the issue ID in commit messages and pull requests
-- Functionality should be documented in Storybook
-- Functionality should have interaction tests in Storybook to describe and protect the expected
-  behaviour
+- Functionality must be documented in Storybook
+- Functionality must be covered by tests - Jest (unit/integration) tests and/or Storybook
+  interaction tests
 
 ## Getting started
 
@@ -74,6 +71,8 @@ npm test
 npm run build:esm
 ```
 
+Additional NPM scripts can be found in `package.json`.
+
 ### Managing translations
 
 Any user-facing literals should be
@@ -103,29 +102,4 @@ locale.
 
 ## Roadmap
 
-### Builder form
-
-The builder form is the form + preview shown in the edit component modal.
-
-- [x] Set up global structure on how to define the builder form for a particular Form.io component
-      type
-- [x] Implement generic, bootstrap-based Form.io components to compose forms
-- [x] Orchestrate form state with Formik + zod for validation
-- [x] Wire up react-intl for localization
-- [x] Define and publish Open Forms-specific component type schema's (shared library)
-- [x] Figure out how to do react-intl message catalog extraction/management for supported languages
-- [x] Implement the builder forms for the supported component types
-- [ ] Use smarter (rich text) editor make using form variables more user friendly
-
-### Builder
-
-- [ ] Sidebar/component type picker, grouped into categories
-- [ ] Dropzone to drop a picked component
-- [ ] Dropzone for container components to support child/nested components
-
-## Notes to address at some point
-
-- Formio used tooltip.js, which used to be popper.js (?), which points to tippy.js. That seems to
-  point to Floating UI, however there is a https://github.com/atomiks/tippyjs-react.
-
-- Figure out component-specific documentation/instructions
+See the [roadmap issue](https://github.com/open-formulieren/formio-builder/issues/104).
