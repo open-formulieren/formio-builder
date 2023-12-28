@@ -142,6 +142,7 @@
       "<rootDir>/src"
     ],
     "moduleNameMapper": {
+      "@open-formulieren/ckeditor5-build-classic": "<rootDir>/src/tests/EditorStub.ts",
       "@/(.*)$": "<rootDir>/src/$1"
     },
     "transformIgnorePatterns": [
