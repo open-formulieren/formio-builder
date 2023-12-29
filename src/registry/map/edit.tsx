@@ -21,7 +21,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import MapConfiguration from './map-configuration';
@@ -32,16 +32,8 @@ import MapConfiguration from './map-configuration';
 const EditForm: EditFormDefinition<MapComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {errors, values, setValues} = useFormikContext<MapComponentSchema>();
-
-  const erroredFields = Object.keys(errors).length ? getErrorNames<MapComponentSchema>(errors) : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {values, setValues} = useFormikContext<MapComponentSchema>();
+  const {hasAnyError} = useErrorChecker<MapComponentSchema>();
 
   Validate.useManageValidatorsTranslations<MapComponentSchema>(['required']);
 

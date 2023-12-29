@@ -25,7 +25,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Radio, TabList, TabPanel, Tabs} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
@@ -36,22 +36,12 @@ import {checkIsManualOptions} from './helpers';
 const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors, setFieldValue} = useFormikContext<RadioComponentSchema>();
+  const {values, setFieldValue} = useFormikContext<RadioComponentSchema>();
+  const {hasAnyError} = useErrorChecker<RadioComponentSchema>();
   const {
     openForms: {dataSrc},
     defaultValue,
   } = values;
-
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<RadioComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
 
   Validate.useManageValidatorsTranslations<RadioComponentSchema>(['required']);
 

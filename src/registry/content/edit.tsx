@@ -12,7 +12,7 @@ import {
 } from '@/components/builder';
 import {Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import RichText from './rich-text';
@@ -26,18 +26,10 @@ import RichText from './rich-text';
 const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
   const {uniquifyKey, supportedLanguageCodes} = useContext(BuilderContext);
   const isKeyManuallySetRef = useRef(false);
-  const {values, errors, setFieldValue} = useFormikContext<ContentComponentSchema>();
+  const {values, setFieldValue} = useFormikContext<ContentComponentSchema>();
   const generatedKey = uniquifyKey(values.key);
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<ContentComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+
+  const {hasAnyError} = useErrorChecker<ContentComponentSchema>();
 
   const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
 
@@ -164,19 +156,7 @@ const CustomClass: React.FC = () => {
 
 const RichTextTranslations: React.FC = () => {
   const {supportedLanguageCodes} = useContext(BuilderContext);
-  const {errors} = useFormikContext<ContentComponentSchema>();
-
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<ContentComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
-
+  const {hasAnyError} = useErrorChecker<ContentComponentSchema>();
   return (
     <Tabs>
       <TabList>

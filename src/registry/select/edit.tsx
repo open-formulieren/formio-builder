@@ -26,7 +26,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
@@ -37,23 +37,13 @@ import {checkIsManualOptions} from './helpers';
 const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors, setFieldValue} = useFormikContext<SelectComponentSchema>();
+  const {values, setFieldValue} = useFormikContext<SelectComponentSchema>();
+  const {hasAnyError} = useErrorChecker<SelectComponentSchema>();
   const {
     openForms: {dataSrc},
     defaultValue,
     multiple,
   } = values;
-
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<SelectComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
 
   Validate.useManageValidatorsTranslations<SelectComponentSchema>(['required']);
 

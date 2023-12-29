@@ -23,7 +23,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
@@ -33,16 +33,8 @@ import {EditFormDefinition} from '../types';
 const EditForm: EditFormDefinition<BsnComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<BsnComponentSchema>();
-
-  const erroredFields = Object.keys(errors).length ? getErrorNames<BsnComponentSchema>(errors) : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {values} = useFormikContext<BsnComponentSchema>();
+  const {hasAnyError} = useErrorChecker<BsnComponentSchema>();
 
   Validate.useManageValidatorsTranslations<BsnComponentSchema>(['required']);
   return (

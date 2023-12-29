@@ -1,5 +1,4 @@
 import {FileComponentSchema} from '@open-formulieren/types';
-import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -20,7 +19,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import FileTabFields from './file-tab';
@@ -32,18 +31,8 @@ import RegistrationTabFields from './registration-tab';
 const EditForm: EditFormDefinition<FileComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {errors} = useFormikContext<FileComponentSchema>();
 
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<FileComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {hasAnyError} = useErrorChecker<FileComponentSchema>();
 
   Validate.useManageValidatorsTranslations<FileComponentSchema>(['required']);
 

@@ -24,7 +24,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {EditFormDefinition} from '@/registry/types';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import DateConstraintValidation from './validation';
 
@@ -36,17 +36,9 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {
     values: {multiple = false},
-    errors,
   } = useFormikContext<DateComponentSchema>();
 
-  const erroredFields = Object.keys(errors).length ? getErrorNames(errors) : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {hasAnyError} = useErrorChecker<DateComponentSchema>();
 
   Validate.useManageValidatorsTranslations<DateComponentSchema>(['required']);
 
