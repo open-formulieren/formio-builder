@@ -1,10 +1,4 @@
-// These can cause infinite recursions, and since we're dealing with JSON-serializable
-// data only, the keys of the objects must be strings.
-type ExcludeBareObject<T> = T extends Record<string, unknown>
-  ? T extends Function
-    ? never
-    : T
-  : never;
+type Primitive = string | number | boolean | undefined | null;
 
 /**
  * Constructs a union of possible paths (as dotted strings) into a given object type.
@@ -14,25 +8,31 @@ type ExcludeBareObject<T> = T extends Record<string, unknown>
  *
  * Okay, so how does it work?
  *
- *  - the first T extends T seems to be excessive, but the [keyof T] indexed access
- *    types operate differently on unions - they only access the keys common to all the
- *    members in the union. Some of our schema types are unions, so to capture all
- *    possible access paths, we need to force distribution over each member in the union,
- *    which is done through a conditional type
+ *  - First, we check if the type var is a primitive - mapping over those doesn't make
+ *    any sense as there is nothing to dive into. If it is primitive, we hit the 'never'
+ *    branch and evaluation stops.
  *
- *  - once inside of that, we know that T is an object (or that's the expectation at
- *    least) and we apply a mapped type - the keys are all possible keys in T, and each
- *    optional key is made required (that's the `-?` modifier).
+ *  - Additionally, this conditional type causes schemas that are a union to be mapped
+ *    over, rather than the [keyof T] indexed access being limited to the *intersection*
+ *    of common keys in all union members. So, this ensures that all the discriminated
+ *    union members are processed individually.
+ *
+ *  - Once inside the first conditional, we now know T is an object and apply a mapped
+ *    type over its keys. If a key is optional, it's made required (that's the `-?`
+ *    modifier), to ensure we loop over all possible keys, required or optional.
  *
  *  - the values in the mapped type are checked first with a conditional type - we only
  *    care about string keys (because JSON serializable data is expected), so this does
  *    not return array indices either (by design - we handle an array of values as a
- *    single value in Formik), that's the `K extends string`.
+ *    single value in Formik), that's the `K extends string`. Possibly in the future we
+ *    can extend this to return a `foo[${number}].bar` type to allow specific indices,
+ *    but that's currently out of scope.
  *
  *    When we have a string key, we check if we need to recurse by looking at the value
  *    type. The value type is looked up via `T[K]`. If it's not a (nested) object, the
  *    value returns just the key `K`. So for a type `{a: string}`, this mapped type
- *    results in `{a: 'a'}`
+ *    results in `{a: 'a'}`. We ignore functions, since those are not values that can
+ *    be set or managed through HTML forms.
  *
  *    If the value type is an object though, then we recurse and we prefix the current
  *    key. A type `{a: {b: string}}` then becomes (in steps):
@@ -53,21 +53,18 @@ type ExcludeBareObject<T> = T extends Record<string, unknown>
  *    5. join the access paths for a and from a: `{a: 'a' | ('a.b' | 'a.c')}`
  *    6. grab the values via the indexed access: `{a: 'a' | ('a.b' | 'a.c')}['a']`
  *    7. final result: `'a' | 'a.b' | 'a.c'`
- *
- *  - The `ExcludeBareObject` helper type is required because potentially the recursion
- *    steps into a generic/bare `Object` type which recurses infintely, and TS can't deal
- *    with that. Formio type definitions happen to use those in some places in their
- *    source code and unfortunately those aren't easily patched/fixed.
  */
-export type Paths<T> = T extends T
-  ? {
+export type Paths<T> = T extends Primitive | Primitive[]
+  ? never
+  : {
       [K in keyof T]-?: K extends string
-        ? ExcludeBareObject<T[K]> extends object
-          ? K | `${K}.${Paths<ExcludeBareObject<T[K]>>}`
-          : K
+        ? T[K] extends Primitive | Primitive[]
+          ? K
+          : T[K] extends Function
+          ? never
+          : K | `${K}.${Paths<T[K]>}`
         : never;
-    }[keyof T]
-  : never;
+    }[keyof T];
 
 export type GetValueAtPath<T, Path extends string> = T extends T
   ? Path extends `${infer P}.${infer Rest}`
