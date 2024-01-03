@@ -21,7 +21,4 @@ export default {
   },
 } as Meta<typeof Tooltip>;
 
-export const Default: StoryObj<typeof Tooltip> = {
-  render: () => <Tooltip />,
-  args: {},
-};
+export const Default: StoryObj<typeof Tooltip> = {};

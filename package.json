@@ -112,6 +112,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/css": "^11.11.2",
+    "@floating-ui/react": "^0.26.4",
     "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "clsx": "^1.2.1",
@@ -128,7 +129,6 @@
     "react-select": "^5.7.2",
     "react-signature-canvas": "^1.0.6",
     "react-tabs": "^4.2.1",
-    "react-tooltip": "^5.10.5",
     "react-use": "^17.4.0",
     "sanitize-html": "^2.11.0",
     "zod": "^3.21.4",
