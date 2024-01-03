@@ -1,5 +1,4 @@
 import {CosignV1ComponentSchema} from '@open-formulieren/types';
-import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
@@ -15,7 +14,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
@@ -25,18 +24,7 @@ import {EditFormDefinition} from '../types';
 const EditForm: EditFormDefinition<CosignV1ComponentSchema> = () => {
   const intl = useIntl();
   useDeriveComponentKey();
-  const {errors} = useFormikContext<CosignV1ComponentSchema>();
-
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<CosignV1ComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {hasAnyError} = useErrorChecker<CosignV1ComponentSchema>();
 
   return (
     <Tabs>

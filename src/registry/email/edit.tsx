@@ -22,7 +22,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
@@ -32,18 +32,9 @@ import {EditFormDefinition} from '../types';
 const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {values, errors} = useFormikContext<EmailComponentSchema>();
+  const {values} = useFormikContext<EmailComponentSchema>();
 
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<EmailComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {hasAnyError} = useErrorChecker<EmailComponentSchema>();
 
   Validate.useManageValidatorsTranslations<EmailComponentSchema>(['required']);
   return (

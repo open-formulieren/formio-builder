@@ -1,5 +1,4 @@
 import {NpFamilyMembersComponentSchema} from '@open-formulieren/types';
-import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -20,7 +19,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
-import {getErrorNames} from '@/utils/errors';
+import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
@@ -30,18 +29,7 @@ import {EditFormDefinition} from '../types';
 const EditForm: EditFormDefinition<NpFamilyMembersComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
-  const {errors} = useFormikContext<NpFamilyMembersComponentSchema>();
-
-  const erroredFields = Object.keys(errors).length
-    ? getErrorNames<NpFamilyMembersComponentSchema>(errors)
-    : [];
-  // TODO: pattern match instead of just string inclusion?
-  // TODO: move into more generically usuable utility when we implement other component
-  // types
-  const hasAnyError = (...fieldNames: string[]): boolean => {
-    if (!erroredFields.length) return false;
-    return fieldNames.some(name => erroredFields.includes(name));
-  };
+  const {hasAnyError} = useErrorChecker<NpFamilyMembersComponentSchema>();
 
   Validate.useManageValidatorsTranslations<NpFamilyMembersComponentSchema>(['required']);
 
