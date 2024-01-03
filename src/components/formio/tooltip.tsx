@@ -32,7 +32,13 @@ const Tooltip: React.FC<TooltipProps> = ({text}) => {
     placement: 'right',
   });
 
-  const hover = useHover(context, {move: false});
+  const hover = useHover(context, {
+    move: false,
+    delay: {
+      open: 0,
+      close: 100,
+    },
+  });
   const focus = useFocus(context);
   const dismiss = useDismiss(context);
   const role = useRole(context, {role: 'label'});
