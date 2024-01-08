@@ -82,3 +82,34 @@ export const ValidateDeltaConstraintConfiguration: Story = {
     });
   },
 };
+
+export const ValidateFixedValueConfiguration: Story = {
+  name: 'Validate datetime constraint configuration: fixed value',
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await step('Navigate to validation tab and open minDate configuration', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
+      await userEvent.click(canvas.getByText(/Minimum date/));
+      await waitFor(async () => {
+        expect(await canvas.findByText('Mode preset')).toBeVisible();
+      });
+    });
+
+    await step('Configure fixed value', async () => {
+      canvas.getByLabelText('Mode preset').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await userEvent.click(await canvas.findByText('Fixed value'));
+
+      const dateTimeInput = canvas.getByLabelText<HTMLInputElement>('Minimum date');
+      // interaction with type="date" is not nice yet in testing-library
+      await userEvent.type(dateTimeInput, '2024-01-01T10:00');
+      expect(dateTimeInput).toHaveValue('2024-01-01T10:00');
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

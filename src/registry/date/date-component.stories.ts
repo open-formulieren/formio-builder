@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -100,6 +100,11 @@ export const ValidateFixedValueConfiguration: Story = {
       canvas.getByLabelText('Mode preset').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('Fixed value'));
+
+      const dateInput = canvas.getByLabelText<HTMLInputElement>('Minimum date');
+      // interaction with type="date" is not nice yet in testing-library
+      await userEvent.type(dateInput, '2024-01-01');
+      expect(dateInput).toHaveValue('2024-01-01');
     });
 
     await step('Submit form', async () => {
