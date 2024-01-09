@@ -328,6 +328,11 @@
     "isTranslated": true,
     "originalDefault": "Placeholder"
   },
+  "CZ4Fby": {
+    "defaultMessage": "{length} {length, plural, one {karakter over} other {karakters over}}",
+    "description": "Character count remaining",
+    "originalDefault": "{length} {length, plural, one {character remaining} other {characters remaining}}"
+  },
   "D0hDzV": {
     "defaultMessage": "{componentType}-component",
     "description": "Formio builder: component configuration form title",

@@ -135,3 +135,48 @@ export const WithMask: Story = {
     });
   },
 };
+
+export const WithCharCount: Story = {
+  args: {
+    label: 'With charcount',
+    showCharCount: true,
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-textfield': ''},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText('With charcount');
+    await userEvent.type(input, 'Foo');
+
+    expect(await canvas.findByText('3 characters')).toBeVisible();
+  },
+};
+
+export const WithCharCountAndMaxLength: Story = {
+  args: {
+    label: 'With charcount',
+    showCharCount: true,
+    maxLength: 100,
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-textfield': ''},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByLabelText('With charcount');
+    await userEvent.type(input, 'Foo');
+
+    expect(await canvas.findByText('97 characters remaining')).toBeVisible();
+  },
+};

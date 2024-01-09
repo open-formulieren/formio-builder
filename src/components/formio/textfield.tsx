@@ -74,7 +74,9 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   );
 
   const hasFocus = inputRef.current === document.activeElement;
-  const charCount = showCharCount && (touched || hasFocus) && value && <CharCount value={value} />;
+  const charCount = showCharCount && (touched || hasFocus) && value && (
+    <CharCount value={value} maxLength={props.maxLength} />
+  );
 
   // 'bare input' is actually a little bit more than just the input, looking at the
   // vanillay formio implementation.
