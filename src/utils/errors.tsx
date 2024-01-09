@@ -132,8 +132,9 @@ interface ValidationErrors {
 
 export const useValidationErrors = (name: string): ValidationErrors => {
   const {getFieldMeta} = useFormikContext<AnyComponentSchema>();
+  // FIXME: inferred type says string, but for nested objects this can be an object itself!
   const {error} = name ? getFieldMeta(name) : {error: ''};
-  const errors = name && error ? [error] : [];
+  const errors = name && error && typeof error === 'string' ? [error] : [];
   return {
     hasErrors: errors.length > 0,
     errors,

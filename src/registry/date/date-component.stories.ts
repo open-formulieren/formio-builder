@@ -1,6 +1,6 @@
 import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -79,6 +79,37 @@ export const ValidateDeltaConstraintConfiguration: Story = {
       });
       expect(await canvas.findByText('Expected integer, received float')).toBeVisible();
       expect(await canvas.findByText('Number must be greater than or equal to 0')).toBeVisible();
+    });
+  },
+};
+
+export const ValidateFixedValueConfiguration: Story = {
+  name: 'Validate date constraint configuration: fixed value',
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await step('Navigate to validation tab and open minDate configuration', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
+      await userEvent.click(canvas.getByText(/Minimum date/));
+      await waitFor(async () => {
+        expect(await canvas.findByText('Mode preset')).toBeVisible();
+      });
+    });
+
+    await step('Configure fixed value', async () => {
+      canvas.getByLabelText('Mode preset').focus();
+      await userEvent.keyboard('[ArrowDown]');
+      await userEvent.click(await canvas.findByText('Fixed value'));
+
+      const dateInput = canvas.getByLabelText<HTMLInputElement>('Minimum date');
+      // interaction with type="date" is not nice yet in testing-library
+      await userEvent.type(dateInput, '2024-01-01');
+      expect(dateInput).toHaveValue('2024-01-01');
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
     });
   },
 };
