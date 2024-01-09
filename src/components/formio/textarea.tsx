@@ -40,9 +40,11 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   const {bareInput} = useContext(RenderContext);
 
   useLayoutEffect(() => {
-    if (autoExpand && inputRef.current) {
-      inputRef.current.style.height = 'inherit';
-      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    const node = inputRef.current;
+    if (autoExpand && node) {
+      const computedStyle = window.getComputedStyle(node);
+      node.style.height = 'inherit';
+      node.style.height = `calc(${node.scrollHeight}px + ${computedStyle.borderTopWidth} + ${computedStyle.borderBottomWidth})`;
     }
   }, [autoExpand, inputRef, value]);
 
