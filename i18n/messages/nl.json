@@ -211,6 +211,11 @@
     "description": "Label for 'registration.docVertrouwelijkheidaanduiding' builder field",
     "originalDefault": "Confidentiality level"
   },
+  "6Xhq/T": {
+    "defaultMessage": "Je moet een datum en tijd opgeven.",
+    "description": "Missing datetime value for fixed value validation",
+    "originalDefault": "You must specify a datetime."
+  },
   "7Ldfn+": {
     "defaultMessage": "Ten opzichte van een variabele",
     "description": "Date constraint mode 'relativeToVariable' label",
@@ -552,6 +557,11 @@
     "defaultMessage": "Main/machtiger",
     "description": "Label identifier role main",
     "originalDefault": "Main"
+  },
+  "RiFNuZ": {
+    "defaultMessage": "Je moet een datum opgeven.",
+    "description": "Missing date value for fixed value validation",
+    "originalDefault": "You must specify a date."
   },
   "RuAQwk": {
     "defaultMessage": "Verwijderen",
