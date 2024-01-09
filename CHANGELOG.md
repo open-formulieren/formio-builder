@@ -1,5 +1,21 @@
 # Changes
 
+## 0.13.1 (2024-01-09)
+
+Bugfixes after extensive testing in the Open Forms backend.
+
+All issue were reported in [`#3733`](https://github.com/open-formulieren/open-forms/issues/3733).
+
+- Fixed some `date`/`datetime` component validation errors not being displayed.
+- Fixed the `fixedValue` validation mode for `date`/`datetime` components not being considered
+  valid.
+- Prevent scrollbar on auto-resize text area preview.
+- Fixed incorrect form field labels for the `editgrid` component (button text configuration).
+- Updated missing translations.
+- Fixed setting the `content` component `customClass` property.
+- Fixed the preview in the `textfield` component when a `validate.maxLength` is set, to be
+  consistent with the SDK behaviour.
+
 ## 0.13.0 (2024-01-03)
 
 Quality of life release
