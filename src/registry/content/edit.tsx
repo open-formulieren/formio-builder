@@ -149,7 +149,7 @@ const CustomClass: React.FC = () => {
         />
       }
       options={options}
-      valueProperty="id"
+      valueProperty="value"
     />
   );
 };

@@ -2671,6 +2671,14 @@ export const Content: Story = {
     //   await userEvent.type(...);
     // });
 
+    await step('Set custom class', async () => {
+      const searchInput = canvas.getByLabelText('CSS class');
+      searchInput.focus();
+      await userEvent.keyboard('[ArrowDown]');
+      const warningOption = await canvas.findByText('Warning');
+      await userEvent.click(warningOption);
+    });
+
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalledWith({
@@ -2690,7 +2698,7 @@ export const Content: Story = {
         showInSummary: false,
         showInEmail: false,
         showInPDF: true,
-        customClass: '',
+        customClass: 'warning',
         conditional: {
           eq: '',
           show: undefined,
