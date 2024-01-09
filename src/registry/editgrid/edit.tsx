@@ -236,11 +236,7 @@ const SaveRow: React.FC = () => {
     defaultMessage: "Set the text of the 'Save row' button.",
   });
   return (
-    <TextField
-      name="saveRow"
-      label={<FormattedMessage {...ADD_ANOTHER_LABEL} />}
-      tooltip={tooltip}
-    />
+    <TextField name="saveRow" label={<FormattedMessage {...SAVE_ROW_LABEL} />} tooltip={tooltip} />
   );
 };
 
@@ -253,7 +249,7 @@ const RemoveRow: React.FC = () => {
   return (
     <TextField
       name="removeRow"
-      label={<FormattedMessage {...ADD_ANOTHER_LABEL} />}
+      label={<FormattedMessage {...REMOVE_ROW_LABEL} />}
       tooltip={tooltip}
     />
   );
