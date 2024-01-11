@@ -78,7 +78,13 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 
   let initialValues = cloneDeep(component);
   if (isNew && isKnownComponentType(component)) {
-    initialValues = merge(EditForm.defaultValues, initialValues);
+    // Formio.js mutates components when adding children (like fieldset layout component),
+    // which apparently goes all the way to our default value definition, which is
+    // supposed to be static.
+    // See https://github.com/open-formulieren/open-forms/issues/3761 for the problems
+    // it causes.
+    const defaultValues = cloneDeep(EditForm.defaultValues);
+    initialValues = merge(defaultValues, initialValues);
   }
 
   // we infer the specific schema from the EditForm component obtained from the registry.
