@@ -1,10 +1,19 @@
 # Changes
 
+## 0.13.2 (2024-01-11)
+
+Bugfix release
+
+- [`#3761`][#3761] Fixed a bug where component default values were mutated. This affected fieldset,
+  editgrid and columns, possibly others.
+
+[#3761]: https://github.com/open-formulieren/open-forms/issues/3761
+
 ## 0.13.1 (2024-01-09)
 
 Bugfixes after extensive testing in the Open Forms backend.
 
-All issue were reported in [`#3733`](https://github.com/open-formulieren/open-forms/issues/3733).
+All issues were reported in [`#3733`](https://github.com/open-formulieren/open-forms/issues/3733).
 
 - Fixed some `date`/`datetime` component validation errors not being displayed.
 - Fixed the `fixedValue` validation mode for `date`/`datetime` components not being considered
