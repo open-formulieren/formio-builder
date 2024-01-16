@@ -5,7 +5,7 @@ interface JSONPreviewProps {
 
 const JSONPreview: React.FC<JSONPreviewProps & JSX.IntrinsicElements['pre']> = ({
   data,
-  className = '',
+  className = 'card',
   ...props
 }) => (
   <pre className={className} data-testid="jsonPreview" {...props}>
