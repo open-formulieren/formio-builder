@@ -124,7 +124,7 @@ const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) =
   const isEditJSONPreview = mode === 'editJSON';
   return (
     <div className="btn-group btn-group-toggle">
-      <label className={clsx('btn', 'btn-sm', 'btn-light', {active: isRichPreview})}>
+      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isRichPreview})}>
         <input
           type="radio"
           name="previewMode"
@@ -135,7 +135,7 @@ const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) =
         />
         <FormattedMessage description="Component 'Rich' preview mode" defaultMessage="Form" />
       </label>
-      <label className={clsx('btn', 'btn-sm', 'btn-light', {active: isJSONPreview})}>
+      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isJSONPreview})}>
         <input
           type="radio"
           name="previewMode"
@@ -146,7 +146,7 @@ const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) =
         />
         <FormattedMessage description="Component 'JSON' preview mode" defaultMessage="JSON" />
       </label>
-      <label className={clsx('btn', 'btn-sm', 'btn-light', {active: isEditJSONPreview})}>
+      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isEditJSONPreview})}>
         <input
           type="radio"
           name="previewMode"
