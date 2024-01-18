@@ -1,5 +1,13 @@
 # Changes
 
+## 0.13.3 (2024-01-18)
+
+Bugfix release
+
+- [`#OF/3774`][#OF/3774] Fix dark mode compatibility
+
+[#OF/3774][https://github.com/open-formulieren/open-forms/issues/3774]
+
 ## 0.13.2 (2024-01-11)
 
 Bugfix release
