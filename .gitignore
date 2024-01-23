@@ -4,3 +4,4 @@ dist/
 lib/
 storybook-static/
 i18n/compiled/*.json
+.idea/
