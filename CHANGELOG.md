@@ -1,12 +1,23 @@
 # Changes
 
+## 0.14.0 (2024-01-23)
+
+Improvement release
+
+- [`#OF/3755`][#OF/3755] Added options to `date` component to not wipe invalid values in the
+  renderer.
+- [`#OF/3755`][#OF/3755] Added options to `datetime` component to not wipe invalid values in the
+  renderer.
+
+[#OF/3755]: https://github.com/open-formulieren/open-forms/issues/3755
+
 ## 0.13.3 (2024-01-18)
 
 Bugfix release
 
 - [`#OF/3774`][#OF/3774] Fix dark mode compatibility
 
-[#OF/3774][https://github.com/open-formulieren/open-forms/issues/3774]
+[#OF/3774]: https://github.com/open-formulieren/open-forms/issues/3774
 
 ## 0.13.2 (2024-01-11)
 
