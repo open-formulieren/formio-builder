@@ -174,6 +174,10 @@ EditForm.defaultValues = {
     attribute: null,
     identifierRole: 'main',
   },
+  // Flatpickr custom options
+  customOptions: {
+    allowInvalidPreload: true,
+  },
 };
 
 interface DefaultValueProps {
