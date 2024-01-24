@@ -1,5 +1,13 @@
 # Changes
 
+## 0.14.1 (2024-01-24)
+
+Bugfix release
+
+- [`#OF/3616`][#OF/3616] Fixed validation bug for `minTime`/`maxTime`
+
+[#OF/3616]: https://github.com/open-formulieren/open-forms/issues/3616
+
 ## 0.14.0 (2024-01-23)
 
 Improvement release
