@@ -23,7 +23,8 @@ const buildOptionalTimeSchema = (intl: IntlShape) =>
   z.union([
     buildTime24hSchema(intl),
     z.literal(''),
-    z.literal(undefined), // formik (deliberately) turns empty string into undefined
+    z.undefined(), // formik (deliberately) turns empty string into undefined
+    z.null(),
   ]);
 
 // case for when component.multiple=false
