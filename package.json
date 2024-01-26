@@ -126,7 +126,7 @@
     "lodash.uniqueid": "^4.0.1",
     "react-intl": "^6.3.2",
     "react-leaflet": "^4.2.1",
-    "react-select": "^5.7.2",
+    "react-select": "^5.8.0",
     "react-signature-canvas": "^1.0.6",
     "react-tabs": "^4.2.1",
     "react-use": "^17.4.0",
