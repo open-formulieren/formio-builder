@@ -1170,7 +1170,6 @@ export const CosignV2: Story = {
       key: 'cosign',
       label: 'A cosign v2 preview',
       hidden: true, // must be ignored
-      authPlugin: 'digid',
     },
   },
 
