@@ -1456,8 +1456,10 @@ export const Select: Story = {
       const previewSearchInput = preview.getByLabelText('Other label');
       previewSearchInput.focus();
       await userEvent.keyboard('[ArrowDown]');
-      await expect(await preview.findByText('Second option')).toBeVisible();
-      await waitFor(() => {
+      await preview.findByRole('listbox');
+      await expect(await preview.findByRole('option', {name: 'Second option'})).toBeVisible();
+      await userEvent.keyboard('[Escape]');
+      await waitFor(async () => {
         expect(preview.queryByRole('listbox')).toBeNull();
       });
 
@@ -1544,7 +1546,7 @@ export const Select: Story = {
       previewSearchInput.focus();
       await userEvent.keyboard('[ArrowDown]');
       await expect(await preview.findByText(/"someVar"/)).toBeVisible();
-      await userEvent.keyboard('[Esc]');
+      await userEvent.keyboard('[Escape]');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalledWith({
