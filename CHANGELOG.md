@@ -1,5 +1,14 @@
 # Changes
 
+## 0.15.0 (2024-01-31)
+
+Improvement release
+
+- [`OF/3680`][OF/3680] Removed `authPlugin` property from Cosign V2 component as it can be derived
+  from the form itself.
+
+[#OF/3680]: https://github.com/open-formulieren/open-forms/issues/3680
+
 ## 0.14.2 (2024-01-31)
 
 Bugfix release
