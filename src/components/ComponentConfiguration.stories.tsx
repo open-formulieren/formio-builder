@@ -2372,7 +2372,6 @@ export const CosignV2: Story = {
       type: 'cosign',
       key: 'cosign',
       label: 'A cosign v2',
-      authPlugin: 'digid',
       validateOn: 'blur',
     },
     builderInfo: {
