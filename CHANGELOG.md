@@ -1,5 +1,13 @@
 # Changes
 
+## 0.14.2 (2024-01-31)
+
+Bugfix release
+
+- [`#OF/3774`][#OF/3774] Fixed dark mode support for select/dropdowns.
+
+[#OF/3774]: https://github.com/open-formulieren/open-forms/issues/3774
+
 ## 0.14.1 (2024-01-24)
 
 Bugfix release
