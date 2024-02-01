@@ -22,7 +22,6 @@ import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {AuthPlugin} from '../cosignV1/edit';
 import {EditFormDefinition} from '../types';
 
 /**
@@ -64,11 +63,6 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
-        {/*
-          See https://github.com/open-formulieren/open-forms/issues/3680 for the planned
-          removal of this field
-        */}
-        <AuthPlugin />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />
