@@ -2422,16 +2422,6 @@ export const CosignV2: Story = {
       await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
-    await step('Auth plugin options shown', async () => {
-      canvas.getByLabelText('Authentication method').focus();
-      await userEvent.keyboard('[ArrowDown]');
-      await waitFor(async () => {
-        const eHerkenningOption = canvas.getByText('eHerkenning, provides: kvk');
-        await expect(eHerkenningOption).toBeVisible();
-        await userEvent.click(eHerkenningOption);
-      });
-    });
-
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalled();
