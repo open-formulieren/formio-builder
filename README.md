@@ -100,6 +100,30 @@ npm run compilemessages
 This is required for Storybook, as the message catalog is loaded dynamically depending on the active
 locale.
 
+## Release flow
+
+We don't let `npm` apply the git tags when releasing a new version, instead follow this process.
+
+1. Create a new branch `release/x.y.z`.
+2. Update the `CHANGELOG.md` file.
+3. Bump the version of the package as follows (use either `major | minor | patch` in the `npm version` command):
+
+```bash
+npm version --no-git-tag-version minor
+git commit -am ":bookmark: Bump to version <newVersion>"
+```
+
+4. Once this branch is merged into main, create a tag and push it:
+
+```bash
+git tag "<newVersion>"
+git push origin main --tags
+```
+
+If you have GPG keys set up, you can use them for the git tag operation.
+
+The CI pipeline will then publish the new version to npmjs.
+
 ## Roadmap
 
 See the [roadmap issue](https://github.com/open-formulieren/formio-builder/issues/104).
