@@ -1,5 +1,21 @@
 # Changes
 
+## 0.16.0 (2024-02-08)
+
+- [OF#3727][#OF/3727] Add min/max count for selectboxes
+
+[#OF/3727]: https://github.com/open-formulieren/open-forms/issues/3727
+
+- Update types version to 0.21.0
+
+## 0.15.1 (2024-02-01)
+
+Removed remaining AuthPlugin
+
+- [OF#3680][#OF/3680] Remove forgotten AuthPlugin component
+
+[#OF/3680]: https://github.com/open-formulieren/open-forms/issues/3680
+
 ## 0.15.0 (2024-01-31)
 
 Improvement release
