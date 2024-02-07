@@ -24,7 +24,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {SelectBoxes, TabList, TabPanel, Tabs} from '@/components/formio';
+import {NumberField, SelectBoxes, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -104,6 +104,8 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
       <TabPanel>
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
+        <MinSelectedCheckboxes />
+        <MaxSelectedCheckboxes />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
 
@@ -214,6 +216,52 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
       options={options}
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
+    />
+  );
+};
+
+const MinSelectedCheckboxes: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.minSelectedCount' builder field",
+    defaultMessage: 'If specified, the user must check at least this many options.',
+  });
+  return (
+    <NumberField
+      name="validate.minSelectedCount"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.minSelectedCount' builder field"
+          defaultMessage="Minimum selected checkboxes"
+        />
+      }
+      placeholder="1"
+      tooltip={tooltip}
+      min={1}
+      step={1}
+    />
+  );
+};
+
+const MaxSelectedCheckboxes: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.maxSelectedCount' builder field",
+    defaultMessage: 'If specified, the user must check at most this many options.',
+  });
+  return (
+    <NumberField
+      name="validate.maxSelectedCount"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.maxSelectedCount' builder field"
+          defaultMessage="Maximum selected checkboxes"
+        />
+      }
+      placeholder="1"
+      tooltip={tooltip}
+      min={1}
+      step={1}
     />
   );
 };
