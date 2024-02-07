@@ -1,8 +1,7 @@
 import {CosignV2ComponentSchema} from '@open-formulieren/types';
-import {useIntl} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
-  AutoComplete,
   BuilderTabs,
   ClearOnHide,
   Description,
@@ -19,7 +18,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -39,8 +38,8 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
           hasErrors={hasAnyError(
             'label',
             'key',
-            'description',
             'tooltip',
+            'description',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -48,7 +47,7 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
             'clearOnHide',
             'isSensitiveData',
             'defaultValue',
-            'autocomplete'
+            'checkBsn'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -67,8 +66,7 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <DefaultValue />
-        <AutoComplete />
+        <CheckBSN />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -94,7 +92,6 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
           propertyLabels={{
             label: intl.formatMessage(LABELS.label),
             description: intl.formatMessage(LABELS.description),
-            tooltip: intl.formatMessage(LABELS.tooltip),
           }}
         />
       </TabPanel>
@@ -103,19 +100,22 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
 };
 
 EditForm.defaultValues = {
-  validateOn: 'blur',
   // basic tab
   label: '',
   key: '',
   description: '',
+  tooltip: '',
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
-  defaultValue: '',
-  autocomplete: 'email',
+  checkBsn: false,
+  defaultValue: {
+    email: '',
+    bsn: '',
+  },
   // Advanced tab
   conditional: {
     show: undefined,
@@ -135,17 +135,23 @@ EditForm.defaultValues = {
   translatedErrors: {},
 };
 
-const DefaultValue: React.FC = () => {
+const CheckBSN: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
-    description: "Tooltip for 'defaultValue' builder field",
-    defaultMessage: 'This will be the initial value for this field before user interaction.',
+    description: "Tooltip for 'checkBsn' builder field",
+    defaultMessage:
+      'Should the user be asked to also enter the BSN of the person that will cosign?',
   });
+
   return (
-    <TextField
-      name="defaultValue"
-      type="email"
-      label={intl.formatMessage(LABELS.defaultValue)}
+    <Checkbox
+      name="checkBsn"
+      label={
+        <FormattedMessage
+          description="Label for 'checkBsn' builder field"
+          defaultMessage="Check BSN"
+        />
+      }
       tooltip={tooltip}
     />
   );
