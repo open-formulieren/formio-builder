@@ -6,5 +6,8 @@ export default {
   edit: EditForm,
   editSchema: validationSchema,
   preview: Preview,
-  defaultValue: '',
+  defaultValue: {
+    email: '',
+    bsn: '',
+  },
 };

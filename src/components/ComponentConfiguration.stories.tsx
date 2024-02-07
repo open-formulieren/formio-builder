@@ -2372,7 +2372,7 @@ export const CosignV2: Story = {
       type: 'cosign',
       key: 'cosign',
       label: 'A cosign v2',
-      validateOn: 'blur',
+      checkBsn: false,
     },
     builderInfo: {
       title: 'Cosign',
@@ -2392,22 +2392,32 @@ export const CosignV2: Story = {
       await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCosignV2');
     });
     await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    await expect(canvas.queryByLabelText('Tooltip')).toHaveValue('');
     await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
     await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
     await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
     await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
     await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    await expect(canvas.queryByLabelText('Check BSN')).not.toBeChecked();
+    await expect(preview.queryByLabelText("Cosigner's BSN")).toBeNull();
 
     // ensure that changing fields in the edit form properly update the preview
     await step('Change label', async () => {
+      const preview = within(canvas.getByTestId('componentPreview'));
+
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-      await expect(await preview.findByText('Updated preview label')).toBeVisible();
+      expect(await preview.findByText('Updated preview label'));
 
-      const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-      await expect(previewInput).toHaveDisplayValue('');
-      await expect(previewInput.type).toEqual('email');
+      const previewInput = preview.getByText('Updated preview label');
+      await expect(previewInput).toBeVisible();
+    });
+
+    await step('Enable checking BSN', async () => {
+      await fireEvent.click(canvas.getByLabelText('Check BSN'));
+
+      await expect(canvas.queryByLabelText('Check BSN')).toBeChecked();
+      await expect(preview.queryByLabelText("Cosigner's BSN")).toBeVisible();
     });
 
     await step('Change key', async () => {
@@ -2424,7 +2434,7 @@ export const CosignV2: Story = {
 
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      expect(args.onSubmit).toHaveBeenCalled();
+      await expect(args.onSubmit).toHaveBeenCalled();
     });
   },
 };
