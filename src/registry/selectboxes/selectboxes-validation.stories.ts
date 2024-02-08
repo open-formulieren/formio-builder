@@ -69,3 +69,62 @@ export const ManualMinimumOneValue: Story = {
     });
   },
 };
+
+export const MinAndMaxSelectedInitialValues: Story = {
+  name: 'Initial min and max count',
+  args: {
+    isNew: true,
+    component: {
+      id: 'wqimsadk',
+      type: 'selectboxes',
+      key: 'selectboxes',
+      label: 'A selectboxes field',
+      openForms: {
+        dataSrc: 'manual',
+        translations: {},
+      },
+      values: [
+        {label: 'Option 1', value: '1'},
+        {label: 'Option 2', value: '2'},
+        {label: 'Option 3', value: '3'},
+        {label: 'Option 4', value: '4'},
+      ],
+      defaultValue: {},
+    },
+
+    builderInfo: {
+      title: 'Select Boxes',
+      icon: 'plus-square',
+      group: 'basic',
+      weight: 60,
+      schema: {},
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await step('Navigate to validation tab and provide a negative number', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
+      const minSelectedInput = canvas.getByLabelText('Minimum selected checkboxes');
+      await userEvent.type(minSelectedInput, '-1');
+      expect(minSelectedInput).toHaveValue(-1);
+      await userEvent.keyboard('[Tab]');
+      expect(minSelectedInput).not.toHaveFocus();
+      await expect(
+        await canvas.findByText('Number must be greater than or equal to 0')
+      ).toBeVisible();
+    });
+
+    await step('Navigate to validation tab and provide a float number', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
+      const maxSelectedInput = canvas.getByLabelText('Maximum selected checkboxes');
+      await userEvent.type(maxSelectedInput, '1.9');
+      expect(maxSelectedInput).toHaveValue(1.9);
+      await userEvent.keyboard('[Tab]');
+      expect(maxSelectedInput).not.toHaveFocus();
+      await waitFor(async () => {
+        expect(await canvas.findByText('Expected integer, received float')).toBeVisible();
+      });
+    });
+  },
+};

@@ -302,6 +302,11 @@
     "description": "Column add/remove table header/label",
     "originalDefault": "Add/remove"
   },
+  "BVuE94": {
+    "defaultMessage": "If specified, the user must check at least this many options.",
+    "description": "Tooltip for 'validate.minSelectedCount' builder field",
+    "originalDefault": "If specified, the user must check at least this many options."
+  },
   "BvRBef": {
     "defaultMessage": "Decimalen",
     "description": "Label for 'decimalLimit' builder field",
@@ -760,6 +765,11 @@
     "description": "Label for 'maxNumberOfFiles' builder field",
     "originalDefault": "Maximum number of files"
   },
+  "aWwaAq": {
+    "defaultMessage": "Maximum selected checkboxes",
+    "description": "Label for 'validate.maxSelectedCount' builder field",
+    "originalDefault": "Maximum selected checkboxes"
+  },
   "arAMAF": {
     "defaultMessage": "Het optielabel is een verplicht veld.",
     "description": "Form builder option label required error",
@@ -855,6 +865,11 @@
     "defaultMessage": "Het verplichte veld Label is niet ingevuld.",
     "description": "Form builder label field 'required' validation error",
     "originalDefault": "Label is a required field."
+  },
+  "dbAJfK": {
+    "defaultMessage": "Minimum selected checkboxes",
+    "description": "Label for 'validate.minSelectedCount' builder field",
+    "originalDefault": "Minimum selected checkboxes"
   },
   "ddDLRu": {
     "defaultMessage": "Als de formuliercomponent",
@@ -1191,6 +1206,11 @@
     "defaultMessage": "'Groep toevoegen'-tekst",
     "description": "Label for 'addAnother' builder field",
     "originalDefault": "'Add another' text"
+  },
+  "sR9GVQ": {
+    "defaultMessage": "If specified, the user must check at most this many options.",
+    "description": "Tooltip for 'validate.maxSelectedCount' builder field",
+    "originalDefault": "If specified, the user must check at most this many options."
   },
   "sU/n0S": {
     "defaultMessage": "Handmatig opvoeren",

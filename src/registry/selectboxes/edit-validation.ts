@@ -18,6 +18,10 @@ const buildValuesSchema = (intl: IntlShape) =>
       // TODO: wire up infernologic type checking
       itemsExpression: jsonSchema.optional(),
     }),
+    validate: z.object({
+      minSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
+      maxSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
+    }),
   });
 
 const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildValuesSchema(intl));
