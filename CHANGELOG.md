@@ -1,5 +1,13 @@
 # Changes
 
+## 0.14.3 (2024-02-12)
+
+Bugfix release
+
+- [`#OF/3858`][#OF/3858] Fixed toggling file upload 'multiple' breaking the preview.
+
+[#OF/3858]: https://github.com/open-formulieren/open-forms/issues/3858
+
 ## 0.14.2 (2024-01-31)
 
 Bugfix release
