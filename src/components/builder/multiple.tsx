@@ -10,7 +10,17 @@ const hasDefaultValue = (component: any): component is AnyComponentSchema & {def
   return hasOwnProperty(component, 'defaultValue');
 };
 
-function Multiple<T = unknown>() {
+export interface MultipleProps {
+  /**
+   * If true, toggling the 'multiple' value will toggle the default value accordingly.
+   *
+   * E.g. `defaultValue: 'aaa'` becomes `defaultValue: ['aaa']` when multiple switches
+   * from `false` to `true`.
+   */
+  updateDefaultValue?: boolean;
+}
+
+function Multiple<T = unknown>({updateDefaultValue = true}: MultipleProps) {
   const intl = useIntl();
   const {values, getFieldProps, setFieldValue} = useFormikContext<T>();
   const {onChange: formikOnChange} = getFieldProps<boolean>('multiple');
@@ -22,6 +32,10 @@ function Multiple<T = unknown>() {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     formikOnChange(e);
+
+    // only touch default value if we're allowed to
+    if (!updateDefaultValue) return;
+
     // update the default value, if there is any
     if (!hasDefaultValue(values)) return;
     const {defaultValue} = values;

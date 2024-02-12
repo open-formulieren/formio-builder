@@ -81,7 +81,7 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<FileComponentSchema> />
+        <Multiple<FileComponentSchema> updateDefaultValue={false} />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
