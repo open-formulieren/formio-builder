@@ -1,5 +1,17 @@
 # Changes
 
+## UNRELEASED
+
+...
+
+## 0.14.3 (2024-02-12)
+
+Bugfix release
+
+- [`#OF/3858`][#OF/3858] Fixed toggling file upload 'multiple' breaking the preview.
+
+[#OF/3858]: https://github.com/open-formulieren/open-forms/issues/3858
+
 ## 0.16.0 (2024-02-08)
 
 - [OF#3727][#OF/3727] Add min/max count for selectboxes
