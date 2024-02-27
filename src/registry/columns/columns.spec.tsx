@@ -1,8 +1,8 @@
 import {ColumnsComponentSchema} from '@open-formulieren/types';
-import {waitFor} from '@storybook/testing-library';
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
+import {waitFor} from '@/tests/test-utils';
 import {contextRender, fireEvent, screen} from '@/tests/test-utils';
 
 beforeAll(() => {

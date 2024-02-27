@@ -130,3 +130,9 @@ export const WithErrors: Story = {
     await expect(canvas.queryByText('Example error')).toBeInTheDocument();
   },
 };
+
+export const ForcedOpen: Story = {
+  args: {
+    menuIsOpen: true,
+  },
+};
