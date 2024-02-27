@@ -150,6 +150,7 @@ const CustomClass: React.FC = () => {
       }
       options={options}
       valueProperty="value"
+      isClearable
     />
   );
 };
