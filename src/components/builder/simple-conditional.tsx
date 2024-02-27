@@ -24,6 +24,7 @@ const SimpleConditional: React.FC = () => (
         {value: true, label: 'True'},
         {value: false, label: 'False'},
       ]}
+      isClearable
     />
     <ComponentSelect
       name="conditional.when"
@@ -33,6 +34,7 @@ const SimpleConditional: React.FC = () => (
           defaultMessage="When the form component"
         />
       }
+      isClearable
     />
     <TextField
       name="conditional.eq"
