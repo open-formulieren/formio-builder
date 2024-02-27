@@ -203,8 +203,8 @@ EditForm.defaultValues = {
     attribute: '',
   },
   prefill: {
-    plugin: null,
-    attribute: null,
+    plugin: '',
+    attribute: '',
     identifierRole: 'main',
   },
 };
