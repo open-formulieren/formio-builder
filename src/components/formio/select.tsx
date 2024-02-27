@@ -7,11 +7,16 @@ import type {
   Props as RSProps,
   ThemeConfig,
 } from 'react-select/dist/declarations/src';
+import {MultiValue} from 'react-select/dist/declarations/src';
 
 import Component from './component';
 import Description from './description';
 
+// alias so that we can keep track of them and improve with generics at some point.
+type ValueType = any;
+
 // See https://react-select.com/typescript
+// TODO: revisit the generics here, they were from before I better understood TypeScript.
 
 export interface SelectProps<
   Option = unknown,
@@ -25,7 +30,8 @@ export interface SelectProps<
   description?: React.ReactNode;
   isClearable?: boolean;
   valueProperty?: string;
-  onChange?: (event: {target: {name: string; value: any}}) => void;
+  emptyValue?: ValueType;
+  onChange?: (event: {target: {name: string; value: ValueType}}) => void;
 }
 
 function isOption<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
@@ -42,13 +48,13 @@ function isOptionGroup<Option, Group extends GroupBase<Option> = GroupBase<Optio
 
 function extractSelectedValue<Option extends {[key: string]: any}, Group extends GroupBase<Option>>(
   options: OptionsOrGroups<Option, Group>,
-  currentValue: any,
+  currentValue: ValueType,
   isSingle: boolean,
   valueProperty: string = 'value'
-): any {
+): ValueType {
   // normalize everything to arrays, for isSingle -> return the first (and only) element.
-  const normalizedCurrentValue: any[] = isSingle ? [currentValue] : currentValue;
-  const value: any[] = [];
+  const normalizedCurrentValue: ValueType[] = isSingle ? [currentValue] : currentValue;
+  const value: ValueType[] = [];
 
   const valueTest = (opt: Option) => normalizedCurrentValue.includes(opt[valueProperty]);
 
@@ -87,6 +93,9 @@ function Select<
   description = '',
   isClearable = false,
   valueProperty = 'value',
+  // react-select uses null internally, see
+  // https://github.com/JedWatson/react-select/blob/06e34882638d1526b9f5a1238bb567a3e9460ce5/packages/react-select/src/Select.tsx#L1083
+  emptyValue = null,
   onChange,
   ...props
 }: SelectProps<Option, IsMulti, Group>) {
@@ -116,7 +125,7 @@ function Select<
     >
       <div>
         {/* TODO: add classname/styling for error state */}
-        <ReactSelect
+        <ReactSelect<Option, IsMulti, Group>
           inputId={htmlId}
           isClearable={isClearable}
           getOptionValue={opt => isOption<Option, Group>(opt) && opt[valueProperty]}
@@ -202,10 +211,16 @@ function Select<
           menuPlacement="auto"
           {...field}
           {...props}
-          onChange={newValue => {
+          onChange={(newValue, action) => {
             const isSingle = !Array.isArray(newValue);
-            const normalized = isSingle ? [newValue] : newValue;
-            const rawValues = normalized.map(val => val?.[valueProperty] ?? null);
+
+            // for multiple, the value is reset to empty array (`[]`)
+            if (action.action === 'clear' && isSingle) {
+              newValue = emptyValue;
+            }
+
+            const normalized = (isSingle ? [newValue] : newValue) as MultiValue<Option>;
+            const rawValues = normalized.map(val => val?.[valueProperty] ?? emptyValue);
             const rawValue = isSingle ? rawValues[0] : rawValues;
             setValue(rawValue);
             onChange?.({target: {name, value: rawValue}});
