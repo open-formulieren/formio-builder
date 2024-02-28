@@ -1,5 +1,15 @@
 # Changes
 
+## 0.14.4 (2024-02-28)
+
+Bugfix release
+
+- [`#OF/3920`][#OF/3920] Fixed content style and simple logic dropdowns not being clearable
+- [`#OF/3922`][#OF/3922] Fixed bad default/empty values for prefill properties
+
+[#OF/3920]: https://github.com/open-formulieren/open-forms/issues/3920
+[#OF/3922]: https://github.com/open-formulieren/open-forms/issues/3922
+
 ## 0.14.3 (2024-02-12)
 
 Bugfix release
