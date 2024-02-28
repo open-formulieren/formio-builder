@@ -1,8 +1,11 @@
 import {ContentComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {useContext, useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
+import {PreviewModeToggle, PreviewState} from '@/components/ComponentPreview';
+import JSONEdit from '@/components/JSONEdit';
+import JSONPreview from '@/components/JSONPreview';
 import {
   BuilderTabs,
   Hidden,
@@ -31,6 +34,9 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
 
   const {hasAnyError} = useErrorChecker<ContentComponentSchema>();
 
+  const intl = useIntl();
+  const [previewMode, setPreviewMode] = useState<PreviewState>('rich');
+
   const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
 
   // Synchronize the default/first language tab value to the main `html` field.
@@ -47,39 +53,66 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
 
   return (
     <>
-      <RichTextTranslations />
-      <Tabs>
-        <TabList>
-          <Tab
-            hasErrors={hasAnyError(
-              'key',
-              'hidden',
-              'showInSummary',
-              'showInEmail',
-              'showInPDF',
-              'customClass'
-            )}
-          >
-            <FormattedMessage
-              description="Component edit form tab title for 'Display' tab"
-              defaultMessage="Display"
+      <div className="card panel preview-panel">
+        <div className="card-header d-flex justify-content-end">
+          <PreviewModeToggle
+            mode={previewMode}
+            onChange={event => setPreviewMode(event.target.value as PreviewState)}
+          />
+        </div>
+        <div className="card-body">
+          {previewMode === 'editJSON' ? (
+            <JSONEdit
+              data={values}
+              rows={10}
+              aria-label={intl.formatMessage({
+                description: 'Accessible label for builder preview JSON edit field',
+                defaultMessage: 'Edit component JSON',
+              })}
             />
-          </Tab>
-          <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        </TabList>
+          ) : previewMode === 'rich' ? (
+            <>
+              <RichTextTranslations />
+              <Tabs>
+                <TabList>
+                  <Tab
+                    hasErrors={hasAnyError(
+                      'key',
+                      'hidden',
+                      'showInSummary',
+                      'showInEmail',
+                      'showInPDF',
+                      'customClass'
+                    )}
+                  >
+                    <FormattedMessage
+                      description="Component edit form tab title for 'Display' tab"
+                      defaultMessage="Display"
+                    />
+                  </Tab>
+                  <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
+                </TabList>
 
-        {/* Display tab */}
-        <TabPanel>
-          <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
-          <Hidden />
-          <PresentationConfig />
-          <CustomClass />
-        </TabPanel>
-        {/* Advanced tab */}
-        <TabPanel>
-          <SimpleConditional />
-        </TabPanel>
-      </Tabs>
+                {/* Display tab */}
+                <TabPanel>
+                  <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
+                  <Hidden />
+                  <PresentationConfig />
+                  <CustomClass />
+                </TabPanel>
+                {/* Advanced tab */}
+                <TabPanel>
+                  <SimpleConditional />
+                </TabPanel>
+              </Tabs>
+            </>
+          ) : (
+            <div className="component-preview" data-testid="componentPreview">
+              <JSONPreview data={values} style={{maxBlockSize: '45vh'}} />
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 };

@@ -111,14 +111,14 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   );
 };
 
-type PreviewState = 'rich' | 'JSON' | 'editJSON';
+export type PreviewState = 'rich' | 'JSON' | 'editJSON';
 
 interface PreviewModeToggleProps {
   mode: PreviewState;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) => {
+export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) => {
   const isRichPreview = mode === 'rich';
   const isJSONPreview = mode === 'JSON';
   const isEditJSONPreview = mode === 'editJSON';
