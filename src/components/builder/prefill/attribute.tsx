@@ -40,11 +40,11 @@ const PrefillAttributeSelect: React.FC = () => {
     error,
   } = useAsync(async () => {
     if (!plugin) {
-      setFieldValue(fieldName, null);
+      setFieldValue(fieldName, '');
       return [];
     }
     if (attribute && previousPlugin && plugin !== previousPlugin) {
-      setFieldValue(fieldName, null);
+      setFieldValue(fieldName, '');
     }
     return await getPrefillAttributes(plugin);
   }, [plugin]);
@@ -70,6 +70,7 @@ const PrefillAttributeSelect: React.FC = () => {
       isClearable
       options={_options}
       valueProperty="id"
+      emptyValue=""
     />
   );
 };

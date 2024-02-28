@@ -55,6 +55,7 @@ const PrefillPluginSelect: React.FC = () => {
       isClearable
       options={_options}
       valueProperty="id"
+      emptyValue=""
     />
   );
 };

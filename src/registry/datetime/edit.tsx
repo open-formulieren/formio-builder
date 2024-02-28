@@ -168,8 +168,8 @@ EditForm.defaultValues = {
   },
   // Prefill tab
   prefill: {
-    plugin: null,
-    attribute: null,
+    plugin: '',
+    attribute: '',
     identifierRole: 'main',
   },
   // Flatpickr custom options

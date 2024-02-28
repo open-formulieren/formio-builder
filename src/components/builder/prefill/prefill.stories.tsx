@@ -42,7 +42,7 @@ export default {
       defaultPrefillAttributes: DEFAULT_PREFILL_ATTRIBUTES,
     },
     formik: {
-      initialValues: {prefill: {plugin: null, attribute: null, identifierRole: 'main'}},
+      initialValues: {prefill: {plugin: '', attribute: '', identifierRole: 'main'}},
     },
   },
 } as Meta<typeof PrefillConfiguration>;
