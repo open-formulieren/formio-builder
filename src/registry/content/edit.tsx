@@ -51,6 +51,10 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
     }
   });
 
+  // the `html` property edits in the JSON edit don't behave as expected, you need to
+  // edit the language specific values, so remove it.
+  const {html, ...jsonEditValues} = values;
+
   return (
     <>
       <div className="card panel preview-panel">
@@ -63,7 +67,7 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
         <div className="card-body">
           {previewMode === 'editJSON' ? (
             <JSONEdit
-              data={values}
+              data={jsonEditValues}
               rows={10}
               aria-label={intl.formatMessage({
                 description: 'Accessible label for builder preview JSON edit field',
