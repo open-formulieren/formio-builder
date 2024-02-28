@@ -1,5 +1,17 @@
 # Changes
 
+## 0.17.0 (2024-02-28)
+
+Fixed some bugs and added improvements
+
+- [`#OF/3920`][#OF/3920] Fixed content style and simple logic dropdowns not being clearable
+- [`#OF/3922`][#OF/3922] Fixed bad default/empty values for prefill properties
+- [`#OF/3928`][#OF/3928] Added JSON view/edit toggles to content component edit form
+
+[#OF/3920]: https://github.com/open-formulieren/open-forms/issues/3920
+[#OF/3922]: https://github.com/open-formulieren/open-forms/issues/3922
+[#OF/3928]: https://github.com/open-formulieren/open-forms/issues/3928
+
 ## 0.16.1 (2024-02-12)
 
 Bugfix release
