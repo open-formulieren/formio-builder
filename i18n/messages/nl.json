@@ -303,7 +303,7 @@
     "originalDefault": "Add/remove"
   },
   "BVuE94": {
-    "defaultMessage": "If specified, the user must check at least this many options.",
+    "defaultMessage": "Indien opgegeven, dan moet de gebruiker minimaal dit aantal opties aanvinken.",
     "description": "Tooltip for 'validate.minSelectedCount' builder field",
     "originalDefault": "If specified, the user must check at least this many options."
   },
@@ -316,6 +316,11 @@
     "defaultMessage": "Opties-expressie",
     "description": "Label for 'openForms.itemsExpression' builder field",
     "originalDefault": "Items expression"
+  },
+  "C4TGm5": {
+    "defaultMessage": "Je kan sjablonen gebruiken in dit veld. Bekijk de <link>handleiding</link> voor voorbeelden en documentatie.",
+    "description": "Description pointing to template documentation/capabilities",
+    "originalDefault": "This field supports templating. See the <link>manual</link> for documentation and examples."
   },
   "C64ptd": {
     "defaultMessage": "Maximale lengte",
@@ -766,7 +771,7 @@
     "originalDefault": "Maximum number of files"
   },
   "aWwaAq": {
-    "defaultMessage": "Maximum selected checkboxes",
+    "defaultMessage": "Maximum aantal aangevinkte opties",
     "description": "Label for 'validate.maxSelectedCount' builder field",
     "originalDefault": "Maximum selected checkboxes"
   },
@@ -867,7 +872,7 @@
     "originalDefault": "Label is a required field."
   },
   "dbAJfK": {
-    "defaultMessage": "Minimum selected checkboxes",
+    "defaultMessage": "Minimum aantal aangevinkte opties",
     "description": "Label for 'validate.minSelectedCount' builder field",
     "originalDefault": "Minimum selected checkboxes"
   },
@@ -1208,7 +1213,7 @@
     "originalDefault": "'Add another' text"
   },
   "sR9GVQ": {
-    "defaultMessage": "If specified, the user must check at most this many options.",
+    "defaultMessage": "Indien opgegeven, dan mag de gebruiker maximaal dit aantal opties aanvinken.",
     "description": "Tooltip for 'validate.maxSelectedCount' builder field",
     "originalDefault": "If specified, the user must check at most this many options."
   },
