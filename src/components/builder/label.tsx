@@ -1,5 +1,7 @@
 import {FormattedMessage} from 'react-intl';
 
+import {TemplatingHint} from '@/components/builder';
+
 import {TextField} from '../formio';
 import {LABELS} from './messages';
 
@@ -11,7 +13,12 @@ import {LABELS} from './messages';
  * and can typically be translated by the form designers.
  */
 const Label: React.FC = () => (
-  <TextField name="label" label={<FormattedMessage {...LABELS.label} />} required />
+  <TextField
+    name="label"
+    label={<FormattedMessage {...LABELS.label} />}
+    tooltip={<TemplatingHint />}
+    required
+  />
 );
 
 export default Label;

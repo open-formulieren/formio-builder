@@ -6,7 +6,7 @@ import Tooltip from './tooltip';
 export interface ComponentLabelProps {
   required?: boolean;
   label?: React.ReactNode;
-  tooltip?: string;
+  tooltip?: React.ReactNode;
   htmlId?: string;
 }
 

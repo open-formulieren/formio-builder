@@ -14,7 +14,7 @@ export interface ComponentProps {
   field?: string;
   required?: boolean;
   label?: React.ReactNode;
-  tooltip?: string;
+  tooltip?: React.ReactNode;
   htmlId?: string;
   children: React.ReactNode;
   className?: string;
