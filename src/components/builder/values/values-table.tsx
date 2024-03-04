@@ -88,9 +88,7 @@ function ValuesTable<S>({name}: ValuesTableProps<S>) {
 
             <tbody>
               {options.map((_, index) => (
-                <tr key={index}>
-                  <OptionRow name={name} index={index} arrayHelpers={arrayHelpers} />
-                </tr>
+                <OptionRow name={name} index={index} arrayHelpers={arrayHelpers} key={index} />
               ))}
             </tbody>
 

@@ -29,39 +29,72 @@ export function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
   return (
     // Same markup as ComponentTranslations<S> body
-    <tbody>
-      <tr>
-        <th colSpan={3} style={{textAlign: 'end'}}>
-          <FormattedMessage
-            description="Values/options translations table header"
-            defaultMessage="Choice/option translations"
-          />
-        </th>
-      </tr>
-
-      {options.map(({value, label}, index) => (
-        <tr key={`option-${index}`}>
-          <td>
-            <span id={`option-${index}-label`}>{label}</span>
-          </td>
-          <td>
-            <div aria-describedby={`option-${index}-label`}>{value || '-'}</div>
-          </td>
-          <td>
-            <TextField
-              name={`${name}[${index}]openForms.translations.${activeLanguage}.label`}
-              aria-label={intl.formatMessage(
-                {
-                  description: 'Accessible label for option label translation field',
-                  defaultMessage: 'Translation for option with value "{value}"',
-                },
-                {value: value}
-              )}
+    <>
+      <tbody>
+        <tr>
+          <th colSpan={3} style={{textAlign: 'end'}}>
+            <FormattedMessage
+              description="Values/options translations table header"
+              defaultMessage="Choice/option translations"
             />
-          </td>
+          </th>
         </tr>
-      ))}
-    </tbody>
+
+        {options.map(({value, label}, index) => (
+          <>
+            <tr key={`option-${index}`}>
+              <td>
+                <span id={`option-${index}-label`}>{label}</span>
+              </td>
+              <td>
+                <div aria-describedby={`option-${index}-label`}>{value || '-'}</div>
+              </td>
+              <td>
+                <TextField
+                  name={`${name}[${index}]openForms.translations.${activeLanguage}.label`}
+                  aria-label={intl.formatMessage(
+                    {
+                      description: 'Accessible label for option label translation field',
+                      defaultMessage: 'Translation for option with value "{value}"',
+                    },
+                    {value: value}
+                  )}
+                />
+              </td>
+            </tr>
+          </>
+        ))}
+      </tbody>
+      <tbody>
+        <tr>
+          <th colSpan={3} style={{textAlign: 'end'}}>
+            <FormattedMessage
+              description="Values/options translations table header"
+              defaultMessage="Choice/option descriptions translations"
+            />
+          </th>
+        </tr>
+        {options.map(({description}, index) => (
+          <tr key={`option-description-${index}`}>
+            <td>
+              <span id={`option-${index}-description`}>{description}</span>
+            </td>
+            <td colSpan={2}>
+              <TextField
+                name={`${name}[${index}]openForms.translations.${activeLanguage}.description`}
+                aria-label={intl.formatMessage(
+                  {
+                    description: 'Accessible label for option description translation field',
+                    defaultMessage: 'Translation for option with value "{value}"',
+                  },
+                  {value: description}
+                )}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </>
   );
 }
 

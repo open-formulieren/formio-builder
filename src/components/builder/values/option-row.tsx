@@ -2,9 +2,11 @@ import {css} from '@emotion/css';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {FieldArrayRenderProps, useFormikContext} from 'formik';
 import camelCase from 'lodash.camelcase';
-import {useIntl} from 'react-intl';
+import {useState} from 'react';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {TextField} from '@/components/formio';
+import {TextArea} from '@/components/formio/textarea';
 
 const ICONS_CELL = css`
   vertical-align: middle !important;
@@ -49,6 +51,7 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
   const fieldNamePrefix = `${name}[${index}]`;
   const {getFieldProps, getFieldHelpers} = useFormikContext();
   const numOptions = getFieldProps<Option[]>(name).value?.length || 0;
+  const [showDescription, setShowDescription] = useState(false);
 
   const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value: option} = getFieldProps<Option>(fieldNamePrefix);
@@ -63,69 +66,116 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
 
   return (
     <>
-      <td className={ICONS_CELL}>
-        <div className={SORT_ICONS}>
+      <tr>
+        <td className={ICONS_CELL}>
+          <div className={SORT_ICONS}>
+            <button
+              type="button"
+              aria-label={intl.formatMessage({
+                description: 'Options table: move option up',
+                defaultMessage: 'Move up',
+              })}
+              onClick={() => arrayHelpers.move(index, index - 1)}
+              disabled={index === 0}
+            >
+              <i className="fa fa-chevron-up" />
+            </button>
+            <button
+              type="button"
+              aria-label={intl.formatMessage({
+                description: 'Options table: move option down',
+                defaultMessage: 'Move down',
+              })}
+              onClick={() => arrayHelpers.move(index, index + 1)}
+              disabled={index === numOptions - 1}
+            >
+              <i className="fa fa-chevron-down" />
+            </button>
+          </div>
+        </td>
+
+        <td>
+          <TextField
+            name={`${fieldNamePrefix}.label`}
+            aria-label={intl.formatMessage({
+              description: 'Accessible label for option label',
+              defaultMessage: 'Option label',
+            })}
+            onChange={onLabelChange}
+          />
+        </td>
+
+        <td>
+          <TextField
+            name={`${fieldNamePrefix}.value`}
+            aria-label={intl.formatMessage({
+              description: 'Accessible label for option value',
+              defaultMessage: 'Option value',
+            })}
+          />
+        </td>
+
+        <td>
           <button
             type="button"
+            className="btn btn-secondary formio-button-remove-row"
+            // TODO: in new design -> implement this in a proper accessible way
+            disabled={numOptions <= 1}
             aria-label={intl.formatMessage({
-              description: 'Options table: move option up',
-              defaultMessage: 'Move up',
+              description: 'Values table: accessible label to remove an option',
+              defaultMessage: 'Remove',
             })}
-            onClick={() => arrayHelpers.move(index, index - 1)}
-            disabled={index === 0}
+            onClick={() => arrayHelpers.remove(index)}
           >
-            <i className="fa fa-chevron-up" />
+            <i className="fa fa-times-circle-o" />
           </button>
-          <button
-            type="button"
-            aria-label={intl.formatMessage({
-              description: 'Options table: move option down',
-              defaultMessage: 'Move down',
-            })}
-            onClick={() => arrayHelpers.move(index, index + 1)}
-            disabled={index === numOptions - 1}
-          >
-            <i className="fa fa-chevron-down" />
-          </button>
-        </div>
-      </td>
-
-      <td>
-        <TextField
-          name={`${fieldNamePrefix}.label`}
-          aria-label={intl.formatMessage({
-            description: 'Accessible label for option label',
-            defaultMessage: 'Option label',
-          })}
-          onChange={onLabelChange}
-        />
-      </td>
-
-      <td>
-        <TextField
-          name={`${fieldNamePrefix}.value`}
-          aria-label={intl.formatMessage({
-            description: 'Accessible label for option value',
-            defaultMessage: 'Option value',
-          })}
-        />
-      </td>
-
-      <td>
-        <button
-          type="button"
-          className="btn btn-secondary formio-button-remove-row"
-          // TODO: in new design -> implement this in a proper accessible way
-          disabled={numOptions <= 1}
-          aria-label={intl.formatMessage({
-            description: 'Values table: accessible label to remove an option',
-            defaultMessage: 'Remove',
-          })}
-          onClick={() => arrayHelpers.remove(index)}
-        >
-          <i className="fa fa-times-circle-o" />
-        </button>
-      </td>
+        </td>
+      </tr>
+      <tr>
+        <th />
+        <th colSpan={3}>
+          {showDescription ? (
+            <>
+              <FormattedMessage
+                description="Option label table header/description"
+                defaultMessage="Description"
+              />
+              <TextArea
+                name={`${fieldNamePrefix}.description`}
+                aria-label={intl.formatMessage({
+                  description: 'Accessible label for option description',
+                  defaultMessage: 'Option description',
+                })}
+              />
+              <a
+                href={'#'}
+                onClick={e => {
+                  e.preventDefault();
+                  setShowDescription(false);
+                }}
+              >
+                <FormattedMessage
+                  description="Option label table header/hide description"
+                  defaultMessage="Hide Description"
+                />
+              </a>
+            </>
+          ) : (
+            <a
+              href={'#'}
+              onClick={e => {
+                e.preventDefault();
+                setShowDescription(true);
+              }}
+            >
+              <FormattedMessage
+                description="Option label table header/show description"
+                defaultMessage="Show Description"
+              />
+            </a>
+          )}
+        </th>
+      </tr>
     </>
   );
 };

@@ -66,6 +66,10 @@ export const WithDescription: Story = {
   args: {
     label: 'With description',
     description: 'A description',
+    options: [
+      {value: 'a', label: 'A', description: 'Test'},
+      {value: 'b', label: 'B'},
+    ],
   },
 };
 

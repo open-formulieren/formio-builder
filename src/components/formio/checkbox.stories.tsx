@@ -41,6 +41,7 @@ export const WithDescription: Story = {
   args: {
     label: 'With description',
     description: 'A description',
+    optionDescription: 'This is a description for the checkbox',
   },
 };
 

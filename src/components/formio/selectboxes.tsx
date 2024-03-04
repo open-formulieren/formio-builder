@@ -7,6 +7,7 @@ import Description from './description';
 export interface Option {
   value: string;
   label: ReactNode;
+  description?: string;
 }
 
 export interface SelectBoxesProps {
@@ -29,10 +30,14 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
   return (
     <Component type="selectboxes" field={name} label={label} tooltip={tooltip} required={required}>
       <div className="form-radio radio">
-        {options.map(({value, label}, index) => (
+        {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
             <label className="form-check-label">
-              <CheckboxInput name={`${name}.${value}`} label={label} />
+              <CheckboxInput
+                name={`${name}.${value}`}
+                label={label}
+                optionDescription={description}
+              />
             </label>
           </div>
         ))}
