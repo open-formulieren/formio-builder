@@ -12,7 +12,7 @@ const currencySchema = z.number().finite().optional();
 const defaultValueSchema = z.object({defaultValue: currencySchema.or(z.null())});
 
 const currencySpecific = z.object({
-  decimalLimit: z.union(Array.from({length: 11}, (_, i) => z.literal(i)) as any).optional(),
+  decimalLimit: z.number().int().min(0).max(10).optional(),
   validate: z
     .object({
       min: currencySchema,
