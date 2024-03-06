@@ -14,7 +14,7 @@ const defaultValueSchema = z.object({
 });
 
 const numberSpecific = z.object({
-  decimalLimit: z.number().int().positive().optional(),
+  decimalLimit: z.number().int().min(0).max(10).optional(),
   validate: z
     .object({
       min: numberSchema,
