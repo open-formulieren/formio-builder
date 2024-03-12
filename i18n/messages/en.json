@@ -314,6 +314,11 @@
     "description": "Label for 'openForms.itemsExpression' builder field",
     "originalDefault": "Items expression"
   },
+  "C4TGm5": {
+    "defaultMessage": "This field supports templating. See the <link>manual</link> for documentation and examples.",
+    "description": "Description pointing to template documentation/capabilities",
+    "originalDefault": "This field supports templating. See the <link>manual</link> for documentation and examples."
+  },
   "C64ptd": {
     "defaultMessage": "Maximum length",
     "description": "Placeholder for 'validate.maxLength' builder field",

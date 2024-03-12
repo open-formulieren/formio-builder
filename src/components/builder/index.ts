@@ -20,6 +20,7 @@ export {default as PresentationConfig} from './presentation-config';
 export {default as ComponentSelect} from './component-select';
 export {default as SimpleConditional} from './simple-conditional';
 export {default as Suffix} from './suffix';
+export {default as TemplatingHint} from './templating-hint';
 export * as Validate from './validate';
 export * as Registration from './registration';
 export * as Prefill from './prefill';

@@ -12,7 +12,8 @@ import ClassicEditor from '@open-formulieren/ckeditor5-build-classic';
 import {useField} from 'formik';
 import {useContext} from 'react';
 
-import {Component} from '@/components/formio';
+import {TemplatingHint} from '@/components/builder';
+import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 export type ColorOption = Required<
@@ -77,6 +78,7 @@ const RichText: React.FC<RichTextProps> = ({name, required}) => {
           helpers.setTouched(true);
         }}
       />
+      <Description text={<TemplatingHint />} />
     </Component>
   );
 };
