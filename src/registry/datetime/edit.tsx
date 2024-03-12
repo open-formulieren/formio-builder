@@ -38,7 +38,11 @@ const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
     values: {multiple = false},
   } = useFormikContext<DateTimeComponentSchema>();
   const {hasAnyError} = useErrorChecker<DateTimeComponentSchema>();
-  Validate.useManageValidatorsTranslations<DateTimeComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations<DateTimeComponentSchema>([
+    'required',
+    'minDate',
+    'maxDate',
+  ]);
 
   return (
     <Tabs>
