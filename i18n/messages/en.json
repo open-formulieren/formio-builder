@@ -509,6 +509,11 @@
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
   },
+  "NdaqDN": {
+    "defaultMessage": "Option description (<option></option>)",
+    "description": "Label for option description location",
+    "originalDefault": "Option description (<option></option>)"
+  },
   "Nsifca": {
     "defaultMessage": "The maximum date that can be picked.",
     "description": "Date field 'maxDate' fixed value tooltip",
@@ -744,6 +749,11 @@
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
   },
+  "YSuwK2": {
+    "defaultMessage": "(collapse)",
+    "description": "Link to collapse/hide option description.",
+    "originalDefault": "(collapse)"
+  },
   "YmWeGZ": {
     "defaultMessage": "Select the plugin to use for the prefill functionality.",
     "description": "Tooltip for 'prefill.plugin' builder field",
@@ -763,6 +773,11 @@
     "defaultMessage": "Maximum selected checkboxes",
     "description": "Label for 'validate.maxSelectedCount' builder field",
     "originalDefault": "Maximum selected checkboxes"
+  },
+  "aqYeqv": {
+    "defaultMessage": "Description translations",
+    "description": "Values/options description translations table header",
+    "originalDefault": "Description translations"
   },
   "arAMAF": {
     "defaultMessage": "The option label is a required field.",
@@ -979,6 +994,11 @@
     "description": "Label for 'showInSummary' builder field",
     "originalDefault": "Show in summary"
   },
+  "iOcL9h": {
+    "defaultMessage": "Description",
+    "description": "Option/choice extra description label",
+    "originalDefault": "Description"
+  },
   "iX0YPY": {
     "defaultMessage": "{collapsed, select, true {Expand panel} other {Collapse panel} }",
     "description": "Panel expand/collapse title",
@@ -1088,6 +1108,11 @@
     "defaultMessage": "Specify whether to add or subtract a time delta to/from the variable.",
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
+  },
+  "mWuCXv": {
+    "defaultMessage": "Optionally provide additional information to explain the meaning of the option.",
+    "description": "Tooltip for option/choice description",
+    "originalDefault": "Optionally provide additional information to explain the meaning of the option."
   },
   "mf9eF+": {
     "defaultMessage": "House number",
@@ -1348,5 +1373,10 @@
     "defaultMessage": "Use globally configured map component settings",
     "description": "Label for 'useConfigDefaultMapSettings' builder field",
     "originalDefault": "Use globally configured map component settings"
+  },
+  "zWxcfD": {
+    "defaultMessage": "{hasDescription, select, true {Edit description} other {Add description}}",
+    "description": "Link to expand/show the option description textarea.",
+    "originalDefault": "{hasDescription, select, true {Edit description} other {Add description}}"
   }
 }
