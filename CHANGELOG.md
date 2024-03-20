@@ -1,5 +1,21 @@
 # Changes
 
+## 0.18.0 (2024-03-20)
+
+Feature release
+
+- [`#OF/3823`][#OF/3823] Added links in the builder UI to the manual about template expressions.
+- [`#OF/3943`][#OF/3943] Fixed not being able to specify 0 decimal places in number components.
+- [`#OF/3978`][#OF/3978] Fixed not being able to specify custom `minDate` and `maxDate` validation
+  error messages.
+- [`#SDK/483`][#SDK/483] Radio/selectboxes components now support an additional description per
+  option.
+
+[#OF/3823]: https://github.com/open-formulieren/open-forms/issues/3823
+[#OF/3943]: https://github.com/open-formulieren/open-forms/issues/3943
+[#OF/3978]: https://github.com/open-formulieren/open-forms/issues/3978
+[#SDK/483]: https://github.com/open-formulieren/open-forms-sdk/issues/483
+
 ## 0.17.0 (2024-02-28)
 
 Fixed some bugs and added improvements
