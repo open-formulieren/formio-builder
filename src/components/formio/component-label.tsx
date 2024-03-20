@@ -8,10 +8,20 @@ export interface ComponentLabelProps {
   label?: React.ReactNode;
   tooltip?: React.ReactNode;
   htmlId?: string;
+  noColFormLabelClassname?: boolean;
 }
 
-const ComponentLabel: React.FC<ComponentLabelProps> = ({label, required, tooltip = '', htmlId}) => {
-  const labelClassName = clsx('col-form-label', {'field-required': required});
+const ComponentLabel: React.FC<ComponentLabelProps> = ({
+  label,
+  required,
+  tooltip = '',
+  htmlId,
+  noColFormLabelClassname = false,
+}) => {
+  const labelClassName = clsx({
+    'col-form-label': !noColFormLabelClassname,
+    'field-required': required,
+  });
   return (
     <label htmlFor={htmlId} className={labelClassName}>
       {label}

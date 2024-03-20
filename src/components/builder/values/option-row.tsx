@@ -6,10 +6,12 @@ import {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {TextField} from '@/components/formio';
+import ComponentLabel from '@/components/formio/component-label';
 import {TextArea} from '@/components/formio/textarea';
 
 const ICONS_CELL = css`
   vertical-align: middle !important;
+  border-bottom: none !important;
 `;
 
 const SORT_ICONS = css`
@@ -64,6 +66,7 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
     setValue(derivedValue);
   };
 
+  const description = getFieldProps<Option>(fieldNamePrefix).value.description ?? '';
   return (
     <>
       <tr>
@@ -115,7 +118,7 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
           />
         </td>
 
-        <td>
+        <td style={{borderBottom: 'none'}}>
           <button
             type="button"
             className="btn btn-secondary formio-button-remove-row"
@@ -132,49 +135,61 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
         </td>
       </tr>
       <tr>
-        <th />
-        <th colSpan={3}>
+        <th style={{borderTop: 'none'}} />
+        <td colSpan={2}>
           {showDescription ? (
             <>
-              <FormattedMessage
-                description="Option label table header/description"
-                defaultMessage="Description"
-              />
-              <TextArea
-                name={`${fieldNamePrefix}.description`}
-                aria-label={intl.formatMessage({
-                  description: 'Accessible label for option description',
-                  defaultMessage: 'Option description',
+              <ComponentLabel
+                label={
+                  <>
+                    <FormattedMessage
+                      description="Option/choice extra description label"
+                      defaultMessage="Description"
+                    />
+                  </>
+                }
+                noColFormLabelClassname
+                htmlId={`${fieldNamePrefix}.description`}
+                tooltip={intl.formatMessage({
+                  description: 'Tooltip for option/choice description',
+                  defaultMessage:
+                    'Optionally provide additional information to explain the meaning of the option.',
                 })}
               />
+              &nbsp;
               <a
-                href={'#'}
+                href="#"
                 onClick={e => {
                   e.preventDefault();
                   setShowDescription(false);
                 }}
               >
                 <FormattedMessage
-                  description="Option label table header/hide description"
-                  defaultMessage="Hide Description"
+                  description="Link to collapse/hide option description."
+                  defaultMessage="(collapse)"
                 />
               </a>
+              <TextArea name={`${fieldNamePrefix}.description`} />
             </>
           ) : (
             <a
-              href={'#'}
+              href="#"
               onClick={e => {
                 e.preventDefault();
                 setShowDescription(true);
               }}
             >
               <FormattedMessage
-                description="Option label table header/show description"
-                defaultMessage="Show Description"
+                description="Link to expand/show the option description textarea."
+                defaultMessage="{hasDescription, select, true {Edit description} other {Add description}}"
+                values={{
+                  hasDescription: !!description,
+                }}
               />
             </a>
           )}
-        </th>
+        </td>
+        <td style={{borderTop: 'none'}} />
       </tr>
     </>
   );
