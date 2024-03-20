@@ -517,6 +517,11 @@
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
   },
+  "NdaqDN": {
+    "defaultMessage": "Waarde-omschrijving (<option></option>)",
+    "description": "Label for option description location",
+    "originalDefault": "Option description (<option></option>)"
+  },
   "Nsifca": {
     "defaultMessage": "De maximale datum die gekozen kan worden.",
     "description": "Date field 'maxDate' fixed value tooltip",
@@ -755,6 +760,11 @@
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
   },
+  "YSuwK2": {
+    "defaultMessage": "(inklappen)",
+    "description": "Link to collapse/hide option description.",
+    "originalDefault": "(collapse)"
+  },
   "YmWeGZ": {
     "defaultMessage": "Selecteer de plugin om te gebruiken voor prefill.",
     "description": "Tooltip for 'prefill.plugin' builder field",
@@ -774,6 +784,11 @@
     "defaultMessage": "Maximum aantal aangevinkte opties",
     "description": "Label for 'validate.maxSelectedCount' builder field",
     "originalDefault": "Maximum selected checkboxes"
+  },
+  "aqYeqv": {
+    "defaultMessage": "Waarde-omschrijvingen",
+    "description": "Values/options description translations table header",
+    "originalDefault": "Description translations"
   },
   "arAMAF": {
     "defaultMessage": "Het optielabel is een verplicht veld.",
@@ -993,6 +1008,11 @@
     "description": "Label for 'showInSummary' builder field",
     "originalDefault": "Show in summary"
   },
+  "iOcL9h": {
+    "defaultMessage": "Omschrijving",
+    "description": "Option/choice extra description label",
+    "originalDefault": "Description"
+  },
   "iX0YPY": {
     "defaultMessage": "{collapsed, select, true {Uitklappen} other {Inklappen} }",
     "description": "Panel expand/collapse title",
@@ -1104,6 +1124,11 @@
     "defaultMessage": "Geef aan of een tijdsduur bijgeteld of afgetrokken moet worden.",
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
+  },
+  "mWuCXv": {
+    "defaultMessage": "Je kan een extra omschrijving opnemen om een keuzeoptie te verduidelijken.",
+    "description": "Tooltip for option/choice description",
+    "originalDefault": "Optionally provide additional information to explain the meaning of the option."
   },
   "mf9eF+": {
     "defaultMessage": "Huisnummer",
@@ -1367,5 +1392,10 @@
     "defaultMessage": "Gebruik algemene kaartinstellingen",
     "description": "Label for 'useConfigDefaultMapSettings' builder field",
     "originalDefault": "Use globally configured map component settings"
+  },
+  "zWxcfD": {
+    "defaultMessage": "{hasDescription, select, true {Bewerk omschrijving} other {Voeg omschrijving toe}}",
+    "description": "Link to expand/show the option description textarea.",
+    "originalDefault": "{hasDescription, select, true {Edit description} other {Add description}}"
   }
 }
