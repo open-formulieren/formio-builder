@@ -46,9 +46,15 @@ export interface OptionRowProps {
   name: string;
   index: number;
   arrayHelpers: FieldArrayRenderProps;
+  withOptionDescription?: boolean;
 }
 
-const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
+const OptionRow: React.FC<OptionRowProps> = ({
+  name,
+  index,
+  arrayHelpers,
+  withOptionDescription = false,
+}) => {
   const intl = useIntl();
   const fieldNamePrefix = `${name}[${index}]`;
   const {getFieldProps, getFieldHelpers} = useFormikContext();
@@ -134,63 +140,66 @@ const OptionRow: React.FC<OptionRowProps> = ({name, index, arrayHelpers}) => {
           </button>
         </td>
       </tr>
-      <tr>
-        <th style={{borderTop: 'none'}} />
-        <td colSpan={2}>
-          {showDescription ? (
-            <>
-              <ComponentLabel
-                label={
-                  <>
-                    <FormattedMessage
-                      description="Option/choice extra description label"
-                      defaultMessage="Description"
-                    />
-                  </>
-                }
-                noColFormLabelClassname
-                htmlId={`${fieldNamePrefix}.description`}
-                tooltip={intl.formatMessage({
-                  description: 'Tooltip for option/choice description',
-                  defaultMessage:
-                    'Optionally provide additional information to explain the meaning of the option.',
-                })}
-              />
-              &nbsp;
+
+      {withOptionDescription && (
+        <tr>
+          <th style={{borderTop: 'none'}} />
+          <td colSpan={2}>
+            {showDescription ? (
+              <>
+                <ComponentLabel
+                  label={
+                    <>
+                      <FormattedMessage
+                        description="Option/choice extra description label"
+                        defaultMessage="Description"
+                      />
+                    </>
+                  }
+                  noColFormLabelClassname
+                  htmlId={`${fieldNamePrefix}.description`}
+                  tooltip={intl.formatMessage({
+                    description: 'Tooltip for option/choice description',
+                    defaultMessage:
+                      'Optionally provide additional information to explain the meaning of the option.',
+                  })}
+                />
+                &nbsp;
+                <a
+                  href="#"
+                  onClick={e => {
+                    e.preventDefault();
+                    setShowDescription(false);
+                  }}
+                >
+                  <FormattedMessage
+                    description="Link to collapse/hide option description."
+                    defaultMessage="(collapse)"
+                  />
+                </a>
+                <TextArea name={`${fieldNamePrefix}.description`} />
+              </>
+            ) : (
               <a
                 href="#"
                 onClick={e => {
                   e.preventDefault();
-                  setShowDescription(false);
+                  setShowDescription(true);
                 }}
               >
                 <FormattedMessage
-                  description="Link to collapse/hide option description."
-                  defaultMessage="(collapse)"
+                  description="Link to expand/show the option description textarea."
+                  defaultMessage="{hasDescription, select, true {Edit description} other {Add description}}"
+                  values={{
+                    hasDescription: !!description,
+                  }}
                 />
               </a>
-              <TextArea name={`${fieldNamePrefix}.description`} />
-            </>
-          ) : (
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                setShowDescription(true);
-              }}
-            >
-              <FormattedMessage
-                description="Link to expand/show the option description textarea."
-                defaultMessage="{hasDescription, select, true {Edit description} other {Add description}}"
-                values={{
-                  hasDescription: !!description,
-                }}
-              />
-            </a>
-          )}
-        </td>
-        <td style={{borderTop: 'none'}} />
-      </tr>
+            )}
+          </td>
+          <td style={{borderTop: 'none'}} />
+        </tr>
+      )}
     </>
   );
 };

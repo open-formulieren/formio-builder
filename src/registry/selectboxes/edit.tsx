@@ -91,7 +91,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <ValuesConfig<SelectboxesComponentSchema> name="values" />
+        <ValuesConfig<SelectboxesComponentSchema> name="values" withOptionDescription />
         {isManualOptions && <DefaultValue options={options} />}
       </TabPanel>
 
@@ -123,7 +123,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
         >
-          <ValuesTranslations<SelectboxesComponentSchema> name="values" />
+          <ValuesTranslations<SelectboxesComponentSchema> name="values" withOptionDescription />
         </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>

@@ -12,6 +12,7 @@ export interface ValuesTableProps<S> {
    * Name of the field holding the (component) values, e.g. `values` or `data.values`.
    */
   name: PathsForValueType<S, Option[]> & string;
+  withOptionDescription?: boolean;
 }
 
 /**
@@ -30,7 +31,7 @@ export interface ValuesTableProps<S> {
  * Translations for every option label are (to be) managed in a dedicated translations
  * component.
  */
-function ValuesTable<S>({name}: ValuesTableProps<S>) {
+function ValuesTable<S>({name, withOptionDescription}: ValuesTableProps<S>) {
   const intl = useIntl();
   const {getFieldProps} = useFormikContext();
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
@@ -88,7 +89,13 @@ function ValuesTable<S>({name}: ValuesTableProps<S>) {
 
             <tbody>
               {options.map((_, index) => (
-                <OptionRow name={name} index={index} arrayHelpers={arrayHelpers} key={index} />
+                <OptionRow
+                  name={name}
+                  index={index}
+                  arrayHelpers={arrayHelpers}
+                  key={index}
+                  withOptionDescription={withOptionDescription}
+                />
               ))}
             </tbody>
 

@@ -91,7 +91,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <ValuesConfig<RadioComponentSchema> name="values" />
+        <ValuesConfig<RadioComponentSchema> name="values" withOptionDescription />
         {isManualOptions && <DefaultValue options={options} />}
       </TabPanel>
 
@@ -121,7 +121,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
         >
-          <ValuesTranslations<RadioComponentSchema> name="values" />
+          <ValuesTranslations<RadioComponentSchema> name="values" withOptionDescription />
         </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>

@@ -13,6 +13,7 @@ export interface ValuesTranslationsProps<S> {
    * Name of the field holding the (component) values, e.g. `values` or `data.values`.
    */
   name: PathsForValueType<S, Option[]> & string;
+  withOptionDescription?: boolean;
 }
 
 /**
@@ -22,7 +23,7 @@ export interface ValuesTranslationsProps<S> {
  * `ComponentTranslations` so that all translations are managed in a single
  * tab.
  */
-export function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
+export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTranslationsProps<S>) {
   const intl = useIntl();
   const {activeLanguage} = useContext(ComponentTranslationsContext);
   const {getFieldProps} = useFormikContext<S>();
@@ -66,42 +67,44 @@ export function ValuesTranslations<S>({name}: ValuesTranslationsProps<S>) {
         ))}
       </tbody>
 
-      <tbody>
-        <tr>
-          <th colSpan={3} style={{textAlign: 'end'}}>
-            <FormattedMessage
-              description="Values/options description translations table header"
-              defaultMessage="Description translations"
-            />
-          </th>
-        </tr>
-        {options.map(({description, value, label}, index) => (
-          <tr key={`option-description-${index}`}>
-            <td>
-              <span id={`option-${index}-label`}>
-                <FormattedMessage
-                  description="Label for option description location"
-                  defaultMessage="Option description (<option></option>)"
-                  values={{
-                    option: () => <code>{value || '-'}</code>,
-                  }}
-                />
-              </span>
-            </td>
-
-            <td>
-              <div aria-describedby={`option-${index}-label`}>{description || '-'}</div>
-            </td>
-
-            <td>
-              <TextArea
-                name={`${name}[${index}]openForms.translations.${activeLanguage}.description`}
-                aria-labelledby={`option-${index}-label`}
+      {withOptionDescription && (
+        <tbody>
+          <tr>
+            <th colSpan={3} style={{textAlign: 'end'}}>
+              <FormattedMessage
+                description="Values/options description translations table header"
+                defaultMessage="Description translations"
               />
-            </td>
+            </th>
           </tr>
-        ))}
-      </tbody>
+          {options.map(({description, value}, index) => (
+            <tr key={`option-description-${index}`}>
+              <td>
+                <span id={`option-${index}-label`}>
+                  <FormattedMessage
+                    description="Label for option description location"
+                    defaultMessage="Option description (<option></option>)"
+                    values={{
+                      option: () => <code>{value || '-'}</code>,
+                    }}
+                  />
+                </span>
+              </td>
+
+              <td>
+                <div aria-describedby={`option-${index}-label`}>{description || '-'}</div>
+              </td>
+
+              <td>
+                <TextArea
+                  name={`${name}[${index}]openForms.translations.${activeLanguage}.description`}
+                  aria-labelledby={`option-${index}-label`}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      )}
     </>
   );
 }
