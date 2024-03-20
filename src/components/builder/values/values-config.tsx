@@ -31,6 +31,7 @@ function isNestedKeySet(obj: {}, path: string): boolean {
 
 export interface ValuesConfigProps<T> {
   name: ValuesTableProps<T>['name'];
+  withOptionDescription?: boolean;
 }
 
 /**
@@ -43,7 +44,10 @@ export interface ValuesConfigProps<T> {
  * Options can either be provided manually upfront, or they can be set dynamically by
  * referencing other variables in the form evaluation context.
  */
-export function ValuesConfig<T extends SchemaWithDataSrc>({name}: ValuesConfigProps<T>) {
+export function ValuesConfig<T extends SchemaWithDataSrc>({
+  name,
+  withOptionDescription,
+}: ValuesConfigProps<T>) {
   const {values, setFieldValue} = useFormikContext<T>();
   const {dataSrc} = values.openForms;
 
@@ -74,7 +78,9 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({name}: ValuesConfigPr
   return (
     <>
       <ValuesSrc />
-      {dataSrc === 'manual' && <ValuesTable<T> name={name} />}
+      {dataSrc === 'manual' && (
+        <ValuesTable<T> name={name} withOptionDescription={withOptionDescription} />
+      )}
       {dataSrc === 'variable' && <ItemsExpression />}
     </>
   );

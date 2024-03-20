@@ -11,9 +11,10 @@ export interface RadioInputProps {
   name: string;
   value: string;
   label?: React.ReactNode;
+  description?: string;
 }
 
-export const RadioInput: React.FC<RadioInputProps> = ({name, value, label}) => {
+export const RadioInput: React.FC<RadioInputProps> = ({name, value, label, description}) => {
   const {hasErrors} = useValidationErrors(name);
   return (
     <>
@@ -25,6 +26,7 @@ export const RadioInput: React.FC<RadioInputProps> = ({name, value, label}) => {
         className={clsx('form-check-input', {'is-invalid': hasErrors})}
       />
       <span>{label}</span>
+      {description && <Description text={description} />}
     </>
   );
 };
@@ -32,6 +34,7 @@ export const RadioInput: React.FC<RadioInputProps> = ({name, value, label}) => {
 export interface Option {
   value: string;
   label: ReactNode;
+  description?: string;
 }
 
 export interface RadioProps {
@@ -54,10 +57,10 @@ export const Radio: React.FC<RadioProps> = ({
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
       <div className="form-radio radio">
-        {options.map(({value, label}, index) => (
+        {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
             <label className="form-check-label">
-              <RadioInput name={name} value={value} label={label} />
+              <RadioInput name={name} value={value} label={label} description={description} />
             </label>
           </div>
         ))}
