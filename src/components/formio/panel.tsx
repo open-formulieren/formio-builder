@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import uniqueId from 'lodash.uniqueid';
+import {uniqueId} from 'lodash';
 import React, {useRef, useState} from 'react';
 import {useIntl} from 'react-intl';
 
