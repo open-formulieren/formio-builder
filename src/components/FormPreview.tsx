@@ -1,9 +1,11 @@
 import {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {Formik} from 'formik';
+import {set} from 'lodash';
 import {ReactNode} from 'react';
 
 import {getRegistryEntry} from '@/registry';
+import {hasOwnProperty} from '@/types';
 
 interface ActionIconProps {
   icon: string;
@@ -25,7 +27,10 @@ export const RenderComponent: React.FC<RenderComponentProps> = ({component}) => 
   const entry = getRegistryEntry(component);
   const className = clsx(
     'offb-form-preview-component',
-    `offb-form-preview-component--${component.type}`
+    `offb-form-preview-component--${component.type}`,
+    {
+      'offb-form-preview-component--hidden': component.hidden,
+    }
   );
 
   // re-use the preview from the configuration edit modal
@@ -82,7 +87,16 @@ export interface FormPreviewProps {
  * editing and some visual feedback about state (such as hidden/visible).
  */
 const FormPreview: React.FC<FormPreviewProps> = ({components}) => {
-  const initialValues = {}; // TODO
+  const initialValues: Record<string, unknown> = {};
+
+  for (const component of components) {
+    const entry = getRegistryEntry(component);
+    const defaultValue = hasOwnProperty(component, 'defaultValue')
+      ? component.defaultValue
+      : entry.defaultValue ?? '';
+    set(initialValues, component.key, defaultValue);
+  }
+
   return (
     <Formik
       enableReinitialize

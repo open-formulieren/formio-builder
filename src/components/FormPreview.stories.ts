@@ -19,8 +19,9 @@ export const SingleTextField: Story = {
       {
         id: 'oiejwa',
         type: 'textfield',
-        key: 'aTextField',
+        key: 'parent.aTextField',
         label: 'A text field',
+        defaultValue: 'a default value',
       },
     ],
   },
