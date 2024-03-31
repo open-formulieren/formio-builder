@@ -1,7 +1,7 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {useFormikContext} from 'formik';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 

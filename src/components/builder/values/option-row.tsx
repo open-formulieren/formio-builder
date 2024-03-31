@@ -1,7 +1,7 @@
 import {css} from '@emotion/css';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {FieldArrayRenderProps, useFormikContext} from 'formik';
-import camelCase from 'lodash.camelcase';
+import {camelCase} from 'lodash';
 import {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 

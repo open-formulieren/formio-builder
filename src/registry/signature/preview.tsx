@@ -1,6 +1,6 @@
 import {SignatureComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import debounce from 'lodash.debounce';
+import {debounce} from 'lodash';
 import {useLayoutEffect, useRef} from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
