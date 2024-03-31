@@ -1,8 +1,21 @@
 import {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
+import {Formik} from 'formik';
 import {ReactNode} from 'react';
 
 import {getRegistryEntry} from '@/registry';
+
+interface ActionIconProps {
+  icon: string;
+  label: string;
+  onClick: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+const ActionIcon: React.FC<ActionIconProps> = ({icon, label, onClick}) => (
+  <a href="#" onClick={onClick}>
+    <i className={`fa fa-fw fa-${icon}`} aria-label={label} />
+  </a>
+);
 
 export interface RenderComponentProps {
   component: AnyComponentSchema;
@@ -26,7 +39,35 @@ export const RenderComponent: React.FC<RenderComponentProps> = ({component}) => 
       <PreviewComponent component={component} />
     );
 
-  return <div className={className}>{preview}</div>;
+  const onAction = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    alert('TODO');
+  };
+
+  return (
+    <div
+      className={className}
+      style={{display: 'flex', gap: '10px', justifyContent: 'space-between', alignItems: 'stretch'}}
+    >
+      <div
+        className="offb-form-preview-component__controls"
+        style={{
+          display: 'flex',
+          gap: '3px',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          borderInlineEnd: 'dotted 1px #aaa',
+          paddingInlineEnd: '4px',
+        }}
+      >
+        <ActionIcon icon="pencil" label="Edit" onClick={onAction} />
+        <ActionIcon icon="times" label="Delete" onClick={onAction} />
+      </div>
+      <div className="offb-form-preview-component__component" style={{flexGrow: '1'}}>
+        {preview}
+      </div>
+    </div>
+  );
 };
 
 export interface FormPreviewProps {
@@ -40,12 +81,23 @@ export interface FormPreviewProps {
  * will be rendered in order (and recursively). Preview components get controls for
  * editing and some visual feedback about state (such as hidden/visible).
  */
-const FormPreview: React.FC<FormPreviewProps> = ({components}) => (
-  <>
-    {components.map(component => (
-      <RenderComponent component={component} />
-    ))}
-  </>
-);
+const FormPreview: React.FC<FormPreviewProps> = ({components}) => {
+  const initialValues = {}; // TODO
+  return (
+    <Formik
+      enableReinitialize
+      initialValues={initialValues}
+      onSubmit={() => {
+        window.alert("Can't submit a preview form.");
+      }}
+    >
+      <>
+        {components.map(component => (
+          <RenderComponent key={component.id} component={component} />
+        ))}
+      </>
+    </Formik>
+  );
+};
 
 export default FormPreview;
