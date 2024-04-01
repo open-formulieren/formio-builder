@@ -1,3 +1,4 @@
+import {css} from '@emotion/css';
 import {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {Formik} from 'formik';
@@ -19,13 +20,32 @@ const ActionIcon: React.FC<ActionIconProps> = ({icon, label, onClick}) => (
   </a>
 );
 
+const COMPONENT_CSS = css`
+  border: dotted 1px var(--offb-form-preview-component-border-color, #ddd);
+
+  &:hover {
+    background-color: var(--offb-form-preview-component-hover-background-color, #eee);
+  }
+`;
+
 export interface RenderComponentProps {
   component: AnyComponentSchema;
 }
 
+/**
+ * Render a single component for the form preview.
+ *
+ * This component may be nested inside a parent component. The component configuration
+ * is looked up in the registry, and the appropriate preview render handler is taken:
+ *
+ * 1. Check for an explicit form preview handler
+ * 2. If not present, render the edit form preview handler
+ * 3. Ultimately, fall back and display a message the component is unknown.
+ */
 export const RenderComponent: React.FC<RenderComponentProps> = ({component}) => {
   const entry = getRegistryEntry(component);
   const className = clsx(
+    COMPONENT_CSS,
     'offb-form-preview-component',
     `offb-form-preview-component--${component.type}`,
     {
@@ -35,13 +55,14 @@ export const RenderComponent: React.FC<RenderComponentProps> = ({component}) => 
 
   // re-use the preview from the configuration edit modal
   // TODO: let more complicated components bring their own logic/presentation
-  const {preview: PreviewComponent} = entry;
+  const {preview: PreviewComponent, formPreview: FormPreviewComponent = undefined} = entry;
+  const Component = FormPreviewComponent ?? PreviewComponent;
 
   const preview: ReactNode =
-    PreviewComponent === null ? (
+    Component === null ? (
       `PREVIEW NOT AVAILABLE FOR COMPONENT TYPE '${component.type}'`
     ) : (
-      <PreviewComponent component={component} />
+      <Component component={component} />
     );
 
   const onAction = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -68,7 +89,10 @@ export const RenderComponent: React.FC<RenderComponentProps> = ({component}) => 
         <ActionIcon icon="pencil" label="Edit" onClick={onAction} />
         <ActionIcon icon="times" label="Delete" onClick={onAction} />
       </div>
-      <div className="offb-form-preview-component__component" style={{flexGrow: '1'}}>
+      <div
+        className="offb-form-preview-component__component"
+        style={{flexGrow: '1', paddingInlineEnd: '10px'}}
+      >
         {preview}
       </div>
     </div>
@@ -89,6 +113,8 @@ export interface FormPreviewProps {
 const FormPreview: React.FC<FormPreviewProps> = ({components}) => {
   const initialValues: Record<string, unknown> = {};
 
+  // TODO: delegate this to the registry so that we can get default values for nested
+  // components too (basically the equivalent of iter_components)
   for (const component of components) {
     const entry = getRegistryEntry(component);
     const defaultValue = hasOwnProperty(component, 'defaultValue')
