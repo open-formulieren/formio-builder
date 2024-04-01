@@ -1,7 +1,6 @@
 import {FormikContextType, useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
-import camelCase from 'lodash.camelcase';
-import debounce from 'lodash.debounce';
+import {camelCase, debounce} from 'lodash';
 import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage} from 'react-intl';
 

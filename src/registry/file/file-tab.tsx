@@ -1,6 +1,6 @@
 import {FileComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';

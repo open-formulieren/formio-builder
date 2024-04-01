@@ -1,6 +1,6 @@
 import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formulieren/types';
 import {useField} from 'formik';
-import isEqual from 'lodash.isequal';
+import {isEqual} from 'lodash';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 

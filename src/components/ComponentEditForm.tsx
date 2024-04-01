@@ -1,7 +1,6 @@
 import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
-import cloneDeep from 'lodash.clonedeep';
-import merge from 'lodash.merge';
+import {cloneDeep, merge} from 'lodash';
 import {PropsWithChildren, useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';

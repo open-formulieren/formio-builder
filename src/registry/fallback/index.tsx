@@ -22,6 +22,7 @@ const Fallback = {
   editSchema: () => z.object({}),
   preview: Preview,
   defaultValue: undefined,
+  formPreview: undefined,
 } satisfies RegistryEntry<FallbackSchema>;
 
 export default Fallback;
