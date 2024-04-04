@@ -2,7 +2,7 @@ import {SelectComponentSchema} from '@open-formulieren/types';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {useFormikContext} from 'formik';
 import isEqual from 'lodash.isequal';
-import {useLayoutEffect} from 'react';
+import {useEffect, useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -44,6 +44,19 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
     defaultValue,
     multiple,
   } = values;
+
+  useEffect(() => {
+    if (defaultValue === undefined) return;
+
+    let newDefaultValue;
+    if (multiple) {
+      // `''` means no default value was set when it wasn't multiple capable
+      newDefaultValue = defaultValue !== '' ? [defaultValue] : [];
+    } else {
+      newDefaultValue = defaultValue[0] ?? '';
+    }
+    setFieldValue('defaultValue', newDefaultValue);
+  }, [multiple]);
 
   Validate.useManageValidatorsTranslations<SelectComponentSchema>(['required']);
 
@@ -92,7 +105,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple />
+        <Multiple<SelectComponentSchema> updateDefaultValue={false} />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
