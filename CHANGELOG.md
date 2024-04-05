@@ -1,5 +1,13 @@
 # Changes
 
+## 0.18.1 (2024-04-05)
+
+Bugfix release
+
+- [`OF#4084`][OF#4084] Fix default value of multiple `select` component
+
+[OF#4084]: https://github.com/open-formulieren/open-forms/issues/4084
+
 ## 0.18.0 (2024-03-20)
 
 Feature release
