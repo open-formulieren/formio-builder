@@ -159,6 +159,20 @@ const DefaultValue: React.FC = () => {
   );
 };
 
+const ComparisonValueInput: React.FC = () => {
+  return (
+    <NumberField
+      name="conditional.eq"
+      label={
+        <FormattedMessage
+          description="Component property 'conditional.eq' label"
+          defaultMessage="Has the value"
+        />
+      }
+    />
+  );
+};
+
 const DecimalLimit: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
@@ -200,3 +214,4 @@ const AllowNegative: React.FC = () => {
 };
 
 export default EditForm;
+export {ComparisonValueInput};
