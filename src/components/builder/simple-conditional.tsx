@@ -1,6 +1,7 @@
 import {FormattedMessage} from 'react-intl';
 
-import {Panel, Select, TextField} from '../formio';
+import {Panel, Select} from '../formio';
+import ComparisonValueInput from './comparison-value-input';
 import ComponentSelect from './component-select';
 
 const SimpleConditional: React.FC = () => (
@@ -36,15 +37,7 @@ const SimpleConditional: React.FC = () => (
       }
       isClearable
     />
-    <TextField
-      name="conditional.eq"
-      label={
-        <FormattedMessage
-          description="Component property 'conditional.eq' label"
-          defaultMessage="Has the value"
-        />
-      }
-    />
+    <ComparisonValueInput />
   </Panel>
 );
 

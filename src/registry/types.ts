@@ -30,6 +30,10 @@ export interface EditSchemaArgs {
 
 export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
 
+export interface comparisonValueComponentProps {
+  multiple?: boolean;
+}
+
 // Registry entry
 
 export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
