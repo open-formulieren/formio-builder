@@ -50,10 +50,22 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
 
     let newDefaultValue;
     if (multiple) {
-      // `''` means no default value was set when it wasn't multiple capable
-      newDefaultValue = defaultValue !== '' ? [defaultValue] : [];
+      // `defaultValue` can either be:
+      // - an non-empty string, meaning the user provided a value for it
+      // - `''` or `null`: no default value was provided. Ideally, this should only
+      //   be `''`, but Formio is overridding it to `null` :/. That's why we check
+      //   for a truthy value here:
+      newDefaultValue = defaultValue ? [defaultValue] : [];
     } else {
-      newDefaultValue = defaultValue[0] ?? '';
+      if (Array.isArray(defaultValue)) {
+        // if switching from multiple=true->false
+        newDefaultValue = defaultValue[0] ?? '';
+      } else {
+        // if the component just got rendered. In this case, `defaultValue`
+        // can be `null` or a string (empty or not).
+        newDefaultValue = defaultValue || '';
+      }
+      // `defaultValue` is guaranteed to be a an (empty) array thanks to the `if` branch above
     }
     setFieldValue('defaultValue', newDefaultValue);
   }, [multiple]);
@@ -167,6 +179,8 @@ EditForm.defaultValues = {
   dataSrc: 'values',
   data: {values: [{value: '', label: ''}]},
   // TODO: at some point we can allow an itemsExpression for this too
+  // Note: Formio will override this to `null`! So be careful when dealing with
+  // the default values of the form
   defaultValue: '',
   // Advanced tab
   conditional: {
