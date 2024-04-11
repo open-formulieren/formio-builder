@@ -79,7 +79,7 @@ test('Switch to multiple sets empty array as default value when initial is null'
     data: {
       values: [{value: 'opt1', label: 'Opt1'}],
     },
-    // @ts-ignore
+    // @ts-expect-error
     defaultValue: null, // This can be set by Formio
   } satisfies SelectComponentSchema;
 
