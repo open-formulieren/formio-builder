@@ -116,7 +116,6 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^6.2.0",
-    "@emotion/css": "^11.11.2",
     "@floating-ui/react": "^0.26.4",
     "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
