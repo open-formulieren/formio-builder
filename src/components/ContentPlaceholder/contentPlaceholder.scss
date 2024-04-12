@@ -1,0 +1,22 @@
+.offb-content-placeholder {
+  text-align: center;
+  font-style: italic;
+
+  padding-inline: 10px;
+  padding-block: 20px;
+  border: solid 1px var(--offb-content-placeholder-border-color, #ccc);
+  border-radius: 2px;
+
+  background-size: 50px 50px;
+  background-color: var(--offb-content-placeholder-background-color, #eee);
+  background-image: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.04) 50%,
+    rgba(0, 0, 0, 0.04) 75%,
+    transparent 75%,
+    transparent
+  );
+}
