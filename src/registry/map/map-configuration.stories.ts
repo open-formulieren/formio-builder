@@ -1,12 +1,12 @@
-import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
 import {
+  expect,
   fireEvent,
   userEvent,
   waitFor,
   waitForElementToBeRemoved,
   within,
-} from '@storybook/testing-library';
+} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';

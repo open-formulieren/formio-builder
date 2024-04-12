@@ -1,7 +1,6 @@
 import {ContentComponentSchema} from '@open-formulieren/types';
-import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {userEvent, waitFor, within} from '@storybook/testing-library';
+import {expect, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -31,6 +30,9 @@ export default {
         },
       },
     },
+    onCancel: fn(),
+    onRemove: fn(),
+    onSubmit: fn(),
 
     builderInfo: {
       title: 'Content',

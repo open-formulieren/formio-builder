@@ -1,12 +1,16 @@
-import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, within} from '@storybook/testing-library';
+import {expect, fireEvent, fn, userEvent, within} from '@storybook/test';
 
 import ComponentEditForm from './ComponentEditForm';
 
 export default {
   title: 'Edit form/Component edit form',
   component: ComponentEditForm,
+  args: {
+    onCancel: fn(),
+    onRemove: fn(),
+    onSubmit: fn(),
+  },
 } as Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
