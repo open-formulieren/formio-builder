@@ -146,6 +146,7 @@
     ],
     "moduleNameMapper": {
       "@open-formulieren/ckeditor5-build-classic": "<rootDir>/src/tests/EditorStub.ts",
+      "^.*\\.scss$": "<rootDir>/src/tests/StylesStub.ts",
       "@/(.*)$": "<rootDir>/src/$1"
     },
     "transformIgnorePatterns": [
