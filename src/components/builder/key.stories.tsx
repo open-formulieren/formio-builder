@@ -1,6 +1,5 @@
-import {expect, jest} from '@storybook/jest';
 import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Formik} from 'formik';
 import {useRef} from 'react';
 
@@ -45,7 +44,7 @@ export const Standalone: Story = {
 const FormikDecorator = (Story: StoryFn, context: StoryContext) => (
   <Formik
     initialValues={{label: '', key: ''}}
-    onSubmit={jest.fn()}
+    onSubmit={fn()}
     {...(context?.parameters?.formik || {})}
   >
     <Story />

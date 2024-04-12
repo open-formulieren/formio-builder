@@ -1,6 +1,5 @@
-import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, within} from '@storybook/testing-library';
+import {expect, fireEvent, fn, userEvent, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -34,6 +33,9 @@ export default {
       filePattern: '',
       defaultValue: null,
     },
+    onCancel: fn(),
+    onRemove: fn(),
+    onSubmit: fn(),
 
     builderInfo: {
       title: 'File upload',

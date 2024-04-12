@@ -3,9 +3,8 @@ import {
   SelectComponentSchema,
   SelectboxesComponentSchema,
 } from '@open-formulieren/types';
-import {expect, jest} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Form, Formik} from 'formik';
 
 import {withFormik} from '@/sb-decorators';
@@ -108,7 +107,7 @@ export const SelectBoxesResetState: StoryObj<{
     );
   },
   args: {
-    onSubmit: jest.fn(),
+    onSubmit: fn(),
   },
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);

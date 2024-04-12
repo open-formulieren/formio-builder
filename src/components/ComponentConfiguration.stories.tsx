@@ -1,7 +1,6 @@
 import {ContentComponentSchema, SupportedLocales} from '@open-formulieren/types';
-import {expect} from '@storybook/jest';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {fireEvent, userEvent, waitFor, within} from '@storybook/testing-library';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import React from 'react';
 
 import {
@@ -51,6 +50,9 @@ export default {
     },
     supportedLanguageCodes: ['nl'],
     fileTypes: DEFAULT_FILE_TYPES,
+    onCancel: fn(),
+    onRemove: fn(),
+    onSubmit: fn(),
     builderInfo: {
       title: 'Text field',
       group: 'basic',

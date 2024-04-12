@@ -1,6 +1,5 @@
-import {expect} from '@storybook/jest';
 import {Meta, StoryFn} from '@storybook/react';
-import {within} from '@storybook/testing-library';
+import {expect, within} from '@storybook/test';
 
 import ComponentLabel from './component-label';
 

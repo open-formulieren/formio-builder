@@ -1,6 +1,5 @@
-import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {waitFor, within} from '@storybook/testing-library';
+import {expect, waitFor, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 

@@ -1,7 +1,6 @@
 import {Option} from '@open-formulieren/types/lib/formio/common';
-import {expect} from '@storybook/jest';
 import {Meta, StoryObj} from '@storybook/react';
-import {within} from '@storybook/testing-library';
+import {expect, within} from '@storybook/test';
 
 import {withFormik} from '@/../.storybook/decorators';
 import {Component} from '@/components/formio';
