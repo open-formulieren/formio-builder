@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, waitFor, within} from '@storybook/test';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -27,6 +27,9 @@ export default {
       },
       filePattern: '',
     },
+    onCancel: fn(),
+    onRemove: fn(),
+    onSubmit: fn(),
     builderInfo: {
       title: 'File upload',
       icon: '',
@@ -150,29 +153,36 @@ export const ValidMaxFileSize: Story = {
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
+    // Submitting the form triggers Formik validation, which appears to be a bit flaky
+    // on CI when relying on userEvent.keyboard('[Tab]')
+    const triggerValidation = async () => {
+      const btn = canvas.getByRole('button', {name: 'Save'});
+      await userEvent.click(btn);
+    };
+
     await userEvent.click(canvas.getByRole('link', {name: 'File'}));
     const fileSize = canvas.getByLabelText('Maximum file size');
 
     await step('Whitespace between value and unit', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '15    mb');
-      await userEvent.keyboard('[Tab]');
-      await waitFor(async () => {
-        expect(
-          canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
-        ).not.toBeInTheDocument();
-      });
+
+      await triggerValidation();
+
+      expect(
+        canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
+      ).not.toBeInTheDocument();
     });
 
     await step('Accept non-MB values', async () => {
       await userEvent.clear(fileSize);
       await userEvent.type(fileSize, '200 KB');
-      await userEvent.keyboard('[Tab]');
-      await waitFor(async () => {
-        expect(
-          canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
-        ).not.toBeInTheDocument();
-      });
+
+      await triggerValidation();
+
+      expect(
+        canvas.queryByText('Specify a positive, non-zero file size without decimals, e.g. 10MB.')
+      ).not.toBeInTheDocument();
     });
   },
 };
