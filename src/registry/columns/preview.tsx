@@ -1,10 +1,10 @@
-import {css} from '@emotion/css';
 import {ColumnsComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {ComponentPreviewProps} from '../types';
+import './preview.scss';
 
 interface ViewportToggleProps {
   mobile: boolean;
@@ -43,49 +43,6 @@ const ViewportToggle: React.FC<ViewportToggleProps> = ({mobile, onChange}) => {
   );
 };
 
-// XXX: once we've moved away from bootstrap/formio 'component library', clean up the
-// styles setup for preview and remove @emotion/css again.
-const PREVIEW_GRID = css`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: 10px;
-  margin-block-start: 1em;
-
-  background-size: 50px 50px;
-  background-color: rgba(97, 137, 255, 0.27);
-  background-image: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.04) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.04) 50%,
-    rgba(0, 0, 0, 0.04) 75%,
-    transparent 75%,
-    transparent
-  );
-`;
-
-const PREVIEW_GRID_MOBILE = css`
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 10px;
-  row-gap: 14px;
-  margin-block-start: 1em;
-  max-inline-size: 50%;
-  margin-inline: auto;
-`;
-
-const COL_PREVIEW = css`
-  background-color: var(--col-preview-background-color, #eee);
-  padding-inline: 5px;
-  padding-block: 10px;
-  margin-block: -2px;
-  hyphens: auto;
-  border: solid 1px var(--col-preview-border-color, #ccc);
-  border-radius: 2px;
-  text-align: center;
-  grid-column: span var(--_col-preview-span);
-`;
-
 /**
  * Show a formio columns component preview.
  */
@@ -98,11 +55,11 @@ const Preview: React.FC<ComponentPreviewProps<ColumnsComponentSchema>> = ({compo
         <ViewportToggle mobile={isMobile} onChange={newIsMobile => setIsMobile(newIsMobile)} />
       </div>
 
-      <div className={clsx(PREVIEW_GRID, {[PREVIEW_GRID_MOBILE]: isMobile})}>
+      <div className={clsx('offb-columns-preview', {'offb-columns-preview--mobile': isMobile})}>
         {columns.map((column, index) => (
           <div
             key={`column-${index}`}
-            className={COL_PREVIEW}
+            className="offb-columns-preview__column"
             style={
               {
                 '--_col-preview-span': `${isMobile ? column.sizeMobile : column.size}`,

@@ -1,0 +1,25 @@
+// !important because we're fighting bootstrap...
+
+.offb-i18n-header {
+  &__label {
+    padding: 0 !important;
+    border-left-color: transparent !important;
+    border-top-color: transparent !important;
+    border-right-color: transparent !important;
+    border-bottom-width: 1px !important;
+  }
+
+  &__tab-container {
+    padding: 0 !important;
+    border-left-color: transparent !important;
+    border-top-color: transparent !important;
+    border-right-color: transparent !important;
+    border-bottom: none !important;
+  }
+
+  &__tabs {
+    margin-left: -1px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+  }
+}

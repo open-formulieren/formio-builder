@@ -1,4 +1,3 @@
-import {css} from '@emotion/css';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {FieldArrayRenderProps, useFormikContext} from 'formik';
 import camelCase from 'lodash.camelcase';
@@ -9,38 +8,7 @@ import {TextField} from '@/components/formio';
 import ComponentLabel from '@/components/formio/component-label';
 import {TextArea} from '@/components/formio/textarea';
 
-const ICONS_CELL = css`
-  vertical-align: middle !important;
-  border-bottom: none !important;
-`;
-
-const SORT_ICONS = css`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    all: unset;
-    padding-inline: 0.2em;
-    line-height: 0;
-
-    :not(:disabled) {
-      cursor: pointer;
-    }
-
-    :disabled {
-      color: #999;
-    }
-
-    :focus-visible .fa {
-      // bootstrap focus styles
-      outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-  }
-`;
+import './option-row.scss';
 
 export interface OptionRowProps {
   name: string;
@@ -75,9 +43,9 @@ const OptionRow: React.FC<OptionRowProps> = ({
   const description = getFieldProps<Option>(fieldNamePrefix).value.description ?? '';
   return (
     <>
-      <tr>
-        <td className={ICONS_CELL}>
-          <div className={SORT_ICONS}>
+      <tr className="offb-option-row">
+        <td className="offb-option-row__icons-cell">
+          <div className="offb-option-row__sort-icons">
             <button
               type="button"
               aria-label={intl.formatMessage({
