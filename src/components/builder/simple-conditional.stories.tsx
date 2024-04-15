@@ -81,10 +81,13 @@ export const SelectATextComponent = {
     expect(eqInput).not.toBeNull();
     expect(eqInput.type).toEqual('text');
 
-    const svgTags = document.getElementsByTagName('svg');
-    // 0 is the cross for the 'This component should display' field, 1 is the arrow of the dropdown
-    const littleCross = svgTags[2];
-    await userEvent.click(littleCross);
+    // find and click the clear button (x icon)
+    const input = canvas.getByLabelText('When the form component');
+    const container = input.closest('.formio-builder-select');
+    const clearIcon = container!.querySelector(
+      '.formio-builder-select__clear-indicator'
+    ) as HTMLDivElement;
+    await userEvent.click(clearIcon);
 
     eqInput = canvas.queryByLabelText('Has the value');
 

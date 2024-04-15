@@ -1,9 +1,9 @@
 import {NumberComponentSchema} from '@open-formulieren/types';
 
+import {NumberField} from '@/components/formio';
 import {RegistryEntry} from '@/registry/types';
 
 import EditForm from './edit';
-import {ComparisonValueInput} from './edit';
 import validationSchema from './edit-validation';
 import Preview from './preview';
 
@@ -12,5 +12,5 @@ export default {
   editSchema: validationSchema,
   preview: Preview,
   defaultValue: undefined, // formik field value
-  comparisonValueComponent: ComparisonValueInput,
+  comparisonValue: NumberField,
 } satisfies RegistryEntry<NumberComponentSchema>;

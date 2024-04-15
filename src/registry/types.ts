@@ -30,7 +30,9 @@ export interface EditSchemaArgs {
 
 export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
 
-export interface comparisonValueComponentProps {
+export interface ComparisonValueProps {
+  name: string;
+  label: string | React.ReactNode;
   multiple?: boolean;
 }
 
@@ -43,7 +45,7 @@ export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
-  comparisonValueComponent?: React.FC<comparisonValueComponentProps>;
+  comparisonValue?: React.FC;
 }
 
 // Registry made up of registry entries, one for each possible component schema
