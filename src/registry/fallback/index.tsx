@@ -2,6 +2,7 @@ import {ComponentSchema} from 'formiojs';
 import {z} from 'zod';
 
 import JSONPreview from '@/components/JSONPreview';
+import {TextField} from '@/components/formio/textfield';
 import {FallbackSchema} from '@/types';
 
 import {EditFormDefinition, RegistryEntry} from '../types';
@@ -22,6 +23,7 @@ const Fallback = {
   editSchema: () => z.object({}),
   preview: Preview,
   defaultValue: undefined,
+  comparisonValue: TextField,
 } satisfies RegistryEntry<FallbackSchema>;
 
 export default Fallback;

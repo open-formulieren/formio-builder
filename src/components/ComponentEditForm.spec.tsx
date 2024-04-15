@@ -1,11 +1,13 @@
 import userEvent from '@testing-library/user-event';
 
-import {default as FieldSet} from '@/registry/fieldset';
 import {contextRender, screen} from '@/tests/test-utils';
 
 import ComponentEditForm from './ComponentEditForm';
 
 test('Mutating components after save does not mutate default values', async () => {
+  // Circular import
+  const {default: FieldSet} = await import('@/registry/fieldset');
+
   const user = userEvent.setup();
   expect(FieldSet.edit.defaultValues.components).toEqual([]);
   let savedComponent: any;
