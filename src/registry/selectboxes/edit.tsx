@@ -43,7 +43,11 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
     defaultValue,
   } = values;
 
-  Validate.useManageValidatorsTranslations<SelectboxesComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations<SelectboxesComponentSchema>([
+    'required',
+    'minSelectedCount',
+    'maxSelectedCount',
+  ]);
 
   const isManualOptions = checkIsManualOptions(values);
   const options = isManualOptions ? values.values || [] : [];

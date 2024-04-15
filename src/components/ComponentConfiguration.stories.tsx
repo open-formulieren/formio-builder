@@ -1159,7 +1159,11 @@ export const SelectBoxes: Story = {
           plugins: [],
         },
         translatedErrors: {
-          nl: {required: ''},
+          nl: {
+            required: '',
+            minSelectedCount: '',
+            maxSelectedCount: '',
+          },
         },
         // registration tab
         registration: {
@@ -1226,7 +1230,11 @@ export const SelectBoxes: Story = {
           plugins: [],
         },
         translatedErrors: {
-          nl: {required: ''},
+          nl: {
+            required: '',
+            minSelectedCount: '',
+            maxSelectedCount: '',
+          },
         },
         // registration tab
         registration: {
