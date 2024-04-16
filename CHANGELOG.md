@@ -1,5 +1,9 @@
 # Changes
 
+## 0.18.3 (2024-04-15)
+
+Fixed a regression in #4155
+
 ## 0.18.2 (2024-04-15)
 
 Bugfix release
