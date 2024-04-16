@@ -4,14 +4,13 @@
 
 Bugfix release
 
-- [`OF#4084`][OF#4084] Handle `select`'s `defaultValue` when set to `null`
-- 🔨 Upgrade to SB v8
-- [`OF#3964`][OF#3964] Make input field in 'simple conditional' dependent on component type
-- 🐛 Add missing error message codes for selectboxes
+- Upgraded Storybook to v8
+- [`OF#3964`][OF#3964] Fixed the datatype of the `eq` reference value depending on the reference
+  component used for comparison.
+- Added missing error message codes for selectboxes
 - [`OF#4155`][OF#4155] Fixed some validation errors in the date component not showing an indicator
   on the validation tab.
 
-[OF#4084]: https://github.com/open-formulieren/open-forms/issues/4084
 [OF#3964]: https://github.com/open-formulieren/open-forms/issues/3964
 [OF#4155]: https://github.com/open-formulieren/open-forms/issues/4155
 
