@@ -25,7 +25,7 @@
     "checkformat": "prettier --check 'src/**/*' '.storybook/**/*'",
     "start": "npm run storybook",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build --webpack-stats-json",
     "makemessages": "formatjs extract",
     "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
     "watch": "ttsc -p tsconfig.prod.json --watch"
