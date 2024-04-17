@@ -19,10 +19,10 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
+import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import {ComparisonValueProps, EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'checkbox' type component.
@@ -155,4 +155,33 @@ const DefaultValue: React.FC<DefaultValueProps> = ({description}) => {
   );
 };
 
+const renderComparisonValueInput: React.FC<ComparisonValueProps> = props => {
+  return (
+    <Select
+      {...props}
+      options={[
+        {
+          value: true,
+          label: (
+            <FormattedMessage
+              description="Label of the 'true' checkbox option"
+              defaultMessage="Checked"
+            />
+          ),
+        },
+        {
+          value: false,
+          label: (
+            <FormattedMessage
+              description="Label of the 'false' checkbox option"
+              defaultMessage="Not checked"
+            />
+          ),
+        },
+      ]}
+    />
+  );
+};
+
 export default EditForm;
+export {renderComparisonValueInput};
