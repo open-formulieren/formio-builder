@@ -34,7 +34,7 @@ export const ComparisonValueInput: React.FC = () => {
       return;
     }
 
-    if (previousWhen !== conditional?.when) {
+    if (previousWhen !== undefined && previousWhen !== conditional?.when) {
       setFieldValue('conditional.eq', '');
     }
   }, [values, setFieldValue]);
