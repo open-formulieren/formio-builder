@@ -5,6 +5,8 @@ This library implements the builder to build
 [Open Forms](https://github.com/open-formulieren/open-forms) extensions.
 
 [![Run CI build and tests](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml)
+[![NPM Version](https://img.shields.io/npm/v/%40open-formulieren%2Fformio-builder)](https://www.npmjs.com/package/@open-formulieren/formio-builder)
+
 
 **Documentation/demo**
 
