@@ -1770,6 +1770,19 @@ export const Checkbox: Story = {
       defaultValue: false,
     },
 
+    otherComponents: [
+      {
+        id: 'blablabla',
+        type: 'checkbox',
+        key: 'checkbox',
+        label: 'A checkbox field',
+        validate: {
+          required: false,
+        },
+        defaultValue: false,
+      },
+    ],
+
     builderInfo: {
       title: 'Checkbox',
       icon: 'check-square',
@@ -1807,14 +1820,61 @@ export const Checkbox: Story = {
     // even when key/label components are not mounted.
     const keyInput = canvas.getByLabelText('Property Name');
     fireEvent.change(keyInput, {target: {value: 'customKey'}});
+
     await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+    const shouldDisplay = canvas.getByLabelText('This component should display');
+    await userEvent.click(shouldDisplay);
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.click(await canvas.findByText('True'));
+    const whenComponent = canvas.getByLabelText('When the form component');
+    await userEvent.click(whenComponent);
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.click(await canvas.findByText('A checkbox field (checkbox)'));
+    const eqValue = canvas.getByLabelText('Has the value');
+    await userEvent.click(eqValue);
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.click(await canvas.findByText('Checked'));
+
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-    expect(args.onSubmit).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        label: 'Other label',
+        key: 'customKey',
+        description: '',
+        tooltip: '',
+        showInSummary: true,
+        showInEmail: false,
+        showInPDF: true,
+        hidden: false,
+        clearOnHide: true,
+        isSensitiveData: false,
+        defaultValue: false,
+        conditional: {
+          show: true,
+          when: 'checkbox',
+          eq: true, // Note: Boolean!
+        },
+        validate: {
+          required: false,
+          plugins: [],
+        },
+        translatedErrors: {
+          nl: {
+            required: '',
+          },
+        },
+        registration: {
+          attribute: '',
+        },
+        id: 'wekruya',
+        type: 'checkbox',
+      });
+    });
   },
 };
 
