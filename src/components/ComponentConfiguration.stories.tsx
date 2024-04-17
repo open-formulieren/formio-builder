@@ -369,6 +369,10 @@ export const NumberField: Story = {
     await userEvent.type(canvas.getByLabelText('Has the value'), '1', {delay: 50});
 
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+    // Go back to the Advanced tab to make sure the `eq` value wasn't cleared (see OF#4186)
+    await userEvent.click(canvas.getByRole('tab', {name: 'Advanced'}));
+    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
