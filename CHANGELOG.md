@@ -1,5 +1,13 @@
 # Changes
 
+## 0.18.4 (2024-04-17)
+
+Bugfix release
+
+- [`OF#4186`][OF#4186] Fix conditional logic value being cleared
+
+[OF#4186]: https://github.com/open-formulieren/open-forms/issues/4186
+
 ## 0.18.3 (2024-04-15)
 
 Fixed a regression in #4155
