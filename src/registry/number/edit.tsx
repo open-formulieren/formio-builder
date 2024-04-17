@@ -22,7 +22,7 @@ import {LABELS} from '@/components/builder/messages';
 import {Checkbox, NumberField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import {ComparisonValueProps, EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'number' type component.
@@ -165,18 +165,8 @@ const DefaultValue: React.FC = () => {
   );
 };
 
-const ComparisonValueInput: React.FC = () => {
-  return (
-    <NumberField
-      name="conditional.eq"
-      label={
-        <FormattedMessage
-          description="Component property 'conditional.eq' label"
-          defaultMessage="Has the value"
-        />
-      }
-    />
-  );
+const renderComparisonValueInput: React.FC<ComparisonValueProps> = props => {
+  return <NumberField {...props} />;
 };
 
 const DecimalLimit: React.FC = () => {
@@ -220,4 +210,4 @@ const AllowNegative: React.FC = () => {
 };
 
 export default EditForm;
-export {ComparisonValueInput};
+export {renderComparisonValueInput};
