@@ -7,7 +7,6 @@ This library implements the builder to build
 [![Run CI build and tests](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/%40open-formulieren%2Fformio-builder)](https://www.npmjs.com/package/@open-formulieren/formio-builder)
 
-
 **Documentation/demo**
 
 - [Storybook](https://open-formulieren.github.io/formio-builder/) documentation and reference.
