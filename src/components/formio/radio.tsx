@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import {Field} from 'formik';
+import {Field, useFormikContext} from 'formik';
+import {ExtendedComponentSchema} from 'formiojs';
 import {ReactNode} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
 
@@ -42,6 +44,7 @@ export interface RadioProps {
   options: Option[];
   label?: React.ReactNode;
   required?: boolean;
+  isPreview?: boolean;
   tooltip?: string;
   description?: string;
 }
@@ -51,11 +54,36 @@ export const Radio: React.FC<RadioProps> = ({
   options,
   label,
   required = false,
+  isPreview = false,
   tooltip = '',
   description = '',
 }) => {
+  const {values, setValues} = useFormikContext<ExtendedComponentSchema>();
+
+  const clearRadioValues = () => {
+    const updatedValues = {...values};
+    updatedValues[name] = '';
+    setValues(updatedValues);
+  };
+
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
+      {values[name] && !isPreview && (
+        <div>
+          <button
+            type="button"
+            className="btn btn-secondary formio-button-remove-row"
+            onClick={clearRadioValues}
+          >
+            <i className="fa fa-times-circle" aria-hidden="true" />
+            <FormattedMessage
+              description="Clear radio values button label"
+              defaultMessage="Clear radio button values"
+            />
+          </button>
+        </div>
+      )}
+
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">

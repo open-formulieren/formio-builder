@@ -42,6 +42,7 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
       label={label}
       tooltip={tooltip}
       required={required}
+      isPreview={true}
       description={description}
     />
   );

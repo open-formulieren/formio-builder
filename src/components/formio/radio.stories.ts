@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, within} from '@storybook/test';
+import {expect, userEvent, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -86,5 +86,38 @@ export const WithErrors: Story = {
     const canvas = within(canvasElement);
     await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
     await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+  },
+};
+
+export const DefaultValueRemoved: Story = {
+  args: {
+    label: 'With removing the default value',
+    options: [
+      {value: 'a', label: 'A'},
+      {value: 'b', label: 'B'},
+    ],
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-radio': 'a'},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const input1 = canvas.getByLabelText('A');
+    const input2 = canvas.getByLabelText('B');
+
+    // Before clearing the default value
+    await expect(canvas.queryByText('Clear radio button values')).toBeInTheDocument();
+    await expect(input1).toBeChecked();
+    await expect(input2).not.toBeChecked();
+
+    // After clearing the default value
+    await userEvent.click(canvas.getByRole('button', {name: 'Clear radio button values'}));
+    await expect(canvas.queryByText('Clear radio button values')).not.toBeInTheDocument();
+    await expect(input1).not.toBeChecked();
+    await expect(input2).not.toBeChecked();
   },
 };
