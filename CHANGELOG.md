@@ -1,5 +1,9 @@
 # Changes
 
+## 0.19.1 (2024-04-26)
+
+Added missing translations.
+
 ## 0.19.0 (2024-04-26)
 
 Feature release
