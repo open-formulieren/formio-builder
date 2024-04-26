@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, within} from '@storybook/test';
+import {expect, userEvent, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -86,5 +86,56 @@ export const WithErrors: Story = {
     const canvas = within(canvasElement);
     await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
     await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+  },
+};
+
+export const Clearable: Story = {
+  args: {
+    label: 'Clearable',
+    isClearable: true,
+    options: [
+      {value: 'a', label: 'A'},
+      {value: 'b', label: 'B'},
+    ],
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-radio': 'a'},
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', {name: 'Clear selection'});
+    const input1 = canvas.getByLabelText('A');
+    const input2 = canvas.getByLabelText('B');
+
+    // Before clearing the default value
+    expect(button).toBeVisible();
+    await expect(input1).toBeChecked();
+    await expect(input2).not.toBeChecked();
+
+    // After clearing the default value
+    await userEvent.click(button);
+    expect(button).not.toBeVisible();
+    await expect(input1).not.toBeChecked();
+    await expect(input2).not.toBeChecked();
+  },
+};
+
+export const ClearableWithEmptyStringOption: Story = {
+  args: {
+    label: 'Clearable',
+    isClearable: true,
+    options: [
+      {value: '', label: ''}, // rendering is weird with empty labels
+    ],
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-radio': ''},
+    },
   },
 };

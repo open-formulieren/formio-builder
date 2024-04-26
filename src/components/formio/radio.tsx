@@ -1,6 +1,8 @@
 import clsx from 'clsx';
-import {Field} from 'formik';
+import {Field, useFormikContext} from 'formik';
+import {ExtendedComponentSchema} from 'formiojs';
 import {ReactNode} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
 
@@ -42,31 +44,65 @@ export interface RadioProps {
   options: Option[];
   label?: React.ReactNode;
   required?: boolean;
+  isClearable?: boolean;
   tooltip?: string;
   description?: string;
 }
+
+const EmptyLabel: React.FC = () => (
+  <em>
+    <FormattedMessage
+      description="Fallback label for option with empty label"
+      defaultMessage="(missing label)"
+    />
+  </em>
+);
 
 export const Radio: React.FC<RadioProps> = ({
   name,
   options,
   label,
   required = false,
+  isClearable = false,
   tooltip = '',
   description = '',
 }) => {
+  const {getFieldProps, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
+  const {value} = getFieldProps(name);
+  const hasSelection = !!options.find(opt => opt.value === value);
+
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
             <label className="form-check-label">
-              <RadioInput name={name} value={value} label={label} description={description} />
+              <RadioInput
+                name={name}
+                value={value}
+                label={label || <EmptyLabel />}
+                description={description}
+              />
             </label>
           </div>
         ))}
       </div>
 
       {description && <Description text={description} />}
+
+      {hasSelection && isClearable && (
+        <button
+          type="button"
+          className="btn btn-link btn-sm"
+          onClick={() => setFieldValue(name, undefined)}
+          style={{padding: 0}}
+        >
+          <FormattedMessage
+            description="Clear selection button label"
+            defaultMessage="Clear selection"
+          />
+        </button>
+      )}
     </Component>
   );
 };
