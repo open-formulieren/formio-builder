@@ -1,5 +1,27 @@
 # Changes
 
+## 0.19.0 (2024-04-26)
+
+Feature release
+
+💥 Breaking change
+
+The custom CSS is now split into its own bundle rather than being injected into the document
+automatically. Make sure to load/import `@open-formulieren/formio-builder/css/index.css`.
+
+- Added SCSS pipeline for custom styling instead of `@emotion/css`
+
+- [`OF#3964`][OF#3964] Use proper boolean values for checkbox trigger components in simple
+  conditionals.
+- [`OF#4064`][OF#4064] Radio component (default) values can now be cleared.
+- [`OF#4158`][OF#4158] Added additional `invalid_date` and `invalid_datetime` error message keys to
+  date and datetime component edit forms.
+- Updated dependencies with security patches.
+
+[OF#3964]: https://github.com/open-formulieren/open-forms/issues/3964
+[OF#4064]: https://github.com/open-formulieren/open-forms/issues/4064
+[OF#4158]: https://github.com/open-formulieren/open-forms/issues/4158
+
 ## 0.18.4 (2024-04-17)
 
 Bugfix release
