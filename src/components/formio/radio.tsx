@@ -1,3 +1,4 @@
+import {css} from '@emotion/css';
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs';
@@ -44,7 +45,7 @@ export interface RadioProps {
   options: Option[];
   label?: React.ReactNode;
   required?: boolean;
-  isPreview?: boolean;
+  isClearable?: boolean;
   tooltip?: string;
   description?: string;
 }
@@ -54,36 +55,18 @@ export const Radio: React.FC<RadioProps> = ({
   options,
   label,
   required = false,
-  isPreview = false,
+  isClearable = true,
   tooltip = '',
   description = '',
 }) => {
-  const {values, setValues} = useFormikContext<ExtendedComponentSchema>();
+  const {values, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
 
-  const clearRadioValues = () => {
-    const updatedValues = {...values};
-    updatedValues[name] = '';
-    setValues(updatedValues);
-  };
+  const CLEAR_VALUES_ICON = css`
+    margin-right: 5px;
+  `;
 
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
-      {values[name] && !isPreview && (
-        <div>
-          <button
-            type="button"
-            className="btn btn-secondary formio-button-remove-row"
-            onClick={clearRadioValues}
-          >
-            <i className="fa fa-times-circle" aria-hidden="true" />
-            <FormattedMessage
-              description="Clear radio values button label"
-              defaultMessage="Clear radio button values"
-            />
-          </button>
-        </div>
-      )}
-
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
@@ -95,6 +78,22 @@ export const Radio: React.FC<RadioProps> = ({
       </div>
 
       {description && <Description text={description} />}
+
+      {values[name] && isClearable && (
+        <div>
+          <button
+            type="button"
+            className="btn btn-secondary formio-button-remove-row"
+            onClick={() => setFieldValue(name, '')}
+          >
+            <i className={clsx('fa', 'fa-times-circle', CLEAR_VALUES_ICON)} aria-hidden="true" />
+            <FormattedMessage
+              description="Clear selection button label"
+              defaultMessage="Clear selection"
+            />
+          </button>
+        </div>
+      )}
     </Component>
   );
 };

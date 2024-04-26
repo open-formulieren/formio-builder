@@ -110,13 +110,13 @@ export const DefaultValueRemoved: Story = {
     const input2 = canvas.getByLabelText('B');
 
     // Before clearing the default value
-    await expect(canvas.queryByText('Clear radio button values')).toBeInTheDocument();
+    await expect(canvas.queryByText('Clear selection')).toBeInTheDocument();
     await expect(input1).toBeChecked();
     await expect(input2).not.toBeChecked();
 
     // After clearing the default value
-    await userEvent.click(canvas.getByRole('button', {name: 'Clear radio button values'}));
-    await expect(canvas.queryByText('Clear radio button values')).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', {name: 'Clear selection'}));
+    await expect(canvas.queryByText('Clear selection')).not.toBeInTheDocument();
     await expect(input1).not.toBeChecked();
     await expect(input2).not.toBeChecked();
   },
