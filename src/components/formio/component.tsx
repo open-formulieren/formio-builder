@@ -1,4 +1,3 @@
-import {css} from '@emotion/css';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -7,6 +6,7 @@ import {useValidationErrors} from '@/utils/errors';
 import {ErrorList} from '@/utils/errors';
 
 import ComponentLabel from './component-label';
+import './component.scss';
 
 export interface ComponentProps {
   // XXX: eventually (most) of these literals will be included in AnyComponentType
@@ -20,15 +20,6 @@ export interface ComponentProps {
   className?: string;
 }
 
-// Fix the overlapping icons/text when the error icon is shown.
-// XXX: once we've moved away from bootstrap/formio 'component library', this fix and
-// @emotion/css can be removed again.
-const PAD_ERROR_ICON = css`
-  .form-control.is-invalid {
-    padding-inline-end: calc(1.5em + 0.75rem);
-  }
-`;
-
 const Component: React.FC<ComponentProps> = ({
   type,
   field = '',
@@ -40,7 +31,7 @@ const Component: React.FC<ComponentProps> = ({
   ...props
 }) => {
   const {errors} = useValidationErrors(field);
-  const className = clsx('form-group', 'has-feedback', 'formio-component', PAD_ERROR_ICON, {
+  const className = clsx('form-group', 'has-feedback', 'formio-component', 'offb-component', {
     [`formio-component-${type}`]: type,
     'has-error': field && errors.length > 0,
     required: required,

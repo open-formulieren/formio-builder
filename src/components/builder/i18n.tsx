@@ -1,4 +1,3 @@
-import {css} from '@emotion/css';
 import {OFExtensions, SupportedLocales} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {useFormikContext} from 'formik';
@@ -12,6 +11,7 @@ import {AnyComponentSchema} from '@/types/schemas';
 
 import {Component, TextField} from '../formio';
 import ComponentLabel from '../formio/component-label';
+import './i18n.scss';
 
 type ExtractTranslatableProperties<T> = T extends OFExtensions<infer TK> ? TK : never;
 type StringValueProperties<S> = S extends AnyComponentSchema
@@ -24,30 +24,6 @@ export interface ComponentTranslationsProps<S extends AnyComponentSchema> {
   };
   children?: React.ReactNode;
 }
-
-// XXX: once we've moved away from bootstrap/formio 'component library', this fix and
-// @emotion/css can be removed again.
-const LABEL_CELL = css`
-  padding: 0 !important;
-  border-left-color: transparent !important;
-  border-top-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom-width: 1px !important;
-`;
-
-const TABS_CELL = css`
-  padding: 0 !important;
-  border-left-color: transparent !important;
-  border-top-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom: none !important;
-`;
-
-const TABS_OFFSET = css`
-  margin-left: -1px;
-  margin-bottom: -1px;
-  margin-right: -1px;
-`;
 
 export interface ComponentTranslationsContextType {
   activeLanguage: SupportedLocales;
@@ -79,8 +55,8 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
     <Component type="datagrid">
       <table className="table table-bordered">
         <thead>
-          <tr>
-            <td colSpan={2} className={LABEL_CELL}>
+          <tr className="offb-i18n-header">
+            <td colSpan={2} className="offb-i18n-header__label">
               <ComponentLabel
                 label={
                   <FormattedMessage
@@ -94,8 +70,8 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
                 })}
               />
             </td>
-            <td className={TABS_CELL}>
-              <ul className={`nav nav-tabs ${TABS_OFFSET}`}>
+            <td className="offb-i18n-header__tab-container">
+              <ul className={`nav nav-tabs offb-i18n-header__tabs`}>
                 {supportedLanguageCodes.map(code => (
                   <li key={code} className={clsx('nav-item', {active: code === activeLanguage})}>
                     <a

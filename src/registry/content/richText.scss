@@ -1,0 +1,9 @@
+.offb-rich-text {
+  .ck.ck-content {
+    /* formula taken from formio's ckeditor build */
+    min-block-size: var(
+      --of-ckeditor-min-block-size,
+      calc(var(--of-ckeditor-rows, 3) * 31px + 14px)
+    );
+  }
+}

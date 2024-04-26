@@ -17,6 +17,30 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     'storybook-react-intl',
     '@storybook/addon-webpack5-compiler-babel',
+    {
+      name: '@storybook/addon-styling-webpack',
+      options: {
+        rules: [
+          // Replaces existing CSS rules with given rule
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+          },
+          // Replaces any existing Sass rules with given rules
+          {
+            test: /\.s[ac]ss$/i,
+            use: [
+              'style-loader',
+              'css-loader',
+              {
+                loader: 'sass-loader',
+                options: {implementation: require.resolve('sass')},
+              },
+            ],
+          },
+        ],
+      },
+    },
   ],
   docs: {
     autodocs: 'tag',
