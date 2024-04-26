@@ -247,6 +247,11 @@
     "isTranslated": true,
     "originalDefault": "{groupLabel} 1"
   },
+  "7rzPgD": {
+    "defaultMessage": "(label ontbreekt)",
+    "description": "Fallback label for option with empty label",
+    "originalDefault": "(missing label)"
+  },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
     "description": "Operator 'subtract' option label",
@@ -593,6 +598,11 @@
     "description": "Tooltip for 'useConfigFiletypes' builder field",
     "originalDefault": "When this is checked, the filetypes configured in the global settings will be used."
   },
+  "S4Lvvs": {
+    "defaultMessage": "Maak keuze leeg",
+    "description": "Clear selection button label",
+    "originalDefault": "Clear selection"
+  },
   "SEXqhC": {
     "defaultMessage": "Validatiemethode",
     "description": "Label for 'date constraint mode' builder field",
@@ -684,6 +694,11 @@
     "description": "Component property 'Autocomplete' label",
     "originalDefault": "Autocomplete"
   },
+  "Vf8vWO": {
+    "defaultMessage": "Aangevinkt",
+    "description": "Label of the 'true' checkbox option",
+    "originalDefault": "Checked"
+  },
   "VhCwEK": {
     "defaultMessage": "Het label dat boven elke herhaalde groep weergegeven wordt in de overzichtspagina, inzendings-PDF en bevestigingsmail. De index van de groep wordt hieraan toegevoegd, bijvoorbeeld als je 'Item' opgeeft, dan wordt dit weergegeven als 'Item 1', 'Item 2', ...",
     "description": "Tooltip for 'groupLabel' builder field",
@@ -769,6 +784,11 @@
     "defaultMessage": "Selecteer de plugin om te gebruiken voor prefill.",
     "description": "Tooltip for 'prefill.plugin' builder field",
     "originalDefault": "Select the plugin to use for the prefill functionality."
+  },
+  "ZMIEED": {
+    "defaultMessage": "Uitgevinkt",
+    "description": "Label of the 'false' checkbox option",
+    "originalDefault": "Not checked"
   },
   "ZOytnI": {
     "defaultMessage": "Indien aangevinkt, dan worden gegevens van partners opgehaald en ingesloten.",

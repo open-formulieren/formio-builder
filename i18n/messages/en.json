@@ -244,6 +244,11 @@
     "description": "Edit grid preview content description",
     "originalDefault": "{groupLabel} 1"
   },
+  "7rzPgD": {
+    "defaultMessage": "(missing label)",
+    "description": "Fallback label for option with empty label",
+    "originalDefault": "(missing label)"
+  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -584,6 +589,11 @@
     "description": "Tooltip for 'useConfigFiletypes' builder field",
     "originalDefault": "When this is checked, the filetypes configured in the global settings will be used."
   },
+  "S4Lvvs": {
+    "defaultMessage": "Clear selection",
+    "description": "Clear selection button label",
+    "originalDefault": "Clear selection"
+  },
   "SEXqhC": {
     "defaultMessage": "Mode preset",
     "description": "Label for 'date constraint mode' builder field",
@@ -674,6 +684,11 @@
     "description": "Component property 'Autocomplete' label",
     "originalDefault": "Autocomplete"
   },
+  "Vf8vWO": {
+    "defaultMessage": "Checked",
+    "description": "Label of the 'true' checkbox option",
+    "originalDefault": "Checked"
+  },
   "VhCwEK": {
     "defaultMessage": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ...",
     "description": "Tooltip for 'groupLabel' builder field",
@@ -758,6 +773,11 @@
     "defaultMessage": "Select the plugin to use for the prefill functionality.",
     "description": "Tooltip for 'prefill.plugin' builder field",
     "originalDefault": "Select the plugin to use for the prefill functionality."
+  },
+  "ZMIEED": {
+    "defaultMessage": "Not checked",
+    "description": "Label of the 'false' checkbox option",
+    "originalDefault": "Not checked"
   },
   "ZOytnI": {
     "defaultMessage": "Whether to add partners information to the component.",
