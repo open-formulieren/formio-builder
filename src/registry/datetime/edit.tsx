@@ -42,6 +42,7 @@ const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
     'required',
     'minDate',
     'maxDate',
+    'invalid_datetime',
   ]);
 
   return (

@@ -40,7 +40,12 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
 
   const {hasAnyError} = useErrorChecker<DateComponentSchema>();
 
-  Validate.useManageValidatorsTranslations<DateComponentSchema>(['required', 'minDate', 'maxDate']);
+  Validate.useManageValidatorsTranslations<DateComponentSchema>([
+    'required',
+    'minDate',
+    'maxDate',
+    'invalid_date',
+  ]);
 
   return (
     <Tabs>
