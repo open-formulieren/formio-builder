@@ -43,8 +43,7 @@ export const ComparisonValueInput: React.FC = () => {
 
   const registryEntry = getRegistryEntry(chosenComponent);
   const {comparisonValue} = registryEntry;
-  const ComparisonValueInput: React.FC<ComparisonValueProps> =
-    comparisonValue || Fallback.comparisonValue;
+  const InputComponent = comparisonValue || Fallback.comparisonValue;
 
   const props: ComparisonValueProps = {
     name: 'conditional.eq',
@@ -57,7 +56,7 @@ export const ComparisonValueInput: React.FC = () => {
   };
   if (chosenComponent.hasOwnProperty('multiple')) props.multiple = chosenComponent.multiple;
 
-  return <ComparisonValueInput {...props} />;
+  return <InputComponent {...props} />;
 };
 
 const SimpleConditional: React.FC = () => (
