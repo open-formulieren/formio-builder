@@ -109,6 +109,7 @@
     "sass-loader": "^14.2.0",
     "storybook": "^8.0.8",
     "storybook-react-intl": "^2.0.10",
+    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.6",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "ttypescript": "^1.5.15",

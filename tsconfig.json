@@ -29,7 +29,8 @@
         "type": "config",
         "overrideIdFn": "[sha512:contenthash:base64:6]",
         "ast": true
-      }
+      },
+      {"transform": "./scss-transformer.ts"}
     ]
   },
   "include": ["src"],
