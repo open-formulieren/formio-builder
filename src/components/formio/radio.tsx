@@ -49,6 +49,15 @@ export interface RadioProps {
   description?: string;
 }
 
+const EmptyLabel: React.FC = () => (
+  <em>
+    <FormattedMessage
+      description="Fallback label for option with empty label"
+      defaultMessage="(missing label)"
+    />
+  </em>
+);
+
 export const Radio: React.FC<RadioProps> = ({
   name,
   options,
@@ -60,6 +69,7 @@ export const Radio: React.FC<RadioProps> = ({
 }) => {
   const {getFieldProps, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
   const {value} = getFieldProps(name);
+  const hasSelection = !!options.find(opt => opt.value === value);
 
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
@@ -67,7 +77,12 @@ export const Radio: React.FC<RadioProps> = ({
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
             <label className="form-check-label">
-              <RadioInput name={name} value={value} label={label} description={description} />
+              <RadioInput
+                name={name}
+                value={value}
+                label={label || <EmptyLabel />}
+                description={description}
+              />
             </label>
           </div>
         ))}
@@ -75,20 +90,18 @@ export const Radio: React.FC<RadioProps> = ({
 
       {description && <Description text={description} />}
 
-      {value && isClearable && (
-        <div>
-          <button
-            type="button"
-            className="btn btn-secondary formio-button-remove-row"
-            onClick={() => setFieldValue(name, '')}
-          >
-            <i className={clsx('fa', 'fa-times-circle')} aria-hidden="true" />{' '}
-            <FormattedMessage
-              description="Clear selection button label"
-              defaultMessage="Clear selection"
-            />
-          </button>
-        </div>
+      {hasSelection && isClearable && (
+        <button
+          type="button"
+          className="btn btn-link btn-sm"
+          onClick={() => setFieldValue(name, undefined)}
+          style={{padding: 0}}
+        >
+          <FormattedMessage
+            description="Clear selection button label"
+            defaultMessage="Clear selection"
+          />
+        </button>
       )}
     </Component>
   );

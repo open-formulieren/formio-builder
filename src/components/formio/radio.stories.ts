@@ -89,9 +89,9 @@ export const WithErrors: Story = {
   },
 };
 
-export const DefaultValueRemoved: Story = {
+export const Clearable: Story = {
   args: {
-    label: 'Clearable default value',
+    label: 'Clearable',
     isClearable: true,
     options: [
       {value: 'a', label: 'A'},
@@ -121,5 +121,21 @@ export const DefaultValueRemoved: Story = {
     expect(button).not.toBeVisible();
     await expect(input1).not.toBeChecked();
     await expect(input2).not.toBeChecked();
+  },
+};
+
+export const ClearableWithEmptyStringOption: Story = {
+  args: {
+    label: 'Clearable',
+    isClearable: true,
+    options: [
+      {value: '', label: ''}, // rendering is weird with empty labels
+    ],
+  },
+
+  parameters: {
+    formik: {
+      initialValues: {'my-radio': ''},
+    },
   },
 };
