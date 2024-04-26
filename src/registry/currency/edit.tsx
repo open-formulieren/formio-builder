@@ -21,7 +21,7 @@ import {LABELS} from '@/components/builder/messages';
 import {Checkbox, NumberField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {ComparisonValueProps, EditFormDefinition} from '../types';
+import {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'currency' type component.
@@ -159,10 +159,6 @@ const DefaultValue: React.FC = () => {
   );
 };
 
-const renderComparisonValueInput: React.FC<ComparisonValueProps> = props => {
-  return <NumberField {...props} />;
-};
-
 const DecimalLimit: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
@@ -203,5 +199,7 @@ const AllowNegative: React.FC = () => {
   );
 };
 
+const ComparisonValueInput = NumberField;
+
 export default EditForm;
-export {renderComparisonValueInput};
+export {ComparisonValueInput};

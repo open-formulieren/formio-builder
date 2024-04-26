@@ -17,12 +17,6 @@ export interface SimpleConditional {
   conditional?: Omit<ConditionalOptions, 'json'>;
 }
 
-const renderDefaultComparisonValueInput: React.FC<ComparisonValueProps> = props => {
-  const ComparisonValueInput: React.FC<ComparisonValueProps> = Fallback.comparisonValue;
-
-  return <ComparisonValueInput {...props} />;
-};
-
 export const ComparisonValueInput: React.FC = () => {
   const {getFormComponents} = useContext(BuilderContext);
   const {values, setFieldValue} = useFormikContext<SimpleConditional>();
@@ -49,8 +43,7 @@ export const ComparisonValueInput: React.FC = () => {
 
   const registryEntry = getRegistryEntry(chosenComponent);
   const {comparisonValue} = registryEntry;
-  const renderComparisonValueInput: React.FC<ComparisonValueProps> =
-    comparisonValue || renderDefaultComparisonValueInput;
+  const InputComponent = comparisonValue || Fallback.comparisonValue;
 
   const props: ComparisonValueProps = {
     name: 'conditional.eq',
@@ -63,7 +56,7 @@ export const ComparisonValueInput: React.FC = () => {
   };
   if (chosenComponent.hasOwnProperty('multiple')) props.multiple = chosenComponent.multiple;
 
-  return <>{renderComparisonValueInput(props)}</>;
+  return <InputComponent {...props} />;
 };
 
 const SimpleConditional: React.FC = () => (

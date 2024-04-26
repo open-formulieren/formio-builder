@@ -155,33 +155,31 @@ const DefaultValue: React.FC<DefaultValueProps> = ({description}) => {
   );
 };
 
-const renderComparisonValueInput: React.FC<ComparisonValueProps> = props => {
-  return (
-    <Select
-      {...props}
-      options={[
-        {
-          value: true,
-          label: (
-            <FormattedMessage
-              description="Label of the 'true' checkbox option"
-              defaultMessage="Checked"
-            />
-          ),
-        },
-        {
-          value: false,
-          label: (
-            <FormattedMessage
-              description="Label of the 'false' checkbox option"
-              defaultMessage="Not checked"
-            />
-          ),
-        },
-      ]}
-    />
-  );
-};
+const ComparisonValueInput: React.FC<ComparisonValueProps> = props => (
+  <Select
+    {...props}
+    options={[
+      {
+        value: true,
+        label: (
+          <FormattedMessage
+            description="Label of the 'true' checkbox option"
+            defaultMessage="Checked"
+          />
+        ),
+      },
+      {
+        value: false,
+        label: (
+          <FormattedMessage
+            description="Label of the 'false' checkbox option"
+            defaultMessage="Not checked"
+          />
+        ),
+      },
+    ]}
+  />
+);
 
 export default EditForm;
-export {renderComparisonValueInput};
+export {ComparisonValueInput};
