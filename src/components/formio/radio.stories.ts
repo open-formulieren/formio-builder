@@ -91,7 +91,8 @@ export const WithErrors: Story = {
 
 export const DefaultValueRemoved: Story = {
   args: {
-    label: 'With removing the default value',
+    label: 'Clearable default value',
+    isClearable: true,
     options: [
       {value: 'a', label: 'A'},
       {value: 'b', label: 'B'},
@@ -106,17 +107,18 @@ export const DefaultValueRemoved: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', {name: 'Clear selection'});
     const input1 = canvas.getByLabelText('A');
     const input2 = canvas.getByLabelText('B');
 
     // Before clearing the default value
-    await expect(canvas.queryByText('Clear selection')).toBeInTheDocument();
+    expect(button).toBeVisible();
     await expect(input1).toBeChecked();
     await expect(input2).not.toBeChecked();
 
     // After clearing the default value
-    await userEvent.click(canvas.getByRole('button', {name: 'Clear selection'}));
-    await expect(canvas.queryByText('Clear selection')).not.toBeInTheDocument();
+    await userEvent.click(button);
+    expect(button).not.toBeVisible();
     await expect(input1).not.toBeChecked();
     await expect(input2).not.toBeChecked();
   },

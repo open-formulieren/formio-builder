@@ -1,4 +1,3 @@
-import {css} from '@emotion/css';
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs';
@@ -55,15 +54,12 @@ export const Radio: React.FC<RadioProps> = ({
   options,
   label,
   required = false,
-  isClearable = true,
+  isClearable = false,
   tooltip = '',
   description = '',
 }) => {
-  const {values, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
-
-  const CLEAR_VALUES_ICON = css`
-    margin-right: 5px;
-  `;
+  const {getFieldProps, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
+  const {value} = getFieldProps(name);
 
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
@@ -79,14 +75,14 @@ export const Radio: React.FC<RadioProps> = ({
 
       {description && <Description text={description} />}
 
-      {values[name] && isClearable && (
+      {value && isClearable && (
         <div>
           <button
             type="button"
             className="btn btn-secondary formio-button-remove-row"
             onClick={() => setFieldValue(name, '')}
           >
-            <i className={clsx('fa', 'fa-times-circle', CLEAR_VALUES_ICON)} aria-hidden="true" />
+            <i className={clsx('fa', 'fa-times-circle')} aria-hidden="true" />{' '}
             <FormattedMessage
               description="Clear selection button label"
               defaultMessage="Clear selection"

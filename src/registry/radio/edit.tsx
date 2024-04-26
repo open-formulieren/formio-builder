@@ -182,6 +182,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
       options={options}
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
+      isClearable
     />
   );
 };
