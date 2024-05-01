@@ -1,8 +1,8 @@
+import JSONEditor from '@open-formulieren/monaco-json-editor/lib/jsonEditor';
 import {JSONObject} from '@open-formulieren/types/lib/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage} from 'react-intl';
 
-import JSONEdit from '@/components/JSONEdit';
 import {Component, Description} from '@/components/formio';
 
 const NAME = 'openForms.itemsExpression';
@@ -14,7 +14,7 @@ const NAME = 'openForms.itemsExpression';
  * @todo: this would really benefit from a nice, context-aware JsonLogic editor.
  */
 export const ItemsExpression: React.FC = () => {
-  const {getFieldProps} = useFormikContext();
+  const {getFieldProps, setFieldValue} = useFormikContext();
   const {value = ''} = getFieldProps<JSONObject | string | undefined>(NAME);
 
   const htmlId = `editform-${NAME}`;
@@ -32,7 +32,12 @@ export const ItemsExpression: React.FC = () => {
       }
     >
       <div>
-        <JSONEdit name={NAME} data={value} rows={3} id={htmlId} />
+        <JSONEditor
+          height="15vh"
+          value={value}
+          onChange={value => setFieldValue(NAME, value)}
+          showLines={false}
+        />
       </div>
 
       <Description
