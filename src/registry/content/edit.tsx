@@ -33,6 +33,7 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
 
   const {hasAnyError} = useErrorChecker<ContentComponentSchema>();
 
+  const intl = useIntl();
   const [previewMode, setPreviewMode] = useState<PreviewState>('rich');
 
   const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
@@ -64,7 +65,17 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
         </div>
         <div className="card-body">
           {previewMode === 'JSON' ? (
-            <JSONEditor height="45vh" value={jsonEditValues} onChange={setValues} />
+            <JSONEditor
+              wrapperProps={{
+                'aria-label': intl.formatMessage({
+                  description: 'Accessible label for builder preview JSON edit field',
+                  defaultMessage: 'Edit component JSON',
+                }),
+              }}
+              height="45vh"
+              value={jsonEditValues}
+              onChange={setValues}
+            />
           ) : (
             <>
               <RichTextTranslations />
