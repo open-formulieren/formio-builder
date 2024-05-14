@@ -1,4 +1,4 @@
-import JSONEditor from '@open-formulieren/monaco-json-editor/lib/jsonEditor';
+import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import {JSONObject} from '@open-formulieren/types/lib/types';
 import {useFormikContext} from 'formik';
 import {FormattedMessage} from 'react-intl';
