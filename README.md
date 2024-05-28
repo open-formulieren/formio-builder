@@ -51,7 +51,12 @@ For (code) contributions that do fit the goals of this library, please follow th
 nvm use
 ```
 
-2. Start Storybook in dev mode for component development:
+2. Install the dependencies
+```bash
+npm install
+```
+
+3. Start Storybook in dev mode for component development:
 
 ```bash
 npm run compilemessages
