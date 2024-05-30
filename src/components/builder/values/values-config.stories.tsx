@@ -162,7 +162,8 @@ export const SelectBoxesResetState: StoryObj<{
 
       await userEvent.click(await canvas.findByText('From variable'));
 
-      const expressionInput = await canvas.findByLabelText('Items expression');
+      const expressionInput = await canvas.findByTestId('jsonEdit');
+
       await userEvent.clear(expressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
