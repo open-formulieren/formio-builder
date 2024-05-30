@@ -13,10 +13,16 @@ import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
 export interface ComponentPreviewWrapperProps {
   component: AnyComponentSchema | FallbackSchema;
+  /** Initial values for the preview component, e.g. `{"componentKey": "some_value"}` */
+  initialValues: Record<string, unknown>;
   children: React.ReactNode;
 }
 
-const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({component, children}) => {
+const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
+  component,
+  initialValues,
+  children,
+}) => {
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
 
   const {setValues} = useFormikContext();
@@ -36,9 +42,17 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({compon
         {previewMode === 'JSON' ? (
           <JSONEditor height="45vh" value={component} onChange={setValues} />
         ) : (
-          <div className="component-preview" data-testid="componentPreview">
-            {children}
-          </div>
+          <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            onSubmit={() => {
+              throw new Error("Can't submit preview form");
+            }}
+          >
+            <div className="component-preview" data-testid="componentPreview">
+              {children}
+            </div>
+          </Formik>
         )}
       </div>
     </div>
@@ -77,21 +91,13 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   const initialValues = key ? {[key]: previewDefaultValue} : {};
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={() => {
-        throw new Error("Can't submit preview form");
-      }}
-    >
-      <ComponentPreviewWrapper component={component}>
-        {isKnownComponentType(component) ? (
-          <PreviewComponent component={component} />
-        ) : (
-          <Fallback.preview component={component} />
-        )}
-      </ComponentPreviewWrapper>
-    </Formik>
+    <ComponentPreviewWrapper component={component} initialValues={initialValues}>
+      {isKnownComponentType(component) ? (
+        <PreviewComponent component={component} />
+      ) : (
+        <Fallback.preview component={component} />
+      )}
+    </ComponentPreviewWrapper>
   );
 };
 
