@@ -7,6 +7,8 @@ import {FormattedMessage} from 'react-intl';
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
+import './componentJsonEdit.scss';
+
 /*
   Generic preview (preview + wrapper with view mode)
  */
@@ -40,7 +42,11 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
       </div>
       <div className="card-body">
         {previewMode === 'JSON' ? (
-          <JSONEditor height="45vh" value={component} onChange={setValues} />
+          <JSONEditor
+            wrapperProps={{className: 'component-json-edit'}}
+            value={component}
+            onChange={setValues}
+          />
         ) : (
           <Formik
             enableReinitialize

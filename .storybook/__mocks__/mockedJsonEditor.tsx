@@ -4,10 +4,11 @@ import React, {useRef, useState} from 'react';
 interface JSONEditorProps {
   value: unknown;
   onChange: (value: any) => void;
+  wrapperProps?: any;
   height?: any;
 }
 
-export const JSONEditor = ({value, onChange, height = ''}: JSONEditorProps) => {
+export const JSONEditor = ({value, onChange, wrapperProps = {}, height = ''}: JSONEditorProps) => {
   const dataAsJSON = JSON.stringify(value, null, 2);
   const [data, setData] = useState(dataAsJSON);
   const [JSONValid, setJSONValid] = useState(true);
@@ -36,16 +37,21 @@ export const JSONEditor = ({value, onChange, height = ''}: JSONEditorProps) => {
     onChange(updatedData);
   };
 
+  // pop the extra className if provided, to avoid overwriting the ones
+  // we hardcode:
+  const {className = undefined, ...otherProps} = wrapperProps;
+
   return (
     <>
       <textarea
         ref={inputRef}
         value={data}
-        className={clsx('form-control', {'is-invalid': !JSONValid})}
+        className={clsx(className, 'form-control', {'is-invalid': !JSONValid})}
         data-testid="jsonEdit"
         onChange={editorOnChange}
         spellCheck={false}
         style={{height}}
+        {...otherProps}
       />
     </>
   );
