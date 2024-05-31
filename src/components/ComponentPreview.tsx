@@ -17,17 +17,18 @@ export interface ComponentPreviewWrapperProps {
   component: AnyComponentSchema | FallbackSchema;
   /** Initial values for the preview component, e.g. `{"componentKey": "some_value"}` */
   initialValues: Record<string, unknown>;
+  /** Handler to be called when the component JSON definition changes */
+  onComponentChange: (value: any) => void;
   children: React.ReactNode;
 }
 
 const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   component,
   initialValues,
+  onComponentChange,
   children,
 }) => {
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
-
-  const {setValues} = useFormikContext();
 
   return (
     <div className="card panel preview-panel">
@@ -45,7 +46,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
           <JSONEditor
             wrapperProps={{className: 'component-json-edit'}}
             value={component}
-            onChange={setValues}
+            onChange={onComponentChange}
           />
         ) : (
           <Formik
@@ -67,6 +68,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
 
 export interface GenericComponentPreviewProps {
   component: AnyComponentSchema | FallbackSchema;
+  onComponentChange: (value: any) => void;
 }
 
 /**
@@ -78,7 +80,10 @@ export interface GenericComponentPreviewProps {
  *
  * It is also responsible for handling the `multiple: true` variants in a generic way.
  */
-const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({component}) => {
+const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
+  component,
+  onComponentChange,
+}) => {
   const key = isKnownComponentType(component) ? component.key : '';
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
@@ -97,7 +102,11 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   const initialValues = key ? {[key]: previewDefaultValue} : {};
 
   return (
-    <ComponentPreviewWrapper component={component} initialValues={initialValues}>
+    <ComponentPreviewWrapper
+      onComponentChange={onComponentChange}
+      component={component}
+      initialValues={initialValues}
+    >
       {isKnownComponentType(component) ? (
         <PreviewComponent component={component} />
       ) : (

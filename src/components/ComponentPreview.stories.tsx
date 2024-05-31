@@ -1,6 +1,5 @@
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, waitFor, within} from '@storybook/test';
-import {Formik} from 'formik';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentPreview from './ComponentPreview';
 
@@ -12,9 +11,7 @@ export default {
 type Story = StoryObj<typeof ComponentPreview>;
 
 const Template: StoryFn<typeof ComponentPreview> = ({component}) => (
-  <Formik initialValues={component} onSubmit={() => {}}>
-    <ComponentPreview component={component} />
-  </Formik>
+  <ComponentPreview onComponentChange={fn()} component={component} />
 );
 
 export const Default: Story = {
