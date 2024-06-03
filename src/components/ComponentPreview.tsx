@@ -1,13 +1,11 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import clsx from 'clsx';
-import {Formik, useFormikContext} from 'formik';
+import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
-
-import './componentJsonEdit.scss';
 
 /*
   Generic preview (preview + wrapper with view mode)
@@ -18,7 +16,7 @@ export interface ComponentPreviewWrapperProps {
   /** Initial values for the preview component, e.g. `{"componentKey": "some_value"}` */
   initialValues: Record<string, unknown>;
   /** Handler to be called when the component JSON definition changes */
-  onComponentChange: (value: any) => void;
+  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
   children: React.ReactNode;
 }
 
@@ -44,7 +42,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
       <div className="card-body">
         {previewMode === 'JSON' ? (
           <JSONEditor
-            wrapperProps={{className: 'component-json-edit'}}
+            wrapperProps={{className: 'json-editor'}}
             value={component}
             onChange={onComponentChange}
           />
@@ -68,7 +66,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
 
 export interface GenericComponentPreviewProps {
   component: AnyComponentSchema | FallbackSchema;
-  onComponentChange: (value: any) => void;
+  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
 }
 
 /**

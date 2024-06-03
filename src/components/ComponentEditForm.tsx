@@ -176,7 +176,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 type EditFormLayoutProps = PropsWithChildren<
   Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
     onSubmit: () => void;
-    onComponentChange: (value: any) => void;
+    onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
     component: AnyComponentSchema | FallbackSchema;
   }
 >;

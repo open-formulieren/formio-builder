@@ -33,7 +33,7 @@ export const ItemsExpression: React.FC = () => {
     >
       <div>
         <JSONEditor
-          height="15vh"
+          wrapperProps={{className: 'json-editor json-editor--compact'}}
           value={value}
           onChange={value => setFieldValue(NAME, value)}
           showLines={false}
