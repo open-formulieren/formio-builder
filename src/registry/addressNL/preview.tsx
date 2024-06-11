@@ -56,6 +56,30 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
           />
         }
       />
+      {component.deriveAddress && (
+        <>
+          <TextField
+            name={`${key}.city`}
+            label={
+              <FormattedMessage
+                description="Label for addressNL city read only result"
+                defaultMessage="City"
+              />
+            }
+            disabled
+          />
+          <TextField
+            name={`${key}.streetNumber`}
+            label={
+              <FormattedMessage
+                description="Label for addressNL streetName read only result"
+                defaultMessage="Street name"
+              />
+            }
+            disabled
+          />
+        </>
+      )}
     </FieldSet>
   );
 };

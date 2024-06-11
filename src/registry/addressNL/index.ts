@@ -15,5 +15,8 @@ export default {
     houseNumber: '',
     houseLetter: '',
     houseNumberAddition: '',
+    city: '',
+    streetName: '',
+    secretStreetCity: '',
   },
 } satisfies RegistryEntry<AddressNLComponentSchema>;
