@@ -1,5 +1,9 @@
 # Changes
 
+## 0.20.0 (2024-05-12)
+
+Added support for city/street name deriviation in AddressNL component.
+
 ## 0.19.1 (2024-04-26)
 
 Added missing translations.
