@@ -1,5 +1,5 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
-import {useIntl} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
   BuilderTabs,
@@ -18,10 +18,32 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
+import {Checkbox} from '@/components/formio';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
+
+const DeriveAddress = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'DeriveAddress' builder field",
+    defaultMessage:
+      'When enabled, the street name and city are derived from the entered postcode and house number.',
+  });
+  return (
+    <Checkbox
+      name="deriveAddress"
+      label={
+        <FormattedMessage
+          description="Label for 'DeriveAddress' builder field"
+          defaultMessage="Derive address"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
 
 /**
  * Form to configure a Formio 'address' type component.
@@ -61,6 +83,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
+        <DeriveAddress />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
@@ -117,6 +140,7 @@ EditForm.defaultValues = {
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
+  deriveAddress: false,
   defaultValue: {
     postcode: '',
     houseNumber: '',

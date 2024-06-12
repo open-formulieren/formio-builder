@@ -105,6 +105,11 @@
     "description": "Component edit form tab title for 'Validation' tab",
     "originalDefault": "Validation"
   },
+  "2sbkGI": {
+    "defaultMessage": "When enabled, the street name and city are derived from the entered postcode and house number.",
+    "description": "Tooltip for 'DeriveAddress' builder field",
+    "originalDefault": "When enabled, the street name and city are derived from the entered postcode and house number."
+  },
   "3+WIVB": {
     "defaultMessage": "Maximale waarde",
     "description": "Label for 'validate.max' builder field",
@@ -357,6 +362,11 @@
     "defaultMessage": "Foutmeldingen specifiek voor dit component, inclusief vertalingen",
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
+  },
+  "DEetjI": {
+    "defaultMessage": "Street name",
+    "description": "Label for addressNL streetName read only result",
+    "originalDefault": "Street name"
   },
   "DJWATl": {
     "defaultMessage": "De mogelijke keuzeopties voor dit veld. De waarden worden in de formuliergegevens opgeslagen. De labels zijn de teksten die aan de gebruiker getoond worden.",
@@ -1207,6 +1217,11 @@
     "description": "Tooltip for 'useConfigDefaultMapSettings' builder field",
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
+  "osSl3z": {
+    "defaultMessage": "City",
+    "description": "Label for addressNL city read only result",
+    "originalDefault": "City"
+  },
   "p7g2h+": {
     "defaultMessage": "Nog één toevoegen",
     "description": "Add another option button label",
@@ -1287,6 +1302,11 @@
     "defaultMessage": "Geef aan of deze waarde in de bevestigingsmail moet opgenomen worden.",
     "description": "Tooltip for 'showInEmail' builder field",
     "originalDefault": "Whether to show this value in the confirmation email"
+  },
+  "toTZ0C": {
+    "defaultMessage": "Derive address",
+    "description": "Label for 'DeriveAddress' builder field",
+    "originalDefault": "Derive address"
   },
   "u5XYQh": {
     "defaultMessage": "Voettekst",
