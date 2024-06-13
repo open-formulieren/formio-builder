@@ -145,7 +145,6 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             label: intl.formatMessage(LABELS.label),
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
-            defaultValue: intl.formatMessage(LABELS.defaultValue),
             placeholder: intl.formatMessage(LABELS.placeholder),
           }}
         />
