@@ -1,5 +1,15 @@
 # Changes
 
+## 0.21.0 (2024-05-13)
+
+Removed translations support for `defaultValue`.
+
+Handling singular/array values at the same time is too complex for a feature that is unused, so we
+decided to drop translation support after it became clear it causes crashes (see
+[`OF#4362`][OF#4362]).
+
+[OF##4362]: https://github.com/open-formulieren/open-forms/issues/#4362
+
 ## 0.20.0 (2024-05-12)
 
 Added support for city/street name deriviation in AddressNL component.
