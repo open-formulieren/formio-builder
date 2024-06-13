@@ -1,5 +1,9 @@
 # Changes
 
+## 0.21.1 (2024-05-13)
+
+Added missing Dutch translations.
+
 ## 0.21.0 (2024-05-13)
 
 Removed translations support for `defaultValue`.

@@ -106,7 +106,7 @@
     "originalDefault": "Validation"
   },
   "2sbkGI": {
-    "defaultMessage": "When enabled, the street name and city are derived from the entered postcode and house number.",
+    "defaultMessage": "Indien aangevinkt, dan worden de straatnaam en stad afgeleid op basis van de ingevoerde postcode en huisnummer.",
     "description": "Tooltip for 'DeriveAddress' builder field",
     "originalDefault": "When enabled, the street name and city are derived from the entered postcode and house number."
   },
@@ -364,7 +364,7 @@
     "originalDefault": "Custom error messages for this component and their translations"
   },
   "DEetjI": {
-    "defaultMessage": "Street name",
+    "defaultMessage": "Straatnaam",
     "description": "Label for addressNL streetName read only result",
     "originalDefault": "Street name"
   },
@@ -1218,7 +1218,7 @@
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
   "osSl3z": {
-    "defaultMessage": "City",
+    "defaultMessage": "Stad",
     "description": "Label for addressNL city read only result",
     "originalDefault": "City"
   },
@@ -1304,7 +1304,7 @@
     "originalDefault": "Whether to show this value in the confirmation email"
   },
   "toTZ0C": {
-    "defaultMessage": "Derive address",
+    "defaultMessage": "Adres afleiden",
     "description": "Label for 'DeriveAddress' builder field",
     "originalDefault": "Derive address"
   },
