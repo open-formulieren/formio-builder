@@ -65,11 +65,6 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
-  "0gmZ4c": {
-    "defaultMessage": "Component-JSON aanpassen",
-    "description": "Accessible label for builder preview JSON edit field",
-    "originalDefault": "Edit component JSON"
-  },
   "1Vvryq": {
     "defaultMessage": "Bestandsnaam",
     "description": "Label for 'file.name' builder field",
@@ -1357,11 +1352,6 @@
     "defaultMessage": "Duur bijtellen/aftrekken",
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
-  },
-  "xnRkUj": {
-    "defaultMessage": "Wijzig JSON",
-    "description": "Component 'editJSON' preview mode",
-    "originalDefault": "Edit JSON"
   },
   "xxVNeU": {
     "defaultMessage": "Zoomniveau",

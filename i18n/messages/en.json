@@ -64,11 +64,6 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
-  "0gmZ4c": {
-    "defaultMessage": "Edit component JSON",
-    "description": "Accessible label for builder preview JSON edit field",
-    "originalDefault": "Edit component JSON"
-  },
   "1Vvryq": {
     "defaultMessage": "File name template",
     "description": "Label for 'file.name' builder field",
@@ -1338,11 +1333,6 @@
     "defaultMessage": "Add/subtract duration",
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
-  },
-  "xnRkUj": {
-    "defaultMessage": "Edit JSON",
-    "description": "Component 'editJSON' preview mode",
-    "originalDefault": "Edit JSON"
   },
   "xxVNeU": {
     "defaultMessage": "Zoom level",

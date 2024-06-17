@@ -146,10 +146,7 @@ export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onCha
           checked={isJSON}
           onChange={onChange}
         />
-        <FormattedMessage
-          description="Component 'editJSON' preview mode"
-          defaultMessage="Edit JSON"
-        />
+        <FormattedMessage description="Component 'JSON' preview mode" defaultMessage="JSON" />
       </label>
     </div>
   );
