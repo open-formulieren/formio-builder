@@ -142,6 +142,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                 onSubmit={formik.submitForm}
                 onCancel={onCancel}
                 onRemove={onRemove}
+                onComponentChange={formik.setValues}
                 component={component}
               >
                 <Form data-testid="componentEditForm">
@@ -175,6 +176,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 type EditFormLayoutProps = PropsWithChildren<
   Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
     onSubmit: () => void;
+    onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
     component: AnyComponentSchema | FallbackSchema;
   }
 >;
@@ -184,12 +186,13 @@ const LayoutWithPreview: React.FC<EditFormLayoutProps> = ({
   onSubmit,
   onCancel,
   onRemove,
+  onComponentChange,
   component,
 }) => (
   <>
     <div className="col col-sm-6">{children}</div>
     <div className="col col-sm-6">
-      <GenericComponentPreview component={component} />
+      <GenericComponentPreview onComponentChange={onComponentChange} component={component} />
       <ButtonRow onSubmit={onSubmit} onCancel={onCancel} onRemove={onRemove} />
     </div>
   </>

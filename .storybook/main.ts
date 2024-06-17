@@ -50,6 +50,11 @@ const config: StorybookConfig = {
       config.resolve = {};
     }
     config.resolve.plugins = [new TsconfigPathsPlugin()];
+    // The Monaco JSON Editor is mocked with a textarea component (the one used before),
+    // as it doesn't play well with Storybook.
+    config.resolve.alias!['@open-formulieren/monaco-json-editor'] = require.resolve(
+      './__mocks__/mockedJsonEditor.tsx'
+    );
     return config;
   },
 };

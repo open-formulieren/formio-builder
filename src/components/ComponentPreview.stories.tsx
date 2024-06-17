@@ -1,5 +1,5 @@
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, waitFor, within} from '@storybook/test';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentPreview from './ComponentPreview';
 
@@ -11,7 +11,7 @@ export default {
 type Story = StoryObj<typeof ComponentPreview>;
 
 const Template: StoryFn<typeof ComponentPreview> = ({component}) => (
-  <ComponentPreview component={component} />
+  <ComponentPreview onComponentChange={fn()} component={component} />
 );
 
 export const Default: Story = {

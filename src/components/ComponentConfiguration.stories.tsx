@@ -1192,7 +1192,7 @@ export const SelectBoxes: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByLabelText('Items expression');
+      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
       await userEvent.clear(itemsExpressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
@@ -1398,7 +1398,7 @@ export const Radio: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByLabelText('Items expression');
+      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
       await userEvent.clear(itemsExpressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
@@ -1611,7 +1611,7 @@ export const Select: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByLabelText('Items expression');
+      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
       await userEvent.clear(itemsExpressionInput);
       // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');

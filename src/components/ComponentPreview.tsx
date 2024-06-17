@@ -1,13 +1,11 @@
+import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
-
-import JSONEdit from './JSONEdit';
-import JSONPreview from './JSONPreview';
 
 /*
   Generic preview (preview + wrapper with view mode)
@@ -15,17 +13,21 @@ import JSONPreview from './JSONPreview';
 
 export interface ComponentPreviewWrapperProps {
   component: AnyComponentSchema | FallbackSchema;
+  /** Initial values for the preview component, e.g. `{"componentKey": "some_value"}` */
   initialValues: Record<string, unknown>;
+  /** Handler to be called when the component JSON definition changes */
+  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
   children: React.ReactNode;
 }
 
 const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   component,
   initialValues,
+  onComponentChange,
   children,
 }) => {
-  const intl = useIntl();
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
+
   return (
     <div className="card panel preview-panel">
       <div className="card-header d-flex justify-content-between align-items-center">
@@ -38,14 +40,11 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
         />
       </div>
       <div className="card-body">
-        {previewMode === 'editJSON' ? (
-          <JSONEdit
-            data={component}
-            rows={10}
-            aria-label={intl.formatMessage({
-              description: 'Accessible label for builder preview JSON edit field',
-              defaultMessage: 'Edit component JSON',
-            })}
+        {previewMode === 'JSON' ? (
+          <JSONEditor
+            wrapperProps={{className: 'json-editor'}}
+            value={component}
+            onChange={onComponentChange}
           />
         ) : (
           <Formik
@@ -56,11 +55,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
             }}
           >
             <div className="component-preview" data-testid="componentPreview">
-              {previewMode === 'rich' ? (
-                children
-              ) : (
-                <JSONPreview data={component} style={{maxBlockSize: '45vh'}} />
-              )}
+              {children}
             </div>
           </Formik>
         )}
@@ -71,6 +66,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
 
 export interface GenericComponentPreviewProps {
   component: AnyComponentSchema | FallbackSchema;
+  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
 }
 
 /**
@@ -82,7 +78,10 @@ export interface GenericComponentPreviewProps {
  *
  * It is also responsible for handling the `multiple: true` variants in a generic way.
  */
-const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({component}) => {
+const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
+  component,
+  onComponentChange,
+}) => {
   const key = isKnownComponentType(component) ? component.key : '';
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
@@ -101,7 +100,11 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   const initialValues = key ? {[key]: previewDefaultValue} : {};
 
   return (
-    <ComponentPreviewWrapper component={component} initialValues={initialValues}>
+    <ComponentPreviewWrapper
+      onComponentChange={onComponentChange}
+      component={component}
+      initialValues={initialValues}
+    >
       {isKnownComponentType(component) ? (
         <PreviewComponent component={component} />
       ) : (
@@ -111,7 +114,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({compon
   );
 };
 
-export type PreviewState = 'rich' | 'JSON' | 'editJSON';
+export type PreviewState = 'rich' | 'JSON';
 
 interface PreviewModeToggleProps {
   mode: PreviewState;
@@ -120,8 +123,7 @@ interface PreviewModeToggleProps {
 
 export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) => {
   const isRichPreview = mode === 'rich';
-  const isJSONPreview = mode === 'JSON';
-  const isEditJSONPreview = mode === 'editJSON';
+  const isJSON = mode === 'JSON';
   return (
     <div className="btn-group btn-group-toggle">
       <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isRichPreview})}>
@@ -135,30 +137,16 @@ export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onCha
         />
         <FormattedMessage description="Component 'Rich' preview mode" defaultMessage="Form" />
       </label>
-      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isJSONPreview})}>
+      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isJSON})}>
         <input
           type="radio"
           name="previewMode"
           value="JSON"
           autoComplete="off"
-          checked={isJSONPreview}
+          checked={isJSON}
           onChange={onChange}
         />
         <FormattedMessage description="Component 'JSON' preview mode" defaultMessage="JSON" />
-      </label>
-      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isEditJSONPreview})}>
-        <input
-          type="radio"
-          name="previewMode"
-          value="editJSON"
-          autoComplete="off"
-          checked={isEditJSONPreview}
-          onChange={onChange}
-        />
-        <FormattedMessage
-          description="Component 'editJSON' preview mode"
-          defaultMessage="Edit JSON"
-        />
       </label>
     </div>
   );

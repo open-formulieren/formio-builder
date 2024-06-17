@@ -1,0 +1,10 @@
+.json-editor {
+  min-block-size: 45vh;
+
+  &#{&}--compact {
+    min-block-size: var(
+      --offb-json-editor-compact-min-block-size,
+      calc(var(--offb-json-editor-compact-rows, 3) * 19px)
+    );
+  }
+}

@@ -1,11 +1,10 @@
+import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import {ContentComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {PreviewModeToggle, PreviewState} from '@/components/ComponentPreview';
-import JSONEdit from '@/components/JSONEdit';
-import JSONPreview from '@/components/JSONPreview';
 import {
   BuilderTabs,
   Hidden,
@@ -29,12 +28,11 @@ import RichText from './rich-text';
 const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
   const {uniquifyKey, supportedLanguageCodes} = useContext(BuilderContext);
   const isKeyManuallySetRef = useRef(false);
-  const {values, setFieldValue} = useFormikContext<ContentComponentSchema>();
+  const {values, setFieldValue, setValues} = useFormikContext<ContentComponentSchema>();
   const generatedKey = uniquifyKey(values.key);
 
   const {hasAnyError} = useErrorChecker<ContentComponentSchema>();
 
-  const intl = useIntl();
   const [previewMode, setPreviewMode] = useState<PreviewState>('rich');
 
   const defaultLanguageCode = supportedLanguageCodes[0] ?? 'nl';
@@ -65,16 +63,9 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
           />
         </div>
         <div className="card-body">
-          {previewMode === 'editJSON' ? (
-            <JSONEdit
-              data={jsonEditValues}
-              rows={10}
-              aria-label={intl.formatMessage({
-                description: 'Accessible label for builder preview JSON edit field',
-                defaultMessage: 'Edit component JSON',
-              })}
-            />
-          ) : previewMode === 'rich' ? (
+          {previewMode === 'JSON' ? (
+            <JSONEditor height="45vh" value={jsonEditValues} onChange={setValues} />
+          ) : (
             <>
               <RichTextTranslations />
               <Tabs>
@@ -110,10 +101,6 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
                 </TabPanel>
               </Tabs>
             </>
-          ) : (
-            <div className="component-preview" data-testid="componentPreview">
-              <JSONPreview data={values} style={{maxBlockSize: '45vh'}} />
-            </div>
           )}
         </div>
       </div>
