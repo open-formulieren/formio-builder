@@ -6,6 +6,7 @@ interface JSONEditorProps {
   onChange: (value: any) => void;
   wrapperProps?: any;
   height?: any;
+  theme?: 'light' | 'dark';
 }
 
 export const JSONEditor = ({value, onChange, wrapperProps = {}, height = ''}: JSONEditorProps) => {

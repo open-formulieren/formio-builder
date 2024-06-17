@@ -26,7 +26,7 @@ import RichText from './rich-text';
  * value is populated from that field (TODO: implement this).
  */
 const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
-  const {uniquifyKey, supportedLanguageCodes} = useContext(BuilderContext);
+  const {uniquifyKey, supportedLanguageCodes, theme} = useContext(BuilderContext);
   const isKeyManuallySetRef = useRef(false);
   const {values, setFieldValue, setValues} = useFormikContext<ContentComponentSchema>();
   const generatedKey = uniquifyKey(values.key);
@@ -64,7 +64,7 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
         </div>
         <div className="card-body">
           {previewMode === 'JSON' ? (
-            <JSONEditor height="45vh" value={jsonEditValues} onChange={setValues} />
+            <JSONEditor height="45vh" value={jsonEditValues} onChange={setValues} theme={theme} />
           ) : (
             <>
               <RichTextTranslations />

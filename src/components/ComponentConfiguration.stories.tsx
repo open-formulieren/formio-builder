@@ -97,6 +97,7 @@ const Template: StoryFn<TemplateArgs> = ({
   <ComponentConfiguration
     uniquifyKey={(key: string) => key}
     supportedLanguageCodes={supportedLanguageCodes}
+    theme="light"
     richTextColors={DEFAULT_COLORS}
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}

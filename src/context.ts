@@ -41,6 +41,7 @@ export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
+  theme: 'light' | 'dark';
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
@@ -57,6 +58,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
+  theme: 'light',
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

@@ -1,9 +1,11 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import {JSONObject} from '@open-formulieren/types/lib/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {Component, Description} from '@/components/formio';
+import {BuilderContext} from '@/context';
 
 const NAME = 'openForms.itemsExpression';
 
@@ -16,6 +18,7 @@ const NAME = 'openForms.itemsExpression';
 export const ItemsExpression: React.FC = () => {
   const {getFieldProps, setFieldValue} = useFormikContext();
   const {value = ''} = getFieldProps<JSONObject | string | undefined>(NAME);
+  const builderContext = useContext(BuilderContext);
 
   const htmlId = `editform-${NAME}`;
   return (
@@ -37,6 +40,7 @@ export const ItemsExpression: React.FC = () => {
           value={value}
           onChange={value => setFieldValue(NAME, value)}
           showLines={false}
+          theme={builderContext.theme}
         />
       </div>
 
