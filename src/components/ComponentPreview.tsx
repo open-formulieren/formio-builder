@@ -1,9 +1,10 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import clsx from 'clsx';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import {BuilderContext} from '@/context';
 import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
 import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
 
@@ -27,6 +28,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   children,
 }) => {
   const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
+  const builderContext = useContext(BuilderContext);
 
   return (
     <div className="card panel preview-panel">
@@ -45,6 +47,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
             wrapperProps={{className: 'json-editor'}}
             value={component}
             onChange={onComponentChange}
+            theme={builderContext.theme}
           />
         ) : (
           <Formik
