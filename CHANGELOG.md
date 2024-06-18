@@ -1,5 +1,11 @@
 # Changes
 
+## 0.22.0 (2024-06-18)
+
+[`OF#4051`][OF#4051] Added a new JSON Editor.
+
+[OF#4051]: https://github.com/open-formulieren/open-forms/issues/4051
+
 ## 0.21.1 (2024-05-13)
 
 Added missing Dutch translations.
