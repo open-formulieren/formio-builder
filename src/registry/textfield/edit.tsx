@@ -26,7 +26,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -68,6 +68,10 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             'showCharCount'
           )}
         />
+        <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
+        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <Tab
           hasErrors={hasAnyError(
             'deriveStreetName',
@@ -81,10 +85,6 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             defaultMessage="Location"
           />
         </Tab>
-        <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
-        <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
-        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -104,14 +104,6 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
         <ReadOnly />
         <Placeholder />
         <ShowCharCount />
-      </TabPanel>
-
-      {/* Location tab */}
-      <TabPanel>
-        <DeriveStreetName />
-        <DeriveCity />
-        <DerivePostcode />
-        <DeriveHouseNumber />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -136,6 +128,33 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
       {/* Prefill tab */}
       <TabPanel>
         <Prefill.PrefillConfiguration />
+      </TabPanel>
+
+      {/* Location tab */}
+      <TabPanel>
+        <p>
+          <i className="fa fa-circle-info" />
+          &nbsp;
+          <FormattedMessage
+            description="Location tab deprecation message"
+            defaultMessage="Deriving the location via text fields is deprecated. Use the AddressNL component instead."
+          />
+        </p>
+        <Panel
+          title={
+            <FormattedMessage
+              description="Legacy text field location configuration"
+              defaultMessage="Configuration (deprecated)"
+            />
+          }
+          collapsible
+          initialCollapsed
+        >
+          <DeriveStreetName />
+          <DeriveCity />
+          <DerivePostcode />
+          <DeriveHouseNumber />
+        </Panel>
       </TabPanel>
 
       {/* Translations */}
