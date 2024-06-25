@@ -1,5 +1,6 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage, useIntl} from 'react-intl';
+import {TextField} from 'components/formio';
 
 import {
   BuilderTabs,
@@ -23,6 +24,61 @@ import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
+
+
+const PostcodeRegexValidation: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.pattern' builder field",
+    defaultMessage:
+      'The regular expression pattern test that the postcode field value must pass before the form can be submitted.',
+  });
+  const placeholder = intl.formatMessage({
+    description: "Placeholder for 'validate.pattern' builder field",
+    defaultMessage: 'Regular expression for postcode',
+  });
+  return (
+    <TextField
+      name="openForms.validate.postcode.pattern"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.pattern' builder field"
+          defaultMessage="Regular expression for postcode"
+        />
+      }
+      tooltip={tooltip}
+      placeholder={placeholder}
+    />
+  );
+};
+
+
+const CityRegexValidation: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'validate.pattern' builder field",
+    defaultMessage:
+      'The regular expression pattern test that the city field value must pass before the form can be submitted.',
+  });
+  const placeholder = intl.formatMessage({
+    description: "Placeholder for 'validate.pattern' builder field",
+    defaultMessage: 'Regular expression for city',
+  });
+  return (
+    <TextField
+      name="openForms.validate.city.pattern"
+      label={
+        <FormattedMessage
+          description="Label for 'validate.pattern' builder field"
+          defaultMessage="Regular expression for city"
+        />
+      }
+      tooltip={tooltip}
+      placeholder={placeholder}
+    />
+  );
+};
+
 
 const DeriveAddress = () => {
   const intl = useIntl();
@@ -99,6 +155,8 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
+        <PostcodeRegexValidation />
+        <CityRegexValidation />
       </TabPanel>
 
       {/* Registration tab */}
