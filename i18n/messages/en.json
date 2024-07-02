@@ -629,6 +629,11 @@
     "description": "Tooltip for 'placeholder' builder field",
     "originalDefault": "The placeholder text that will appear when this field is empty."
   },
+  "Tw9+0D": {
+    "defaultMessage": "Layout",
+    "description": "Component property 'layout' label",
+    "originalDefault": "Layout"
+  },
   "UCGSib": {
     "defaultMessage": "Plugin(s)",
     "description": "Label for 'validate.plugins' builder field",
