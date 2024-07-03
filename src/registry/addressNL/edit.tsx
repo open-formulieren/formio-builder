@@ -20,6 +20,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox} from '@/components/formio';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
+import {Select} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -44,6 +45,21 @@ const DeriveAddress = () => {
     />
   );
 };
+
+const ColumnsLayout: React.FC = () => (
+  <Select
+    name="layout"
+    label={
+      <FormattedMessage description="Component property 'layout' label" defaultMessage="Layout" />
+    }
+    options={[
+      {value: 'singleColumn', label: 'Single column'},
+      {value: 'doubleColumn', label: 'Double column'},
+    ]}
+    isClearable
+    defaultValue={{value: 'doubleColumn', label: 'Double column'}}
+  />
+);
 
 /**
  * Form to configure a Formio 'address' type component.
@@ -83,6 +99,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
+        <ColumnsLayout />
         <DeriveAddress />
         <Hidden />
         <ClearOnHide />
@@ -141,6 +158,7 @@ EditForm.defaultValues = {
   clearOnHide: true,
   isSensitiveData: true,
   deriveAddress: false,
+  layout: 'doubleColumn',
   defaultValue: {
     postcode: '',
     houseNumber: '',
