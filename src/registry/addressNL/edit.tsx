@@ -46,20 +46,32 @@ const DeriveAddress = () => {
   );
 };
 
-const ColumnsLayout: React.FC = () => (
-  <Select
-    name="layout"
-    label={
-      <FormattedMessage description="Component property 'layout' label" defaultMessage="Layout" />
-    }
-    options={[
-      {value: 'singleColumn', label: 'Single column'},
-      {value: 'doubleColumn', label: 'Double column'},
-    ]}
-    isClearable
-    defaultValue={{value: 'doubleColumn', label: 'Double column'}}
-  />
-);
+const ColumnsLayout: React.FC = () => {
+  const intl = useIntl();
+
+  const singleColumn = intl.formatMessage({
+    description: 'Single column label',
+    defaultMessage: 'Single column',
+  });
+  const doubleColumn = intl.formatMessage({
+    description: 'Double column label',
+    defaultMessage: 'Double column',
+  });
+
+  return (
+    <Select
+      name="layout"
+      label={
+        <FormattedMessage description="Component property 'layout' label" defaultMessage="Layout" />
+      }
+      options={[
+        {value: 'singleColumn', label: singleColumn},
+        {value: 'doubleColumn', label: doubleColumn},
+      ]}
+      isClearable
+    />
+  );
+};
 
 /**
  * Form to configure a Formio 'address' type component.
