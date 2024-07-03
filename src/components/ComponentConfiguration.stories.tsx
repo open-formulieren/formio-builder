@@ -2220,6 +2220,8 @@ export const AddressNL: Story = {
       validate: {
         required: false,
       },
+      deriveAddress: false,
+      layout: 'singleColumn',
     },
     builderInfo: {
       title: 'Address Field',
