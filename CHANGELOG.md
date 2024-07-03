@@ -1,5 +1,9 @@
 # Changes
 
+## 0.23.1 (2024-07-03)
+
+Added missing Dutch translations.
+
 ## 0.23.0 (2024-07-03)
 
 - [`OF#4423`][OF#4423] Added layout dropdown (single/double column) for addressNL field.
