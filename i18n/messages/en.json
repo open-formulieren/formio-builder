@@ -439,6 +439,11 @@
     "description": "Tooltip for 'columns' builder field",
     "originalDefault": "Specify the size of each column. The sum of all the widths should be 100%."
   },
+  "GsAN0n": {
+    "defaultMessage": "Single column",
+    "description": "Single column label",
+    "originalDefault": "Single column"
+  },
   "H4sILo": {
     "defaultMessage": "Derive city",
     "description": "Label for 'deriveCity' builder field",
@@ -618,6 +623,11 @@
     "defaultMessage": "Which authentication method the co-signer must use. Note that this must be an authentication method available on the form.",
     "description": "Description for 'authPlugin' builder field",
     "originalDefault": "Which authentication method the co-signer must use. Note that this must be an authentication method available on the form."
+  },
+  "T2dCIS": {
+    "defaultMessage": "Double column",
+    "description": "Double column label",
+    "originalDefault": "Double column"
   },
   "TCNvqa": {
     "defaultMessage": "Minimum date",
