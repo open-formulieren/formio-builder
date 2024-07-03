@@ -1,0 +1,9 @@
+.offb-addressnl-preview {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 10px;
+
+  &--doubleColumn {
+    grid-template-columns: 1fr 1fr;
+  }
+}

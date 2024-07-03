@@ -1022,6 +1022,25 @@ export const NpFamilyMembers: Story = {
   },
 };
 
+export const AddressNL: Story = {
+  name: 'addressNL',
+  render: Template,
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'addressNL',
+      key: 'address',
+      label: 'A Dutch address',
+      validate: {
+        required: false,
+      },
+      deriveAddress: false,
+      layout: 'singleColumn',
+    },
+  },
+};
+
 export const Columns: Story = {
   name: 'Columns',
   render: Template,
