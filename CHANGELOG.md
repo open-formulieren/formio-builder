@@ -2,8 +2,8 @@
 
 ## 0.23.0 (2024-07-03)
 
-- [`OF#4423`][OF#4423] Added layout dropdown (single/double column) for addressNL field. [OF#4423]:
-  https://github.com/open-formulieren/open-forms/issues/4423
+- [`OF#4423`][OF#4423] Added layout dropdown (single/double column) for addressNL field.  
+  [OF#4423]: https://github.com/open-formulieren/open-forms/issues/4423
 
 - Deprecate textfield location derivation
 
