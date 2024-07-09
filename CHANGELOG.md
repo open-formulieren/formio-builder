@@ -1,5 +1,11 @@
 # Changes
 
+## 0.23.2 (2024-07-09)
+
+- [`OF#4405`][OF#4405] Updated selectboxes validation configuration placeholders.
+
+[OF#4405]: https://github.com/open-formulieren/open-forms/issues/4405
+
 ## 0.23.1 (2024-07-03)
 
 Added missing Dutch translations.
