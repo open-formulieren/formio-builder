@@ -239,7 +239,10 @@ const MinSelectedCheckboxes: React.FC = () => {
           defaultMessage="Minimum selected checkboxes"
         />
       }
-      placeholder="1"
+      placeholder={intl.formatMessage({
+        description: "Placeholder for 'validate.minSelectedCount' builder field",
+        defaultMessage: 'Minimum selected checkboxes (e.g. 1)',
+      })}
       tooltip={tooltip}
       min={1}
       step={1}
@@ -262,7 +265,10 @@ const MaxSelectedCheckboxes: React.FC = () => {
           defaultMessage="Maximum selected checkboxes"
         />
       }
-      placeholder="1"
+      placeholder={intl.formatMessage({
+        description: "Placeholder for 'validate.maxSelectedCount' builder field",
+        defaultMessage: 'Maximum selected checkboxes (e.g. 1)',
+      })}
       tooltip={tooltip}
       min={1}
       step={1}

@@ -709,6 +709,11 @@
     "description": "Tooltip for 'deriveCity' builder field",
     "originalDefault": "If the postcode and house number are entered this field will autofill with the city"
   },
+  "VNGD7o": {
+    "defaultMessage": "Maximaal aantal aangevinkte opties (bijv. 1)",
+    "description": "Placeholder for 'validate.maxSelectedCount' builder field",
+    "originalDefault": "Maximum selected checkboxes (e.g. 1)"
+  },
   "VX9nvG": {
     "defaultMessage": "Maximale datum {configured, select, false {(niet ingesteld)} other {}}",
     "description": "Date field 'maxDate' validation panel title",
@@ -1226,6 +1231,11 @@
     "defaultMessage": "Geef de knoptekst om een groep toe te voegen op.",
     "description": "Tooltip for 'addAnother' builder field",
     "originalDefault": "Set the text of the 'Add Another' button."
+  },
+  "oGBVo2": {
+    "defaultMessage": "Minimaal aantal aangevinkte opties (bijv. 1)",
+    "description": "Placeholder for 'validate.minSelectedCount' builder field",
+    "originalDefault": "Minimum selected checkboxes (e.g. 1)"
   },
   "oWJX5K": {
     "defaultMessage": "Suffix (bijv. m²)",
