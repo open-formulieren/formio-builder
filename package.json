@@ -122,7 +122,7 @@
     "@floating-ui/react": "^0.26.4",
     "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
-    "@open-formulieren/monaco-json-editor": "^0.1.7",
+    "@open-formulieren/monaco-json-editor": "^0.2.0",
     "@storybook/test": "^8.0.8",
     "clsx": "^1.2.1",
     "formik": "^2.4.5",
