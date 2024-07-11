@@ -1,5 +1,9 @@
 # Changes
 
+## 0.24.0 (2024-07-09)
+
+Updated our monaco-json-editor dependency to 0.2.0.
+
 ## 0.23.2 (2024-07-09)
 
 - [`OF#4405`][OF#4405] Updated selectboxes validation configuration placeholders.
