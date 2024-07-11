@@ -41,15 +41,16 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
           onChange={event => setpreviewMode(event.target.value as PreviewState)}
         />
       </div>
-      <div className="card-body">
-        {previewMode === 'JSON' ? (
-          <JSONEditor
-            wrapperProps={{className: 'json-editor'}}
-            value={component}
-            onChange={onComponentChange}
-            theme={builderContext.theme}
-          />
-        ) : (
+
+      {previewMode === 'JSON' ? (
+        <JSONEditor
+          wrapperProps={{className: 'json-editor'}}
+          value={component}
+          onChange={onComponentChange}
+          theme={builderContext.theme}
+        />
+      ) : (
+        <div className="card-body">
           <Formik
             enableReinitialize
             initialValues={initialValues}
@@ -61,8 +62,8 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
               {children}
             </div>
           </Formik>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
