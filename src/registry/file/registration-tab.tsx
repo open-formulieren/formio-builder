@@ -15,11 +15,11 @@ interface DocumentTypeOptionsGroup {
 
 const groupDocumentTypeOptions = (options: DocumentTypeOption[]): DocumentTypeOptionsGroup[] => {
   const optionsWithGroupLabel = options.map(item => {
-    const groupLabel = [item.backendLabel, item.catalogus.domein].filter(Boolean).join(' > ');
+    const groupLabel = [item.backendLabel, item.catalogusLabel].filter(Boolean).join(' > ');
     return {
       groupLabel,
-      value: item.informatieobjecttype.url,
-      label: item.informatieobjecttype.omschrijving,
+      value: item.url,
+      label: item.omschrijving,
     };
   });
 

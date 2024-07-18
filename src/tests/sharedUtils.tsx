@@ -125,43 +125,28 @@ export const DEFAULT_FILE_TYPES: SelectOption[] = [
 export const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
   {
     backendLabel: '',
-    catalogus: {
-      domein: 'VTH',
-    },
-    informatieobjecttype: {
-      url: 'https://example.com/iotype/123',
-      omschrijving: 'Vergunning',
-    },
+    catalogusLabel: 'VTH (RSIN: 000000000)',
+    url: 'https://example.com/iotype/123',
+    omschrijving: 'Vergunning',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogus: {
-      domein: 'VTH',
-    },
-    informatieobjecttype: {
-      url: 'https://example.com/iotype/456',
-      omschrijving: 'Vergunning',
-    },
+    catalogusLabel: 'VTH (RSIN: 000000000)',
+
+    url: 'https://example.com/iotype/456',
+    omschrijving: 'Vergunning',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogus: {
-      domein: 'VTH',
-    },
-    informatieobjecttype: {
-      url: 'https://example.com/iotype/789',
-      omschrijving: 'Ontheffing',
-    },
+    catalogusLabel: 'VTH (RSIN: 000000000)',
+    url: 'https://example.com/iotype/789',
+    omschrijving: 'Ontheffing',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogus: {
-      domein: 'SOC',
-    },
-    informatieobjecttype: {
-      url: 'https://example.com/iotype/abc',
-      omschrijving: 'Aanvraag',
-    },
+    catalogusLabel: 'Test catalogus name',
+    url: 'https://example.com/iotype/abc',
+    omschrijving: 'Aanvraag',
   },
 ];
 

@@ -68,6 +68,7 @@ const contextRender = (
               uniquifyKey: key => key,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               richTextColors: DEFAULT_COLORS,
+              theme: 'light',
               getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
@@ -160,6 +161,7 @@ const dummyBuilderContext = {
   uniquifyKey: (key: string) => key,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
+  theme: 'light',
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

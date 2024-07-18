@@ -45,9 +45,9 @@ export const DocumentTypes: Story = {
     await userEvent.keyboard('[ArrowDown]');
 
     await step('Option group labels', async () => {
-      expect(await canvas.findByText('VTH', {exact: true})).toBeVisible();
-      expect(canvas.getByText('Open Zaak > VTH', {exact: true})).toBeVisible();
-      expect(canvas.getByText('Open Zaak > SOC', {exact: true})).toBeVisible();
+      expect(await canvas.findByText('VTH (RSIN: 000000000)', {exact: true})).toBeVisible();
+      expect(canvas.getByText('Open Zaak > VTH (RSIN: 000000000)', {exact: true})).toBeVisible();
+      expect(canvas.getByText('Open Zaak > Test catalogus name', {exact: true})).toBeVisible();
     });
 
     await step('Option labels', async () => {
