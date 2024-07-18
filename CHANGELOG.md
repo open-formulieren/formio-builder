@@ -1,5 +1,11 @@
 # Changes
 
+## 0.25.0 (2024-07-18)
+
+- [`OF#4267`][OF#4267] Updated file upload registration tab for changes in backend API.
+
+[OF#4267]: https://github.com/open-formulieren/open-forms/issues/4267
+
 ## 0.24.0 (2024-07-09)
 
 Updated our monaco-json-editor dependency to 0.2.0.
