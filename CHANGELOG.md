@@ -1,5 +1,12 @@
 # Changes
 
+## 0.26.0 (2024-07-26)
+
+- [`OF#4556`][OF#4556] Updated language/literals to match language used in the backend.
+- Upgraded to Storybook 8.2
+
+[OF#4556]: https://github.com/open-formulieren/open-forms/issues/4556
+
 ## 0.25.0 (2024-07-18)
 
 - [`OF#4267`][OF#4267] Updated file upload registration tab for changes in backend API.
