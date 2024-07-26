@@ -20,7 +20,7 @@ const preview: Preview = {
       },
     },
   },
-  initialGlobals: {
+  globals: {
     locale: reactIntl.defaultLocale,
     locales: {
       en: 'English',
