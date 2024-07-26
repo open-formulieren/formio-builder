@@ -390,7 +390,7 @@
     "originalDefault": "Translations"
   },
   "E5rUfM": {
-    "defaultMessage": "Prefill-bron",
+    "defaultMessage": "Bronhouder",
     "description": "Label for 'prefill.identifierRole' builder field",
     "originalDefault": "Identifier role"
   },
@@ -589,7 +589,7 @@
     "originalDefault": "Translations for literals used in this component."
   },
   "RPzjrJ": {
-    "defaultMessage": "Main/machtiger",
+    "defaultMessage": "Hoofdentiteit",
     "description": "Label identifier role main",
     "originalDefault": "Main"
   },
