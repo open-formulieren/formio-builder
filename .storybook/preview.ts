@@ -11,13 +11,6 @@ import {reactIntl} from './reactIntl';
 
 const preview: Preview = {
   decorators: [BuilderContextDecorator, ModalDecorator],
-  globals: {
-    locale: reactIntl.defaultLocale,
-    locales: {
-      en: 'English',
-      nl: 'Nederlands',
-    },
-  },
   parameters: {
     reactIntl,
     controls: {
@@ -25,6 +18,13 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+  },
+  globals: {
+    locale: reactIntl.defaultLocale,
+    locales: {
+      en: 'English',
+      nl: 'Nederlands',
     },
   },
 };
