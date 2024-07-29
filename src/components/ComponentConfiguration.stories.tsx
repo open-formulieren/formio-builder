@@ -2241,6 +2241,16 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       layout: 'singleColumn',
+      ofComponents: {
+        postcode: {
+          validate: {pattern: '1015 [a-zA-Z]{2}'},
+          translatedErrors: {},
+        },
+        city: {
+          validate: {pattern: 'Amsterdam'},
+          translatedErrors: {},
+        },
+      },
     },
     builderInfo: {
       title: 'Address Field',

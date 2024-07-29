@@ -1,4 +1,6 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
+import {TextField} from 'components/formio';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -19,11 +21,70 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox} from '@/components/formio';
-import {TabList, TabPanel, Tabs} from '@/components/formio';
+import {DataMap, Panel, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {Select} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
+
+export interface SubcomponentValidationProps {
+  component: string;
+  label: React.ReactNode;
+  tooltip: string;
+  placeholder: string;
+}
+
+export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
+  component,
+  label,
+  tooltip,
+  placeholder,
+}) => {
+  const {supportedLanguageCodes} = useContext(BuilderContext);
+  return (
+    <>
+      <TextField
+        name={`openForms.components.${component}.validate.pattern`}
+        label={label}
+        tooltip={tooltip}
+        placeholder={placeholder}
+      />
+      <Tabs>
+        <TabList>
+          {supportedLanguageCodes.map(code => (
+            <Tab key={code}>{code.toUpperCase()}</Tab>
+          ))}
+        </TabList>
+
+        {supportedLanguageCodes.map(code => (
+          <TabPanel key={code}>
+            <DataMap
+              name={`openForms.components.${component}.translatedErrors.${code}`}
+              keyLabel={
+                <FormattedMessage
+                  description="Label for translation of validation error code"
+                  defaultMessage="Error code"
+                />
+              }
+              valueComponent={
+                <TextField
+                  name="message"
+                  label={
+                    <FormattedMessage
+                      description="Label for translation message for validation error code"
+                      defaultMessage="Error message"
+                    />
+                  }
+                />
+              }
+            />
+          </TabPanel>
+        ))}
+      </Tabs>
+    </>
+  );
+};
 
 const DeriveAddress = () => {
   const intl = useIntl();
@@ -81,6 +142,15 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<AddressNLComponentSchema>();
   Validate.useManageValidatorsTranslations<AddressNLComponentSchema>(['required']);
+  Validate.useManageValidatorsTranslations(
+    ['pattern'],
+    `openForms.components.postcode.translatedErrors`
+  );
+  Validate.useManageValidatorsTranslations(
+    ['pattern'],
+    `openForms.components.city.translatedErrors`
+  );
+
   return (
     <Tabs>
       <TabList>
@@ -128,6 +198,76 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
+
+        {/* Postcode field validation */}
+        <Panel
+          title={
+            <FormattedMessage
+              description="Title of postcode field validation panel"
+              defaultMessage="Postcode"
+            />
+          }
+          tooltip={intl.formatMessage({
+            description: 'Tooltip postcode field validation panel',
+            defaultMessage: 'Validation for the postcode field',
+          })}
+          collapsible
+          initialCollapsed
+        >
+          <SubcomponentValidation
+            component="postcode"
+            label={
+              <FormattedMessage
+                description="Label for 'validate.pattern' builder field"
+                defaultMessage="Regular expression for postcode"
+              />
+            }
+            tooltip={intl.formatMessage({
+              description: "Tooltip for 'validate.pattern' builder field",
+              defaultMessage:
+                'The regular expression pattern test that the postcode field value must pass before the form can be submitted.',
+            })}
+            placeholder={intl.formatMessage({
+              description: "Placeholder for 'validate.pattern' builder field",
+              defaultMessage: 'Regular expression for postcode',
+            })}
+          />
+        </Panel>
+
+        {/* City field validation */}
+        <Panel
+          title={
+            <FormattedMessage
+              description="Title of city field validation panel"
+              defaultMessage="City"
+            />
+          }
+          tooltip={intl.formatMessage({
+            description: 'Tooltip city field validation panel',
+            defaultMessage: 'Validation for the city field',
+          })}
+          collapsible
+          initialCollapsed
+        >
+          <SubcomponentValidation
+            component="city"
+            label={
+              <FormattedMessage
+                description="Label for 'validate.pattern' builder field"
+                defaultMessage="Regular expression for city"
+              />
+            }
+            tooltip={intl.formatMessage({
+              description: "Tooltip for 'validate.pattern' builder field",
+              defaultMessage:
+                'The regular expression pattern test that the city field value must pass before the form can be submitted.',
+            })}
+            placeholder={intl.formatMessage({
+              description: "Placeholder for 'validate.pattern' builder field",
+              defaultMessage: 'Regular expression for city',
+            })}
+          />
+        </Panel>
       </TabPanel>
 
       {/* Registration tab */}
@@ -191,6 +331,19 @@ EditForm.defaultValues = {
   translatedErrors: {},
   registration: {
     attribute: '',
+  },
+  openForms: {
+    translations: {},
+    components: {
+      postcode: {
+        validate: {pattern: ''},
+        translatedErrors: {},
+      },
+      city: {
+        validate: {pattern: ''},
+        translatedErrors: {},
+      },
+    },
   },
 };
 
