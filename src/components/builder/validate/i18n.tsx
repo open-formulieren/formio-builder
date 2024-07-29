@@ -9,12 +9,12 @@ import {BuilderContext} from '@/context';
 import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../../formio';
 
 export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
-  keys: PossibleValidatorErrorKeys<S>[]
+  keys: PossibleValidatorErrorKeys<S>[],
+  field: string = 'translatedErrors'
 ): void {
   const {supportedLanguageCodes} = useContext(BuilderContext);
-  const [{value}, , {setValue}] = useField<S['translatedErrors']>('translatedErrors');
+  const [{value}, , {setValue}] = useField<S['translatedErrors']>(field);
 
-  // set any missing translations
   useEffect(() => {
     const newValue = value
       ? {...value}
