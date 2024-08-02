@@ -1,5 +1,9 @@
 # Changes
 
+## 0.27.0 (2024-08-02)
+
+- Exported `getReactSelectStyles` helper for react-select usage outside of formio-builder.
+
 ## 0.26.0 (2024-07-26)
 
 - [`OF#4556`][OF#4556] Updated language/literals to match language used in the backend.
