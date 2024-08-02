@@ -5,6 +5,7 @@ import type {
   GroupBase,
   OptionsOrGroups,
   Props as RSProps,
+  StylesConfig,
   ThemeConfig,
 } from 'react-select/dist/declarations/src';
 import {MultiValue} from 'react-select/dist/declarations/src';
@@ -80,6 +81,87 @@ const BUILDER_SELECT_THEME: ThemeConfig = theme => ({
   borderRadius: 4, // same as bootstrap inputs
 });
 
+export function getReactSelectStyles<
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(): StylesConfig<Option, IsMulti, Group> {
+  return {
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      backgroundColor: 'var(--form-input-bg, #fff)',
+      borderColor: state.isFocused ? 'var(--body-quiet-color, #666)' : 'var(--border-color, #ccc)',
+      boxShadow: undefined,
+      '&:hover': {
+        borderColor: undefined,
+      },
+    }),
+    placeholder: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-quiet-color, #e0e0e0)',
+    }),
+    indicatorSeparator: baseStyles => ({
+      ...baseStyles,
+      backgroundColor: 'var(--border-color, #ccc)',
+    }),
+    dropdownIndicator: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-quiet-color, #e0e0e0)',
+      '&:hover': {
+        color: 'var(--body-loud-color, #000)',
+      },
+    }),
+    clearIndicator: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-quiet-color, #e0e0e0)',
+      '&:hover': {
+        color: 'var(--body-loud-color, #000)',
+      },
+    }),
+    valueContainer: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-fg, #333)',
+    }),
+    input: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-fg, #333)',
+    }),
+    singleValue: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--body-fg, #333)',
+    }),
+    multiValue: baseStyles => ({
+      ...baseStyles,
+      backgroundColor: 'var(--default-button-bg, #017092)',
+    }),
+    multiValueLabel: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--formio-dropdown-value-label-color, #fff)',
+    }),
+    multiValueRemove: baseStyles => ({
+      ...baseStyles,
+      color: 'var(--formio-dropdown-value-label-color, #fff)',
+    }),
+    menu: baseStyles => ({
+      ...baseStyles,
+      backgroundColor: 'var(--form-input-bg, #fff)',
+      borderColor: 'var(--border-color, #ccc)',
+    }),
+    menuList: baseStyles => ({
+      ...baseStyles,
+      border: 'solid 1px var(--border-color, #ccc)',
+      borderRadius: '4px',
+    }),
+    option: (baseStyles, state) => ({
+      ...baseStyles,
+      color: 'var(--body-fg, #333)',
+      backgroundColor: state.isFocused
+        ? 'var(--formio-dropdown-highlighted-bg, #f2f2f2)'
+        : undefined,
+    }),
+  };
+}
+
 // can't use React.FC with generics
 function Select<
   Option extends {[key: string]: any},
@@ -132,82 +214,7 @@ function Select<
           className="formio-builder-select"
           classNamePrefix="formio-builder-select"
           theme={BUILDER_SELECT_THEME}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'var(--form-input-bg, #fff)',
-              borderColor: state.isFocused
-                ? 'var(--body-quiet-color, #666)'
-                : 'var(--border-color, #ccc)',
-              boxShadow: undefined,
-              '&:hover': {
-                borderColor: undefined,
-              },
-            }),
-            placeholder: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-quiet-color, #e0e0e0)',
-            }),
-            indicatorSeparator: baseStyles => ({
-              ...baseStyles,
-              backgroundColor: 'var(--border-color, #ccc)',
-            }),
-            dropdownIndicator: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-quiet-color, #e0e0e0)',
-              '&:hover': {
-                color: 'var(--body-loud-color, #000)',
-              },
-            }),
-            clearIndicator: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-quiet-color, #e0e0e0)',
-              '&:hover': {
-                color: 'var(--body-loud-color, #000)',
-              },
-            }),
-            valueContainer: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-fg, #333)',
-            }),
-            input: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-fg, #333)',
-            }),
-            singleValue: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--body-fg, #333)',
-            }),
-            multiValue: baseStyles => ({
-              ...baseStyles,
-              backgroundColor: 'var(--default-button-bg, #017092)',
-            }),
-            multiValueLabel: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--formio-dropdown-value-label-color, #fff)',
-            }),
-            multiValueRemove: baseStyles => ({
-              ...baseStyles,
-              color: 'var(--formio-dropdown-value-label-color, #fff)',
-            }),
-            menu: baseStyles => ({
-              ...baseStyles,
-              backgroundColor: 'var(--form-input-bg, #fff)',
-              borderColor: 'var(--border-color, #ccc)',
-            }),
-            menuList: baseStyles => ({
-              ...baseStyles,
-              border: 'solid 1px var(--border-color, #ccc)',
-              borderRadius: '4px',
-            }),
-            option: (baseStyles, state) => ({
-              ...baseStyles,
-              color: 'var(--body-fg, #333)',
-              backgroundColor: state.isFocused
-                ? 'var(--formio-dropdown-highlighted-bg, #f2f2f2)'
-                : undefined,
-            }),
-          }}
+          styles={getReactSelectStyles<Option, IsMulti, Group>()}
           menuPlacement="auto"
           {...field}
           {...props}
