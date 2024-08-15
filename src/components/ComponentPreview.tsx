@@ -5,19 +5,19 @@ import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {BuilderContext} from '@/context';
-import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
-import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
+import {getRegistryEntry} from '@/registry';
+import {AnyComponentSchema, hasOwnProperty} from '@/types';
 
 /*
   Generic preview (preview + wrapper with view mode)
  */
 
 export interface ComponentPreviewWrapperProps {
-  component: AnyComponentSchema | FallbackSchema;
+  component: AnyComponentSchema;
   /** Initial values for the preview component, e.g. `{"componentKey": "some_value"}` */
   initialValues: Record<string, unknown>;
   /** Handler to be called when the component JSON definition changes */
-  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
+  onComponentChange: (value: AnyComponentSchema) => void;
   children: React.ReactNode;
 }
 
@@ -69,8 +69,8 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
 };
 
 export interface GenericComponentPreviewProps {
-  component: AnyComponentSchema | FallbackSchema;
-  onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
+  component: AnyComponentSchema;
+  onComponentChange: (value: AnyComponentSchema) => void;
 }
 
 /**
@@ -86,7 +86,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
   component,
   onComponentChange,
 }) => {
-  const key = isKnownComponentType(component) ? component.key : '';
+  const {key} = component;
   const entry = getRegistryEntry(component);
   const {preview: PreviewComponent, defaultValue = ''} = entry;
   if (PreviewComponent === null) {
@@ -109,11 +109,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
       component={component}
       initialValues={initialValues}
     >
-      {isKnownComponentType(component) ? (
-        <PreviewComponent component={component} />
-      ) : (
-        <Fallback.preview component={component} />
-      )}
+      <PreviewComponent component={component} />
     </ComponentPreviewWrapper>
   );
 };

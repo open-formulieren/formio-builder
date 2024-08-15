@@ -1,14 +1,16 @@
+import {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {ExtendedComponentSchema, Utils as FormioUtils} from 'formiojs';
+import {Utils as FormioUtils} from 'formiojs';
 import type {ConditionalOptions} from 'formiojs';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import usePrevious from 'react-use/esm/usePrevious';
 
+import {TextField} from '@/components/formio/textfield';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import Fallback from '@/registry/fallback';
 import {ComparisonValueProps} from '@/registry/types';
+import {hasOwnProperty} from '@/types';
 
 import {Panel, Select} from '../formio';
 import ComponentSelect from './component-select';
@@ -22,7 +24,7 @@ export const ComparisonValueInput: React.FC = () => {
   const {values, setFieldValue} = useFormikContext<SimpleConditional>();
 
   const componentKey = values?.conditional?.when;
-  const chosenComponent: ExtendedComponentSchema = componentKey
+  const chosenComponent: AnyComponentSchema = componentKey
     ? FormioUtils.getComponent(getFormComponents(), componentKey, false)
     : null;
   const previousWhen = usePrevious(componentKey);
@@ -43,7 +45,7 @@ export const ComparisonValueInput: React.FC = () => {
 
   const registryEntry = getRegistryEntry(chosenComponent);
   const {comparisonValue} = registryEntry;
-  const InputComponent = comparisonValue || Fallback.comparisonValue;
+  const InputComponent = comparisonValue || TextField;
 
   const props: ComparisonValueProps = {
     name: 'conditional.eq',
@@ -54,7 +56,10 @@ export const ComparisonValueInput: React.FC = () => {
       />
     ),
   };
-  if (chosenComponent.hasOwnProperty('multiple')) props.multiple = chosenComponent.multiple;
+
+  if (hasOwnProperty(chosenComponent, 'multiple')) {
+    props.multiple = chosenComponent.multiple as boolean;
+  }
 
   return <InputComponent {...props} />;
 };

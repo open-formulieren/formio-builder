@@ -1,3 +1,4 @@
+import {AnyComponentSchema} from '@open-formulieren/types';
 import {Form, Formik} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import {cloneDeep, merge} from 'lodash';
@@ -6,8 +7,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {BuilderContext} from '@/context';
-import {Fallback, getRegistryEntry, isKnownComponentType} from '@/registry';
-import {AnyComponentSchema, FallbackSchema} from '@/types';
+import {getRegistryEntry} from '@/registry';
 
 import GenericComponentPreview from './ComponentPreview';
 
@@ -22,13 +22,11 @@ export interface BuilderInfo {
 
 export interface ComponentEditFormProps {
   isNew: boolean;
-  // it is (currently) possible someone drags a component type into the canvas that we
-  // don't know (yet), so we need to handle FallbackSchema.
-  component: AnyComponentSchema | FallbackSchema;
+  component: AnyComponentSchema;
   builderInfo: BuilderInfo;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onSubmit: (component: AnyComponentSchema | FallbackSchema) => void;
+  onSubmit: (component: AnyComponentSchema) => void;
 }
 
 type ButtonRowProps = Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
@@ -76,7 +74,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const hasPreview = registryEntry.preview !== null;
 
   let initialValues = cloneDeep(component);
-  if (isNew && isKnownComponentType(component)) {
+  if (isNew) {
     // Formio.js mutates components when adding children (like fieldset layout component),
     // which apparently goes all the way to our default value definition, which is
     // supposed to be static.
@@ -86,17 +84,12 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
     initialValues = merge(defaultValues, initialValues);
   }
 
-  // we infer the specific schema from the EditForm component obtained from the registry.
-  // This gives a specific schema rather than AnyComponentSchema and allows us to type
-  // check the values accordingly.
-  type ComponentSchema = React.ComponentProps<typeof EditForm>['component'];
-
   const Wrapper = hasPreview ? LayoutWithPreview : LayoutWithoutPreview;
 
   // Markup (mostly) taken from formio's default templates - there's room for improvement here
   // to de-bootstrapify it.
   return (
-    <Formik<ComponentSchema>
+    <Formik<typeof component>
       validateOnChange={false}
       validateOnBlur
       initialValues={initialValues}
@@ -148,11 +141,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                   <div className="formio-component formio-component-label-hidden">
                     <div className="formio-form">
                       <div className="formio-component-tabs">
-                        {isKnownComponentType(component) ? (
-                          <EditForm component={component} />
-                        ) : (
-                          <Fallback.edit component={component} />
-                        )}
+                        <EditForm component={component} />
                       </div>
                     </div>
                   </div>
@@ -175,8 +164,8 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 type EditFormLayoutProps = PropsWithChildren<
   Pick<ComponentEditFormProps, 'onCancel' | 'onRemove'> & {
     onSubmit: () => void;
-    onComponentChange: (value: AnyComponentSchema | FallbackSchema) => void;
-    component: AnyComponentSchema | FallbackSchema;
+    onComponentChange: (value: AnyComponentSchema) => void;
+    component: AnyComponentSchema;
   }
 >;
 

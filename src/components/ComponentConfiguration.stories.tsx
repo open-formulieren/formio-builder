@@ -137,6 +137,25 @@ export const Default: Story = {
   },
 };
 
+export const UnsupportedComponent: Story = {
+  render: Template,
+  name: 'invalid/unsupported component type',
+
+  args: {
+    component: {
+      // @ts-expect-error
+      type: 'an-invalid-type',
+    },
+    builderInfo: {
+      title: 'invalid',
+      group: 'basic',
+      icon: 'terminal',
+      schema: {placeholder: ''},
+      weight: 0,
+    },
+  },
+};
+
 export const TextField: Story = {
   render: Template,
   name: 'type: textfield',

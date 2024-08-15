@@ -1,4 +1,6 @@
-import {AnyComponentSchema, FallbackSchema, hasOwnProperty} from '@/types';
+import type {AnyComponentSchema, FallbackSchema} from '@open-formulieren/types';
+
+import {hasOwnProperty} from '@/types';
 
 import AddressNL from './addressNL';
 import BSN from './bsn';
@@ -12,7 +14,6 @@ import DateField from './date';
 import DateTimeField from './datetime';
 import EditGrid from './editgrid';
 import Email from './email';
-import Fallback from './fallback';
 import FieldSet from './fieldset';
 import FileUpload from './file';
 import Iban from './iban';
@@ -32,18 +33,24 @@ import TextField from './textfield';
 import TimeField from './time';
 import {Registry, RegistryEntry} from './types';
 
+/**
+ * Type guard to determine if the passed in 'component' is something we have type
+ * definitions for.
+ *
+ * Use this check as high as possible, so that all other child components and
+ * functionality do not need to worry about `FallbackSchema`.
+ */
 export const isKnownComponentType = (
   component: AnyComponentSchema | FallbackSchema
 ): component is AnyComponentSchema => {
   return Boolean(component.type && hasOwnProperty(REGISTRY, component.type));
 };
 
-export const getRegistryEntry = <S extends AnyComponentSchema | FallbackSchema>(component: S) => {
-  if (isKnownComponentType(component)) {
-    const entry = REGISTRY[component.type];
-    return entry as RegistryEntry<AnyComponentSchema>;
-  }
-  return Fallback;
+export const getRegistryEntry = (
+  component: AnyComponentSchema
+): RegistryEntry<AnyComponentSchema> => {
+  const entry = REGISTRY[component.type];
+  return entry;
 };
 
 const REGISTRY: Registry = {
@@ -81,5 +88,4 @@ const REGISTRY: Registry = {
   password: Password,
 };
 
-export {Fallback};
 export default REGISTRY;

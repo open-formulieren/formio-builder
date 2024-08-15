@@ -14,38 +14,6 @@ const Template: StoryFn<typeof ComponentPreview> = ({component}) => (
   <ComponentPreview onComponentChange={fn()} component={component} />
 );
 
-export const Default: Story = {
-  render: Template,
-
-  args: {
-    component: {
-      id: 'foo',
-      type: 'textfield',
-      label: 'A text field',
-      validate: {
-        required: false,
-      },
-    },
-  },
-};
-
-export const Fallback: Story = {
-  render: Template,
-
-  args: {
-    component: {
-      id: 'fallback',
-      // should never accidentally be an actual type
-      type: '85230383-896e-40ce-a1a9-35a090b73f17',
-    } as any,
-  },
-
-  play: async ({canvasElement}) => {
-    const canvas = within(canvasElement);
-    await canvas.findByTestId('jsonPreview');
-  },
-};
-
 export const TextField: Story = {
   render: Template,
 
@@ -141,6 +109,7 @@ export const Email: Story = {
       label: 'Email preview',
       description: 'A preview of the email Formio component',
       hidden: true, // must be ignored
+      validateOn: 'blur',
     },
   },
 
@@ -174,6 +143,7 @@ export const EmailMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
+      validateOn: 'blur',
     },
   },
 
