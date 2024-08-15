@@ -1,8 +1,8 @@
+import {AnyComponentSchema} from '@open-formulieren/types';
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {BuilderContextType} from '@/context';
-import {AnyComponentSchema, FallbackSchema} from '@/types';
 
 // Edit form
 
@@ -11,17 +11,18 @@ export interface EditFormProps<S> {
 }
 
 export interface EditFormDefinition<S> extends React.FC<EditFormProps<S>> {
-  defaultValues: S extends AnyComponentSchema ? Omit<S, 'id' | 'type'> : FallbackSchema;
+  // the ternary is a trick to force typescript to distribute unions inside S - otherwise
+  // it will operate on the intersection of the union and it loses type information
+  // for specific schemas
+  defaultValues: S extends AnyComponentSchema ? Omit<S, 'id' | 'type'> : never;
 }
 
 // Component preview
-export interface ComponentPreviewProps<S extends AnyComponentSchema | FallbackSchema> {
+export interface ComponentPreviewProps<S extends AnyComponentSchema> {
   component: S;
 }
 
-export type Preview<S extends AnyComponentSchema | FallbackSchema> = React.FC<
-  ComponentPreviewProps<S>
->;
+export type Preview<S extends AnyComponentSchema> = React.FC<ComponentPreviewProps<S>>;
 
 export interface EditSchemaArgs {
   intl: IntlShape;
@@ -32,13 +33,13 @@ export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
 
 export interface ComparisonValueProps {
   name: string;
-  label: string | React.ReactNode;
+  label: React.ReactNode;
   multiple?: boolean;
 }
 
 // Registry entry
 
-export interface RegistryEntry<S extends AnyComponentSchema | FallbackSchema> {
+export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
   preview: Preview<S> | null;

@@ -464,6 +464,11 @@
     "description": "Values table: accessible label to remove an option",
     "originalDefault": "Remove"
   },
+  "ISVTEk": {
+    "defaultMessage": "The component type <code>{type}</code> is unknown. We can only display the JSON definition.",
+    "description": "Informational message about unsupported component",
+    "originalDefault": "The component type <code>{type}</code> is unknown. We can only display the JSON definition."
+  },
   "JDYF2q": {
     "defaultMessage": "The data entered in this component will be removed in accordance with the privacy settings.",
     "description": "Tooltip for 'IsSensitiveData' builder field",

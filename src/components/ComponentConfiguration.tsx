@@ -1,8 +1,16 @@
+import {JSONEditor} from '@open-formulieren/monaco-json-editor';
+import {FallbackSchema} from '@open-formulieren/types';
+import {FormattedMessage} from 'react-intl';
+
 import {BuilderContext, BuilderContextType} from '@/context';
+import {isKnownComponentType} from '@/registry';
 
 import ComponentEditForm, {ComponentEditFormProps} from './ComponentEditForm';
 
-export interface ComponentConfigurationProps extends BuilderContextType, ComponentEditFormProps {}
+type MergedProps = BuilderContextType & ComponentEditFormProps;
+export type ComponentConfigurationProps = Omit<MergedProps, 'component'> & {
+  component: MergedProps['component'] | FallbackSchema;
+};
 
 /**
  * The main entrypoint to edit a component in the builder modal.
@@ -42,34 +50,65 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   onCancel,
   onRemove,
   onSubmit,
-}) => (
-  <BuilderContext.Provider
-    value={{
-      uniquifyKey,
-      supportedLanguageCodes,
-      richTextColors,
-      theme,
-      getFormComponents,
-      getValidatorPlugins,
-      getRegistrationAttributes,
-      getPrefillPlugins,
-      getPrefillAttributes,
-      getFileTypes,
-      serverUploadLimit,
-      getDocumentTypes,
-      getConfidentialityLevels,
-      getAuthPlugins,
-    }}
-  >
-    <ComponentEditForm
-      isNew={isNew}
-      component={component}
-      builderInfo={builderInfo}
-      onCancel={onCancel}
-      onRemove={onRemove}
-      onSubmit={onSubmit}
+}) => {
+  if (!isKnownComponentType(component)) {
+    return <Fallback theme={theme} component={component} />;
+  }
+  return (
+    <BuilderContext.Provider
+      value={{
+        uniquifyKey,
+        supportedLanguageCodes,
+        richTextColors,
+        theme,
+        getFormComponents,
+        getValidatorPlugins,
+        getRegistrationAttributes,
+        getPrefillPlugins,
+        getPrefillAttributes,
+        getFileTypes,
+        serverUploadLimit,
+        getDocumentTypes,
+        getConfidentialityLevels,
+        getAuthPlugins,
+      }}
+    >
+      <ComponentEditForm
+        isNew={isNew}
+        component={component}
+        builderInfo={builderInfo}
+        onCancel={onCancel}
+        onRemove={onRemove}
+        onSubmit={onSubmit}
+      />
+    </BuilderContext.Provider>
+  );
+};
+
+interface FallbackProps {
+  component: FallbackSchema;
+  theme: BuilderContextType['theme'];
+}
+
+const Fallback: React.FC<FallbackProps> = ({component, theme}) => (
+  <>
+    <FormattedMessage
+      tagName="p"
+      description="Informational message about unsupported component"
+      defaultMessage="The component type <code>{type}</code> is unknown. We can only display the JSON definition."
+      values={{
+        type: component.type ?? '-',
+        code: chunks => <code>{chunks}</code>,
+      }}
     />
-  </BuilderContext.Provider>
+    <JSONEditor
+      wrapperProps={{className: 'json-editor'}}
+      value={component}
+      onChange={() => alert('Editing is not possible in unknown components.')}
+      theme={theme}
+      readOnly
+    />
+  </>
 );
 
 export default ComponentConfiguration;
