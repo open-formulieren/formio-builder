@@ -28,8 +28,17 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
+/**
+ * Helper type to extract information from existing types.
+ */
+type AddressSubComponents = Required<
+  Required<Required<AddressNLComponentSchema>['openForms']>['components']
+>;
+type PostcodeSchema = AddressSubComponents['postcode'];
+type CitySchema = AddressSubComponents['city'];
+
 export interface SubcomponentValidationProps {
-  component: string;
+  component: keyof AddressSubComponents;
   label: React.ReactNode;
   tooltip: string;
   placeholder: string;
@@ -142,11 +151,12 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<AddressNLComponentSchema>();
   Validate.useManageValidatorsTranslations<AddressNLComponentSchema>(['required']);
-  Validate.useManageValidatorsTranslations(
+
+  Validate.useManageValidatorsTranslations<PostcodeSchema>(
     ['pattern'],
     `openForms.components.postcode.translatedErrors`
   );
-  Validate.useManageValidatorsTranslations(
+  Validate.useManageValidatorsTranslations<CitySchema>(
     ['pattern'],
     `openForms.components.city.translatedErrors`
   );
