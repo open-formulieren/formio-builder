@@ -1,0 +1,28 @@
+import {ArgTypes, Canvas, Meta} from '@storybook/blocks';
+
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modals
+
+Modals are built with the `react-modal` library, which helps enforce the accessible behaviours.
+
+Pass the content of the modal as children:
+
+```tsx
+<Modal isOpen closeModal={() => setClosed()}>
+  <h1>Modal title</h1>
+  <p>Modal body</p>
+</Modal>
+```
+
+## Props
+
+<ArgTypes />
+
+## Context
+
+For Storybook purposes, we use the `ModalContext` React context so that the nodes are injected in
+the correct location. The context is considered private API and it is not necessary to make use of
+the modal component.

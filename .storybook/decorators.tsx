@@ -1,6 +1,7 @@
 import type {Decorator} from '@storybook/react';
 import {Formik} from 'formik';
 
+import {ModalContext} from '@/components/Modal';
 import {BuilderContext} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
@@ -17,7 +18,18 @@ import {
 } from '@/tests/sharedUtils';
 
 export const ModalDecorator: Decorator = (Story, {parameters}) => {
-  if (parameters?.modal?.noModal) return <Story />;
+  if (parameters?.modal?.noModal)
+    return (
+      <ModalContext.Provider
+        value={{
+          // only for storybook integration, do not use this in real apps!
+          parentSelector: () => document.getElementById('storybook-root')!,
+          ariaHideApp: false,
+        }}
+      >
+        <Story />
+      </ModalContext.Provider>
+    );
   return (
     <div
       className="formio-dialog formio-dialog-theme-default component-settings"
@@ -41,7 +53,6 @@ export const ModalDecorator: Decorator = (Story, {parameters}) => {
 export const BuilderContextDecorator: Decorator = (Story, context) => {
   if (!context.parameters?.builder?.enableContext) return <Story />;
   const supportedLanguageCodes = context.parameters.builder?.supportedLanguageCodes || ['nl', 'en'];
-  const translationsStore = context.parameters.builder?.translationsStore || null;
   const theme = context.parameters.builder?.theme || 'light';
   const defaultComponentTree =
     context.parameters.builder?.defaultComponentTree || DEFAULT_COMPONENT_TREE;
@@ -64,7 +75,6 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
         theme,
-        componentTranslationsRef: {current: translationsStore},
         getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         getValidatorPlugins: async () => {
           await sleep(context.parameters?.builder?.validatorPluginsDelay || 0);
