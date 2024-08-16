@@ -1,9 +1,9 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
-import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 import {AnyComponentSchema, hasOwnProperty} from '@/types';
@@ -27,7 +27,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   onComponentChange,
   children,
 }) => {
-  const [previewMode, setpreviewMode] = useState<PreviewState>('rich');
+  const [previewMode, setPreviewMode] = useState<PreviewState>('rich');
   const builderContext = useContext(BuilderContext);
 
   return (
@@ -36,10 +36,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
         <h4 className="card-title mb-0">
           <FormattedMessage description="Component preview card title" defaultMessage="Preview" />
         </h4>
-        <PreviewModeToggle
-          mode={previewMode}
-          onChange={event => setpreviewMode(event.target.value as PreviewState)}
-        />
+        <PreviewModeToggle previewMode={previewMode} setPreviewMode={setPreviewMode} />
       </div>
 
       {previewMode === 'JSON' ? (
@@ -111,44 +108,6 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
     >
       <PreviewComponent component={component} />
     </ComponentPreviewWrapper>
-  );
-};
-
-export type PreviewState = 'rich' | 'JSON';
-
-interface PreviewModeToggleProps {
-  mode: PreviewState;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({mode, onChange}) => {
-  const isRichPreview = mode === 'rich';
-  const isJSON = mode === 'JSON';
-  return (
-    <div className="btn-group btn-group-toggle">
-      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isRichPreview})}>
-        <input
-          type="radio"
-          name="previewMode"
-          value="rich"
-          autoComplete="off"
-          checked={isRichPreview}
-          onChange={onChange}
-        />
-        <FormattedMessage description="Component 'Rich' preview mode" defaultMessage="Form" />
-      </label>
-      <label className={clsx('btn', 'btn-sm', 'btn-secondary', {active: isJSON})}>
-        <input
-          type="radio"
-          name="previewMode"
-          value="JSON"
-          autoComplete="off"
-          checked={isJSON}
-          onChange={onChange}
-        />
-        <FormattedMessage description="Component 'JSON' preview mode" defaultMessage="JSON" />
-      </label>
-    </div>
   );
 };
 
