@@ -4,7 +4,7 @@ import {useFormikContext} from 'formik';
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
-import {PreviewModeToggle, PreviewState} from '@/components/ComponentPreview';
+import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
 import {
   BuilderTabs,
   Hidden,
@@ -57,10 +57,7 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
     <>
       <div className="card panel preview-panel">
         <div className="card-header d-flex justify-content-end">
-          <PreviewModeToggle
-            mode={previewMode}
-            onChange={event => setPreviewMode(event.target.value as PreviewState)}
-          />
+          <PreviewModeToggle previewMode={previewMode} setPreviewMode={setPreviewMode} />
         </div>
         <div className="card-body">
           {previewMode === 'JSON' ? (
