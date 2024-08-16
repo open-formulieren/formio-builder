@@ -1,0 +1,97 @@
+.offb-form-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  &--form {
+    gap: 0;
+
+    .offb-form-preview__mode-toggle {
+      margin-bottom: 5px;
+    }
+  }
+
+  &__mode-toggle {
+    align-self: flex-end;
+  }
+}
+
+.offb-form-preview-component {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-areas:
+    'drag-handle representation controls'
+    'drag-handle children children';
+
+  align-items: center;
+
+  border: 1px solid var(--offb-form-preview-component-border-color, #ccc);
+  border-radius: 0.2rem;
+
+  &__drag-handle {
+    all: initial;
+    grid-area: drag-handle;
+    padding-inline: 10px;
+    cursor: move;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-inline-end: 1px dotted var(--offb-form-preview-component-border-color, #ccc);
+    outline: revert !important;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__representation {
+    grid-area: representation;
+    flex-grow: 1;
+    padding-inline: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__component-type {
+    color: #aaa;
+    text-transform: lowercase;
+  }
+
+  &__controls {
+    --_offb-form-preview-action-padding-inline: 3px;
+    grid-area: controls;
+    border-inline-start: 1px dotted var(--offb-form-preview-component-border-color, #ccc);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: var(--_offb-form-preview-action-padding-inline);
+  }
+
+  &__children {
+    grid-area: children;
+    margin-block-end: 5px;
+    margin-inline-end: -1px;
+    padding-block-start: 5px;
+    padding-inline-start: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    border-block-start: 1px dotted var(--offb-form-preview-component-border-color, #ccc);
+  }
+}
+
+.offb-form-preview-action {
+  border: none;
+  appearance: none;
+  background-color: transparent;
+  padding-inline: var(--_offb-form-preview-action-padding-inline);
+  padding-block: 5px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
