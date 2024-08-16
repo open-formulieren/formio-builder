@@ -152,7 +152,7 @@
       "/node_modules/(?!uuid)/"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/tests/setupTests.js"
+      "<rootDir>/src/tests/setupTests.ts"
     ],
     "testEnvironment": "jsdom"
   }

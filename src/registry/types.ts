@@ -17,12 +17,7 @@ export interface EditFormDefinition<S> extends React.FC<EditFormProps<S>> {
   defaultValues: S extends AnyComponentSchema ? Omit<S, 'id' | 'type'> : never;
 }
 
-// Component preview
-export interface ComponentPreviewProps<S extends AnyComponentSchema> {
-  component: S;
-}
-
-export type Preview<S extends AnyComponentSchema> = React.FC<ComponentPreviewProps<S>>;
+// Component schema-specific input validation for the edit form
 
 export interface EditSchemaArgs {
   intl: IntlShape;
@@ -30,6 +25,11 @@ export interface EditSchemaArgs {
 }
 
 export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
+
+// Component preview
+export interface ComponentPreviewProps<S extends AnyComponentSchema = AnyComponentSchema> {
+  component: S;
+}
 
 export interface ComparisonValueProps {
   name: string;
@@ -39,10 +39,20 @@ export interface ComparisonValueProps {
 
 // Registry entry
 
+export interface Previews {
+  /**
+   * The component preview rendered next to the component configuration form.
+   *
+   * The preview updates live as the component configuration itself is modified through
+   * form field interaction.
+   */
+  panel: React.FC<ComponentPreviewProps> | null;
+}
+
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
-  preview: Preview<S> | null;
+  preview: Previews;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
