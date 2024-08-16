@@ -4,11 +4,13 @@ import {RegistryEntry} from '@/registry/types';
 
 import EditForm from './edit';
 import validationSchema from './edit-validation';
-import Preview from './preview';
+import PanelPreview from './panel-preview';
 
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: Preview,
+  preview: {
+    panel: PanelPreview,
+  },
   defaultValue: undefined, // a fieldset component does not hold a value itself
 } satisfies RegistryEntry<FieldsetComponentSchema>;

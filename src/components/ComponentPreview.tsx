@@ -85,8 +85,11 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
 }) => {
   const {key} = component;
   const entry = getRegistryEntry(component);
-  const {preview: PreviewComponent, defaultValue = ''} = entry;
-  if (PreviewComponent === null) {
+  const {
+    preview: {panel: PanelPreviewComponent},
+    defaultValue = '',
+  } = entry;
+  if (PanelPreviewComponent === null) {
     return null;
   }
   const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
@@ -106,7 +109,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
       component={component}
       initialValues={initialValues}
     >
-      <PreviewComponent component={component} />
+      <PanelPreviewComponent component={component} />
     </ComponentPreviewWrapper>
   );
 };

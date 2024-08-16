@@ -7,6 +7,8 @@ import validationSchema from './edit-validation';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: null,
+  preview: {
+    panel: null,
+  },
   defaultValue: undefined, // a content component does not hold a value itself
 } satisfies RegistryEntry<ContentComponentSchema>;

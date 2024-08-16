@@ -9,7 +9,7 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: Preview,
+  preview: {panel: Preview},
   // default empty value for Formik - this ignores any manually configured options!
   defaultValue: '',
 } satisfies RegistryEntry<SelectComponentSchema>;

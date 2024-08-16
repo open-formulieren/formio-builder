@@ -9,7 +9,7 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: Preview,
+  preview: {panel: Preview},
   defaultValue: undefined, // formik field value
   comparisonValue: ComparisonValueInput,
 } satisfies RegistryEntry<CurrencyComponentSchema>;

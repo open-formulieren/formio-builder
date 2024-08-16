@@ -9,7 +9,9 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: Preview,
+  preview: {
+    panel: Preview,
+  },
   defaultValue: {
     postcode: '',
     houseNumber: '',

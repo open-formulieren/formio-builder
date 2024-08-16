@@ -71,7 +71,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
 
   const registryEntry = getRegistryEntry(component);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
-  const hasPreview = registryEntry.preview !== null;
+  const hasPreview = registryEntry.preview.panel !== null;
 
   let initialValues = cloneDeep(component);
   if (isNew) {
