@@ -1,7 +1,7 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {TextField} from 'components/formio';
 import {useContext} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {
   BuilderTabs,
@@ -38,6 +38,7 @@ type PostcodeSchema = AddressSubComponents['postcode'];
 type CitySchema = AddressSubComponents['city'];
 
 export interface SubcomponentValidationProps {
+  prefix: string;
   component: keyof AddressSubComponents;
   label: React.ReactNode;
   tooltip: string;
@@ -45,6 +46,7 @@ export interface SubcomponentValidationProps {
 }
 
 export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
+  prefix,
   component,
   label,
   tooltip,
@@ -54,7 +56,7 @@ export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
   return (
     <>
       <TextField
-        name={`openForms.components.${component}.validate.pattern`}
+        name={`${prefix}.${component}.validate.pattern`}
         label={label}
         tooltip={tooltip}
         placeholder={placeholder}
@@ -69,13 +71,17 @@ export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
         {supportedLanguageCodes.map(code => (
           <TabPanel key={code}>
             <DataMap
-              name={`openForms.components.${component}.translatedErrors.${code}`}
+              name={`${prefix}.${component}.translatedErrors.${code}`}
               keyLabel={
                 <FormattedMessage
                   description="Label for translation of validation error code"
                   defaultMessage="Error code"
                 />
               }
+              ariaLabelMessage={defineMessage({
+                description: 'Accessible label for error message input field',
+                defaultMessage: 'Error message for "{key}"',
+              })}
               valueComponent={
                 <TextField
                   name="message"
@@ -154,12 +160,9 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
 
   Validate.useManageValidatorsTranslations<PostcodeSchema>(
     ['pattern'],
-    `openForms.components.postcode.translatedErrors`
+    `openForms.components.postcode`
   );
-  Validate.useManageValidatorsTranslations<CitySchema>(
-    ['pattern'],
-    `openForms.components.city.translatedErrors`
-  );
+  Validate.useManageValidatorsTranslations<CitySchema>(['pattern'], `openForms.components.city`);
 
   return (
     <Tabs>
@@ -225,6 +228,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
           initialCollapsed
         >
           <SubcomponentValidation
+            prefix="openForms.components"
             component="postcode"
             label={
               <FormattedMessage
@@ -260,6 +264,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
           initialCollapsed
         >
           <SubcomponentValidation
+            prefix="openForms.components"
             component="city"
             label={
               <FormattedMessage

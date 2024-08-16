@@ -2,7 +2,7 @@ import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formuliere
 import {useField} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useEffect} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
+import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {BuilderContext} from '@/context';
 
@@ -10,10 +10,11 @@ import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../../for
 
 export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
   keys: PossibleValidatorErrorKeys<S>[],
-  field: string = 'translatedErrors'
+  prefix: string = ''
 ): void {
+  const fieldName = `${prefix}${prefix ? '.' : ''}translatedErrors`;
   const {supportedLanguageCodes} = useContext(BuilderContext);
-  const [{value}, , {setValue}] = useField<S['translatedErrors']>(field);
+  const [{value}, , {setValue}] = useField<S['translatedErrors']>(fieldName);
 
   useEffect(() => {
     const newValue = value
@@ -68,6 +69,10 @@ const ValidationErrorTranslations = () => {
                   defaultMessage="Error code"
                 />
               }
+              ariaLabelMessage={defineMessage({
+                description: 'Accessible label for error message input field',
+                defaultMessage: 'Error message for "{key}"',
+              })}
               valueComponent={
                 <TextField
                   name="message"

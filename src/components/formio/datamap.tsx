@@ -1,5 +1,6 @@
 import {useField} from 'formik';
 import React from 'react';
+import {MessageDescriptor, useIntl} from 'react-intl';
 
 import DataGrid, {DataGridRow} from './datagrid';
 import TextField from './textfield';
@@ -8,12 +9,19 @@ export interface DataMapProps {
   name: string;
   valueComponent: React.ReactElement;
   keyLabel: React.ReactNode;
+  ariaLabelMessage?: MessageDescriptor;
 }
 
 /**
  * Data map with readonly keys.
  */
-export const DataMap: React.FC<DataMapProps> = ({name, valueComponent, keyLabel = 'Key'}) => {
+export const DataMap: React.FC<DataMapProps> = ({
+  name,
+  valueComponent,
+  ariaLabelMessage,
+  keyLabel = 'Key',
+}) => {
+  const intl = useIntl();
   const [{value}, , {setValue}] = useField(name);
   const transformedValue = Object.entries(value).map(([key, value]) => ({key, value}));
   const columns = [keyLabel, valueComponent.props.label];
@@ -30,6 +38,9 @@ export const DataMap: React.FC<DataMapProps> = ({name, valueComponent, keyLabel 
               const newValue = {...value, [item.key]: event.target.value};
               setValue(newValue);
             },
+            'aria-label': ariaLabelMessage
+              ? intl.formatMessage(ariaLabelMessage, {key: item.key})
+              : undefined,
           })}
         </DataGridRow>
       ))}
