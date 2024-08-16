@@ -49,7 +49,10 @@ function ModeToggle<T extends string>({
   return (
     <div className={clsx('btn-group', 'btn-group-toggle', className)}>
       {modes.map(({value, label}) => (
-        <label className={clsx('btn', 'btn-sm', btnClassName, {active: value === currentMode})}>
+        <label
+          key={value}
+          className={clsx('btn', 'btn-sm', btnClassName, {active: value === currentMode})}
+        >
           <input
             type="radio"
             name={name}
