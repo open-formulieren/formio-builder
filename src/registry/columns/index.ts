@@ -6,12 +6,16 @@ import EditForm from './edit';
 import validationSchema from './edit-validation';
 import PanelPreview from './panel-preview';
 import './previews.scss';
+import StructureSubtreePreview from './structure-preview';
+import WebformPreview from './webform-preview';
 
 export default {
   edit: EditForm,
   editSchema: validationSchema,
   preview: {
     panel: PanelPreview,
+    structureSubtree: StructureSubtreePreview,
+    webform: WebformPreview,
   },
   defaultValue: undefined, // a column component does not hold a value itself
 } satisfies RegistryEntry<ColumnsComponentSchema>;
