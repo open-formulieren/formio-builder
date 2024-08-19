@@ -1,0 +1,13 @@
+.component-preview.component-preview--email {
+  // single value preview
+  .form-group > div:has(input + button) {
+    display: flex;
+    gap: 15px;
+  }
+
+  // multiple value preview
+  td:has(input + button) {
+    display: flex;
+    gap: 15px;
+  }
+}

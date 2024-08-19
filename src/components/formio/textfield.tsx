@@ -20,6 +20,7 @@ export interface TextFieldProps {
   showCharCount?: boolean;
   inputMask?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  childrenAfterField?: React.ReactNode;
 }
 
 export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps> = ({
@@ -31,6 +32,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   showCharCount = false,
   inputMask,
   onChange,
+  childrenAfterField,
   ...props
 }) => {
   const {getFieldProps, getFieldMeta} = useFormikContext();
@@ -57,20 +59,23 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   }
 
   const inputField = (
-    <Field
-      innerRef={inputRef}
-      name={name}
-      id={htmlId}
-      as="input"
-      type="text"
-      className={clsx('form-control', {'is-invalid': hasErrors})}
-      data-testid={`input-${name}`}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        formikOnChange(event);
-        onChange?.(event);
-      }}
-      {...props}
-    />
+    <>
+      <Field
+        innerRef={inputRef}
+        name={name}
+        id={htmlId}
+        as="input"
+        type="text"
+        className={clsx('form-control', {'is-invalid': hasErrors})}
+        data-testid={`input-${name}`}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          formikOnChange(event);
+          onChange?.(event);
+        }}
+        {...props}
+      />
+      {childrenAfterField}
+    </>
   );
 
   const hasFocus = inputRef.current === document.activeElement;

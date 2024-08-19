@@ -1,4 +1,5 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
+import clsx from 'clsx';
 import {Formik} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
@@ -55,7 +56,10 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
               throw new Error("Can't submit preview form");
             }}
           >
-            <div className="component-preview" data-testid="componentPreview">
+            <div
+              className={clsx('component-preview', `component-preview--${component.type}`)}
+              data-testid="componentPreview"
+            >
               {children}
             </div>
           </Formik>

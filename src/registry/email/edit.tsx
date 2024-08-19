@@ -140,9 +140,13 @@ EditForm.defaultValues = {
   registration: {
     attribute: '',
   },
+  // openForms extensions
+  openForms: {
+    translations: {},
+    requireVerification: false,
+  },
   // fixed but not editable
   validateOn: 'blur',
-  // inputType: 'email',
 };
 
 interface DefaultValueProps {
