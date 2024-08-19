@@ -85,6 +85,11 @@
     "description": "Tooltip for 'validate.min' builder field",
     "originalDefault": "The minimum value this field can have before the form can be submitted."
   },
+  "205QX5": {
+    "defaultMessage": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account.",
+    "description": "Tooltip for email 'openForms.requireVerification' builder field",
+    "originalDefault": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account."
+  },
   "2Lg8Vc": {
     "defaultMessage": "Verberg veldengroepheader",
     "description": "Label for 'hideHeader' builder field",
@@ -347,6 +352,11 @@
     "defaultMessage": "{length} {length, plural, one {karakter over} other {karakters over}}",
     "description": "Character count remaining",
     "originalDefault": "{length} {length, plural, one {character remaining} other {characters remaining}}"
+  },
+  "Cf5zSF": {
+    "defaultMessage": "Verify",
+    "description": "Email verification button text",
+    "originalDefault": "Verify"
   },
   "D0hDzV": {
     "defaultMessage": "{componentType}-component",
@@ -763,6 +773,11 @@
     "defaultMessage": "In het verleden",
     "description": "Date constraint mode 'past' label",
     "originalDefault": "In the past"
+  },
+  "Wb+QGm": {
+    "defaultMessage": "Require verification",
+    "description": "Label for email 'openForms.requireVerification' builder field",
+    "originalDefault": "Require verification"
   },
   "WkBjB5": {
     "defaultMessage": "Indien meerdere unieke identificaties beschikbaar zijn (bijvoorbeeld bij eHerkenning Bewindvoering en DigiD Machtigen), welke prefill-gegevens moeten dan opgehaald worden? Deze voor de machtiger of de gemachtigde?",
@@ -1422,6 +1437,11 @@
     "defaultMessage": "Maximale lengte",
     "description": "Label for 'validate.maxLength' builder field",
     "originalDefault": "Maximum length"
+  },
+  "yGAl1a": {
+    "defaultMessage": "Close",
+    "description": "Modal close button label",
+    "originalDefault": "Close"
   },
   "yL9Ql7": {
     "defaultMessage": "Vertalingen",
