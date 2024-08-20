@@ -62,13 +62,14 @@ export const ImageResizeOptionsShown: Story = {
     });
 
     await step('Select image file types displays controls', async () => {
+      // TODO: replace with react-select-event
       canvas.getByLabelText('File types').focus();
       await userEvent.keyboard('[ArrowDown]');
-      await waitFor(async () => {
-        await expect(canvas.queryByText('.png')).toBeVisible();
-      });
-      await userEvent.click(canvas.getByText('.png'));
-      expect(canvas.queryByLabelText('Resize image')).toBeVisible();
+      const pngOption = await canvas.findByText('.png');
+      expect(pngOption).toBeVisible();
+      await userEvent.click(pngOption);
+
+      expect(await canvas.findByLabelText('Resize image')).toBeVisible();
       expect(canvas.queryByLabelText('Resize image')).not.toBeChecked();
       expect(canvas.queryByLabelText('Maximum width')).not.toBeInTheDocument();
       expect(canvas.queryByLabelText('Maximum height')).not.toBeInTheDocument();
@@ -77,7 +78,7 @@ export const ImageResizeOptionsShown: Story = {
     await step('Enabling image resizing displays dimension controls', async () => {
       fireEvent.click(canvas.getByLabelText('Resize image'));
 
-      expect(canvas.queryByLabelText('Maximum width')).toBeVisible();
+      expect(await canvas.findByLabelText('Maximum width')).toBeVisible();
       expect(canvas.queryByLabelText('Maximum width')).toHaveDisplayValue('2000');
       expect(canvas.queryByLabelText('Maximum height')).toBeVisible();
       expect(canvas.queryByLabelText('Maximum height')).toHaveDisplayValue('2000');
