@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, userEvent, waitFor, within} from '@storybook/test';
+import {expect, userEvent, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -39,7 +39,8 @@ export const PostcodeValidationTabWithoutConfiguration: Story = {
       expect(await canvas.findByText('NL')).toBeVisible();
       expect(await canvas.findByText('EN')).toBeVisible();
       expect(await canvas.findByText('Error code')).toBeVisible();
-      expect(canvas.getByLabelText('Error message for "pattern"')).toHaveDisplayValue('');
+      const errorMessageInput = await canvas.findByLabelText('Error message for "pattern"');
+      expect(errorMessageInput).toHaveDisplayValue('');
     });
   },
 };
@@ -56,7 +57,8 @@ export const CityValidationTabWithoutConfiguration: Story = {
       expect(await canvas.findByText('NL')).toBeVisible();
       expect(await canvas.findByText('EN')).toBeVisible();
       expect(await canvas.findByText('Error code')).toBeVisible();
-      expect(canvas.getByLabelText('Error message for "pattern"')).toHaveDisplayValue('');
+      const errorMessageInput = await canvas.findByLabelText('Error message for "pattern"');
+      expect(errorMessageInput).toHaveDisplayValue('');
     });
   },
 };
@@ -90,7 +92,7 @@ export const PostcodeValidationTabWithConfiguration: Story = {
     await step('Navigate to validation tab and open Postcode validation', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getAllByText('Postcode')[0]);
-      const patternInput = canvas.getByLabelText('Regular expression for postcode');
+      const patternInput = await canvas.findByLabelText('Regular expression for postcode');
       expect(patternInput).toBeVisible();
       expect(patternInput).toHaveValue('1017 [A-Za-z]{2}');
 
@@ -98,9 +100,8 @@ export const PostcodeValidationTabWithConfiguration: Story = {
       expect(await canvas.findByDisplayValue('Postcode moet 1017 XX zijn')).toBeVisible();
 
       await userEvent.click(await canvas.findByText('EN'));
-      expect(canvas.getByLabelText('Error message for "pattern"')).toHaveDisplayValue(
-        'Postal code must be 1017 XX'
-      );
+      const errorMessageInput = await canvas.findByLabelText('Error message for "pattern"');
+      expect(errorMessageInput).toHaveDisplayValue('Postal code must be 1017 XX');
     });
   },
 };
@@ -134,7 +135,7 @@ export const CityValidationTabWithConfiguration: Story = {
     await step('Navigate to validation tab and open City validation', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getAllByText('City')[0]);
-      const patternInput = canvas.getByLabelText('Regular expression for city');
+      const patternInput = await canvas.findByLabelText('Regular expression for city');
       expect(patternInput).toBeVisible();
       expect(patternInput).toHaveValue('Amsterdam');
 
@@ -142,9 +143,8 @@ export const CityValidationTabWithConfiguration: Story = {
       expect(await canvas.findByDisplayValue('De stad moet Amsterdam zijn')).toBeVisible();
 
       await userEvent.click(await canvas.findByText('EN'));
-      expect(canvas.getByLabelText('Error message for "pattern"')).toHaveDisplayValue(
-        'The city must be Amsterdam'
-      );
+      const errorMessageInput = await canvas.findByLabelText('Error message for "pattern"');
+      expect(errorMessageInput).toHaveDisplayValue('The city must be Amsterdam');
     });
   },
 };
