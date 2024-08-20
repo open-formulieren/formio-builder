@@ -87,6 +87,7 @@ const EditForm: EditFormDefinition<EmailComponentSchema> = () => {
       {/* Validation tab */}
       <TabPanel>
         <Validate.Required />
+        <RequireVerification />
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
@@ -140,9 +141,13 @@ EditForm.defaultValues = {
   registration: {
     attribute: '',
   },
+  // openForms extensions
+  openForms: {
+    translations: {},
+    requireVerification: false,
+  },
   // fixed but not editable
   validateOn: 'blur',
-  // inputType: 'email',
 };
 
 interface DefaultValueProps {
@@ -179,6 +184,28 @@ const IsConfirmationRecipient: React.FC = () => {
         <FormattedMessage
           description="Label for 'confirmationRecipient' builder field"
           defaultMessage="Receives confirmation email"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
+};
+
+const RequireVerification = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for email 'openForms.requireVerification' builder field",
+    defaultMessage: `When email address verification is enabled, the user must verify
+    their email address before they can submit the form. This proves the email address
+    exists and that they have access to the account.`,
+  });
+  return (
+    <Checkbox
+      name="openForms.requireVerification"
+      label={
+        <FormattedMessage
+          description="Label for email 'openForms.requireVerification' builder field"
+          defaultMessage="Require verification"
         />
       }
       tooltip={tooltip}

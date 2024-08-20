@@ -1,3 +1,4 @@
+import {EmailComponentSchema} from '@open-formulieren/types';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
@@ -128,6 +129,25 @@ export const Email: Story = {
     // check that user can type into the field
     await userEvent.type(input, 'hello@example.com');
     await expect(input).toHaveDisplayValue('hello@example.com');
+  },
+};
+
+export const EmailWithVerification: Story = {
+  render: Template,
+  args: {
+    component: {
+      type: 'email',
+      id: 'email',
+      key: 'emailPreview',
+      label: 'Email preview',
+      description: 'A preview of the email Formio component',
+      hidden: true, // must be ignored
+      validateOn: 'blur',
+      openForms: {
+        translations: {},
+        requireVerification: true,
+      },
+    },
   },
 };
 
