@@ -50,12 +50,12 @@
     "originalDefault": "Whether to show this value in the confirmation PDF"
   },
   "0D+m56": {
-    "defaultMessage": "Regular expression for city",
+    "defaultMessage": "Patroon of waarde voor de stad",
     "description": "Placeholder for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for city"
   },
   "0FD2pY": {
-    "defaultMessage": "Validation for the postcode field",
+    "defaultMessage": "Validatieregels voor het postcodeveld",
     "description": "Tooltip postcode field validation panel",
     "originalDefault": "Validation for the postcode field"
   },
@@ -96,7 +96,7 @@
     "originalDefault": "The minimum value this field can have before the form can be submitted."
   },
   "205QX5": {
-    "defaultMessage": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account.",
+    "defaultMessage": "Wanneer e-mailadresverificatie ingeschakeld is, dan moet de gebruiker hun e-mail verifiëren voor ze het formulier kunnen insturen. Dit bewijst dat het e-mailadres geldig is en dat de gebruiker er toegang tot heeft.",
     "description": "Tooltip for email 'openForms.requireVerification' builder field",
     "originalDefault": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account."
   },
@@ -167,7 +167,7 @@
     "originalDefault": "Days"
   },
   "4DrI94": {
-    "defaultMessage": "Regular expression for postcode",
+    "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for postcode"
   },
@@ -369,7 +369,7 @@
     "originalDefault": "{length} {length, plural, one {character remaining} other {characters remaining}}"
   },
   "Cf5zSF": {
-    "defaultMessage": "Verify",
+    "defaultMessage": "Verifiëren",
     "description": "Email verification button text",
     "originalDefault": "Verify"
   },
@@ -496,7 +496,7 @@
     "originalDefault": "Remove"
   },
   "ISVTEk": {
-    "defaultMessage": "The component type <code>{type}</code> is unknown. We can only display the JSON definition.",
+    "defaultMessage": "Het componenttype <code>{type}</code> is niet bekend. We kunnen enkel de JSON-definitie weergeven.",
     "description": "Informational message about unsupported component",
     "originalDefault": "The component type <code>{type}</code> is unknown. We can only display the JSON definition."
   },
@@ -790,7 +790,7 @@
     "originalDefault": "In the past"
   },
   "Wb+QGm": {
-    "defaultMessage": "Require verification",
+    "defaultMessage": "Verplicht verificatie",
     "description": "Label for email 'openForms.requireVerification' builder field",
     "originalDefault": "Require verification"
   },
@@ -800,7 +800,7 @@
     "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
   },
   "WxwqZJ": {
-    "defaultMessage": "The regular expression pattern test that the postcode field value must pass before the form can be submitted.",
+    "defaultMessage": "Het patroon van reguliere expressie waar de postcode aan moet voldoen voor het formulier kan verstuurd worden.",
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
   },
@@ -962,7 +962,7 @@
     "originalDefault": "Remove item"
   },
   "dD9O3Q": {
-    "defaultMessage": "Regular expression for postcode",
+    "defaultMessage": "Patroon of waarde voor de postcode",
     "description": "Placeholder for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for postcode"
   },
@@ -1068,7 +1068,7 @@
     "originalDefault": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component."
   },
   "fhVFUY": {
-    "defaultMessage": "City",
+    "defaultMessage": "Stad",
     "description": "Title of city field validation panel",
     "originalDefault": "City"
   },
@@ -1094,7 +1094,7 @@
     "originalDefault": "Fieldset content"
   },
   "hEVgKd": {
-    "defaultMessage": "Error message for \"{key}\"",
+    "defaultMessage": "Foutmelding voor \"{key}\"",
     "description": "Accessible label for error message input field",
     "originalDefault": "Error message for \"{key}\""
   },
@@ -1241,7 +1241,7 @@
     "originalDefault": "Optionally provide additional information to explain the meaning of the option."
   },
   "mck25o": {
-    "defaultMessage": "Validation for the city field",
+    "defaultMessage": "Validatieregels voor het stad-veld",
     "description": "Tooltip city field validation panel",
     "originalDefault": "Validation for the city field"
   },
@@ -1313,7 +1313,7 @@
     "originalDefault": "City"
   },
   "osl4X2": {
-    "defaultMessage": "The regular expression pattern test that the city field value must pass before the form can be submitted.",
+    "defaultMessage": "Het patroon van reguliere expressie waar de stad aan moet voldoen voor het formulier kan verstuurd worden.",
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the city field value must pass before the form can be submitted."
   },
@@ -1365,6 +1365,7 @@
   "rW1edF": {
     "defaultMessage": "Postcode",
     "description": "Title of postcode field validation panel",
+    "isTranslated": true,
     "originalDefault": "Postcode"
   },
   "rkJLBr": {
@@ -1394,7 +1395,7 @@
     "originalDefault": "{groupLabel} 3"
   },
   "swKpQE": {
-    "defaultMessage": "Regular expression for city",
+    "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for city"
   },
@@ -1494,7 +1495,7 @@
     "originalDefault": "Maximum length"
   },
   "yGAl1a": {
-    "defaultMessage": "Close",
+    "defaultMessage": "Sluiten",
     "description": "Modal close button label",
     "originalDefault": "Close"
   },
