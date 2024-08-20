@@ -1,5 +1,25 @@
 # Changes
 
+## 0.28.0 (2024-08-20)
+
+**New features**
+
+- [`OF#4420`][OF#4420] Added validation options for AddressNL postcode and city sub-components.
+- [`OF#4542`][OF#4542] Added "require verification" validation option to email component.
+
+- Added a modal component implementation, preparing for future features.
+
+[OF#4420]: https://github.com/open-formulieren/open-forms/issues/4420
+[OF#4542]: https://github.com/open-formulieren/open-forms/issues/4542
+
+**Cleanups**
+
+- Updated to NodeJS 20.
+- Use the full lodash package instead of split packages (the latter is advised against).
+- Refactored how we deal with unknown components.
+- Refactored the "mode toggles" into its own component.
+- Fixed typescript integration in Jest tests.
+
 ## 0.27.0 (2024-08-02)
 
 - Exported `getReactSelectStyles` helper for react-select usage outside of formio-builder.
