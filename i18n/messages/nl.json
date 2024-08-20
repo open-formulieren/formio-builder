@@ -49,6 +49,16 @@
     "description": "Tooltip for 'showInPDF' builder field",
     "originalDefault": "Whether to show this value in the confirmation PDF"
   },
+  "0D+m56": {
+    "defaultMessage": "Regular expression for city",
+    "description": "Placeholder for 'validate.pattern' builder field",
+    "originalDefault": "Regular expression for city"
+  },
+  "0FD2pY": {
+    "defaultMessage": "Validation for the postcode field",
+    "description": "Tooltip postcode field validation panel",
+    "originalDefault": "Validation for the postcode field"
+  },
   "0OP7ho": {
     "defaultMessage": "Ontvangt bevestigingsmail",
     "description": "Label for 'confirmationRecipient' builder field",
@@ -155,6 +165,11 @@
     "defaultMessage": "Dagen",
     "description": "Label for 'delta.days' in relative delta date constraint validation",
     "originalDefault": "Days"
+  },
+  "4DrI94": {
+    "defaultMessage": "Regular expression for postcode",
+    "description": "Label for 'validate.pattern' builder field",
+    "originalDefault": "Regular expression for postcode"
   },
   "4HBnrF": {
     "defaultMessage": "Sleep of <browse>selecteer</browse> bestanden om te uploaden.",
@@ -784,6 +799,11 @@
     "description": "Tooltip for 'prefill.identifierRole' builder field",
     "originalDefault": "In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?"
   },
+  "WxwqZJ": {
+    "defaultMessage": "The regular expression pattern test that the postcode field value must pass before the form can be submitted.",
+    "description": "Tooltip for 'validate.pattern' builder field",
+    "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
+  },
   "XMV3t2": {
     "defaultMessage": "Info",
     "description": "Label for content component CSS class 'info' option",
@@ -941,6 +961,11 @@
     "description": "'Remove item' screenreader button text",
     "originalDefault": "Remove item"
   },
+  "dD9O3Q": {
+    "defaultMessage": "Regular expression for postcode",
+    "description": "Placeholder for 'validate.pattern' builder field",
+    "originalDefault": "Regular expression for postcode"
+  },
   "dJNdhr": {
     "defaultMessage": "Annuleren",
     "description": "Cancel component configuration button",
@@ -1042,6 +1067,11 @@
     "description": "Description for the 'openForms.itemsExpression' builder field",
     "originalDefault": "A JSON logic expression returning a variable (of array type) whose items should be used as the options for this component."
   },
+  "fhVFUY": {
+    "defaultMessage": "City",
+    "description": "Title of city field validation panel",
+    "originalDefault": "City"
+  },
   "gCQtSJ": {
     "defaultMessage": "Geef de knoptekst om een groep te verwijderen op.",
     "description": "Tooltip for 'removeRow' builder field",
@@ -1062,6 +1092,11 @@
     "defaultMessage": "Veldengroepinhoud",
     "description": "Fieldset preview content description",
     "originalDefault": "Fieldset content"
+  },
+  "hEVgKd": {
+    "defaultMessage": "Error message for \"{key}\"",
+    "description": "Accessible label for error message input field",
+    "originalDefault": "Error message for \"{key}\""
   },
   "hJtTwo": {
     "defaultMessage": "Formulierveld",
@@ -1205,6 +1240,11 @@
     "description": "Tooltip for option/choice description",
     "originalDefault": "Optionally provide additional information to explain the meaning of the option."
   },
+  "mck25o": {
+    "defaultMessage": "Validation for the city field",
+    "description": "Tooltip city field validation panel",
+    "originalDefault": "Validation for the city field"
+  },
   "mf9eF+": {
     "defaultMessage": "Huisnummer",
     "description": "Label for address housenumber",
@@ -1272,6 +1312,11 @@
     "description": "Label for addressNL city read only result",
     "originalDefault": "City"
   },
+  "osl4X2": {
+    "defaultMessage": "The regular expression pattern test that the city field value must pass before the form can be submitted.",
+    "description": "Tooltip for 'validate.pattern' builder field",
+    "originalDefault": "The regular expression pattern test that the city field value must pass before the form can be submitted."
+  },
   "p7g2h+": {
     "defaultMessage": "Nog één toevoegen",
     "description": "Add another option button label",
@@ -1317,6 +1362,11 @@
     "description": "Component edit form tab title for 'Registration' tab",
     "originalDefault": "Registration"
   },
+  "rW1edF": {
+    "defaultMessage": "Postcode",
+    "description": "Title of postcode field validation panel",
+    "originalDefault": "Postcode"
+  },
   "rkJLBr": {
     "defaultMessage": "'Groep toevoegen'-tekst",
     "description": "Label for 'addAnother' builder field",
@@ -1342,6 +1392,11 @@
     "description": "Edit grid preview content description",
     "isTranslated": true,
     "originalDefault": "{groupLabel} 3"
+  },
+  "swKpQE": {
+    "defaultMessage": "Regular expression for city",
+    "description": "Label for 'validate.pattern' builder field",
+    "originalDefault": "Regular expression for city"
   },
   "tU1UVF": {
     "defaultMessage": "De minimale tijd die gekozen kan worden.",
