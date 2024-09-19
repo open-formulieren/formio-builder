@@ -84,7 +84,7 @@ export const jsonSchema: z.ZodType<Json> = z.lazy(() =>
 
 // Maps to @open-formulieren/types common.ts Option type.
 const optionTranslationSchema = z.object({
-  label: z.string(),
+  label: z.string().optional(),
 });
 
 export const optionSchema = (intl: IntlShape) =>
@@ -109,7 +109,7 @@ export const optionSchema = (intl: IntlShape) =>
       .object({
         // zod doesn't seem to be able to use our supportedLanguageCodes for z.object keys,
         // they need to be defined statically. So, 'record' it is.
-        translations: z.record(optionTranslationSchema.optional()),
+        translations: z.record(z.string(), optionTranslationSchema.optional()),
       })
       .optional(),
   });
