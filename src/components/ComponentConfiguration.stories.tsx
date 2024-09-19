@@ -1204,6 +1204,21 @@ export const SelectBoxes: Story = {
       // check that the option labels are in the translations table
       expect(await editForm.findByText('Option label 1')).toBeVisible();
       expect(await editForm.findByText('Second option')).toBeVisible();
+
+      // Check that all translations can be filled
+      const inputs = editForm.getAllByRole('textbox');
+      for (let input of inputs) {
+        await userEvent.type(input, 'manualTranslation');
+        await expect(input).toHaveValue('manualTranslation');
+        await userEvent.clear(input);
+        await expect(input).toHaveValue('');
+      }
+
+      // Removing focus from the last input
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // Check that none of the inputs have a Required error message
+      await expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1239,7 +1254,9 @@ export const SelectBoxes: Story = {
         openForms: {
           dataSrc: 'variable',
           itemsExpression: {var: 'someVar'},
-          translations: {},
+          translations: {
+            nl: {description: '', label: '', tooltip: ''},
+          },
         },
         defaultValue: {},
         // Advanced tab
@@ -1410,6 +1427,21 @@ export const Radio: Story = {
       // check that the option labels are in the translations table
       expect(await editForm.findByText('Option label 1')).toBeVisible();
       expect(await editForm.findByText('Second option')).toBeVisible();
+
+      // Check that all translations can be filled
+      const inputs = editForm.getAllByRole('textbox');
+      for (let input of inputs) {
+        await userEvent.type(input, 'manualTranslation');
+        await expect(input).toHaveValue('manualTranslation');
+        await userEvent.clear(input);
+        await expect(input).toHaveValue('');
+      }
+
+      // Removing focus from the last input
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // Check that none of the inputs have a Required error message
+      await expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1445,7 +1477,9 @@ export const Radio: Story = {
         openForms: {
           dataSrc: 'variable',
           itemsExpression: {var: 'someVar'},
-          translations: {},
+          translations: {
+            nl: {description: '', label: '', tooltip: ''},
+          },
         },
         defaultValue: '',
         // Advanced tab
@@ -1623,6 +1657,21 @@ export const Select: Story = {
       // check that the option labels are in the translations table
       expect(await editForm.findByText('Option label 1')).toBeVisible();
       expect(await editForm.findByText('Second option')).toBeVisible();
+
+      // Check that all translations can be filled
+      const inputs = editForm.getAllByRole('textbox');
+      for (let input of inputs) {
+        await userEvent.type(input, 'manualTranslation');
+        await expect(input).toHaveValue('manualTranslation');
+        await userEvent.clear(input);
+        await expect(input).toHaveValue('');
+      }
+
+      // Removing focus from the last input
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // Check that none of the inputs have a Required error message
+      await expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1665,7 +1714,9 @@ export const Select: Story = {
         openForms: {
           dataSrc: 'variable',
           itemsExpression: {var: 'someVar'},
-          translations: {},
+          translations: {
+            nl: {description: '', label: '', tooltip: ''},
+          },
         },
         defaultValue: '',
         // Advanced tab
