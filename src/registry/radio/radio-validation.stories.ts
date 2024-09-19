@@ -57,3 +57,30 @@ export const ManualMinimumOneValue: Story = {
     });
   },
 };
+
+export const TranslationsArentRequired: Story = {
+  name: 'Translations: translations aren\'t required fields',
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await step('Translations aren\'t required fields', async () => {
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+      const editForm = within(canvas.getByTestId('componentEditForm'));
+
+      // Check that all translations can be filled
+      const inputs = editForm.getAllByRole('textbox');
+      for (let input of inputs) {
+        await userEvent.type(input, 'manualTranslation');
+        await expect(input).toHaveValue('manualTranslation');
+        await userEvent.clear(input);
+        await expect(input).toHaveValue('');
+      }
+
+      // Removing focus from the last input
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // Check that none of the inputs have a Required error message
+      await expect(await editForm.queryByText('Required')).toBeNull();
+    });
+  },
+};
