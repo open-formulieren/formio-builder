@@ -1,9 +1,9 @@
 import {SelectComponentSchema} from '@open-formulieren/types';
+import {expect, within} from '@storybook/test';
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {contextRender, screen} from '@/tests/test-utils';
-import {expect, within} from '@storybook/test';
 
 beforeAll(() => {
   jest.useFakeTimers();

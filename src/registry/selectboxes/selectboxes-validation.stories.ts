@@ -73,11 +73,11 @@ export const ManualMinimumOneValue: Story = {
 };
 
 export const TranslationsArentRequired: Story = {
-  name: 'Translations: translations aren\'t required fields',
+  name: "Translations: translations aren't required fields",
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
 
-    await step('Translations aren\'t required fields', async () => {
+    await step("Translations aren't required fields", async () => {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
       const editForm = within(canvas.getByTestId('componentEditForm'));
 

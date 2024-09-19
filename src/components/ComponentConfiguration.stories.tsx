@@ -974,8 +974,10 @@ export const FileUpload: Story = {
     await step('File tab', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'File'}));
 
-      await expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
-      await expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
+      await waitFor(async () => {
+        await expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
+        await expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
+      });
 
       // check that the file types are visible
       canvas.getByLabelText('File types').focus();
@@ -1209,16 +1211,16 @@ export const SelectBoxes: Story = {
       const inputs = editForm.getAllByRole('textbox');
       for (let input of inputs) {
         await userEvent.type(input, 'manualTranslation');
-        await expect(input).toHaveValue('manualTranslation');
+        expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
-        await expect(input).toHaveValue('');
+        expect(input).toHaveValue('');
       }
 
       // Removing focus from the last input
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      await expect(await editForm.queryByText('Required')).toBeNull();
+      expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
