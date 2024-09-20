@@ -1012,6 +1012,35 @@ export const NpFamilyMembers: Story = {
   },
 };
 
+export const ProductPrice: Story = {
+  name: 'Product price',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'productPrice',
+      id: 'productPrice',
+      key: 'productPricePreview',
+      label: 'Product price preview',
+      description: 'A preview of the product price Formio component',
+      hidden: true, // must be ignored
+      product: '123',
+    },
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the user-controlled content is visible
+    await canvas.findByText('Product price preview');
+    await canvas.findByText('A preview of the product price Formio component');
+
+    // check that the radio buttons are rendered
+    await canvas.findByText('option 1: € 10,99');
+    await canvas.findByText('option 2: € 15,99');
+  },
+};
+
 export const AddressNL: Story = {
   name: 'addressNL',
   render: Template,

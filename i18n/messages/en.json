@@ -594,6 +594,11 @@
     "description": "File component 'fileMaxSize' validation error",
     "originalDefault": "Specify a positive, non-zero file size without decimals, e.g. 10MB."
   },
+  "QXsAuR": {
+    "defaultMessage": "Product to fetch prices for",
+    "description": "Tooltip for 'product' builder field",
+    "originalDefault": "Product to fetch prices for"
+  },
   "Qjl92W": {
     "defaultMessage": "Preview",
     "description": "Component preview card title",
@@ -1149,6 +1154,11 @@
     "description": "Label for 'initialCenter.lat' builder field",
     "originalDefault": "Latitude"
   },
+  "jtWzSW": {
+    "defaultMessage": "option 2: € 15,99",
+    "description": "productPrice dummy option",
+    "originalDefault": "option 2: € 15,99"
+  },
   "k1+ljn": {
     "defaultMessage": "Move down",
     "description": "Options table: move option down",
@@ -1379,6 +1389,11 @@
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for city"
   },
+  "sxdJ/8": {
+    "defaultMessage": "option 1: € 10,99",
+    "description": "productPrice dummy option",
+    "originalDefault": "option 1: € 10,99"
+  },
   "tU1UVF": {
     "defaultMessage": "The earliest possible value that can be entered.",
     "description": "Tooltip for 'validate.minTime' builder field",
@@ -1413,6 +1428,11 @@
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
+  },
+  "uuKVtO": {
+    "defaultMessage": "Product",
+    "description": "Label for 'product' builder field",
+    "originalDefault": "Product"
   },
   "vRVMpe": {
     "defaultMessage": "Value",
