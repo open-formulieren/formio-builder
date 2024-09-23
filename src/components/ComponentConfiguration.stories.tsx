@@ -2237,7 +2237,7 @@ export const ProductPrice: Story = {
       id: 'wqimsadk',
       type: 'productPrice',
       key: 'productPrice',
-      label: 'An productPrice field',
+      label: 'A productPrice field',
       product: '123',
     },
 
@@ -2254,9 +2254,9 @@ export const ProductPrice: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('An productPrice field');
+    await expect(canvas.getByLabelText('Label')).toHaveValue('A productPrice field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anProductPriceField');
+      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aProductPriceField');
     });
     await expect(canvas.getByLabelText('Description')).toHaveValue('');
     await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');

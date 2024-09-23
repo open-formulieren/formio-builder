@@ -115,7 +115,7 @@ EditForm.defaultValues = {
   showInPDF: true,
   hidden: false,
   clearOnHide: true,
-  isSensitiveData: true,
+  isSensitiveData: false,
   product: '',
   // Advanced tab
   conditional: {
