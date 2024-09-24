@@ -235,6 +235,17 @@ export const DEFAULT_COLORS: ColorOption[] = [
   },
 ];
 
+export const DEFAULT_PRODUCTS: SelectOption[] = [
+  {
+    label: 'product 1',
+    value: '1234',
+  },
+  {
+    label: 'product 2',
+    value: '5678',
+  },
+];
+
 export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }

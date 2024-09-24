@@ -48,6 +48,7 @@ export interface BuilderContextType {
   getDocumentTypes: () => Promise<Array<DocumentTypeOption>>;
   getConfidentialityLevels: () => Promise<SelectOption[]>;
   getAuthPlugins: () => Promise<AuthPluginOption[]>;
+  getProducts: () => Promise<SelectOption[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -65,6 +66,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getDocumentTypes: async () => [],
   getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
+  getProducts: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';
