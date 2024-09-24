@@ -1,5 +1,11 @@
 # Changes
 
+## 0.29.0 (2024-09-24)
+
+- [`OP#24`][OP#24] Added experimental Product prices component.
+
+[OP#24]: https://github.com/maykinmedia/open-producten/issues/24
+
 ## 0.28.0 (2024-08-20)
 
 **New features**
