@@ -1,0 +1,11 @@
+.offb-table {
+  // Ensures that the column widths are respected
+  table-layout: fixed;
+
+  &__content {
+    &--allow-break {
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+  }
+}

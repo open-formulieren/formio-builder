@@ -12,6 +12,7 @@ import {AnyComponentSchema} from '@/types/schemas';
 import {Component, TextField} from '../formio';
 import ComponentLabel from '../formio/component-label';
 import './i18n.scss';
+import './table.scss';
 
 type ExtractTranslatableProperties<T> = T extends OFExtensions<infer TK> ? TK : never;
 type StringValueProperties<S> = S extends AnyComponentSchema
@@ -53,7 +54,7 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
 
   return (
     <Component type="datagrid">
-      <table className="table table-bordered">
+      <table className="table table-bordered offb-table">
         <thead>
           <tr className="offb-i18n-header">
             <td colSpan={2} className="offb-i18n-header__label">
@@ -122,7 +123,10 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
                 </span>
               </td>
               <td>
-                <div aria-describedby={`component-translation-property-${property}`}>
+                <div
+                  aria-describedby={`component-translation-property-${property}`}
+                  className="offb-table__content--allow-break"
+                >
                   {(values?.[property] || '-') as string}
                 </div>
               </td>
