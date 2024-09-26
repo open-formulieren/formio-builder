@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {useContext, useRef} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
@@ -35,7 +35,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   childrenAfterField,
   ...props
 }) => {
-  const {getFieldProps, getFieldMeta} = useFormikContext();
+  const {getFieldProps, getFieldMeta, setFieldValue} = useFormikContext();
   const {value, onChange: formikOnChange} = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
   const {errors, hasErrors} = useValidationErrors(name);
@@ -47,6 +47,13 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   if (value === undefined && props.value === undefined) {
     props = {...props, value: ''};
   }
+
+  useEffect(() => {
+    if (value === undefined || value === null) {
+      // Make sure value is valid
+      setFieldValue(name, '');
+    }
+  }, [value]);
 
   // XXX: this is only accepted in the form builder to get to (close to) vanilla form
   // builder feature parity - setting the value with mask placeholders is bad for
