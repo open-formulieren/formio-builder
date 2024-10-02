@@ -52,8 +52,36 @@ export const ManualMinimumOneValue: Story = {
       await userEvent.type(labelInput, 'Foo');
       await userEvent.clear(labelInput);
       await userEvent.keyboard('[Tab]');
-      await expect(await canvas.findByText('The option label is a required field.')).toBeVisible();
-      await expect(await canvas.findByText('The option value is a required field.')).toBeVisible();
+
+      expect(await canvas.findByText('The option label is a required field.')).toBeVisible();
+      expect(await canvas.findByText('The option value is a required field.')).toBeVisible();
+    });
+  },
+};
+
+export const TranslationsArentRequired: Story = {
+  name: "Translations: translations aren't required fields",
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await step("Translations aren't required fields", async () => {
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+      const editForm = within(canvas.getByTestId('componentEditForm'));
+
+      // Check that all translations can be filled
+      const inputs = editForm.getAllByRole('textbox');
+      for (let input of inputs) {
+        await userEvent.type(input, 'manualTranslation');
+        expect(input).toHaveValue('manualTranslation');
+        await userEvent.clear(input);
+        expect(input).toHaveValue('');
+      }
+
+      // Removing focus from the last input
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+
+      // Check that none of the inputs have a Required error message
+      expect(await editForm.queryByText('Required')).toBeNull();
     });
   },
 };
