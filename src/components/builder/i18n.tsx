@@ -57,7 +57,10 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
       <table className="table table-bordered offb-table">
         <thead>
           <tr className="offb-i18n-header">
-            <td colSpan={2} className="offb-i18n-header__label">
+            <td
+              colSpan={2}
+              className="offb-i18n-header__label offb-table__col offb-table__col--width-50"
+            >
               <ComponentLabel
                 label={
                   <FormattedMessage
@@ -71,7 +74,7 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
                 })}
               />
             </td>
-            <td className="offb-i18n-header__tab-container">
+            <td className="offb-i18n-header__tab-container offb-table__col offb-table__col--width-50">
               <ul className={`nav nav-tabs offb-i18n-header__tabs`}>
                 {supportedLanguageCodes.map(code => (
                   <li key={code} className={clsx('nav-item', {active: code === activeLanguage})}>
@@ -93,19 +96,19 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
           </tr>
 
           <tr>
-            <th style={{width: '20%'}}>
+            <th className="offb-table__col offb-table__col--width-25">
               <FormattedMessage
                 description="Translations: location column header"
                 defaultMessage="Location"
               />
             </th>
-            <th style={{width: '35%'}}>
+            <th className="offb-table__col offb-table__col--width-25">
               <FormattedMessage
                 description="Translations: property column header"
                 defaultMessage="Value"
               />
             </th>
-            <th style={{borderTop: 'none'}}>
+            <th className="offb-table__col offb-table__col--width-50">
               <FormattedMessage
                 description="Translations: translation column header"
                 defaultMessage="Translations"
@@ -125,7 +128,7 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
               <td>
                 <div
                   aria-describedby={`component-translation-property-${property}`}
-                  className="offb-table__content--allow-break"
+                  className="offb-table__content offb-table__content--allow-break"
                 >
                   {(values?.[property] || '-') as string}
                 </div>

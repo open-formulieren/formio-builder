@@ -46,14 +46,17 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
           <>
             <tr key={`option-${index}`}>
               <td>
-                <span id={`option-${index}-label`} className="offb-table__content--allow-break">
+                <span
+                  id={`option-${index}-label`}
+                  className="offb-table__content offb-table__content--allow-break"
+                >
                   {label}
                 </span>
               </td>
               <td>
                 <div
                   aria-describedby={`option-${index}-label`}
-                  className="offb-table__content--allow-break"
+                  className="offb-table__content offb-table__content--allow-break"
                 >
                   {value || '-'}
                 </div>
@@ -94,7 +97,9 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
                     defaultMessage="Option description (<option></option>)"
                     values={{
                       option: () => (
-                        <code className="offb-table__content--allow-break">{value || '-'}</code>
+                        <code className="offb-table__content offb-table__content--allow-break">
+                          {value || '-'}
+                        </code>
                       ),
                     }}
                   />
@@ -104,7 +109,7 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
               <td>
                 <div
                   aria-describedby={`option-${index}-label`}
-                  className="offb-table__content--allow-break"
+                  className="offb-table__content offb-table__content--allow-break"
                 >
                   {description || '-'}
                 </div>
