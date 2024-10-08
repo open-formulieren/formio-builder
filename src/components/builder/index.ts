@@ -4,6 +4,8 @@
  * These components are commonly re-used in the component edit form, built using the
  * formio component 'primitives'.
  */
+import './table.scss';
+
 export {default as Label} from './label';
 export {default as Description} from './description';
 export {default as Tooltip} from './tooltip';

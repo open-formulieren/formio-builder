@@ -7,7 +7,6 @@ import {TextArea, TextField} from '@/components/formio';
 import {PathsForValueType} from '@/types';
 
 import {ComponentTranslationsContext} from '../i18n';
-import '../table.scss';
 
 export interface ValuesTranslationsProps<S> {
   /**
