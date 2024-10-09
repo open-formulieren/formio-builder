@@ -604,11 +604,6 @@
     "description": "File component 'fileMaxSize' validation error",
     "originalDefault": "Specify a positive, non-zero file size without decimals, e.g. 10MB."
   },
-  "QXsAuR": {
-    "defaultMessage": "Product to fetch prices for",
-    "description": "Tooltip for 'product' builder field",
-    "originalDefault": "Product to fetch prices for"
-  },
   "Qjl92W": {
     "defaultMessage": "Preview",
     "description": "Component preview card title",
@@ -1438,11 +1433,6 @@
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
-  },
-  "uuKVtO": {
-    "defaultMessage": "Product",
-    "description": "Label for 'product' builder field",
-    "originalDefault": "Product"
   },
   "vRVMpe": {
     "defaultMessage": "Value",

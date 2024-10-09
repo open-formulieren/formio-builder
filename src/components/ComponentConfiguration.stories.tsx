@@ -13,7 +13,6 @@ import {
   DEFAULT_COLORS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
-  DEFAULT_PRODUCTS,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
 
@@ -114,7 +113,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
     getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
-    getProducts={async () => DEFAULT_PRODUCTS}
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
@@ -2300,7 +2298,6 @@ export const ProductPrice: Story = {
       type: 'productPrice',
       key: 'productPrice',
       label: 'A productPrice field',
-      product: '123',
     },
 
     builderInfo: {
@@ -2342,16 +2339,6 @@ export const ProductPrice: Story = {
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
     await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
-
-    await step('Change Product', async () => {
-      canvas.getByLabelText('Product').focus();
-      await userEvent.keyboard('[ArrowDown]');
-      await waitFor(async () => {
-        const product1 = canvas.getByText('product 1');
-        await expect(product1).toBeVisible();
-        await userEvent.click(product1);
-      });
-    });
 
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
