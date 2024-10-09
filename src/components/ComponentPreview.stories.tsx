@@ -1024,7 +1024,6 @@ export const ProductPrice: Story = {
       label: 'Product price preview',
       description: 'A preview of the product price Formio component',
       hidden: true, // must be ignored
-      product: '123',
     },
   },
 

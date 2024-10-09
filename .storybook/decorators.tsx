@@ -12,7 +12,6 @@ import {
   DEFAULT_FILE_TYPES,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
-  DEFAULT_PRODUCTS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_VALIDATOR_PLUGINS,
   sleep,
@@ -101,7 +100,6 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         getDocumentTypes: async () => context?.args?.documentTypes || defaultdocumentTypes,
         getConfidentialityLevels: async () => CONFIDENTIALITY_LEVELS,
         getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
-        getProducts: async () => DEFAULT_PRODUCTS,
       }}
     >
       <Story />

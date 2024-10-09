@@ -18,7 +18,6 @@ import {
   DEFAULT_FILE_TYPES,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
-  DEFAULT_PRODUCTS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_VALIDATOR_PLUGINS,
   sleep,
@@ -94,7 +93,6 @@ const contextRender = (
               getConfidentialityLevels: async () =>
                 builderOptions.confidentialityLevels || CONFIDENTIALITY_LEVELS,
               getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
-              getProducts: async () => DEFAULT_PRODUCTS,
             }}
           >
             {children}
@@ -174,7 +172,6 @@ const dummyBuilderContext = {
   getDocumentTypes: async () => [],
   getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
-  getProducts: async () => [],
 } satisfies BuilderContextType;
 
 // re-export everything (see https://testing-library.com/docs/react-testing-library/setup/#custom-render)

@@ -44,7 +44,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   getDocumentTypes,
   getConfidentialityLevels,
   getAuthPlugins,
-  getProducts,
   isNew,
   component,
   builderInfo,
@@ -72,7 +71,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
         getDocumentTypes,
         getConfidentialityLevels,
         getAuthPlugins,
-        getProducts,
       }}
     >
       <ComponentEditForm
