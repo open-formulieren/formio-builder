@@ -1,5 +1,13 @@
 # Changes
 
+## 0.30.0 (2024-10-10)
+
+- [`OF#4636`][OF#4636] Updated translation tab table widths and fixed view breaking overflow.
+- [`OF#4637`][OF#4637] Fixed optional translations acting as required.
+
+[OF#4636]: https://github.com/open-formulieren/open-forms/issues/4636
+[OF#4637]: https://github.com/open-formulieren/open-forms/issues/4637
+
 ## 0.29.0 (2024-09-24)
 
 - [`OP#24`][OP#24] Added experimental Product prices component.
