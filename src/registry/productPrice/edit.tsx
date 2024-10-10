@@ -7,7 +7,6 @@ import {
   Description,
   Hidden,
   IsSensitiveData,
-  Key,
   Label,
   PresentationConfig,
   Registration,
@@ -15,7 +14,6 @@ import {
   Tooltip,
   Translations,
   Validate,
-  useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
@@ -28,7 +26,6 @@ import {EditFormDefinition} from '../types';
  */
 const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
   const intl = useIntl();
-  const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<ProductPriceComponentSchema>();
 
   Validate.useManageValidatorsTranslations<ProductPriceComponentSchema>(['required']);
@@ -58,7 +55,6 @@ const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
       {/* Basic tab */}
       <TabPanel>
         <Label />
-        <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
         <PresentationConfig />
