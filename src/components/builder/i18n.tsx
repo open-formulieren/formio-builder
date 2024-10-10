@@ -12,6 +12,7 @@ import {AnyComponentSchema} from '@/types/schemas';
 import {Component, TextField} from '../formio';
 import ComponentLabel from '../formio/component-label';
 import './i18n.scss';
+import './table.scss';
 
 type ExtractTranslatableProperties<T> = T extends OFExtensions<infer TK> ? TK : never;
 type StringValueProperties<S> = S extends AnyComponentSchema
