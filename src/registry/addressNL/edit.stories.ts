@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, userEvent, within} from '@storybook/test';
+import {expect, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -36,7 +36,9 @@ export const PostcodeValidationTabWithoutConfiguration: Story = {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getAllByText('Postcode')[0]);
 
-      expect(await canvas.findByLabelText('Regular expression for postcode')).toBeVisible();
+      await waitFor(() => {
+        expect(canvas.getByLabelText('Regular expression for postcode')).toBeVisible();
+      });
       expect(await canvas.findByText('NL')).toBeVisible();
       expect(await canvas.findByText('EN')).toBeVisible();
       expect(await canvas.findByText('Error code')).toBeVisible();
@@ -56,7 +58,9 @@ export const CityValidationTabWithoutConfiguration: Story = {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       await userEvent.click(canvas.getAllByText('City')[0]);
 
-      expect(await canvas.findByLabelText('Regular expression for city')).toBeVisible();
+      await waitFor(() => {
+        expect(canvas.getByLabelText('Regular expression for city')).toBeVisible();
+      });
       expect(await canvas.findByText('NL')).toBeVisible();
       expect(await canvas.findByText('EN')).toBeVisible();
       expect(await canvas.findByText('Error code')).toBeVisible();
@@ -98,7 +102,9 @@ export const PostcodeValidationTabWithConfiguration: Story = {
       await userEvent.click(canvas.getAllByText('Postcode')[0]);
       const patternInput = await canvas.findByLabelText('Regular expression for postcode');
 
-      expect(patternInput).toBeVisible();
+      await waitFor(() => {
+        expect(patternInput).toBeVisible();
+      });
       expect(patternInput).toHaveValue('1017 [A-Za-z]{2}');
 
       expect(await canvas.findByDisplayValue('pattern')).toBeVisible();
@@ -142,7 +148,9 @@ export const CityValidationTabWithConfiguration: Story = {
       await userEvent.click(canvas.getAllByText('City')[0]);
       const patternInput = await canvas.findByLabelText('Regular expression for city');
 
-      expect(patternInput).toBeVisible();
+      await waitFor(() => {
+        expect(patternInput).toBeVisible();
+      });
       expect(patternInput).toHaveValue('Amsterdam');
 
       expect(await canvas.findByDisplayValue('pattern')).toBeVisible();
