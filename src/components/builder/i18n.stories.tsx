@@ -3,6 +3,7 @@ import {expect, userEvent, waitFor, within} from '@storybook/test';
 import {Formik} from 'formik';
 
 import {TextField} from '@/components/formio';
+import {withFormik} from '@/sb-decorators';
 
 import {ComponentTranslations} from './i18n';
 
@@ -106,5 +107,28 @@ export const Default: Story = {
     // Enter a value in the non-translatable field
     await userEvent.type(canvas.getByLabelText('Non-translatable field'), 'Literal 2');
     expect(translationField2).toBeNull();
+  },
+};
+
+export const LongStringsWrap: StoryObj<typeof ComponentTranslations<DummyComponent>> = {
+  decorators: [withFormik],
+  args: {
+    propertyLabels: {
+      label: 'Label',
+    },
+  },
+  parameters: {
+    formik: {
+      initialValues: {
+        label: Array(100).fill('a').join(''),
+        openForms: {
+          translations: {
+            nl: {
+              label: 'Insgelijks',
+            },
+          },
+        },
+      },
+    },
   },
 };

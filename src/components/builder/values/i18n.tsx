@@ -45,10 +45,20 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
           <>
             <tr key={`option-${index}`}>
               <td>
-                <span id={`option-${index}-label`}>{label}</span>
+                <span
+                  id={`option-${index}-label`}
+                  className="offb-table__content offb-table__content--allow-break"
+                >
+                  {label}
+                </span>
               </td>
               <td>
-                <div aria-describedby={`option-${index}-label`}>{value || '-'}</div>
+                <div
+                  aria-describedby={`option-${index}-label`}
+                  className="offb-table__content offb-table__content--allow-break"
+                >
+                  {value || '-'}
+                </div>
               </td>
               <td>
                 <TextField
@@ -85,14 +95,23 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
                     description="Label for option description location"
                     defaultMessage="Option description (<option></option>)"
                     values={{
-                      option: () => <code>{value || '-'}</code>,
+                      option: () => (
+                        <code className="offb-table__content offb-table__content--allow-break">
+                          {value || '-'}
+                        </code>
+                      ),
                     }}
                   />
                 </span>
               </td>
 
               <td>
-                <div aria-describedby={`option-${index}-label`}>{description || '-'}</div>
+                <div
+                  aria-describedby={`option-${index}-label`}
+                  className="offb-table__content offb-table__content--allow-break"
+                >
+                  {description || '-'}
+                </div>
               </td>
 
               <td>
