@@ -42,9 +42,7 @@ const config: StorybookConfig = {
       },
     },
   ],
-  docs: {
-    autodocs: 'tag',
-  },
+  docs: {},
   webpackFinal: async (config, {configType}) => {
     if (!config.resolve) {
       config.resolve = {};
