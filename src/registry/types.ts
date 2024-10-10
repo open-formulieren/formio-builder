@@ -26,10 +26,23 @@ export interface EditSchemaArgs {
 
 export type EditSchema = (args: EditSchemaArgs) => z.ZodFirstPartySchemaTypes;
 
-// Component preview
+// Component / form previewing
+
 export interface ComponentPreviewProps<S extends AnyComponentSchema = AnyComponentSchema> {
   component: S;
 }
+
+export interface StructureSubtreeProps<S extends AnyComponentSchema = AnyComponentSchema> {
+  component: S;
+  renderSubtree: (components: AnyComponentSchema[]) => React.ReactNode;
+}
+
+export interface WebformPreviewProps<S extends AnyComponentSchema = AnyComponentSchema> {
+  component: S;
+  renderSubtree: (components: AnyComponentSchema[]) => React.ReactNode;
+}
+
+// Integration with simple-conditional.
 
 export interface ComparisonValueProps {
   name: string;
@@ -47,12 +60,35 @@ export interface Previews {
    * form field interaction.
    */
   panel: React.FC<ComponentPreviewProps> | null;
+  /**
+   * The rendered structure of the children of a component.
+   *
+   * Component types that act as containers can render their structural preview with
+   * this component.
+   *
+   * The prop `renderSubtree` prop is a callback function taking a list of nested
+   * components and will render their structure preview.
+   */
+  structureSubtree?: React.FC<StructureSubtreeProps>;
+
+  /**
+   * The component preview rendered as part of the whole form definition.
+   *
+   * The form can be interacted with to give an impression of the published form in the
+   * SDK, but the goal is NOT to implement the SDK here too. If not specified, then
+   * the `panel`` preview will be rendered.
+   */
+  webform?: React.FC<WebformPreviewProps>;
 }
 
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
   preview: Previews;
+  /**
+   * Return a summary to act as (string) representation of the component.
+   */
+  getSummary?: (component: S) => React.ReactNode;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
