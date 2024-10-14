@@ -19,6 +19,18 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    options: {
+      storySort: {
+        order: [
+          'Introduction',
+          'Public API',
+          'Edit form',
+          'Generic',
+          'Formio',
+          'Builder components',
+      ],
+      }
+    }
   },
   initialGlobals: {
     locale: reactIntl.defaultLocale,
