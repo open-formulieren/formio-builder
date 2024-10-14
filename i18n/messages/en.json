@@ -269,6 +269,11 @@
     "description": "Fallback label for option with empty label",
     "originalDefault": "(missing label)"
   },
+  "8M403q": {
+    "defaultMessage": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time.",
+    "description": "Tooltip for 'openForms.softRequired' builder field",
+    "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
+  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -588,6 +593,11 @@
     "defaultMessage": "{field} must be a valid email.",
     "description": "Invalid email address format validation error",
     "originalDefault": "{field} must be a valid email."
+  },
+  "QL4SGQ": {
+    "defaultMessage": "Soft required",
+    "description": "Label for 'openForms.softRequired' builder field",
+    "originalDefault": "Soft required"
   },
   "QW32Dd": {
     "defaultMessage": "Specify a positive, non-zero file size without decimals, e.g. 10MB.",
