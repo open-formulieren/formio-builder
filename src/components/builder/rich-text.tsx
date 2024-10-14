@@ -8,7 +8,8 @@
  */
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@open-formulieren/ckeditor5-build-classic';
-import {useField} from 'formik';
+import {AnyComponentSchema} from '@open-formulieren/types';
+import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
 import {TemplatingHint} from '@/components/builder';
@@ -26,6 +27,7 @@ export type ColorOption = Required<
 export interface RichTextProps {
   name: string;
   required?: boolean;
+  supportsBackendTemplating?: boolean;
 }
 
 /**
@@ -35,11 +37,14 @@ export interface RichTextProps {
  * classic editor build, with some extra plugins enabled to match the features used/exposed
  * by Formio.js.
  */
-const RichText: React.FC<RichTextProps> = ({name, required}) => {
+const RichText: React.FC<RichTextProps> = ({name, required, supportsBackendTemplating = false}) => {
   const {richTextColors} = useContext(BuilderContext);
+  const {
+    values: {type},
+  } = useFormikContext<AnyComponentSchema>();
   const [props, , helpers] = useField<string>(name);
   return (
-    <Component type="content" field={name} required={required} className="offb-rich-text">
+    <Component type={type} field={name} required={required} className="offb-rich-text">
       <CKEditor
         editor={ClassicEditor}
         config={{
@@ -69,7 +74,7 @@ const RichText: React.FC<RichTextProps> = ({name, required}) => {
           helpers.setTouched(true);
         }}
       />
-      <Description text={<TemplatingHint />} />
+      {supportsBackendTemplating && <Description text={<TemplatingHint />} />}
     </Component>
   );
 };
