@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, fireEvent, fn, userEvent, within} from '@storybook/test';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -31,6 +31,7 @@ export default {
         allowedTypesLabels: [],
       },
       filePattern: '',
+      // @ts-expect-error this is what is actually produced by Formio
       defaultValue: null,
     },
     onCancel: fn(),
@@ -66,5 +67,51 @@ export const ToggleToMultiple: Story = {
     // @ts-ignore
     const {defaultValue} = args.onSubmit.mock.calls[0][0];
     expect(defaultValue).toBeNull();
+  },
+};
+
+export const SoftRequiredValidation: Story = {
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await step('Navigate to validate tab', async () => {
+      await userEvent.click(canvas.getByRole('tab', {name: 'Validation'}));
+    });
+
+    // establish base state
+    const hardRequired = await canvas.findByRole('checkbox', {name: 'Required'});
+    expect(hardRequired).not.toBeChecked();
+    const softRequired = await canvas.findByRole('checkbox', {name: 'Soft required'});
+    expect(softRequired).not.toBeChecked();
+
+    await step('Mark component soft required', async () => {
+      // We use fireEvent because firefox borks on userEvent.click, see:
+      // https://github.com/testing-library/user-event/issues/1149
+      fireEvent.click(softRequired);
+      expect(softRequired).toBeChecked();
+      expect(hardRequired).not.toBeChecked();
+    });
+
+    await step('Mark component hard required', async () => {
+      // We use fireEvent because firefox borks on userEvent.click, see:
+      // https://github.com/testing-library/user-event/issues/1149
+      fireEvent.click(hardRequired);
+      await waitFor(() => {
+        expect(hardRequired).toBeChecked();
+        expect(softRequired).not.toBeChecked();
+        expect(softRequired).toBeDisabled();
+      });
+    });
+
+    await step('Mark component not hard required', async () => {
+      // We use fireEvent because firefox borks on userEvent.click, see:
+      // https://github.com/testing-library/user-event/issues/1149
+      fireEvent.click(hardRequired);
+      await waitFor(() => {
+        expect(hardRequired).not.toBeChecked();
+        expect(softRequired).not.toBeChecked();
+        expect(softRequired).not.toBeDisabled();
+      });
+    });
   },
 };

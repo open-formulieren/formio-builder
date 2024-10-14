@@ -1057,6 +1057,11 @@ export const FileUpload: Story = {
           docVertrouwelijkheidaanduiding: '',
           titel: '',
         },
+        // custom extensions
+        openForms: {
+          softRequired: false,
+          translations: {},
+        },
       });
     });
   },

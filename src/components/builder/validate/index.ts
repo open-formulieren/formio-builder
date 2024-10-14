@@ -5,3 +5,4 @@ export {default as Min} from './min';
 export {default as RegexValidation} from './regex';
 export {default as ValidatorPluginSelect} from './validator-select';
 export {default as ValidationErrorTranslations, useManageValidatorsTranslations} from './i18n';
+export {default as SoftRequired} from './soft-required';
