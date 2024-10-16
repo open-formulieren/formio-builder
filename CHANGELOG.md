@@ -1,5 +1,19 @@
 # Changes
 
+## 0.31.0 (2024-10-16)
+
+Feature release
+
+- [`OP#24`][OP#24] Reverted having to select a product in the `productPrice` component.
+- [`OF#4546`][OF#4546] Added support for soft-required validation:
+  - File upload components can now be soft-required
+  - Added a new custom component type to dislay soft-required validation errors
+- Upgraded to latest Storybook version.
+- Added explicit sorting to story folders.
+
+[OP#24]: https://github.com/maykinmedia/open-producten/issues/24
+[OF#4546]: https://github.com/open-formulieren/open-forms/issues/4546
+
 ## 0.30.0 (2024-10-10)
 
 - [`OF#4636`][OF#4636] Updated translation tab table widths and fixed view breaking overflow.
