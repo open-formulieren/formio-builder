@@ -1,7 +1,5 @@
 import {ProductPriceComponentSchema} from '@open-formulieren/types';
-import {useContext} from 'react';
-import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useIntl} from 'react-intl';
 
 import {
   BuilderTabs,
@@ -9,7 +7,6 @@ import {
   Description,
   Hidden,
   IsSensitiveData,
-  Key,
   Label,
   PresentationConfig,
   Registration,
@@ -17,11 +14,9 @@ import {
   Tooltip,
   Translations,
   Validate,
-  useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
-import {BuilderContext} from '@/context';
+import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -31,7 +26,6 @@ import {EditFormDefinition} from '../types';
  */
 const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
   const intl = useIntl();
-  const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<ProductPriceComponentSchema>();
 
   Validate.useManageValidatorsTranslations<ProductPriceComponentSchema>(['required']);
@@ -42,7 +36,6 @@ const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
         <BuilderTabs.Basic
           hasErrors={hasAnyError(
             'label',
-            'key',
             'description',
             'tooltip',
             'showInSummary',
@@ -50,8 +43,7 @@ const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
             'showInPDF',
             'hidden',
             'clearOnHide',
-            'isSensitiveData',
-            'product'
+            'isSensitiveData'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -63,14 +55,12 @@ const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
       {/* Basic tab */}
       <TabPanel>
         <Label />
-        <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <Product />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -107,7 +97,7 @@ const EditForm: EditFormDefinition<ProductPriceComponentSchema> = () => {
 EditForm.defaultValues = {
   // basic tab
   label: '',
-  key: '',
+  key: 'priceOption',
   description: '',
   tooltip: '',
   showInSummary: true,
@@ -116,7 +106,6 @@ EditForm.defaultValues = {
   hidden: false,
   clearOnHide: true,
   isSensitiveData: false,
-  product: '',
   // Advanced tab
   conditional: {
     show: undefined,
@@ -132,34 +121,6 @@ EditForm.defaultValues = {
   registration: {
     attribute: '',
   },
-};
-
-const Product: React.FC = () => {
-  const {getProducts} = useContext(BuilderContext);
-  const {value: options, loading, error} = useAsync(async () => await getProducts(), []);
-  if (error) {
-    throw error;
-  }
-
-  const intl = useIntl();
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'product' builder field",
-    defaultMessage: 'Product to fetch prices for',
-  });
-  return (
-    <Select
-      name="product"
-      label={
-        <FormattedMessage
-          description="Label for 'product' builder field"
-          defaultMessage="Product"
-        />
-      }
-      options={options}
-      isLoading={loading}
-      tooltip={tooltip}
-    />
-  );
 };
 
 export default EditForm;

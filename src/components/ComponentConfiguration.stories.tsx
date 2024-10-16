@@ -13,7 +13,6 @@ import {
   DEFAULT_COLORS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
-  DEFAULT_PRODUCTS,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
 
@@ -114,7 +113,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
     getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
-    getProducts={async () => DEFAULT_PRODUCTS}
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
@@ -2300,7 +2298,6 @@ export const ProductPrice: Story = {
       type: 'productPrice',
       key: 'productPrice',
       label: 'A productPrice field',
-      product: '123',
     },
 
     builderInfo: {
@@ -2317,9 +2314,6 @@ export const ProductPrice: Story = {
     const preview = within(canvas.getByTestId('componentPreview'));
 
     await expect(canvas.getByLabelText('Label')).toHaveValue('A productPrice field');
-    await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aProductPriceField');
-    });
     await expect(canvas.getByLabelText('Description')).toHaveValue('');
     await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
     await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
@@ -2332,26 +2326,9 @@ export const ProductPrice: Story = {
     await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
     await expect(await preview.findByText('Updated preview label')).toBeVisible();
 
-    // Ensure that the manually entered key is kept instead of derived from the label,
-    // even when key/label components are not mounted.
-    const keyInput = canvas.getByLabelText('Property Name');
-    // fireEvent is deliberate, as userEvent.clear + userEvent.type briefly makes the field
-    // not have any value, which triggers the generate-key-from-label behaviour.
-    fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
-
-    await step('Change Product', async () => {
-      canvas.getByLabelText('Product').focus();
-      await userEvent.keyboard('[ArrowDown]');
-      await waitFor(async () => {
-        const product1 = canvas.getByText('product 1');
-        await expect(product1).toBeVisible();
-        await userEvent.click(product1);
-      });
-    });
 
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
