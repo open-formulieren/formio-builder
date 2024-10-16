@@ -18,6 +18,8 @@ export default {
       storage: 'url',
       url: '',
       type: 'file',
+      options: {withCredentials: true},
+      webcam: false,
       key: 'file',
       label: 'A file upload',
       file: {

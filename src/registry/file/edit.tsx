@@ -95,6 +95,7 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
       {/* Validation tab */}
       <TabPanel>
         <Validate.Required />
+        <Validate.SoftRequired />
         <Validate.ValidationErrorTranslations />
       </TabPanel>
 
@@ -156,6 +157,10 @@ EditForm.defaultValues = {
     required: false,
   },
   translatedErrors: {},
+  openForms: {
+    softRequired: false,
+    translations: {},
+  },
   // file tab
   file: {
     name: '',

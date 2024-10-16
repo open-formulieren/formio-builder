@@ -10,6 +10,7 @@ import {
   Hidden,
   Key,
   PresentationConfig,
+  RichText,
   SimpleConditional,
 } from '@/components/builder';
 import {Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
@@ -17,7 +18,6 @@ import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
-import RichText from './rich-text';
 
 /**
  * Form to configure a Formio 'content' type component.
@@ -191,7 +191,11 @@ const RichTextTranslations: React.FC = () => {
 
       {supportedLanguageCodes.map((code, index) => (
         <TabPanel key={code}>
-          <RichText name={`openForms.translations.${code}.html`} required={index === 0} />
+          <RichText
+            name={`openForms.translations.${code}.html`}
+            required={index === 0}
+            supportsBackendTemplating
+          />
         </TabPanel>
       ))}
     </Tabs>

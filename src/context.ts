@@ -3,8 +3,8 @@ import React from 'react';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
+import type {ColorOption} from '@/components/builder/rich-text';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
-import type {ColorOption} from '@/registry/content/rich-text';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 

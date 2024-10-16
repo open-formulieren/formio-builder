@@ -29,6 +29,7 @@ import Radio from './radio';
 import Select from './select';
 import Selectboxes from './selectboxes';
 import Signature from './signature';
+import SoftRequiredErrors from './softRequiredErrors';
 import Textarea from './textarea';
 import TextField from './textfield';
 import TimeField from './time';
@@ -84,6 +85,7 @@ const REGISTRY: Registry = {
   content: Content,
   columns: Columns,
   fieldset: FieldSet,
+  softRequiredErrors: SoftRequiredErrors,
   // deprecated
   coSign: CosignV1,
   password: Password,

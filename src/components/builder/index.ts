@@ -18,6 +18,7 @@ export {default as ReadOnly} from './readonly';
 export {default as ShowCharCount} from './show-char-count';
 export {default as PresentationConfig} from './presentation-config';
 export {default as ComponentSelect} from './component-select';
+export {default as RichText} from './rich-text';
 export {default as SimpleConditional} from './simple-conditional';
 export {default as Suffix} from './suffix';
 export {default as TemplatingHint} from './templating-hint';

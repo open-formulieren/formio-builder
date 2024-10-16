@@ -1,4 +1,8 @@
-import {ContentComponentSchema, SupportedLocales} from '@open-formulieren/types';
+import {
+  ContentComponentSchema,
+  SoftRequiredErrorsComponentSchema,
+  SupportedLocales,
+} from '@open-formulieren/types';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import React from 'react';
@@ -1056,6 +1060,11 @@ export const FileUpload: Story = {
           bronorganisatie: '',
           docVertrouwelijkheidaanduiding: '',
           titel: '',
+        },
+        // custom extensions
+        openForms: {
+          softRequired: false,
+          translations: {},
         },
       });
     });
@@ -3017,6 +3026,60 @@ export const Content: Story = {
           when: '',
         },
       } satisfies ContentComponentSchema);
+    });
+  },
+};
+
+export const SoftRequiredErrors: Story = {
+  render: Template,
+  name: 'type: softRequiredErrors',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'softRequiredErrors',
+      key: 'softRequiredErrors',
+      html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+      openForms: {
+        translations: {
+          nl: {
+            html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+          },
+        },
+      },
+    },
+
+    builderInfo: {
+      title: 'Soft required errors',
+      icon: 'html5',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        id: 'wekruya',
+        type: 'softRequiredErrors',
+        label: '',
+        html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+            },
+            en: {
+              html: '',
+            },
+          },
+        },
+        key: 'softRequiredErrors',
+      } satisfies SoftRequiredErrorsComponentSchema);
     });
   },
 };
