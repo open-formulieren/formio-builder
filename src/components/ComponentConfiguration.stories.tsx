@@ -434,6 +434,11 @@ export const NumberField: Story = {
             max: '',
           },
         },
+        prefill: {
+          attribute: '',
+          identifierRole: 'main',
+          plugin: '',
+        },
         registration: {
           attribute: '',
         },

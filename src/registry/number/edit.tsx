@@ -9,6 +9,7 @@ import {
   IsSensitiveData,
   Key,
   Label,
+  Prefill,
   PresentationConfig,
   Registration,
   SimpleConditional,
@@ -58,6 +59,7 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -94,6 +96,11 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
       {/* Registration tab */}
       <TabPanel>
         <Registration.RegistrationAttributeSelect />
+      </TabPanel>
+
+      {/* Prefill tab */}
+      <TabPanel>
+        <Prefill.PrefillConfiguration />
       </TabPanel>
 
       {/* Translations */}
@@ -147,6 +154,11 @@ EditForm.defaultValues = {
   // Registration tab
   registration: {
     attribute: '',
+  },
+  prefill: {
+    plugin: '',
+    attribute: '',
+    identifierRole: 'main',
   },
 };
 
