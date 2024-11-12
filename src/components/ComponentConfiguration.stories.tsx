@@ -1626,6 +1626,7 @@ export const Select: Story = {
         clearOnHide: true,
         isSensitiveData: false,
         dataSrc: 'values',
+        dataType: 'string',
         data: {
           values: [
             {
@@ -1726,6 +1727,7 @@ export const Select: Story = {
         clearOnHide: true,
         isSensitiveData: false,
         dataSrc: 'values',
+        dataType: 'string',
         data: {},
         openForms: {
           dataSrc: 'variable',

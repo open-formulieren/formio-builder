@@ -177,6 +177,7 @@ EditForm.defaultValues = {
   // fixed, this is what itemsExpression results in via the backend. Do not confuse with
   // openForms.dataSrc!
   dataSrc: 'values',
+  dataType: 'string',
   data: {values: [{value: '', label: ''}]},
   // TODO: at some point we can allow an itemsExpression for this too
   // Note: Formio will override this to `null`! So be careful when dealing with
