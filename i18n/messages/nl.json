@@ -669,7 +669,7 @@
     "originalDefault": "In the future"
   },
   "Su4nqf": {
-    "defaultMessage": "Welke authenticatiemethode de mede-ondertekener moet gebruiken. Let op: Dit moet dezelfde authenticatiemethode zijn als is gebruikt op het formulier.",
+    "defaultMessage": "Welke authenticatiemethode de mede-ondertekenaar moet gebruiken. Let op: Dit moet dezelfde authenticatiemethode zijn als is gebruikt op het formulier.",
     "description": "Description for 'authPlugin' builder field",
     "originalDefault": "Which authentication method the co-signer must use. Note that this must be an authentication method available on the form."
   },
