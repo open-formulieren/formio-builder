@@ -1,5 +1,17 @@
 # Changes
 
+## 0.32.0 (2024-11-12)
+
+Feature and bugfix release
+
+- [`OF#4320`][OF#4320] Update cosign language used.
+- [`OF#4813`][OF#4813] Enabled prefill on number components.
+- [`OF#4772`][OF#4772] Enforce select values to be interpreted as strings in Formio.
+
+[OF#4320]: https://github.com/open-formulieren/open-forms/issues/4320
+[OF#4813]: https://github.com/open-formulieren/open-forms/issues/4813
+[OF#4772]: https://github.com/open-formulieren/open-forms/issues/4772
+
 ## 0.31.0 (2024-10-16)
 
 Feature release
