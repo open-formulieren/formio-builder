@@ -125,28 +125,28 @@ export const DEFAULT_FILE_TYPES: SelectOption[] = [
 export const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
   {
     backendLabel: '',
-    catalogusLabel: 'VTH (RSIN: 000000000)',
+    catalogueLabel: 'VTH (RSIN: 000000000)',
     url: 'https://example.com/iotype/123',
-    omschrijving: 'Vergunning',
+    description: 'Vergunning',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogusLabel: 'VTH (RSIN: 000000000)',
+    catalogueLabel: 'VTH (RSIN: 000000000)',
 
     url: 'https://example.com/iotype/456',
-    omschrijving: 'Vergunning',
+    description: 'Vergunning',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogusLabel: 'VTH (RSIN: 000000000)',
+    catalogueLabel: 'VTH (RSIN: 000000000)',
     url: 'https://example.com/iotype/789',
-    omschrijving: 'Ontheffing',
+    description: 'Ontheffing',
   },
   {
     backendLabel: 'Open Zaak',
-    catalogusLabel: 'Test catalogus name',
+    catalogueLabel: 'Test catalogus name',
     url: 'https://example.com/iotype/abc',
-    omschrijving: 'Aanvraag',
+    description: 'Aanvraag',
   },
 ];
 
