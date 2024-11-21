@@ -21,7 +21,6 @@ import Licenseplate from './licenseplate';
 import LeafletMap from './map';
 import NpFamilyMembers from './npFamilyMembers';
 import NumberField from './number';
-import Password from './password';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import ProductPrice from './productPrice';
@@ -88,7 +87,6 @@ const REGISTRY: Registry = {
   softRequiredErrors: SoftRequiredErrors,
   // deprecated
   coSign: CosignV1,
-  password: Password,
   productPrice: ProductPrice,
 };
 
