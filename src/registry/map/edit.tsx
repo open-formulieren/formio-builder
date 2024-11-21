@@ -1,7 +1,8 @@
 import {MapComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+import useAsync from 'react-use/esm/useAsync';
 
 import {
   BuilderTabs,
@@ -20,7 +21,8 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
+import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -62,7 +64,8 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'isSensitiveData',
             'useConfigDefaultMapSettings',
             'defaultZoom',
-            'initialCenter'
+            'initialCenter',
+            'tileLayerIdentifier'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -83,6 +86,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <IsSensitiveData />
         <UseConfigDefaultMapSettings />
         {!values.useConfigDefaultMapSettings && <MapConfiguration />}
+        <TileLayer />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -134,6 +138,7 @@ EditForm.defaultValues = {
     lat: undefined,
     lng: undefined,
   },
+  tileLayerIdentifier: undefined,
   defaultValue: null,
   // Advanced tab
   conditional: {
@@ -170,6 +175,40 @@ const UseConfigDefaultMapSettings: React.FC<{}> = () => {
         />
       }
       tooltip={tooltip}
+    />
+  );
+};
+
+const TileLayer: React.FC = () => {
+  const {getMapTileLayers} = useContext(BuilderContext);
+  const intl = useIntl();
+  const {value: options, loading, error} = useAsync(async () => await getMapTileLayers(), []);
+  if (error) {
+    throw error;
+  }
+
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'tileLayerIdentifier' builder field",
+    defaultMessage:
+      'The tile layer is responsible for showing the map background. ' +
+      'This effects the map style at particular coordinates and zoom levels.',
+  });
+  return (
+    <Select
+      name="tileLayerIdentifier"
+      label={
+        <FormattedMessage
+          description="Label for 'tileLayerIdentifier' builder field"
+          defaultMessage="Tile layer"
+        />
+      }
+      isClearable
+      tooltip={tooltip}
+      isLoading={loading}
+      options={options?.map(tileLayer => ({
+        label: tileLayer.label,
+        value: tileLayer.identifier,
+      }))}
     />
   );
 };

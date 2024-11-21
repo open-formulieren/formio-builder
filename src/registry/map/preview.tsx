@@ -1,9 +1,12 @@
 import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
 import {MapComponentSchema} from '@open-formulieren/types';
-import {useLayoutEffect} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {MapContainer, TileLayer, useMap} from 'react-leaflet';
+import useAsync from 'react-use/esm/useAsync';
 
+import Loader from '@/components/builder/loader';
 import {Component, Description} from '@/components/formio';
+import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -37,10 +40,29 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     validate = {},
     defaultZoom,
     initialCenter = {},
+    tileLayerIdentifier,
   } = component;
+  const {getMapTileLayers} = useContext(BuilderContext);
+  const {value: tileLayers, loading, error} = useAsync(async () => await getMapTileLayers(), []);
+  if (error) {
+    throw error;
+  }
+  if (loading) {
+    return <Loader />;
+  }
+
   const {required = false} = validate;
   const {lat = 52.1326332, lng = 5.291266} = initialCenter;
   const zoom = defaultZoom ?? 8;
+
+  const tileLayerUrl = (): string => {
+    // Try to find the url of the chosen tile layer. If it is found, return the url,
+    // else return the default tile layer url.
+    return (
+      tileLayers?.find(tileLayer => tileLayer.identifier === tileLayerIdentifier)?.url ??
+      TILE_LAYER_RD.url
+    );
+  };
   return (
     <Component
       type={component.type}
@@ -61,7 +83,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
           minBlockSize: '400px',
         }}
       >
-        <TileLayer {...TILE_LAYER_RD} />
+        <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
         <MapView lat={lat} lng={lng} zoom={zoom} />
       </MapContainer>
       {description && <Description text={description} />}
