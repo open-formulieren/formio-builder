@@ -10,6 +10,7 @@ import {
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
+  DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
@@ -74,6 +75,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         uniquifyKey: key => key,
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
+        getMapTileLayers: async () => DEFAULT_MAP_TILE_LAYERS,
         theme,
         getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         getValidatorPlugins: async () => {
