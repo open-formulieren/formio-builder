@@ -30,6 +30,17 @@ export interface DocumentTypeOption {
 }
 
 /*
+  Map tile layers
+
+  This datastructure is created by the Open Forms backend.
+ */
+export interface MapTileLayer {
+  identifier: string;
+  url: string;
+  label: string;
+}
+
+/*
   Builder
  */
 
@@ -48,6 +59,7 @@ export interface BuilderContextType {
   getDocumentTypes: () => Promise<Array<DocumentTypeOption>>;
   getConfidentialityLevels: () => Promise<SelectOption[]>;
   getAuthPlugins: () => Promise<AuthPluginOption[]>;
+  getMapTileLayers: () => Promise<MapTileLayer[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -65,6 +77,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getDocumentTypes: async () => [],
   getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
+  getMapTileLayers: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';
