@@ -13,6 +13,7 @@ import {
   DEFAULT_COLORS,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
+  DEFAULT_MAP_TILE_LAYERS,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
 
@@ -109,6 +110,7 @@ const Template: StoryFn<TemplateArgs> = ({
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
     getFileTypes={async () => fileTypes}
+    getMapTileLayers={async () => DEFAULT_MAP_TILE_LAYERS}
     serverUploadLimit="50MB"
     getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
     getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
