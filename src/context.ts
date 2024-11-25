@@ -24,9 +24,9 @@ export interface SelectOption {
  */
 export interface DocumentTypeOption {
   backendLabel: string;
-  catalogusLabel: string;
+  catalogueLabel: string;
   url: string;
-  omschrijving: string;
+  description: string;
 }
 
 /*
