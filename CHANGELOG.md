@@ -1,5 +1,15 @@
 # Changes
 
+## 0.33.0 (2024-11-25)
+
+💥 Breaking changes release
+
+- [`OF#3283`][OF#3283] Dropped support for the password component.
+- [`OF#4606`][OF#4606] Updated the expected data/props following changes in the backend serializers.
+
+[OF#3283]: https://github.com/open-formulieren/open-forms/issues/3283
+[OF#4606]: https://github.com/open-formulieren/open-forms/issues/4606
+
 ## 0.32.0 (2024-11-12)
 
 Feature and bugfix release
