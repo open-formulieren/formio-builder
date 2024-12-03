@@ -27,6 +27,7 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import MapConfiguration from './map-configuration';
+import InteractionConfiguration from '@/registry/map/interaction-configuration';
 
 /**
  * Form to configure a Formio 'map' type component.
@@ -65,7 +66,8 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'useConfigDefaultMapSettings',
             'defaultZoom',
             'initialCenter',
-            'tileLayerIdentifier'
+            'tileLayerIdentifier',
+            'interactions'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -87,6 +89,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <UseConfigDefaultMapSettings />
         {!values.useConfigDefaultMapSettings && <MapConfiguration />}
         <TileLayer />
+        <InteractionConfiguration />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -139,6 +142,12 @@ EditForm.defaultValues = {
     lng: undefined,
   },
   tileLayerIdentifier: undefined,
+  interactions: {
+    circle: false,
+    polygon: false,
+    polyline: false,
+    marker: true,
+  },
   defaultValue: null,
   // Advanced tab
   conditional: {
