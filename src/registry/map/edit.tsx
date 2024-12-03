@@ -23,6 +23,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
+import InteractionConfiguration from '@/registry/map/interaction-configuration';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -65,7 +66,8 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'useConfigDefaultMapSettings',
             'defaultZoom',
             'initialCenter',
-            'tileLayerIdentifier'
+            'tileLayerIdentifier',
+            'interactions'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -87,6 +89,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <UseConfigDefaultMapSettings />
         {!values.useConfigDefaultMapSettings && <MapConfiguration />}
         <TileLayer />
+        <InteractionConfiguration />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -139,6 +142,11 @@ EditForm.defaultValues = {
     lng: undefined,
   },
   tileLayerIdentifier: undefined,
+  interactions: {
+    polygon: false,
+    polyline: false,
+    marker: true,
+  },
   defaultValue: null,
   // Advanced tab
   conditional: {
