@@ -25,6 +25,7 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import MapConfiguration from './map-configuration';
+import InteractionConfiguration from '@/registry/map/interaction-configuration';
 
 /**
  * Form to configure a Formio 'map' type component.
@@ -62,7 +63,8 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'isSensitiveData',
             'useConfigDefaultMapSettings',
             'defaultZoom',
-            'initialCenter'
+            'initialCenter',
+            'interactions'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
@@ -83,6 +85,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <IsSensitiveData />
         <UseConfigDefaultMapSettings />
         {!values.useConfigDefaultMapSettings && <MapConfiguration />}
+        <InteractionConfiguration />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -133,6 +136,12 @@ EditForm.defaultValues = {
   initialCenter: {
     lat: undefined,
     lng: undefined,
+  },
+  interactions: {
+    circle: false,
+    polygon: false,
+    polyline: false,
+    marker: true,
   },
   defaultValue: null,
   // Advanced tab
