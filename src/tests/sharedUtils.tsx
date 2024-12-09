@@ -1,5 +1,5 @@
 // This module contains shared utilities and constants between Jest and Storybook.
-import type {DocumentTypeOption, SelectOption} from '@/context';
+import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
 import {ColorOption} from '@/registry/content/rich-text';
 import {AnyComponentSchema} from '@/types';
 
@@ -232,6 +232,19 @@ export const DEFAULT_COLORS: ColorOption[] = [
   {
     color: '#e6e64c',
     label: 'Yellow',
+  },
+];
+
+export const DEFAULT_MAP_TILE_LAYERS: MapTileLayer[] = [
+  {
+    identifier: 'brt',
+    url: 'https://service.pdok.nl/brt/achtergrondkaart/wmts/v2_0/standaard/EPSG:28992/{z}/{x}/{y}.png',
+    label: 'BRT',
+  },
+  {
+    identifier: 'luchtfoto',
+    url: 'https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/Actueel_orthoHR/EPSG:28992/{z}/{x}/{y}.png',
+    label: 'Luchtfoto',
   },
 ];
 
