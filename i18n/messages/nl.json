@@ -116,7 +116,7 @@
     "originalDefault": "Validation"
   },
   "2mgmOj": {
-    "defaultMessage": "The title for the document that is related to the case.",
+    "defaultMessage": "De titel voor het zaak document.",
     "description": "Tooltip for 'registration.titel' builder field",
     "originalDefault": "The title for the document that is related to the case."
   },
