@@ -114,6 +114,11 @@
     "description": "Component edit form tab title for 'Validation' tab",
     "originalDefault": "Validation"
   },
+  "2mgmOj": {
+    "defaultMessage": "The title for the document that is related to the case.",
+    "description": "Tooltip for 'registration.titel' builder field",
+    "originalDefault": "The title for the document that is related to the case."
+  },
   "2sbkGI": {
     "defaultMessage": "When enabled, the street name and city are derived from the entered postcode and house number.",
     "description": "Tooltip for 'DeriveAddress' builder field",
@@ -943,11 +948,6 @@
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
-  },
-  "ctoEdl": {
-    "defaultMessage": "The name under which the INFORMATIEOBJECT is formally known.",
-    "description": "Tooltip for 'registration.titel' builder field",
-    "originalDefault": "The name under which the INFORMATIEOBJECT is formally known."
   },
   "czUDSQ": {
     "defaultMessage": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported.",

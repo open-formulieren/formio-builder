@@ -137,7 +137,7 @@ const Title = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'registration.titel' builder field",
-    defaultMessage: 'The name under which the INFORMATIEOBJECT is formally known.',
+    defaultMessage: 'The title for the document that is related to the case.',
   });
 
   return (
