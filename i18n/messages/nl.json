@@ -613,6 +613,11 @@
     "description": "File component 'fileMaxSize' validation error",
     "originalDefault": "Specify a positive, non-zero file size without decimals, e.g. 10MB."
   },
+  "Qd9qN8": {
+    "defaultMessage": "Kaartlaag",
+    "description": "Label for 'tileLayerIdentifier' builder field",
+    "originalDefault": "Tile layer"
+  },
   "Qjl92W": {
     "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
@@ -1010,6 +1015,11 @@
     "defaultMessage": "Kaartinstellingen",
     "description": "Map configuration panel title",
     "originalDefault": "Map configuration"
+  },
+  "eAmrdi": {
+    "defaultMessage": "Aan het laden...",
+    "description": "Loading content text",
+    "originalDefault": "Loading..."
   },
   "eUowhH": {
     "defaultMessage": "'Groep bewaren'-tekst",
@@ -1503,6 +1513,11 @@
     "defaultMessage": "Duur bijtellen/aftrekken",
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
+  },
+  "xbUkMg": {
+    "defaultMessage": "De kaartlaag bepaald de achtergrond van het kaartmateriaal voor verschillende coördinaten and zoomniveaus.",
+    "description": "Tooltip for 'tileLayerIdentifier' builder field",
+    "originalDefault": "The tile layer is responsible for showing the map background. This effects the map style at particular coordinates and zoom levels."
   },
   "xxVNeU": {
     "defaultMessage": "Zoomniveau",
