@@ -115,6 +115,11 @@
     "description": "Component edit form tab title for 'Validation' tab",
     "originalDefault": "Validation"
   },
+  "2mgmOj": {
+    "defaultMessage": "The title for the document that is related to the case.",
+    "description": "Tooltip for 'registration.titel' builder field",
+    "originalDefault": "The title for the document that is related to the case."
+  },
   "2sbkGI": {
     "defaultMessage": "Indien aangevinkt, dan worden de straatnaam en stad afgeleid op basis van de ingevoerde postcode en huisnummer.",
     "description": "Tooltip for 'DeriveAddress' builder field",
@@ -955,11 +960,6 @@
     "description": "Label for 'prefill.plugin' builder field",
     "isTranslated": true,
     "originalDefault": "Plugin"
-  },
-  "ctoEdl": {
-    "defaultMessage": "Titel voor het document in de Documenten API.",
-    "description": "Tooltip for 'registration.titel' builder field",
-    "originalDefault": "The name under which the INFORMATIEOBJECT is formally known."
   },
   "czUDSQ": {
     "defaultMessage": "Een korte beschrijvende indicatie die meer context beschrijft voor de verwachtte waarde. Je kan hier de '<sup> en <sub>' HTML tags gebruiken.",
