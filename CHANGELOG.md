@@ -1,5 +1,15 @@
 # Changes
 
+## 0.34.0 (2024-12-13)
+
+Feature and bugfix release
+
+- [`OF#4319`][OF#4319] Updated title's tooltip in Upload File Component to be more specific.
+- [`OF#2173`][OF#2173] Added background configuration to the map component.
+
+[OF#4319]: https://github.com/open-formulieren/open-forms/issues/4319
+[OF#2173]: https://github.com/open-formulieren/open-forms/issues/4880
+
 ## 0.33.0 (2024-11-25)
 
 💥 Breaking changes release
