@@ -116,7 +116,7 @@
     "originalDefault": "Validation"
   },
   "2mgmOj": {
-    "defaultMessage": "De titel voor het zaak document.",
+    "defaultMessage": "De titel voor het zaakdocument.",
     "description": "Tooltip for 'registration.titel' builder field",
     "originalDefault": "The title for the document that is related to the case."
   },
@@ -1515,7 +1515,7 @@
     "originalDefault": "Add/subtract duration"
   },
   "xbUkMg": {
-    "defaultMessage": "De kaartlaag bepaald de achtergrond van het kaartmateriaal voor verschillende coördinaten and zoomniveaus.",
+    "defaultMessage": "De kaartlaag bepaalt de achtergrond van het kaartmateriaal voor verschillende coördinaten en zoomniveaus.",
     "description": "Tooltip for 'tileLayerIdentifier' builder field",
     "originalDefault": "The tile layer is responsible for showing the map background. This effects the map style at particular coordinates and zoom levels."
   },
