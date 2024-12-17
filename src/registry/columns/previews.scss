@@ -26,6 +26,16 @@
     margin-inline: auto;
   }
 
+  &--ui {
+    background: transparent;
+
+    .offb-columns-preview__column {
+      background: transparent;
+      margin-block: unset;
+      border: none;
+    }
+  }
+
   &__column {
     background-color: var(--offb-columns-preview-background-color, #eee);
     padding-inline: 5px;
@@ -36,5 +46,16 @@
     border-radius: 2px;
     text-align: center;
     grid-column: span var(--_col-preview-span);
+  }
+}
+
+.offb-form-preview-column {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+
+  &__label {
+    font-size: 0.8em;
+    margin-block-start: 5px;
   }
 }
