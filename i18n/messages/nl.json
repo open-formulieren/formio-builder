@@ -151,6 +151,11 @@
     "isTranslated": true,
     "originalDefault": "CSS class"
   },
+  "3xnsUT": {
+    "defaultMessage": "Lijn interacties",
+    "description": "Label for 'interactions.polyline' builder field",
+    "originalDefault": "Line interactions"
+  },
   "4/cCvG": {
     "defaultMessage": "Locatie",
     "description": "Component edit form tab title for 'Location' tab",
@@ -572,6 +577,11 @@
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
   },
+  "NbDr3m": {
+    "defaultMessage": "Geeft gebruikers de mogelijkheid een lijn te tekenen, wanneer ze met het kaartmateriaal werken",
+    "description": "Tooltip for 'interactions.polyline' builder field",
+    "originalDefault": "Allowing users to draw a line when using the map component"
+  },
   "NdaqDN": {
     "defaultMessage": "Waarde-omschrijving (<option></option>)",
     "description": "Label for option description location",
@@ -597,6 +607,16 @@
     "description": "Component property 'Label' label",
     "isTranslated": true,
     "originalDefault": "Label"
+  },
+  "P84Gif": {
+    "defaultMessage": "Geeft gebruikers de mogelijkheid een cirkel te tekenen, wanneer ze met het kaartmateriaal werken",
+    "description": "Tooltip for 'interactions.circle' builder field",
+    "originalDefault": "Allowing users to draw a circle when using the map component"
+  },
+  "POkaFQ": {
+    "defaultMessage": "Polygoon interacties",
+    "description": "Label for 'interactions.polygon' builder field",
+    "originalDefault": "Polygon interactions"
   },
   "PhXIai": {
     "defaultMessage": "Aantal jaren. Lege waarden worden genegeerd.",
@@ -885,6 +905,16 @@
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
   },
+  "ZRM6J8": {
+    "defaultMessage": "Mogelijke kaartmateriaal interacties",
+    "description": "Interaction configuration panel title",
+    "originalDefault": "Available map interactions"
+  },
+  "ZXsJ9p": {
+    "defaultMessage": "Cirkel interacties",
+    "description": "Label for 'interactions.circle' builder field",
+    "originalDefault": "Circle interactions"
+  },
   "aBADYT": {
     "defaultMessage": "Maximum aantal bestanden",
     "description": "Label for 'maxNumberOfFiles' builder field",
@@ -1158,6 +1188,11 @@
     "description": "Label for 'ClearOnHide' builder field",
     "originalDefault": "Clear on hide"
   },
+  "iyWQAt": {
+    "defaultMessage": "Geeft gebruikers de mogelijkheid een polygoon te tekenen, wanneer ze met het kaartmateriaal werken",
+    "description": "Tooltip for 'interactions.polygon' builder field",
+    "originalDefault": "Allowing users to draw a polygon when using the map component"
+  },
   "j2vQH3": {
     "defaultMessage": "Waarden",
     "description": "Label for the 'values' builder field",
@@ -1198,6 +1233,11 @@
     "defaultMessage": "Foutmelding",
     "description": "Label for translation message for validation error code",
     "originalDefault": "Error message"
+  },
+  "kIX7bm": {
+    "defaultMessage": "Pin interacties",
+    "description": "Label for 'interactions.marker' builder field",
+    "originalDefault": "Marker interactions"
   },
   "kg/eh1": {
     "defaultMessage": "Waardenvertalingen",
@@ -1463,6 +1503,11 @@
     "defaultMessage": "Verberg de koptekst en de lijn boven de veldengroep in het formulier.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
+  },
+  "vFydxX": {
+    "defaultMessage": "Geeft gebruikers de mogelijkheid een pin te plaatsen, wanneer ze met het kaartmateriaal werken",
+    "description": "Tooltip for 'interactions.marker' builder field",
+    "originalDefault": "Allowing users to set a marker when using the map component"
   },
   "vRVMpe": {
     "defaultMessage": "(Standaard)tekst",

@@ -149,6 +149,11 @@
     "description": "Label for 'customClass' builder field",
     "originalDefault": "CSS class"
   },
+  "3xnsUT": {
+    "defaultMessage": "Line interactions",
+    "description": "Label for 'interactions.polyline' builder field",
+    "originalDefault": "Line interactions"
+  },
   "4/cCvG": {
     "defaultMessage": "Location",
     "description": "Component edit form tab title for 'Location' tab",
@@ -564,6 +569,11 @@
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
   },
+  "NbDr3m": {
+    "defaultMessage": "Allowing users to draw a line when using the map component",
+    "description": "Tooltip for 'interactions.polyline' builder field",
+    "originalDefault": "Allowing users to draw a line when using the map component"
+  },
   "NdaqDN": {
     "defaultMessage": "Option description (<option></option>)",
     "description": "Label for option description location",
@@ -588,6 +598,16 @@
     "defaultMessage": "Label",
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
+  },
+  "P84Gif": {
+    "defaultMessage": "Allowing users to draw a circle when using the map component",
+    "description": "Tooltip for 'interactions.circle' builder field",
+    "originalDefault": "Allowing users to draw a circle when using the map component"
+  },
+  "POkaFQ": {
+    "defaultMessage": "Polygon interactions",
+    "description": "Label for 'interactions.polygon' builder field",
+    "originalDefault": "Polygon interactions"
   },
   "PhXIai": {
     "defaultMessage": "Number of years. Empty values are ignored.",
@@ -874,6 +894,16 @@
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
   },
+  "ZRM6J8": {
+    "defaultMessage": "Available map interactions",
+    "description": "Interaction configuration panel title",
+    "originalDefault": "Available map interactions"
+  },
+  "ZXsJ9p": {
+    "defaultMessage": "Circle interactions",
+    "description": "Label for 'interactions.circle' builder field",
+    "originalDefault": "Circle interactions"
+  },
   "aBADYT": {
     "defaultMessage": "Maximum number of files",
     "description": "Label for 'maxNumberOfFiles' builder field",
@@ -1144,6 +1174,11 @@
     "description": "Label for 'ClearOnHide' builder field",
     "originalDefault": "Clear on hide"
   },
+  "iyWQAt": {
+    "defaultMessage": "Allowing users to draw a polygon when using the map component",
+    "description": "Tooltip for 'interactions.polygon' builder field",
+    "originalDefault": "Allowing users to draw a polygon when using the map component"
+  },
   "j2vQH3": {
     "defaultMessage": "Values",
     "description": "Label for the 'values' builder field",
@@ -1183,6 +1218,11 @@
     "defaultMessage": "Error message",
     "description": "Label for translation message for validation error code",
     "originalDefault": "Error message"
+  },
+  "kIX7bm": {
+    "defaultMessage": "Marker interactions",
+    "description": "Label for 'interactions.marker' builder field",
+    "originalDefault": "Marker interactions"
   },
   "kg/eh1": {
     "defaultMessage": "Choice/option translations",
@@ -1443,6 +1483,11 @@
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
+  },
+  "vFydxX": {
+    "defaultMessage": "Allowing users to set a marker when using the map component",
+    "description": "Tooltip for 'interactions.marker' builder field",
+    "originalDefault": "Allowing users to set a marker when using the map component"
   },
   "vRVMpe": {
     "defaultMessage": "Value",
