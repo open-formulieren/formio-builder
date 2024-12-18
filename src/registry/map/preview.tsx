@@ -1,14 +1,17 @@
 import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
 import {MapComponentSchema} from '@open-formulieren/types';
-import {useContext, useLayoutEffect} from 'react';
-import {MapContainer, TileLayer, useMap} from 'react-leaflet';
+import type {FeatureGroup as LeafletFeatureGroup} from 'leaflet';
+import {useContext, useLayoutEffect, useRef} from 'react';
+import {FeatureGroup, MapContainer, TileLayer, useMap} from 'react-leaflet';
+import {EditControl} from 'react-leaflet-draw';
 import useAsync from 'react-use/esm/useAsync';
 
 import Loader from '@/components/builder/loader';
 import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
+import {ComponentPreviewProps} from '@/registry/types';
 
-import {ComponentPreviewProps} from '../types';
+import './previews.scss';
 
 interface MapViewProps {
   lat: number;
@@ -41,8 +44,10 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     defaultZoom,
     initialCenter = {},
     tileLayerIdentifier,
+    interactions,
   } = component;
   const {getMapTileLayers} = useContext(BuilderContext);
+  const featureGroupRef = useRef<LeafletFeatureGroup>(null);
   const {value: tileLayers, loading, error} = useAsync(async () => await getMapTileLayers(), []);
   if (error) {
     throw error;
@@ -63,6 +68,12 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
       TILE_LAYER_RD.url
     );
   };
+
+  const onFeatureCreate = (event: any) => {
+    featureGroupRef.current?.clearLayers();
+    featureGroupRef.current?.addLayer(event.layer);
+  };
+
   return (
     <Component
       type={component.type}
@@ -84,6 +95,24 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         }}
       >
         <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
+        <FeatureGroup ref={featureGroupRef}>
+          <EditControl
+            position="topright"
+            onCreated={onFeatureCreate}
+            edit={{
+              edit: false,
+              remove: false,
+            }}
+            draw={{
+              rectangle: false,
+              circle: false,
+              polyline: !!interactions?.polyline,
+              polygon: !!interactions?.polygon,
+              marker: !!interactions?.marker,
+              circlemarker: false,
+            }}
+          />
+        </FeatureGroup>
         <MapView lat={lat} lng={lng} zoom={zoom} />
       </MapContainer>
       {description && <Description text={description} />}
