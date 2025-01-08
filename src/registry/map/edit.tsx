@@ -21,7 +21,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
+import {Checkbox, Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import InteractionConfiguration from '@/registry/map/interaction-configuration';
 import {useErrorChecker} from '@/utils/errors';
@@ -62,16 +62,25 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'showInPDF',
             'hidden',
             'clearOnHide',
-            'isSensitiveData',
+            'isSensitiveData'
+          )}
+        />
+        <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
+        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <Tab
+          hasErrors={hasAnyError(
             'useConfigDefaultMapSettings',
             'defaultZoom',
             'initialCenter',
             'tileLayerIdentifier',
             'interactions'
           )}
-        />
-        <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        >
+          <FormattedMessage
+            description="Component edit form tab title for 'Map settings' tab"
+            defaultMessage="Map settings"
+          />
+        </Tab>
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
@@ -86,10 +95,6 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
-        <UseConfigDefaultMapSettings />
-        {!values.useConfigDefaultMapSettings && <MapConfiguration />}
-        <TileLayer />
-        <InteractionConfiguration />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -102,6 +107,14 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <Validate.Required />
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
+      </TabPanel>
+
+      {/* Map settings tab */}
+      <TabPanel>
+        <TileLayer />
+        <InteractionConfiguration />
+        <UseConfigDefaultMapSettings />
+        {!values.useConfigDefaultMapSettings && <MapConfiguration />}
       </TabPanel>
 
       {/* Registration tab */}

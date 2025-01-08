@@ -45,6 +45,7 @@ export const NotUsingGlobalConfig: Story = {
     const canvas = within(canvasElement);
 
     await step('Initial state', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
       expect(
         canvas.getByLabelText('Use globally configured map component settings')
       ).not.toBeChecked();
@@ -81,6 +82,7 @@ export const UsingGlobalConfig: Story = {
     const canvas = within(canvasElement);
 
     await step('Initial state', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
       expect(
         canvas.getByLabelText('Use globally configured map component settings')
       ).not.toBeChecked();
