@@ -287,6 +287,11 @@
     "description": "Operator 'subtract' option label",
     "originalDefault": "Subtract"
   },
+  "9oJuUL": {
+    "defaultMessage": "Pin/punt",
+    "description": "Label for 'interactions.marker' builder field",
+    "originalDefault": "Marker"
+  },
   "AClYLf": {
     "defaultMessage": "Indien aangevinkt, dan is de dag op het moment van evaluatie een geldige datum.",
     "description": "Tooltip for 'date constraint includeToday' builder validation field",
@@ -474,6 +479,11 @@
     "defaultMessage": "Grootte van de kolommen",
     "description": "Label for the 'columns' builder field",
     "originalDefault": "Column sizes"
+  },
+  "Gjhh/5": {
+    "defaultMessage": "Beschikbare vormen",
+    "description": "Map interaction configuration panel title",
+    "originalDefault": "Available drawing shapes"
   },
   "GjumK9": {
     "defaultMessage": "Geef de grootte van elke kolom op. De som van alle breedtes moet 100% zijn.",
@@ -688,6 +698,11 @@
     "description": "Double column label",
     "originalDefault": "Double column"
   },
+  "T64zDz": {
+    "defaultMessage": "Veelhoek (Polygoon)",
+    "description": "Label for 'interactions.polygon' builder field",
+    "originalDefault": "Polygon"
+  },
   "TCNvqa": {
     "defaultMessage": "Minimale datum",
     "description": "Date field 'minDate' fixed value label",
@@ -803,6 +818,11 @@
     "defaultMessage": "Zijn er voor dit veld meerdere waarden mogelijk?",
     "description": "Tooltip for 'Multiple values' builder field",
     "originalDefault": "Are there multiple values possible for this field?"
+  },
+  "WXpj4j": {
+    "defaultMessage": "Gebruikers kunnen een punt aanduiden op de kaart.",
+    "description": "Tooltip for 'interactions.marker' builder field",
+    "originalDefault": "Users can set a marker on the map"
   },
   "WZJG0y": {
     "defaultMessage": "In het verleden",
@@ -925,6 +945,11 @@
     "description": "Label for address houseletter",
     "originalDefault": "House letter addition"
   },
+  "b64egT": {
+    "defaultMessage": "Gebruikers kunnen een veelhoek (gesloten vorm die uit rechte lijnen bestaat) tekenen.",
+    "description": "Tooltip for 'interactions.polygon' builder field",
+    "originalDefault": "Users can draw shapes (polygons) on the map"
+  },
   "bYBFBc": {
     "defaultMessage": "Geef aan of deze waarde in het bevestigscherm moet getoond worden.",
     "description": "Tooltip for 'showInSummary' builder field",
@@ -1010,11 +1035,6 @@
     "defaultMessage": "Minimale datum {configured, select, false {(niet ingesteld)} other {}}",
     "description": "Date field 'minDate' validation panel title",
     "originalDefault": "Minimum date {configured, select, false {(not set)} other {}}"
-  },
-  "e6SsfR": {
-    "defaultMessage": "Kaartinstellingen",
-    "description": "Map configuration panel title",
-    "originalDefault": "Map configuration"
   },
   "eAmrdi": {
     "defaultMessage": "Aan het laden...",
@@ -1260,6 +1280,11 @@
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
   },
+  "mRmbnJ": {
+    "defaultMessage": "Lijn",
+    "description": "Label for 'interactions.polyline' builder field",
+    "originalDefault": "Line"
+  },
   "mWuCXv": {
     "defaultMessage": "Je kan een extra omschrijving opnemen om een keuzeoptie te verduidelijken.",
     "description": "Tooltip for option/choice description",
@@ -1357,6 +1382,11 @@
     "description": "Label for 'NumberOfRows' builder field",
     "originalDefault": "Number of rows"
   },
+  "pM92DZ": {
+    "defaultMessage": "Gebruikers kunnen rechte lijnen tekenen op de kaart.",
+    "description": "Tooltip for 'interactions.polyline' builder field",
+    "originalDefault": "Users can draw straight lines on the map"
+  },
   "pT5jx/": {
     "defaultMessage": "Kolombreedte op mobiel, de waarde moet tussen 1 en 4 liggen.",
     "description": "Accessible label for column mobile size",
@@ -1366,6 +1396,11 @@
     "defaultMessage": "Waarden via de expressie: <code>{expression}</code>",
     "description": "Selectboxes dummy option for itemsExpression",
     "originalDefault": "Options from expression: <code>{expression}</code>"
+  },
+  "pdmkVe": {
+    "defaultMessage": "Begin focuspunt",
+    "description": "Map initial focus panel title",
+    "originalDefault": "Initial focus"
   },
   "pfdsz9": {
     "defaultMessage": "Huisnummertoevoeging",
@@ -1483,6 +1518,11 @@
     "defaultMessage": "Geef het attribuut op wat de prefill-gegevens bevat.",
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
+  },
+  "wJ7Yha": {
+    "defaultMessage": "Kaartinstellingen",
+    "description": "Component edit form tab title for 'Map settings' tab",
+    "originalDefault": "Map settings"
   },
   "wOq8Pb": {
     "defaultMessage": "Vertaling voor het label van de optie met waarde \"{value}\"",

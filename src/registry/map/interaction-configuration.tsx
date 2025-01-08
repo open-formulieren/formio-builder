@@ -6,7 +6,7 @@ const PolygonInteraction: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'interactions.polygon' builder field",
-    defaultMessage: 'Allowing users to draw a polygon when using the map component',
+    defaultMessage: 'Users can draw shapes (polygons) on the map',
   });
   return (
     <Checkbox
@@ -14,7 +14,7 @@ const PolygonInteraction: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'interactions.polygon' builder field"
-          defaultMessage="Polygon interactions"
+          defaultMessage="Polygon"
         />
       }
       tooltip={tooltip}
@@ -26,7 +26,7 @@ const PolylineInteraction: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'interactions.polyline' builder field",
-    defaultMessage: 'Allowing users to draw a line when using the map component',
+    defaultMessage: 'Users can draw straight lines on the map',
   });
   return (
     <Checkbox
@@ -34,7 +34,7 @@ const PolylineInteraction: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'interactions.polyline' builder field"
-          defaultMessage="Line interactions"
+          defaultMessage="Line"
         />
       }
       tooltip={tooltip}
@@ -46,7 +46,7 @@ const MarkerInteraction: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'interactions.marker' builder field",
-    defaultMessage: 'Allowing users to set a marker when using the map component',
+    defaultMessage: 'Users can set a marker on the map',
   });
   return (
     <Checkbox
@@ -54,7 +54,7 @@ const MarkerInteraction: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'interactions.marker' builder field"
-          defaultMessage="Marker interactions"
+          defaultMessage="Marker"
         />
       }
       tooltip={tooltip}
@@ -66,8 +66,8 @@ const InteractionConfiguration: React.FC = () => (
   <Panel
     title={
       <FormattedMessage
-        description="Interaction configuration panel title"
-        defaultMessage="Available map interactions"
+        description="Map interaction configuration panel title"
+        defaultMessage="Available drawing shapes"
       />
     }
   >
