@@ -101,7 +101,6 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
             onCreated={onFeatureCreate}
             edit={{
               edit: false,
-              remove: false,
             }}
             draw={{
               rectangle: false,
