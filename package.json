@@ -30,7 +30,8 @@
     "build-storybook": "storybook build --webpack-stats-json",
     "makemessages": "formatjs extract",
     "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
-    "watch": "ttsc -p tsconfig.prod.json --watch"
+    "watch": "ttsc -p tsconfig.prod.json --watch",
+    "postinstall": "patch-package"
   },
   "files": [
     "lib/",
@@ -81,6 +82,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "^29.5.12",
     "@types/leaflet": "^1.9.8",
+    "@types/leaflet-draw": "^1.0.11",
     "@types/lodash": "^4.17.0",
     "@types/proj4leaflet": "^1.0.10",
     "@types/react": "^18.2.45",
@@ -126,6 +128,7 @@
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.21",
+    "patch-package": "^8.0.0",
     "react-intl": "^6.3.2",
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.4",
