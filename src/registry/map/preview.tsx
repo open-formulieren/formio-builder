@@ -74,6 +74,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     featureGroupRef.current?.addLayer(event.layer);
   };
 
+  const editable = Object.values(interactions || {}).find(interaction => interaction);
   return (
     <Component
       type={component.type}
@@ -96,21 +97,23 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
       >
         <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
         <FeatureGroup ref={featureGroupRef}>
-          <EditControl
-            position="topright"
-            onCreated={onFeatureCreate}
-            edit={{
-              edit: false,
-            }}
-            draw={{
-              rectangle: false,
-              circle: false,
-              polyline: !!interactions?.polyline,
-              polygon: !!interactions?.polygon,
-              marker: !!interactions?.marker,
-              circlemarker: false,
-            }}
-          />
+          {editable && (
+            <EditControl
+              position="topright"
+              onCreated={onFeatureCreate}
+              edit={{
+                edit: false,
+              }}
+              draw={{
+                rectangle: false,
+                circle: false,
+                polyline: !!interactions?.polyline,
+                polygon: !!interactions?.polygon,
+                marker: !!interactions?.marker,
+                circlemarker: false,
+              }}
+            />
+          )}
         </FeatureGroup>
         <MapView lat={lat} lng={lng} zoom={zoom} />
       </MapContainer>
