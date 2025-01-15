@@ -84,8 +84,8 @@ const MapConfiguration: React.FC = () => (
   <Panel
     title={
       <FormattedMessage
-        description="Map configuration panel title"
-        defaultMessage="Map configuration"
+        description="Map initial focus panel title"
+        defaultMessage="Initial focus"
       />
     }
     collapsible

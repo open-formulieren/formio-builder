@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-leaflet-draw/src/index.d.ts b/node_modules/react-leaflet-draw/src/index.d.ts
+index 0ebca75..5bc3da9 100644
+--- a/node_modules/react-leaflet-draw/src/index.d.ts
++++ b/node_modules/react-leaflet-draw/src/index.d.ts
+@@ -1,7 +1,7 @@
+ import * as React from 'react';
+ import type {
+ 	DrawOptions,
+-	EditOptions,
++	Control,
+ 	ControlPosition,
+ 	DrawEvents,
+ } from 'leaflet';
+@@ -22,7 +22,7 @@ interface EditControlProps {
+ 
+ 	onCreated?: (v: DrawEvents.Created) => void;
+ 	onMounted?: Function;
+-	edit?: EditOptions;
++	edit?: Omit<Control.EditOptions, 'featureGroup'>;
+ 	draw: {
+ 		polyline?: DrawOptions.PolylineOptions | boolean;
+ 		polygon?: DrawOptions.PolygonOptions | boolean;

@@ -45,13 +45,14 @@ export const NotUsingGlobalConfig: Story = {
     const canvas = within(canvasElement);
 
     await step('Initial state', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
       expect(
         canvas.getByLabelText('Use globally configured map component settings')
       ).not.toBeChecked();
     });
 
     await step('Open configuration panel', async () => {
-      const panelTitle = await canvas.findByText('Map configuration');
+      const panelTitle = await canvas.findByText('Initial focus');
       await waitFor(async () => {
         expect(panelTitle).toBeVisible();
       });
@@ -81,13 +82,14 @@ export const UsingGlobalConfig: Story = {
     const canvas = within(canvasElement);
 
     await step('Initial state', async () => {
+      await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
       expect(
         canvas.getByLabelText('Use globally configured map component settings')
       ).not.toBeChecked();
     });
 
     await step('Toggle checkbox to enable global configuration', async () => {
-      const panelTitle = await canvas.findByText('Map configuration');
+      const panelTitle = await canvas.findByText('Initial focus');
       await waitFor(async () => {
         expect(panelTitle).toBeVisible();
       });

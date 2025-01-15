@@ -284,6 +284,11 @@
     "description": "Operator 'subtract' option label",
     "originalDefault": "Subtract"
   },
+  "9oJuUL": {
+    "defaultMessage": "Marker",
+    "description": "Label for 'interactions.marker' builder field",
+    "originalDefault": "Marker"
+  },
   "AClYLf": {
     "defaultMessage": "If checked, the current day is an allowed value.",
     "description": "Tooltip for 'date constraint includeToday' builder validation field",
@@ -468,6 +473,11 @@
     "defaultMessage": "Column sizes",
     "description": "Label for the 'columns' builder field",
     "originalDefault": "Column sizes"
+  },
+  "Gjhh/5": {
+    "defaultMessage": "Available drawing shapes",
+    "description": "Map interaction configuration panel title",
+    "originalDefault": "Available drawing shapes"
   },
   "GjumK9": {
     "defaultMessage": "Specify the size of each column. The sum of all the widths should be 100%.",
@@ -679,6 +689,11 @@
     "description": "Double column label",
     "originalDefault": "Double column"
   },
+  "T64zDz": {
+    "defaultMessage": "Polygon",
+    "description": "Label for 'interactions.polygon' builder field",
+    "originalDefault": "Polygon"
+  },
   "TCNvqa": {
     "defaultMessage": "Minimum date",
     "description": "Date field 'minDate' fixed value label",
@@ -793,6 +808,11 @@
     "defaultMessage": "Are there multiple values possible for this field?",
     "description": "Tooltip for 'Multiple values' builder field",
     "originalDefault": "Are there multiple values possible for this field?"
+  },
+  "WXpj4j": {
+    "defaultMessage": "Users can set a marker on the map",
+    "description": "Tooltip for 'interactions.marker' builder field",
+    "originalDefault": "Users can set a marker on the map"
   },
   "WZJG0y": {
     "defaultMessage": "In the past",
@@ -914,6 +934,11 @@
     "description": "Label for address houseletter",
     "originalDefault": "House letter addition"
   },
+  "b64egT": {
+    "defaultMessage": "Users can draw shapes (polygons) on the map",
+    "description": "Tooltip for 'interactions.polygon' builder field",
+    "originalDefault": "Users can draw shapes (polygons) on the map"
+  },
   "bYBFBc": {
     "defaultMessage": "Whether to show this value in the submission summary",
     "description": "Tooltip for 'showInSummary' builder field",
@@ -998,11 +1023,6 @@
     "defaultMessage": "Minimum date {configured, select, false {(not set)} other {}}",
     "description": "Date field 'minDate' validation panel title",
     "originalDefault": "Minimum date {configured, select, false {(not set)} other {}}"
-  },
-  "e6SsfR": {
-    "defaultMessage": "Map configuration",
-    "description": "Map configuration panel title",
-    "originalDefault": "Map configuration"
   },
   "eAmrdi": {
     "defaultMessage": "Loading...",
@@ -1244,6 +1264,11 @@
     "description": "Tooltip for 'operator' in relative delta date constraint validation",
     "originalDefault": "Specify whether to add or subtract a time delta to/from the variable."
   },
+  "mRmbnJ": {
+    "defaultMessage": "Line",
+    "description": "Label for 'interactions.polyline' builder field",
+    "originalDefault": "Line"
+  },
   "mWuCXv": {
     "defaultMessage": "Optionally provide additional information to explain the meaning of the option.",
     "description": "Tooltip for option/choice description",
@@ -1339,6 +1364,11 @@
     "description": "Label for 'NumberOfRows' builder field",
     "originalDefault": "Number of rows"
   },
+  "pM92DZ": {
+    "defaultMessage": "Users can draw straight lines on the map",
+    "description": "Tooltip for 'interactions.polyline' builder field",
+    "originalDefault": "Users can draw straight lines on the map"
+  },
   "pT5jx/": {
     "defaultMessage": "Column size on mobile, value between 1 and 4.",
     "description": "Accessible label for column mobile size",
@@ -1348,6 +1378,11 @@
     "defaultMessage": "Options from expression: <code>{expression}</code>",
     "description": "Selectboxes dummy option for itemsExpression",
     "originalDefault": "Options from expression: <code>{expression}</code>"
+  },
+  "pdmkVe": {
+    "defaultMessage": "Initial focus",
+    "description": "Map initial focus panel title",
+    "originalDefault": "Initial focus"
   },
   "pfdsz9": {
     "defaultMessage": "House number addition",
@@ -1463,6 +1498,11 @@
     "defaultMessage": "Specify the attribute holding the pre-fill data.",
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
+  },
+  "wJ7Yha": {
+    "defaultMessage": "Map settings",
+    "description": "Component edit form tab title for 'Map settings' tab",
+    "originalDefault": "Map settings"
   },
   "wOq8Pb": {
     "defaultMessage": "Translation for option with value \"{value}\"",
