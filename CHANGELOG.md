@@ -1,5 +1,15 @@
 # Changes
 
+## 0.35.0 (2025-01-15)
+
+Feature and bugfix release
+
+- [`OF#2177`][OF#2177] Added multiple drawing shapes to the map component:
+  - Users can now place markers, polygons and polylines on maps
+  - Moved map configuration to separate 'Map settings' tab
+
+[OF#2177]: https://github.com/open-formulieren/open-forms/issues/2177
+
 ## 0.34.0 (2024-12-13)
 
 Feature and bugfix release
