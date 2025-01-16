@@ -20,5 +20,6 @@ export default {
     city: '',
     streetName: '',
     secretStreetCity: '',
+    autoPopulated: false,
   },
 } satisfies RegistryEntry<AddressNLComponentSchema>;

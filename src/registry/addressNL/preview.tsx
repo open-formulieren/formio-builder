@@ -70,6 +70,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
                 />
               }
               disabled
+              required={required}
             />
             <TextField
               name={`${key}.streetNumber`}
@@ -80,6 +81,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
                 />
               }
               disabled
+              required={required}
             />
           </>
         )}

@@ -2360,6 +2360,9 @@ export const AddressNL: Story = {
         required: false,
       },
       deriveAddress: false,
+      defaultValue: {
+        autoPopulated: false,
+      },
       layout: 'singleColumn',
       openForms: {
         components: {
