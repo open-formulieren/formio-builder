@@ -1055,6 +1055,9 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       layout: 'singleColumn',
+      defaultValue: {
+        autoPopulated: false,
+      },
     },
   },
 };
