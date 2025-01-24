@@ -1,5 +1,7 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {TextField} from 'components/formio';
+import {useFormikContext} from 'formik';
+import {ChangeEvent} from 'react';
 import {useContext} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
@@ -103,6 +105,8 @@ export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
 
 const DeriveAddress = () => {
   const intl = useIntl();
+  const {getFieldProps, setFieldValue} = useFormikContext();
+  const {onChange: formikOnChange} = getFieldProps<boolean>('deriveAddress');
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'DeriveAddress' builder field",
     defaultMessage:
@@ -118,6 +122,40 @@ const DeriveAddress = () => {
         />
       }
       tooltip={tooltip}
+      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        const {value} = event.target;
+        formikOnChange(event);
+        if (value) {
+          setFieldValue('showStreetCity', value);
+        }
+      }}
+    />
+  );
+};
+
+const ShowStreetCity = () => {
+  const intl = useIntl();
+  const {
+    values: {deriveAddress},
+  } = useFormikContext<AddressNLComponentSchema>();
+
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'ShowStreetCity' builder field",
+    defaultMessage:
+      'When enabled, the street name and city are shown in the form. By default they are shown.',
+  });
+
+  return (
+    <Checkbox
+      name="showStreetCity"
+      label={
+        <FormattedMessage
+          description="Label for 'ShowStreetCity' builder field"
+          defaultMessage="Show street name and city"
+        />
+      }
+      tooltip={tooltip}
+      disabled={deriveAddress}
     />
   );
 };
@@ -195,6 +233,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Tooltip />
         <PresentationConfig />
         <ColumnsLayout />
+        <ShowStreetCity />
         <DeriveAddress />
         <Hidden />
         <ClearOnHide />
@@ -309,7 +348,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   React.Children and related API's legacy API - this may get removed in future
   versions.
 
-  Explicitly specifying the schema and default values is therefore probbaly best, at
+  Explicitly specifying the schema and default values is therefore probably best, at
   the cost of some repetition.
  */
 EditForm.defaultValues = {
@@ -326,6 +365,7 @@ EditForm.defaultValues = {
   isSensitiveData: true,
   deriveAddress: false,
   layout: 'doubleColumn',
+  showStreetCity: true,
   defaultValue: {
     postcode: '',
     houseNumber: '',

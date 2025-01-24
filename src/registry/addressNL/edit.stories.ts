@@ -162,3 +162,31 @@ export const CityValidationTabWithConfiguration: Story = {
     });
   },
 };
+
+export const ShowStreetCityWithDeriveAddress: Story = {
+  name: 'AddressNL with show and derive address',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'addressNL',
+      key: 'address',
+      label: 'An address field',
+      showStreetCity: false,
+    },
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    const showStreetCityCheckbox = await canvas.findByLabelText('Show street name and city');
+    expect(showStreetCityCheckbox).not.toBeChecked();
+
+    const deriveAddressCheckbox = await canvas.findByLabelText('Derive address');
+    await userEvent.click(deriveAddressCheckbox);
+    expect(showStreetCityCheckbox).toBeChecked();
+    expect(showStreetCityCheckbox).toBeDisabled();
+
+    await userEvent.click(deriveAddressCheckbox);
+    expect(showStreetCityCheckbox).toBeChecked();
+    expect(showStreetCityCheckbox).not.toBeDisabled();
+  },
+};

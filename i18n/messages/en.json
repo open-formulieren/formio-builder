@@ -554,6 +554,11 @@
     "description": "Tooltip for 'maxNumberOfFiles' builder field",
     "originalDefault": "The maximum number of files that can be uploaded."
   },
+  "Kv4hZl": {
+    "defaultMessage": "When enabled, the street name and city are shown in the form. By default they are shown.",
+    "description": "Tooltip for 'ShowStreetCity' builder field",
+    "originalDefault": "When enabled, the street name and city are shown in the form. By default they are shown."
+  },
   "KwatvH": {
     "defaultMessage": "The number of rows for this text area.",
     "description": "Tooltip for 'NumberOfRows' builder field",
@@ -1598,5 +1603,10 @@
     "defaultMessage": "{hasDescription, select, true {Edit description} other {Add description}}",
     "description": "Link to expand/show the option description textarea.",
     "originalDefault": "{hasDescription, select, true {Edit description} other {Add description}}"
+  },
+  "zbPFLe": {
+    "defaultMessage": "Show street name and city",
+    "description": "Label for 'ShowStreetCity' builder field",
+    "originalDefault": "Show street name and city"
   }
 }

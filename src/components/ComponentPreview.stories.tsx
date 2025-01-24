@@ -1055,6 +1055,10 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       layout: 'singleColumn',
+      showStreetCity: true,
+      defaultValue: {
+        autoPopulated: false,
+      },
     },
   },
 };
