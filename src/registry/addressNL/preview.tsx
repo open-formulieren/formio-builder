@@ -15,7 +15,16 @@ import './preview.scss';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, deriveAddress, layout} = component;
+  const {
+    key,
+    label,
+    description,
+    tooltip,
+    validate = {},
+    deriveAddress,
+    layout,
+    showStreetCity,
+  } = component;
 
   const {required = false} = validate;
   return (
@@ -59,7 +68,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
             />
           }
         />
-        {deriveAddress && (
+        {(showStreetCity || deriveAddress) && (
           <>
             <TextField
               name={`${key}.city`}
@@ -69,7 +78,8 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
                   defaultMessage="City"
                 />
               }
-              disabled
+              disabled={deriveAddress}
+              required={required}
             />
             <TextField
               name={`${key}.streetNumber`}
@@ -79,7 +89,8 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
                   defaultMessage="Street name"
                 />
               }
-              disabled
+              disabled={deriveAddress}
+              required={required}
             />
           </>
         )}
