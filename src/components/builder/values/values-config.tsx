@@ -4,6 +4,7 @@ import {useLayoutEffect} from 'react';
 import {hasOwnProperty} from '@/types';
 
 import ItemsExpression from './items-expression';
+import {ReferentielijstenServiceSelect, ReferentielijstenTabelCode} from './referentielijsten';
 import {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
 import ValuesTable, {ValuesTableProps} from './values-table';
@@ -59,6 +60,12 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         if (values.openForms.hasOwnProperty('itemsExpression')) {
           setFieldValue('openForms.itemsExpression', undefined);
         }
+        if (values.openForms.hasOwnProperty('code')) {
+          setFieldValue('openForms.code', undefined);
+        }
+        if (values.openForms.hasOwnProperty('service')) {
+          setFieldValue('openForms.service', undefined);
+        }
         if (!isNestedKeySet(values, name)) {
           setFieldValue(name, [{value: '', label: '', openForms: {translations: {}}}]);
         }
@@ -67,6 +74,21 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
       case 'variable': {
         if (isNestedKeySet(values, name)) {
           setFieldValue(name, undefined);
+        }
+        if (values.openForms.hasOwnProperty('code')) {
+          setFieldValue('openForms.code', undefined);
+        }
+        if (values.openForms.hasOwnProperty('service')) {
+          setFieldValue('openForms.service', undefined);
+        }
+        break;
+      }
+      case 'referentielijsten': {
+        if (isNestedKeySet(values, name)) {
+          setFieldValue(name, undefined);
+        }
+        if (values.openForms.hasOwnProperty('itemsExpression')) {
+          setFieldValue('openForms.itemsExpression', undefined);
         }
         break;
       }
@@ -82,6 +104,12 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         <ValuesTable<T> name={name} withOptionDescription={withOptionDescription} />
       )}
       {dataSrc === 'variable' && <ItemsExpression />}
+      {dataSrc === 'referentielijsten' && (
+        <>
+          <ReferentielijstenServiceSelect />
+          <ReferentielijstenTabelCode />
+        </>
+      )}
     </>
   );
 }
