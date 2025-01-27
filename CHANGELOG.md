@@ -1,5 +1,14 @@
 # Changes
 
+## 0.36.0 (2025-01-24)
+
+Feature release
+
+- [`OF#5006`][OF#5006] Updated stories for manual AddressNL city/street name fallback in case
+  autofill isn't available.
+
+[OF#5006]: https://github.com/open-formulieren/open-forms/issues/5006
+
 ## 0.35.0 (2025-01-15)
 
 Feature and bugfix release
