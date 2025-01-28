@@ -13,6 +13,7 @@ import {
   DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
+  DEFAULT_REFERENTIELIJSTEN_TABELLEN,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_SERVICES,
   DEFAULT_VALIDATOR_PLUGINS,
@@ -63,6 +64,9 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultRegistrationAttributes =
     context.parameters.builder?.defaultRegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
   const defaultServices = context.parameters.builder?.defaultServices || DEFAULT_SERVICES;
+  const defaultReferentielijstenTabellen =
+    context.parameters.builder?.defaultReferentielijstenTabellen ||
+    DEFAULT_REFERENTIELIJSTEN_TABELLEN;
   const defaultPrefillPlugins =
     context.parameters.builder?.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
   const defaultPrefillAttributes =
@@ -91,6 +95,10 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         getServices: async () => {
           await sleep(context.parameters?.builder?.servicesDelay || 0);
           return context?.args?.services || defaultServices;
+        },
+        getReferentielijstenTabellen: async () => {
+          await sleep(context.parameters?.builder?.referentielijstenTabellenDelay || 0);
+          return context?.args?.referentielijstenTabellen || defaultReferentielijstenTabellen;
         },
         getPrefillPlugins: async () => {
           await sleep(context.parameters?.builder?.prefillPluginsDelay || 0);

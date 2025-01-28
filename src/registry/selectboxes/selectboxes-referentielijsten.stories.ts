@@ -54,14 +54,14 @@ export const StoreValuesInComponent: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await userEvent.type(codeInput, 'tabel1');
+      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
       expect(args.onSubmit).toHaveBeenCalledWith(
         expect.objectContaining({
           openForms: {
-            code: 'tabel1',
+            code: 'tabel2',
             dataSrc: 'referentielijsten',
             service: 'referentielijsten',
             translations: {},
@@ -86,7 +86,7 @@ export const SwitchToVariableResetOptions: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await userEvent.type(codeInput, 'tabel1');
+      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
 
       await rsSelect(dataSourceInput, 'From variable');
 
@@ -123,7 +123,7 @@ export const SwitchToManualResetOptions: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await userEvent.type(codeInput, 'tabel1');
+      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
 
       await rsSelect(dataSourceInput, 'Manually fill in');
 
