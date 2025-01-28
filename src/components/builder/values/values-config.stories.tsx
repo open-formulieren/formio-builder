@@ -7,7 +7,10 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Form, Formik} from 'formik';
 
+import selectboxes from '@/registry/selectboxes';
+import {BuilderContextDecorator} from '@/sb-decorators';
 import {withFormik} from '@/sb-decorators';
+import {DEFAULT_SERVICES} from '@/tests/sharedUtils';
 
 import ValuesConfig from './values-config';
 
@@ -298,5 +301,59 @@ export const SelectVariable: SelectStory = {
         data: {},
       },
     },
+  },
+};
+
+export const SelectReferentielijsten: SelectStory = {
+  ...Select,
+
+  decorators: [withFormik, BuilderContextDecorator],
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'referentielijsten',
+          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
+        },
+        data: {},
+      },
+    },
+    builder: {enableContext: true},
+  },
+};
+
+export const SelectboxesReferentielijsten: SelectboxesStory = {
+  ...SelectBoxes,
+
+  decorators: [withFormik, BuilderContextDecorator],
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'referentielijsten',
+          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
+        },
+        data: {},
+      },
+    },
+    builder: {enableContext: true},
+  },
+};
+
+export const RadioReferentielijsten: RadioStory = {
+  ...Radio,
+
+  decorators: [withFormik, BuilderContextDecorator],
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'referentielijsten',
+          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
+        },
+        data: {},
+      },
+    },
+    builder: {enableContext: true},
   },
 };
