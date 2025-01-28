@@ -1,4 +1,5 @@
 // This module contains shared utilities and constants between Jest and Storybook.
+import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
 import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
 import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
 import {ColorOption} from '@/registry/content/rich-text';
@@ -48,6 +49,19 @@ export const DEFAULT_SERVICES: ReferentielijstenServiceOption[] = [
     label: 'Documenten',
     apiRoot: 'http://localhost:8003/documenten/api/v1/',
     apiType: 'drc',
+  },
+];
+
+export const DEFAULT_REFERENTIELIJSTEN_TABELLEN: ReferentielijstenTabelOption[] = [
+  {
+    code: 'tabel1',
+    naam: 'Tabel 1',
+    einddatumGeldigheid: null,
+  },
+  {
+    code: 'tabel2',
+    naam: 'Tabel 2',
+    einddatumGeldigheid: '2025-04-11T13:02:25Z',
   },
 ];
 
