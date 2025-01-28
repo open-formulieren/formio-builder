@@ -2,6 +2,7 @@ import {SelectComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {Select} from '@/components/formio';
+import {Option} from '@/components/formio/select';
 
 import {ComponentPreviewProps} from '../types';
 import {
@@ -22,7 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
   const {key, label, description, tooltip, validate, multiple} = component;
   const {required = false} = validate || {};
 
-  let options;
+  let options: Option[] = [];
   if (checkIsManualOptions(component)) {
     options = component?.data?.values || [];
   } else if (checkIsReferentielijstenOptions(component)) {
