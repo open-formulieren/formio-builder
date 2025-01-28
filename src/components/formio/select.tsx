@@ -1,5 +1,6 @@
 import {useField} from 'formik';
 import React from 'react';
+import {ReactNode} from 'react';
 import ReactSelect from 'react-select';
 import type {
   GroupBase,
@@ -33,6 +34,12 @@ export interface SelectProps<
   valueProperty?: string;
   emptyValue?: ValueType;
   onChange?: (event: {target: {name: string; value: ValueType}}) => void;
+}
+
+export interface Option {
+  value: string;
+  label: ReactNode;
+  description?: string;
 }
 
 function isOption<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
