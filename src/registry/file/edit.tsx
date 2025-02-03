@@ -168,7 +168,7 @@ EditForm.defaultValues = {
     allowedTypesLabels: [],
   },
   filePattern: '*',
-  useConfigFiletypes: false,
+  useConfigFiletypes: true,
   of: {
     image: {
       resize: {
