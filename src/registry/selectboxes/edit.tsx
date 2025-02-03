@@ -29,6 +29,7 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
+import TransformData from './transform-data';
 
 /**
  * Form to configure a Formio 'selectboxes' type component.
@@ -116,6 +117,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
       {/* Registration tab */}
       <TabPanel>
         <Registration.RegistrationAttributeSelect />
+        <TransformData />
       </TabPanel>
 
       {/* Translations */}
@@ -149,6 +151,7 @@ EditForm.defaultValues = {
   openForms: {
     dataSrc: 'manual',
     translations: {},
+    transformData: false,
   },
   values: [{value: '', label: ''}],
   // TODO: check that the initial values are set based on component.values
