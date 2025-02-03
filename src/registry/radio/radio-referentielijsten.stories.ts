@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, fn, userEvent, within} from '@storybook/test';
+import {expect, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';
@@ -153,6 +153,38 @@ export const SwitchToManualResetOptions: Story = {
           ],
         })
       );
+    });
+  },
+};
+
+export const AutoSelectIfOnlyOneReferentielijstenService: Story = {
+  name: 'If there is only one Referentielijsten service: automatically select it',
+  parameters: {
+    builder: {
+      enableContext: true,
+      defaultServices: [
+        {
+          url: 'http://localhost:8000/api/v2/services/70',
+          slug: 'referentielijsten',
+          label: 'Referentielijsten',
+          apiRoot: 'http://localhost:8004/api/v1/',
+          apiType: 'orc',
+        },
+      ],
+    },
+  },
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    await step('Fill in options', async () => {
+      const dataSourceInput = canvas.getByLabelText('Data source');
+      await rsSelect(dataSourceInput, 'Referentielijsten API');
+
+      const serviceInput = canvas.getByLabelText('Referentielijsten service');
+
+      await waitFor(async () => {
+        expect(serviceInput.parentElement?.parentElement).toHaveTextContent('Referentielijsten');
+      });
     });
   },
 };

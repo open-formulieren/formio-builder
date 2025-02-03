@@ -45,8 +45,8 @@ export const DEFAULT_SERVICES: ReferentielijstenServiceOption[] = [
   },
   {
     url: 'http://localhost:8000/api/v2/services/6',
-    slug: 'documenten',
-    label: 'Documenten',
+    slug: 'referentielijsten2',
+    label: 'Referentielijsten 2',
     apiRoot: 'http://localhost:8003/documenten/api/v1/',
     apiType: 'drc',
   },

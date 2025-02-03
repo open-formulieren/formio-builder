@@ -1,11 +1,11 @@
+import {useField} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
-import Select from '@/components/formio/select';
+import Select, {Option} from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-// TODO transform this to id and label?
 export interface ReferentielijstenServiceOption {
   url: string;
   slug: string;
@@ -43,6 +43,18 @@ const ReferentielijstenServiceSelect: React.FC = () => {
     throw error;
   }
   const _options = isServiceOptions(options) ? options : [];
+  const transformedOptions: Option[] = _options.map(({slug, label}) => ({
+    value: slug,
+    label: label,
+  }));
+
+  // react-select doesn't update the defaultValue if it is initially `null`,
+  // so instead we update the value of the Formik field to ensure the correct default
+  // is selected
+  const [field, , {setValue}] = useField('openForms.service');
+  if (transformedOptions && transformedOptions.length == 1 && !field.value) {
+    setValue(transformedOptions[0].value);
+  }
 
   return (
     <Select
@@ -58,8 +70,7 @@ const ReferentielijstenServiceSelect: React.FC = () => {
         defaultMessage: `The identifier of the Referentielijsten service from which the options will be retrieved.`,
       })}
       isLoading={loading}
-      options={_options}
-      valueProperty="slug"
+      options={transformedOptions}
       required
     />
   );
