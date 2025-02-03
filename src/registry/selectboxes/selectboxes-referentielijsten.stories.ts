@@ -54,7 +54,7 @@ export const StoreValuesInComponent: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
+      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
@@ -86,7 +86,7 @@ export const SwitchToVariableResetOptions: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
+      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
 
       await rsSelect(dataSourceInput, 'From variable');
 
@@ -123,7 +123,7 @@ export const SwitchToManualResetOptions: Story = {
       await rsSelect(serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (2025-04-11T13:02:25Z)');
+      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
 
       await rsSelect(dataSourceInput, 'Manually fill in');
 

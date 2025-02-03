@@ -9,7 +9,7 @@ import {BuilderContext} from '@/context';
 export interface ReferentielijstenTabelOption {
   code: string;
   naam: string;
-  einddatumGeldigheid: string | null;
+  isGeldig: boolean;
 }
 
 function isTabelOptions(
@@ -20,10 +20,10 @@ function isTabelOptions(
 
 function transformItems(items: ReferentielijstenTabelOption[]) {
   return items.map(item => {
-    const {code, naam, einddatumGeldigheid} = item;
+    const {code, naam, isGeldig} = item;
     return {
       value: code,
-      label: einddatumGeldigheid ? `${naam} (${einddatumGeldigheid})` : naam,
+      label: !isGeldig ? `${naam} (niet meer geldig)` : naam,
     };
   });
 }

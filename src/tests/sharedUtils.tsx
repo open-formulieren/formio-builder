@@ -56,12 +56,12 @@ export const DEFAULT_REFERENTIELIJSTEN_TABELLEN: ReferentielijstenTabelOption[] 
   {
     code: 'tabel1',
     naam: 'Tabel 1',
-    einddatumGeldigheid: null,
+    isGeldig: true,
   },
   {
     code: 'tabel2',
     naam: 'Tabel 2',
-    einddatumGeldigheid: '2025-04-11T13:02:25Z',
+    isGeldig: false,
   },
 ];
 
