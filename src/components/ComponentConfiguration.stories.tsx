@@ -1047,7 +1047,7 @@ export const FileUpload: Story = {
           allowedTypesLabels: ['.jpg'], // derived from file.type
         },
         filePattern: 'image/jpeg', // derived from file.type
-        useConfigFiletypes: false,
+        useConfigFiletypes: true,
         of: {
           image: {
             resize: {
