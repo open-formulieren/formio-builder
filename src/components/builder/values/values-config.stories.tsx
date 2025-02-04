@@ -7,10 +7,8 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Form, Formik} from 'formik';
 
-import selectboxes from '@/registry/selectboxes';
 import {BuilderContextDecorator} from '@/sb-decorators';
 import {withFormik} from '@/sb-decorators';
-import {DEFAULT_SERVICES} from '@/tests/sharedUtils';
 
 import ValuesConfig from './values-config';
 

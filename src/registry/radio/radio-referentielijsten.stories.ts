@@ -25,7 +25,6 @@ export default {
         dataSrc: 'manual',
         translations: {},
       },
-      data: {values: [{value: '', label: ''}]},
       values: [{value: '', label: ''}],
       defaultValue: '',
     },
@@ -49,30 +48,28 @@ export const StoreValuesInComponent: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await step('Fill in options', async () => {
-      const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
-      const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Referentielijsten service');
+    await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
-      const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Referentielijsten table code');
+    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
-      expect(args.onSubmit).toHaveBeenCalledWith(
-        expect.objectContaining({
-          openForms: {
-            code: 'tabel2',
-            dataSrc: 'referentielijsten',
-            service: 'referentielijsten',
-            translations: {},
-          },
-          type: 'radio',
-        })
-      );
-    });
+    expect(args.onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        openForms: {
+          code: 'tabel2',
+          dataSrc: 'referentielijsten',
+          service: 'referentielijsten',
+          translations: {},
+        },
+        type: 'radio',
+      })
+    );
   },
 };
 
@@ -81,35 +78,33 @@ export const SwitchToVariableResetOptions: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await step('Fill in options', async () => {
-      const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
-      const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Referentielijsten service');
+    await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
-      const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Referentielijsten table code');
+    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
-      await rsSelect(canvas, dataSourceInput, 'From variable');
+    await rsSelect(canvas, dataSourceInput, 'From variable');
 
-      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
-      await userEvent.clear(itemsExpressionInput);
-      await userEvent.type(itemsExpressionInput, '"foo"');
+    const itemsExpressionInput = canvas.getByTestId('jsonEdit');
+    await userEvent.clear(itemsExpressionInput);
+    await userEvent.type(itemsExpressionInput, '"foo"');
 
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
-      expect(args.onSubmit).toHaveBeenCalledWith(
-        expect.objectContaining({
-          openForms: {
-            dataSrc: 'variable',
-            itemsExpression: 'foo',
-            translations: {},
-          },
-          type: 'radio',
-        })
-      );
-    });
+    expect(args.onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        openForms: {
+          dataSrc: 'variable',
+          itemsExpression: 'foo',
+          translations: {},
+        },
+        type: 'radio',
+      })
+    );
   },
 };
 
@@ -118,42 +113,40 @@ export const SwitchToManualResetOptions: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await step('Fill in options', async () => {
-      const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
-      const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Referentielijsten service');
+    await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
-      const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Referentielijsten table code');
+    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
-      await rsSelect(canvas, dataSourceInput, 'Manually fill in');
+    await rsSelect(canvas, dataSourceInput, 'Manually fill in');
 
-      const labelInput = canvas.getByTestId('input-values[0].label');
-      await userEvent.type(labelInput, 'Foo');
+    const labelInput = canvas.getByTestId('input-values[0].label');
+    await userEvent.type(labelInput, 'Foo');
 
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
-      expect(args.onSubmit).toHaveBeenCalledWith(
-        expect.objectContaining({
-          openForms: {
-            dataSrc: 'manual',
-            translations: {},
-          },
-          type: 'radio',
-          values: [
-            {
-              label: 'Foo',
-              value: 'foo',
-              openForms: {
-                translations: {},
-              },
+    expect(args.onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        type: 'radio',
+        values: [
+          {
+            label: 'Foo',
+            value: 'foo',
+            openForms: {
+              translations: {},
             },
-          ],
-        })
-      );
-    });
+          },
+        ],
+      })
+    );
   },
 };
 
@@ -176,15 +169,13 @@ export const AutoSelectIfOnlyOneReferentielijstenService: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await step('Fill in options', async () => {
-      const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
-      const serviceInput = canvas.getByLabelText('Referentielijsten service');
+    const serviceInput = canvas.getByLabelText('Referentielijsten service');
 
-      await waitFor(async () => {
-        expect(serviceInput.parentElement?.parentElement).toHaveTextContent('Referentielijsten');
-      });
+    await waitFor(() => {
+      expect(serviceInput.parentElement?.parentElement).toHaveTextContent('Referentielijsten');
     });
   },
 };

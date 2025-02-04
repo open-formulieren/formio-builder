@@ -25,6 +25,8 @@ const buildValuesSchema = (intl: IntlShape) =>
       ]),
       // TODO: wire up infernologic type checking
       itemsExpression: jsonSchema.optional(),
+      service: z.string().optional(),
+      code: z.string().optional(),
     }),
   });
 

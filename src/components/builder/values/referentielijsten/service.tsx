@@ -1,10 +1,12 @@
-import {useField} from 'formik';
+import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
-import Select, {Option} from '@/components/formio/select';
+import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
+
+import {ComponentWithReferentielijsten} from './code';
 
 export interface ReferentielijstenServiceOption {
   url: string;
@@ -12,12 +14,6 @@ export interface ReferentielijstenServiceOption {
   label: string;
   apiRoot: string;
   apiType: string;
-}
-
-function isServiceOptions(
-  options: ReferentielijstenServiceOption[] | undefined
-): options is ReferentielijstenServiceOption[] {
-  return options !== undefined;
 }
 
 /**
@@ -33,32 +29,19 @@ function isServiceOptions(
  */
 const ReferentielijstenServiceSelect: React.FC = () => {
   const intl = useIntl();
+  const {values, setFieldValue} = useFormikContext<ComponentWithReferentielijsten>();
   const {getServices} = useContext(BuilderContext);
-  const {
-    value: options,
-    loading,
-    error,
-  } = useAsync(async () => await getServices('referentielijsten'), []);
-  if (error) {
-    throw error;
-  }
-  const _options = isServiceOptions(options) ? options : [];
-  const transformedOptions: Option[] = _options.map(({slug, label}) => ({
-    value: slug,
-    label: label,
-  }));
-
-  // react-select doesn't update the defaultValue if it is initially `null`,
-  // so instead we update the value of the Formik field to ensure the correct default
-  // is selected
-  const [field, , {setValue}] = useField('openForms.service');
-  if (transformedOptions && transformedOptions.length == 1 && !field.value) {
-    setValue(transformedOptions[0].value);
-  }
+  const {value: options = [], loading} = useAsync(async () => {
+    const options = await getServices('referentielijsten');
+    if (options.length === 1 && !values?.openForms?.service) {
+      setFieldValue('openForms.service', options[0].slug);
+    }
+    return options;
+  }, [getServices, setFieldValue]); // values is deliberately excluded from the dependency array
 
   return (
     <Select
-      name={'openForms.service'}
+      name="openForms.service"
       label={
         <FormattedMessage
           description="Label for 'openForms.service' builder field"
@@ -70,7 +53,8 @@ const ReferentielijstenServiceSelect: React.FC = () => {
         defaultMessage: `The identifier of the Referentielijsten service from which the options will be retrieved.`,
       })}
       isLoading={loading}
-      options={transformedOptions}
+      valueProperty="slug"
+      options={options}
       required
     />
   );

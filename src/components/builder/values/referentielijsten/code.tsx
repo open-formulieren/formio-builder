@@ -19,20 +19,26 @@ function isTabelOptions(
 }
 
 function transformItems(items: ReferentielijstenTabelOption[]) {
+  const intl = useIntl();
   return items.map(item => {
     const {code, naam, isGeldig} = item;
     return {
       value: code,
-      label: !isGeldig ? `${naam} (niet meer geldig)` : naam,
+      label: !isGeldig
+        ? `${naam} ${intl.formatMessage({
+            description: 'Message to indicate that Referentielijsten tabel is expired',
+            defaultMessage: '(niet meer geldig)',
+          })}`
+        : naam,
     };
   });
 }
 
-interface ComponentWithReferentielijsten {
+export interface ComponentWithReferentielijsten {
   openForms?: {
     dataSrc: 'referentielijsten';
-    service?: string;
-    code?: string;
+    service: string;
+    code: string;
   };
 }
 
@@ -63,7 +69,7 @@ export const ReferentielijstenTabelCode: React.FC = () => {
 
   return (
     <Select
-      name={'openForms.code'}
+      name="openForms.code"
       label={
         <FormattedMessage
           description="Label for 'openForms.code' builder field"

@@ -17,7 +17,6 @@ export const checkIsManualOptions = (
 export const checkIsReferentielijstenOptions = (
   component: SelectComponentSchema
 ): component is SelectComponentSchema & {
-  data: {values: Option[] | undefined};
   openForms: {code: string; service: string};
 } => {
   return component.openForms.dataSrc === 'referentielijsten';
@@ -29,7 +28,6 @@ export const checkIsReferentielijstenOptions = (
 export const checkIsVariableOptions = (
   component: SelectComponentSchema
 ): component is SelectComponentSchema & {
-  data: {values: Option[] | undefined};
   openForms: {itemsExpression: string | JSONObject};
 } => {
   return component.openForms.dataSrc === 'variable';
