@@ -1,12 +1,10 @@
-import {ReactNode} from 'react';
-
 import {CheckboxInput} from './checkbox';
 import Component from './component';
 import Description from './description';
 
 export interface Option {
   value: string;
-  label: ReactNode;
+  label: React.ReactNode;
   description?: string;
 }
 

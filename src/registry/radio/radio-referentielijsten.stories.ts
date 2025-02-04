@@ -51,13 +51,13 @@ export const StoreValuesInComponent: Story = {
 
     await step('Fill in options', async () => {
       const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(dataSourceInput, 'Referentielijsten API');
+      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
       const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(serviceInput, 'Referentielijsten');
+      await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
+      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
@@ -83,15 +83,15 @@ export const SwitchToVariableResetOptions: Story = {
 
     await step('Fill in options', async () => {
       const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(dataSourceInput, 'Referentielijsten API');
+      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
       const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(serviceInput, 'Referentielijsten');
+      await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
+      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
-      await rsSelect(dataSourceInput, 'From variable');
+      await rsSelect(canvas, dataSourceInput, 'From variable');
 
       const itemsExpressionInput = canvas.getByTestId('jsonEdit');
       await userEvent.clear(itemsExpressionInput);
@@ -120,15 +120,15 @@ export const SwitchToManualResetOptions: Story = {
 
     await step('Fill in options', async () => {
       const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(dataSourceInput, 'Referentielijsten API');
+      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
       const serviceInput = canvas.getByLabelText('Referentielijsten service');
-      await rsSelect(serviceInput, 'Referentielijsten');
+      await rsSelect(canvas, serviceInput, 'Referentielijsten');
 
       const codeInput = canvas.getByLabelText('Referentielijsten table code');
-      await rsSelect(codeInput, 'Tabel 2 (niet meer geldig)');
+      await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
 
-      await rsSelect(dataSourceInput, 'Manually fill in');
+      await rsSelect(canvas, dataSourceInput, 'Manually fill in');
 
       const labelInput = canvas.getByTestId('input-values[0].label');
       await userEvent.type(labelInput, 'Foo');
@@ -178,7 +178,7 @@ export const AutoSelectIfOnlyOneReferentielijstenService: Story = {
 
     await step('Fill in options', async () => {
       const dataSourceInput = canvas.getByLabelText('Data source');
-      await rsSelect(dataSourceInput, 'Referentielijsten API');
+      await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
 
       const serviceInput = canvas.getByLabelText('Referentielijsten service');
 

@@ -1,6 +1,5 @@
 import {useField} from 'formik';
 import React from 'react';
-import {ReactNode} from 'react';
 import ReactSelect from 'react-select';
 import type {
   GroupBase,
@@ -38,7 +37,7 @@ export interface SelectProps<
 
 export interface Option {
   value: string;
-  label: ReactNode;
+  label: React.ReactNode;
   description?: string;
 }
 
