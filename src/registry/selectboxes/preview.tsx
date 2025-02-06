@@ -2,9 +2,14 @@ import {SelectboxesComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {SelectBoxes} from '@/components/formio';
+import {Option} from '@/components/formio/selectboxes';
 
 import {ComponentPreviewProps} from '../types';
-import {checkIsManualOptions} from './helpers';
+import {
+  checkIsManualOptions,
+  checkIsReferentielijstenOptions,
+  checkIsVariableOptions,
+} from './helpers';
 
 /**
  * Show a formio selectboxes component preview.
@@ -17,24 +22,38 @@ const Preview: React.FC<ComponentPreviewProps<SelectboxesComponentSchema>> = ({c
   const intl = useIntl();
   const {key, label, description, tooltip, validate} = component;
   const {required = false} = validate || {};
-  const isManualOptions = checkIsManualOptions(component);
-  const options = isManualOptions
-    ? component.values || []
-    : [
-        {
-          value: 'itemsExpression',
-          label: intl.formatMessage(
-            {
-              description: 'Selectboxes dummy option for itemsExpression',
-              defaultMessage: 'Options from expression: <code>{expression}</code>',
-            },
-            {
-              expression: JSON.stringify(component.openForms.itemsExpression),
-              code: chunks => <code>{chunks}</code>,
-            }
-          ),
-        },
-      ];
+
+  let options: Option[] = [];
+  if (checkIsManualOptions(component)) {
+    options = component?.values || [];
+  } else if (checkIsReferentielijstenOptions(component)) {
+    options = [
+      {
+        value: 'option1',
+        label: intl.formatMessage({
+          description: 'Radio dummy option1 from referentielijsten',
+          defaultMessage: 'Option from referentielijsten: option1',
+        }),
+      },
+    ];
+  } else if (checkIsVariableOptions(component)) {
+    options = [
+      {
+        value: 'itemsExpression',
+        label: intl.formatMessage(
+          {
+            description: 'Selectboxes dummy option for itemsExpression',
+            defaultMessage: 'Options from expression: <code>{expression}</code>',
+          },
+          {
+            expression: JSON.stringify(component.openForms.itemsExpression),
+            code: chunks => <code>{chunks}</code>,
+          }
+        ),
+      },
+    ];
+  }
+
   return (
     <SelectBoxes
       name={key}

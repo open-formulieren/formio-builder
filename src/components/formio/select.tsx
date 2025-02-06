@@ -35,6 +35,12 @@ export interface SelectProps<
   onChange?: (event: {target: {name: string; value: ValueType}}) => void;
 }
 
+export interface Option {
+  value: string;
+  label: React.ReactNode;
+  description?: string;
+}
+
 function isOption<Option, Group extends GroupBase<Option> = GroupBase<Option>>(
   opt: Option | Group
 ): opt is Option {

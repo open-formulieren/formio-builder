@@ -1,4 +1,6 @@
 // This module contains shared utilities and constants between Jest and Storybook.
+import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
+import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
 import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
 import {ColorOption} from '@/registry/content/rich-text';
 import {AnyComponentSchema} from '@/types';
@@ -31,6 +33,36 @@ export const DEFAULT_VALIDATOR_PLUGINS: ValidatorOption[] = [
 export const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'attribute-1', label: 'Attribute 1'},
   {id: 'attribute-2', label: 'Attribute 2'},
+];
+
+export const DEFAULT_SERVICES: ReferentielijstenServiceOption[] = [
+  {
+    url: 'http://localhost:8000/api/v2/services/70',
+    slug: 'referentielijsten',
+    label: 'Referentielijsten',
+    apiRoot: 'http://localhost:8004/api/v1/',
+    apiType: 'orc',
+  },
+  {
+    url: 'http://localhost:8000/api/v2/services/6',
+    slug: 'referentielijsten2',
+    label: 'Referentielijsten 2',
+    apiRoot: 'http://localhost:8003/documenten/api/v1/',
+    apiType: 'drc',
+  },
+];
+
+export const DEFAULT_REFERENTIELIJSTEN_TABELLEN: ReferentielijstenTabelOption[] = [
+  {
+    code: 'tabel1',
+    naam: 'Tabel 1',
+    isGeldig: true,
+  },
+  {
+    code: 'tabel2',
+    naam: 'Tabel 2',
+    isGeldig: false,
+  },
 ];
 
 export const DEFAULT_PREFILL_PLUGINS: PrefillPluginOption[] = [

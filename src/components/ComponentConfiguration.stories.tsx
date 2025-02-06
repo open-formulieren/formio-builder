@@ -7,6 +7,7 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import React from 'react';
 
+import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -75,6 +76,7 @@ interface TemplateArgs {
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
+  services: ReferentielijstenServiceOption[];
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
@@ -91,6 +93,7 @@ const Template: StoryFn<TemplateArgs> = ({
   registrationAttributes,
   prefillPlugins,
   prefillAttributes,
+  services,
   supportedLanguageCodes,
   fileTypes,
   isNew,
@@ -107,6 +110,7 @@ const Template: StoryFn<TemplateArgs> = ({
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}
+    getServices={async () => services}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
     getFileTypes={async () => fileTypes}

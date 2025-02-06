@@ -14,9 +14,15 @@ const buildValuesSchema = (intl: IntlShape) =>
   z.object({
     values: optionSchema(intl).array().min(1).optional(),
     openForms: z.object({
-      dataSrc: z.union([z.literal('manual'), z.literal('variable')]),
+      dataSrc: z.union([
+        z.literal('manual'),
+        z.literal('variable'),
+        z.literal('referentielijsten'),
+      ]),
       // TODO: wire up infernologic type checking
       itemsExpression: jsonSchema.optional(),
+      service: z.string().optional(),
+      code: z.string().optional(),
     }),
     validate: z.object({
       minSelectedCount: z.null().or(z.number().int().gte(0)).optional(),

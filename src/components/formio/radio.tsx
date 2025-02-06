@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs';
-import {ReactNode} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
@@ -35,7 +34,7 @@ export const RadioInput: React.FC<RadioInputProps> = ({name, value, label, descr
 
 export interface Option {
   value: string;
-  label: ReactNode;
+  label: React.ReactNode;
   description?: string;
 }
 
