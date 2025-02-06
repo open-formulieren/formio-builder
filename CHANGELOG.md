@@ -1,5 +1,15 @@
 # Changes
 
+## 0.37.0 (2025-02-06)
+
+Feature release
+
+- [`OF#5016`][OF#5016] Add `referentielijsten` as a `dataSrc` for select/selectboxes/radio components
+- [`OF#5025`][OF#5025] Use generally configured filetypes by default
+
+[OF#5016]: https://github.com/open-formulieren/open-forms/issues/5016
+[OF#5025]: https://github.com/open-formulieren/open-forms/issues/5025
+
 ## 0.36.0 (2025-01-24)
 
 Feature release
