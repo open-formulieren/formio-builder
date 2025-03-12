@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import './component-label.scss';
 import Tooltip from './tooltip';
 
 export interface ComponentLabelProps {
