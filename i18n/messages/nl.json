@@ -90,6 +90,11 @@
     "description": "Tooltip for 'file.name' builder field",
     "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
   },
+  "1xUdSY": {
+    "defaultMessage": "Referentielijsten service",
+    "description": "Label for 'openForms.service' builder field",
+    "originalDefault": "Referentielijsten service"
+  },
   "2/2h2C": {
     "defaultMessage": "De minimale waarde die dit veld kan hebben voordat het formulier kan worden verzonden.",
     "description": "Tooltip for 'validate.min' builder field",
@@ -282,6 +287,11 @@
     "description": "Tooltip for 'openForms.softRequired' builder field",
     "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
   },
+  "9HMEtT": {
+    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
+    "description": "Label for referentielijsten table or item",
+    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
+  },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
     "description": "Operator 'subtract' option label",
@@ -326,6 +336,11 @@
     "defaultMessage": "Locatie",
     "description": "Translations: location column header",
     "originalDefault": "Location"
+  },
+  "BFq6vL": {
+    "defaultMessage": "Loading values...",
+    "description": "Text for loading values",
+    "originalDefault": "Loading values..."
   },
   "BGZD6J": {
     "defaultMessage": "Minimale waarde",
@@ -418,6 +433,11 @@
     "defaultMessage": "Basis",
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
+  },
+  "DzG4Xk": {
+    "defaultMessage": "The identifier of the Referentielijsten service from which the options will be retrieved.",
+    "description": "Description for the 'openForms.service' builder field",
+    "originalDefault": "The identifier of the Referentielijsten service from which the options will be retrieved."
   },
   "E/biiX": {
     "defaultMessage": "Knopteksten",
@@ -885,6 +905,11 @@
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
   },
+  "YObTjL": {
+    "defaultMessage": "The code of the table from which the options will be retrieved.",
+    "description": "Description for the 'openForms.code' builder field",
+    "originalDefault": "The code of the table from which the options will be retrieved."
+  },
   "YSuwK2": {
     "defaultMessage": "(inklappen)",
     "description": "Link to collapse/hide option description.",
@@ -904,6 +929,11 @@
     "defaultMessage": "Indien aangevinkt, dan worden gegevens van partners opgehaald en ingesloten.",
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
+  },
+  "Zo2Xje": {
+    "defaultMessage": "Referentielijsten table code",
+    "description": "Label for 'openForms.code' builder field",
+    "originalDefault": "Referentielijsten table code"
   },
   "aBADYT": {
     "defaultMessage": "Maximum aantal bestanden",
@@ -985,6 +1015,11 @@
     "description": "Label for 'prefill.plugin' builder field",
     "isTranslated": true,
     "originalDefault": "Plugin"
+  },
+  "ctKwBy": {
+    "defaultMessage": "Referentielijsten API",
+    "description": "Data source option label for value 'referentielijsten'",
+    "originalDefault": "Referentielijsten API"
   },
   "czUDSQ": {
     "defaultMessage": "Een korte beschrijvende indicatie die meer context beschrijft voor de verwachtte waarde. Je kan hier de '<sup> en <sub>' HTML tags gebruiken.",
@@ -1239,11 +1274,6 @@
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
   },
-  "kw2jNc": {
-    "defaultMessage": "Opties via de expressie: <code>{expression}</code>",
-    "description": "Radio dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
-  },
   "lKijv2": {
     "defaultMessage": "Inclusief de 'huidige datum'",
     "description": "Label for 'date constraint includeToday' builder validation field",
@@ -1393,7 +1423,7 @@
     "originalDefault": "Column size on mobile, value between 1 and 4."
   },
   "paY2Oa": {
-    "defaultMessage": "Waarden via de expressie: <code>{expression}</code>",
+    "defaultMessage": "Options from expression: <code>{expression}</code>",
     "description": "Selectboxes dummy option for itemsExpression",
     "originalDefault": "Options from expression: <code>{expression}</code>"
   },
@@ -1538,11 +1568,6 @@
     "defaultMessage": "Kolom {number}",
     "description": "Column preview column description",
     "originalDefault": "Column {number}"
-  },
-  "wVoT0I": {
-    "defaultMessage": "Opties via de expressie: <code>{expression}</code>",
-    "description": "Select dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "wZ99FU": {
     "defaultMessage": "Het patroon van reguliere expressie waar de waarde aan moet voldoen voor het formulier kan verstuurd worden.",

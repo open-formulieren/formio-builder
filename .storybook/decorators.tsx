@@ -2,6 +2,7 @@ import type {Decorator} from '@storybook/react';
 import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
+import {ReferentielijstenTabelItem} from '@/components/builder/values/referentielijsten/types';
 import {BuilderContext} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
@@ -14,6 +15,7 @@ import {
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
   DEFAULT_REFERENTIELIJSTEN_TABELLEN,
+  DEFAULT_REFERENTIELIJSTEN_TABEL_ITEMS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_SERVICES,
   DEFAULT_VALIDATOR_PLUGINS,
@@ -67,6 +69,9 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultReferentielijstenTabellen =
     context.parameters.builder?.defaultReferentielijstenTabellen ||
     DEFAULT_REFERENTIELIJSTEN_TABELLEN;
+  const defaultReferentielijstenTabelItems: Record<string, ReferentielijstenTabelItem[]> =
+    context.parameters.builder?.defaultReferentielijstenTabelItems ||
+    DEFAULT_REFERENTIELIJSTEN_TABEL_ITEMS;
   const defaultPrefillPlugins =
     context.parameters.builder?.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
   const defaultPrefillAttributes =
@@ -99,6 +104,12 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         getReferentielijstenTabellen: async () => {
           await sleep(context.parameters?.builder?.referentielijstenTabellenDelay || 0);
           return context?.args?.referentielijstenTabellen || defaultReferentielijstenTabellen;
+        },
+        getReferentielijstenTabelItems: async (service, tabelCode) => {
+          await sleep(context.parameters?.builder?.referentielijstenTabelItemDelay || 0);
+          const referentielijstTabelItems: Record<string, ReferentielijstenTabelItem[]> =
+            context?.args?.referentielijstenTabelItems || defaultReferentielijstenTabelItems;
+          return referentielijstTabelItems[tabelCode];
         },
         getPrefillPlugins: async () => {
           await sleep(context.parameters?.builder?.prefillPluginsDelay || 0);

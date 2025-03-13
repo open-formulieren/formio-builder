@@ -7,8 +7,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Form, Formik} from 'formik';
 
-import {BuilderContextDecorator} from '@/sb-decorators';
-import {withFormik} from '@/sb-decorators';
+import {BuilderContextDecorator, withFormik} from '@/sb-decorators';
 
 import ValuesConfig from './values-config';
 

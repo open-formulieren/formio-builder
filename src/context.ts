@@ -5,8 +5,11 @@ import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import type {ColorOption} from '@/components/builder/rich-text';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
-import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
-import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
+import {
+  ReferentielijstenServiceOption,
+  ReferentielijstenTabelItem,
+  ReferentielijstenTabelOption,
+} from '@/components/builder/values/referentielijsten/types';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
@@ -56,6 +59,10 @@ export interface BuilderContextType {
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
   getServices: (type: string) => Promise<ReferentielijstenServiceOption[]>;
   getReferentielijstenTabellen: (service: string) => Promise<ReferentielijstenTabelOption[]>;
+  getReferentielijstenTabelItems: (
+    service: string,
+    tabelCode: string
+  ) => Promise<ReferentielijstenTabelItem[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
   getFileTypes: () => Promise<SelectOption[]>;
@@ -76,6 +83,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getRegistrationAttributes: async () => [],
   getServices: async () => [],
   getReferentielijstenTabellen: async () => [],
+  getReferentielijstenTabelItems: async () => [],
   getPrefillPlugins: async () => [],
   getPrefillAttributes: async () => [],
   getFileTypes: async () => [],

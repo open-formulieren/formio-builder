@@ -1,6 +1,10 @@
 // This module contains shared utilities and constants between Jest and Storybook.
-import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
-import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
+import {
+  ReferentielijstenTabelItem,
+  ReferentielijstenTabelOption,
+} from 'components/builder/values/referentielijsten/types';
+
+import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/types';
 import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
 import {ColorOption} from '@/registry/content/rich-text';
 import {AnyComponentSchema} from '@/types';
@@ -64,6 +68,21 @@ export const DEFAULT_REFERENTIELIJSTEN_TABELLEN: ReferentielijstenTabelOption[] 
     isGeldig: false,
   },
 ];
+
+export const DEFAULT_REFERENTIELIJSTEN_TABEL_ITEMS: Record<string, ReferentielijstenTabelItem[]> = {
+  countries: [
+    {
+      code: 'nl',
+      naam: 'The Netherlands',
+      isGeldig: true,
+    },
+    {
+      code: 'gr',
+      naam: 'Greece',
+      isGeldig: true,
+    },
+  ],
+};
 
 export const DEFAULT_PREFILL_PLUGINS: PrefillPluginOption[] = [
   {id: 'plugin-1', label: 'Plugin 1'},

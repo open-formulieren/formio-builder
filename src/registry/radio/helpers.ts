@@ -2,7 +2,7 @@ import {RadioComponentSchema} from '@open-formulieren/types';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {JSONObject} from '@open-formulieren/types/lib/types';
 
-import {ComponentWithReferentielijsten} from '@/components/builder/values/referentielijsten/code';
+import {ComponentWithReferentielijsten} from '@/components/builder/values/referentielijsten/types';
 
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.

@@ -6,15 +6,7 @@ import useAsync from 'react-use/esm/useAsync';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithReferentielijsten} from './code';
-
-export interface ReferentielijstenServiceOption {
-  url: string;
-  slug: string;
-  label: string;
-  apiRoot: string;
-  apiType: string;
-}
+import {ComponentWithReferentielijsten} from './types';
 
 /**
  * Fetch the available Referentielijsten Services and display them in a Select

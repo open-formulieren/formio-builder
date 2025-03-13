@@ -1,3 +1,5 @@
+import {FormattedMessage} from 'react-intl';
+
 import {CheckboxInput} from './checkbox';
 import Component from './component';
 import Description from './description';
@@ -15,6 +17,7 @@ export interface SelectBoxesProps {
   required?: boolean;
   tooltip?: string;
   description?: string;
+  isLoading?: boolean;
 }
 
 export const SelectBoxes: React.FC<SelectBoxesProps> = ({
@@ -24,7 +27,14 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
   required = false,
   tooltip = '',
   description = '',
+  isLoading = false,
 }) => {
+  if (isLoading) {
+    return (
+      <FormattedMessage description="Text for loading values" defaultMessage="Loading values..." />
+    );
+  }
+
   return (
     <Component type="selectboxes" field={name} label={label} tooltip={tooltip} required={required}>
       <div className="form-radio radio">

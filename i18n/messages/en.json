@@ -89,6 +89,11 @@
     "description": "Tooltip for 'file.name' builder field",
     "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
   },
+  "1xUdSY": {
+    "defaultMessage": "Referentielijsten service",
+    "description": "Label for 'openForms.service' builder field",
+    "originalDefault": "Referentielijsten service"
+  },
   "2/2h2C": {
     "defaultMessage": "The minimum value this field can have before the form can be submitted.",
     "description": "Tooltip for 'validate.min' builder field",
@@ -279,6 +284,11 @@
     "description": "Tooltip for 'openForms.softRequired' builder field",
     "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
   },
+  "9HMEtT": {
+    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
+    "description": "Label for referentielijsten table or item",
+    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
+  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -323,6 +333,11 @@
     "defaultMessage": "Location",
     "description": "Translations: location column header",
     "originalDefault": "Location"
+  },
+  "BFq6vL": {
+    "defaultMessage": "Loading values...",
+    "description": "Text for loading values",
+    "originalDefault": "Loading values..."
   },
   "BGZD6J": {
     "defaultMessage": "Minimum value",
@@ -413,6 +428,11 @@
     "defaultMessage": "Basic",
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
+  },
+  "DzG4Xk": {
+    "defaultMessage": "The identifier of the Referentielijsten service from which the options will be retrieved.",
+    "description": "Description for the 'openForms.service' builder field",
+    "originalDefault": "The identifier of the Referentielijsten service from which the options will be retrieved."
   },
   "E/biiX": {
     "defaultMessage": "Button labels",
@@ -874,6 +894,11 @@
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
   },
+  "YObTjL": {
+    "defaultMessage": "The code of the table from which the options will be retrieved.",
+    "description": "Description for the 'openForms.code' builder field",
+    "originalDefault": "The code of the table from which the options will be retrieved."
+  },
   "YSuwK2": {
     "defaultMessage": "(collapse)",
     "description": "Link to collapse/hide option description.",
@@ -893,6 +918,11 @@
     "defaultMessage": "Whether to add partners information to the component.",
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
+  },
+  "Zo2Xje": {
+    "defaultMessage": "Referentielijsten table code",
+    "description": "Label for 'openForms.code' builder field",
+    "originalDefault": "Referentielijsten table code"
   },
   "aBADYT": {
     "defaultMessage": "Maximum number of files",
@@ -973,6 +1003,11 @@
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
+  },
+  "ctKwBy": {
+    "defaultMessage": "Referentielijsten API",
+    "description": "Data source option label for value 'referentielijsten'",
+    "originalDefault": "Referentielijsten API"
   },
   "czUDSQ": {
     "defaultMessage": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported.",
@@ -1223,11 +1258,6 @@
     "defaultMessage": "Show character counter",
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
-  },
-  "kw2jNc": {
-    "defaultMessage": "Options from expression: <code>{expression}</code>",
-    "description": "Radio dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "lKijv2": {
     "defaultMessage": "Including today",
@@ -1518,11 +1548,6 @@
     "defaultMessage": "Column {number}",
     "description": "Column preview column description",
     "originalDefault": "Column {number}"
-  },
-  "wVoT0I": {
-    "defaultMessage": "Options from expression: <code>{expression}</code>",
-    "description": "Select dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "wZ99FU": {
     "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",

@@ -1,8 +1,12 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
+import {useContext} from 'react';
 import {useIntl} from 'react-intl';
+import useAsync from 'react-use/esm/useAsync';
 
+import {ReferentielijstenTabelItem} from '@/components/builder/values/referentielijsten/types';
+import {transformItems} from '@/components/builder/values/referentielijsten/utils';
 import {Radio} from '@/components/formio';
-import {Option} from '@/components/formio/radio';
+import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
 import {
@@ -22,36 +26,47 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
   const intl = useIntl();
   const {key, label, description, tooltip, validate} = component;
   const {required = false} = validate || {};
+  const {getReferentielijstenTabelItems} = useContext(BuilderContext);
 
-  let options: Option[] = [];
-  if (checkIsManualOptions(component)) {
-    options = component?.values || [];
-  } else if (checkIsReferentielijstenOptions(component)) {
-    options = [
-      {
-        value: 'option1',
-        label: intl.formatMessage({
-          description: 'Radio dummy option1 from referentielijsten',
-          defaultMessage: 'Option from referentielijsten: option1',
-        }),
-      },
-    ];
-  } else if (checkIsVariableOptions(component)) {
-    options = [
-      {
-        value: 'itemsExpression',
-        label: intl.formatMessage(
-          {
-            description: 'Radio dummy option for itemsExpression',
-            defaultMessage: 'Options from expression: <code>{expression}</code>',
-          },
-          {
-            expression: JSON.stringify(component.openForms.itemsExpression),
-            code: chunks => <code>{chunks}</code>,
-          }
-        ),
-      },
-    ];
+  const {
+    value: options = [],
+    loading,
+    error,
+  } = useAsync(async () => {
+    if (checkIsManualOptions(component)) {
+      return component?.values || [];
+    }
+    if (checkIsVariableOptions(component)) {
+      return [
+        {
+          value: 'itemsExpression',
+          label: intl.formatMessage(
+            {
+              description: 'Selectboxes dummy option for itemsExpression',
+              defaultMessage: 'Options from expression: <code>{expression}</code>',
+            },
+            {
+              expression: JSON.stringify(component.openForms.itemsExpression),
+              code: chunks => <code>{chunks}</code>,
+            }
+          ),
+        },
+      ];
+    }
+
+    if (checkIsReferentielijstenOptions(component)) {
+      const items: ReferentielijstenTabelItem[] = await getReferentielijstenTabelItems(
+        component.openForms?.service || '',
+        component.openForms?.code || ''
+      );
+      return items ? transformItems(items, intl) : [];
+    }
+
+    return [];
+  }, [component]);
+
+  if (error) {
+    throw error;
   }
 
   return (
@@ -62,6 +77,7 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
       tooltip={tooltip}
       required={required}
       description={description}
+      isLoading={loading}
     />
   );
 };

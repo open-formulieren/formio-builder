@@ -6,40 +6,13 @@ import useAsync from 'react-use/esm/useAsync';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-export interface ReferentielijstenTabelOption {
-  code: string;
-  naam: string;
-  isGeldig: boolean;
-}
+import {ComponentWithReferentielijsten, ReferentielijstenTabelOption} from './types';
+import {transformItems} from './utils';
 
 function isTabelOptions(
   options: ReferentielijstenTabelOption[] | undefined
 ): options is ReferentielijstenTabelOption[] {
   return options !== undefined;
-}
-
-function transformItems(items: ReferentielijstenTabelOption[]) {
-  const intl = useIntl();
-  return items.map(item => {
-    const {code, naam, isGeldig} = item;
-    return {
-      value: code,
-      label: !isGeldig
-        ? `${naam} ${intl.formatMessage({
-            description: 'Message to indicate that Referentielijsten tabel is expired',
-            defaultMessage: '(niet meer geldig)',
-          })}`
-        : naam,
-    };
-  });
-}
-
-export interface ComponentWithReferentielijsten {
-  openForms?: {
-    dataSrc: 'referentielijsten';
-    service: string;
-    code: string;
-  };
 }
 
 /**
@@ -65,7 +38,7 @@ export const ReferentielijstenTabelCode: React.FC = () => {
   if (error) {
     throw error;
   }
-  const _options = isTabelOptions(options) ? transformItems(options) : [];
+  const _options = isTabelOptions(options) ? transformItems(options, intl) : [];
 
   return (
     <Select

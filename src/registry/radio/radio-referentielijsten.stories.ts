@@ -45,7 +45,7 @@ type Story = StoryObj<typeof ComponentEditForm>;
 
 export const StoreValuesInComponent: Story = {
   name: 'On save: store proper values in the component',
-  play: async ({canvasElement, step, args}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
@@ -75,7 +75,7 @@ export const StoreValuesInComponent: Story = {
 
 export const SwitchToVariableResetOptions: Story = {
   name: 'On switch from referentielijsten to variable: reset the options',
-  play: async ({canvasElement, step, args}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
@@ -110,7 +110,7 @@ export const SwitchToVariableResetOptions: Story = {
 
 export const SwitchToManualResetOptions: Story = {
   name: 'On switch from referentielijsten to manual: reset the options',
-  play: async ({canvasElement, step, args}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
@@ -166,7 +166,7 @@ export const AutoSelectIfOnlyOneReferentielijstenService: Story = {
       ],
     },
   },
-  play: async ({canvasElement, step, args}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
@@ -177,5 +177,47 @@ export const AutoSelectIfOnlyOneReferentielijstenService: Story = {
     await waitFor(() => {
       expect(serviceInput.parentElement?.parentElement).toHaveTextContent('Referentielijsten');
     });
+  },
+};
+
+export const WithReferentielijstenOptions: Story = {
+  name: 'With Referentielijsten options',
+  parameters: {
+    builder: {
+      defaultReferentielijstenTabellen: [
+        {
+          code: 'countries',
+          naam: 'Countries',
+          isGeldig: true,
+        },
+      ],
+    },
+  },
+
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+
+    const serviceInput = canvas.getByLabelText('Referentielijsten service');
+    await rsSelect(canvas, serviceInput, 'Referentielijsten');
+
+    const codeInput = canvas.getByLabelText('Referentielijsten table code');
+    await rsSelect(canvas, codeInput, 'Countries');
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+
+    expect(args.onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        openForms: {
+          code: 'countries',
+          dataSrc: 'referentielijsten',
+          service: 'referentielijsten',
+          translations: {},
+        },
+        type: 'radio',
+      })
+    );
   },
 };

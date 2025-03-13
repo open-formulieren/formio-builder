@@ -46,6 +46,7 @@ export interface RadioProps {
   isClearable?: boolean;
   tooltip?: string;
   description?: string;
+  isLoading?: boolean;
 }
 
 const EmptyLabel: React.FC = () => (
@@ -65,10 +66,17 @@ export const Radio: React.FC<RadioProps> = ({
   isClearable = false,
   tooltip = '',
   description = '',
+  isLoading = false,
 }) => {
   const {getFieldProps, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
   const {value} = getFieldProps(name);
   const hasSelection = !!options.find(opt => opt.value === value);
+
+  if (isLoading) {
+    return (
+      <FormattedMessage description="Text for loading values" defaultMessage="Loading values..." />
+    );
+  }
 
   return (
     <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>

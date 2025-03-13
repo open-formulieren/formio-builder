@@ -7,7 +7,6 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import React from 'react';
 
-import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -23,6 +22,10 @@ import {BuilderInfo} from './ComponentEditForm';
 import {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import {ValidatorOption} from './builder/validate/validator-select';
+import {
+  ReferentielijstenServiceOption,
+  ReferentielijstenTabelItem,
+} from './builder/values/referentielijsten/types';
 
 export default {
   title: 'Public API/ComponentConfiguration',
@@ -77,6 +80,7 @@ interface TemplateArgs {
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
   services: ReferentielijstenServiceOption[];
+  referentielijstenTabelItems: Record<string, ReferentielijstenTabelItem[]>;
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
@@ -95,6 +99,7 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillAttributes,
   services,
   supportedLanguageCodes,
+  referentielijstenTabelItems,
   fileTypes,
   isNew,
   builderInfo,
@@ -110,6 +115,7 @@ const Template: StoryFn<TemplateArgs> = ({
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}
+    getReferentielijstenTabelItems={async () => referentielijstenTabelItems}
     getServices={async () => services}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
@@ -1610,7 +1616,12 @@ export const Select: Story = {
       previewSearchInput.focus();
       await userEvent.keyboard('[ArrowDown]');
       await preview.findByRole('listbox');
-      await expect(await preview.findByRole('option', {name: 'Second option'})).toBeVisible();
+      await waitFor(
+        async () => {
+          expect(await preview.findByRole('option', {name: 'Second option'})).toBeVisible();
+        },
+        {timeout: 200}
+      );
       await userEvent.keyboard('[Escape]');
       await waitFor(async () => {
         expect(preview.queryByRole('listbox')).toBeNull();
@@ -1714,7 +1725,13 @@ export const Select: Story = {
       const previewSearchInput = preview.getByLabelText('Other label');
       previewSearchInput.focus();
       await userEvent.keyboard('[ArrowDown]');
-      await expect(await preview.findByText(/"someVar"/)).toBeVisible();
+      await waitFor(
+        async () => {
+          expect(await preview.findByText(/"someVar"/)).toBeVisible();
+        },
+        {timeout: 200}
+      );
+      // await expect(await preview.findByText(/"someVar"/)).toBeVisible();
       await userEvent.keyboard('[Escape]');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
