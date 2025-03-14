@@ -89,11 +89,6 @@
     "description": "Tooltip for 'file.name' builder field",
     "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
   },
-  "1xUdSY": {
-    "defaultMessage": "Referentielijsten service",
-    "description": "Label for 'openForms.service' builder field",
-    "originalDefault": "Referentielijsten service"
-  },
   "2/2h2C": {
     "defaultMessage": "The minimum value this field can have before the form can be submitted.",
     "description": "Tooltip for 'validate.min' builder field",
@@ -284,11 +279,6 @@
     "description": "Tooltip for 'openForms.softRequired' builder field",
     "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
   },
-  "9HMEtT": {
-    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
-    "description": "Label for referentielijsten table or item",
-    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
-  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -428,11 +418,6 @@
     "defaultMessage": "Basic",
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
-  },
-  "DzG4Xk": {
-    "defaultMessage": "The identifier of the Referentielijsten service from which the options will be retrieved.",
-    "description": "Description for the 'openForms.service' builder field",
-    "originalDefault": "The identifier of the Referentielijsten service from which the options will be retrieved."
   },
   "E/biiX": {
     "defaultMessage": "Button labels",
@@ -879,6 +864,11 @@
     "description": "Label for 'of.image.resize.width' builder field",
     "originalDefault": "Maximum width"
   },
+  "Y7QwvZ": {
+    "defaultMessage": "Reference lists API",
+    "description": "Data source option label for value 'referentielijsten'",
+    "originalDefault": "Reference lists API"
+  },
   "Y8cmP1": {
     "defaultMessage": "Size",
     "description": "file component preview: file size column header",
@@ -918,11 +908,6 @@
     "defaultMessage": "Whether to add partners information to the component.",
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
-  },
-  "Zo2Xje": {
-    "defaultMessage": "Referentielijsten table code",
-    "description": "Label for 'openForms.code' builder field",
-    "originalDefault": "Referentielijsten table code"
   },
   "aBADYT": {
     "defaultMessage": "Maximum number of files",
@@ -994,6 +979,11 @@
     "description": "Label identifier role authorised person",
     "originalDefault": "Authorised person"
   },
+  "cLzsxn": {
+    "defaultMessage": "Reference lists table code",
+    "description": "Label for 'openForms.code' builder field",
+    "originalDefault": "Reference lists table code"
+  },
   "cQvPLh": {
     "defaultMessage": "Number of days. Empty values are ignored.",
     "description": "Tooltip for 'delta.days' in relative delta date constraint validation",
@@ -1003,11 +993,6 @@
     "defaultMessage": "Plugin",
     "description": "Label for 'prefill.plugin' builder field",
     "originalDefault": "Plugin"
-  },
-  "ctKwBy": {
-    "defaultMessage": "Referentielijsten API",
-    "description": "Data source option label for value 'referentielijsten'",
-    "originalDefault": "Referentielijsten API"
   },
   "czUDSQ": {
     "defaultMessage": "A short indicator that can provide more context for the expected field value. The '<sup> and <sub>' HTML tags are supported.",
@@ -1138,6 +1123,11 @@
     "defaultMessage": "Set the text of the 'Remove row' button.",
     "description": "Tooltip for 'removeRow' builder field",
     "originalDefault": "Set the text of the 'Remove row' button."
+  },
+  "gSSyoc": {
+    "defaultMessage": "Reference lists service",
+    "description": "Label for 'openForms.service' builder field",
+    "originalDefault": "Reference lists service"
   },
   "guySt0": {
     "defaultMessage": "Postcode",
@@ -1494,6 +1484,11 @@
     "description": "Component property 'footer' label",
     "originalDefault": "Footer"
   },
+  "u5fu3R": {
+    "defaultMessage": "The identifier of the reference lists service from which the options will be retrieved.",
+    "description": "Description for the 'openForms.service' builder field",
+    "originalDefault": "The identifier of the reference lists service from which the options will be retrieved."
+  },
   "uDSxtY": {
     "defaultMessage": "Translations",
     "description": "Component edit form tab title for 'Translations' tab",
@@ -1503,6 +1498,11 @@
     "defaultMessage": "Error",
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
+  },
+  "ucbVst": {
+    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
+    "description": "Label for reference lists table or item",
+    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
   },
   "unjdIB": {
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",

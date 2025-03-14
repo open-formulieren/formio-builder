@@ -90,11 +90,6 @@
     "description": "Tooltip for 'file.name' builder field",
     "originalDefault": "Specify template for name of uploaded file(s). <code>'{{ fileName }}'</code> contains the original filename."
   },
-  "1xUdSY": {
-    "defaultMessage": "Referentielijsten service",
-    "description": "Label for 'openForms.service' builder field",
-    "originalDefault": "Referentielijsten service"
-  },
   "2/2h2C": {
     "defaultMessage": "De minimale waarde die dit veld kan hebben voordat het formulier kan worden verzonden.",
     "description": "Tooltip for 'validate.min' builder field",
@@ -287,11 +282,6 @@
     "description": "Tooltip for 'openForms.softRequired' builder field",
     "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
   },
-  "9HMEtT": {
-    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
-    "description": "Label for referentielijsten table or item",
-    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
-  },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
     "description": "Operator 'subtract' option label",
@@ -338,7 +328,7 @@
     "originalDefault": "Location"
   },
   "BFq6vL": {
-    "defaultMessage": "Loading values...",
+    "defaultMessage": "Opties ophalen...",
     "description": "Text for loading values",
     "originalDefault": "Loading values..."
   },
@@ -433,11 +423,6 @@
     "defaultMessage": "Basis",
     "description": "Component edit form tab title for 'Basic' tab",
     "originalDefault": "Basic"
-  },
-  "DzG4Xk": {
-    "defaultMessage": "The identifier of the Referentielijsten service from which the options will be retrieved.",
-    "description": "Description for the 'openForms.service' builder field",
-    "originalDefault": "The identifier of the Referentielijsten service from which the options will be retrieved."
   },
   "E/biiX": {
     "defaultMessage": "Knopteksten",
@@ -890,6 +875,11 @@
     "description": "Label for 'of.image.resize.width' builder field",
     "originalDefault": "Maximum width"
   },
+  "Y7QwvZ": {
+    "defaultMessage": "Referentielijsten-API",
+    "description": "Data source option label for value 'referentielijsten'",
+    "originalDefault": "Reference lists API"
+  },
   "Y8cmP1": {
     "defaultMessage": "Bestandsgrootte",
     "description": "file component preview: file size column header",
@@ -906,7 +896,7 @@
     "originalDefault": "Advanced"
   },
   "YObTjL": {
-    "defaultMessage": "The code of the table from which the options will be retrieved.",
+    "defaultMessage": "Code van de tabel waaruit de opties opgehaald worden",
     "description": "Description for the 'openForms.code' builder field",
     "originalDefault": "The code of the table from which the options will be retrieved."
   },
@@ -929,11 +919,6 @@
     "defaultMessage": "Indien aangevinkt, dan worden gegevens van partners opgehaald en ingesloten.",
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
-  },
-  "Zo2Xje": {
-    "defaultMessage": "Referentielijsten table code",
-    "description": "Label for 'openForms.code' builder field",
-    "originalDefault": "Referentielijsten table code"
   },
   "aBADYT": {
     "defaultMessage": "Maximum aantal bestanden",
@@ -1005,6 +990,11 @@
     "description": "Label identifier role authorised person",
     "originalDefault": "Authorised person"
   },
+  "cLzsxn": {
+    "defaultMessage": "Tabelcode",
+    "description": "Label for 'openForms.code' builder field",
+    "originalDefault": "Reference lists table code"
+  },
   "cQvPLh": {
     "defaultMessage": "Aantal dagen. Lege waarden worden genegeerd.",
     "description": "Tooltip for 'delta.days' in relative delta date constraint validation",
@@ -1015,11 +1005,6 @@
     "description": "Label for 'prefill.plugin' builder field",
     "isTranslated": true,
     "originalDefault": "Plugin"
-  },
-  "ctKwBy": {
-    "defaultMessage": "Referentielijsten API",
-    "description": "Data source option label for value 'referentielijsten'",
-    "originalDefault": "Referentielijsten API"
   },
   "czUDSQ": {
     "defaultMessage": "Een korte beschrijvende indicatie die meer context beschrijft voor de verwachtte waarde. Je kan hier de '<sup> en <sub>' HTML tags gebruiken.",
@@ -1151,6 +1136,11 @@
     "defaultMessage": "Geef de knoptekst om een groep te verwijderen op.",
     "description": "Tooltip for 'removeRow' builder field",
     "originalDefault": "Set the text of the 'Remove row' button."
+  },
+  "gSSyoc": {
+    "defaultMessage": "Service",
+    "description": "Label for 'openForms.service' builder field",
+    "originalDefault": "Reference lists service"
   },
   "guySt0": {
     "defaultMessage": "Postcode",
@@ -1423,7 +1413,7 @@
     "originalDefault": "Column size on mobile, value between 1 and 4."
   },
   "paY2Oa": {
-    "defaultMessage": "Options from expression: <code>{expression}</code>",
+    "defaultMessage": "Opties uit de expressie: <code>{expression}</code>",
     "description": "Selectboxes dummy option for itemsExpression",
     "originalDefault": "Options from expression: <code>{expression}</code>"
   },
@@ -1514,6 +1504,11 @@
     "description": "Component property 'footer' label",
     "originalDefault": "Footer"
   },
+  "u5fu3R": {
+    "defaultMessage": "De (externe) service die de tabellen/referentielijsten ontsluit.",
+    "description": "Description for the 'openForms.service' builder field",
+    "originalDefault": "The identifier of the reference lists service from which the options will be retrieved."
+  },
   "uDSxtY": {
     "defaultMessage": "Vertalingen",
     "description": "Component edit form tab title for 'Translations' tab",
@@ -1523,6 +1518,11 @@
     "defaultMessage": "Fout",
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
+  },
+  "ucbVst": {
+    "defaultMessage": "{naam}{isValid, select, true {} other { (niet meer geldig)}}",
+    "description": "Label for reference lists table or item",
+    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
   },
   "unjdIB": {
     "defaultMessage": "Verberg de koptekst en de lijn boven de veldengroep in het formulier.",
