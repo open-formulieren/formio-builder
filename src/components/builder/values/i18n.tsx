@@ -42,38 +42,36 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
         </tr>
 
         {options.map(({value, label}, index) => (
-          <>
-            <tr key={`option-${index}`}>
-              <td>
-                <span
-                  id={`option-${index}-label`}
-                  className="offb-table__content offb-table__content--allow-break"
-                >
-                  {label}
-                </span>
-              </td>
-              <td>
-                <div
-                  aria-describedby={`option-${index}-label`}
-                  className="offb-table__content offb-table__content--allow-break"
-                >
-                  {value || '-'}
-                </div>
-              </td>
-              <td>
-                <TextField
-                  name={`${name}[${index}]openForms.translations.${activeLanguage}.label`}
-                  aria-label={intl.formatMessage(
-                    {
-                      description: 'Accessible label for option label translation field',
-                      defaultMessage: 'Translation for option with value "{value}"',
-                    },
-                    {value: value}
-                  )}
-                />
-              </td>
-            </tr>
-          </>
+          <tr key={`option-${index}`}>
+            <td>
+              <span
+                id={`option-${index}-label`}
+                className="offb-table__content offb-table__content--allow-break"
+              >
+                {label}
+              </span>
+            </td>
+            <td>
+              <div
+                aria-describedby={`option-${index}-label`}
+                className="offb-table__content offb-table__content--allow-break"
+              >
+                {value || '-'}
+              </div>
+            </td>
+            <td>
+              <TextField
+                name={`${name}[${index}]openForms.translations.${activeLanguage}.label`}
+                aria-label={intl.formatMessage(
+                  {
+                    description: 'Accessible label for option label translation field',
+                    defaultMessage: 'Translation for option with value "{value}"',
+                  },
+                  {value: value}
+                )}
+              />
+            </td>
+          </tr>
         ))}
       </tbody>
 
