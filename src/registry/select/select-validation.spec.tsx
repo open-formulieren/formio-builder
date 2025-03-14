@@ -15,12 +15,13 @@ afterAll(() => {
 
 test('Option values and labels are required fields', async () => {
   const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
     dataSrc: 'values',
+    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -29,7 +30,7 @@ test('Option values and labels are required fields', async () => {
       values: [{value: '', label: ''}],
     },
     defaultValue: '',
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',
@@ -59,12 +60,13 @@ test('Option values and labels are required fields', async () => {
 
 test('There is always at least one option', async () => {
   const onSubmit = jest.fn();
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
     dataSrc: 'values',
+    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -73,7 +75,7 @@ test('There is always at least one option', async () => {
       values: [],
     },
     defaultValue: '',
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',
@@ -101,12 +103,13 @@ test('There is always at least one option', async () => {
 test('All translations are optional', async () => {
   const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
   const onSubmit = jest.fn();
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
     dataSrc: 'values',
+    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -115,7 +118,7 @@ test('All translations are optional', async () => {
       values: [],
     },
     defaultValue: '',
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',

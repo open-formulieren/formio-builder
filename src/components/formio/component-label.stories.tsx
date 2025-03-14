@@ -1,4 +1,4 @@
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {expect, within} from '@storybook/test';
 
 import ComponentLabel from './component-label';
@@ -15,22 +15,24 @@ export default {
     tooltip: '',
     htmlId: '',
   },
-} as Meta<typeof ComponentLabel>;
+} satisfies Meta<typeof ComponentLabel>;
 
-export const Default = {
+type Story = StoryObj<typeof ComponentLabel>;
+
+export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
     await expect(canvas.queryByText('Example label text')).toBeInTheDocument();
   },
 };
 
-export const WithTooltip = {
+export const WithTooltip: Story = {
   args: {
     tooltip: 'Call me clippy',
   },
 };
 
-export const Required = {
+export const Required: Story = {
   args: {
     required: true,
   },

@@ -16,12 +16,13 @@ test('Switch to multiple sets empty array as default value', async () => {
   const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
   const onSubmit = jest.fn();
 
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
+    dataSrc: 'values',
+    dataType: 'string',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -30,7 +31,7 @@ test('Switch to multiple sets empty array as default value', async () => {
       values: [{value: 'opt1', label: 'Opt1'}],
     },
     defaultValue: '',
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',
@@ -66,12 +67,13 @@ test('Switch to multiple sets empty array as default value when initial is null'
   const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
   const onSubmit = jest.fn();
 
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
     dataSrc: 'values',
+    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -81,7 +83,7 @@ test('Switch to multiple sets empty array as default value when initial is null'
     },
     // @ts-expect-error
     defaultValue: null, // This can be set by Formio
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',
@@ -117,12 +119,13 @@ test('Switch to non multiple sets empty string as default value', async () => {
   const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
   const onSubmit = jest.fn();
 
-  const component = {
+  const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
     key: 'select',
     label: 'A select field',
     dataSrc: 'values',
+    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -131,7 +134,7 @@ test('Switch to non multiple sets empty string as default value', async () => {
       values: [{value: 'opt1', label: 'Opt1'}],
     },
     multiple: true,
-  } satisfies SelectComponentSchema;
+  };
 
   const builderInfo = {
     title: 'Select',

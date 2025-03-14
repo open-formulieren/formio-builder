@@ -1,3 +1,4 @@
+import {AddressNLComponentSchema} from '@open-formulieren/types';
 import {Meta, StoryObj} from '@storybook/react';
 import {expect, userEvent, waitFor, within} from '@storybook/test';
 
@@ -79,7 +80,10 @@ export const PostcodeValidationTabWithConfiguration: Story = {
       type: 'addressNL',
       key: 'address',
       label: 'An address field',
+      deriveAddress: false,
+      layout: 'doubleColumn',
       openForms: {
+        translations: {},
         components: {
           postcode: {
             validate: {
@@ -92,7 +96,7 @@ export const PostcodeValidationTabWithConfiguration: Story = {
           },
         },
       },
-    },
+    } satisfies AddressNLComponentSchema,
   },
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
@@ -125,7 +129,10 @@ export const CityValidationTabWithConfiguration: Story = {
       type: 'addressNL',
       key: 'address',
       label: 'An address field',
+      deriveAddress: false,
+      layout: 'doubleColumn',
       openForms: {
+        translations: {},
         components: {
           city: {
             validate: {
@@ -138,7 +145,7 @@ export const CityValidationTabWithConfiguration: Story = {
           },
         },
       },
-    },
+    } satisfies AddressNLComponentSchema,
   },
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
