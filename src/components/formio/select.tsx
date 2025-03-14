@@ -32,6 +32,7 @@ export interface SelectProps<
   isClearable?: boolean;
   valueProperty?: string;
   emptyValue?: ValueType;
+  isLoading?: boolean;
   onChange?: (event: {target: {name: string; value: ValueType}}) => void;
 }
 
@@ -180,6 +181,7 @@ function Select<
   tooltip = '',
   description = '',
   isClearable = false,
+  isLoading = false,
   valueProperty = 'value',
   // react-select uses null internally, see
   // https://github.com/JedWatson/react-select/blob/06e34882638d1526b9f5a1238bb567a3e9460ce5/packages/react-select/src/Select.tsx#L1083
@@ -216,6 +218,7 @@ function Select<
         <ReactSelect<Option, IsMulti, Group>
           inputId={htmlId}
           isClearable={isClearable}
+          isLoading={isLoading}
           getOptionValue={opt => isOption<Option, Group>(opt) && opt[valueProperty]}
           className="formio-builder-select"
           classNamePrefix="formio-builder-select"

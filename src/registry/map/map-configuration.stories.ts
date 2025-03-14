@@ -9,12 +9,10 @@ import {
 } from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {BuilderContextDecorator} from '@/sb-decorators';
 
 export default {
   title: 'Builder components/Map/Configuration',
   component: ComponentEditForm,
-  decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
   },

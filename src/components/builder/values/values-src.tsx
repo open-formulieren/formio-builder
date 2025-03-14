@@ -15,12 +15,12 @@ const OPTION_LABELS = defineMessages<OptionValue>({
   },
   referentielijsten: {
     description: "Data source option label for value 'referentielijsten'",
-    defaultMessage: 'Referentielijsten API',
+    defaultMessage: 'Reference lists API',
   },
 });
 
 // define the values with the the desired correct order
-const OPTION_VALUES = ['manual', 'variable', 'referentielijsten'] as const;
+const OPTION_VALUES: OptionValue[] = ['manual', 'variable', 'referentielijsten'];
 
 /**
  * The `ValuesSrc` component is used to configure on the component where options/values

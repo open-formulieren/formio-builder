@@ -1,14 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
 import {expect, userEvent, within} from '@storybook/test';
 
-import {BuilderContextDecorator, withFormik} from '@/sb-decorators';
+import {withFormik} from '@/sb-decorators';
 
 import RegistrationTabFields from './registration-tab';
 
 export default {
   title: 'Builder components/File upload',
   component: RegistrationTabFields,
-  decorators: [withFormik, BuilderContextDecorator],
+  decorators: [withFormik],
   parameters: {
     formik: {
       initialValues: {

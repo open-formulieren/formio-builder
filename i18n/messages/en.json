@@ -324,6 +324,11 @@
     "description": "Translations: location column header",
     "originalDefault": "Location"
   },
+  "BFq6vL": {
+    "defaultMessage": "Loading values...",
+    "description": "Text for loading values",
+    "originalDefault": "Loading values..."
+  },
   "BGZD6J": {
     "defaultMessage": "Minimum value",
     "description": "Placeholder for 'validate.min' builder field",
@@ -859,6 +864,11 @@
     "description": "Label for 'of.image.resize.width' builder field",
     "originalDefault": "Maximum width"
   },
+  "Y7QwvZ": {
+    "defaultMessage": "Reference lists API",
+    "description": "Data source option label for value 'referentielijsten'",
+    "originalDefault": "Reference lists API"
+  },
   "Y8cmP1": {
     "defaultMessage": "Size",
     "description": "file component preview: file size column header",
@@ -873,6 +883,11 @@
     "defaultMessage": "Advanced",
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
+  },
+  "YObTjL": {
+    "defaultMessage": "The code of the table from which the options will be retrieved.",
+    "description": "Description for the 'openForms.code' builder field",
+    "originalDefault": "The code of the table from which the options will be retrieved."
   },
   "YSuwK2": {
     "defaultMessage": "(collapse)",
@@ -963,6 +978,11 @@
     "defaultMessage": "Authorised person",
     "description": "Label identifier role authorised person",
     "originalDefault": "Authorised person"
+  },
+  "cLzsxn": {
+    "defaultMessage": "Reference lists table code",
+    "description": "Label for 'openForms.code' builder field",
+    "originalDefault": "Reference lists table code"
   },
   "cQvPLh": {
     "defaultMessage": "Number of days. Empty values are ignored.",
@@ -1104,6 +1124,11 @@
     "description": "Tooltip for 'removeRow' builder field",
     "originalDefault": "Set the text of the 'Remove row' button."
   },
+  "gSSyoc": {
+    "defaultMessage": "Reference lists service",
+    "description": "Label for 'openForms.service' builder field",
+    "originalDefault": "Reference lists service"
+  },
   "guySt0": {
     "defaultMessage": "Postcode",
     "description": "Label for address postcode",
@@ -1223,11 +1248,6 @@
     "defaultMessage": "Show character counter",
     "description": "Label for 'ShowCharCount' builder field",
     "originalDefault": "Show character counter"
-  },
-  "kw2jNc": {
-    "defaultMessage": "Options from expression: <code>{expression}</code>",
-    "description": "Radio dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "lKijv2": {
     "defaultMessage": "Including today",
@@ -1464,6 +1484,11 @@
     "description": "Component property 'footer' label",
     "originalDefault": "Footer"
   },
+  "u5fu3R": {
+    "defaultMessage": "The identifier of the reference lists service from which the options will be retrieved.",
+    "description": "Description for the 'openForms.service' builder field",
+    "originalDefault": "The identifier of the reference lists service from which the options will be retrieved."
+  },
   "uDSxtY": {
     "defaultMessage": "Translations",
     "description": "Component edit form tab title for 'Translations' tab",
@@ -1473,6 +1498,11 @@
     "defaultMessage": "Error",
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
+  },
+  "ucbVst": {
+    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
+    "description": "Label for reference lists table or item",
+    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
   },
   "unjdIB": {
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
@@ -1518,11 +1548,6 @@
     "defaultMessage": "Column {number}",
     "description": "Column preview column description",
     "originalDefault": "Column {number}"
-  },
-  "wVoT0I": {
-    "defaultMessage": "Options from expression: <code>{expression}</code>",
-    "description": "Select dummy option for itemsExpression",
-    "originalDefault": "Options from expression: <code>{expression}</code>"
   },
   "wZ99FU": {
     "defaultMessage": "The regular expression pattern test that the field value must pass before the form can be submitted.",

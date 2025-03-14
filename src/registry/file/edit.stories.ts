@@ -2,12 +2,10 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {BuilderContextDecorator} from '@/sb-decorators';
 
 export default {
   title: 'Builder components/File upload',
   component: ComponentEditForm,
-  decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
   },

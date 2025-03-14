@@ -5,8 +5,11 @@ import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/
 import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import type {ColorOption} from '@/components/builder/rich-text';
 import {ValidatorOption} from '@/components/builder/validate/validator-select';
-import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
-import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
+import {
+  ReferenceListsServiceOption,
+  ReferenceListsTable,
+  ReferenceListsTableItem,
+} from '@/components/builder/values/reference-lists/types';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
@@ -54,8 +57,12 @@ export interface BuilderContextType {
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
-  getServices: (type: string) => Promise<ReferentielijstenServiceOption[]>;
-  getReferentielijstenTabellen: (service: string) => Promise<ReferentielijstenTabelOption[]>;
+  getServices: (type: string) => Promise<ReferenceListsServiceOption[]>;
+  getReferenceListsTables: (service: string) => Promise<ReferenceListsTable[]>;
+  getReferenceListsTableItems: (
+    service: string,
+    tabelCode: string
+  ) => Promise<ReferenceListsTableItem[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
   getFileTypes: () => Promise<SelectOption[]>;
@@ -75,7 +82,8 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],
   getServices: async () => [],
-  getReferentielijstenTabellen: async () => [],
+  getReferenceListsTables: async () => [],
+  getReferenceListsTableItems: async () => [],
   getPrefillPlugins: async () => [],
   getPrefillAttributes: async () => [],
   getFileTypes: async () => [],

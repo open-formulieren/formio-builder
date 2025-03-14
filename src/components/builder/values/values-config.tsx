@@ -4,7 +4,7 @@ import {useLayoutEffect} from 'react';
 import {hasOwnProperty} from '@/types';
 
 import ItemsExpression from './items-expression';
-import {ReferentielijstenServiceSelect, ReferentielijstenTabelCode} from './referentielijsten';
+import {ReferenceListsServiceSelect, ReferenceListsTableCode} from './reference-lists';
 import {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
 import ValuesTable, {ValuesTableProps} from './values-table';
@@ -106,8 +106,8 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
       {dataSrc === 'variable' && <ItemsExpression />}
       {dataSrc === 'referentielijsten' && (
         <>
-          <ReferentielijstenServiceSelect />
-          <ReferentielijstenTabelCode />
+          <ReferenceListsServiceSelect />
+          <ReferenceListsTableCode />
         </>
       )}
     </>

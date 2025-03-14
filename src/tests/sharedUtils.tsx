@@ -1,8 +1,11 @@
 // This module contains shared utilities and constants between Jest and Storybook.
-import {ReferentielijstenTabelOption} from '@/components/builder/values/referentielijsten/code';
-import {ReferentielijstenServiceOption} from '@/components/builder/values/referentielijsten/service';
+import type {ColorOption} from '@/components/builder/rich-text';
+import {
+  ReferenceListsServiceOption,
+  ReferenceListsTable,
+  ReferenceListsTableItem,
+} from '@/components/builder/values/reference-lists/types';
 import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
-import {ColorOption} from '@/registry/content/rich-text';
 import {AnyComponentSchema} from '@/types';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
@@ -35,35 +38,74 @@ export const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'attribute-2', label: 'Attribute 2'},
 ];
 
-export const DEFAULT_SERVICES: ReferentielijstenServiceOption[] = [
+export const DEFAULT_SERVICES: ReferenceListsServiceOption[] = [
   {
     url: 'http://localhost:8000/api/v2/services/70',
-    slug: 'referentielijsten',
-    label: 'Referentielijsten',
+    slug: 'reference-lists',
+    label: 'Reference lists 1',
     apiRoot: 'http://localhost:8004/api/v1/',
     apiType: 'orc',
   },
   {
     url: 'http://localhost:8000/api/v2/services/6',
-    slug: 'referentielijsten2',
-    label: 'Referentielijsten 2',
+    slug: 'reference-lists2',
+    label: 'Reference lists 2',
     apiRoot: 'http://localhost:8003/documenten/api/v1/',
     apiType: 'drc',
   },
 ];
 
-export const DEFAULT_REFERENTIELIJSTEN_TABELLEN: ReferentielijstenTabelOption[] = [
+export const DEFAULT_REFERENCE_LISTS_TABLES: ReferenceListsTable[] = [
   {
-    code: 'tabel1',
-    naam: 'Tabel 1',
+    code: 'table1',
+    naam: 'Table 1',
     isGeldig: true,
   },
   {
-    code: 'tabel2',
-    naam: 'Tabel 2',
+    code: 'table2',
+    naam: 'Table 2',
     isGeldig: false,
   },
 ];
+
+export const DEFAULT_REFERENCE_LISTS_TABLE_ITEMS: Record<string, ReferenceListsTableItem[]> = {
+  table1: [
+    {
+      code: 'option1',
+      naam: 'Table 1, option 1',
+      isGeldig: true,
+    },
+    {
+      code: 'option2',
+      naam: 'Table 1, option 2',
+      isGeldig: false,
+    },
+  ],
+  table2: [
+    {
+      code: 'option1',
+      naam: 'Table 2, option 1',
+      isGeldig: true,
+    },
+    {
+      code: 'option2',
+      naam: 'Table 2, option 2',
+      isGeldig: true,
+    },
+  ],
+  countries: [
+    {
+      code: 'nl',
+      naam: 'The Netherlands',
+      isGeldig: true,
+    },
+    {
+      code: 'gr',
+      naam: 'Greece',
+      isGeldig: true,
+    },
+  ],
+};
 
 export const DEFAULT_PREFILL_PLUGINS: PrefillPluginOption[] = [
   {id: 'plugin-1', label: 'Plugin 1'},

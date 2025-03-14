@@ -1,4 +1,3 @@
-import {EmailComponentSchema} from '@open-formulieren/types';
 import {Meta, StoryFn, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
@@ -674,6 +673,27 @@ export const SelectBoxesVariable: Story = {
   },
 };
 
+export const SelectBoxesReferenceLists: Story = {
+  name: 'Selectboxes: reference lists options',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'selectboxes',
+      id: 'selectboxes',
+      key: 'selectboxesPreview',
+      label: 'Selectboxes preview',
+      description: 'A preview of the selectboxes Formio component',
+      openForms: {
+        dataSrc: 'referentielijsten',
+        code: 'countries',
+        service: 'reference-lists',
+      },
+    },
+  },
+  parameters: {builder: {enableContext: true}},
+};
+
 export const Radio: Story = {
   name: 'Radio: manual values',
   render: Template,
@@ -740,6 +760,29 @@ export const RadioVariable: Story = {
         translations: {},
       },
     },
+  },
+};
+
+export const RadioReferenceLists: Story = {
+  name: 'Radio: reference lists options',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'radio',
+      id: 'radio',
+      key: 'radioPreview',
+      label: 'Radio preview',
+      description: 'A preview of the radio Formio component',
+      openForms: {
+        dataSrc: 'referentielijsten',
+        code: 'countries',
+        service: 'reference-lists',
+      },
+    },
+  },
+  parameters: {
+    builder: {enableContext: true},
   },
 };
 
@@ -905,6 +948,29 @@ export const SelectVariable: Story = {
         translations: {},
       },
     },
+  },
+};
+
+export const SelectVariableReferenceLists: Story = {
+  name: 'Select: reference lists options',
+  render: Template,
+
+  args: {
+    component: {
+      type: 'select',
+      id: 'select',
+      key: 'selectPreview',
+      label: 'Select preview',
+      description: 'A preview of the select Formio component',
+      openForms: {
+        dataSrc: 'referentielijsten',
+        code: 'countries',
+        service: 'reference-lists',
+      },
+    },
+  },
+  parameters: {
+    builder: {enableContext: true},
   },
 };
 

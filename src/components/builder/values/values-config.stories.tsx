@@ -7,7 +7,6 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 import {Form, Formik} from 'formik';
 
-import {BuilderContextDecorator} from '@/sb-decorators';
 import {withFormik} from '@/sb-decorators';
 
 import ValuesConfig from './values-config';
@@ -206,6 +205,25 @@ export const SelectBoxesResetState: StoryObj<{
   },
 };
 
+export const SelectboxesReferenceLists: SelectboxesStory = {
+  ...SelectBoxes,
+
+  decorators: [withFormik],
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'referentielijsten',
+          code: 'table1',
+          service: 'reference-lists2',
+        },
+        data: {},
+      },
+    },
+    builder: {enableContext: true},
+  },
+};
+
 /**
  * Variant pinned to the `RadioComponentSchema` component type.
  */
@@ -247,6 +265,25 @@ export const RadioVariable: RadioStory = {
         },
       },
     },
+  },
+};
+
+export const RadioReferenceLists: RadioStory = {
+  ...Radio,
+
+  decorators: [withFormik],
+  parameters: {
+    formik: {
+      initialValues: {
+        openForms: {
+          dataSrc: 'referentielijsten',
+          code: 'table1',
+          service: 'reference-lists2',
+        },
+        data: {},
+      },
+    },
+    builder: {enableContext: true},
   },
 };
 
@@ -302,52 +339,17 @@ export const SelectVariable: SelectStory = {
   },
 };
 
-export const SelectReferentielijsten: SelectStory = {
+export const SelectReferenceLists: SelectStory = {
   ...Select,
 
-  decorators: [withFormik, BuilderContextDecorator],
+  decorators: [withFormik],
   parameters: {
     formik: {
       initialValues: {
         openForms: {
           dataSrc: 'referentielijsten',
-          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
-        },
-        data: {},
-      },
-    },
-    builder: {enableContext: true},
-  },
-};
-
-export const SelectboxesReferentielijsten: SelectboxesStory = {
-  ...SelectBoxes,
-
-  decorators: [withFormik, BuilderContextDecorator],
-  parameters: {
-    formik: {
-      initialValues: {
-        openForms: {
-          dataSrc: 'referentielijsten',
-          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
-        },
-        data: {},
-      },
-    },
-    builder: {enableContext: true},
-  },
-};
-
-export const RadioReferentielijsten: RadioStory = {
-  ...Radio,
-
-  decorators: [withFormik, BuilderContextDecorator],
-  parameters: {
-    formik: {
-      initialValues: {
-        openForms: {
-          dataSrc: 'referentielijsten',
-          itemsExpression: {code: 'table1', service: 'referentielijsten-api'},
+          code: 'table1',
+          service: 'reference-lists2',
         },
         data: {},
       },

@@ -1,13 +1,17 @@
 import {SelectComponentSchema} from '@open-formulieren/types';
+import {useContext} from 'react';
 import {useIntl} from 'react-intl';
+import useAsync from 'react-use/esm/useAsync';
 
+import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
+import {transformItems} from '@/components/builder/values/reference-lists/utils';
 import {Select} from '@/components/formio';
-import {Option} from '@/components/formio/select';
+import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
 import {
   checkIsManualOptions,
-  checkIsReferentielijstenOptions,
+  checkIsReferenceListsOptions,
   checkIsVariableOptions,
 } from './helpers';
 
@@ -22,36 +26,47 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
   const intl = useIntl();
   const {key, label, description, tooltip, validate, multiple} = component;
   const {required = false} = validate || {};
+  const {getReferenceListsTableItems} = useContext(BuilderContext);
 
-  let options: Option[] = [];
-  if (checkIsManualOptions(component)) {
-    options = component?.data?.values || [];
-  } else if (checkIsReferentielijstenOptions(component)) {
-    options = [
-      {
-        value: 'option1',
-        label: intl.formatMessage({
-          description: 'Radio dummy option1 from referentielijsten',
-          defaultMessage: 'Option from referentielijsten: option1',
-        }),
-      },
-    ];
-  } else if (checkIsVariableOptions(component)) {
-    options = [
-      {
-        value: 'itemsExpression',
-        label: intl.formatMessage(
-          {
-            description: 'Select dummy option for itemsExpression',
-            defaultMessage: 'Options from expression: <code>{expression}</code>',
-          },
-          {
-            expression: JSON.stringify(component.openForms.itemsExpression),
-            code: chunks => <code>{chunks}</code>,
-          }
-        ),
-      },
-    ];
+  const {
+    value: options = [],
+    loading,
+    error,
+  } = useAsync(async () => {
+    if (checkIsManualOptions(component)) {
+      return component?.data?.values || [];
+    }
+    if (checkIsVariableOptions(component)) {
+      return [
+        {
+          value: 'itemsExpression',
+          label: intl.formatMessage(
+            {
+              description: 'Selectboxes dummy option for itemsExpression',
+              defaultMessage: 'Options from expression: <code>{expression}</code>',
+            },
+            {
+              expression: JSON.stringify(component.openForms.itemsExpression),
+              code: chunks => <code>{chunks}</code>,
+            }
+          ),
+        },
+      ];
+    }
+
+    if (checkIsReferenceListsOptions(component)) {
+      const items: ReferenceListsTableItem[] = await getReferenceListsTableItems(
+        component.openForms?.service || '',
+        component.openForms?.code || ''
+      );
+      return items ? transformItems(items, intl) : [];
+    }
+
+    return [];
+  }, [component]);
+
+  if (error) {
+    throw error;
   }
 
   return (
@@ -64,6 +79,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
       description={description}
       isMulti={!!multiple}
       isClearable
+      isLoading={loading}
     />
   );
 };

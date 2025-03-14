@@ -1,14 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, waitFor, within} from '@storybook/test';
+import {expect, fireEvent, userEvent, within} from '@storybook/test';
 
-import {BuilderContextDecorator, withFormik} from '@/sb-decorators';
+import {withFormik} from '@/sb-decorators';
 
 import FileTabFields from './file-tab';
 
 export default {
   title: 'Builder components/File upload',
   component: FileTabFields,
-  decorators: [withFormik, BuilderContextDecorator],
+  decorators: [withFormik],
   parameters: {
     formik: {
       initialValues: {
