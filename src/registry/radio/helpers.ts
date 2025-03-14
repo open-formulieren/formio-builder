@@ -2,7 +2,7 @@ import {RadioComponentSchema} from '@open-formulieren/types';
 import {Option} from '@open-formulieren/types/lib/formio/common';
 import {JSONObject} from '@open-formulieren/types/lib/types';
 
-import {ComponentWithReferentielijsten} from '@/components/builder/values/referentielijsten/types';
+import {ComponentWithReferenceLists} from '@/components/builder/values/reference-lists/types';
 
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.
@@ -16,10 +16,10 @@ export const checkIsManualOptions = (
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.
 // See https://github.com/microsoft/TypeScript/issues/18758
-export const checkIsReferentielijstenOptions = (
+export const checkIsReferenceListsOptions = (
   component: RadioComponentSchema
 ): component is RadioComponentSchema &
-  ComponentWithReferentielijsten & {
+  ComponentWithReferenceLists & {
     openForms: {code: string; service: string};
   } => {
   return component.openForms.dataSrc === 'referentielijsten';

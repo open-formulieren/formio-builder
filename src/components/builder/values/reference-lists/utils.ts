@@ -1,13 +1,10 @@
 import {IntlShape} from 'react-intl';
 
-import {
-  ReferentielijstenTabelItem,
-  ReferentielijstenTabelOption,
-} from '@/components/builder/values/referentielijsten/types';
+import {ReferenceListsTable, ReferenceListsTableItem} from './types';
 
 // Transform options to the desired shape for the options of the Select component
 export function transformItems(
-  items: ReferentielijstenTabelItem[] | ReferentielijstenTabelOption[],
+  items: ReferenceListsTableItem[] | ReferenceListsTable[],
   intl: IntlShape
 ) {
   return items.map(item => {
@@ -16,7 +13,7 @@ export function transformItems(
       value: code,
       label: intl.formatMessage(
         {
-          description: 'Label for referentielijsten table or item',
+          description: 'Label for reference lists table or item',
           defaultMessage: '{naam}{isValid, select, true {} other { (no longer valid)}}',
         },
         {naam: naam, isValid: isGeldig}

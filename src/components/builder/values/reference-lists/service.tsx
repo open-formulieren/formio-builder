@@ -6,10 +6,10 @@ import useAsync from 'react-use/esm/useAsync';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithReferentielijsten} from './types';
+import {ComponentWithReferenceLists} from './types';
 
 /**
- * Fetch the available Referentielijsten Services and display them in a Select
+ * Fetch the available Reference lists services and display them in a Select
  *
  * The selected service is used at runtime to retrieve options to populate a Select
  *
@@ -19,9 +19,9 @@ import {ComponentWithReferentielijsten} from './types';
  * If a fetch error occurs, it is thrown during rendering - you should provide your
  * own error boundary to catch this.
  */
-const ReferentielijstenServiceSelect: React.FC = () => {
+const ReferenceListsServiceSelect: React.FC = () => {
   const intl = useIntl();
-  const {values, setFieldValue} = useFormikContext<ComponentWithReferentielijsten>();
+  const {values, setFieldValue} = useFormikContext<ComponentWithReferenceLists>();
   const {getServices} = useContext(BuilderContext);
   const {value: options = [], loading} = useAsync(async () => {
     const options = await getServices('referentielijsten');
@@ -37,12 +37,12 @@ const ReferentielijstenServiceSelect: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'openForms.service' builder field"
-          defaultMessage="Referentielijsten service"
+          defaultMessage="Reference lists service"
         />
       }
       tooltip={intl.formatMessage({
         description: "Description for the 'openForms.service' builder field",
-        defaultMessage: `The identifier of the Referentielijsten service from which the options will be retrieved.`,
+        defaultMessage: `The identifier of the reference lists service from which the options will be retrieved.`,
       })}
       isLoading={loading}
       valueProperty="slug"
@@ -52,4 +52,4 @@ const ReferentielijstenServiceSelect: React.FC = () => {
   );
 };
 
-export default ReferentielijstenServiceSelect;
+export default ReferenceListsServiceSelect;

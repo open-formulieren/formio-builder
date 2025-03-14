@@ -1,4 +1,4 @@
-export interface ComponentWithReferentielijsten {
+export interface ComponentWithReferenceLists {
   openForms?: {
     dataSrc: 'referentielijsten';
     service: string;
@@ -6,7 +6,7 @@ export interface ComponentWithReferentielijsten {
   };
 }
 
-export interface ReferentielijstenServiceOption {
+export interface ReferenceListsServiceOption {
   url: string;
   slug: string;
   label: string;
@@ -14,13 +14,13 @@ export interface ReferentielijstenServiceOption {
   apiType: string;
 }
 
-export interface ReferentielijstenTabelOption {
+export interface ReferenceListsTable {
   code: string;
   naam: string;
   isGeldig: boolean;
 }
 
-export interface ReferentielijstenTabelItem {
+export interface ReferenceListsTableItem {
   code: string;
   naam: string;
   isGeldig: boolean;

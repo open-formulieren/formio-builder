@@ -2,7 +2,7 @@ import type {Decorator} from '@storybook/react';
 import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
-import {ReferentielijstenTabelItem} from '@/components/builder/values/referentielijsten/types';
+import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
 import {BuilderContext} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
@@ -14,8 +14,8 @@ import {
   DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
-  DEFAULT_REFERENTIELIJSTEN_TABELLEN,
-  DEFAULT_REFERENTIELIJSTEN_TABEL_ITEMS,
+  DEFAULT_REFERENCE_LISTS_TABLES,
+  DEFAULT_REFERENCE_LISTS_TABLE_ITEMS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
   DEFAULT_SERVICES,
   DEFAULT_VALIDATOR_PLUGINS,
@@ -66,12 +66,11 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultRegistrationAttributes =
     context.parameters.builder?.defaultRegistrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
   const defaultServices = context.parameters.builder?.defaultServices || DEFAULT_SERVICES;
-  const defaultReferentielijstenTabellen =
-    context.parameters.builder?.defaultReferentielijstenTabellen ||
-    DEFAULT_REFERENTIELIJSTEN_TABELLEN;
-  const defaultReferentielijstenTabelItems: Record<string, ReferentielijstenTabelItem[]> =
-    context.parameters.builder?.defaultReferentielijstenTabelItems ||
-    DEFAULT_REFERENTIELIJSTEN_TABEL_ITEMS;
+  const defaultReferenceListsTables =
+    context.parameters.builder?.defaultReferenceListsTables || DEFAULT_REFERENCE_LISTS_TABLES;
+  const defaultReferenceListsTableItems: Record<string, ReferenceListsTableItem[]> =
+    context.parameters.builder?.defaultReferenceListsTableItems ||
+    DEFAULT_REFERENCE_LISTS_TABLE_ITEMS;
   const defaultPrefillPlugins =
     context.parameters.builder?.defaultPrefillPlugins || DEFAULT_PREFILL_PLUGINS;
   const defaultPrefillAttributes =
@@ -101,15 +100,18 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
           await sleep(context.parameters?.builder?.servicesDelay || 0);
           return context?.args?.services || defaultServices;
         },
-        getReferentielijstenTabellen: async () => {
+        getReferenceListsTables: async () => {
           await sleep(context.parameters?.builder?.referentielijstenTabellenDelay || 0);
-          return context?.args?.referentielijstenTabellen || defaultReferentielijstenTabellen;
+          return context?.args?.referentielijstenTabellen || defaultReferenceListsTables;
         },
-        getReferentielijstenTabelItems: async (service, tabelCode) => {
+        getReferenceListsTableItems: async (_, tableCode) => {
           await sleep(context.parameters?.builder?.referentielijstenTabelItemDelay || 0);
-          const referentielijstTabelItems: Record<string, ReferentielijstenTabelItem[]> =
-            context?.args?.referentielijstenTabelItems || defaultReferentielijstenTabelItems;
-          return referentielijstTabelItems[tabelCode];
+          const itemsFromArgs = context?.args?.referenceListsTableItems as
+            | Record<string, ReferenceListsTableItem[]>
+            | undefined;
+          const referentielijstTabelItems = itemsFromArgs || defaultReferenceListsTableItems;
+          const items = referentielijstTabelItems[tableCode];
+          return items;
         },
         getPrefillPlugins: async () => {
           await sleep(context.parameters?.builder?.prefillPluginsDelay || 0);

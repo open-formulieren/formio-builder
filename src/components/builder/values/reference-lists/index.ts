@@ -5,5 +5,5 @@
  *  - selectboxes
  *  - radio
  */
-export {default as ReferentielijstenServiceSelect} from './service';
-export {default as ReferentielijstenTabelCode} from './code';
+export {default as ReferenceListsServiceSelect} from './service';
+export {default as ReferenceListsTableCode} from './code';

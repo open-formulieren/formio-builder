@@ -6,7 +6,7 @@ import {BuilderContextDecorator} from '@/sb-decorators';
 import {rsSelect} from '@/utils/storybookTestHelpers';
 
 export default {
-  title: 'Builder components/Selectboxes/Referentielijsten',
+  title: 'Builder components/Selectboxes/Reference lists',
   component: ComponentEditForm,
   decorators: [BuilderContextDecorator],
   parameters: {
@@ -47,22 +47,22 @@ export const StoreValuesInComponent: Story = {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
-    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    await rsSelect(canvas, dataSourceInput, 'Reference lists API');
 
-    const serviceInput = canvas.getByLabelText('Referentielijsten service');
-    await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Reference lists service');
+    await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
-    const codeInput = canvas.getByLabelText('Referentielijsten table code');
-    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Reference lists table code');
+    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
     expect(args.onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
         openForms: {
-          code: 'tabel2',
+          code: 'table2',
           dataSrc: 'referentielijsten',
-          service: 'referentielijsten',
+          service: 'reference-lists',
           translations: {},
         },
         type: 'selectboxes',
@@ -71,11 +71,11 @@ export const StoreValuesInComponent: Story = {
   },
 };
 
-export const WithReferentielijstenOptions: Story = {
-  name: 'With Referentielijsten options',
+export const WithReferenceListsOptions: Story = {
+  name: 'With reference lists options',
   parameters: {
     builder: {
-      defaultReferentielijstenTabellen: [
+      defaultReferenceListsTables: [
         {
           code: 'countries',
           naam: 'Countries',
@@ -88,12 +88,12 @@ export const WithReferentielijstenOptions: Story = {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
-    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    await rsSelect(canvas, dataSourceInput, 'Reference lists API');
 
-    const serviceInput = canvas.getByLabelText('Referentielijsten service');
-    await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Reference lists service');
+    await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
-    const codeInput = canvas.getByLabelText('Referentielijsten table code');
+    const codeInput = canvas.getByLabelText('Reference lists table code');
     await rsSelect(canvas, codeInput, 'Countries');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
@@ -103,7 +103,7 @@ export const WithReferentielijstenOptions: Story = {
         openForms: {
           code: 'countries',
           dataSrc: 'referentielijsten',
-          service: 'referentielijsten',
+          service: 'reference-lists',
           translations: {},
         },
         type: 'selectboxes',
@@ -113,18 +113,18 @@ export const WithReferentielijstenOptions: Story = {
 };
 
 export const SwitchToVariableResetOptions: Story = {
-  name: 'On switch from referentielijsten to variable: reset the options',
+  name: 'On switch from reference lists to variable: reset the options',
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
-    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    await rsSelect(canvas, dataSourceInput, 'Reference lists API');
 
-    const serviceInput = canvas.getByLabelText('Referentielijsten service');
-    await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Reference lists service');
+    await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
-    const codeInput = canvas.getByLabelText('Referentielijsten table code');
-    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Reference lists table code');
+    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
 
     await rsSelect(canvas, dataSourceInput, 'From variable');
 
@@ -148,18 +148,18 @@ export const SwitchToVariableResetOptions: Story = {
 };
 
 export const SwitchToManualResetOptions: Story = {
-  name: 'On switch from referentielijsten to manual: reset the options',
+  name: 'On switch from reference lists to manual: reset the options',
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
     const dataSourceInput = canvas.getByLabelText('Data source');
-    await rsSelect(canvas, dataSourceInput, 'Referentielijsten API');
+    await rsSelect(canvas, dataSourceInput, 'Reference lists API');
 
-    const serviceInput = canvas.getByLabelText('Referentielijsten service');
-    await rsSelect(canvas, serviceInput, 'Referentielijsten');
+    const serviceInput = canvas.getByLabelText('Reference lists service');
+    await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
-    const codeInput = canvas.getByLabelText('Referentielijsten table code');
-    await rsSelect(canvas, codeInput, 'Tabel 2 (niet meer geldig)');
+    const codeInput = canvas.getByLabelText('Reference lists table code');
+    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
 
     await rsSelect(canvas, dataSourceInput, 'Manually fill in');
 

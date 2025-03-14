@@ -3,15 +3,15 @@ import {useContext} from 'react';
 import {useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
-import {ReferentielijstenTabelItem} from '@/components/builder/values/referentielijsten/types';
-import {transformItems} from '@/components/builder/values/referentielijsten/utils';
+import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
+import {transformItems} from '@/components/builder/values/reference-lists/utils';
 import {Select} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
 import {
   checkIsManualOptions,
-  checkIsReferentielijstenOptions,
+  checkIsReferenceListsOptions,
   checkIsVariableOptions,
 } from './helpers';
 
@@ -26,7 +26,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
   const intl = useIntl();
   const {key, label, description, tooltip, validate, multiple} = component;
   const {required = false} = validate || {};
-  const {getReferentielijstenTabelItems} = useContext(BuilderContext);
+  const {getReferenceListsTableItems} = useContext(BuilderContext);
 
   const {
     value: options = [],
@@ -54,8 +54,8 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
       ];
     }
 
-    if (checkIsReferentielijstenOptions(component)) {
-      const items: ReferentielijstenTabelItem[] = await getReferentielijstenTabelItems(
+    if (checkIsReferenceListsOptions(component)) {
+      const items: ReferenceListsTableItem[] = await getReferenceListsTableItems(
         component.openForms?.service || '',
         component.openForms?.code || ''
       );

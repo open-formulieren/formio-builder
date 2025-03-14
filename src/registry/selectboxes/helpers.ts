@@ -14,7 +14,7 @@ export const checkIsManualOptions = (
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.
 // See https://github.com/microsoft/TypeScript/issues/18758
-export const checkIsReferentielijstenOptions = (
+export const checkIsReferenceListsOptions = (
   component: SelectboxesComponentSchema
 ): component is SelectboxesComponentSchema & {
   openForms: {code: string; service: string};

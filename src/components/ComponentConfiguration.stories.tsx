@@ -23,9 +23,9 @@ import {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import {ValidatorOption} from './builder/validate/validator-select';
 import {
-  ReferentielijstenServiceOption,
-  ReferentielijstenTabelItem,
-} from './builder/values/referentielijsten/types';
+  ReferenceListsServiceOption,
+  ReferenceListsTableItem,
+} from './builder/values/reference-lists/types';
 
 export default {
   title: 'Public API/ComponentConfiguration',
@@ -79,8 +79,8 @@ interface TemplateArgs {
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
-  services: ReferentielijstenServiceOption[];
-  referentielijstenTabelItems: Record<string, ReferentielijstenTabelItem[]>;
+  services: ReferenceListsServiceOption[];
+  referenceListsTableItems: Record<string, ReferenceListsTableItem[]>;
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
@@ -99,7 +99,7 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillAttributes,
   services,
   supportedLanguageCodes,
-  referentielijstenTabelItems,
+  referenceListsTableItems,
   fileTypes,
   isNew,
   builderInfo,
@@ -115,7 +115,7 @@ const Template: StoryFn<TemplateArgs> = ({
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}
-    getReferentielijstenTabelItems={async () => referentielijstenTabelItems}
+    getReferenceListsTableItems={async (_, code) => referenceListsTableItems[code]}
     getServices={async () => services}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}

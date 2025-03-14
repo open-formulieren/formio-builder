@@ -6,33 +6,33 @@ import useAsync from 'react-use/esm/useAsync';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithReferentielijsten, ReferentielijstenTabelOption} from './types';
+import {ComponentWithReferenceLists, ReferenceListsTable} from './types';
 import {transformItems} from './utils';
 
 function isTabelOptions(
-  options: ReferentielijstenTabelOption[] | undefined
-): options is ReferentielijstenTabelOption[] {
+  options: ReferenceListsTable[] | undefined
+): options is ReferenceListsTable[] {
   return options !== undefined;
 }
 
 /**
- * The `ReferentielijstenTabelCode` component is used to specify the code of the tabel
- * in Referentielijsten API for which the items will be fetched
+ * The `ReferenceListsTableCode` component is used to specify the code of the tabel
+ * in Reference lists API for which the items will be fetched
  */
-export const ReferentielijstenTabelCode: React.FC = () => {
+export const ReferenceListsTableCode: React.FC = () => {
   const intl = useIntl();
-  const {values} = useFormikContext<ComponentWithReferentielijsten>();
+  const {values} = useFormikContext<ComponentWithReferenceLists>();
   const service = values?.openForms?.service;
-  const {getReferentielijstenTabellen} = useContext(BuilderContext);
+  const {getReferenceListsTables} = useContext(BuilderContext);
   const {
     value: options,
     loading,
     error,
   } = useAsync(async () => {
-    if (service) {
-      return await getReferentielijstenTabellen(service);
+    if (!service) {
+      return [];
     }
-    return [];
+    return await getReferenceListsTables(service);
   }, [service]);
 
   if (error) {
@@ -46,7 +46,7 @@ export const ReferentielijstenTabelCode: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'openForms.code' builder field"
-          defaultMessage="Referentielijsten table code"
+          defaultMessage="Reference lists table code"
         />
       }
       tooltip={intl.formatMessage({
@@ -61,4 +61,4 @@ export const ReferentielijstenTabelCode: React.FC = () => {
   );
 };
 
-export default ReferentielijstenTabelCode;
+export default ReferenceListsTableCode;

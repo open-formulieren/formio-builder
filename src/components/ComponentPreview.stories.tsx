@@ -673,8 +673,8 @@ export const SelectBoxesVariable: Story = {
   },
 };
 
-export const SelectBoxesReferentielijsten: Story = {
-  name: 'Selectboxes: referentilijsten options',
+export const SelectBoxesReferenceLists: Story = {
+  name: 'Selectboxes: reference lists options',
   render: Template,
 
   args: {
@@ -687,7 +687,7 @@ export const SelectBoxesReferentielijsten: Story = {
       openForms: {
         dataSrc: 'referentielijsten',
         code: 'countries',
-        service: 'referentielijsten',
+        service: 'reference-lists',
       },
     },
   },
@@ -763,8 +763,8 @@ export const RadioVariable: Story = {
   },
 };
 
-export const RadioReferentielijsten: Story = {
-  name: 'Radio: referentilijsten options',
+export const RadioReferenceLists: Story = {
+  name: 'Radio: reference lists options',
   render: Template,
 
   args: {
@@ -777,7 +777,7 @@ export const RadioReferentielijsten: Story = {
       openForms: {
         dataSrc: 'referentielijsten',
         code: 'countries',
-        service: 'referentielijsten',
+        service: 'reference-lists',
       },
     },
   },
@@ -951,8 +951,8 @@ export const SelectVariable: Story = {
   },
 };
 
-export const SelectVariableReferentilijsten: Story = {
-  name: 'Select: referentilijsten options',
+export const SelectVariableReferenceLists: Story = {
+  name: 'Select: reference lists options',
   render: Template,
 
   args: {
@@ -965,7 +965,7 @@ export const SelectVariableReferentilijsten: Story = {
       openForms: {
         dataSrc: 'referentielijsten',
         code: 'countries',
-        service: 'referentielijsten',
+        service: 'reference-lists',
       },
     },
   },
