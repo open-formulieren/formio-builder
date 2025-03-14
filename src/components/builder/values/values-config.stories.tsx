@@ -215,7 +215,7 @@ export const SelectboxesReferenceLists: SelectboxesStory = {
         openForms: {
           dataSrc: 'referentielijsten',
           code: 'table1',
-          service: 'referentielijsten-api',
+          service: 'reference-lists2',
         },
         data: {},
       },
@@ -278,7 +278,7 @@ export const RadioReferenceLists: RadioStory = {
         openForms: {
           dataSrc: 'referentielijsten',
           code: 'table1',
-          service: 'referentielijsten-api',
+          service: 'reference-lists2',
         },
         data: {},
       },
@@ -349,7 +349,7 @@ export const SelectReferenceLists: SelectStory = {
         openForms: {
           dataSrc: 'referentielijsten',
           code: 'table1',
-          service: 'referentielijsten-api',
+          service: 'reference-lists2',
         },
         data: {},
       },

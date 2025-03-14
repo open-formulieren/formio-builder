@@ -69,6 +69,30 @@ export const DEFAULT_REFERENCE_LISTS_TABLES: ReferenceListsTable[] = [
 ];
 
 export const DEFAULT_REFERENCE_LISTS_TABLE_ITEMS: Record<string, ReferenceListsTableItem[]> = {
+  table1: [
+    {
+      code: 'option1',
+      naam: 'Table 1, option 1',
+      isGeldig: true,
+    },
+    {
+      code: 'option2',
+      naam: 'Table 1, option 2',
+      isGeldig: false,
+    },
+  ],
+  table2: [
+    {
+      code: 'option1',
+      naam: 'Table 2, option 1',
+      isGeldig: true,
+    },
+    {
+      code: 'option2',
+      naam: 'Table 2, option 2',
+      isGeldig: true,
+    },
+  ],
   countries: [
     {
       code: 'nl',
