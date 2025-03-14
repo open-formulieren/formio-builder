@@ -1,4 +1,4 @@
-import {Meta, StoryFn} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react';
 import {expect, userEvent, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
@@ -49,20 +49,17 @@ export default {
   args: {
     componentTree: COMPONENT_TREE,
   },
-} as Meta<typeof SimpleConditional>;
+} satisfies Meta<typeof SimpleConditional>;
 
-const Template: StoryFn<typeof SimpleConditional> = () => <SimpleConditional />;
+type Story = StoryObj<typeof SimpleConditional>;
 
-export const Default = {
-  render: Template,
-};
+export const Default: Story = {};
 
-export const SelectATextComponent = {
-  render: Template,
+export const SelectATextComponent: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    let eqInput = canvas.queryByLabelText('Has the value');
+    let eqInput = canvas.queryByLabelText<HTMLInputElement>('Has the value');
 
     expect(eqInput).toBeNull();
 
@@ -76,10 +73,10 @@ export const SelectATextComponent = {
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.click(canvas.getByText('Textfield 1 (text1)'));
 
-    eqInput = canvas.queryByLabelText('Has the value');
+    eqInput = canvas.queryByLabelText<HTMLInputElement>('Has the value');
 
     expect(eqInput).not.toBeNull();
-    expect(eqInput.type).toEqual('text');
+    expect(eqInput!.type).toEqual('text');
 
     // find and click the clear button (x icon)
     const input = canvas.getByLabelText('When the form component');
@@ -95,8 +92,7 @@ export const SelectATextComponent = {
   },
 };
 
-export const SelectingANumberComponent = {
-  render: Template,
+export const SelectingANumberComponent: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
@@ -110,15 +106,14 @@ export const SelectingANumberComponent = {
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.click(canvas.getByText('Nested number (nested.number1)'));
 
-    const eqInput = canvas.queryByLabelText('Has the value');
+    const eqInput = canvas.queryByLabelText<HTMLInputElement>('Has the value');
 
     expect(eqInput).not.toBeNull();
-    expect(eqInput.type).toEqual('number');
+    expect(eqInput!.type).toEqual('number');
   },
 };
 
-export const SelectingACurrencyComponent = {
-  render: Template,
+export const SelectingACurrencyComponent: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
@@ -132,9 +127,9 @@ export const SelectingACurrencyComponent = {
     await userEvent.keyboard('[ArrowDown]');
     await userEvent.click(canvas.getByText('Currency 1 (currency1)'));
 
-    const eqInput = canvas.queryByLabelText('Has the value');
+    const eqInput = canvas.queryByLabelText<HTMLInputElement>('Has the value');
 
     expect(eqInput).not.toBeNull();
-    expect(eqInput.type).toEqual('number');
+    expect(eqInput!.type).toEqual('number');
   },
 };

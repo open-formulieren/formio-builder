@@ -19,6 +19,7 @@
     "build:esm": "ttsc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "build:cjs": "ttsc -p tsconfig.prod.json --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.prod.json --outDir lib/cjs",
     "build:scss": "node bundle-scss.mjs && rm lib/css/index.js lib/css/index.js.map",
+    "build:typecheck": "tsc --noEmit",
     "build": "run-p build:*",
     "test": "npm-run-all test:*",
     "test:storybook": "test-storybook",

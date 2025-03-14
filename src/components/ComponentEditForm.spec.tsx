@@ -1,3 +1,4 @@
+import {FieldsetComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 
 import {contextRender, screen} from '@/tests/test-utils';
@@ -15,12 +16,16 @@ test('Mutating components after save does not mutate default values', async () =
   contextRender(
     <ComponentEditForm
       isNew
-      component={{
-        type: 'fieldset',
-        key: 'fieldset',
-        label: 'Field set',
-        components: [],
-      }}
+      component={
+        {
+          id: 'fieldset',
+          type: 'fieldset',
+          key: 'fieldset',
+          label: 'Field set',
+          components: [],
+          hideHeader: false,
+        } satisfies FieldsetComponentSchema
+      }
       builderInfo={{
         title: 'foo',
         group: 'bar',

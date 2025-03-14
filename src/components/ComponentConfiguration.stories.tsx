@@ -1,5 +1,7 @@
 import {
+  AddressNLComponentSchema,
   ContentComponentSchema,
+  SelectComponentSchema,
   SoftRequiredErrorsComponentSchema,
   SupportedLocales,
 } from '@open-formulieren/types';
@@ -24,6 +26,7 @@ import {RegistrationAttributeOption} from './builder/registration/registration-a
 import {ValidatorOption} from './builder/validate/validator-select';
 import {
   ReferenceListsServiceOption,
+  ReferenceListsTable,
   ReferenceListsTableItem,
 } from './builder/values/reference-lists/types';
 
@@ -58,6 +61,31 @@ export default {
       ],
     },
     supportedLanguageCodes: ['nl'],
+    services: [
+      {
+        url: '',
+        slug: 'reference-lists',
+        label: 'Reference lists',
+        apiRoot: '',
+        apiType: 'orc',
+      },
+    ] satisfies ReferenceListsServiceOption[],
+    referenceListsTables: [
+      {
+        code: 'countries',
+        naam: 'Countries',
+        isGeldig: true,
+      },
+    ] satisfies ReferenceListsTable[],
+    referenceListsTableItems: {
+      countries: [
+        {
+          code: 'elb',
+          naam: 'Elbonia',
+          isGeldig: true,
+        },
+      ],
+    } satisfies Record<string, ReferenceListsTableItem[]>,
     fileTypes: DEFAULT_FILE_TYPES,
     onCancel: fn(),
     onRemove: fn(),
@@ -80,6 +108,7 @@ interface TemplateArgs {
   registrationAttributes: RegistrationAttributeOption[];
   prefillPlugins: PrefillPluginOption[];
   services: ReferenceListsServiceOption[];
+  referenceListsTables: ReferenceListsTable[];
   referenceListsTableItems: Record<string, ReferenceListsTableItem[]>;
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
@@ -99,6 +128,7 @@ const Template: StoryFn<TemplateArgs> = ({
   prefillAttributes,
   services,
   supportedLanguageCodes,
+  referenceListsTables,
   referenceListsTableItems,
   fileTypes,
   isNew,
@@ -115,8 +145,9 @@ const Template: StoryFn<TemplateArgs> = ({
     getFormComponents={() => otherComponents}
     getValidatorPlugins={async () => validatorPlugins}
     getRegistrationAttributes={async () => registrationAttributes}
-    getReferenceListsTableItems={async (_, code) => referenceListsTableItems[code]}
     getServices={async () => services}
+    getReferenceListsTables={async () => referenceListsTables}
+    getReferenceListsTableItems={async (_, code) => referenceListsTableItems[code]}
     getPrefillPlugins={async () => prefillPlugins}
     getPrefillAttributes={async (plugin: string) => prefillAttributes[plugin]}
     getFileTypes={async () => fileTypes}
@@ -1550,9 +1581,10 @@ export const Select: Story = {
         translations: {},
       },
       dataSrc: 'values',
+      dataType: 'string',
       data: {values: []},
       defaultValue: '',
-    },
+    } satisfies SelectComponentSchema,
 
     builderInfo: {
       title: 'Select',
@@ -2382,10 +2414,18 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       defaultValue: {
+        postcode: '',
+        houseNumber: '',
+        houseLetter: '',
+        houseNumberAddition: '',
+        city: '',
+        streetName: '',
+        secretStreetCity: '',
         autoPopulated: false,
       },
       layout: 'singleColumn',
       openForms: {
+        translations: {},
         components: {
           postcode: {
             validate: {pattern: '1015 [a-zA-Z]{2}'},
@@ -2397,7 +2437,7 @@ export const AddressNL: Story = {
           },
         },
       },
-    },
+    } satisfies AddressNLComponentSchema,
     builderInfo: {
       title: 'Address Field',
       icon: 'home',

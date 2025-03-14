@@ -7,6 +7,14 @@ import React from 'react';
 import {IntlProvider} from 'react-intl';
 import {createIntl, createIntlCache} from 'react-intl';
 
+import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill';
+import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
+import {ValidatorOption} from '@/components/builder/validate/validator-select';
+import {
+  ReferenceListsServiceOption,
+  ReferenceListsTable,
+  ReferenceListsTableItem,
+} from '@/components/builder/values/reference-lists/types';
 import {BuilderContext, BuilderContextType} from '@/context';
 import type {DocumentTypeOption, SelectOption} from '@/context';
 import {
@@ -16,29 +24,34 @@ import {
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
+  DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
+  DEFAULT_REFERENCE_LISTS_TABLES,
+  DEFAULT_REFERENCE_LISTS_TABLE_ITEMS,
   DEFAULT_REGISTRATION_ATTRIBUTES,
+  DEFAULT_SERVICES,
   DEFAULT_VALIDATOR_PLUGINS,
   sleep,
 } from '@/tests/sharedUtils';
 import {AnyComponentSchema} from '@/types';
-
-import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
-import {RegistrationAttributeOption} from '../components/builder/registration/registration-attribute';
-import {ValidatorOption} from '../components/builder/validate/validator-select';
 
 interface BuilderOptions {
   supportedLanguageCodes: SupportedLocales[];
   componentTree: AnyComponentSchema[];
   validatorPlugins: ValidatorOption[];
   registrationAttributes: RegistrationAttributeOption[];
+  registrationAttributesDelay: number;
   prefillPlugins: PrefillPluginOption[];
   prefillAttributes: {[key: string]: PrefillAttributeOption[]};
+  prefillAttributesDelay: number;
   fileTypes: SelectOption[];
   documentTypes: DocumentTypeOption[];
   confidentialityLevels: SelectOption[];
-  registrationAttributesDelay: number;
+  referenceListsServices: ReferenceListsServiceOption[];
+  referenceListsTables: ReferenceListsTable[];
+  referenceListsTableItems: Record<string, ReferenceListsTableItem[]>;
+  referenceListsDelay: number;
 }
 
 interface contextRenderOptions {
@@ -69,6 +82,7 @@ const contextRender = (
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               richTextColors: DEFAULT_COLORS,
               theme: 'light',
+              getMapTileLayers: async () => DEFAULT_MAP_TILE_LAYERS,
               getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
@@ -79,13 +93,27 @@ const contextRender = (
                 return builderOptions.registrationAttributes || DEFAULT_REGISTRATION_ATTRIBUTES;
               },
               getPrefillPlugins: async () => {
-                await sleep(builderOptions.registrationAttributesDelay || 0);
+                await sleep(builderOptions.prefillAttributesDelay || 0);
                 return builderOptions.prefillPlugins || DEFAULT_PREFILL_PLUGINS;
               },
               getPrefillAttributes: async plugin => {
-                await sleep(builderOptions.registrationAttributesDelay || 0);
+                await sleep(builderOptions.prefillAttributesDelay || 0);
                 const container = builderOptions.prefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
                 return container?.[plugin] || [{id: '', label: 'no plugins found'}];
+              },
+              getServices: async () => {
+                await sleep(builderOptions.referenceListsDelay || 0);
+                return builderOptions.referenceListsServices || DEFAULT_SERVICES;
+              },
+              getReferenceListsTables: async () => {
+                await sleep(builderOptions.referenceListsDelay || 0);
+                return builderOptions.referenceListsTables || DEFAULT_REFERENCE_LISTS_TABLES;
+              },
+              getReferenceListsTableItems: async (_, tableCode) => {
+                await sleep(builderOptions.referenceListsDelay || 0);
+                const tableItems =
+                  builderOptions.referenceListsTableItems || DEFAULT_REFERENCE_LISTS_TABLE_ITEMS;
+                return tableItems[tableCode] ?? [];
               },
               getFileTypes: async () => builderOptions.fileTypes || DEFAULT_FILE_TYPES,
               serverUploadLimit: '50MB',
@@ -157,22 +185,26 @@ const formikRender = (
 const cache = createIntlCache();
 const dummyIntl = createIntl({locale: 'en', messages: {}}, cache);
 
-const dummyBuilderContext = {
+const dummyBuilderContext: BuilderContextType = {
   uniquifyKey: (key: string) => key,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',
+  getMapTileLayers: async () => [],
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],
   getPrefillPlugins: async () => [],
   getPrefillAttributes: async () => [],
+  getServices: async () => [],
+  getReferenceListsTables: async () => [],
+  getReferenceListsTableItems: async () => [],
   getFileTypes: async () => [],
   serverUploadLimit: '(unknown)',
   getDocumentTypes: async () => [],
   getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
-} satisfies BuilderContextType;
+};
 
 // re-export everything (see https://testing-library.com/docs/react-testing-library/setup/#custom-render)
 export * from '@testing-library/react';

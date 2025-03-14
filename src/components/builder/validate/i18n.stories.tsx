@@ -1,11 +1,28 @@
-import {Meta, StoryFn} from '@storybook/react';
+import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formulieren/types';
+import {Meta, StoryObj} from '@storybook/react';
 import {expect, userEvent, within} from '@storybook/test';
-import {Formik} from 'formik';
+
+import {withFormik} from '@/sb-decorators';
 
 import ValidationErrorTranslations, {useManageValidatorsTranslations} from './i18n';
 
+interface Args {
+  errorCodes: PossibleValidatorErrorKeys<SchemaWithValidation>[];
+  translatedErrors: Record<
+    string,
+    Partial<Record<PossibleValidatorErrorKeys<SchemaWithValidation>, string>>
+  >;
+}
+
 export default {
   title: 'Formio/Builder/Validation/Translations',
+  decorators: [
+    (Story, {args}) => {
+      useManageValidatorsTranslations(args.errorCodes);
+      return <Story />;
+    },
+    withFormik,
+  ],
   component: ValidationErrorTranslations,
   parameters: {
     controls: {hideNoControlsWarning: true},
@@ -13,6 +30,24 @@ export default {
     builder: {
       enableContext: true,
       supportedLanguageCodes: ['nl', 'en', 'de'],
+    },
+    formik: {
+      initialValues: {
+        translatedErrors: {
+          nl: {
+            required: 'Dit veld is verplicht.',
+            pattern: '',
+          },
+          en: {
+            required: 'This field is required.',
+            pattern: '',
+          },
+          de: {
+            required: 'Dieses Feld ist erforderlich.',
+            pattern: '',
+          },
+        },
+      },
     },
   },
   args: {
@@ -32,33 +67,11 @@ export default {
       },
     },
   },
-} as Meta<typeof ValidationErrorTranslations>;
+} satisfies Meta<Args>;
 
-interface BodyProps {
-  errorCodes: string[];
-}
+type Story = StoryObj<Args>;
 
-const Body: React.FC<BodyProps> = ({errorCodes}) => {
-  useManageValidatorsTranslations(errorCodes);
-  return <ValidationErrorTranslations />;
-};
-
-interface StoryArgs {
-  errorCodes: string[];
-  translatedErrors: Record<string, Record<string, string>>;
-}
-
-const Template: StoryFn<React.FC<StoryArgs>> = ({errorCodes, translatedErrors}) => {
-  return (
-    <Formik initialValues={{translatedErrors}} onSubmit={console.log}>
-      <Body errorCodes={errorCodes} />
-    </Formik>
-  );
-};
-
-export const Default = {
-  render: Template,
-
+export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 

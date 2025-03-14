@@ -1,4 +1,18 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
+import {
+  AddressNLComponentSchema,
+  BsnComponentSchema,
+  CosignV2ComponentSchema,
+  EditGridComponentSchema,
+  FieldsetComponentSchema,
+  FileComponentSchema,
+  PhoneNumberComponentSchema,
+  PostcodeComponentSchema,
+  RadioComponentSchema,
+  SelectComponentSchema,
+  SelectboxesComponentSchema,
+  TimeComponentSchema,
+} from '@open-formulieren/types';
+import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentPreview from './ComponentPreview';
@@ -6,17 +20,14 @@ import ComponentPreview from './ComponentPreview';
 export default {
   title: 'Edit form/ComponentPreview',
   component: ComponentPreview,
+  args: {
+    onComponentChange: fn(),
+  },
 } as Meta<typeof ComponentPreview>;
 
 type Story = StoryObj<typeof ComponentPreview>;
 
-const Template: StoryFn<typeof ComponentPreview> = ({component}) => (
-  <ComponentPreview onComponentChange={fn()} component={component} />
-);
-
 export const TextField: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'textfield',
@@ -49,8 +60,6 @@ export const TextField: Story = {
 };
 
 export const TextFieldMultiple: Story = {
-  render: Template,
-
   parameters: {
     formik: {
       initialValues: {
@@ -99,8 +108,6 @@ export const TextFieldMultiple: Story = {
 };
 
 export const Email: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'email',
@@ -132,7 +139,6 @@ export const Email: Story = {
 };
 
 export const EmailWithVerification: Story = {
-  render: Template,
   args: {
     component: {
       type: 'email',
@@ -151,8 +157,6 @@ export const EmailWithVerification: Story = {
 };
 
 export const EmailMultiple: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'email',
@@ -194,8 +198,6 @@ export const EmailMultiple: Story = {
 };
 
 export const NumberField: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'number',
@@ -226,8 +228,6 @@ export const NumberField: Story = {
 };
 
 export const DateField: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'date',
@@ -256,8 +256,6 @@ export const DateField: Story = {
 };
 
 export const DateFieldMultiple: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'date',
@@ -295,8 +293,6 @@ export const DateFieldMultiple: Story = {
 };
 
 export const DateTimeField: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'datetime',
@@ -325,8 +321,6 @@ export const DateTimeField: Story = {
 };
 
 export const DateTimeFieldMultiple: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'datetime',
@@ -364,17 +358,18 @@ export const DateTimeFieldMultiple: Story = {
 };
 
 export const TimeField: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'time',
       id: 'time',
       key: 'timePreview',
       label: 'Time preview',
+      inputType: 'text',
+      format: 'HH:mm',
+      validateOn: 'blur',
       description: 'A preview of the time Formio component',
       hidden: true, // must be ignored
-    },
+    } satisfies TimeComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -394,18 +389,19 @@ export const TimeField: Story = {
 };
 
 export const TimeFieldMultiple: Story = {
-  render: Template,
-
   args: {
     component: {
       type: 'time',
       id: 'time',
       key: 'timePreview',
       label: 'Time preview',
+      inputType: 'text',
+      format: 'HH:mm',
+      validateOn: 'blur',
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-    },
+    } satisfies TimeComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -434,8 +430,6 @@ export const TimeFieldMultiple: Story = {
 
 export const Postcode: Story = {
   name: 'Postcode (deprecated)',
-  render: Template,
-
   args: {
     component: {
       type: 'postcode',
@@ -448,7 +442,8 @@ export const Postcode: Story = {
       validate: {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
-    },
+      validateOn: 'blur',
+    } satisfies PostcodeComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -471,8 +466,6 @@ export const Postcode: Story = {
 
 export const PostcodeMultiple: Story = {
   name: 'Postcode (deprecated) Multiple',
-  render: Template,
-
   args: {
     component: {
       type: 'postcode',
@@ -482,7 +475,12 @@ export const PostcodeMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-    },
+      inputMask: '9999 AA',
+      validate: {
+        pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
+      },
+      validateOn: 'blur',
+    } satisfies PostcodeComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -511,17 +509,16 @@ export const PostcodeMultiple: Story = {
 
 export const PhoneNumber: Story = {
   name: 'PhoneNumber',
-  render: Template,
-
   args: {
     component: {
       type: 'phoneNumber',
       id: 'phoneNumber',
       key: 'phoneNumber',
       label: 'Phone number preview',
+      inputMask: null,
       description: 'A preview of the phoneNumber Formio component',
       hidden: true, // must be ignored
-    },
+    } satisfies PhoneNumberComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -543,18 +540,17 @@ export const PhoneNumber: Story = {
 
 export const PhoneNumberMultiple: Story = {
   name: 'PhoneNumber Multiple',
-  render: Template,
-
   args: {
     component: {
       type: 'phoneNumber',
       id: 'phoneNumber',
       key: 'phoneNumberPreview',
       label: 'Phone number preview',
+      inputMask: null,
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-    },
+    } satisfies PhoneNumberComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -583,16 +579,24 @@ export const PhoneNumberMultiple: Story = {
 
 export const File: Story = {
   name: 'File upload',
-  render: Template,
-
   args: {
     component: {
       type: 'file',
       id: 'file',
       key: 'filePreview',
       label: 'File upload preview',
+      webcam: false,
+      options: {withCredentials: true},
+      storage: 'url',
+      url: '',
+      file: {
+        name: '',
+        type: [],
+        allowedTypesLabels: [],
+      },
+      filePattern: '*',
       description: 'A preview of the file Formio component',
-    },
+    } satisfies FileComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -606,8 +610,6 @@ export const File: Story = {
 
 export const SelectBoxes: Story = {
   name: 'Selectboxes: manual values',
-  render: Template,
-
   args: {
     component: {
       type: 'selectboxes',
@@ -629,7 +631,8 @@ export const SelectBoxes: Story = {
           label: 'Option 2',
         },
       ],
-    },
+      defaultValue: {option1: false, option2: false},
+    } satisfies SelectboxesComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -655,8 +658,6 @@ export const SelectBoxes: Story = {
 
 export const SelectBoxesVariable: Story = {
   name: 'Selectboxes: variable for values',
-  render: Template,
-
   args: {
     component: {
       type: 'selectboxes',
@@ -669,14 +670,13 @@ export const SelectBoxesVariable: Story = {
         itemsExpression: {var: 'foo'},
         translations: {},
       },
-    },
+      defaultValue: {},
+    } satisfies SelectboxesComponentSchema,
   },
 };
 
 export const SelectBoxesReferenceLists: Story = {
   name: 'Selectboxes: reference lists options',
-  render: Template,
-
   args: {
     component: {
       type: 'selectboxes',
@@ -688,16 +688,16 @@ export const SelectBoxesReferenceLists: Story = {
         dataSrc: 'referentielijsten',
         code: 'countries',
         service: 'reference-lists',
+        translations: {},
       },
-    },
+      defaultValue: {},
+    } satisfies SelectboxesComponentSchema,
   },
   parameters: {builder: {enableContext: true}},
 };
 
 export const Radio: Story = {
   name: 'Radio: manual values',
-  render: Template,
-
   args: {
     component: {
       type: 'radio',
@@ -709,6 +709,7 @@ export const Radio: Story = {
         dataSrc: 'manual',
         translations: {},
       },
+      defaultValue: null,
       values: [
         {
           value: 'option1',
@@ -719,7 +720,7 @@ export const Radio: Story = {
           label: 'Option 2',
         },
       ],
-    },
+    } satisfies RadioComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -745,8 +746,6 @@ export const Radio: Story = {
 
 export const RadioVariable: Story = {
   name: 'Radio: variable for values',
-  render: Template,
-
   args: {
     component: {
       type: 'radio',
@@ -759,14 +758,13 @@ export const RadioVariable: Story = {
         itemsExpression: {var: 'foo'},
         translations: {},
       },
-    },
+      defaultValue: null,
+    } satisfies RadioComponentSchema,
   },
 };
 
 export const RadioReferenceLists: Story = {
   name: 'Radio: reference lists options',
-  render: Template,
-
   args: {
     component: {
       type: 'radio',
@@ -778,8 +776,10 @@ export const RadioReferenceLists: Story = {
         dataSrc: 'referentielijsten',
         code: 'countries',
         service: 'reference-lists',
+        translations: {},
       },
-    },
+      defaultValue: null,
+    } satisfies RadioComponentSchema,
   },
   parameters: {
     builder: {enableContext: true},
@@ -791,8 +791,6 @@ export const RadioReferenceLists: Story = {
  */
 export const Select: Story = {
   name: 'Select: manual values',
-  render: Template,
-
   args: {
     component: {
       type: 'select',
@@ -805,6 +803,7 @@ export const Select: Story = {
         translations: {},
       },
       dataSrc: 'values',
+      dataType: 'string',
       data: {
         values: [
           {
@@ -817,7 +816,7 @@ export const Select: Story = {
           },
         ],
       },
-    },
+    } satisfies SelectComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -856,8 +855,6 @@ export const Select: Story = {
  */
 export const SelectMultiple: Story = {
   name: 'Select: manual values, multiple',
-  render: Template,
-
   args: {
     component: {
       type: 'select',
@@ -871,6 +868,7 @@ export const SelectMultiple: Story = {
         translations: {},
       },
       dataSrc: 'values',
+      dataType: 'string',
       data: {
         values: [
           {
@@ -887,7 +885,7 @@ export const SelectMultiple: Story = {
           },
         ],
       },
-    },
+    } satisfies SelectComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -933,8 +931,6 @@ export const SelectMultiple: Story = {
  */
 export const SelectVariable: Story = {
   name: 'Select: variable for values',
-  render: Template,
-
   args: {
     component: {
       type: 'select',
@@ -942,19 +938,19 @@ export const SelectVariable: Story = {
       key: 'selectPreview',
       label: 'Select preview',
       description: 'A preview of the select Formio component',
+      dataSrc: 'values',
+      dataType: 'string',
       openForms: {
         dataSrc: 'variable',
         itemsExpression: {var: 'foo'},
         translations: {},
       },
-    },
+    } satisfies SelectComponentSchema,
   },
 };
 
 export const SelectVariableReferenceLists: Story = {
   name: 'Select: reference lists options',
-  render: Template,
-
   args: {
     component: {
       type: 'select',
@@ -962,12 +958,15 @@ export const SelectVariableReferenceLists: Story = {
       key: 'selectPreview',
       label: 'Select preview',
       description: 'A preview of the select Formio component',
+      dataSrc: 'values',
+      dataType: 'string',
       openForms: {
         dataSrc: 'referentielijsten',
         code: 'countries',
         service: 'reference-lists',
+        translations: {},
       },
-    },
+    } satisfies SelectComponentSchema,
   },
   parameters: {
     builder: {enableContext: true},
@@ -976,8 +975,6 @@ export const SelectVariableReferenceLists: Story = {
 
 export const BSN: Story = {
   name: 'BSN',
-  render: Template,
-
   args: {
     component: {
       type: 'bsn',
@@ -987,7 +984,8 @@ export const BSN: Story = {
       description: 'A preview of the BSN Formio component',
       hidden: true, // must be ignored
       inputMask: '999999999',
-    },
+      validateOn: 'blur',
+    } satisfies BsnComponentSchema,
   },
 
   play: async ({canvasElement, args}) => {
@@ -1010,8 +1008,6 @@ export const BSN: Story = {
 
 export const BSNMultiple: Story = {
   name: 'BSN Multiple',
-  render: Template,
-
   args: {
     component: {
       type: 'bsn',
@@ -1021,7 +1017,9 @@ export const BSNMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-    },
+      inputMask: '999999999',
+      validateOn: 'blur',
+    } satisfies BsnComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -1050,8 +1048,6 @@ export const BSNMultiple: Story = {
 
 export const NpFamilyMembers: Story = {
   name: 'Family members',
-  render: Template,
-
   args: {
     component: {
       type: 'npFamilyMembers',
@@ -1080,8 +1076,6 @@ export const NpFamilyMembers: Story = {
 
 export const ProductPrice: Story = {
   name: 'Product price',
-  render: Template,
-
   args: {
     component: {
       type: 'productPrice',
@@ -1108,8 +1102,6 @@ export const ProductPrice: Story = {
 
 export const AddressNL: Story = {
   name: 'addressNL',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1122,16 +1114,21 @@ export const AddressNL: Story = {
       deriveAddress: false,
       layout: 'singleColumn',
       defaultValue: {
+        postcode: '',
+        houseNumber: '',
+        houseLetter: '',
+        houseNumberAddition: '',
+        city: '',
+        streetName: '',
+        secretStreetCity: '',
         autoPopulated: false,
       },
-    },
+    } satisfies AddressNLComponentSchema,
   },
 };
 
 export const Columns: Story = {
   name: 'Columns',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1173,8 +1170,6 @@ export const Columns: Story = {
 
 export const FieldSet: Story = {
   name: 'FieldSet',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1182,6 +1177,7 @@ export const FieldSet: Story = {
       key: 'fieldset',
       label: 'A fieldset preview',
       hidden: true, // must be ignored
+      hideHeader: false,
       components: [
         // we do not display the nested components
         {
@@ -1191,7 +1187,7 @@ export const FieldSet: Story = {
           label: 'Nested text field',
         },
       ],
-    },
+    } satisfies FieldsetComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -1205,8 +1201,6 @@ export const FieldSet: Story = {
 
 export const EditGrid: Story = {
   name: 'EditGrid',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1215,6 +1209,7 @@ export const EditGrid: Story = {
       label: 'A repeating group preview',
       groupLabel: 'Item',
       hidden: true, // must be ignored
+      disableAddingRemovingRows: false,
       components: [
         // we do not display the nested components
         {
@@ -1224,7 +1219,7 @@ export const EditGrid: Story = {
           label: 'Nested text field',
         },
       ],
-    },
+    } satisfies EditGridComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -1241,8 +1236,6 @@ export const EditGrid: Story = {
 
 export const CosignV1: Story = {
   name: 'Cosign v1',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1266,8 +1259,6 @@ export const CosignV1: Story = {
 
 export const CosignV2: Story = {
   name: 'Cosign v2',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1275,7 +1266,8 @@ export const CosignV2: Story = {
       key: 'cosign',
       label: 'A cosign v2 preview',
       hidden: true, // must be ignored
-    },
+      validateOn: 'blur',
+    } satisfies CosignV2ComponentSchema,
   },
 
   play: async ({canvasElement}) => {
@@ -1291,8 +1283,6 @@ export const CosignV2: Story = {
 
 export const Signature: Story = {
   name: 'Signature',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
@@ -1317,8 +1307,6 @@ export const Signature: Story = {
 
 export const LeafletMap: Story = {
   name: 'Map',
-  render: Template,
-
   args: {
     component: {
       id: 'wekruya',
