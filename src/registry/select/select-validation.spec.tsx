@@ -3,7 +3,7 @@ import {expect, within} from '@storybook/test';
 import userEvent from '@testing-library/user-event';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {contextRender, screen} from '@/tests/test-utils';
+import {act, contextRender, screen} from '@/tests/test-utils';
 
 beforeAll(() => {
   jest.useFakeTimers();
@@ -142,14 +142,16 @@ test('All translations are optional', async () => {
   const inputs = editForm.getAllByRole('textbox');
   for (let input of inputs) {
     await user.type(input, 'manualTranslation');
-    await expect(input).toHaveValue('manualTranslation');
+    expect(input).toHaveValue('manualTranslation');
     await user.clear(input);
-    await expect(input).toHaveValue('');
+    expect(input).toHaveValue('');
   }
 
-  // Removing focus from the last input
-  await user.click(screen.getByRole('tab', {name: 'Translations'}));
+  await act(async () => {
+    // Removing focus from the last input
+    await user.click(screen.getByRole('tab', {name: 'Translations'}));
+  });
 
   // Check that none of the inputs have a Required error message
-  await expect(await editForm.queryByText('Required')).toBeNull();
+  expect(editForm.queryByText('Required')).toBeNull();
 });
