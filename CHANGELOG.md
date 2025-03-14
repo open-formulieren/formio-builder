@@ -1,10 +1,22 @@
 # Changes
 
+## 0.38.0 (2025-03-14)
+
+Bugfix release
+
+- [`OF#5105`][OF#5105] Fixed required fields asterisks being shown on top of open select menus.
+- [`OF#5107`][OF#5107] Added support for displaying reference lists values in component previews.
+- Fixed the type safety (and checking) of story and test files.
+
+[OF#5105]: https://github.com/open-formulieren/open-forms/issues/5105
+[OF#5107]: https://github.com/open-formulieren/open-forms/issues/5107
+
 ## 0.37.0 (2025-02-06)
 
 Feature release
 
-- [`OF#5016`][OF#5016] Add `referentielijsten` as a `dataSrc` for select/selectboxes/radio components
+- [`OF#5016`][OF#5016] Add `referentielijsten` as a `dataSrc` for select/selectboxes/radio
+  components
 - [`OF#5025`][OF#5025] Use generally configured filetypes by default
 
 [OF#5016]: https://github.com/open-formulieren/open-forms/issues/5016
