@@ -2,13 +2,11 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fn, userEvent, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {BuilderContextDecorator} from '@/sb-decorators';
 import {rsSelect} from '@/utils/storybookTestHelpers';
 
 export default {
   title: 'Builder components/Select/Reference lists',
   component: ComponentEditForm,
-  decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
   },

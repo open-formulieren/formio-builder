@@ -2,12 +2,10 @@ import {Meta, StoryObj} from '@storybook/react';
 import {expect, fireEvent, userEvent, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {BuilderContextDecorator} from '@/sb-decorators';
 
 export default {
   title: 'Builder components/Columns/Validations',
   component: ComponentEditForm,
-  decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
   },
