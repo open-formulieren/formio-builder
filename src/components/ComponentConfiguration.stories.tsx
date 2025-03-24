@@ -1134,7 +1134,32 @@ export const SelectBoxes: Story = {
       values: [],
       defaultValue: {},
     },
-
+    referenceListsTables: [
+      {
+        code: 'countries',
+        naam: 'Countries',
+        isGeldig: true,
+      },
+      {
+        code: 'invalid-table',
+        naam: 'Invalid',
+        isGeldig: false,
+      },
+    ],
+    referenceListsTableItems: {
+      countries: [
+        {
+          code: 'elb',
+          naam: 'Elbonia',
+          isGeldig: true,
+        },
+        {
+          code: 'gr',
+          naam: 'Greece',
+          isGeldig: false,
+        },
+      ],
+    },
     builderInfo: {
       title: 'Select Boxes',
       icon: 'plus-square',
@@ -1364,6 +1389,32 @@ export const Radio: Story = {
       values: [],
       defaultValue: '',
     },
+    referenceListsTables: [
+      {
+        code: 'countries',
+        naam: 'Countries',
+        isGeldig: true,
+      },
+      {
+        code: 'invalid-table',
+        naam: 'Invalid',
+        isGeldig: false,
+      },
+    ],
+    referenceListsTableItems: {
+      countries: [
+        {
+          code: 'elb',
+          naam: 'Elbonia',
+          isGeldig: true,
+        },
+        {
+          code: 'gr',
+          naam: 'Greece',
+          isGeldig: false,
+        },
+      ],
+    },
 
     builderInfo: {
       title: 'Radio',
@@ -1585,7 +1636,32 @@ export const Select: Story = {
       data: {values: []},
       defaultValue: '',
     } satisfies SelectComponentSchema,
-
+    referenceListsTables: [
+      {
+        code: 'countries',
+        naam: 'Countries',
+        isGeldig: true,
+      },
+      {
+        code: 'invalid-table',
+        naam: 'Invalid',
+        isGeldig: false,
+      },
+    ],
+    referenceListsTableItems: {
+      countries: [
+        {
+          code: 'elb',
+          naam: 'Elbonia',
+          isGeldig: true,
+        },
+        {
+          code: 'gr',
+          naam: 'Greece',
+          isGeldig: false,
+        },
+      ],
+    },
     builderInfo: {
       title: 'Select',
       icon: 'th-list',

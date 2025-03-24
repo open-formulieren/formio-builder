@@ -59,7 +59,8 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
         component.openForms?.service || '',
         component.openForms?.code || ''
       );
-      return items ? transformItems(items, intl) : [];
+      const validItems = items?.filter(item => item.isGeldig);
+      return validItems ? transformItems(validItems, intl) : [];
     }
 
     return [];

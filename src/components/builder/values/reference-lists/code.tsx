@@ -38,7 +38,8 @@ export const ReferenceListsTableCode: React.FC = () => {
   if (error) {
     throw error;
   }
-  const _options = isTabelOptions(options) ? transformItems(options, intl) : [];
+  const validOptions = options?.filter(option => option.isGeldig);
+  const _options = isTabelOptions(validOptions) ? transformItems(validOptions, intl) : [];
 
   return (
     <Select

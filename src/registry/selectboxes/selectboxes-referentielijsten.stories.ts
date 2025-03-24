@@ -51,14 +51,14 @@ export const StoreValuesInComponent: Story = {
     await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
     const codeInput = canvas.getByLabelText('Reference lists table code');
-    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
+    await rsSelect(canvas, codeInput, 'Table 1');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
     expect(args.onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
         openForms: {
-          code: 'table2',
+          code: 'table1',
           dataSrc: 'referentielijsten',
           service: 'reference-lists',
           translations: {},
@@ -79,6 +79,11 @@ export const WithReferenceListsOptions: Story = {
           naam: 'Countries',
           isGeldig: true,
         },
+        {
+          code: 'invalid-table',
+          naam: 'Invalid',
+          isGeldig: false,
+        },
       ],
     },
   },
@@ -93,6 +98,7 @@ export const WithReferenceListsOptions: Story = {
 
     const codeInput = canvas.getByLabelText('Reference lists table code');
     await rsSelect(canvas, codeInput, 'Countries');
+    expect(canvas.queryByText('Invalid')).not.toBeInTheDocument();
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
@@ -122,7 +128,7 @@ export const SwitchToVariableResetOptions: Story = {
     await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
     const codeInput = canvas.getByLabelText('Reference lists table code');
-    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
+    await rsSelect(canvas, codeInput, 'Table 1');
 
     await rsSelect(canvas, dataSourceInput, 'From variable');
 
@@ -157,7 +163,7 @@ export const SwitchToManualResetOptions: Story = {
     await rsSelect(canvas, serviceInput, 'Reference lists 1');
 
     const codeInput = canvas.getByLabelText('Reference lists table code');
-    await rsSelect(canvas, codeInput, 'Table 2 (no longer valid)');
+    await rsSelect(canvas, codeInput, 'Table 1');
 
     await rsSelect(canvas, dataSourceInput, 'Manually fill in');
 
