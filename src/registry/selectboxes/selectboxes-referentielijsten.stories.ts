@@ -186,3 +186,17 @@ export const SwitchToManualResetOptions: Story = {
     );
   },
 };
+
+export const ServiceAndTableRequired: Story = {
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const dataSourceInput = canvas.getByLabelText('Data source');
+    await rsSelect(canvas, dataSourceInput, 'Reference lists API');
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+
+    expect(await canvas.findByText('You must select a table.')).toBeVisible();
+    expect(args.onSubmit).not.toHaveBeenCalled();
+  },
+};
