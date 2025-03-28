@@ -241,6 +241,11 @@
     "description": "Missing datetime value for fixed value validation",
     "originalDefault": "You must specify a datetime."
   },
+  "7HlMn7": {
+    "defaultMessage": "Je moet een service selecteren.",
+    "description": "Validation error for missing reference lists service",
+    "originalDefault": "You must select a service."
+  },
   "7Ldfn+": {
     "defaultMessage": "Ten opzichte van een variabele",
     "description": "Date constraint mode 'relativeToVariable' label",
@@ -1177,6 +1182,11 @@
     "defaultMessage": "Mobiel",
     "description": "Columns 'mobile' preview viewport",
     "originalDefault": "Mobile"
+  },
+  "i/P7yw": {
+    "defaultMessage": "Je moet een tabel selecteren.",
+    "description": "Validation error for missing reference lists table",
+    "originalDefault": "You must select a table."
   },
   "iOADkJ": {
     "defaultMessage": "Weergeven in overzicht",

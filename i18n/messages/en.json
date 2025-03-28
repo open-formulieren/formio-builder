@@ -239,6 +239,11 @@
     "description": "Missing datetime value for fixed value validation",
     "originalDefault": "You must specify a datetime."
   },
+  "7HlMn7": {
+    "defaultMessage": "You must select a service.",
+    "description": "Validation error for missing reference lists service",
+    "originalDefault": "You must select a service."
+  },
   "7Ldfn+": {
     "defaultMessage": "Relative to variable",
     "description": "Date constraint mode 'relativeToVariable' label",
@@ -1163,6 +1168,11 @@
     "defaultMessage": "Mobile",
     "description": "Columns 'mobile' preview viewport",
     "originalDefault": "Mobile"
+  },
+  "i/P7yw": {
+    "defaultMessage": "You must select a table.",
+    "description": "Validation error for missing reference lists table",
+    "originalDefault": "You must select a table."
   },
   "iOADkJ": {
     "defaultMessage": "Show in summary",
