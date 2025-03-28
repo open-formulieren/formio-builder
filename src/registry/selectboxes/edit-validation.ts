@@ -11,24 +11,51 @@ import {EditSchema} from '../types';
 // so we mark each aspect as optional so that *when* it is provided, we can run the
 // validation
 const buildValuesSchema = (intl: IntlShape) =>
-  z.object({
-    values: optionSchema(intl).array().min(1).optional(),
-    openForms: z.object({
-      dataSrc: z.union([
-        z.literal('manual'),
-        z.literal('variable'),
-        z.literal('referentielijsten'),
-      ]),
-      // TODO: wire up infernologic type checking
-      itemsExpression: jsonSchema.optional(),
-      service: z.string().optional(),
-      code: z.string().optional(),
-    }),
-    validate: z.object({
-      minSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
-      maxSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
-    }),
-  });
+  z
+    .object({
+      values: optionSchema(intl).array().min(1).optional(),
+      openForms: z.object({
+        dataSrc: z.union([
+          z.literal('manual'),
+          z.literal('variable'),
+          z.literal('referentielijsten'),
+        ]),
+        // TODO: wire up infernologic type checking
+        itemsExpression: jsonSchema.optional(),
+        service: z.string().optional(),
+        code: z.string().optional(),
+      }),
+      validate: z.object({
+        minSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
+        maxSelectedCount: z.null().or(z.number().int().gte(0)).optional(),
+      }),
+    })
+    .superRefine((component, ctx) => {
+      // validate the both service and table are selected when using reference lists
+      if (component?.openForms?.dataSrc === 'referentielijsten') {
+        const {service, code} = component.openForms;
+        if (!service) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['openForms', 'service'],
+            message: intl.formatMessage({
+              description: 'Validation error for missing reference lists service',
+              defaultMessage: 'You must select a service.',
+            }),
+          });
+        }
+        if (!code) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['openForms', 'code'],
+            message: intl.formatMessage({
+              description: 'Validation error for missing reference lists table',
+              defaultMessage: 'You must select a table.',
+            }),
+          });
+        }
+      }
+    });
 
 const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildValuesSchema(intl));
 
