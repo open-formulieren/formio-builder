@@ -1,5 +1,15 @@
 # Changes
 
+## 0.39.0 (2025-03-28)
+
+Small improvements release.
+
+- Upgraded to latest storybook version.
+- [`OF#5207`][OF#5207] Added missing validation for reference lists configuration in radio, select
+  and selectboxes components.
+
+[OF#5207]: https://github.com/open-formulieren/open-forms/issues/5207
+
 ## 0.38.0 (2025-03-14)
 
 Bugfix release
