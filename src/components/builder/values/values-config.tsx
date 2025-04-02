@@ -83,7 +83,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         }
         break;
       }
-      case 'referentielijsten': {
+      case 'referenceLists': {
         if (isNestedKeySet(values, name)) {
           setFieldValue(name, undefined);
         }
@@ -104,7 +104,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         <ValuesTable<T> name={name} withOptionDescription={withOptionDescription} />
       )}
       {dataSrc === 'variable' && <ItemsExpression />}
-      {dataSrc === 'referentielijsten' && (
+      {dataSrc === 'referenceLists' && (
         <>
           <ReferenceListsServiceSelect />
           <ReferenceListsTableCode />

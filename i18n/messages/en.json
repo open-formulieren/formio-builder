@@ -644,6 +644,11 @@
     "description": "Validation error for partial coordinates (lat, lng) configuration",
     "originalDefault": "You need to configure both longitude and latitude."
   },
+  "R25Vbr": {
+    "defaultMessage": "Reference lists API",
+    "description": "Data source option label for value 'referenceLists'",
+    "originalDefault": "Reference lists API"
+  },
   "RN628y": {
     "defaultMessage": "Translations for literals used in this component.",
     "description": "Tooltip for component translations.",
@@ -868,11 +873,6 @@
     "defaultMessage": "Maximum width",
     "description": "Label for 'of.image.resize.width' builder field",
     "originalDefault": "Maximum width"
-  },
-  "Y7QwvZ": {
-    "defaultMessage": "Reference lists API",
-    "description": "Data source option label for value 'referentielijsten'",
-    "originalDefault": "Reference lists API"
   },
   "Y8cmP1": {
     "defaultMessage": "Size",
@@ -1459,6 +1459,11 @@
     "description": "Label for 'prefill.attribute' builder field",
     "originalDefault": "Plugin attribute"
   },
+  "sjnifH": {
+    "defaultMessage": "{name}{isValid, select, true {} other { (no longer valid)}}",
+    "description": "Label for reference lists table or item",
+    "originalDefault": "{name}{isValid, select, true {} other { (no longer valid)}}"
+  },
   "smPv/m": {
     "defaultMessage": "{groupLabel} 3",
     "description": "Edit grid preview content description",
@@ -1508,11 +1513,6 @@
     "defaultMessage": "Error",
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
-  },
-  "ucbVst": {
-    "defaultMessage": "{naam}{isValid, select, true {} other { (no longer valid)}}",
-    "description": "Label for reference lists table or item",
-    "originalDefault": "{naam}{isValid, select, true {} other { (no longer valid)}}"
   },
   "unjdIB": {
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",

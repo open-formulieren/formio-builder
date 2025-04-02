@@ -1,6 +1,6 @@
 export interface ComponentWithReferenceLists {
   openForms?: {
-    dataSrc: 'referentielijsten';
+    dataSrc: 'referenceLists';
     service: string;
     code: string;
   };
@@ -16,12 +16,12 @@ export interface ReferenceListsServiceOption {
 
 export interface ReferenceListsTable {
   code: string;
-  naam: string;
-  isGeldig: boolean;
+  name: string;
+  isValid: boolean;
 }
 
 export interface ReferenceListsTableItem {
   code: string;
-  naam: string;
-  isGeldig: boolean;
+  name: string;
+  isValid: boolean;
 }

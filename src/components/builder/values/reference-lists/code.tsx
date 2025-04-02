@@ -9,14 +9,14 @@ import {BuilderContext} from '@/context';
 import {ComponentWithReferenceLists, ReferenceListsTable} from './types';
 import {transformItems} from './utils';
 
-function isTabelOptions(
+function isTableOptions(
   options: ReferenceListsTable[] | undefined
 ): options is ReferenceListsTable[] {
   return options !== undefined;
 }
 
 /**
- * The `ReferenceListsTableCode` component is used to specify the code of the tabel
+ * The `ReferenceListsTableCode` component is used to specify the code of the table
  * in Reference lists API for which the items will be fetched
  */
 export const ReferenceListsTableCode: React.FC = () => {
@@ -38,7 +38,7 @@ export const ReferenceListsTableCode: React.FC = () => {
   if (error) {
     throw error;
   }
-  const _options = isTabelOptions(options) ? transformItems(options, intl) : [];
+  const _options = isTableOptions(options) ? transformItems(options, intl) : [];
 
   return (
     <Select
