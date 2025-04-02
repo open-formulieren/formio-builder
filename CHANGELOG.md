@@ -1,5 +1,13 @@
 # Changes
 
+## 0.40.0 (2025-04-02)
+
+Small improvements release.
+
+- [`OF#5207`][OF#5207] Converted Dutch code to English for consistency.
+
+[OF#5207]: https://github.com/open-formulieren/open-forms/issues/5207
+
 ## 0.39.0 (2025-03-28)
 
 Small improvements release.
