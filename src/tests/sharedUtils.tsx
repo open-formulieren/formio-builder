@@ -58,13 +58,13 @@ export const DEFAULT_SERVICES: ReferenceListsServiceOption[] = [
 export const DEFAULT_REFERENCE_LISTS_TABLES: ReferenceListsTable[] = [
   {
     code: 'table1',
-    naam: 'Table 1',
-    isGeldig: true,
+    name: 'Table 1',
+    isValid: true,
   },
   {
     code: 'table2',
-    naam: 'Table 2',
-    isGeldig: false,
+    name: 'Table 2',
+    isValid: false,
   },
 ];
 
@@ -72,37 +72,37 @@ export const DEFAULT_REFERENCE_LISTS_TABLE_ITEMS: Record<string, ReferenceListsT
   table1: [
     {
       code: 'option1',
-      naam: 'Table 1, option 1',
-      isGeldig: true,
+      name: 'Table 1, option 1',
+      isValid: true,
     },
     {
       code: 'option2',
-      naam: 'Table 1, option 2',
-      isGeldig: false,
+      name: 'Table 1, option 2',
+      isValid: false,
     },
   ],
   table2: [
     {
       code: 'option1',
-      naam: 'Table 2, option 1',
-      isGeldig: true,
+      name: 'Table 2, option 1',
+      isValid: true,
     },
     {
       code: 'option2',
-      naam: 'Table 2, option 2',
-      isGeldig: true,
+      name: 'Table 2, option 2',
+      isValid: true,
     },
   ],
   countries: [
     {
       code: 'nl',
-      naam: 'The Netherlands',
-      isGeldig: true,
+      name: 'The Netherlands',
+      isValid: true,
     },
     {
       code: 'gr',
-      naam: 'Greece',
-      isGeldig: true,
+      name: 'Greece',
+      isValid: true,
     },
   ],
 };

@@ -24,7 +24,7 @@ const ReferenceListsServiceSelect: React.FC = () => {
   const {values, setFieldValue} = useFormikContext<ComponentWithReferenceLists>();
   const {getServices} = useContext(BuilderContext);
   const {value: options = [], loading} = useAsync(async () => {
-    const options = await getServices('referentielijsten');
+    const options = await getServices('referenceLists');
     if (options.length === 1 && !values?.openForms?.service) {
       setFieldValue('openForms.service', options[0].slug);
     }

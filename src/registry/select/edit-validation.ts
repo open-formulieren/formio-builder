@@ -19,11 +19,7 @@ const buildValuesSchema = (intl: IntlShape) =>
         values: optionSchema(intl).array().min(1).optional(),
       }),
       openForms: z.object({
-        dataSrc: z.union([
-          z.literal('manual'),
-          z.literal('variable'),
-          z.literal('referentielijsten'),
-        ]),
+        dataSrc: z.union([z.literal('manual'), z.literal('variable'), z.literal('referenceLists')]),
         // TODO: wire up infernologic type checking
         itemsExpression: jsonSchema.optional(),
         service: z.string().optional(),
@@ -32,7 +28,7 @@ const buildValuesSchema = (intl: IntlShape) =>
     })
     .superRefine((component, ctx) => {
       // validate the both service and table are selected when using reference lists
-      if (component?.openForms?.dataSrc === 'referentielijsten') {
+      if (component?.openForms?.dataSrc === 'referenceLists') {
         const {service, code} = component.openForms;
         if (!service) {
           ctx.addIssue({

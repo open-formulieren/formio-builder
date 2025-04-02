@@ -685,7 +685,7 @@ export const SelectBoxesReferenceLists: Story = {
       label: 'Selectboxes preview',
       description: 'A preview of the selectboxes Formio component',
       openForms: {
-        dataSrc: 'referentielijsten',
+        dataSrc: 'referenceLists',
         code: 'countries',
         service: 'reference-lists',
         translations: {},
@@ -773,7 +773,7 @@ export const RadioReferenceLists: Story = {
       label: 'Radio preview',
       description: 'A preview of the radio Formio component',
       openForms: {
-        dataSrc: 'referentielijsten',
+        dataSrc: 'referenceLists',
         code: 'countries',
         service: 'reference-lists',
         translations: {},
@@ -961,7 +961,7 @@ export const SelectVariableReferenceLists: Story = {
       dataSrc: 'values',
       dataType: 'string',
       openForms: {
-        dataSrc: 'referentielijsten',
+        dataSrc: 'referenceLists',
         code: 'countries',
         service: 'reference-lists',
         translations: {},

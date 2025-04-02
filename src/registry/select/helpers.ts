@@ -19,7 +19,7 @@ export const checkIsReferenceListsOptions = (
 ): component is SelectComponentSchema & {
   openForms: {code: string; service: string};
 } => {
-  return component.openForms.dataSrc === 'referentielijsten';
+  return component.openForms.dataSrc === 'referenceLists';
 };
 
 // A type guard is needed because TS cannot figure out it's a discriminated union

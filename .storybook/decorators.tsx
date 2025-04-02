@@ -101,16 +101,16 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
           return context?.args?.services || defaultServices;
         },
         getReferenceListsTables: async () => {
-          await sleep(context.parameters?.builder?.referentielijstenTabellenDelay || 0);
-          return context?.args?.referentielijstenTabellen || defaultReferenceListsTables;
+          await sleep(context.parameters?.builder?.referenceListsTablesDelay || 0);
+          return context?.args?.referenceListsTables || defaultReferenceListsTables;
         },
         getReferenceListsTableItems: async (_, tableCode) => {
-          await sleep(context.parameters?.builder?.referentielijstenTabelItemDelay || 0);
+          await sleep(context.parameters?.builder?.referenceListsTableItemDelay || 0);
           const itemsFromArgs = context?.args?.referenceListsTableItems as
             | Record<string, ReferenceListsTableItem[]>
             | undefined;
-          const referentielijstTabelItems = itemsFromArgs || defaultReferenceListsTableItems;
-          const items = referentielijstTabelItems[tableCode];
+          const referenceListsTableItems = itemsFromArgs || defaultReferenceListsTableItems;
+          const items = referenceListsTableItems[tableCode];
           return items;
         },
         getPrefillPlugins: async () => {

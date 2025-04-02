@@ -8,15 +8,15 @@ export function transformItems(
   intl: IntlShape
 ) {
   return items.map(item => {
-    const {code, naam, isGeldig} = item;
+    const {code, name, isValid} = item;
     return {
       value: code,
       label: intl.formatMessage(
         {
           description: 'Label for reference lists table or item',
-          defaultMessage: '{naam}{isValid, select, true {} other { (no longer valid)}}',
+          defaultMessage: '{name}{isValid, select, true {} other { (no longer valid)}}',
         },
-        {naam: naam, isValid: isGeldig}
+        {name: name, isValid: isValid}
       ),
     };
   });

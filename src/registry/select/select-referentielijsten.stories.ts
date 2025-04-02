@@ -62,7 +62,7 @@ export const StoreValuesInComponent: Story = {
       expect.objectContaining({
         openForms: {
           code: 'table2',
-          dataSrc: 'referentielijsten',
+          dataSrc: 'referenceLists',
           service: 'reference-lists',
           translations: {},
         },
@@ -114,8 +114,8 @@ export const WithReferenceListsOptions: Story = {
       defaultReferenceListsTables: [
         {
           code: 'countries',
-          naam: 'Countries',
-          isGeldig: true,
+          name: 'Countries',
+          isValid: true,
         },
       ],
     },
@@ -138,7 +138,7 @@ export const WithReferenceListsOptions: Story = {
       expect.objectContaining({
         openForms: {
           code: 'countries',
-          dataSrc: 'referentielijsten',
+          dataSrc: 'referenceLists',
           service: 'reference-lists',
           translations: {},
         },

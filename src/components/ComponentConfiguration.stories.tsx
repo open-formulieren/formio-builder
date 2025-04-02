@@ -73,16 +73,16 @@ export default {
     referenceListsTables: [
       {
         code: 'countries',
-        naam: 'Countries',
-        isGeldig: true,
+        name: 'Countries',
+        isValid: true,
       },
     ] satisfies ReferenceListsTable[],
     referenceListsTableItems: {
       countries: [
         {
           code: 'elb',
-          naam: 'Elbonia',
-          isGeldig: true,
+          name: 'Elbonia',
+          isValid: true,
         },
       ],
     } satisfies Record<string, ReferenceListsTableItem[]>,

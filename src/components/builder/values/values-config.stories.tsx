@@ -213,7 +213,7 @@ export const SelectboxesReferenceLists: SelectboxesStory = {
     formik: {
       initialValues: {
         openForms: {
-          dataSrc: 'referentielijsten',
+          dataSrc: 'referenceLists',
           code: 'table1',
           service: 'reference-lists2',
         },
@@ -276,7 +276,7 @@ export const RadioReferenceLists: RadioStory = {
     formik: {
       initialValues: {
         openForms: {
-          dataSrc: 'referentielijsten',
+          dataSrc: 'referenceLists',
           code: 'table1',
           service: 'reference-lists2',
         },
@@ -347,7 +347,7 @@ export const SelectReferenceLists: SelectStory = {
     formik: {
       initialValues: {
         openForms: {
-          dataSrc: 'referentielijsten',
+          dataSrc: 'referenceLists',
           code: 'table1',
           service: 'reference-lists2',
         },

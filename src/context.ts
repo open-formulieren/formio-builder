@@ -61,7 +61,7 @@ export interface BuilderContextType {
   getReferenceListsTables: (service: string) => Promise<ReferenceListsTable[]>;
   getReferenceListsTableItems: (
     service: string,
-    tabelCode: string
+    tableCode: string
   ) => Promise<ReferenceListsTableItem[]>;
   getPrefillPlugins: (componentType: string) => Promise<PrefillPluginOption[]>;
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
