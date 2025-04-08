@@ -105,3 +105,76 @@ export const UsingGlobalConfig: Story = {
     });
   },
 };
+
+export const TogglingShapeOptions: Story = {
+  name: 'Toggling shape options',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+      interactions: {
+        polygon: true,
+        polyline: true,
+        marker: true,
+      },
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
+    const drawingButtonsContainer = canvasElement.querySelector(
+      '.leaflet-top.leaflet-right'
+    ) as HTMLElement;
+
+    step('Initial state', () => {
+      expect(canvas.getByLabelText('Polygon')).toBeChecked();
+      expect(drawingButtonsContainer).not.toBeNull();
+
+      const drawingButtons = within(drawingButtonsContainer).getAllByRole('link');
+
+      expect(drawingButtons).toHaveLength(4);
+      expect(drawingButtons[0]).toHaveAccessibleName('Draw a polyline');
+      expect(drawingButtons[1]).toHaveAccessibleName('Draw a polygon');
+      expect(drawingButtons[2]).toHaveAccessibleName('Draw a marker');
+      expect(drawingButtons[3]).toHaveAccessibleName('Delete layers');
+    });
+
+    await step('Disabling one of the shapes', async () => {
+      await userEvent.click(canvas.getByLabelText('Polygon'));
+
+      // The checkbox for 'Polygon' should be unchecked.
+      expect(canvas.getByLabelText('Polygon')).not.toBeChecked();
+
+      const drawingButtons = within(drawingButtonsContainer).getAllByRole('link');
+
+      // The polygon button shouldn't be shown
+      expect(drawingButtons).toHaveLength(3);
+      expect(
+        within(drawingButtonsContainer).queryByRole('link', {name: 'Draw a polygon'})
+      ).toBeNull();
+
+      // All other buttons should remain visible
+      expect(drawingButtons[0]).toHaveAccessibleName('Draw a polyline');
+      expect(drawingButtons[1]).toHaveAccessibleName('Draw a marker');
+      expect(drawingButtons[2]).toHaveAccessibleName('Delete layers');
+    });
+
+    await step('Re-enabling the disabled shape', async () => {
+      await userEvent.click(canvas.getByLabelText('Polygon'));
+
+      // The 'Polygon' checkbox should be checked and all buttons should be visible.
+      expect(canvas.getByLabelText('Polygon')).toBeChecked();
+
+      const drawingButtons = within(drawingButtonsContainer).getAllByRole('link');
+
+      expect(drawingButtons).toHaveLength(4);
+      expect(drawingButtons[0]).toHaveAccessibleName('Draw a polyline');
+      expect(drawingButtons[1]).toHaveAccessibleName('Draw a polygon');
+      expect(drawingButtons[2]).toHaveAccessibleName('Draw a marker');
+      expect(drawingButtons[3]).toHaveAccessibleName('Delete layers');
+    });
+  },
+};
