@@ -5,7 +5,7 @@ const logError = (error: any, errorInfo: any) => {
   console.error(error, errorInfo);
 };
 
-interface ErrorBoundaryProps {
+export interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
@@ -14,7 +14,7 @@ interface ErrorBoundaryState {
   error: any;
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {hasError: false, error: null};

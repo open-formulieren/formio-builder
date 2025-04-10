@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {ErrorBoundary} from '@/components/ErrorBoundary';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
