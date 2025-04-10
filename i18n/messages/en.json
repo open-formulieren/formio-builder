@@ -599,6 +599,11 @@
     "description": "Column mobile size table header/label",
     "originalDefault": "Size (mobile)"
   },
+  "KMs17v": {
+    "defaultMessage": "Unfortunately something went wrong!",
+    "description": "Generic error message",
+    "originalDefault": "Unfortunately something went wrong!"
+  },
   "Kdgpxf": {
     "defaultMessage": "Longitude coordinate of the initial center point of the map.",
     "description": "Tooltip for 'initialCenter.lng' builder field",
@@ -613,6 +618,11 @@
     "defaultMessage": "The maximum number of files that can be uploaded.",
     "description": "Tooltip for 'maxNumberOfFiles' builder field",
     "originalDefault": "The maximum number of files that can be uploaded."
+  },
+  "KvSkZT": {
+    "defaultMessage": "Oops!",
+    "description": "Error boundary title",
+    "originalDefault": "Oops!"
   },
   "KwatvH": {
     "defaultMessage": "The number of rows for this text area.",

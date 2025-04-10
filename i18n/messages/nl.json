@@ -607,6 +607,11 @@
     "description": "Column mobile size table header/label",
     "originalDefault": "Size (mobile)"
   },
+  "KMs17v": {
+    "defaultMessage": "Unfortunately something went wrong!",
+    "description": "Generic error message",
+    "originalDefault": "Unfortunately something went wrong!"
+  },
   "Kdgpxf": {
     "defaultMessage": "Longitudecoordinaat waarop de kaart gecentreerd wordt.",
     "description": "Tooltip for 'initialCenter.lng' builder field",
@@ -621,6 +626,11 @@
     "defaultMessage": "Het maximaal aantal bestanden die mogen geüpload worden.",
     "description": "Tooltip for 'maxNumberOfFiles' builder field",
     "originalDefault": "The maximum number of files that can be uploaded."
+  },
+  "KvSkZT": {
+    "defaultMessage": "Oops!",
+    "description": "Error boundary title",
+    "originalDefault": "Oops!"
   },
   "KwatvH": {
     "defaultMessage": "Het aantal regels voor dit tekstvlak.",
