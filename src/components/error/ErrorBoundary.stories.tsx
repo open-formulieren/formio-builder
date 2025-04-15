@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import ErrorBoundary from '@/components/ErrorBoundary';
+import ErrorBoundary from '@/components/error/ErrorBoundary';
 
 const Nested = ({error}: {error: Error}) => {
   throw error;
@@ -16,7 +16,7 @@ const render = () => {
 };
 
 export default {
-  title: 'Generic/ErrorBoundary',
+  title: 'Generic/Error Boundary',
   render,
   component: ErrorBoundary,
   parameters: {

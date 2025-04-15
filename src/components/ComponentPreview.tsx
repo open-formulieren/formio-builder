@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import ErrorBoundary from '@/components/ErrorBoundary';
+import ErrorBoundary from '@/components/error/ErrorBoundary';
 import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
@@ -33,42 +33,40 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
   const builderContext = useContext(BuilderContext);
 
   return (
-    <ErrorBoundary>
-      <div className="card panel preview-panel">
-        <div className="card-header d-flex justify-content-between align-items-center">
-          <h4 className="card-title mb-0">
-            <FormattedMessage description="Component preview card title" defaultMessage="Preview" />
-          </h4>
-          <PreviewModeToggle previewMode={previewMode} setPreviewMode={setPreviewMode} />
-        </div>
-
-        {previewMode === 'JSON' ? (
-          <JSONEditor
-            wrapperProps={{className: 'json-editor'}}
-            value={component}
-            onChange={onComponentChange}
-            theme={builderContext.theme}
-          />
-        ) : (
-          <div className="card-body">
-            <Formik
-              enableReinitialize
-              initialValues={initialValues}
-              onSubmit={() => {
-                throw new Error("Can't submit preview form");
-              }}
-            >
-              <div
-                className={clsx('component-preview', `component-preview--${component.type}`)}
-                data-testid="componentPreview"
-              >
-                {children}
-              </div>
-            </Formik>
-          </div>
-        )}
+    <div className="card panel preview-panel">
+      <div className="card-header d-flex justify-content-between align-items-center">
+        <h4 className="card-title mb-0">
+          <FormattedMessage description="Component preview card title" defaultMessage="Preview" />
+        </h4>
+        <PreviewModeToggle previewMode={previewMode} setPreviewMode={setPreviewMode} />
       </div>
-    </ErrorBoundary>
+
+      {previewMode === 'JSON' ? (
+        <JSONEditor
+          wrapperProps={{className: 'json-editor'}}
+          value={component}
+          onChange={onComponentChange}
+          theme={builderContext.theme}
+        />
+      ) : (
+        <div className="card-body">
+          <Formik
+            enableReinitialize
+            initialValues={initialValues}
+            onSubmit={() => {
+              throw new Error("Can't submit preview form");
+            }}
+          >
+            <div
+              className={clsx('component-preview', `component-preview--${component.type}`)}
+              data-testid="componentPreview"
+            >
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </div>
+          </Formik>
+        </div>
+      )}
+    </div>
   );
 };
 
