@@ -1,5 +1,13 @@
 # Changes
 
+## 0.41.0 (2025-05-26)
+
+Feature release.
+
+- [`#225`][#225] Added Partners component for the new Family members prefill plugin.
+
+[#225]: https://github.com/open-formulieren/formio-builder/issues/225
+
 ## 0.40.0 (2025-04-02)
 
 Small improvements release.
