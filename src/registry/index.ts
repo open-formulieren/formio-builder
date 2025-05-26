@@ -21,6 +21,7 @@ import Licenseplate from './licenseplate';
 import LeafletMap from './map';
 import NpFamilyMembers from './npFamilyMembers';
 import NumberField from './number';
+import Partners from './partners';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
 import ProductPrice from './productPrice';
@@ -80,6 +81,7 @@ const REGISTRY: Registry = {
   addressNL: AddressNL,
   map: LeafletMap,
   editgrid: EditGrid,
+  partners: Partners,
   // layout
   content: Content,
   columns: Columns,

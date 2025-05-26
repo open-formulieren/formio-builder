@@ -39,6 +39,11 @@
     "description": "Tooltip for 'validate.max' builder field",
     "originalDefault": "The maximum value this field can have before the form can be submitted."
   },
+  "/kZu2e": {
+    "defaultMessage": "Initials",
+    "description": "Label for partner's initials",
+    "originalDefault": "Initials"
+  },
   "/stTVr": {
     "defaultMessage": "Geef de knoptekst om een groep te bewaren op.",
     "description": "Tooltip for 'saveRow' builder field",
@@ -535,6 +540,11 @@
     "description": "Tooltip for 'IsSensitiveData' builder field",
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
+  "JKnHMC": {
+    "defaultMessage": "Lastname",
+    "description": "Label for partner's lastname",
+    "originalDefault": "Lastname"
+  },
   "JdwEl7": {
     "defaultMessage": "JSON",
     "description": "Component 'JSON' preview mode",
@@ -586,6 +596,11 @@
     "description": "Label for 'initialCenter.lng' builder field",
     "isTranslated": true,
     "originalDefault": "Longitude"
+  },
+  "M2+MHj": {
+    "defaultMessage": "Affixes",
+    "description": "Label for partner's affixes",
+    "originalDefault": "Affixes"
   },
   "MTdKuN": {
     "defaultMessage": "Blokkeer het toevoegen/verwijderen van groepen",
@@ -925,6 +940,11 @@
     "description": "Tooltip for 'includePartners' builder field",
     "originalDefault": "Whether to add partners information to the component."
   },
+  "ZYWsHs": {
+    "defaultMessage": "Date of birth",
+    "description": "Label for partner's date of birth",
+    "originalDefault": "Date of birth"
+  },
   "aBADYT": {
     "defaultMessage": "Maximum aantal bestanden",
     "description": "Label for 'maxNumberOfFiles' builder field",
@@ -1177,6 +1197,11 @@
     "defaultMessage": "(optioneel)",
     "description": "placeholder for 'file.name' builder field",
     "originalDefault": "(optional)"
+  },
+  "hkXaC1": {
+    "defaultMessage": "BSN",
+    "description": "Label for partner's BSN",
+    "originalDefault": "BSN"
   },
   "hwsnj9": {
     "defaultMessage": "Mobiel",
