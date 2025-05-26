@@ -5,6 +5,7 @@ import {
   EditGridComponentSchema,
   FieldsetComponentSchema,
   FileComponentSchema,
+  PartnersComponentSchema,
   PhoneNumberComponentSchema,
   PostcodeComponentSchema,
   RadioComponentSchema,
@@ -1328,5 +1329,20 @@ export const LeafletMap: Story = {
     // the map should be rendered, with zoom controls
     await expect(await canvas.findByRole('button', {name: 'Zoom in'})).toBeVisible();
     await expect(await canvas.findByRole('button', {name: 'Zoom out'})).toBeVisible();
+  },
+};
+
+export const Partners: Story = {
+  name: 'Partners',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'partners',
+      key: 'partners',
+      label: 'A partners preview',
+      tooltip: 'An example for the tooltip',
+      description: 'A description for the Partners component',
+      defaultValue: [],
+    } satisfies PartnersComponentSchema,
   },
 };

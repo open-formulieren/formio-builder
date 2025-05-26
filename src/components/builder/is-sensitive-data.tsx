@@ -2,7 +2,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import {Checkbox} from '../formio';
 
-const IsSensitiveData = () => {
+const IsSensitiveData = ({disabled = false}) => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'IsSensitiveData' builder field",
@@ -19,6 +19,11 @@ const IsSensitiveData = () => {
         />
       }
       tooltip={tooltip}
+      // Note that `disabled` results in this form field not being submitted at all in traditional
+      // HTML forms. However, with Formik, the value is tracked in the React state and will
+      // still be included. Normally we'd use the `readonly` attribute, but checkboxes don't
+      // support this and require us to use `disabled`.
+      disabled={disabled}
     />
   );
 };
