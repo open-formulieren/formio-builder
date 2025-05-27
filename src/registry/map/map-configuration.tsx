@@ -18,6 +18,12 @@ const DefaultZoom: React.FC = () => {
           defaultMessage="Zoom level"
         />
       }
+      description={
+        <FormattedMessage
+          description="Description for 'defaultZoom' builder field"
+          defaultMessage="Value in whole numbers, between 1 and 13."
+        />
+      }
       tooltip={tooltip}
       step={1}
       min={TILE_LAYER_RD.minZoom}

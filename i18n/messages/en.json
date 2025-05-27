@@ -1299,6 +1299,11 @@
     "description": "Date field 'minDate' fixed value tooltip",
     "originalDefault": "The minimum date that can be picked."
   },
+  "lZp543": {
+    "defaultMessage": "Value in whole numbers, between 1 and 13.",
+    "description": "Description for 'defaultZoom' builder field",
+    "originalDefault": "Value in whole numbers, between 1 and 13."
+  },
   "loKqis": {
     "defaultMessage": "Partner 1",
     "description": "npFamilyMembers dummy option for partner",
