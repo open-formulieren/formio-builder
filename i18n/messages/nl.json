@@ -156,6 +156,11 @@
     "isTranslated": true,
     "originalDefault": "CSS class"
   },
+  "3rmiz8": {
+    "defaultMessage": "FirstNames",
+    "description": "Label for child's first names",
+    "originalDefault": "FirstNames"
+  },
   "4/cCvG": {
     "defaultMessage": "Locatie",
     "description": "Component edit form tab title for 'Location' tab",
@@ -246,6 +251,11 @@
     "description": "Missing datetime value for fixed value validation",
     "originalDefault": "You must specify a datetime."
   },
+  "7E8B/6": {
+    "defaultMessage": "Enable selection",
+    "description": "Label for 'enableSelection' builder field",
+    "originalDefault": "Enable selection"
+  },
   "7HlMn7": {
     "defaultMessage": "Je moet een service selecteren.",
     "description": "Validation error for missing reference lists service",
@@ -291,6 +301,11 @@
     "defaultMessage": "Aangeraden velden moeten in principe ingevuld worden, maar ontbrekende waarden blokkeren de voortgang niet. Dit is soms nodig voor juridische redenen. Een component kan niet tegelijk verplicht en aangeraden zijn.",
     "description": "Tooltip for 'openForms.softRequired' builder field",
     "originalDefault": "Soft required fields should be filled out, but empty values don't block the users' progress. Sometimes this is needed for legal reasons. A component cannot be hard and soft required at the same time."
+  },
+  "96yhxP": {
+    "defaultMessage": "Date of birth",
+    "description": "Label for child's date of birth",
+    "originalDefault": "Date of birth"
   },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
@@ -514,6 +529,11 @@
     "defaultMessage": "Stad afleiden",
     "description": "Label for 'deriveCity' builder field",
     "originalDefault": "Derive city"
+  },
+  "H9I1Lx": {
+    "defaultMessage": "BSN",
+    "description": "Label for child's BSN",
+    "originalDefault": "BSN"
   },
   "HNoGb8": {
     "defaultMessage": "Alleen-lezen",
@@ -1080,6 +1100,11 @@
     "defaultMessage": "Minimale datum {configured, select, false {(niet ingesteld)} other {}}",
     "description": "Date field 'minDate' validation panel title",
     "originalDefault": "Minimum date {configured, select, false {(not set)} other {}}"
+  },
+  "e09gXO": {
+    "defaultMessage": "Allow the selection of specific children that are retrieved from the external source for further processing.",
+    "description": "Tooltip for 'enableSelection' builder field",
+    "originalDefault": "Allow the selection of specific children that are retrieved from the external source for further processing."
   },
   "eAmrdi": {
     "defaultMessage": "Aan het laden...",

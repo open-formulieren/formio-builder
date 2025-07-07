@@ -5,6 +5,7 @@ import {hasOwnProperty} from '@/types';
 import AddressNL from './addressNL';
 import BSN from './bsn';
 import Checkbox from './checkbox';
+import Children from './children';
 import Columns from './columns';
 import Content from './content';
 import CosignV1 from './cosignV1';
@@ -82,6 +83,7 @@ const REGISTRY: Registry = {
   map: LeafletMap,
   editgrid: EditGrid,
   partners: Partners,
+  children: Children,
   // layout
   content: Content,
   columns: Columns,
