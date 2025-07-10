@@ -1,5 +1,9 @@
 # Changes
 
+## 0.41.1 (2025-07-10)
+
+Added missing Dutch translations.
+
 ## 0.41.0 (2025-05-26)
 
 Feature release.
