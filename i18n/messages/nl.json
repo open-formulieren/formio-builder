@@ -40,7 +40,7 @@
     "originalDefault": "The maximum value this field can have before the form can be submitted."
   },
   "/kZu2e": {
-    "defaultMessage": "Initials",
+    "defaultMessage": "Initialen",
     "description": "Label for partner's initials",
     "originalDefault": "Initials"
   },
@@ -541,7 +541,7 @@
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
   "JKnHMC": {
-    "defaultMessage": "Lastname",
+    "defaultMessage": "Achternaam",
     "description": "Label for partner's lastname",
     "originalDefault": "Lastname"
   },
@@ -598,7 +598,7 @@
     "originalDefault": "Longitude"
   },
   "M2+MHj": {
-    "defaultMessage": "Affixes",
+    "defaultMessage": "Voorvoegsels",
     "description": "Label for partner's affixes",
     "originalDefault": "Affixes"
   },
@@ -941,7 +941,7 @@
     "originalDefault": "Whether to add partners information to the component."
   },
   "ZYWsHs": {
-    "defaultMessage": "Date of birth",
+    "defaultMessage": "Geboortedatum",
     "description": "Label for partner's date of birth",
     "originalDefault": "Date of birth"
   },
@@ -1201,6 +1201,7 @@
   "hkXaC1": {
     "defaultMessage": "BSN",
     "description": "Label for partner's BSN",
+    "isTranslated": true,
     "originalDefault": "BSN"
   },
   "hwsnj9": {
