@@ -49,6 +49,8 @@ const Latitude: React.FC = () => {
       }
       tooltip={tooltip}
       placeholder="52.1326332"
+      min={-90}
+      max={90}
     />
   );
 };
@@ -76,6 +78,8 @@ const Longitude: React.FC = () => {
       }
       tooltip={tooltip}
       placeholder="5.291266"
+      min={-180}
+      max={180}
     />
   );
 };
