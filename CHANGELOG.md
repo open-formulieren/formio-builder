@@ -1,5 +1,15 @@
 # Changes
 
+## 0.42.0 (2025-07-23)
+
+Feature release.
+
+- [`#226`][#226] Added Children component for the new Family members prefill plugin.
+
+[#226]: https://github.com/open-formulieren/formio-builder/issues/226
+
+- Updated types version to 0.44.0
+
 ## 0.41.1 (2025-07-10)
 
 Added missing Dutch translations.
