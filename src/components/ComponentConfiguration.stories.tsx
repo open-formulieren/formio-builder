@@ -3103,3 +3103,48 @@ export const Partners: Story = {
     });
   },
 };
+
+export const Children: Story = {
+  render: Template,
+  name: 'type: children',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'children',
+      key: 'children',
+      label: 'Children',
+      enableSelection: false,
+      tooltip: 'An example for the tooltip',
+      description: 'A description for the Children component',
+      defaultValue: [],
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+
+    expect(canvas.getByLabelText('Label')).toHaveValue('Children');
+    await waitFor(() => {
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('children');
+    });
+    expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
+
+    await step('Change key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+      await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

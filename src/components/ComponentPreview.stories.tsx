@@ -1,6 +1,7 @@
 import {
   AddressNLComponentSchema,
   BsnComponentSchema,
+  ChildrenComponentSchema,
   CosignV2ComponentSchema,
   EditGridComponentSchema,
   FieldsetComponentSchema,
@@ -1344,5 +1345,21 @@ export const Partners: Story = {
       description: 'A description for the Partners component',
       defaultValue: [],
     } satisfies PartnersComponentSchema,
+  },
+};
+
+export const Children: Story = {
+  name: 'Children',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'children',
+      key: 'children',
+      label: 'A children preview',
+      enableSelection: false,
+      tooltip: 'An example for the tooltip',
+      description: 'A description for the Children component',
+      defaultValue: [],
+    } satisfies ChildrenComponentSchema,
   },
 };
