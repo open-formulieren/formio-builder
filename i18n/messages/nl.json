@@ -80,6 +80,11 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
+  "1U0I5C": {
+    "defaultMessage": "Firstnames",
+    "description": "Label for child's first names",
+    "originalDefault": "Firstnames"
+  },
   "1Vvryq": {
     "defaultMessage": "Bestandsnaam",
     "description": "Label for 'file.name' builder field",
@@ -155,11 +160,6 @@
     "description": "Label for 'customClass' builder field",
     "isTranslated": true,
     "originalDefault": "CSS class"
-  },
-  "3rmiz8": {
-    "defaultMessage": "FirstNames",
-    "description": "Label for child's first names",
-    "originalDefault": "FirstNames"
   },
   "4/cCvG": {
     "defaultMessage": "Locatie",
@@ -814,11 +814,6 @@
     "description": "Component edit form tab title for 'File' tab",
     "originalDefault": "File"
   },
-  "V2/ceD": {
-    "defaultMessage": "Instellingen (verouderd)",
-    "description": "Legacy text field location configuration",
-    "originalDefault": "Configuration (deprecated)"
-  },
   "V6ClU9": {
     "defaultMessage": "Indien de postcode en huisnummer ingevuld zijn, dan wordt automatisch de stad ingevuld.",
     "description": "Tooltip for 'deriveCity' builder field",
@@ -1140,11 +1135,6 @@
     "defaultMessage": "Het e-mailadres in dit veld ontvangt de bevestigingsmail.",
     "description": "Tooltip for 'confirmationRecipient' builder field",
     "originalDefault": "Email-address in this field will receive the confirmation email."
-  },
-  "fGTdJz": {
-    "defaultMessage": "Het afleiden van adres via tekstveld-componenten is verouderd. Gebruik in de plaats de 'AddressNL'-component (in de 'Speciale velden' groep).",
-    "description": "Location tab deprecation message",
-    "originalDefault": "Deriving the location via text fields is deprecated. Use the AddressNL component instead."
   },
   "fRMCJI": {
     "defaultMessage": "Prefill",
@@ -1513,6 +1503,11 @@
     "defaultMessage": "'Groep toevoegen'-tekst",
     "description": "Label for 'addAnother' builder field",
     "originalDefault": "'Add another' text"
+  },
+  "s8ercf": {
+    "defaultMessage": "Instellingen",
+    "description": "Text field location configuration",
+    "originalDefault": "Configuration"
   },
   "sR9GVQ": {
     "defaultMessage": "Indien opgegeven, dan mag de gebruiker maximaal dit aantal opties aanvinken.",
