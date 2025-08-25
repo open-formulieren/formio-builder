@@ -79,6 +79,11 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
+  "1U0I5C": {
+    "defaultMessage": "Firstnames",
+    "description": "Label for child's first names",
+    "originalDefault": "Firstnames"
+  },
   "1Vvryq": {
     "defaultMessage": "File name template",
     "description": "Label for 'file.name' builder field",
@@ -153,11 +158,6 @@
     "defaultMessage": "CSS class",
     "description": "Label for 'customClass' builder field",
     "originalDefault": "CSS class"
-  },
-  "3rmiz8": {
-    "defaultMessage": "FirstNames",
-    "description": "Label for child's first names",
-    "originalDefault": "FirstNames"
   },
   "4/cCvG": {
     "defaultMessage": "Location",
@@ -804,11 +804,6 @@
     "description": "Component edit form tab title for 'File' tab",
     "originalDefault": "File"
   },
-  "V2/ceD": {
-    "defaultMessage": "Configuration (deprecated)",
-    "description": "Legacy text field location configuration",
-    "originalDefault": "Configuration (deprecated)"
-  },
   "V6ClU9": {
     "defaultMessage": "If the postcode and house number are entered this field will autofill with the city",
     "description": "Tooltip for 'deriveCity' builder field",
@@ -1128,11 +1123,6 @@
     "defaultMessage": "Email-address in this field will receive the confirmation email.",
     "description": "Tooltip for 'confirmationRecipient' builder field",
     "originalDefault": "Email-address in this field will receive the confirmation email."
-  },
-  "fGTdJz": {
-    "defaultMessage": "Deriving the location via text fields is deprecated. Use the AddressNL component instead.",
-    "description": "Location tab deprecation message",
-    "originalDefault": "Deriving the location via text fields is deprecated. Use the AddressNL component instead."
   },
   "fRMCJI": {
     "defaultMessage": "Prefill",
@@ -1493,6 +1483,11 @@
     "defaultMessage": "'Add another' text",
     "description": "Label for 'addAnother' builder field",
     "originalDefault": "'Add another' text"
+  },
+  "s8ercf": {
+    "defaultMessage": "Configuration",
+    "description": "Text field location configuration",
+    "originalDefault": "Configuration"
   },
   "sR9GVQ": {
     "defaultMessage": "If specified, the user must check at most this many options.",

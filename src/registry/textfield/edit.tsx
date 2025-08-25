@@ -132,23 +132,14 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
 
       {/* Location tab */}
       <TabPanel>
-        <p>
-          <i className="fa fa-circle-info" />
-          &nbsp;
-          <FormattedMessage
-            description="Location tab deprecation message"
-            defaultMessage="Deriving the location via text fields is deprecated. Use the AddressNL component instead."
-          />
-        </p>
         <Panel
           title={
             <FormattedMessage
-              description="Legacy text field location configuration"
-              defaultMessage="Configuration (deprecated)"
+              description="Text field location configuration"
+              defaultMessage="Configuration"
             />
           }
           collapsible
-          initialCollapsed
         >
           <DeriveStreetName />
           <DeriveCity />
