@@ -1,5 +1,11 @@
 # Changes
 
+## 0.43.0 (2025-08-25)
+
+- [`OF#5439`][OF#5439] Removed deprecation warning for textfield location derivation.
+
+[OF#5439]: https://github.com/open-formulieren/open-forms/issues/5439
+
 ## 0.42.0 (2025-07-23)
 
 Feature release.
