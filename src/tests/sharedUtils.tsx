@@ -5,7 +5,7 @@ import {
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import type {DocumentTypeOption, MapTileLayer, SelectOption} from '@/context';
+import type {DocumentTypeOption, MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
 import {AnyComponentSchema} from '@/types';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
@@ -319,6 +319,21 @@ export const DEFAULT_MAP_TILE_LAYERS: MapTileLayer[] = [
     identifier: 'luchtfoto',
     url: 'https://service.pdok.nl/hwh/luchtfotorgb/wmts/v1_0/Actueel_orthoHR/EPSG:28992/{z}/{x}/{y}.png',
     label: 'Luchtfoto',
+  },
+];
+
+export const DEFAULT_MAP_OVERLAY_TILE_LAYERS: MapOverlayTileLayer[] = [
+  {
+    name: 'PDOK BAG',
+    uuid: 'f57405dc-1796-4f5b-8ad4-c98eb8511110',
+    type: 'wms',
+    url: 'https://service.pdok.nl/lv/bag/wms/v2_0?request=getCapabilities&service=WMS',
+  },
+  {
+    name: 'PDOK grondwaterspiegeldiepte',
+    uuid: '71c73427-c792-43ec-b25e-7f4f3e043fbd',
+    type: 'wms',
+    url: 'https://service.pdok.nl/bzk/bro-grondwaterspiegeldiepte/wms/v2_0?request=getCapabilities&service=WMS',
   },
 ];
 
