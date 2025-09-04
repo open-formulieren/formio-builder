@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
-import {BuilderContext} from '@/context';
+import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -11,6 +11,7 @@ import {
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
+  DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
@@ -85,7 +86,16 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         uniquifyKey: key => key,
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
-        getMapTileLayers: async () => DEFAULT_MAP_TILE_LAYERS,
+        getMapTileLayers: async () => {
+          const itemsFromArgs = context?.args?.mapTileLayers as MapTileLayer[] | undefined;
+          return itemsFromArgs || DEFAULT_MAP_TILE_LAYERS;
+        },
+        getMapOverlayTileLayers: async () => {
+          const itemsFromArgs = context?.args?.mapOverlayTileLayers as
+            | MapOverlayTileLayer[]
+            | undefined;
+          return itemsFromArgs || DEFAULT_MAP_OVERLAY_TILE_LAYERS;
+        },
         theme,
         getFormComponents: () => context?.args?.componentTree || defaultComponentTree,
         getValidatorPlugins: async () => {

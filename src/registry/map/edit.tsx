@@ -28,6 +28,7 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import MapConfiguration from './map-configuration';
+import Overlays from './overlays';
 
 /**
  * Form to configure a Formio 'map' type component.
@@ -72,13 +73,18 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'useConfigDefaultMapSettings',
             'defaultZoom',
             'initialCenter',
-            'tileLayerIdentifier',
             'interactions'
           )}
         >
           <FormattedMessage
             description="Component edit form tab title for 'Map settings' tab"
             defaultMessage="Map settings"
+          />
+        </Tab>
+        <Tab hasErrors={hasAnyError('tileLayerIdentifier', 'overlays')}>
+          <FormattedMessage
+            description="Component edit form tab title for 'Layers' tab"
+            defaultMessage="Layers"
           />
         </Tab>
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
@@ -111,10 +117,15 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
 
       {/* Map settings tab */}
       <TabPanel>
-        <TileLayer />
         <InteractionConfiguration />
         <UseConfigDefaultMapSettings />
         {!values.useConfigDefaultMapSettings && <MapConfiguration />}
+      </TabPanel>
+
+      {/* Map layers tab */}
+      <TabPanel>
+        <TileLayer />
+        <Overlays />
       </TabPanel>
 
       {/* Registration tab */}
