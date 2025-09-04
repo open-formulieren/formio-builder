@@ -1,9 +1,10 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, within} from '@storybook/test';
+import {expect, userEvent, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
 import Select from './select';
+import {rsSelect} from '@/utils/storybookTestHelpers';
 
 export default {
   title: 'Formio/Components/Select',
@@ -86,6 +87,55 @@ export const Multi: Story = {
     await expect(canvas.queryByText('Option 1')).toBeInTheDocument();
     await expect(canvas.queryByText('Option 2')).not.toBeInTheDocument();
     await expect(canvas.queryByText('Option 3')).toBeInTheDocument();
+  },
+};
+
+export const ChangeOrderOfMultiOptions: Story = {
+  parameters: {
+    formik: {
+      initialValues: {'my-select': ['opt-1', 'opt-3']},
+    },
+  },
+
+  args: {
+    isMulti: true,
+    options: [
+      {value: 'opt-1', label: 'Option 1'},
+      {value: 'opt-2', label: 'Option 2'},
+      {value: 'opt-3', label: 'Option 3'},
+    ],
+  },
+
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await step('Initial state', () => {
+      const allSelectedOption = canvasElement.querySelectorAll('.formio-builder-select__multi-value__label');
+
+      expect(allSelectedOption).toHaveLength(2);
+
+      expect(allSelectedOption[0]).toHaveTextContent("Option 1");
+      expect(allSelectedOption[1]).toHaveTextContent("Option 3");
+    });
+
+    await step('Deselect and then re-select Option 1', async () => {
+      // Remove option 1
+      const removeOptionButton = canvas.getByRole('button', {name: "Remove Option 1"});
+      await userEvent.click(removeOptionButton);
+
+      // Select Option 1
+      const selectElement = canvas.getByLabelText("My Select");
+      await rsSelect(canvas, selectElement, 'Option 1');
+    });
+
+    await step('Re-ordered state', () => {
+      const allSelectedOption = canvasElement.querySelectorAll('.formio-builder-select__multi-value__label');
+
+      expect(allSelectedOption).toHaveLength(2);
+
+      expect(allSelectedOption[0]).toHaveTextContent("Option 3");
+      expect(allSelectedOption[1]).toHaveTextContent("Option 1");
+    });
   },
 };
 
