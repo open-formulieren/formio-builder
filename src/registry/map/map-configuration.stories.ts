@@ -9,10 +9,13 @@ import {
 } from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
+import {BuilderContextDecorator} from '@/sb-decorators';
+import {rsSelect} from '@/utils/storybookTestHelpers';
 
 export default {
   title: 'Builder components/Map/Configuration',
   component: ComponentEditForm,
+  decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
   },
@@ -175,6 +178,209 @@ export const TogglingShapeOptions: Story = {
       expect(drawingButtons[1]).toHaveAccessibleName('Draw a polygon');
       expect(drawingButtons[2]).toHaveAccessibleName('Draw a marker');
       expect(drawingButtons[3]).toHaveAccessibleName('Delete layers');
+    });
+  },
+};
+
+export const AddOverlay: Story = {
+  name: 'Add overlay',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
+
+    // Expect that the overlay button isn't show in the preview, as there aren't any
+    // configured overlays.
+    expect(canvas.queryByRole('button', {name: 'Layers'})).not.toBeInTheDocument();
+
+    await step('Add WMS overlay layer', async () => {
+      const addOverlayButton = canvas.getByRole('button', {name: 'Add another overlay'});
+      await userEvent.click(addOverlayButton);
+
+      const wmsLayerSelect = canvas.getByLabelText('Tile layer');
+      const labelInput = canvas.getByLabelText('Label');
+      const subLayersSelect = canvas.getAllByLabelText('Layers')[1];
+
+      await rsSelect(canvas, wmsLayerSelect, 'PDOK BAG');
+      await userEvent.type(labelInput, 'BAG pand layer');
+      await rsSelect(canvas, subLayersSelect, 'Pand');
+    });
+
+    await step('Expect new overlay to be active', async () => {
+      const wmsLayerButtonsContainer = canvas.getByRole('button', {name: 'Layers'});
+
+      expect(wmsLayerButtonsContainer).toBeVisible();
+      await userEvent.click(wmsLayerButtonsContainer);
+
+      const layerCheckbox = canvas.getByLabelText('BAG pand layer');
+      expect(layerCheckbox).toBeVisible();
+      expect(layerCheckbox).toBeChecked();
+    });
+  },
+};
+
+export const ChangeOverlaysOrder: Story = {
+  name: 'Change overlays order',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+      overlays: [
+        {
+          uuid: 'f57405dc-1796-4f5b-8ad4-c98eb8511110',
+          label: 'BAG pand layer',
+          type: 'wms',
+          layers: ['pand'],
+          // url is part of the schema, but doesn't exist in this scenario
+          url: '',
+        },
+        {
+          uuid: '71c73427-c792-43ec-b25e-7f4f3e043fbd',
+          label: 'grondwaterspiegeldiepte layer',
+          type: 'wms',
+          layers: ['BRO Grondwaterspiegeldiepte GHG'],
+          // url is part of the schema, but doesn't exist in this scenario
+          url: '',
+        },
+      ],
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
+
+    const wmsLayersMenuButton = canvas.getByRole('button', {name: 'Layers'});
+    const wmsLayersMenuElement = canvasElement.querySelector(
+      '.leaflet-control-layers.leaflet-control'
+    );
+    const wmsLayersMenu = within(wmsLayersMenuElement as HTMLElement);
+
+    expect(wmsLayersMenuButton).toBeVisible();
+    expect(wmsLayersMenu).toBeVisible();
+
+    await step('Initial state', async () => {
+      // Open the layers menu
+      await userEvent.click(wmsLayersMenuButton);
+
+      const layerCheckboxes = wmsLayersMenu.getAllByRole('checkbox');
+      const pandLayer = wmsLayersMenu.getByRole('checkbox', {
+        name: 'BAG pand layer',
+      });
+      const grondwaterLayer = wmsLayersMenu.getByRole('checkbox', {
+        name: 'grondwaterspiegeldiepte layer',
+      });
+
+      // The layer menu has exactly 2 checkboxes
+      expect(layerCheckboxes).toHaveLength(2);
+
+      // Expect both checkboxes to be checked
+      expect(pandLayer).toBeChecked();
+      expect(grondwaterLayer).toBeChecked();
+
+      // Expect the pand layer to be the first layer
+      expect(layerCheckboxes[0]).toBe(pandLayer);
+      expect(layerCheckboxes[1]).toBe(grondwaterLayer);
+
+      // Check config fields
+      const overlayCards = canvas.queryAllByText(/Overlay: .*?/);
+
+      expect(overlayCards).toHaveLength(2);
+
+      // Expect the first overlay config to be for 'BAG pand layer'
+      expect(overlayCards[0]).toHaveTextContent('Overlay: BAG pand layer');
+      expect(overlayCards[1]).toHaveTextContent('Overlay: grondwaterspiegeldiepte layer');
+    });
+
+    await step('Change order', async () => {
+      // Click the 'move down' button of the first overlay card
+      const moveDownButton = canvas.getAllByRole('button', {name: 'Move down'})[0];
+      await userEvent.click(moveDownButton);
+    });
+
+    await step('Make sure the order has changed', async () => {
+      // Check the order of the config panels
+      const overlayCards = canvas.queryAllByText(/Overlay: .*?/);
+
+      // Expect the first overlay config to be for 'grondwaterspiegeldiepte layer'
+      expect(overlayCards[0]).toHaveTextContent('Overlay: grondwaterspiegeldiepte layer');
+      expect(overlayCards[1]).toHaveTextContent('Overlay: BAG pand layer');
+
+      const layerCheckboxes = wmsLayersMenu.getAllByRole('checkbox');
+      const pandLayer = wmsLayersMenu.getByRole('checkbox', {
+        name: 'BAG pand layer',
+      });
+      const grondwaterLayer = wmsLayersMenu.getByRole('checkbox', {
+        name: 'grondwaterspiegeldiepte layer',
+      });
+
+      // Expect grondwaterspiegeldiepte layer to be the first layer
+      expect(layerCheckboxes[0]).toBe(grondwaterLayer);
+      expect(layerCheckboxes[1]).toBe(pandLayer);
+    });
+  },
+};
+
+export const DeleteOverlay: Story = {
+  name: 'Delete overlay',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+      overlays: [
+        {
+          uuid: 'f57405dc-1796-4f5b-8ad4-c98eb8511110',
+          label: 'BAG pand layer',
+          type: 'wms',
+          layers: ['pand'],
+          // url is part of the schema, but doesn't exist in this scenario
+          url: '',
+        },
+      ],
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
+
+    await step('Initial state', async () => {
+      // Check preview checkboxes
+      const wmsLayerButtonsContainer = canvas.getByRole('button', {name: 'Layers'});
+
+      expect(wmsLayerButtonsContainer).toBeVisible();
+      await userEvent.click(wmsLayerButtonsContainer);
+
+      const layerCheckbox = canvas.getByLabelText('BAG pand layer');
+
+      expect(layerCheckbox).toBeChecked();
+    });
+
+    await step('Delete overlay layer', async () => {
+      const header = canvas.getByText('Overlay: BAG pand layer');
+      await userEvent.click(header);
+
+      const deleteButton = canvas.getByRole('button', {name: 'Remove overlay'});
+      await userEvent.click(deleteButton);
+    });
+
+    await step('Check if overlay layer is deleted', async () => {
+      const header = canvas.queryByText('Overlay: BAG pand layer');
+      expect(header).not.toBeInTheDocument();
+
+      // With no layers, the layers menu button in the preview should be gone
+      const wmsLayerButtonsContainer = canvas.queryByRole('button', {name: 'Layers'});
+      expect(wmsLayerButtonsContainer).not.toBeInTheDocument();
     });
   },
 };
