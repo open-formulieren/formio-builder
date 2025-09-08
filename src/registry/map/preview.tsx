@@ -19,7 +19,7 @@ import {BuilderContext} from '@/context';
 import {ComponentPreviewProps} from '@/registry/types';
 
 import './previews.scss';
-import type {Overlay} from './types';
+import type {OverlayWithoutUrl} from './types';
 
 interface MapViewProps {
   lat: number;
@@ -36,7 +36,7 @@ const MapView: React.FC<MapViewProps> = ({lat, lng, zoom}) => {
 };
 
 interface TileLayerControlProps {
-  overlay: Overlay;
+  overlay: OverlayWithoutUrl;
   url: string;
   index: number;
 }
@@ -55,7 +55,7 @@ const WMSTileLayerControl: React.FC<TileLayerControlProps> = ({index, overlay, u
 );
 
 const overlayLayerControls: Partial<
-  Record<Overlay['type'], React.ElementType<TileLayerControlProps>>
+  Record<OverlayWithoutUrl['type'], React.ElementType<TileLayerControlProps>>
 > = {
   wms: WMSTileLayerControl,
 };
@@ -101,7 +101,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
   const {lat = 52.1326332, lng = 5.291266} = initialCenter;
   const zoom = defaultZoom ?? 8;
 
-  const overlayUrl = (overlay: Overlay): string | null => {
+  const overlayUrl = (overlay: OverlayWithoutUrl): string | null => {
     return overlayTileLayersData.find(tileLayer => tileLayer.uuid === overlay.uuid)?.url ?? '';
   };
 
@@ -143,7 +143,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
         {overlaysToDisplay?.length && (
           <LayersControl position="topright">
-            {overlaysToDisplay.map((layer: Overlay, index: number) => {
+            {overlaysToDisplay.map((layer: OverlayWithoutUrl, index: number) => {
               const Component = overlayLayerControls[layer.type];
               const url = overlayUrl(layer);
               if (!url) {

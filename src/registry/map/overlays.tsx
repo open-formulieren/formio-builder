@@ -9,12 +9,12 @@ import type {Option} from '@/components/formio/selectboxes';
 import {BuilderContext, type MapOverlayTileLayer} from '@/context';
 
 import './overlays.scss';
-import type {Overlay} from './types';
+import type {OverlayWithoutUrl} from './types';
 
 const Overlays: React.FC = () => {
   const intl = useIntl();
   const {getMapOverlayTileLayers} = useContext(BuilderContext);
-  const [{value}] = useField<Overlay[]>('overlays');
+  const [{value}] = useField<OverlayWithoutUrl[]>('overlays');
   const {
     value: overlayTileLayers,
     loading,
@@ -65,7 +65,7 @@ const Overlays: React.FC = () => {
                     label: '',
                     type: 'wms', // We currently only support WMS tile layers.
                     layers: [],
-                  } satisfies Overlay)
+                  } satisfies OverlayWithoutUrl)
                 }
               >
                 <i className="fa fa-plus" aria-hidden="true" />{' '}
@@ -129,7 +129,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
 
   const numOptions = getFieldProps<Option[]>('overlays').value?.length || 0;
   const {value} = getFieldProps(fieldNamePrefix);
-  const {setValue} = getFieldHelpers<Overlay>(fieldNamePrefix);
+  const {setValue} = getFieldHelpers<OverlayWithoutUrl>(fieldNamePrefix);
   const selectedTileLayerUrl = overlayTileLayers?.find(
     tileLayer => tileLayer.uuid === value.uuid
   )?.url;

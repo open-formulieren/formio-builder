@@ -1,3 +1,4 @@
 import type {MapComponentSchema} from '@open-formulieren/types';
 
-export type Overlay = NonNullable<MapComponentSchema['overlays']>[number];
+// The type definition of a singular overlay, without the url
+export type OverlayWithoutUrl = Omit<NonNullable<MapComponentSchema['overlays']>[number], 'url'>;
