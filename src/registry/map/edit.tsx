@@ -222,8 +222,8 @@ const TileLayer: React.FC = () => {
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'tileLayerIdentifier' builder field",
     defaultMessage:
-      'The tile layer is responsible for showing the map background. ' +
-      'This effects the map style at particular coordinates and zoom levels.',
+      'Optionally specify an alternative background layer for the map component. ' +
+      'This affects the map style at particular coordinates and zoom levels.',
   });
   return (
     <Select
@@ -231,7 +231,7 @@ const TileLayer: React.FC = () => {
       label={
         <FormattedMessage
           description="Label for 'tileLayerIdentifier' builder field"
-          defaultMessage="Tile layer"
+          defaultMessage="Background"
         />
       }
       isClearable
