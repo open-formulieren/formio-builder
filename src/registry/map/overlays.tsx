@@ -5,9 +5,9 @@ import useAsync from 'react-use/esm/useAsync';
 
 import Loader from '@/components/builder/loader';
 import {Component, Panel, Select, TextField} from '@/components/formio';
-import type {Option} from '@/components/formio/selectboxes';
 import {BuilderContext, type MapOverlayTileLayer} from '@/context';
 
+import {getWMSLayerOptions} from './getTileLayerOptions';
 import './overlays.scss';
 import type {OverlayWithoutUrl} from './types';
 
@@ -82,36 +82,6 @@ const Overlays: React.FC = () => {
   );
 };
 
-const getWMSLayerOptionsByWMSUrl = async (
-  wmsTileLayerUrl: string | undefined
-): Promise<Option[]> => {
-  if (!wmsTileLayerUrl) {
-    return [];
-  }
-
-  const wmsLayerUrl = new URL(`${wmsTileLayerUrl}?request=getCapabilities&service=WMS`);
-  return await fetch(wmsLayerUrl)
-    .then(response => response.text())
-    .then(text => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(text, 'text/xml');
-
-      const layerOptions: Option[] = [];
-      doc.querySelectorAll('Layer > Layer').forEach(layerElement => {
-        const layerIdentifier = layerElement.querySelector('Name')?.innerHTML;
-        if (!layerIdentifier) {
-          return;
-        }
-
-        layerOptions.push({
-          value: layerIdentifier,
-          label: layerElement.querySelector('Title')?.innerHTML || layerIdentifier,
-        });
-      });
-      return layerOptions;
-    });
-};
-
 interface OverlayTileLayerProps {
   index: number;
   arrayHelpers: FieldArrayRenderProps;
@@ -127,7 +97,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
   const fieldNamePrefix = `overlays[${index}]`;
   const {getFieldProps, getFieldHelpers} = useFormikContext();
 
-  const numOptions = getFieldProps<Option[]>('overlays').value?.length || 0;
+  const numOptions = getFieldProps<OverlayWithoutUrl[]>('overlays').value?.length || 0;
   const {value} = getFieldProps(fieldNamePrefix);
   const {setValue} = getFieldHelpers<OverlayWithoutUrl>(fieldNamePrefix);
   const selectedTileLayerUrl = overlayTileLayers?.find(
@@ -139,7 +109,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
     loading,
     error,
   } = useAsync(async () => {
-    return selectedTileLayerUrl ? await getWMSLayerOptionsByWMSUrl(selectedTileLayerUrl) : [];
+    return selectedTileLayerUrl ? await getWMSLayerOptions(selectedTileLayerUrl) : [];
   }, [selectedTileLayerUrl]);
   if (error) {
     throw error;
