@@ -75,6 +75,11 @@
     "isTranslated": true,
     "originalDefault": "{groupLabel} 2"
   },
+  "0eRdLf": {
+    "defaultMessage": "Layers",
+    "description": "Component edit form tab title for 'Layers' tab",
+    "originalDefault": "Layers"
+  },
   "0gbtNe": {
     "defaultMessage": "Maanden",
     "description": "Label for 'delta.months' in relative delta date constraint validation",
@@ -250,6 +255,16 @@
     "defaultMessage": "Je moet een datum en tijd opgeven.",
     "description": "Missing datetime value for fixed value validation",
     "originalDefault": "You must specify a datetime."
+  },
+  "6jI29r": {
+    "defaultMessage": "The overlay is used to show additional map information on top of the map background. This uses tile layers as information source.",
+    "description": "Tooltip for the 'overlays' builder field",
+    "originalDefault": "The overlay is used to show additional map information on top of the map background. This uses tile layers as information source."
+  },
+  "74r2X8": {
+    "defaultMessage": "Add another overlay",
+    "description": "'overlays' builder field 'add another overlay' button label",
+    "originalDefault": "Add another overlay"
   },
   "7E8B/6": {
     "defaultMessage": "Enable selection",
@@ -642,6 +657,11 @@
     "description": "Tooltip for 'footer' builder field",
     "originalDefault": "A short instruction shown below the signature pad."
   },
+  "OFlBqy": {
+    "defaultMessage": "Overlays",
+    "description": "Label for the 'overlays' builder field",
+    "originalDefault": "Overlays"
+  },
   "OlPsaw": {
     "defaultMessage": "Foutcode",
     "description": "Label for translation of validation error code",
@@ -672,11 +692,6 @@
     "defaultMessage": "Geef een bestandsgrootte groter dan nul zonder decimalen op, bijvoorbeeld '10MB'.",
     "description": "File component 'fileMaxSize' validation error",
     "originalDefault": "Specify a positive, non-zero file size without decimals, e.g. 10MB."
-  },
-  "Qd9qN8": {
-    "defaultMessage": "Kaartlaag",
-    "description": "Label for 'tileLayerIdentifier' builder field",
-    "originalDefault": "Tile layer"
   },
   "Qjl92W": {
     "defaultMessage": "Voorbeeld",
@@ -774,6 +789,11 @@
     "isTranslated": true,
     "originalDefault": "Plugin(s)"
   },
+  "UDHbKX": {
+    "defaultMessage": "Label",
+    "description": "Map 'overlays' configuration: label for label",
+    "originalDefault": "Label"
+  },
   "UGLnLd": {
     "defaultMessage": "Selecteer de plugin(s) om te gebruiken voor validatie.",
     "description": "Tooltip for 'validate.plugins' builder field",
@@ -818,6 +838,11 @@
     "defaultMessage": "Indien de postcode en huisnummer ingevuld zijn, dan wordt automatisch de stad ingevuld.",
     "description": "Tooltip for 'deriveCity' builder field",
     "originalDefault": "If the postcode and house number are entered this field will autofill with the city"
+  },
+  "V6JFeE": {
+    "defaultMessage": "Move down",
+    "description": "Map 'overlays' configuration panel: move layer down",
+    "originalDefault": "Move down"
   },
   "VNGD7o": {
     "defaultMessage": "Maximaal aantal aangevinkte opties (bijv. 1)",
@@ -1106,6 +1131,11 @@
     "description": "Loading content text",
     "originalDefault": "Loading..."
   },
+  "eEqSUK": {
+    "defaultMessage": "Layers",
+    "description": "Map 'overlays' configuration: label for layers",
+    "originalDefault": "Layers"
+  },
   "eUowhH": {
     "defaultMessage": "'Groep bewaren'-tekst",
     "description": "Label for 'saveRow' builder field",
@@ -1136,6 +1166,11 @@
     "description": "Tooltip for 'confirmationRecipient' builder field",
     "originalDefault": "Email-address in this field will receive the confirmation email."
   },
+  "fB4Vug": {
+    "defaultMessage": "Background",
+    "description": "Label for 'tileLayerIdentifier' builder field",
+    "originalDefault": "Background"
+  },
   "fRMCJI": {
     "defaultMessage": "Prefill",
     "description": "Component edit form tab title for 'Prefill' tab",
@@ -1156,6 +1191,11 @@
     "defaultMessage": "Informatieobjecttype",
     "description": "Label for 'registration.informatieobjecttype' builder field",
     "originalDefault": "Information object type"
+  },
+  "faAkZs": {
+    "defaultMessage": "Remove overlay",
+    "description": "Map 'overlays' configuration: label for delete overlay button",
+    "originalDefault": "Remove overlay"
   },
   "fagx6e": {
     "defaultMessage": "Verberg de titel/het label van dit component in het formulier.",
@@ -1438,6 +1478,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the city field value must pass before the form can be submitted."
   },
+  "p/KSh+": {
+    "defaultMessage": "Move up",
+    "description": "Map 'overlays' configuration panel: move layer up",
+    "originalDefault": "Move up"
+  },
   "p7g2h+": {
     "defaultMessage": "Nog één toevoegen",
     "description": "Add another option button label",
@@ -1545,6 +1590,11 @@
     "description": "productPrice dummy option",
     "originalDefault": "option 1: € 10,99"
   },
+  "t10YHv": {
+    "defaultMessage": "Tile layer",
+    "description": "Map 'overlays' configuration: label for tile layer",
+    "originalDefault": "Tile layer"
+  },
   "tU1UVF": {
     "defaultMessage": "De minimale tijd die gekozen kan worden.",
     "description": "Tooltip for 'validate.minTime' builder field",
@@ -1635,10 +1685,10 @@
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
   },
-  "xbUkMg": {
-    "defaultMessage": "De kaartlaag bepaalt de achtergrond van het kaartmateriaal voor verschillende coördinaten en zoomniveaus.",
-    "description": "Tooltip for 'tileLayerIdentifier' builder field",
-    "originalDefault": "The tile layer is responsible for showing the map background. This effects the map style at particular coordinates and zoom levels."
+  "xrfkiI": {
+    "defaultMessage": "Overlay: {overlayName}",
+    "description": "Map 'overlays' configuration panel title",
+    "originalDefault": "Overlay: {overlayName}"
   },
   "xxVNeU": {
     "defaultMessage": "Zoomniveau",
@@ -1659,6 +1709,11 @@
     "defaultMessage": "Vertalingen",
     "description": "Translations: translation column header",
     "originalDefault": "Translations"
+  },
+  "yQ7wJc": {
+    "defaultMessage": "This field is used to alter the map component background. This effects the map style at particular coordinates and zoom levels.",
+    "description": "Tooltip for 'tileLayerIdentifier' builder field",
+    "originalDefault": "This field is used to alter the map component background. This effects the map style at particular coordinates and zoom levels."
   },
   "yQUV3M": {
     "defaultMessage": "RSIN van de organisatie die document registreert in de Documenten API. Indien leeg, dan worden algemene instellingen gebruikt.",

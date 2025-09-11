@@ -1,0 +1,26 @@
+// bootstrap/scss/functions is needed for functions in the variables file.
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+.offb-panel-header-collapse-trigger {
+  align-self: normal;
+  align-content: center;
+
+  // Add negative margin and positive padding, to make the trigger fit the entire
+  // `.card-header` parent.
+  // The end result is a container that fits its parent completely, almost as if the
+  // trigger container isn't even there.
+  margin-inline-start: -#{$card-spacer-x};
+  margin-block: -#{$card-spacer-y};
+  padding-inline-start: $card-spacer-x;
+  padding-block: $card-spacer-y;
+
+  flex-grow: 1;
+
+  // If `.card-header-collapse-trigger` has a sibling we should keep some space between
+  // them. If not, it can also adjust the spacing at the end of the card header.
+  &:last-child {
+    margin-inline-end: -#{$card-spacer-x};
+    padding-inline-end: $card-spacer-x;
+  }
+}

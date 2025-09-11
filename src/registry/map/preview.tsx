@@ -1,8 +1,15 @@
 import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
-import {MapComponentSchema} from '@open-formulieren/types';
-import type {FeatureGroup as LeafletFeatureGroup} from 'leaflet';
+import type {MapComponentSchema} from '@open-formulieren/types';
+import type {DrawEvents, FeatureGroup as LeafletFeatureGroup} from 'leaflet';
 import {useContext, useLayoutEffect, useRef} from 'react';
-import {FeatureGroup, MapContainer, TileLayer, useMap} from 'react-leaflet';
+import {
+  FeatureGroup,
+  LayersControl,
+  MapContainer,
+  TileLayer,
+  WMSTileLayer,
+  useMap,
+} from 'react-leaflet';
 import {EditControl} from 'react-leaflet-draw';
 import useAsync from 'react-use/esm/useAsync';
 
@@ -12,6 +19,7 @@ import {BuilderContext} from '@/context';
 import {ComponentPreviewProps} from '@/registry/types';
 
 import './previews.scss';
+import type {OverlayWithoutUrl} from './types';
 
 interface MapViewProps {
   lat: number;
@@ -25,6 +33,31 @@ const MapView: React.FC<MapViewProps> = ({lat, lng, zoom}) => {
     map.setView([lat, lng], zoom);
   }, [map, lat, lng, zoom]);
   return null;
+};
+
+interface TileLayerControlProps {
+  overlay: OverlayWithoutUrl;
+  url: string;
+  index: number;
+}
+
+const WMSTileLayerControl: React.FC<TileLayerControlProps> = ({index, overlay, url}) => (
+  <LayersControl.Overlay name={overlay.label} key={`${index}-${overlay.label}`} checked>
+    <WMSTileLayer
+      url={url}
+      params={{
+        format: 'image/png',
+        layers: overlay.layers.join(','),
+        transparent: true,
+      }}
+    />
+  </LayersControl.Overlay>
+);
+
+const overlayLayerControls: Partial<
+  Record<OverlayWithoutUrl['type'], React.ElementType<TileLayerControlProps>>
+> = {
+  wms: WMSTileLayerControl,
 };
 
 /**
@@ -45,10 +78,15 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     initialCenter = {},
     tileLayerIdentifier,
     interactions,
+    overlays,
   } = component;
-  const {getMapTileLayers} = useContext(BuilderContext);
+  const {getMapTileLayers, getMapOverlayTileLayers} = useContext(BuilderContext);
   const featureGroupRef = useRef<LeafletFeatureGroup>(null);
-  const {value: tileLayers, loading, error} = useAsync(async () => await getMapTileLayers(), []);
+  const {
+    value: [tileLayers, overlayTileLayersData] = [[], []],
+    loading,
+    error,
+  } = useAsync(async () => await Promise.all([getMapTileLayers(), getMapOverlayTileLayers()]), []);
   if (error) {
     throw error;
   }
@@ -56,20 +94,27 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     return <Loader />;
   }
 
+  // We should only display overlay tile layers that have an uuid.
+  const overlaysToDisplay = overlays?.filter(layer => !!layer?.uuid);
+
   const {required = false} = validate;
   const {lat = 52.1326332, lng = 5.291266} = initialCenter;
   const zoom = defaultZoom ?? 8;
+
+  const overlayUrl = (overlay: OverlayWithoutUrl): string | null => {
+    return overlayTileLayersData.find(tileLayer => tileLayer.uuid === overlay.uuid)?.url ?? '';
+  };
 
   const tileLayerUrl = (): string => {
     // Try to find the url of the chosen tile layer. If it is found, return the url,
     // else return the default tile layer url.
     return (
-      tileLayers?.find(tileLayer => tileLayer.identifier === tileLayerIdentifier)?.url ??
+      tileLayers.find(tileLayer => tileLayer.identifier === tileLayerIdentifier)?.url ??
       TILE_LAYER_RD.url
     );
   };
 
-  const onFeatureCreate = (event: any) => {
+  const onFeatureCreate = (event: DrawEvents.Created) => {
     featureGroupRef.current?.clearLayers();
     featureGroupRef.current?.addLayer(event.layer);
   };
@@ -96,6 +141,21 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         }}
       >
         <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
+        {overlaysToDisplay?.length && (
+          <LayersControl position="topright">
+            {overlaysToDisplay.map((layer: OverlayWithoutUrl, index: number) => {
+              const Component = overlayLayerControls[layer.type];
+              const url = overlayUrl(layer);
+              if (!url) {
+                return null;
+              }
+              return Component ? (
+                <Component index={index} key={index} url={url} overlay={layer} />
+              ) : null;
+            })}
+          </LayersControl>
+        )}
+
         <FeatureGroup ref={featureGroupRef}>
           {editable && (
             <EditControl

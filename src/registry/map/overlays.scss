@@ -1,0 +1,29 @@
+.offb-overlay {
+  &__sort-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      all: unset;
+      padding-inline: 0.2em;
+      line-height: 0;
+
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+
+      &:disabled {
+        color: #999;
+      }
+
+      &:focus-visible .fa {
+        // bootstrap focus styles
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
+}

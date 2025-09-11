@@ -24,6 +24,7 @@ import {
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
+  DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
   DEFAULT_PREFILL_PLUGINS,
@@ -83,6 +84,7 @@ const contextRender = (
               richTextColors: DEFAULT_COLORS,
               theme: 'light',
               getMapTileLayers: async () => DEFAULT_MAP_TILE_LAYERS,
+              getMapOverlayTileLayers: async () => DEFAULT_MAP_OVERLAY_TILE_LAYERS,
               getFormComponents: () => builderOptions.componentTree || DEFAULT_COMPONENT_TREE,
               getValidatorPlugins: async () => {
                 await sleep(builderOptions.registrationAttributesDelay || 0);
@@ -191,6 +193,7 @@ const dummyBuilderContext: BuilderContextType = {
   richTextColors: [],
   theme: 'light',
   getMapTileLayers: async () => [],
+  getMapOverlayTileLayers: async () => [],
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

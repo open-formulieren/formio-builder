@@ -1,5 +1,5 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, userEvent, within} from '@storybook/test';
+import type {Meta, StoryObj} from '@storybook/react';
+import {expect, fn, userEvent, within} from '@storybook/test';
 
 import Panel from './panel';
 
@@ -59,5 +59,24 @@ export const CollapsibleInitiallyCollapsed: Story = {
     const header = await canvas.findByText(args.title as string);
     await userEvent.click(header);
     await expect(canvas.queryByText(args.children as string)).toBeInTheDocument();
+  },
+};
+
+export const CollapsibleWithExtraHeaderControls: Story = {
+  args: {
+    collapsible: true,
+    headerEnd: <button onClick={() => fn()}>Extra button</button>,
+  },
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+    const header = await canvas.findByText(args.title as string);
+    const headerControls = canvas.getByRole('button', {name: 'Extra button'});
+
+    await expect(canvas.queryByText(args.children as string)).toBeVisible();
+    await expect(headerControls).toBeVisible();
+
+    await userEvent.click(header);
+    await expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
+    await expect(headerControls).toBeVisible();
   },
 };

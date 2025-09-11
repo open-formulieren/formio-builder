@@ -35,7 +35,7 @@ export interface DocumentTypeOption {
 }
 
 /*
-  Map tile layers
+  Map background tile layers
 
   This datastructure is created by the Open Forms backend.
  */
@@ -43,6 +43,21 @@ export interface MapTileLayer {
   identifier: string;
   url: string;
   label: string;
+}
+
+/*
+  Map overlay tile layers.
+
+  This is the structure of the overlay tile layers (WMS and WFS) that are defined in the
+  backend application.
+
+  This datastructure is created by the Open Forms backend.
+ */
+export interface MapOverlayTileLayer {
+  name: string;
+  type: 'wms' | 'wfs';
+  uuid: string;
+  url: string;
 }
 
 /*
@@ -71,6 +86,7 @@ export interface BuilderContextType {
   getConfidentialityLevels: () => Promise<SelectOption[]>;
   getAuthPlugins: () => Promise<AuthPluginOption[]>;
   getMapTileLayers: () => Promise<MapTileLayer[]>;
+  getMapOverlayTileLayers: () => Promise<MapOverlayTileLayer[]>;
 }
 
 const BuilderContext = React.createContext<BuilderContextType>({
@@ -92,6 +108,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
   getMapTileLayers: async () => [],
+  getMapOverlayTileLayers: async () => [],
 });
 
 BuilderContext.displayName = 'BuilderContext';

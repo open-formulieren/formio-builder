@@ -3,6 +3,7 @@ import {uniqueId} from 'lodash';
 import React, {useRef, useState} from 'react';
 import {useIntl} from 'react-intl';
 
+import './panel.scss';
 import Tooltip from './tooltip';
 
 export interface PanelProps {
@@ -10,6 +11,7 @@ export interface PanelProps {
   tooltip?: string;
   collapsible?: boolean;
   initialCollapsed?: boolean;
+  headerEnd?: React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -24,6 +26,7 @@ const Panel: React.FC<PanelProps> = ({
   tooltip = '',
   collapsible = false,
   initialCollapsed = false,
+  headerEnd,
   children,
 }) => {
   const intl = useIntl();
@@ -55,21 +58,30 @@ const Panel: React.FC<PanelProps> = ({
 
   return (
     <div className="mb-2 card border">
-      <div className="card-header bg-default" {...headerProps}>
-        <span className="mb-0 card-title">
-          {collapsible ? (
-            <i
-              className={clsx('formio-collapse-icon', 'text-muted', 'fa', 'fa-regular', {
-                'fa-plus-square': collapsed,
-                'fa-minus-square': !collapsed,
-              })}
-              title={collapseTitle}
-            />
-          ) : null}
-          {title}
-          {tooltip && ' '}
-          <Tooltip text={tooltip} />
-        </span>
+      <div
+        className={clsx('card-header', 'bg-default', {
+          'd-flex': !!headerEnd,
+          'align-items-center': !!headerEnd,
+        })}
+      >
+        <div className="offb-panel-header-collapse-trigger" {...headerProps}>
+          <span className="mb-0 card-title">
+            {collapsible ? (
+              <i
+                className={clsx('formio-collapse-icon', 'text-muted', 'fa', 'fa-regular', {
+                  'fa-plus-square': collapsed,
+                  'fa-minus-square': !collapsed,
+                })}
+                title={collapseTitle}
+              />
+            ) : null}
+            {title}
+            {tooltip && ' '}
+            <Tooltip text={tooltip} />
+          </span>
+        </div>
+
+        {headerEnd}
       </div>
       {collapsed ? null : (
         <div className="card-body" id={idRef.current}>
