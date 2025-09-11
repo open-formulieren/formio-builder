@@ -47,9 +47,12 @@ const Overlays: React.FC = () => {
       <FieldArray name="overlays">
         {arrayHelpers => (
           <>
-            {value?.map((_item, index) => (
+            {value?.map(({uuid, label}, index) => (
               <OverlayTileLayer
-                key={index}
+                // index will always be unique, but gets confused when items are shuffled
+                // around. The label and uuid are added for additional 'cache' busting,
+                // as those values increase uniqueness.
+                key={`${uuid}/${index}/${label}`}
                 index={index}
                 arrayHelpers={arrayHelpers}
                 overlayTileLayers={overlayTileLayers}
@@ -163,22 +166,22 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
           description: "Map 'overlays' configuration: label for tile layer",
           defaultMessage: 'Tile layer',
         })}
+        required
         options={overlayTileLayers}
         valueProperty="uuid"
         getOptionLabel={option => option.name}
         onChange={event => {
-          const newUuid = event.target.value;
-          const newLayer = overlayTileLayers?.find(layer => layer.uuid === newUuid);
+          const layerUuid = event.target.value;
+          const newLayer = overlayTileLayers?.find(layer => layer.uuid === layerUuid);
           // When updating the uuid, also update the other fields as everything is
           // related to the uuid.
           setValue({
             ...value,
-            uuid: newUuid,
-            label: value.label || newLayer?.name,
+            uuid: layerUuid,
+            label: newLayer?.name ?? '',
             layers: [],
           });
         }}
-        isClearable
       />
 
       <TextField

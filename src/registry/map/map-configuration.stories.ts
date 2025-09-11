@@ -206,11 +206,12 @@ export const AddOverlay: Story = {
       await userEvent.click(addOverlayButton);
 
       const wmsLayerSelect = canvas.getByLabelText('Tile layer');
-      const labelInput = canvas.getByLabelText('Label');
-      const subLayersSelect = canvas.getAllByLabelText('Layers')[1];
-
       await rsSelect(canvas, wmsLayerSelect, 'PDOK BAG');
-      await userEvent.type(labelInput, 'BAG pand layer');
+      // toggle the panel open again
+      await userEvent.click(canvas.getByRole('button', {name: 'Overlay: PDOK BAG'}));
+      const labelInput = canvas.getByLabelText('Label');
+      expect(labelInput).toHaveDisplayValue('PDOK BAG');
+      const subLayersSelect = canvas.getAllByLabelText('Layers')[1];
       await rsSelect(canvas, subLayersSelect, 'Pand');
     });
 
@@ -220,7 +221,7 @@ export const AddOverlay: Story = {
       expect(wmsLayerButtonsContainer).toBeVisible();
       await userEvent.click(wmsLayerButtonsContainer);
 
-      const layerCheckbox = canvas.getByLabelText('BAG pand layer');
+      const layerCheckbox = canvas.getByLabelText('PDOK BAG');
       expect(layerCheckbox).toBeVisible();
       expect(layerCheckbox).toBeChecked();
     });
@@ -260,13 +261,15 @@ export const ChangeOverlaysOrder: Story = {
     await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
 
     const wmsLayersMenuButton = canvas.getByRole('button', {name: 'Layers'});
-    const wmsLayersMenuElement = canvasElement.querySelector(
+    const wmsLayersMenuElement = canvasElement.querySelector<HTMLElement>(
       '.leaflet-control-layers.leaflet-control'
     );
-    const wmsLayersMenu = within(wmsLayersMenuElement as HTMLElement);
+    const wmsLayersMenu = within(wmsLayersMenuElement!);
 
-    expect(wmsLayersMenuButton).toBeVisible();
-    expect(wmsLayersMenu).toBeVisible();
+    await waitFor(() => {
+      expect(wmsLayersMenuButton).toBeVisible();
+      expect(wmsLayersMenuElement).toBeVisible();
+    });
 
     await step('Initial state', async () => {
       // Open the layers menu
@@ -358,7 +361,9 @@ export const DeleteOverlay: Story = {
       // Check preview checkboxes
       const wmsLayerButtonsContainer = canvas.getByRole('button', {name: 'Layers'});
 
-      expect(wmsLayerButtonsContainer).toBeVisible();
+      await waitFor(() => {
+        expect(wmsLayerButtonsContainer).toBeVisible();
+      });
       await userEvent.click(wmsLayerButtonsContainer);
 
       const layerCheckbox = canvas.getByLabelText('BAG pand layer');
