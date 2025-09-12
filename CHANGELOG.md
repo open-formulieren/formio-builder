@@ -1,5 +1,13 @@
 # Changes
 
+## 0.44.0 (2025-09-12)
+
+Feature release.
+
+- [`OF#5575`][OF#5575] Added support for adding (WMS) tile layers to the map component.
+
+[OF#5575]: https://github.com/open-formulieren/open-forms/issues/5575
+
 ## 0.43.0 (2025-08-25)
 
 - [`OF#5439`][OF#5439] Removed deprecation warning for textfield location derivation.
