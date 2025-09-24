@@ -329,6 +329,11 @@
     "description": "Label for 'interactions.marker' builder field",
     "originalDefault": "Marker"
   },
+  "AAKF9b": {
+    "defaultMessage": "Optionally specify an alternative background layer for the map component. This affects the map style at particular coordinates and zoom levels.",
+    "description": "Tooltip for 'tileLayerIdentifier' builder field",
+    "originalDefault": "Optionally specify an alternative background layer for the map component. This affects the map style at particular coordinates and zoom levels."
+  },
   "AClYLf": {
     "defaultMessage": "If checked, the current day is an allowed value.",
     "description": "Tooltip for 'date constraint includeToday' builder validation field",
@@ -1688,11 +1693,6 @@
     "defaultMessage": "Translations",
     "description": "Translations: translation column header",
     "originalDefault": "Translations"
-  },
-  "yQ7wJc": {
-    "defaultMessage": "This field is used to alter the map component background. This effects the map style at particular coordinates and zoom levels.",
-    "description": "Tooltip for 'tileLayerIdentifier' builder field",
-    "originalDefault": "This field is used to alter the map component background. This effects the map style at particular coordinates and zoom levels."
   },
   "yQUV3M": {
     "defaultMessage": "RSIN of the organization which creates the ENKELVOUDIGINFORMATIEOBJECT.",
