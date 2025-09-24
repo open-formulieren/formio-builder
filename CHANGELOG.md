@@ -1,5 +1,11 @@
 # Changes
 
+## 0.44.1 (2025-09-24)
+
+Bugfix release.
+
+- Added missing Dutch translations.
+
 ## 0.44.0 (2025-09-12)
 
 Feature release.
