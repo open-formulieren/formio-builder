@@ -61,7 +61,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
               className={clsx('component-preview', `component-preview--${component.type}`)}
               data-testid="componentPreview"
             >
-              <ErrorBoundary>{children}</ErrorBoundary>
+              <ErrorBoundary resetKeys={[component]}>{children}</ErrorBoundary>
             </div>
           </Formik>
         </div>

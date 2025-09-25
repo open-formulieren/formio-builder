@@ -12,6 +12,7 @@ const logError = (error: AnyError, errorInfo: React.ErrorInfo) => {
 
 export interface ErrorBoundaryProps {
   children: React.ReactNode;
+  resetKeys?: any[]; // optional dependency list
 }
 
 interface StateWithoutError {
@@ -41,6 +42,13 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
 
   componentDidCatch(error: AnyError, errorInfo: React.ErrorInfo) {
     logError(error, errorInfo);
+  }
+
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (this.props.resetKeys && prevProps.resetKeys !== this.props.resetKeys) {
+      // Reset the error state
+      this.setState({hasError: false, error: null});
+    }
   }
 
   render(): React.ReactNode {
