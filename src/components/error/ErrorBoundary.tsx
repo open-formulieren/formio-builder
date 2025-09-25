@@ -1,8 +1,12 @@
 import React from 'react';
 
-import GenericError from '@/components/error/GenericError';
+import {z} from 'zod';
 
-const logError = (error: Error, errorInfo: React.ErrorInfo) => {
+import GenericError from './GenericError';
+import ZodError from './ZodError';
+import type {AnyError} from './errorTypes';
+
+const logError = (error: AnyError, errorInfo: React.ErrorInfo) => {
   console.error(error, errorInfo);
 };
 
@@ -17,7 +21,7 @@ interface StateWithoutError {
 
 interface StateWithError {
   hasError: true;
-  error: Error;
+  error: AnyError;
 }
 
 type ErrorBoundaryState = StateWithError | StateWithoutError;
@@ -28,14 +32,14 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
     this.state = {hasError: false, error: null};
   }
 
-  static getDerivedStateFromError(error: Error): StateWithError {
+  static getDerivedStateFromError(error: AnyError): StateWithError {
     return {
       hasError: true,
       error,
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: AnyError, errorInfo: React.ErrorInfo) {
     logError(error, errorInfo);
   }
 
@@ -46,6 +50,9 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
       return children;
     }
 
+    if (error instanceof z.ZodError) {
+      return <ZodError error={error} />;
+    }
     return <GenericError error={error} />;
   }
 }
