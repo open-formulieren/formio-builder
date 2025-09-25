@@ -1315,10 +1315,10 @@ export const LeafletMap: Story = {
       type: 'map',
       key: 'map',
       label: 'A map preview',
+      useConfigDefaultMapSettings: true,
       hidden: true, // must be ignored
     },
   },
-
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 

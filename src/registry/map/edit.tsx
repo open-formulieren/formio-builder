@@ -43,7 +43,10 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
 
   useEffect(() => {
     const hasLocationSet =
-      values.defaultZoom || values?.initialCenter?.lat || values?.initialCenter?.lng;
+      values.defaultZoom ||
+      values?.initialCenter ||
+      values?.initialCenter?.lat ||
+      values?.initialCenter?.lng;
     if (values.useConfigDefaultMapSettings && hasLocationSet) {
       setValues({...values, defaultZoom: undefined, initialCenter: undefined});
     }
