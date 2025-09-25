@@ -18,6 +18,9 @@ export default {
   decorators: [BuilderContextDecorator],
   parameters: {
     builder: {enableContext: true},
+    test: {
+      dangerouslyIgnoreUnhandledErrors: true,
+    },
   },
   args: {
     isNew: true,
@@ -386,6 +389,50 @@ export const DeleteOverlay: Story = {
       // With no layers, the layers menu button in the preview should be gone
       const wmsLayerButtonsContainer = canvas.queryByRole('button', {name: 'Layers'});
       expect(wmsLayerButtonsContainer).not.toBeInTheDocument();
+    });
+  },
+};
+
+export const InvalidConfiguration: Story = {
+  name: 'Invalid configuration',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
+
+    const errorMessageText = 'Something is wrong with the component configuration!';
+
+    await step('Initial state without error', async () => {
+      const errorMessage = await canvas.queryByText(errorMessageText);
+      expect(errorMessage).toBeNull();
+    });
+
+    await step('Open configuration panel', async () => {
+      const panelTitle = await canvas.findByText('Initial focus');
+      await waitFor(async () => {
+        expect(panelTitle).toBeVisible();
+      });
+      await userEvent.click(panelTitle);
+    });
+
+    await step('Enter an invalid latitude value', async () => {
+      const latitudeField = await canvas.getByLabelText('Latitude');
+      await userEvent.type(latitudeField, '9999');
+      await userEvent.tab();
+    });
+
+    await step('Error message is shown', async () => {
+      const errorMessage = await canvas.findByText(errorMessageText);
+      await waitFor(async () => {
+        expect(errorMessage).toBeVisible();
+      });
     });
   },
 };
