@@ -4,10 +4,11 @@ import {Formik} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
+import PreviewModeToggle, {type PreviewState} from '@/components/PreviewModeToggle';
+import ErrorBoundary from '@/components/error/ErrorBoundary';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import {AnyComponentSchema, hasOwnProperty} from '@/types';
+import {type AnyComponentSchema, hasOwnProperty} from '@/types';
 
 /*
   Generic preview (preview + wrapper with view mode)
@@ -60,7 +61,7 @@ const ComponentPreviewWrapper: React.FC<ComponentPreviewWrapperProps> = ({
               className={clsx('component-preview', `component-preview--${component.type}`)}
               data-testid="componentPreview"
             >
-              {children}
+              <ErrorBoundary>{children}</ErrorBoundary>
             </div>
           </Formik>
         </div>
