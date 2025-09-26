@@ -2,6 +2,7 @@ import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
 import type {MapComponentSchema} from '@open-formulieren/types';
 import type {DrawEvents, FeatureGroup as LeafletFeatureGroup} from 'leaflet';
 import {useContext, useLayoutEffect, useRef} from 'react';
+import {useIntl} from 'react-intl';
 import {
   FeatureGroup,
   LayersControl,
@@ -18,8 +19,10 @@ import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {ComponentPreviewProps} from '@/registry/types';
 
+import zodSchema from './edit-validation';
 import './previews.scss';
 import type {OverlayWithoutUrl} from './types';
+import {z} from 'zod';
 
 interface MapViewProps {
   lat: number;
@@ -80,7 +83,9 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     interactions,
     overlays,
   } = component;
-  const {getMapTileLayers, getMapOverlayTileLayers} = useContext(BuilderContext);
+  const intl = useIntl();
+  const builderContext = useContext(BuilderContext);
+  const {getMapTileLayers, getMapOverlayTileLayers} = builderContext;
   const featureGroupRef = useRef<LeafletFeatureGroup>(null);
   const {
     value: [tileLayers, overlayTileLayersData] = [[], []],
@@ -92,6 +97,14 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
   }
   if (loading) {
     return <Loader />;
+  }
+
+  try {
+    zodSchema({intl, builderContext}).parse(component);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      throw error;
+    }
   }
 
   // We should only display overlay tile layers that have an uuid.

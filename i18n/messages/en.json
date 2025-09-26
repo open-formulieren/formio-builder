@@ -999,6 +999,11 @@
     "description": "Label for 'validate.maxSelectedCount' builder field",
     "originalDefault": "Maximum selected checkboxes"
   },
+  "am6Gnc": {
+    "defaultMessage": "Something is wrong with the component configuration!",
+    "description": "Zod error message",
+    "originalDefault": "Something is wrong with the component configuration!"
+  },
   "aqYeqv": {
     "defaultMessage": "Description translations",
     "description": "Values/options description translations table header",
