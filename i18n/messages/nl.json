@@ -531,7 +531,7 @@
     "originalDefault": "Column sizes"
   },
   "GDWp6v": {
-    "defaultMessage": "Value in whole numbers, between {minZoom} and {maxZoom}.",
+    "defaultMessage": "Waarde in gehele getallen, tussen {minZoom} en {maxZoom}.",
     "description": "Description for 'defaultZoom' builder field",
     "originalDefault": "Value in whole numbers, between {minZoom} and {maxZoom}."
   },
@@ -613,7 +613,7 @@
     "originalDefault": "Size (mobile)"
   },
   "KMs17v": {
-    "defaultMessage": "Unfortunately something went wrong!",
+    "defaultMessage": "Er ging helaas iets fout!",
     "description": "Generic error message",
     "originalDefault": "Unfortunately something went wrong!"
   },
@@ -633,7 +633,7 @@
     "originalDefault": "The maximum number of files that can be uploaded."
   },
   "KvSkZT": {
-    "defaultMessage": "Oops!",
+    "defaultMessage": "Oeps!",
     "description": "Error boundary title",
     "originalDefault": "Oops!"
   },
