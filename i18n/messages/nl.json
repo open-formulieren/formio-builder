@@ -530,6 +530,11 @@
     "description": "Label for the 'columns' builder field",
     "originalDefault": "Column sizes"
   },
+  "GDWp6v": {
+    "defaultMessage": "Value in whole numbers, between {minZoom} and {maxZoom}.",
+    "description": "Description for 'defaultZoom' builder field",
+    "originalDefault": "Value in whole numbers, between {minZoom} and {maxZoom}."
+  },
   "Gjhh/5": {
     "defaultMessage": "Beschikbare vormen",
     "description": "Map interaction configuration panel title",
