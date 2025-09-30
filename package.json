@@ -31,8 +31,7 @@
     "build-storybook": "storybook build --webpack-stats-json",
     "makemessages": "formatjs extract",
     "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
-    "watch": "ttsc -p tsconfig.prod.json --watch",
-    "postinstall": "patch-package"
+    "watch": "ttsc -p tsconfig.prod.json --watch"
   },
   "files": [
     "lib/",
@@ -77,6 +76,7 @@
     "@storybook/addon-webpack5-compiler-babel": "^3.0.5",
     "@storybook/react": "^8.6.10",
     "@storybook/react-webpack5": "^8.6.10",
+    "@storybook/test": "^8.6.10",
     "@storybook/test-runner": "^0.22.0",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
@@ -123,13 +123,11 @@
     "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.2.0",
-    "@storybook/test": "^8.6.10",
     "clsx": "^1.2.1",
     "formik": "^2.4.5",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.21",
-    "patch-package": "^8.0.0",
     "react-intl": "^6.3.2",
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.6",
