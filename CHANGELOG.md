@@ -1,5 +1,22 @@
 # Changes
 
+## 0.45.0 (2025-09-30)
+
+Quality of life improvements.
+
+- [`OF#5191`][OF#5191] Display error message in the preview if the map configuration is invalid
+  rather than falling back to the error boundary.
+
+  - Added additional descriptions/help texts for configuration options.
+  - Improved validation behaviour.
+  - Added error boundary around the generic component preview to prevent the entire modal from
+    crashing.
+
+- Replaced parts of the CI-pipeline with reusable actions.
+- Added check for missing translations in CI.
+
+[OF#5191]: https://github.com/open-formulieren/open-forms/issues/5191
+
 ## 0.44.1 (2025-09-24)
 
 Bugfix release.
