@@ -126,7 +126,7 @@
     "originalDefault": "Note that the server upload limit is {serverUploadLimit}."
   },
   "2gs8pJ": {
-    "defaultMessage": "The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration.",
+    "defaultMessage": "De instellingen van de kaartcomponent zijn ongeldig. Los de validatiefouten op om een voorvertoning te zien.",
     "description": "Map preview: invalid config message",
     "originalDefault": "The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration."
   },
