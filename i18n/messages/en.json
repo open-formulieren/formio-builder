@@ -124,6 +124,11 @@
     "description": "Description for 'fileMaxSize' builder field",
     "originalDefault": "Note that the server upload limit is {serverUploadLimit}."
   },
+  "2gs8pJ": {
+    "defaultMessage": "The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration.",
+    "description": "Map preview: invalid config message",
+    "originalDefault": "The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration."
+  },
   "2k+Mca": {
     "defaultMessage": "Validation",
     "description": "Component edit form tab title for 'Validation' tab",

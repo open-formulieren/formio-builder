@@ -2,6 +2,7 @@ import {CRS_RD, TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
 import type {MapComponentSchema} from '@open-formulieren/types';
 import type {DrawEvents, FeatureGroup as LeafletFeatureGroup} from 'leaflet';
 import {useContext, useLayoutEffect, useRef} from 'react';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {
   FeatureGroup,
   LayersControl,
@@ -18,6 +19,7 @@ import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {ComponentPreviewProps} from '@/registry/types';
 
+import zodSchema from './edit-validation';
 import './previews.scss';
 import type {OverlayWithoutUrl} from './types';
 
@@ -80,7 +82,9 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
     interactions,
     overlays,
   } = component;
-  const {getMapTileLayers, getMapOverlayTileLayers} = useContext(BuilderContext);
+  const intl = useIntl();
+  const builderContext = useContext(BuilderContext);
+  const {getMapTileLayers, getMapOverlayTileLayers} = builderContext;
   const featureGroupRef = useRef<LeafletFeatureGroup>(null);
   const {
     value: [tileLayers, overlayTileLayersData] = [[], []],
@@ -92,6 +96,17 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
   }
   if (loading) {
     return <Loader />;
+  }
+
+  const {success: isValidConfiguration} = zodSchema({intl, builderContext}).safeParse(component);
+
+  if (!isValidConfiguration) {
+    return (
+      <FormattedMessage
+        description="Map preview: invalid config message"
+        defaultMessage="The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration."
+      />
+    );
   }
 
   // We should only display overlay tile layers that have an uuid.

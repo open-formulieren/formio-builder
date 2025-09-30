@@ -389,3 +389,48 @@ export const DeleteOverlay: Story = {
     });
   },
 };
+
+export const InvalidConfiguration: Story = {
+  name: 'Invalid configuration',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('link', {name: 'Map settings'}));
+
+    const errorMessageText =
+      "The map configuration is not valid, so we can't show a preview. Fix the validation errors in the component configuration.";
+
+    await step('Initial state without error', async () => {
+      const errorMessage = await canvas.queryByText(errorMessageText);
+      expect(errorMessage).toBeNull();
+    });
+
+    await step('Open configuration panel', async () => {
+      const panelTitle = await canvas.findByText('Initial focus');
+      await waitFor(async () => {
+        expect(panelTitle).toBeVisible();
+      });
+      await userEvent.click(panelTitle);
+    });
+
+    await step('Enter an invalid latitude value', async () => {
+      const latitudeField = await canvas.getByLabelText('Latitude');
+      await userEvent.type(latitudeField, '9999');
+      await userEvent.tab();
+    });
+
+    await step('Error message is shown', async () => {
+      const errorMessage = await canvas.findByText(errorMessageText);
+      await waitFor(async () => {
+        expect(errorMessage).toBeVisible();
+      });
+    });
+  },
+};
