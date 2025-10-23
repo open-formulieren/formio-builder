@@ -150,6 +150,11 @@
     "description": "Label for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
+  "34Nekc": {
+    "defaultMessage": "Users can specify an email address as preferred communication method",
+    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
+    "originalDefault": "Users can specify an email address as preferred communication method"
+  },
   "3LEg1l": {
     "defaultMessage": "Laat negatieve waarden toe.",
     "description": "Tooltip for 'allowNegative' builder field",
@@ -271,6 +276,11 @@
     "description": "'overlays' builder field 'add another overlay' button label",
     "originalDefault": "Add another overlay"
   },
+  "752whH": {
+    "defaultMessage": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address.",
+    "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
+    "originalDefault": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address."
+  },
   "7E8B/6": {
     "defaultMessage": "Schakel selectie in",
     "description": "Label for 'enableSelection' builder field",
@@ -306,6 +316,11 @@
     "description": "Label for 'delta.years' in relative delta date constraint validation",
     "originalDefault": "Years"
   },
+  "7noYJs": {
+    "defaultMessage": "Email",
+    "description": "Label for 'digitalAddressTypes.email' builder field",
+    "originalDefault": "Email"
+  },
   "7qqbU9": {
     "defaultMessage": "{groupLabel} 1",
     "description": "Edit grid preview content description",
@@ -326,6 +341,11 @@
     "defaultMessage": "Geboortedatum",
     "description": "Label for child's date of birth",
     "originalDefault": "Date of birth"
+  },
+  "9XqFGF": {
+    "defaultMessage": "Open Forms should update customer data after submission",
+    "description": "Label for 'shouldUpdateCustomerData' builder field",
+    "originalDefault": "Open Forms should update customer data after submission"
   },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
@@ -699,6 +719,16 @@
     "isTranslated": true,
     "originalDefault": "Label"
   },
+  "PIU3Ha": {
+    "defaultMessage": "Available digital address types",
+    "description": "Digital address types panel title",
+    "originalDefault": "Available digital address types"
+  },
+  "PToTK+": {
+    "defaultMessage": "{field} must be a valid phone number.",
+    "description": "Invalid phone number format validation error",
+    "originalDefault": "{field} must be a valid phone number."
+  },
   "PhXIai": {
     "defaultMessage": "Aantal jaren. Lege waarden worden genegeerd.",
     "description": "Tooltip for 'delta.years' in relative delta date constraint validation",
@@ -723,6 +753,11 @@
     "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
     "originalDefault": "Preview"
+  },
+  "Qr/L4+": {
+    "defaultMessage": "Phone number",
+    "description": "Label for 'digitalAddressTypes.phoneNumber' builder field",
+    "originalDefault": "Phone number"
   },
   "R/XadM": {
     "defaultMessage": "Je moet latitude en longitude allebei instellen.",
@@ -956,6 +991,11 @@
     "defaultMessage": "Bestandsnaam",
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
+  },
+  "XaGrGg": {
+    "defaultMessage": "You must enable at least one digital address type.",
+    "description": "Missing digital address types",
+    "originalDefault": "You must enable at least one digital address type."
   },
   "Xj1uvL": {
     "defaultMessage": "Verwijderen",
@@ -1203,6 +1243,11 @@
     "description": "Component edit form tab title for 'Prefill' tab",
     "isTranslated": true,
     "originalDefault": "Prefill"
+  },
+  "fT1Pis": {
+    "defaultMessage": "Users can specify a phone number as preferred communication method",
+    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
+    "originalDefault": "Users can specify a phone number as preferred communication method"
   },
   "fT6Gtt": {
     "defaultMessage": "Sla de waarde op onder het geselecteerde attribuut in de geselecteerde registratieplugin.",
@@ -1627,6 +1672,11 @@
     "description": "Tooltip for 'validate.minTime' builder field",
     "originalDefault": "The earliest possible value that can be entered."
   },
+  "tZwyML": {
+    "defaultMessage": "Phone number",
+    "description": "Label for digital address phone number",
+    "originalDefault": "Phone number"
+  },
   "tnDJ58": {
     "defaultMessage": "Geef aan of deze waarde in de bevestigingsmail moet opgenomen worden.",
     "description": "Tooltip for 'showInEmail' builder field",
@@ -1711,6 +1761,11 @@
     "defaultMessage": "Duur bijtellen/aftrekken",
     "description": "Label for 'operator' in relative delta date constraint validation",
     "originalDefault": "Add/subtract duration"
+  },
+  "xPFvic": {
+    "defaultMessage": "Email",
+    "description": "Label for digital address email",
+    "originalDefault": "Email"
   },
   "xrfkiI": {
     "defaultMessage": "Laag: {overlayName}",

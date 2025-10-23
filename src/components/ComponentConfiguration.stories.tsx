@@ -3150,3 +3150,71 @@ export const Children: Story = {
     });
   },
 };
+
+export const Profile: Story = {
+  render: Template,
+  name: 'type: customerProfile',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'customerProfile',
+      key: 'profile',
+      label: 'Profile',
+      tooltip: 'An example for the tooltip',
+      description: 'A description for the customerProfile component',
+      defaultValue: {},
+      shouldUpdateCustomerData: true,
+      digitalAddressTypes: {
+        email: true,
+        phoneNumber: false,
+      },
+    },
+
+    builderInfo: {
+      title: 'Profile',
+      icon: 'comments',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
+  },
+
+  play: async ({canvasElement, step, args}) => {
+    const canvas = within(canvasElement);
+    const componentPreview = within(canvas.getByTestId('componentPreview'));
+
+    expect(canvas.getByLabelText('Label')).toHaveValue('Profile');
+    await waitFor(() => {
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('profile');
+    });
+    expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
+
+    await step('Change key', async () => {
+      // Ensure that the manually entered key is kept instead of derived from the label,
+      // even when key/label components are not mounted.
+      const keyInput = canvas.getByLabelText('Property Name');
+      fireEvent.change(keyInput, {target: {value: 'customKey'}});
+      await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
+      await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
+      await userEvent.clear(canvas.getByLabelText('Label'));
+      await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    });
+
+    await step('Change digital address types', async () => {
+      // Changing the digital address types changes the component inputs
+      expect(await componentPreview.queryByLabelText('Phone number')).not.toBeInTheDocument();
+
+      const phoneNumberCheckbox = canvas.getByLabelText('Phone number');
+      await userEvent.click(phoneNumberCheckbox);
+
+      expect(componentPreview.getByLabelText('Phone number')).toBeVisible();
+    });
+
+    await step('Submit form', async () => {
+      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
+      expect(args.onSubmit).toHaveBeenCalled();
+    });
+  },
+};

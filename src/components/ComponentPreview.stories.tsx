@@ -3,6 +3,7 @@ import {
   BsnComponentSchema,
   ChildrenComponentSchema,
   CosignV2ComponentSchema,
+  CustomerProfileComponentSchema,
   EditGridComponentSchema,
   FieldsetComponentSchema,
   FileComponentSchema,
@@ -1361,5 +1362,25 @@ export const Children: Story = {
       description: 'A description for the Children component',
       defaultValue: [],
     } satisfies ChildrenComponentSchema,
+  },
+};
+
+export const Profile: Story = {
+  name: 'Profile',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'customerProfile',
+      key: 'customerProfile',
+      label: 'A profile preview',
+      tooltip: 'An example for the tooltip',
+      description: 'A description for the Profile component',
+      defaultValue: {},
+      digitalAddressTypes: {
+        email: true,
+        phoneNumber: true,
+      },
+      shouldUpdateCustomerData: true,
+    } satisfies CustomerProfileComponentSchema,
   },
 };
