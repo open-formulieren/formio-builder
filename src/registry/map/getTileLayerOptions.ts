@@ -64,3 +64,18 @@ export const getWMSLayerOptions = async (wmsTileLayerUrl: string): Promise<Optio
   const doc = parser.parseFromString(text, 'text/xml');
   return getWMSLayerOptionsFromXMLData(doc);
 };
+
+export const getWFSLayerOptions = async (wfsTileLayerUrl: string): Promise<Option[]> => {
+  if (!wfsTileLayerUrl) {
+    return [];
+  }
+
+  const response = await window.fetch(wfsTileLayerUrl);
+  const text = await response.text();
+  const parser = new DOMParser();
+  // @ts-expect-error
+  const doc = parser.parseFromString(text, 'text/xml');
+
+  // @TODO get WFS layer options from xml data
+  return [];
+};

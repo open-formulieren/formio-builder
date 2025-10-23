@@ -335,6 +335,12 @@ export const DEFAULT_MAP_OVERLAY_TILE_LAYERS: MapOverlayTileLayer[] = [
     type: 'wms',
     url: 'https://service.pdok.nl/bzk/bro-grondwaterspiegeldiepte/wms/v2_0?request=getCapabilities&service=WMS',
   },
+  {
+    name: 'Interactive PDOK BAG',
+    uuid: 'a91d0268-f0de-48dd-9010-509df63e68ab',
+    type: 'wfs',
+    url: 'https://service.pdok.nl/lv/bag/wfs/v2_0?request=getCapabilities&service=WFS',
+  },
 ];
 
 export function sleep(ms: number) {

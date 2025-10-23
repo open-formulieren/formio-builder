@@ -2,14 +2,17 @@ import {FieldArray, type FieldArrayRenderProps, useField, useFormikContext} from
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
+import {util} from 'zod';
 
 import Loader from '@/components/builder/loader';
 import {Component, Panel, Select, TextField} from '@/components/formio';
 import {BuilderContext, type MapOverlayTileLayer} from '@/context';
 
-import {getWMSLayerOptions} from './getTileLayerOptions';
+import {getWFSLayerOptions, getWMSLayerOptions} from './getTileLayerOptions';
 import './overlays.scss';
 import type {OverlayWithoutUrl} from './types';
+
+import assertNever = util.assertNever;
 
 const Overlays: React.FC = () => {
   const intl = useIntl();
@@ -66,9 +69,9 @@ const Overlays: React.FC = () => {
                   arrayHelpers.push({
                     uuid: '',
                     label: '',
-                    type: 'wms', // We currently only support WMS tile layers.
                     layers: [],
-                  } satisfies OverlayWithoutUrl)
+                    // The type will be set when selecting an overlay
+                  } satisfies Partial<OverlayWithoutUrl>)
                 }
               >
                 <i className="fa fa-plus" aria-hidden="true" />{' '}
@@ -103,17 +106,26 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
   const numOptions = getFieldProps<OverlayWithoutUrl[]>('overlays').value?.length || 0;
   const {value} = getFieldProps(fieldNamePrefix);
   const {setValue} = getFieldHelpers<OverlayWithoutUrl>(fieldNamePrefix);
-  const selectedTileLayerUrl = overlayTileLayers?.find(
-    tileLayer => tileLayer.uuid === value.uuid
-  )?.url;
+  const selectedTileLayer = overlayTileLayers?.find(tileLayer => tileLayer.uuid === value.uuid);
 
   const {
     value: options,
     loading,
     error,
   } = useAsync(async () => {
-    return selectedTileLayerUrl ? await getWMSLayerOptions(selectedTileLayerUrl) : [];
-  }, [selectedTileLayerUrl]);
+    if (!selectedTileLayer || !selectedTileLayer.url) {
+      return [];
+    }
+
+    switch (selectedTileLayer.type) {
+      case 'wms':
+        return await getWMSLayerOptions(selectedTileLayer.url);
+      case 'wfs':
+        return await getWFSLayerOptions(selectedTileLayer.url);
+      default:
+        assertNever(selectedTileLayer.type);
+    }
+  }, [selectedTileLayer]);
   if (error) {
     throw error;
   }
@@ -179,6 +191,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
             ...value,
             uuid: layerUuid,
             label: newLayer?.name ?? '',
+            type: newLayer?.type,
             layers: [],
           });
         }}
