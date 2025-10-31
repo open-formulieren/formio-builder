@@ -9,7 +9,6 @@ import {
   IsSensitiveData,
   Key,
   Label,
-  Prefill,
   PresentationConfig,
   SimpleConditional,
   Tooltip,
@@ -53,7 +52,6 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
-        <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -80,11 +78,6 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
       <TabPanel>
         <Validate.Required />
         <Validate.ValidationErrorTranslations />
-      </TabPanel>
-
-      {/* Prefill tab */}
-      <TabPanel>
-        <Prefill.PrefillConfiguration />
       </TabPanel>
 
       {/* Translations */}
@@ -135,11 +128,6 @@ EditForm.defaultValues = {
     plugins: [],
   },
   translatedErrors: {},
-  prefill: {
-    plugin: '',
-    attribute: '',
-    identifierRole: 'main',
-  },
 };
 
 const ShouldUpdateCustomerData: React.FC = () => {
