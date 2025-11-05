@@ -1,5 +1,13 @@
 # Changes
 
+## 0.46.0 (2025-11-05)
+
+Feature release.
+
+- [`#5708`][#5708] Added CustomerProfile component for the new Klantinteracties API prefill plugin.
+
+[#5708]: https://github.com/open-formulieren/open-forms/issues/5708
+
 ## 0.45.0 (2025-09-30)
 
 Quality of life improvements.
