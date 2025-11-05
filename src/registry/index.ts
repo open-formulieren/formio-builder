@@ -11,6 +11,7 @@ import Content from './content';
 import CosignV1 from './cosignV1';
 import CosignV2 from './cosignV2';
 import Currency from './currency';
+import CustomerProfile from './customerProfile';
 import DateField from './date';
 import DateTimeField from './datetime';
 import EditGrid from './editgrid';
@@ -84,6 +85,7 @@ const REGISTRY: Registry = {
   editgrid: EditGrid,
   partners: Partners,
   children: Children,
+  customerProfile: CustomerProfile,
   // layout
   content: Content,
   columns: Columns,
