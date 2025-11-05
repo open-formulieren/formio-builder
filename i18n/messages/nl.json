@@ -151,7 +151,7 @@
     "originalDefault": "Maximum value"
   },
   "34Nekc": {
-    "defaultMessage": "Gebruikers kunnen een e-mailadres aangeven als voorkeurscommunicatiemethode",
+    "defaultMessage": "Gebruikers kunnen een e-mailadres opgeven als voorkeurscommunicatiemethode",
     "description": "Tooltip for 'digitalAddressTypes.email' builder field",
     "originalDefault": "Users can specify an email address as preferred communication method"
   },
@@ -277,7 +277,7 @@
     "originalDefault": "Add another overlay"
   },
   "752whH": {
-    "defaultMessage": "Indien aangevinkt, dan worden nieuwe en bijgewerkte gebruiker communicatiemethodes bijwerkt in het klantinteracties systeem door Open Formulieren.",
+    "defaultMessage": "Indien aangevinkt, dan werkt Open Formulieren nieuwe en bijgewerkte gebruikercommunicatiemethodes bij in het klantinteractiessysteem.",
     "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
     "originalDefault": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address."
   },
@@ -343,7 +343,7 @@
     "originalDefault": "Date of birth"
   },
   "9XqFGF": {
-    "defaultMessage": "Gebruiker communicatiemethodes laten bijwerken door Open Formulieren",
+    "defaultMessage": "Gebruikercommunicatiemethodes bijwerken",
     "description": "Label for 'shouldUpdateCustomerData' builder field",
     "originalDefault": "Open Forms should update customer data after submission"
   },
@@ -993,7 +993,7 @@
     "originalDefault": "File name"
   },
   "XaGrGg": {
-    "defaultMessage": "Je moet minimaal één digitaaladres soort selecteren.",
+    "defaultMessage": "Je moet minimaal één digitaaladressoort selecteren.",
     "description": "Missing digital address types",
     "originalDefault": "You must enable at least one digital address type."
   },
@@ -1245,7 +1245,7 @@
     "originalDefault": "Prefill"
   },
   "fT1Pis": {
-    "defaultMessage": "Gebruikers kunnen een telefoonnummer aangeven als voorkeurscommunicatiemethode",
+    "defaultMessage": "Gebruikers kunnen een telefoonnummer opgeven als voorkeurscommunicatiemethode",
     "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
     "originalDefault": "Users can specify a phone number as preferred communication method"
   },
