@@ -151,7 +151,7 @@
     "originalDefault": "Maximum value"
   },
   "34Nekc": {
-    "defaultMessage": "Users can specify an email address as preferred communication method",
+    "defaultMessage": "Gebruikers kunnen een e-mailadres opgeven als voorkeurscommunicatiemethode",
     "description": "Tooltip for 'digitalAddressTypes.email' builder field",
     "originalDefault": "Users can specify an email address as preferred communication method"
   },
@@ -277,7 +277,7 @@
     "originalDefault": "Add another overlay"
   },
   "752whH": {
-    "defaultMessage": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address.",
+    "defaultMessage": "Indien aangevinkt, dan werkt Open Formulieren nieuwe en bijgewerkte gebruikercommunicatiemethodes bij in het klantinteractiessysteem.",
     "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
     "originalDefault": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address."
   },
@@ -317,7 +317,7 @@
     "originalDefault": "Years"
   },
   "7noYJs": {
-    "defaultMessage": "Email",
+    "defaultMessage": "E-mailadres",
     "description": "Label for 'digitalAddressTypes.email' builder field",
     "originalDefault": "Email"
   },
@@ -343,7 +343,7 @@
     "originalDefault": "Date of birth"
   },
   "9XqFGF": {
-    "defaultMessage": "Open Forms should update customer data after submission",
+    "defaultMessage": "Gebruikercommunicatiemethodes bijwerken",
     "description": "Label for 'shouldUpdateCustomerData' builder field",
     "originalDefault": "Open Forms should update customer data after submission"
   },
@@ -720,12 +720,12 @@
     "originalDefault": "Label"
   },
   "PIU3Ha": {
-    "defaultMessage": "Available digital address types",
+    "defaultMessage": "Beschikbare soorten digitale adressen",
     "description": "Digital address types panel title",
     "originalDefault": "Available digital address types"
   },
   "PToTK+": {
-    "defaultMessage": "{field} must be a valid phone number.",
+    "defaultMessage": "{field} moet een geldig telefoonnummer zijn.",
     "description": "Invalid phone number format validation error",
     "originalDefault": "{field} must be a valid phone number."
   },
@@ -755,7 +755,7 @@
     "originalDefault": "Preview"
   },
   "Qr/L4+": {
-    "defaultMessage": "Phone number",
+    "defaultMessage": "Telefoonnummer",
     "description": "Label for 'digitalAddressTypes.phoneNumber' builder field",
     "originalDefault": "Phone number"
   },
@@ -993,7 +993,7 @@
     "originalDefault": "File name"
   },
   "XaGrGg": {
-    "defaultMessage": "You must enable at least one digital address type.",
+    "defaultMessage": "Je moet minimaal één digitaaladressoort selecteren.",
     "description": "Missing digital address types",
     "originalDefault": "You must enable at least one digital address type."
   },
@@ -1245,7 +1245,7 @@
     "originalDefault": "Prefill"
   },
   "fT1Pis": {
-    "defaultMessage": "Users can specify a phone number as preferred communication method",
+    "defaultMessage": "Gebruikers kunnen een telefoonnummer opgeven als voorkeurscommunicatiemethode",
     "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
     "originalDefault": "Users can specify a phone number as preferred communication method"
   },
@@ -1673,7 +1673,7 @@
     "originalDefault": "The earliest possible value that can be entered."
   },
   "tZwyML": {
-    "defaultMessage": "Phone number",
+    "defaultMessage": "Telefoonnummer",
     "description": "Label for digital address phone number",
     "originalDefault": "Phone number"
   },
@@ -1763,7 +1763,7 @@
     "originalDefault": "Add/subtract duration"
   },
   "xPFvic": {
-    "defaultMessage": "Email",
+    "defaultMessage": "E-mailadres",
     "description": "Label for digital address email",
     "originalDefault": "Email"
   },
