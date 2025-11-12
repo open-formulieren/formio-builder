@@ -149,11 +149,6 @@
     "description": "Label for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
-  "34Nekc": {
-    "defaultMessage": "Users can specify an email address as preferred communication method",
-    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Users can specify an email address as preferred communication method"
-  },
   "3LEg1l": {
     "defaultMessage": "Allow negative values.",
     "description": "Tooltip for 'allowNegative' builder field",
@@ -244,6 +239,11 @@
     "description": "Label for 'validate.maxTime' builder field",
     "originalDefault": "Maximum time"
   },
+  "68Aey7": {
+    "defaultMessage": "When this is checked, Open Forms automatically updates the customer profile when a digital address is added.",
+    "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
+    "originalDefault": "When this is checked, Open Forms automatically updates the customer profile when a digital address is added."
+  },
   "6F2H6H": {
     "defaultMessage": "Has the value",
     "description": "Component property 'conditional.eq' label",
@@ -274,10 +274,10 @@
     "description": "'overlays' builder field 'add another overlay' button label",
     "originalDefault": "Add another overlay"
   },
-  "752whH": {
-    "defaultMessage": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address.",
-    "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
-    "originalDefault": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address."
+  "78ckd0": {
+    "defaultMessage": "Email",
+    "description": "Label for 'email' option in 'digitalAddressTypes' select field",
+    "originalDefault": "Email"
   },
   "7E8B/6": {
     "defaultMessage": "Enable selection",
@@ -313,11 +313,6 @@
     "defaultMessage": "Years",
     "description": "Label for 'delta.years' in relative delta date constraint validation",
     "originalDefault": "Years"
-  },
-  "7noYJs": {
-    "defaultMessage": "Email",
-    "description": "Label for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Email"
   },
   "7qqbU9": {
     "defaultMessage": "{groupLabel} 1",
@@ -709,11 +704,6 @@
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
   },
-  "PIU3Ha": {
-    "defaultMessage": "Available digital address types",
-    "description": "Digital address types panel title",
-    "originalDefault": "Available digital address types"
-  },
   "PToTK+": {
     "defaultMessage": "{field} must be a valid phone number.",
     "description": "Invalid phone number format validation error",
@@ -743,11 +733,6 @@
     "defaultMessage": "Preview",
     "description": "Component preview card title",
     "originalDefault": "Preview"
-  },
-  "Qr/L4+": {
-    "defaultMessage": "Phone number",
-    "description": "Label for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Phone number"
   },
   "R/XadM": {
     "defaultMessage": "You need to configure both longitude and latitude.",
@@ -964,6 +949,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
   },
+  "XKpEHP": {
+    "defaultMessage": "At least one digital address type must be selected.",
+    "description": "Validation error for zero digital address types selected",
+    "originalDefault": "At least one digital address type must be selected."
+  },
   "XMV3t2": {
     "defaultMessage": "Info",
     "description": "Label for content component CSS class 'info' option",
@@ -979,15 +969,15 @@
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
   },
-  "XaGrGg": {
-    "defaultMessage": "You must enable at least one digital address type.",
-    "description": "Missing digital address types",
-    "originalDefault": "You must enable at least one digital address type."
-  },
   "Xj1uvL": {
     "defaultMessage": "Remove",
     "description": "Columns table: accessible label to remove a column",
     "originalDefault": "Remove"
+  },
+  "Y1qhnH": {
+    "defaultMessage": "Digital address types a user can be contacted on.",
+    "description": "Tooltip for 'digitalAddressTypes' builder field",
+    "originalDefault": "Digital address types a user can be contacted on."
   },
   "Y4oNhH": {
     "defaultMessage": "Maximum width",
@@ -1228,11 +1218,6 @@
     "defaultMessage": "Prefill",
     "description": "Component edit form tab title for 'Prefill' tab",
     "originalDefault": "Prefill"
-  },
-  "fT1Pis": {
-    "defaultMessage": "Users can specify a phone number as preferred communication method",
-    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Users can specify a phone number as preferred communication method"
   },
   "fT6Gtt": {
     "defaultMessage": "Save the value as this attribute in the registration backend system.",
@@ -1579,6 +1564,11 @@
     "description": "Label for 'showInPDF' builder field",
     "originalDefault": "Show in PDF"
   },
+  "q+qVVR": {
+    "defaultMessage": "Phone number",
+    "description": "Label for 'phoneNumber' option in 'digitalAddressTypes' select field",
+    "originalDefault": "Phone number"
+  },
   "qmBAmr": {
     "defaultMessage": "Include partners",
     "description": "Label for 'includePartners' builder field",
@@ -1688,6 +1678,11 @@
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
+  },
+  "vN6yXh": {
+    "defaultMessage": "Available digital address types",
+    "description": "Label for 'digitalAddressTypes' builder field",
+    "originalDefault": "Available digital address types"
   },
   "vRVMpe": {
     "defaultMessage": "Value",
