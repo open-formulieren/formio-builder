@@ -1,5 +1,5 @@
-import {CustomerProfileComponentSchema} from '@open-formulieren/types';
-import {FormattedMessage, useIntl} from 'react-intl';
+import type {CustomerProfileComponentSchema, DigitalAddressType} from '@open-formulieren/types';
+import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
 import {
   BuilderTabs,
@@ -17,7 +17,7 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox, Panel, TabList, TabPanel, Tabs} from '@/components/formio';
+import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -112,10 +112,7 @@ EditForm.defaultValues = {
   clearOnHide: true,
   isSensitiveData: true,
   shouldUpdateCustomerData: true,
-  digitalAddressTypes: {
-    email: true,
-    phoneNumber: false,
-  },
+  digitalAddressTypes: ['email', 'phoneNumber'],
   // Advanced tab
   conditional: {
     show: undefined,
@@ -135,8 +132,8 @@ const ShouldUpdateCustomerData: React.FC = () => {
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'shouldUpdateCustomerData' builder field",
     defaultMessage:
-      'Determines whether Open Forms updates the customer profile when a customer ' +
-      'adds a new digital address.',
+      'When this is checked, Open Forms automatically updates the customer profile ' +
+      'when a digital address is added.',
   });
   return (
     <Checkbox
@@ -152,58 +149,40 @@ const ShouldUpdateCustomerData: React.FC = () => {
   );
 };
 
+const DigitalAddressTypeOptionLabels = defineMessages<DigitalAddressType>({
+  email: {
+    description: "Label for 'email' option in 'digitalAddressTypes' select field",
+    defaultMessage: 'Email',
+  },
+  phoneNumber: {
+    description: "Label for 'phoneNumber' option in 'digitalAddressTypes' select field",
+    defaultMessage: 'Phone number',
+  },
+});
+
 const DigitalAddressTypes: React.FC = () => {
+  const intl = useIntl();
+  const options = Object.entries(DigitalAddressTypeOptionLabels).map(([value, label]) => ({
+    value,
+    label: intl.formatMessage(label),
+  }));
+
   return (
-    <Panel
-      title={
+    <Select
+      name="digitalAddressTypes"
+      label={
         <FormattedMessage
-          description="Digital address types panel title"
+          description="Label for 'digitalAddressTypes' builder field"
           defaultMessage="Available digital address types"
         />
       }
-    >
-      <EmailDigitalAddressType />
-      <PhoneNumberDigitalAddressType />
-    </Panel>
-  );
-};
-
-const EmailDigitalAddressType: React.FC = () => {
-  const intl = useIntl();
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'digitalAddressTypes.email' builder field",
-    defaultMessage: 'Users can specify an email address as preferred communication method',
-  });
-  return (
-    <Checkbox
-      name="digitalAddressTypes.email"
-      label={
-        <FormattedMessage
-          description="Label for 'digitalAddressTypes.email' builder field"
-          defaultMessage="Email"
-        />
-      }
-      tooltip={tooltip}
-    />
-  );
-};
-
-const PhoneNumberDigitalAddressType: React.FC = () => {
-  const intl = useIntl();
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
-    defaultMessage: 'Users can specify a phone number as preferred communication method',
-  });
-  return (
-    <Checkbox
-      name="digitalAddressTypes.phoneNumber"
-      label={
-        <FormattedMessage
-          description="Label for 'digitalAddressTypes.phoneNumber' builder field"
-          defaultMessage="Phone number"
-        />
-      }
-      tooltip={tooltip}
+      tooltip={intl.formatMessage({
+        description: "Tooltip for 'digitalAddressTypes' builder field",
+        defaultMessage: 'Digital address types a user can be contacted on.',
+      })}
+      isMulti
+      required
+      options={options}
     />
   );
 };
