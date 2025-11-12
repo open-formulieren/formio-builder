@@ -149,11 +149,6 @@
     "description": "Label for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
-  "34Nekc": {
-    "defaultMessage": "Users can specify an email address as preferred communication method",
-    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Users can specify an email address as preferred communication method"
-  },
   "3LEg1l": {
     "defaultMessage": "Allow negative values.",
     "description": "Tooltip for 'allowNegative' builder field",
@@ -964,6 +959,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
   },
+  "X/X+5U": {
+    "defaultMessage": "Users can enter an email address as communication method",
+    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
+    "originalDefault": "Users can enter an email address as communication method"
+  },
   "XMV3t2": {
     "defaultMessage": "Info",
     "description": "Label for content component CSS class 'info' option",
@@ -978,11 +978,6 @@
     "defaultMessage": "File name",
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
-  },
-  "XaGrGg": {
-    "defaultMessage": "You must enable at least one digital address type.",
-    "description": "Missing digital address types",
-    "originalDefault": "You must enable at least one digital address type."
   },
   "Xj1uvL": {
     "defaultMessage": "Remove",
@@ -1194,6 +1189,11 @@
     "description": "Label for 'saveRow' builder field",
     "originalDefault": "'Save row' text"
   },
+  "eW30DC": {
+    "defaultMessage": "Users can enter a phone number as communication method",
+    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
+    "originalDefault": "Users can enter a phone number as communication method"
+  },
   "ee4oWr": {
     "defaultMessage": "Add column",
     "description": "Add another column button label",
@@ -1228,11 +1228,6 @@
     "defaultMessage": "Prefill",
     "description": "Component edit form tab title for 'Prefill' tab",
     "originalDefault": "Prefill"
-  },
-  "fT1Pis": {
-    "defaultMessage": "Users can specify a phone number as preferred communication method",
-    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Users can specify a phone number as preferred communication method"
   },
   "fT6Gtt": {
     "defaultMessage": "Save the value as this attribute in the registration backend system.",

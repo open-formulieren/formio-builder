@@ -150,11 +150,6 @@
     "description": "Label for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
-  "34Nekc": {
-    "defaultMessage": "Gebruikers kunnen een e-mailadres opgeven als voorkeurscommunicatiemethode",
-    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Users can specify an email address as preferred communication method"
-  },
   "3LEg1l": {
     "defaultMessage": "Laat negatieve waarden toe.",
     "description": "Tooltip for 'allowNegative' builder field",
@@ -976,6 +971,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
   },
+  "X/X+5U": {
+    "defaultMessage": "Users can enter an email address as communication method",
+    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
+    "originalDefault": "Users can enter an email address as communication method"
+  },
   "XMV3t2": {
     "defaultMessage": "Info",
     "description": "Label for content component CSS class 'info' option",
@@ -991,11 +991,6 @@
     "defaultMessage": "Bestandsnaam",
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
-  },
-  "XaGrGg": {
-    "defaultMessage": "Je moet minimaal één digitaaladressoort selecteren.",
-    "description": "Missing digital address types",
-    "originalDefault": "You must enable at least one digital address type."
   },
   "Xj1uvL": {
     "defaultMessage": "Verwijderen",
@@ -1208,6 +1203,11 @@
     "description": "Label for 'saveRow' builder field",
     "originalDefault": "'Save row' text"
   },
+  "eW30DC": {
+    "defaultMessage": "Users can enter a phone number as communication method",
+    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
+    "originalDefault": "Users can enter a phone number as communication method"
+  },
   "ee4oWr": {
     "defaultMessage": "Kolom toevoegen",
     "description": "Add another column button label",
@@ -1243,11 +1243,6 @@
     "description": "Component edit form tab title for 'Prefill' tab",
     "isTranslated": true,
     "originalDefault": "Prefill"
-  },
-  "fT1Pis": {
-    "defaultMessage": "Gebruikers kunnen een telefoonnummer opgeven als voorkeurscommunicatiemethode",
-    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Users can specify a phone number as preferred communication method"
   },
   "fT6Gtt": {
     "defaultMessage": "Sla de waarde op onder het geselecteerde attribuut in de geselecteerde registratieplugin.",
