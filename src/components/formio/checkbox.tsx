@@ -13,6 +13,7 @@ export interface CheckboxInputProps {
   onChange?: FormikHandlers['handleChange'];
   optionDescription?: string;
   disabled?: boolean;
+  checked?: boolean;
 }
 
 export const CheckboxInput: React.FC<CheckboxInputProps> = ({
@@ -21,9 +22,10 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   onChange,
   optionDescription,
   disabled = false,
+  checked = undefined,
 }) => {
   const {getFieldProps} = useFormikContext();
-  const {onChange: formikOnChange} = getFieldProps(name);
+  const {value, onChange: formikOnChange} = getFieldProps(name);
   const {hasErrors} = useValidationErrors(name);
   return (
     <>
@@ -37,6 +39,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
           onChange?.(e);
         }}
         disabled={disabled}
+        checked={checked ?? value}
       />
       <span>{label}</span>
       {optionDescription && <Description text={optionDescription} />}
@@ -53,6 +56,7 @@ export interface CheckboxProps {
   onChange?: FormikHandlers['handleChange'];
   optionDescription?: string;
   disabled?: boolean;
+  checked?: boolean;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -64,6 +68,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   onChange,
   optionDescription,
   disabled = false,
+  checked = undefined,
 }) => (
   <Component field={name} required={required} type="checkbox">
     <div className="form-check checkbox">
@@ -74,6 +79,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           onChange={onChange}
           optionDescription={optionDescription}
           disabled={disabled}
+          checked={checked}
         />
         {tooltip && ' '}
         <Tooltip text={tooltip} />

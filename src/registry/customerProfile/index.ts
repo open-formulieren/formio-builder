@@ -10,5 +10,5 @@ export default {
   edit: EditForm,
   editSchema: validationSchema,
   preview: {panel: Preview},
-  defaultValue: {},
+  defaultValue: [],
 } satisfies RegistryEntry<CustomerProfileComponentSchema>;

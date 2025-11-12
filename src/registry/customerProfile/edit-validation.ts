@@ -1,4 +1,3 @@
-import {CustomerProfileData} from '@open-formulieren/types';
 import {IntlShape, defineMessages} from 'react-intl';
 import {z} from 'zod';
 
@@ -40,54 +39,34 @@ const buildDefaultValueSchema = (intl: IntlShape) => {
     .email()
     .optional();
 
-  return z
-    .object({})
-    .passthrough()
-    .superRefine((data, ctx) => {
-      const {digitalAddressTypes, defaultValue} = data as {
-        digitalAddressTypes: {email: boolean; phoneNumber: boolean};
-        defaultValue: CustomerProfileData;
-      };
+  const emailDigitalAddressSchema = z.object({
+    type: z.literal('email'),
+    address: emailSchema,
+  });
 
-      if (!digitalAddressTypes.email && !digitalAddressTypes.phoneNumber) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: intl.formatMessage({
-            description: 'Missing digital address types',
-            defaultMessage: 'You must enable at least one digital address type.',
-          }),
-          path: ['digitalAddressTypes'],
-        });
-      }
+  const phoneNumberDigitalAddressSchema = z.object({
+    type: z.literal('phoneNumber'),
+    address: phoneNumberSchema,
+  });
 
-      // Validate email if enabled
-      if (digitalAddressTypes.email) {
-        const emailResult = emailSchema.safeParse(defaultValue?.email?.address);
-        if (!emailResult.success) {
-          emailResult.error.issues.forEach(issue => {
-            ctx.addIssue({
-              ...issue,
-              path: ['defaultValue', 'email', 'address'],
-            });
-          });
-        }
-      }
+  const digitalAddressSchema = z
+    .object({
+      useOnlyOnce: z.boolean().optional(),
+      isNewPreferred: z.boolean().optional(),
+    })
+    .and(phoneNumberDigitalAddressSchema.or(emailDigitalAddressSchema));
 
-      // Validate phone number if enabled
-      if (digitalAddressTypes.phoneNumber) {
-        const phoneResult = phoneNumberSchema.safeParse(defaultValue?.phoneNumber?.address);
-        if (!phoneResult.success) {
-          phoneResult.error.issues.forEach(issue => {
-            ctx.addIssue({
-              ...issue,
-              path: ['defaultValue', 'phoneNumber', 'address'],
-            });
-          });
-        }
-      }
-    });
+  const defaultValue = z.array(digitalAddressSchema).optional();
+
+  return z.object({defaultValue});
 };
 
-const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildDefaultValueSchema(intl));
+const customerProfileSchema = z.object({
+  shouldUpdateCustomerData: z.boolean(),
+  digitalAddressTypes: z.array(z.enum(['email', 'phoneNumber'])).min(1),
+});
+
+const schema: EditSchema = ({intl}) =>
+  buildCommonSchema(intl).and(buildDefaultValueSchema(intl)).and(customerProfileSchema);
 
 export default schema;

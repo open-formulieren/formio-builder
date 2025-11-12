@@ -1,4 +1,4 @@
-import {CustomerProfileComponentSchema} from '@open-formulieren/types';
+import {CustomerProfileComponentSchema, DigitalAddressType} from '@open-formulieren/types';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';
 
@@ -11,10 +11,7 @@ test('Basic CustomerProfile component passes validation', () => {
     type: 'customerProfile',
     label: 'Customer profile',
     key: 'customerProfile',
-    digitalAddressTypes: {
-      email: true,
-      phoneNumber: true,
-    },
+    digitalAddressTypes: ['email', 'phoneNumber'],
     shouldUpdateCustomerData: true,
   };
 
@@ -29,19 +26,12 @@ test('CustomerProfile component with defaultValues passes validation', () => {
     type: 'customerProfile',
     label: 'Customer profile',
     key: 'customerProfile',
-    digitalAddressTypes: {
-      email: true,
-      phoneNumber: true,
-    },
+    digitalAddressTypes: ['email', 'phoneNumber'],
     shouldUpdateCustomerData: true,
-    defaultValue: {
-      email: {
-        address: 'test@mail.com',
-      },
-      phoneNumber: {
-        address: '+31612345678',
-      },
-    },
+    defaultValue: [
+      {address: 'test@mail.com', type: 'email'},
+      {address: '+31612345678', type: 'phoneNumber'},
+    ],
   };
 
   const {success} = schema.safeParse(component);
@@ -50,45 +40,43 @@ test('CustomerProfile component with defaultValues passes validation', () => {
 
 test.each([
   [
-    // DigitalAddressTypes requires one option to be true
-    {
-      email: false,
-      phoneNumber: false,
-    },
+    // DigitalAddressTypes requires at least one option
+    [],
     false,
   ],
-  [
-    {
-      email: true,
-      phoneNumber: false,
-    },
-    true,
-  ],
-  [
-    {
-      email: false,
-      phoneNumber: true,
-    },
-    true,
-  ],
-  [
-    {
-      email: true,
-      phoneNumber: true,
-    },
-    true,
-  ],
-])('CustomerProfile requires at least one digitalAddressType', (digitalAddressTypes, expected) => {
+  [['email'], true],
+  [['phoneNumber'], true],
+  [['email', 'phoneNumber'], true],
+])(
+  'CustomerProfile requires at least one digitalAddressType',
+  (digitalAddressTypes: DigitalAddressType[], expected) => {
+    const schema = schemaFactory({intl: dummyIntl, builderContext: dummyBuilderContext});
+    const component: CustomerProfileComponentSchema = {
+      id: 'customerProfile',
+      type: 'customerProfile',
+      label: 'Customer profile',
+      key: 'customerProfile',
+      digitalAddressTypes: digitalAddressTypes,
+      shouldUpdateCustomerData: true,
+    };
+
+    const {success} = schema.safeParse(component);
+    expect(success).toBe(expected);
+  }
+);
+
+test('CustomerProfile only accepts valid digitalAddressTypes', () => {
   const schema = schemaFactory({intl: dummyIntl, builderContext: dummyBuilderContext});
   const component: CustomerProfileComponentSchema = {
     id: 'customerProfile',
     type: 'customerProfile',
     label: 'Customer profile',
     key: 'customerProfile',
-    digitalAddressTypes: digitalAddressTypes,
+    // Forcing an invalid type here to test the validation
+    digitalAddressTypes: ['other'] as unknown as DigitalAddressType[],
     shouldUpdateCustomerData: true,
   };
 
   const {success} = schema.safeParse(component);
-  expect(success).toBe(expected);
+  expect(success).toBe(false);
 });

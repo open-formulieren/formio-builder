@@ -3163,12 +3163,9 @@ export const Profile: Story = {
       label: 'Profile',
       tooltip: 'An example for the tooltip',
       description: 'A description for the customerProfile component',
-      defaultValue: {},
+      defaultValue: [],
       shouldUpdateCustomerData: true,
-      digitalAddressTypes: {
-        email: true,
-        phoneNumber: false,
-      },
+      digitalAddressTypes: ['email', 'phoneNumber'],
     },
 
     builderInfo: {
@@ -3182,6 +3179,7 @@ export const Profile: Story = {
 
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
+    const componentEditForm = within(canvas.getByTestId('componentEditForm'));
     const componentPreview = within(canvas.getByTestId('componentPreview'));
 
     expect(canvas.getByLabelText('Label')).toHaveValue('Profile');
@@ -3202,14 +3200,23 @@ export const Profile: Story = {
       expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
+    await step('Initial digital address types', async () => {
+      // Both digital address types are checked by default
+      expect(componentEditForm.getByLabelText('Email')).toBeChecked();
+      expect(componentEditForm.getByLabelText('Phone number')).toBeChecked();
+
+      // Both digital addresses have inputs
+      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
+      expect(await componentPreview.getByLabelText('Phone number')).toBeVisible();
+    });
+
     await step('Change digital address types', async () => {
-      // Changing the digital address types changes the component inputs
+      // Uncheck the phone number field
+      await userEvent.click(componentEditForm.getByLabelText('Phone number'));
+
+      // The phone number field is removed
       expect(await componentPreview.queryByLabelText('Phone number')).not.toBeInTheDocument();
-
-      const phoneNumberCheckbox = canvas.getByLabelText('Phone number');
-      await userEvent.click(phoneNumberCheckbox);
-
-      expect(componentPreview.getByLabelText('Phone number')).toBeVisible();
+      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
     });
 
     await step('Submit form', async () => {
