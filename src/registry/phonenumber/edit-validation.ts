@@ -1,30 +1,24 @@
+import {defineMessage} from 'react-intl';
 import {z} from 'zod';
 
-import {LABELS} from '@/components/builder/messages';
 import {buildCommonSchema} from '@/registry/validation';
 
 import {EditSchema} from '../types';
 
-const phoneRegex = /^[+0-9][- 0-9]+$/;
+const PHONE_NUMBER_INVALID_MESSAGE = defineMessage({
+  description: 'Validation error for phone number format.',
+  defaultMessage:
+    'Invalid phone number - a phone number may only contain digits, the + or - sign or spaces',
+});
 
-const defaultValueSchema = (intl: any) =>
-  z.preprocess(
-    val => (val === '' ? undefined : val),
-    z.union([
-      z.string().regex(phoneRegex, {
-        message: intl.formatMessage(
-          {
-            description: 'Invalid phone number format validation error',
-            defaultMessage: '{field} must be a valid phone number.',
-          },
-          {field: intl.formatMessage(LABELS.defaultValue)}
-        ),
-      }),
-      z.array(z.string().regex(phoneRegex)),
-    ])
-  );
+const schema: EditSchema = ({intl}) => {
+  const singleValueSchema = z.string().regex(/^[+0-9][- 0-9]+$/, {
+    message: intl.formatMessage(PHONE_NUMBER_INVALID_MESSAGE),
+  });
 
-const schema: EditSchema = ({intl}) =>
-  buildCommonSchema(intl).extend({defaultValue: defaultValueSchema(intl).optional()});
+  const defaultValue = z.union([singleValueSchema, z.array(singleValueSchema)]).optional();
+
+  return buildCommonSchema(intl).extend({defaultValue});
+};
 
 export default schema;
