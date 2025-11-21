@@ -150,11 +150,6 @@
     "description": "Label for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
-  "34Nekc": {
-    "defaultMessage": "Gebruikers kunnen een e-mailadres opgeven als voorkeurscommunicatiemethode",
-    "description": "Tooltip for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Users can specify an email address as preferred communication method"
-  },
   "3LEg1l": {
     "defaultMessage": "Laat negatieve waarden toe.",
     "description": "Tooltip for 'allowNegative' builder field",
@@ -246,6 +241,11 @@
     "description": "Label for 'validate.maxTime' builder field",
     "originalDefault": "Maximum time"
   },
+  "68Aey7": {
+    "defaultMessage": "Wanneer dit is ingeschakeld, wordt het klantprofiel automatisch bijgewerkt door Open Formulieren zodra een digitaal adres wordt toegevoegd.",
+    "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
+    "originalDefault": "When this is checked, Open Forms automatically updates the customer profile when a digital address is added."
+  },
   "6F2H6H": {
     "defaultMessage": "De waarde heeft:",
     "description": "Component property 'conditional.eq' label",
@@ -276,10 +276,10 @@
     "description": "'overlays' builder field 'add another overlay' button label",
     "originalDefault": "Add another overlay"
   },
-  "752whH": {
-    "defaultMessage": "Indien aangevinkt, dan werkt Open Formulieren nieuwe en bijgewerkte gebruikercommunicatiemethodes bij in het klantinteractiessysteem.",
-    "description": "Tooltip for 'shouldUpdateCustomerData' builder field",
-    "originalDefault": "Determines whether Open Forms updates the customer profile when a customer adds a new digital address."
+  "78ckd0": {
+    "defaultMessage": "E-mailadres",
+    "description": "Label for 'email' option in 'digitalAddressTypes' select field",
+    "originalDefault": "Email"
   },
   "7E8B/6": {
     "defaultMessage": "Schakel selectie in",
@@ -315,11 +315,6 @@
     "defaultMessage": "Jaren",
     "description": "Label for 'delta.years' in relative delta date constraint validation",
     "originalDefault": "Years"
-  },
-  "7noYJs": {
-    "defaultMessage": "E-mailadres",
-    "description": "Label for 'digitalAddressTypes.email' builder field",
-    "originalDefault": "Email"
   },
   "7qqbU9": {
     "defaultMessage": "{groupLabel} 1",
@@ -719,11 +714,6 @@
     "isTranslated": true,
     "originalDefault": "Label"
   },
-  "PIU3Ha": {
-    "defaultMessage": "Beschikbare soorten digitale adressen",
-    "description": "Digital address types panel title",
-    "originalDefault": "Available digital address types"
-  },
   "PToTK+": {
     "defaultMessage": "{field} moet een geldig telefoonnummer zijn.",
     "description": "Invalid phone number format validation error",
@@ -753,11 +743,6 @@
     "defaultMessage": "Voorbeeld",
     "description": "Component preview card title",
     "originalDefault": "Preview"
-  },
-  "Qr/L4+": {
-    "defaultMessage": "Telefoonnummer",
-    "description": "Label for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Phone number"
   },
   "R/XadM": {
     "defaultMessage": "Je moet latitude en longitude allebei instellen.",
@@ -976,6 +961,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the postcode field value must pass before the form can be submitted."
   },
+  "XKpEHP": {
+    "defaultMessage": "Selecteer ten minste één digitaal adrestype.",
+    "description": "Validation error for zero digital address types selected",
+    "originalDefault": "At least one digital address type must be selected."
+  },
   "XMV3t2": {
     "defaultMessage": "Info",
     "description": "Label for content component CSS class 'info' option",
@@ -992,15 +982,15 @@
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
   },
-  "XaGrGg": {
-    "defaultMessage": "Je moet minimaal één digitaaladressoort selecteren.",
-    "description": "Missing digital address types",
-    "originalDefault": "You must enable at least one digital address type."
-  },
   "Xj1uvL": {
     "defaultMessage": "Verwijderen",
     "description": "Columns table: accessible label to remove a column",
     "originalDefault": "Remove"
+  },
+  "Y1qhnH": {
+    "defaultMessage": "Digitale adrestypen waarop een gebruiker te bereiken is.",
+    "description": "Tooltip for 'digitalAddressTypes' builder field",
+    "originalDefault": "Digital address types a user can be contacted on."
   },
   "Y4oNhH": {
     "defaultMessage": "Maximale breedte",
@@ -1243,11 +1233,6 @@
     "description": "Component edit form tab title for 'Prefill' tab",
     "isTranslated": true,
     "originalDefault": "Prefill"
-  },
-  "fT1Pis": {
-    "defaultMessage": "Gebruikers kunnen een telefoonnummer opgeven als voorkeurscommunicatiemethode",
-    "description": "Tooltip for 'digitalAddressTypes.phoneNumber' builder field",
-    "originalDefault": "Users can specify a phone number as preferred communication method"
   },
   "fT6Gtt": {
     "defaultMessage": "Sla de waarde op onder het geselecteerde attribuut in de geselecteerde registratieplugin.",
@@ -1600,6 +1585,11 @@
     "description": "Label for 'showInPDF' builder field",
     "originalDefault": "Show in PDF"
   },
+  "q+qVVR": {
+    "defaultMessage": "Telefoonnummer",
+    "description": "Label for 'phoneNumber' option in 'digitalAddressTypes' select field",
+    "originalDefault": "Phone number"
+  },
   "qmBAmr": {
     "defaultMessage": "Inclusief partner(s)",
     "description": "Label for 'includePartners' builder field",
@@ -1711,6 +1701,11 @@
     "defaultMessage": "Verberg de koptekst en de lijn boven de veldengroep in het formulier.",
     "description": "Tooltip for 'hideHeader' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the fieldset."
+  },
+  "vN6yXh": {
+    "defaultMessage": "Beschikbare digitale adrestypen",
+    "description": "Label for 'digitalAddressTypes' builder field",
+    "originalDefault": "Available digital address types"
   },
   "vRVMpe": {
     "defaultMessage": "(Standaard)tekst",

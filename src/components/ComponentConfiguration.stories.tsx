@@ -3162,13 +3162,10 @@ export const Profile: Story = {
       key: 'profile',
       label: 'Profile',
       tooltip: 'An example for the tooltip',
-      description: 'A description for the customerProfile component',
-      defaultValue: {},
+      description: 'A description for the Profile component',
+      defaultValue: [],
       shouldUpdateCustomerData: true,
-      digitalAddressTypes: {
-        email: true,
-        phoneNumber: false,
-      },
+      digitalAddressTypes: ['email', 'phoneNumber'],
     },
 
     builderInfo: {
@@ -3182,6 +3179,7 @@ export const Profile: Story = {
 
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
+    const componentEditForm = within(canvas.getByTestId('componentEditForm'));
     const componentPreview = within(canvas.getByTestId('componentPreview'));
 
     expect(canvas.getByLabelText('Label')).toHaveValue('Profile');
@@ -3202,14 +3200,22 @@ export const Profile: Story = {
       expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
-    await step('Change digital address types', async () => {
-      // Changing the digital address types changes the component inputs
+    await step('Initial digital address types', async () => {
+      // Email and phone number digital address types are selected by default
+      expect(componentEditForm.getByText('Email')).toBeVisible();
+      expect(componentEditForm.getByText('Phone number')).toBeVisible();
+
+      // Both digital addresses have inputs in the preview
+      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
+      expect(await componentPreview.getByLabelText('Phone number')).toBeVisible();
+    });
+
+    await step('Deselect phone number digital address type', async () => {
+      await userEvent.click(componentEditForm.getByRole('button', {name: 'Remove Phone number'}));
+
+      // The phone number field is removed
       expect(await componentPreview.queryByLabelText('Phone number')).not.toBeInTheDocument();
-
-      const phoneNumberCheckbox = canvas.getByLabelText('Phone number');
-      await userEvent.click(phoneNumberCheckbox);
-
-      expect(componentPreview.getByLabelText('Phone number')).toBeVisible();
+      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
     });
 
     await step('Submit form', async () => {
