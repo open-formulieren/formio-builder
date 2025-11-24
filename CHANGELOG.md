@@ -1,5 +1,13 @@
 # Changes
 
+## 0.46.1 (2025-11-24)
+
+Small improvements release.
+
+- [`#5708`][#5708] Updated types library and adjusted profile component accordingly.
+
+[#5708]: https://github.com/open-formulieren/open-forms/issues/5708
+
 ## 0.46.0 (2025-11-05)
 
 Feature release.
