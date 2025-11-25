@@ -3163,7 +3163,7 @@ export const Profile: Story = {
       label: 'Profile',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Profile component',
-      defaultValue: [],
+      defaultValue: undefined,
       shouldUpdateCustomerData: true,
       digitalAddressTypes: ['email', 'phoneNumber'],
     },

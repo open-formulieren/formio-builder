@@ -1,15 +1,9 @@
-import {
-  CustomerProfileComponentSchema,
-  CustomerProfileData,
-  DigitalAddressType,
-} from '@open-formulieren/types';
-import {useFormikContext} from 'formik';
-import {useEffect} from 'react';
+import type {CustomerProfileComponentSchema, DigitalAddressType} from '@open-formulieren/types';
 import {FormattedMessage, defineMessages} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 const fieldLabels = defineMessages<DigitalAddressType>({
   email: {
@@ -35,41 +29,23 @@ const fieldTypes: Record<DigitalAddressType, string> = {
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> = ({component}) => {
-  const {getFieldProps, getFieldHelpers} = useFormikContext();
-  const {key, label, description, tooltip, validate = {}, digitalAddressTypes} = component;
-  const {setValue} = getFieldHelpers<CustomerProfileComponentSchema['defaultValue']>(key);
-  const {value: addresses = []} = getFieldProps<CustomerProfileData>(key);
-
-  useEffect(() => {
-    // When digitalAddressTypes changes, update the addresses array to match the new types.
-    if (digitalAddressTypes.length !== addresses?.length) {
-      setValue(
-        digitalAddressTypes.map(type => ({
-          type,
-          // Try to preserve the existing address if it exists, otherwise use an empty string.
-          address: addresses.find(address => address.type === type)?.address || '',
-        }))
-      );
-    }
-  }, [addresses, digitalAddressTypes]);
+  const {key, label, description, tooltip, validate = {}, digitalAddressTypes = []} = component;
 
   const {required = false} = validate;
   return (
     <FieldSet field={key} label={label} tooltip={tooltip}>
+      {digitalAddressTypes
+        .sort((a, b) => a.localeCompare(b))
+        .map((addressType, index) => (
+          <TextField
+            key={addressType}
+            name={`${key}.${index}.address`}
+            label={<FormattedMessage {...fieldLabels[addressType]} />}
+            required={required}
+            type={fieldTypes[addressType]}
+          />
+        ))}
       {description && <Description text={description} />}
-      <div className="offb-customer-profile-preview">
-        {addresses
-          .sort((a, b) => a.type.localeCompare(b.type))
-          .map((address, index) => (
-            <TextField
-              key={address.type}
-              name={`${key}.${index}.address`}
-              label={<FormattedMessage {...fieldLabels[address.type]} />}
-              required={required}
-              type={fieldTypes[address.type]}
-            />
-          ))}
-      </div>
     </FieldSet>
   );
 };

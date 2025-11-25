@@ -1375,7 +1375,7 @@ export const Profile: Story = {
       label: 'A profile preview',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Profile component',
-      defaultValue: [],
+      defaultValue: undefined,
       digitalAddressTypes: ['email', 'phoneNumber'],
       shouldUpdateCustomerData: true,
     } satisfies CustomerProfileComponentSchema,
