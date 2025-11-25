@@ -704,11 +704,6 @@
     "description": "Component property 'Label' label",
     "originalDefault": "Label"
   },
-  "PToTK+": {
-    "defaultMessage": "{field} must be a valid phone number.",
-    "description": "Invalid phone number format validation error",
-    "originalDefault": "{field} must be a valid phone number."
-  },
   "PhXIai": {
     "defaultMessage": "Number of years. Empty values are ignored.",
     "description": "Tooltip for 'delta.years' in relative delta date constraint validation",
