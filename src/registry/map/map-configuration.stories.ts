@@ -202,7 +202,7 @@ export const AddOverlay: Story = {
     expect(canvas.queryByRole('button', {name: 'Layers'})).not.toBeInTheDocument();
 
     await step('Add WMS overlay layer', async () => {
-      const addOverlayButton = canvas.getByRole('button', {name: 'Add another overlay'});
+      const addOverlayButton = await canvas.findByRole('button', {name: 'Add another overlay'});
       await userEvent.click(addOverlayButton);
 
       const wmsLayerSelect = canvas.getByLabelText('Tile layer');
