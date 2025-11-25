@@ -38,9 +38,9 @@ test('CustomerProfile component with defaultValues fails validation', () => {
   expect(success).toBe(false);
 });
 
-// This is a special case where Formio assigns a default value of `null` to the field.
-// This is not allowed by the typescript definition, but it's a valid value in the
-// formio-builder and backend.
+// The current backend formio.js code uses `null` as a fallback for falsy defaultValues.
+// This is behaviour that we have to accept for now. This is not allowed by the
+// TypeScript definition, but it's a valid value in the formio-builder and backend.
 test('CustomerProfile component with defaultValues `null` passes validation', () => {
   const schema = schemaFactory({intl: dummyIntl, builderContext: dummyBuilderContext});
   const component: CustomerProfileComponentSchema = {
@@ -48,10 +48,9 @@ test('CustomerProfile component with defaultValues `null` passes validation', ()
     type: 'customerProfile',
     label: 'Customer profile',
     key: 'customerProfile',
-    // The typescript definition doesn't allow for `null` as a valid value,
-    // but this is the "empty" value formio assigns to the field.
-    // So we have to twist the type here to prevent typescript from complaining.
-    defaultValue: null as unknown as CustomerProfileComponentSchema['defaultValue'],
+    // @ts-expect-error Because the TypeScript definition of this component doesn't allow
+    // `null`, we have to annotate this with 'expect error'.
+    defaultValue: null,
     digitalAddressTypes: ['email', 'phoneNumber'],
     shouldUpdateCustomerData: true,
   };
