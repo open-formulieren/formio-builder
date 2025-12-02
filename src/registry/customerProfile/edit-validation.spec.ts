@@ -19,7 +19,7 @@ test('Basic CustomerProfile component passes validation', () => {
   expect(success).toBe(true);
 });
 
-test('CustomerProfile component with defaultValues passes validation', () => {
+test('CustomerProfile component with defaultValues fails validation', () => {
   const schema = schemaFactory({intl: dummyIntl, builderContext: dummyBuilderContext});
   const component: CustomerProfileComponentSchema = {
     id: 'customerProfile',
@@ -32,6 +32,27 @@ test('CustomerProfile component with defaultValues passes validation', () => {
       {address: 'test@mail.com', type: 'email'},
       {address: '+31612345678', type: 'phoneNumber'},
     ],
+  };
+
+  const {success} = schema.safeParse(component);
+  expect(success).toBe(false);
+});
+
+// The current backend formio.js code uses `null` as a fallback for falsy defaultValues.
+// This is behaviour that we have to accept for now. This is not allowed by the
+// TypeScript definition, but it's a valid value in the formio-builder and backend.
+test('CustomerProfile component with defaultValues `null` passes validation', () => {
+  const schema = schemaFactory({intl: dummyIntl, builderContext: dummyBuilderContext});
+  const component: CustomerProfileComponentSchema = {
+    id: 'customerProfile',
+    type: 'customerProfile',
+    label: 'Customer profile',
+    key: 'customerProfile',
+    // @ts-expect-error Because the TypeScript definition of this component doesn't allow
+    // `null`, we have to annotate this with 'expect error'.
+    defaultValue: null,
+    digitalAddressTypes: ['email', 'phoneNumber'],
+    shouldUpdateCustomerData: true,
   };
 
   const {success} = schema.safeParse(component);

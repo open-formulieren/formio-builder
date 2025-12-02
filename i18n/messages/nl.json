@@ -714,11 +714,6 @@
     "isTranslated": true,
     "originalDefault": "Label"
   },
-  "PToTK+": {
-    "defaultMessage": "{field} moet een geldig telefoonnummer zijn.",
-    "description": "Invalid phone number format validation error",
-    "originalDefault": "{field} must be a valid phone number."
-  },
   "PhXIai": {
     "defaultMessage": "Aantal jaren. Lege waarden worden genegeerd.",
     "description": "Tooltip for 'delta.years' in relative delta date constraint validation",
