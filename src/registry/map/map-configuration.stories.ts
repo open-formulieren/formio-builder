@@ -216,12 +216,12 @@ export const AddOverlay: Story = {
     });
 
     await step('Expect new overlay to be active', async () => {
-      const wmsLayerButtonsContainer = canvas.getByRole('button', {name: 'Layers'});
+      const wmsLayerButtonsContainer = await canvas.findByRole('button', {name: 'Layers'});
 
       expect(wmsLayerButtonsContainer).toBeVisible();
       await userEvent.click(wmsLayerButtonsContainer);
 
-      const layerCheckbox = canvas.getByLabelText('PDOK BAG');
+      const layerCheckbox = await canvas.findByLabelText('PDOK BAG');
       expect(layerCheckbox).toBeVisible();
       expect(layerCheckbox).toBeChecked();
     });
