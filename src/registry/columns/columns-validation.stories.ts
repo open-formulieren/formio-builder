@@ -1,5 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, within} from '@storybook/test';
+import {expect, fireEvent, userEvent, waitFor, within} from '@storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
@@ -50,8 +50,9 @@ export const SumOfColumnSizes: Story = {
     fireEvent.change(sliders[2], {target: {value: 4}});
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-    await expect(
-      await canvas.findByText('The sum of column sizes may not exceed 12.')
-    ).toBeVisible();
+    await waitFor(async () => {
+      const error = await canvas.findByText('The sum of column sizes may not exceed 12.');
+      expect(error).toBeVisible();
+    });
   },
 };

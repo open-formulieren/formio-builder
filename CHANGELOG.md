@@ -1,5 +1,13 @@
 # Changes
 
+## 0.46.2 (2025-12-02)
+
+Bugfix release.
+
+- [`#5708`][#5708] Fixed `defaultValue` of the profile component.
+
+[#5708]: https://github.com/open-formulieren/open-forms/issues/5708
+
 ## 0.46.1 (2025-11-24)
 
 Small improvements release.
