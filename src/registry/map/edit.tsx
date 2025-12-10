@@ -23,12 +23,13 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import InteractionConfiguration from '@/registry/map/interaction-configuration';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
+import InteractionConfiguration from './interaction-configuration';
 import MapConfiguration from './map-configuration';
 import Overlays from './overlays';
+import type {ExtendedMapOverlay} from './types';
 
 /**
  * Form to configure a Formio 'map' type component.
@@ -51,6 +52,24 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
       setValues({...values, defaultZoom: undefined, initialCenter: undefined});
     }
   });
+
+  // Make sure each overlay has a unique internal id.
+  useEffect(() => {
+    if (!values.overlays || !values.overlays.length) return;
+
+    const overlays: ExtendedMapOverlay[] = values.overlays;
+    // Only update if at least one overlay is missing an internal id
+    const needsUpdate = overlays.some(o => !o._OF_INTERNAL_id);
+    if (!needsUpdate) return;
+
+    setValues({
+      ...values,
+      overlays: overlays.map(o => ({
+        ...o,
+        _OF_INTERNAL_id: o._OF_INTERNAL_id ?? crypto.randomUUID(),
+      })),
+    });
+  }, []);
 
   return (
     <Tabs>

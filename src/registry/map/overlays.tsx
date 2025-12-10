@@ -47,12 +47,9 @@ const Overlays: React.FC = () => {
       <FieldArray name="overlays">
         {arrayHelpers => (
           <>
-            {value?.map(({uuid, label}, index) => (
+            {value?.map(({_OF_INTERNAL_id}, index) => (
               <OverlayTileLayer
-                // index will always be unique, but gets confused when items are shuffled
-                // around. The label and uuid are added for additional 'cache' busting,
-                // as those values increase uniqueness.
-                key={`${uuid}/${index}/${label}`}
+                key={_OF_INTERNAL_id}
                 index={index}
                 arrayHelpers={arrayHelpers}
                 overlayTileLayers={overlayTileLayers}
@@ -69,6 +66,7 @@ const Overlays: React.FC = () => {
                     type: 'wms', // We currently only support WMS tile layers.
                     url: '', // This is dynamically set by the backend, so can remain empty.
                     layers: [],
+                    _OF_INTERNAL_id: crypto.randomUUID(),
                   } satisfies ExtendedMapOverlay)
                 }
               >
