@@ -1,5 +1,5 @@
 import {FieldArray, type FieldArrayRenderProps, useField, useFormikContext} from 'formik';
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
@@ -47,12 +47,12 @@ const Overlays: React.FC = () => {
       <FieldArray name="overlays">
         {arrayHelpers => (
           <>
-            {value?.map(({uuid, label}, index) => (
+            {value?.map(({_OF_INTERNAL_id}, index) => (
               <OverlayTileLayer
-                // index will always be unique, but gets confused when items are shuffled
-                // around. The label and uuid are added for additional 'cache' busting,
-                // as those values increase uniqueness.
-                key={`${uuid}/${index}/${label}`}
+                // `_OF_INTERNAL_id` could be undefined, in which case the `OverlayTileLayer`
+                // component will assign it a value.
+                // While `_OF_INTERNAL_id` is undefined, we can use the index as a temporary key.
+                key={_OF_INTERNAL_id || index}
                 index={index}
                 arrayHelpers={arrayHelpers}
                 overlayTileLayers={overlayTileLayers}
@@ -69,6 +69,7 @@ const Overlays: React.FC = () => {
                     type: 'wms', // We currently only support WMS tile layers.
                     url: '', // This is dynamically set by the backend, so can remain empty.
                     layers: [],
+                    _OF_INTERNAL_id: crypto.randomUUID(),
                   } satisfies ExtendedMapOverlay)
                 }
               >
@@ -118,6 +119,17 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
   if (error) {
     throw error;
   }
+
+  // This should only happen when editing overlays of already saved forms
+  // or when messing with the JSON panel.
+  useEffect(() => {
+    if (!value._OF_INTERNAL_id) {
+      setValue({
+        ...value,
+        _OF_INTERNAL_id: crypto.randomUUID(),
+      });
+    }
+  }, [value, setValue]);
 
   return (
     <Panel
