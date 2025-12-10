@@ -23,10 +23,10 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import InteractionConfiguration from '@/registry/map/interaction-configuration';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
+import InteractionConfiguration from './interaction-configuration';
 import MapConfiguration from './map-configuration';
 import Overlays from './overlays';
 

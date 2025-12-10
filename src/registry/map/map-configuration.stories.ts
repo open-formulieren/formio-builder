@@ -53,7 +53,7 @@ export const NotUsingGlobalConfig: Story = {
     });
 
     await step('Open configuration panel', async () => {
-      const panelTitle = await canvas.findByText('Initial focus');
+      const panelTitle = await canvas.findByRole('button', {name: 'Initial focus'});
       await waitFor(async () => {
         expect(panelTitle).toBeVisible();
       });
@@ -194,36 +194,123 @@ export const AddOverlay: Story = {
   },
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
+    const componentPreview = within(canvas.getByTestId('componentPreview'));
 
     await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
 
     // Expect that the overlay button isn't show in the preview, as there aren't any
     // configured overlays.
-    expect(canvas.queryByRole('button', {name: 'Layers'})).not.toBeInTheDocument();
+    expect(componentPreview.queryByRole('button', {name: 'Layers'})).not.toBeInTheDocument();
 
     await step('Add WMS overlay layer', async () => {
       const addOverlayButton = await canvas.findByRole('button', {name: 'Add another overlay'});
       await userEvent.click(addOverlayButton);
 
+      const labelInput = canvas.getByLabelText('Label');
+      expect(labelInput).toHaveDisplayValue('');
+
       const wmsLayerSelect = canvas.getByLabelText('Tile layer');
       await rsSelect(canvas, wmsLayerSelect, 'PDOK BAG');
-      // toggle the panel open again
-      await userEvent.click(canvas.getByRole('button', {name: 'Overlay: PDOK BAG'}));
-      const labelInput = canvas.getByLabelText('Label');
+      // After selecting a layer, the label is automatically filled in with the layer name.
       expect(labelInput).toHaveDisplayValue('PDOK BAG');
       const subLayersSelect = canvas.getAllByLabelText('Layers')[1];
       await rsSelect(canvas, subLayersSelect, 'Pand');
     });
 
     await step('Expect new overlay to be active', async () => {
-      const wmsLayerButtonsContainer = await canvas.findByRole('button', {name: 'Layers'});
+      const mapLayersButton = await componentPreview.findByRole('button', {name: 'Layers'});
 
-      expect(wmsLayerButtonsContainer).toBeVisible();
-      await userEvent.click(wmsLayerButtonsContainer);
+      expect(mapLayersButton).toBeVisible();
+      await userEvent.click(mapLayersButton);
 
-      const layerCheckbox = await canvas.findByLabelText('PDOK BAG');
+      const layerCheckbox = await componentPreview.findByLabelText('PDOK BAG');
       expect(layerCheckbox).toBeVisible();
       expect(layerCheckbox).toBeChecked();
+    });
+  },
+};
+
+export const EditOverlay: Story = {
+  name: 'Edit overlay',
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'map',
+      key: 'map',
+      label: 'A map',
+      overlays: [
+        {
+          uuid: 'f57405dc-1796-4f5b-8ad4-c98eb8511110',
+          label: 'BAG pand layer',
+          type: 'wms',
+          layers: ['pand'],
+          // url is part of the schema, but doesn't exist in this scenario
+          url: '',
+        },
+      ],
+    },
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    const componentPreview = within(canvas.getByTestId('componentPreview'));
+
+    await userEvent.click(canvas.getByRole('link', {name: 'Layers'}));
+
+    // Open the overlay configuration menu
+    const overlayConfigTrigger = await canvas.findByRole('button', {
+      name: 'Overlay: BAG pand layer',
+    });
+    await waitFor(() => {
+      expect(overlayConfigTrigger).toBeVisible();
+    });
+    await userEvent.click(overlayConfigTrigger);
+
+    await step('Validate initial values', async () => {
+      // Validate tile layer value
+      expect(canvas.getByRole('combobox', {name: 'Tile layer'})).toBeVisible();
+      expect(canvas.getByText('PDOK BAG')).toBeVisible();
+      // Validate label value
+      expect(canvas.getByLabelText('Label')).toHaveDisplayValue('BAG pand layer');
+      // Validate sub-layers
+      expect(canvas.getByRole('combobox', {name: 'Layers'})).toBeVisible();
+      expect(await canvas.findByText('Pand')).toBeVisible();
+
+      // Validate overlay label in the preview
+      const mapLayersButton = await componentPreview.findByRole('button', {name: 'Layers'});
+      await userEvent.click(mapLayersButton);
+      expect(componentPreview.getByLabelText('BAG pand layer')).toBeVisible();
+      // Close the overlay menu in the preview
+      await userEvent.unhover(mapLayersButton);
+    });
+
+    await step('Update values', async () => {
+      // Change tile layer
+      await rsSelect(
+        canvas,
+        canvas.getByRole('combobox', {name: 'Tile layer'}),
+        'PDOK grondwaterspiegeldiepte'
+      );
+      const labelField = canvas.getByLabelText('Label');
+
+      // Expect label to be changed to the layer name, and sub-layers to be empty
+      expect(labelField).toHaveDisplayValue('PDOK grondwaterspiegeldiepte');
+      // We cannot accurately check the value of the React-Select component.
+      // Best we can do is check that the previous value is no longer present.
+      expect(canvas.queryByText('Pand')).not.toBeInTheDocument();
+
+      // Change label
+      await userEvent.clear(labelField);
+      await userEvent.type(labelField, 'grondwaterspiegeldiepte layer');
+      expect(labelField).toHaveDisplayValue('grondwaterspiegeldiepte layer');
+
+      // Select sub-layer
+      const subLayersSelect = canvas.getAllByLabelText('Layers')[1];
+      await rsSelect(canvas, subLayersSelect, 'BRO Grondwaterspiegeldiepte GHG');
+
+      // Expect overlay label in preview to be changed
+      const mapLayersButton = await componentPreview.findByRole('button', {name: 'Layers'});
+      await userEvent.click(mapLayersButton);
+      expect(componentPreview.getByLabelText('grondwaterspiegeldiepte layer')).toBeVisible();
     });
   },
 };
