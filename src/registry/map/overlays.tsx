@@ -9,12 +9,12 @@ import {BuilderContext, type MapOverlayTileLayer} from '@/context';
 
 import {getWMSLayerOptions} from './getTileLayerOptions';
 import './overlays.scss';
-import type {OverlayWithoutUrl} from './types';
+import {ExtendedMapOverlay} from './types';
 
 const Overlays: React.FC = () => {
   const intl = useIntl();
   const {getMapOverlayTileLayers} = useContext(BuilderContext);
-  const [{value}] = useField<OverlayWithoutUrl[]>('overlays');
+  const [{value}] = useField<ExtendedMapOverlay[]>('overlays');
   const {
     value: overlayTileLayers,
     loading,
@@ -67,8 +67,9 @@ const Overlays: React.FC = () => {
                     uuid: '',
                     label: '',
                     type: 'wms', // We currently only support WMS tile layers.
+                    url: '', // This is dynamically set by the backend, so can remain empty.
                     layers: [],
-                  } satisfies OverlayWithoutUrl)
+                  } satisfies ExtendedMapOverlay)
                 }
               >
                 <i className="fa fa-plus" aria-hidden="true" />{' '}
@@ -100,9 +101,9 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
   const fieldNamePrefix = `overlays[${index}]`;
   const {getFieldProps, getFieldHelpers} = useFormikContext();
 
-  const numOptions = getFieldProps<OverlayWithoutUrl[]>('overlays').value?.length || 0;
+  const numOptions = getFieldProps<ExtendedMapOverlay[]>('overlays').value?.length || 0;
   const {value} = getFieldProps(fieldNamePrefix);
-  const {setValue} = getFieldHelpers<OverlayWithoutUrl>(fieldNamePrefix);
+  const {setValue} = getFieldHelpers<ExtendedMapOverlay>(fieldNamePrefix);
   const selectedTileLayerUrl = overlayTileLayers?.find(
     tileLayer => tileLayer.uuid === value.uuid
   )?.url;
