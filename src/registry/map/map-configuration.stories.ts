@@ -53,7 +53,7 @@ export const NotUsingGlobalConfig: Story = {
     });
 
     await step('Open configuration panel', async () => {
-      const panelTitle = await canvas.findByText('Initial focus');
+      const panelTitle = await canvas.findByRole('button', {name: 'Initial focus'});
       await waitFor(async () => {
         expect(panelTitle).toBeVisible();
       });
@@ -260,7 +260,9 @@ export const EditOverlay: Story = {
     const overlayConfigTrigger = await canvas.findByRole('button', {
       name: 'Overlay: BAG pand layer',
     });
-    expect(overlayConfigTrigger).toBeVisible();
+    await waitFor(() => {
+      expect(overlayConfigTrigger).toBeVisible();
+    });
     await userEvent.click(overlayConfigTrigger);
 
     await step('Validate initial values', async () => {
