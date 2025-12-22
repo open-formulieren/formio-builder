@@ -1,5 +1,15 @@
 # Changes
 
+## 0.45.2 (2025-12-23)
+
+Bugfix release.
+
+Version 0.45.1 was incorrectly published and has been yanked.
+
+- [`OF#5723`][OF#5723] Fixed map component layer panels collapsing while editing the label.
+
+[OF#5723]: https://github.com/open-formulieren/open-forms/issues/5723
+
 ## 0.45.0 (2025-09-30)
 
 Quality of life improvements.
