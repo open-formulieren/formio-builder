@@ -1,5 +1,5 @@
 import {FieldArray, type FieldArrayRenderProps, useField, useFormikContext} from 'formik';
-import {useContext, useEffect} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import useAsync from 'react-use/esm/useAsync';
 
@@ -100,7 +100,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
 }) => {
   const intl = useIntl();
   const fieldNamePrefix = `overlays[${index}]`;
-  const {getFieldProps, getFieldHelpers} = useFormikContext();
+  const {getFieldProps, getFieldHelpers, setFieldValue} = useFormikContext();
 
   const numOptions = getFieldProps<ExtendedMapOverlay[]>('overlays').value?.length || 0;
   const {value} = getFieldProps(fieldNamePrefix);
@@ -120,16 +120,14 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
     throw error;
   }
 
+  const internalId = value._OF_INTERNAL_id;
   // This should only happen when editing overlays of already saved forms
   // or when messing with the JSON panel.
-  useEffect(() => {
-    if (!value._OF_INTERNAL_id) {
-      setValue({
-        ...value,
-        _OF_INTERNAL_id: crypto.randomUUID(),
-      });
+  useLayoutEffect(() => {
+    if (!internalId) {
+      setFieldValue(`${fieldNamePrefix}._OF_INTERNAL_id`, window.crypto.randomUUID());
     }
-  }, [value, setValue]);
+  }, [internalId, setFieldValue]);
 
   return (
     <Panel
