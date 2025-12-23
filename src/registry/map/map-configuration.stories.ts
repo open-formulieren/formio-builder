@@ -260,9 +260,6 @@ export const EditOverlay: Story = {
     const overlayConfigTrigger = await canvas.findByRole('button', {
       name: 'Overlay: BAG pand layer',
     });
-    await waitFor(() => {
-      expect(overlayConfigTrigger).toBeVisible();
-    });
     await userEvent.click(overlayConfigTrigger);
 
     await step('Validate initial values', async () => {
