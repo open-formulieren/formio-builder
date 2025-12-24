@@ -1,4 +1,5 @@
 import {TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
+import {useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {NumberField, Panel} from '@/components/formio';
@@ -36,7 +37,24 @@ const DefaultZoom: React.FC = () => {
   );
 };
 
+/**
+ * Calculate the step size for coordinate fields based on the zoom level.
+ *
+ * This roughly translates to:
+ * zoomLevel 1: step size 0.5
+ * zoomLevel 4: step size 0.0625
+ * zoomLevel 8: step size 0.0039
+ * zoomLevel 12: step size 0.00024
+ */
+const useCoordinateFieldStep = () => {
+  const {getFieldMeta} = useFormikContext();
+  const {value: zoomLevel} = getFieldMeta<number | null>('defaultZoom');
+
+  return Math.pow(2, -(zoomLevel ?? 8));
+};
+
 const Latitude: React.FC = () => {
+  const fieldStep = useCoordinateFieldStep();
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'initialCenter.lat' builder field",
@@ -54,18 +72,20 @@ const Latitude: React.FC = () => {
       description={
         <FormattedMessage
           description="Description for 'initialCenter.lat' builder field"
-          defaultMessage="Value in decimal degrees, between -90 and +90."
+          defaultMessage="Value in decimal degrees, between 50.5 and 54."
         />
       }
       tooltip={tooltip}
       placeholder="52.1326332"
-      min={-90}
-      max={90}
+      min={50.5}
+      max={54}
+      step={fieldStep}
     />
   );
 };
 
 const Longitude: React.FC = () => {
+  const fieldStep = useCoordinateFieldStep();
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'initialCenter.lng' builder field",
@@ -83,13 +103,14 @@ const Longitude: React.FC = () => {
       description={
         <FormattedMessage
           description="Description for 'initialCenter.lng' builder field"
-          defaultMessage="Value in decimal degrees, between -180 and +180."
+          defaultMessage="Value in decimal degrees, between 3 and 7.5."
         />
       }
       tooltip={tooltip}
       placeholder="5.291266"
-      min={-180}
-      max={180}
+      min={3}
+      max={7.5}
+      step={fieldStep}
     />
   );
 };

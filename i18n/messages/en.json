@@ -474,6 +474,11 @@
     "description": "Tooltip for 'values' builder field",
     "originalDefault": "The values that can be picked for this field. Values are the text that is submitted with the form data. Labels are the text next to radio buttons, checkboxes and options in dropdowns."
   },
+  "DbpUVv": {
+    "defaultMessage": "Value in decimal degrees, between 50.5 and 54.",
+    "description": "Description for 'initialCenter.lat' builder field",
+    "originalDefault": "Value in decimal degrees, between 50.5 and 54."
+  },
   "Dm3S1P": {
     "defaultMessage": "Placeholder",
     "description": "Component property 'Placeholder' label",
@@ -803,6 +808,11 @@
     "defaultMessage": "Minimum date",
     "description": "Date field 'minDate' fixed value label",
     "originalDefault": "Minimum date"
+  },
+  "Tpg442": {
+    "defaultMessage": "Value in decimal degrees, between 3 and 7.5.",
+    "description": "Description for 'initialCenter.lng' builder field",
+    "originalDefault": "Value in decimal degrees, between 3 and 7.5."
   },
   "TtqZa0": {
     "defaultMessage": "The placeholder text that will appear when this field is empty.",
@@ -1344,11 +1354,6 @@
     "description": "Tooltip for 'AutoExpand' builder field",
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
   },
-  "jiDz2v": {
-    "defaultMessage": "Value in decimal degrees, between -90 and +90.",
-    "description": "Description for 'initialCenter.lat' builder field",
-    "originalDefault": "Value in decimal degrees, between -90 and +90."
-  },
   "jnHPfU": {
     "defaultMessage": "Latitude",
     "description": "Label for 'initialCenter.lat' builder field",
@@ -1783,11 +1788,6 @@
     "defaultMessage": "Maximum height",
     "description": "Label for 'of.image.resize.height' builder field",
     "originalDefault": "Maximum height"
-  },
-  "z45pcO": {
-    "defaultMessage": "Value in decimal degrees, between -180 and +180.",
-    "description": "Description for 'initialCenter.lng' builder field",
-    "originalDefault": "Value in decimal degrees, between -180 and +180."
   },
   "z7HXSS": {
     "defaultMessage": "Use globally configured map component settings",
