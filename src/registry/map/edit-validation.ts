@@ -1,4 +1,5 @@
-import {TILE_LAYER_RD} from '@open-formulieren/leaflet-tools';
+// Import direct from the tiles lib, otherwise Leaflet is needed in unit tests for CRS.
+import {TILE_LAYER_RD} from '@open-formulieren/leaflet-tools/lib/tiles';
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
@@ -9,10 +10,12 @@ import {EditSchema} from '../types';
 const buildConfigurationSchema = (intl: IntlShape) =>
   z.object({
     defaultZoom: z.number().int().lte(TILE_LAYER_RD.maxZoom).gte(TILE_LAYER_RD.minZoom).optional(),
+    // The initialCenter coordinates are limited to the WGS84 bounds for the Netherlands
+    // https://epsg.io/28992
     initialCenter: z
       .object({
-        lat: z.number().lte(90).gte(-90).optional(),
-        lng: z.number().lte(180).gte(-180).optional(),
+        lat: z.number().gte(50.5).lte(54).optional(),
+        lng: z.number().gte(3).lte(7.5).optional(),
       })
       .superRefine((val, ctx) => {
         const bothMissing = val.lat == null && val.lng == null;

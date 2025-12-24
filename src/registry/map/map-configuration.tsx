@@ -54,13 +54,13 @@ const Latitude: React.FC = () => {
       description={
         <FormattedMessage
           description="Description for 'initialCenter.lat' builder field"
-          defaultMessage="Value in decimal degrees, between -90 and +90."
+          defaultMessage="Value in decimal degrees, between 50.5 and 54."
         />
       }
       tooltip={tooltip}
       placeholder="52.1326332"
-      min={-90}
-      max={90}
+      min={50.5}
+      max={54}
     />
   );
 };
@@ -83,13 +83,13 @@ const Longitude: React.FC = () => {
       description={
         <FormattedMessage
           description="Description for 'initialCenter.lng' builder field"
-          defaultMessage="Value in decimal degrees, between -180 and +180."
+          defaultMessage="Value in decimal degrees, between 3 and 7.5."
         />
       }
       tooltip={tooltip}
       placeholder="5.291266"
-      min={-180}
-      max={180}
+      min={3}
+      max={7.5}
     />
   );
 };
