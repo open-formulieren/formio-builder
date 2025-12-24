@@ -478,6 +478,11 @@
     "description": "Tooltip for 'values' builder field",
     "originalDefault": "The values that can be picked for this field. Values are the text that is submitted with the form data. Labels are the text next to radio buttons, checkboxes and options in dropdowns."
   },
+  "DbpUVv": {
+    "defaultMessage": "Waarde in decimale graden, tussen 50.5 en 54.",
+    "description": "Description for 'initialCenter.lat' builder field",
+    "originalDefault": "Value in decimal degrees, between 50.5 and 54."
+  },
   "Dm3S1P": {
     "defaultMessage": "Placeholder",
     "description": "Component property 'Placeholder' label",
@@ -813,6 +818,11 @@
     "defaultMessage": "Minimale datum",
     "description": "Date field 'minDate' fixed value label",
     "originalDefault": "Minimum date"
+  },
+  "Tpg442": {
+    "defaultMessage": "Waarde in decimale graden, tussen 3 en 7.5.",
+    "description": "Description for 'initialCenter.lng' builder field",
+    "originalDefault": "Value in decimal degrees, between 3 and 7.5."
   },
   "TtqZa0": {
     "defaultMessage": "De placeholder-tekst die verschijnt als dit veld leeg is.",
@@ -1361,11 +1371,6 @@
     "description": "Tooltip for 'AutoExpand' builder field",
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
   },
-  "jiDz2v": {
-    "defaultMessage": "Waarde in decimale graden, tussen -90 en +90.",
-    "description": "Description for 'initialCenter.lat' builder field",
-    "originalDefault": "Value in decimal degrees, between -90 and +90."
-  },
   "jnHPfU": {
     "defaultMessage": "Latitude",
     "description": "Label for 'initialCenter.lat' builder field",
@@ -1806,11 +1811,6 @@
     "defaultMessage": "Maximale hoogte",
     "description": "Label for 'of.image.resize.height' builder field",
     "originalDefault": "Maximum height"
-  },
-  "z45pcO": {
-    "defaultMessage": "Waarde in decimale graden, tussen -180 en +180.",
-    "description": "Description for 'initialCenter.lng' builder field",
-    "originalDefault": "Value in decimal degrees, between -180 and +180."
   },
   "z7HXSS": {
     "defaultMessage": "Gebruik algemene kaartinstellingen",
