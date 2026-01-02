@@ -119,7 +119,6 @@ export const Email: Story = {
       label: 'Email preview',
       description: 'A preview of the email Formio component',
       hidden: true, // must be ignored
-      validateOn: 'blur',
     },
   },
 
@@ -150,7 +149,6 @@ export const EmailWithVerification: Story = {
       label: 'Email preview',
       description: 'A preview of the email Formio component',
       hidden: true, // must be ignored
-      validateOn: 'blur',
       openForms: {
         translations: {},
         requireVerification: true,
@@ -169,7 +167,6 @@ export const EmailMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-      validateOn: 'blur',
     },
   },
 
@@ -367,9 +364,6 @@ export const TimeField: Story = {
       id: 'time',
       key: 'timePreview',
       label: 'Time preview',
-      inputType: 'text',
-      format: 'HH:mm',
-      validateOn: 'blur',
       description: 'A preview of the time Formio component',
       hidden: true, // must be ignored
     } satisfies TimeComponentSchema,
@@ -398,9 +392,6 @@ export const TimeFieldMultiple: Story = {
       id: 'time',
       key: 'timePreview',
       label: 'Time preview',
-      inputType: 'text',
-      format: 'HH:mm',
-      validateOn: 'blur',
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
@@ -441,11 +432,9 @@ export const Postcode: Story = {
       label: 'Postcode preview',
       description: 'A preview of the postcode Formio component',
       hidden: true, // must be ignored
-      inputMask: '9999 AA',
       validate: {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
-      validateOn: 'blur',
     } satisfies PostcodeComponentSchema,
   },
 
@@ -478,11 +467,9 @@ export const PostcodeMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-      inputMask: '9999 AA',
       validate: {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
-      validateOn: 'blur',
     } satisfies PostcodeComponentSchema,
   },
 
@@ -518,7 +505,6 @@ export const PhoneNumber: Story = {
       id: 'phoneNumber',
       key: 'phoneNumber',
       label: 'Phone number preview',
-      inputMask: null,
       description: 'A preview of the phoneNumber Formio component',
       hidden: true, // must be ignored
     } satisfies PhoneNumberComponentSchema,
@@ -549,7 +535,6 @@ export const PhoneNumberMultiple: Story = {
       id: 'phoneNumber',
       key: 'phoneNumberPreview',
       label: 'Phone number preview',
-      inputMask: null,
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
@@ -588,10 +573,6 @@ export const File: Story = {
       id: 'file',
       key: 'filePreview',
       label: 'File upload preview',
-      webcam: false,
-      options: {withCredentials: true},
-      storage: 'url',
-      url: '',
       file: {
         name: '',
         type: [],
@@ -673,6 +654,7 @@ export const SelectBoxesVariable: Story = {
         itemsExpression: {var: 'foo'},
         translations: {},
       },
+      values: [],
       defaultValue: {},
     } satisfies SelectboxesComponentSchema,
   },
@@ -693,6 +675,7 @@ export const SelectBoxesReferenceLists: Story = {
         service: 'reference-lists',
         translations: {},
       },
+      values: [],
       defaultValue: {},
     } satisfies SelectboxesComponentSchema,
   },
@@ -761,6 +744,7 @@ export const RadioVariable: Story = {
         itemsExpression: {var: 'foo'},
         translations: {},
       },
+      values: [],
       defaultValue: null,
     } satisfies RadioComponentSchema,
   },
@@ -781,6 +765,7 @@ export const RadioReferenceLists: Story = {
         service: 'reference-lists',
         translations: {},
       },
+      values: [],
       defaultValue: null,
     } satisfies RadioComponentSchema,
   },
@@ -805,8 +790,6 @@ export const Select: Story = {
         dataSrc: 'manual',
         translations: {},
       },
-      dataSrc: 'values',
-      dataType: 'string',
       data: {
         values: [
           {
@@ -870,8 +853,6 @@ export const SelectMultiple: Story = {
         dataSrc: 'manual',
         translations: {},
       },
-      dataSrc: 'values',
-      dataType: 'string',
       data: {
         values: [
           {
@@ -941,13 +922,12 @@ export const SelectVariable: Story = {
       key: 'selectPreview',
       label: 'Select preview',
       description: 'A preview of the select Formio component',
-      dataSrc: 'values',
-      dataType: 'string',
       openForms: {
         dataSrc: 'variable',
         itemsExpression: {var: 'foo'},
         translations: {},
       },
+      data: {values: []},
     } satisfies SelectComponentSchema,
   },
 };
@@ -961,14 +941,13 @@ export const SelectVariableReferenceLists: Story = {
       key: 'selectPreview',
       label: 'Select preview',
       description: 'A preview of the select Formio component',
-      dataSrc: 'values',
-      dataType: 'string',
       openForms: {
         dataSrc: 'referenceLists',
         code: 'countries',
         service: 'reference-lists',
         translations: {},
       },
+      data: {values: []},
     } satisfies SelectComponentSchema,
   },
   parameters: {
@@ -986,8 +965,6 @@ export const BSN: Story = {
       label: 'BSN preview',
       description: 'A preview of the BSN Formio component',
       hidden: true, // must be ignored
-      inputMask: '999999999',
-      validateOn: 'blur',
     } satisfies BsnComponentSchema,
   },
 
@@ -1020,8 +997,6 @@ export const BSNMultiple: Story = {
       description: 'Description only once',
       hidden: true, // must be ignored
       multiple: true,
-      inputMask: '999999999',
-      validateOn: 'blur',
     } satisfies BsnComponentSchema,
   },
 
@@ -1077,32 +1052,6 @@ export const NpFamilyMembers: Story = {
   },
 };
 
-export const ProductPrice: Story = {
-  name: 'Product price',
-  args: {
-    component: {
-      type: 'productPrice',
-      id: 'productPrice',
-      key: 'productPricePreview',
-      label: 'Product price preview',
-      description: 'A preview of the product price Formio component',
-      hidden: true, // must be ignored
-    },
-  },
-
-  play: async ({canvasElement}) => {
-    const canvas = within(canvasElement);
-
-    // check that the user-controlled content is visible
-    await canvas.findByText('Product price preview');
-    await canvas.findByText('A preview of the product price Formio component');
-
-    // check that the radio buttons are rendered
-    await canvas.findByText('option 1: € 10,99');
-    await canvas.findByText('option 2: € 15,99');
-  },
-};
-
 export const AddressNL: Story = {
   name: 'addressNL',
   args: {
@@ -1116,16 +1065,6 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       layout: 'singleColumn',
-      defaultValue: {
-        postcode: '',
-        houseNumber: '',
-        houseLetter: '',
-        houseNumberAddition: '',
-        city: '',
-        streetName: '',
-        secretStreetCity: '',
-        autoPopulated: false,
-      },
     } satisfies AddressNLComponentSchema,
   },
 };
@@ -1269,7 +1208,6 @@ export const CosignV2: Story = {
       key: 'cosign',
       label: 'A cosign v2 preview',
       hidden: true, // must be ignored
-      validateOn: 'blur',
     } satisfies CosignV2ComponentSchema,
   },
 
@@ -1344,7 +1282,6 @@ export const Partners: Story = {
       label: 'A partners preview',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Partners component',
-      defaultValue: [],
     } satisfies PartnersComponentSchema,
   },
 };
@@ -1360,7 +1297,6 @@ export const Children: Story = {
       enableSelection: false,
       tooltip: 'An example for the tooltip',
       description: 'A description for the Children component',
-      defaultValue: [],
     } satisfies ChildrenComponentSchema,
   },
 };
@@ -1375,7 +1311,6 @@ export const Profile: Story = {
       label: 'A profile preview',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Profile component',
-      defaultValue: undefined,
       digitalAddressTypes: ['email', 'phoneNumber'],
       shouldUpdateCustomerData: true,
     } satisfies CustomerProfileComponentSchema,

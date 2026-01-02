@@ -114,9 +114,6 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
 };
 
 EditForm.defaultValues = {
-  format: 'HH:mm',
-  validateOn: 'blur',
-  inputType: 'text',
   // basic tab
   label: '',
   key: '',

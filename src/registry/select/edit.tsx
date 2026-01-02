@@ -1,5 +1,4 @@
-import {SelectComponentSchema} from '@open-formulieren/types';
-import {Option} from '@open-formulieren/types/lib/formio/common';
+import {Option, SelectComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useEffect, useLayoutEffect} from 'react';
@@ -174,10 +173,6 @@ EditForm.defaultValues = {
     dataSrc: 'manual',
     translations: {},
   },
-  // fixed, this is what itemsExpression results in via the backend. Do not confuse with
-  // openForms.dataSrc!
-  dataSrc: 'values',
-  dataType: 'string',
   data: {values: [{value: '', label: ''}]},
   // TODO: at some point we can allow an itemsExpression for this too
   // Note: Formio will override this to `null`! So be careful when dealing with

@@ -146,8 +146,6 @@ EditForm.defaultValues = {
     translations: {},
     requireVerification: false,
   },
-  // fixed but not editable
-  validateOn: 'blur',
 };
 
 interface DefaultValueProps {

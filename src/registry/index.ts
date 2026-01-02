@@ -26,7 +26,6 @@ import NumberField from './number';
 import Partners from './partners';
 import PhoneNumber from './phonenumber';
 import Postcode from './postcode';
-import ProductPrice from './productPrice';
 import Radio from './radio';
 import Select from './select';
 import Selectboxes from './selectboxes';
@@ -93,7 +92,6 @@ const REGISTRY: Registry = {
   softRequiredErrors: SoftRequiredErrors,
   // deprecated
   coSign: CosignV1,
-  productPrice: ProductPrice,
 };
 
 export default REGISTRY;

@@ -129,11 +129,6 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
  *   needs to be sent by the SDK/client!
  */
 EditForm.defaultValues = {
-  storage: 'url',
-  url: '',
-  options: {withCredentials: true},
-  webcam: false,
-
   // basic tab
   label: '',
   key: '',

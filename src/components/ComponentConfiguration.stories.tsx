@@ -284,7 +284,6 @@ export const Email: Story = {
       validate: {
         required: false,
       },
-      validateOn: 'blur',
     },
     builderInfo: {
       title: 'Email',
@@ -740,9 +739,6 @@ export const TimeField: Story = {
     component: {
       id: 'wekruya',
       type: 'time',
-      inputType: 'text',
-      format: 'HH:mm',
-      validateOn: 'blur',
       key: 'time',
       label: 'A time field',
       validate: {
@@ -824,8 +820,6 @@ export const Postcode: Story = {
     component: {
       id: 'wekruya',
       type: 'postcode',
-      validateOn: 'blur',
-      inputMask: '9999 AA',
       key: 'postcode',
       label: 'A postcode field',
       validate: {
@@ -907,7 +901,6 @@ export const PhoneNumber: Story = {
     component: {
       id: 'wekruya',
       type: 'phoneNumber',
-      inputMask: null,
       key: 'phoneNumber',
       label: 'A phone number field',
     },
@@ -978,12 +971,6 @@ export const FileUpload: Story = {
   args: {
     component: {
       id: 'kiweljhr',
-      storage: 'url',
-      webcam: false,
-      options: {
-        withCredentials: true,
-      },
-      url: '',
       type: 'file',
       key: 'file',
       label: 'A file upload',
@@ -1582,8 +1569,6 @@ export const Select: Story = {
         dataSrc: 'manual',
         translations: {},
       },
-      dataSrc: 'values',
-      dataType: 'string',
       data: {values: []},
       defaultValue: '',
     } satisfies SelectComponentSchema,
@@ -1826,8 +1811,6 @@ export const BSN: Story = {
   args: {
     component: {
       id: 'wekruya',
-      inputMask: '999999999',
-      validateOn: 'blur',
       type: 'bsn',
       key: 'bsn',
       label: 'A BSN field',
@@ -2121,7 +2104,6 @@ export const Iban: Story = {
     component: {
       id: 'wekruya',
       type: 'iban',
-      validateOn: 'blur',
       key: 'iban',
       label: 'An IBAN field',
       validate: {
@@ -2201,7 +2183,6 @@ export const LicensePlate: Story = {
     component: {
       id: 'wekruya',
       type: 'licenseplate',
-      validateOn: 'blur',
       key: 'licenseplate',
       label: 'A license plate field',
       validate: {
@@ -2352,55 +2333,6 @@ export const NpFamilyMembers: Story = {
   },
 };
 
-export const ProductPrice: Story = {
-  render: Template,
-  name: 'type: productPrice',
-
-  args: {
-    component: {
-      id: 'wqimsadk',
-      type: 'productPrice',
-      key: 'productPrice',
-      label: 'A productPrice field',
-    },
-
-    builderInfo: {
-      title: 'product prices',
-      icon: 'document',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-
-  play: async ({canvasElement, step, args}) => {
-    const canvas = within(canvasElement);
-    const preview = within(canvas.getByTestId('componentPreview'));
-
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A productPrice field');
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-
-    // ensure that changing fields in the edit form properly update the preview
-
-    await userEvent.clear(canvas.getByLabelText('Label'));
-    await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-    await expect(await preview.findByText('Updated preview label')).toBeVisible();
-
-    await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
-    await userEvent.clear(canvas.getByLabelText('Label'));
-    await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-
-    await step('Submit form', async () => {
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      await expect(args.onSubmit).toHaveBeenCalled();
-    });
-  },
-};
-
 export const AddressNL: Story = {
   render: Template,
   name: 'type: addressNL',
@@ -2415,16 +2347,6 @@ export const AddressNL: Story = {
         required: false,
       },
       deriveAddress: false,
-      defaultValue: {
-        postcode: '',
-        houseNumber: '',
-        houseLetter: '',
-        houseNumberAddition: '',
-        city: '',
-        streetName: '',
-        secretStreetCity: '',
-        autoPopulated: false,
-      },
       layout: 'singleColumn',
       openForms: {
         translations: {},
@@ -2754,7 +2676,6 @@ export const CosignV2: Story = {
       type: 'cosign',
       key: 'cosign',
       label: 'A cosign v2',
-      validateOn: 'blur',
     },
     builderInfo: {
       title: 'Cosign',
@@ -2985,7 +2906,6 @@ export const Content: Story = {
       expect(args.onSubmit).toHaveBeenCalledWith({
         id: 'wekruya',
         type: 'content',
-        label: '',
         html: '<p>Hello storybook</p>',
         openForms: {
           translations: {
@@ -3046,7 +2966,6 @@ export const SoftRequiredErrors: Story = {
       expect(args.onSubmit).toHaveBeenCalledWith({
         id: 'wekruya',
         type: 'softRequiredErrors',
-        label: '',
         html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
         openForms: {
           translations: {
@@ -3076,7 +2995,6 @@ export const Partners: Story = {
       label: 'Partners',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Partners component',
-      defaultValue: [],
     },
   },
 
@@ -3121,7 +3039,6 @@ export const Children: Story = {
       enableSelection: false,
       tooltip: 'An example for the tooltip',
       description: 'A description for the Children component',
-      defaultValue: [],
     },
   },
 
@@ -3165,7 +3082,6 @@ export const Profile: Story = {
       label: 'Profile',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Profile component',
-      defaultValue: undefined,
       shouldUpdateCustomerData: true,
       digitalAddressTypes: ['email', 'phoneNumber'],
     },

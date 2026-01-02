@@ -9,11 +9,7 @@ import {Select} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
-import {
-  checkIsManualOptions,
-  checkIsReferenceListsOptions,
-  checkIsVariableOptions,
-} from './helpers';
+import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
 
 /**
  * Show a formio select component preview.
@@ -33,9 +29,6 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
     loading,
     error,
   } = useAsync(async () => {
-    if (checkIsManualOptions(component)) {
-      return component?.data?.values || [];
-    }
     if (checkIsVariableOptions(component)) {
       return [
         {
@@ -62,7 +55,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
       return items ? transformItems(items, intl) : [];
     }
 
-    return [];
+    return component?.data?.values || [];
   }, [component]);
 
   if (error) {
