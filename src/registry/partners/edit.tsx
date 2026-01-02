@@ -93,7 +93,6 @@ const defaultValues: PartnersComponentSchema = {
   label: '',
   key: '',
   isSensitiveData: true,
-  defaultValue: [],
 };
 
 EditForm.defaultValues = defaultValues;

@@ -1,4 +1,4 @@
-import {Option} from '@open-formulieren/types/lib/formio/common';
+import {Option} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';

@@ -1,6 +1,5 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
-import {Option} from '@open-formulieren/types/lib/formio/common';
-import {JSONObject} from '@open-formulieren/types/lib/types';
+import {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 
 import {ComponentWithReferenceLists} from '@/components/builder/values/reference-lists/types';
 
@@ -9,7 +8,7 @@ import {ComponentWithReferenceLists} from '@/components/builder/values/reference
 // See https://github.com/microsoft/TypeScript/issues/18758
 export const checkIsManualOptions = (
   component: RadioComponentSchema
-): component is RadioComponentSchema & {values: Option[] | undefined} => {
+): component is RadioComponentSchema => {
   return component.openForms.dataSrc === 'manual';
 };
 
@@ -31,7 +30,7 @@ export const checkIsReferenceListsOptions = (
 export const checkIsVariableOptions = (
   component: RadioComponentSchema
 ): component is RadioComponentSchema & {
-  openForms: {itemsExpression: string | JSONObject};
+  openForms: {itemsExpression: JsonLogicExpression};
 } => {
   return component.openForms.dataSrc === 'variable';
 };

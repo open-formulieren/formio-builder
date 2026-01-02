@@ -1,10 +1,10 @@
-import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formulieren/types';
 import {Meta, StoryObj} from '@storybook/react';
 import {expect, userEvent, within} from '@storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
 import ValidationErrorTranslations, {useManageValidatorsTranslations} from './i18n';
+import {PossibleValidatorErrorKeys, SchemaWithValidation} from './types';
 
 interface Args {
   errorCodes: PossibleValidatorErrorKeys<SchemaWithValidation>[];

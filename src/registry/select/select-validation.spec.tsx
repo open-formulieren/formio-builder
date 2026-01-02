@@ -20,8 +20,6 @@ test('Option values and labels are required fields', async () => {
     type: 'select',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
-    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -65,8 +63,6 @@ test('There is always at least one option', async () => {
     type: 'select',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
-    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -108,8 +104,6 @@ test('All translations are optional', async () => {
     type: 'select',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
-    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},

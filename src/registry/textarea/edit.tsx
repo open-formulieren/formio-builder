@@ -163,9 +163,6 @@ EditForm.defaultValues = {
     pattern: '',
   },
   translatedErrors: {},
-  registration: {
-    attribute: '',
-  },
 };
 
 interface DefaultValueProps {

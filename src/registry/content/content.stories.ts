@@ -64,7 +64,6 @@ export const MultipleLanguages: Story = {
     expect(args.onSubmit).toHaveBeenCalledWith({
       id: 'wekruya',
       type: 'content',
-      label: '',
       html: '<p>Nederlandse inhoud</p>',
       openForms: {
         translations: {

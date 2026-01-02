@@ -1,5 +1,4 @@
-import {SelectboxesComponentSchema} from '@open-formulieren/types';
-import {Option} from '@open-formulieren/types/lib/formio/common';
+import {Option, SelectboxesComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useLayoutEffect} from 'react';

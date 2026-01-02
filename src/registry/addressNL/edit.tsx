@@ -326,12 +326,6 @@ EditForm.defaultValues = {
   isSensitiveData: true,
   deriveAddress: false,
   layout: 'doubleColumn',
-  defaultValue: {
-    postcode: '',
-    houseNumber: '',
-    houseLetter: '',
-    houseNumberAddition: '',
-  },
   // Advanced tab
   conditional: {
     show: undefined,

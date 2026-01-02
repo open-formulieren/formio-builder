@@ -97,7 +97,6 @@ const defaultValues: ChildrenComponentSchema = {
   key: '',
   isSensitiveData: true,
   enableSelection: false,
-  defaultValue: [],
 };
 
 EditForm.defaultValues = defaultValues;
