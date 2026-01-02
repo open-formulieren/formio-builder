@@ -124,8 +124,6 @@ const EditForm: EditFormDefinition<BsnComponentSchema> = () => {
   the cost of some repetition.
  */
 EditForm.defaultValues = {
-  validateOn: 'blur',
-  inputMask: '999999999',
   // basic tab
   label: '',
   key: '',

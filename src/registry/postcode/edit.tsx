@@ -125,8 +125,6 @@ const EditForm: EditFormDefinition<PostcodeComponentSchema> = () => {
   the cost of some repetition.
  */
 EditForm.defaultValues = {
-  validateOn: 'blur',
-  inputMask: '9999 AA',
   // basic tab
   label: '',
   key: '',
@@ -140,7 +138,6 @@ EditForm.defaultValues = {
   clearOnHide: true,
   isSensitiveData: true,
   defaultValue: '',
-  autocomplete: '',
   disabled: false,
   // Advanced tab
   conditional: {

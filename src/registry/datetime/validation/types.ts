@@ -1,5 +1,4 @@
 import {DateTimeComponentSchema} from '@open-formulieren/types';
-import {DateConstraintConfiguration} from '@open-formulieren/types/lib/formio/dates';
 
 import {FilterByValueType} from '@/types';
 
@@ -7,7 +6,9 @@ import {FilterByValueType} from '@/types';
 // schema a bit more readable while keeping everything exhaustive and type safe.
 type AllDateExtensions = Required<NonNullable<DateTimeComponentSchema['openForms']>>;
 
-export type AllModes = DateConstraintConfiguration['mode'];
+export type AllModes = {
+  [K in keyof AllDateExtensions]: AllDateExtensions[K] extends {mode: infer U} ? U : never;
+}[keyof AllDateExtensions];
 export type NonEmptyModes = Exclude<AllModes, ''>;
 export type DateConstraintKey = keyof FilterByValueType<AllDateExtensions, {mode: AllModes}>;
 export type AllPossibleConstraints = AllDateExtensions[DateConstraintKey];

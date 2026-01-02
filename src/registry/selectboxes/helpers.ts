@@ -1,13 +1,12 @@
 import {SelectboxesComponentSchema} from '@open-formulieren/types';
-import {Option} from '@open-formulieren/types/lib/formio/common';
-import {JSONObject} from '@open-formulieren/types/lib/types';
+import {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.
 // See https://github.com/microsoft/TypeScript/issues/18758
 export const checkIsManualOptions = (
   component: SelectboxesComponentSchema
-): component is SelectboxesComponentSchema & {values: Option[] | undefined} => {
+): component is SelectboxesComponentSchema => {
   return component.openForms.dataSrc === 'manual';
 };
 
@@ -28,7 +27,7 @@ export const checkIsReferenceListsOptions = (
 export const checkIsVariableOptions = (
   component: SelectboxesComponentSchema
 ): component is SelectboxesComponentSchema & {
-  openForms: {itemsExpression: string | JSONObject};
+  openForms: {itemsExpression: JsonLogicExpression};
 } => {
   return component.openForms.dataSrc === 'variable';
 };

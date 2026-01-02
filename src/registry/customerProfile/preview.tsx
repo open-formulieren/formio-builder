@@ -1,4 +1,5 @@
-import type {CustomerProfileComponentSchema, DigitalAddressType} from '@open-formulieren/types';
+import type {CustomerProfileComponentSchema} from '@open-formulieren/types';
+import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
 import {FormattedMessage, defineMessages} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';

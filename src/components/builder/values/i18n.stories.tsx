@@ -1,4 +1,4 @@
-import {Option} from '@open-formulieren/types/lib/formio/common';
+import {Option} from '@open-formulieren/types';
 import {Meta, StoryObj} from '@storybook/react';
 import {expect, within} from '@storybook/test';
 

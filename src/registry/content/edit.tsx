@@ -108,7 +108,6 @@ const EditForm: EditFormDefinition<ContentComponentSchema> = () => {
 EditForm.defaultValues = {
   // Display tab
   html: '',
-  label: '',
   key: '',
   hidden: false,
   showInSummary: false,

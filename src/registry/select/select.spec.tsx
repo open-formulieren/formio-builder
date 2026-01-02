@@ -19,8 +19,6 @@ test('Switch to multiple sets empty array as default value', async () => {
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
-    dataSrc: 'values',
-    dataType: 'string',
     key: 'select',
     label: 'A select field',
     openForms: {
@@ -72,8 +70,6 @@ test('Switch to multiple sets empty array as default value when initial is null'
     type: 'select',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
-    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},
@@ -124,8 +120,6 @@ test('Switch to non multiple sets empty string as default value', async () => {
     type: 'select',
     key: 'select',
     label: 'A select field',
-    dataSrc: 'values',
-    dataType: 'string',
     openForms: {
       dataSrc: 'manual',
       translations: {},

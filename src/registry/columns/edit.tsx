@@ -1,4 +1,5 @@
-import {Column, ColumnsComponentSchema} from '@open-formulieren/types';
+import {ColumnsComponentSchema} from '@open-formulieren/types';
+import {Column} from '@open-formulieren/types/dist/components/columns';
 import {Field, FieldArray, FieldArrayRenderProps, useFormikContext} from 'formik';
 import {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -31,7 +32,6 @@ const EditForm: EditFormDefinition<ColumnsComponentSchema> = () => {
 
 EditForm.defaultValues = {
   key: '',
-  hidden: false,
   clearOnHide: true,
   columns: [
     {

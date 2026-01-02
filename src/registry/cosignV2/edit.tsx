@@ -103,7 +103,6 @@ const EditForm: EditFormDefinition<CosignV2ComponentSchema> = () => {
 };
 
 EditForm.defaultValues = {
-  validateOn: 'blur',
   // basic tab
   label: '',
   key: '',

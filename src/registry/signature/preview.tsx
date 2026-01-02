@@ -1,4 +1,5 @@
 import {SignatureComponentSchema} from '@open-formulieren/types';
+import {SignatureValue} from '@open-formulieren/types/dist/components/signature';
 import {useFormikContext} from 'formik';
 import {debounce} from 'lodash';
 import {useLayoutEffect, useRef} from 'react';
@@ -20,7 +21,7 @@ const BG_COLOR = 'rgb(245,245,235)';
 const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({component}) => {
   const {getFieldProps, getFieldHelpers} = useFormikContext();
   const {key, label, description, tooltip, validate = {}, footer = ''} = component;
-  const {setValue} = getFieldHelpers<SignatureComponentSchema['defaultValue']>(key);
+  const {setValue} = getFieldHelpers<SignatureValue | ''>(key);
   const {required = false} = validate;
   const containerRef = useRef<HTMLDivElement>(null);
   const padRef = useRef<SignatureCanvas>(null);
@@ -67,7 +68,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
   const onEnd = () => {
     const instance = padRef.current;
     if (instance === null) return;
-    const dataUrl = instance.toDataURL() as SignatureComponentSchema['defaultValue'];
+    const dataUrl = instance.toDataURL() as SignatureValue;
     setValue(dataUrl);
   };
 

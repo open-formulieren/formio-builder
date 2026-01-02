@@ -1,4 +1,5 @@
-import {CustomerProfileComponentSchema, DigitalAddressType} from '@open-formulieren/types';
+import {CustomerProfileComponentSchema} from '@open-formulieren/types';
+import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';
 
@@ -28,6 +29,7 @@ test('CustomerProfile component with defaultValues fails validation', () => {
     key: 'customerProfile',
     digitalAddressTypes: ['email', 'phoneNumber'],
     shouldUpdateCustomerData: true,
+    // @ts-expect-error defaultValue cannot be supplied at the component level
     defaultValue: [
       {address: 'test@mail.com', type: 'email'},
       {address: '+31612345678', type: 'phoneNumber'},
