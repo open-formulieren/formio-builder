@@ -16,8 +16,8 @@
     "./lib/": "./lib/"
   },
   "scripts": {
-    "build:esm": "ttsc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "build:cjs": "ttsc -p tsconfig.prod.json --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.prod.json --outDir lib/cjs",
+    "build:esm": "tspc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
+    "build:cjs": "tspc -p tsconfig.prod.json --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.prod.json --outDir lib/cjs",
     "build:scss": "node bundle-scss.mjs && rm lib/css/index.js lib/css/index.js.map",
     "build:typecheck": "tsc --noEmit",
     "build": "run-p build:*",
@@ -31,7 +31,7 @@
     "build-storybook": "storybook build --webpack-stats-json",
     "makemessages": "formatjs extract",
     "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
-    "watch": "ttsc -p tsconfig.prod.json --watch"
+    "watch": "tspc -p tsconfig.prod.json --watch"
   },
   "files": [
     "lib/",
@@ -112,10 +112,10 @@
     "storybook": "^8.6.10",
     "storybook-react-intl": "^3.2.3",
     "ts-node": "^10.9.2",
+    "ts-patch": "^3.3.0",
     "tsc-alias": "^1.8.6",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
-    "ttypescript": "^1.5.15",
-    "typescript": "^4.9.5"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^6.2.0",
