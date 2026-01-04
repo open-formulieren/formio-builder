@@ -423,7 +423,7 @@ export const TimeFieldMultiple: Story = {
 };
 
 export const Postcode: Story = {
-  name: 'Postcode (deprecated)',
+  name: 'Postcode',
   args: {
     component: {
       type: 'postcode',
@@ -450,14 +450,14 @@ export const Postcode: Story = {
     // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
-    expect(input).toHaveAttribute('placeholder', '____ __');
+    expect(input).toHaveAttribute('placeholder', '9999 AA');
     await userEvent.type(input, '1015 CJ');
     expect(input).toHaveDisplayValue('1015 CJ');
   },
 };
 
 export const PostcodeMultiple: Story = {
-  name: 'Postcode (deprecated) Multiple',
+  name: 'Postcode Multiple',
   args: {
     component: {
       type: 'postcode',

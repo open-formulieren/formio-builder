@@ -1,3 +1,4 @@
+import {RadioComponentSchema} from '@open-formulieren/types';
 import {Meta, StoryObj} from '@storybook/react';
 import {expect, fn, userEvent, waitFor, within} from '@storybook/test';
 
@@ -17,20 +18,18 @@ export default {
       type: 'radio',
       key: 'radio',
       label: 'A radio field',
-      dataSrc: 'values',
-      dataType: 'string',
       openForms: {
         dataSrc: 'manual',
         translations: {},
       },
       values: [{value: '', label: ''}],
       defaultValue: '',
-    },
+    } satisfies RadioComponentSchema,
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
     builderInfo: {
-      title: 'Select',
+      title: 'Radio',
       icon: 'plus-square',
       group: 'basic',
       weight: 60,

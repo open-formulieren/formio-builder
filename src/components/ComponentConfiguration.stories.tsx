@@ -1,6 +1,7 @@
 import {
   AddressNLComponentSchema,
   ContentComponentSchema,
+  FileComponentSchema,
   SelectComponentSchema,
   SoftRequiredErrorsComponentSchema,
   SupportedLocales,
@@ -1041,10 +1042,6 @@ export const FileUpload: Story = {
       expect(args.onSubmit).toHaveBeenCalledWith({
         type: 'file',
         id: 'kiweljhr',
-        webcam: false,
-        options: {withCredentials: true},
-        storage: 'url',
-        url: '',
         // basic tab
         label: 'A file upload',
         key: 'aFileUpload',
@@ -1101,7 +1098,7 @@ export const FileUpload: Story = {
           softRequired: false,
           translations: {},
         },
-      });
+      } satisfies FileComponentSchema);
     });
   },
 };
@@ -1306,6 +1303,7 @@ export const SelectBoxes: Story = {
             nl: {description: '', label: '', tooltip: ''},
           },
         },
+        values: [],
         defaultValue: {},
         // Advanced tab
         conditional: {
@@ -1529,6 +1527,7 @@ export const Radio: Story = {
             nl: {description: '', label: '', tooltip: ''},
           },
         },
+        values: [],
         defaultValue: '',
         // Advanced tab
         conditional: {
@@ -1661,8 +1660,6 @@ export const Select: Story = {
         hidden: false,
         clearOnHide: true,
         isSensitiveData: false,
-        dataSrc: 'values',
-        dataType: 'string',
         data: {
           values: [
             {
@@ -1699,7 +1696,7 @@ export const Select: Story = {
         registration: {
           attribute: '',
         },
-      });
+      } satisfies SelectComponentSchema);
       // @ts-expect-error
       args.onSubmit.mockClear();
     });
@@ -1768,9 +1765,7 @@ export const Select: Story = {
         hidden: false,
         clearOnHide: true,
         isSensitiveData: false,
-        dataSrc: 'values',
-        dataType: 'string',
-        data: {},
+        data: {values: []},
         openForms: {
           dataSrc: 'variable',
           itemsExpression: {var: 'someVar'},
@@ -1797,7 +1792,7 @@ export const Select: Story = {
         registration: {
           attribute: '',
         },
-      });
+      } satisfies SelectComponentSchema);
       // @ts-expect-error
       args.onSubmit.mockClear();
     });

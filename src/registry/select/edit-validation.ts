@@ -16,7 +16,7 @@ const buildValuesSchema = (intl: IntlShape) =>
       data: z.object({
         // *can* be empty if an itemsExpression is set, it's only added back at runtime in
         // the backend
-        values: optionSchema(intl).array().min(1).optional(),
+        values: optionSchema(intl).array().optional(),
       }),
       openForms: z.object({
         dataSrc: z.union([z.literal('manual'), z.literal('variable'), z.literal('referenceLists')]),
@@ -27,8 +27,21 @@ const buildValuesSchema = (intl: IntlShape) =>
       }),
     })
     .superRefine((component, ctx) => {
+      // ensure at least one option is set for manual data source
+      if (
+        component?.openForms?.dataSrc === 'manual' &&
+        (component?.data?.values ?? []).length < 1
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.too_small,
+          path: ['data', 'values'],
+          minimum: 1,
+          inclusive: true,
+          type: 'number',
+        });
+      }
       // validate the both service and table are selected when using reference lists
-      if (component?.openForms?.dataSrc === 'referenceLists') {
+      else if (component?.openForms?.dataSrc === 'referenceLists') {
         const {service, code} = component.openForms;
         if (!service) {
           ctx.addIssue({

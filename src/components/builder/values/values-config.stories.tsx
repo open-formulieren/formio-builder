@@ -176,6 +176,7 @@ export const SelectBoxesResetState: StoryObj<{
             dataSrc: 'variable',
             itemsExpression: {var: 'someVar'},
           },
+          values: [],
         });
       });
       // @ts-expect-error jest mocks + TS doesn't play nice together
