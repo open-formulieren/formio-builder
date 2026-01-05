@@ -9,11 +9,7 @@ import {Radio} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
-import {
-  checkIsManualOptions,
-  checkIsReferenceListsOptions,
-  checkIsVariableOptions,
-} from './helpers';
+import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
 
 /**
  * Show a formio radio component preview.
@@ -33,9 +29,6 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
     loading,
     error,
   } = useAsync(async () => {
-    if (checkIsManualOptions(component)) {
-      return component?.values || [];
-    }
     if (checkIsVariableOptions(component)) {
       return [
         {
@@ -62,7 +55,7 @@ const Preview: React.FC<ComponentPreviewProps<RadioComponentSchema>> = ({compone
       return items ? transformItems(items, intl) : [];
     }
 
-    return [];
+    return component?.values || [];
   }, [component]);
 
   if (error) {

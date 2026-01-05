@@ -83,7 +83,6 @@ const DEFAULT_CONTENT_NL: string = `
 EditForm.defaultValues = {
   // Display tab
   html: DEFAULT_CONTENT_NL,
-  label: '',
   key: '',
   openForms: {
     translations: {

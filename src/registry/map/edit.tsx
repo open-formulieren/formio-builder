@@ -174,7 +174,6 @@ EditForm.defaultValues = {
     polyline: false,
     marker: true,
   },
-  defaultValue: null,
   // Advanced tab
   conditional: {
     show: undefined,

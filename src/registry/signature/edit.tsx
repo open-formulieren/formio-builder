@@ -118,7 +118,6 @@ EditForm.defaultValues = {
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
-  defaultValue: '',
   footer: '',
   // Advanced tab
   conditional: {

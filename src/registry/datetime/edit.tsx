@@ -155,16 +155,7 @@ EditForm.defaultValues = {
     plugins: [],
   },
   translatedErrors: {},
-  // Defaults from https://github.com/formio/formio.js/blob/
-  // bebc2ad73cad138a6de0a8247df47f0085a314cc/src/components/datetime/DateTime.js#L22
   datePicker: {
-    showWeeks: true,
-    startingDay: 0,
-    initDate: '',
-    minMode: 'day',
-    maxMode: 'year',
-    yearRows: 4,
-    yearColumns: 5,
     minDate: null,
     maxDate: null,
   },
@@ -182,10 +173,6 @@ EditForm.defaultValues = {
     plugin: '',
     attribute: '',
     identifierRole: 'main',
-  },
-  // Flatpickr custom options
-  customOptions: {
-    allowInvalidPreload: true,
   },
 };
 

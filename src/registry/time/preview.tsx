@@ -16,7 +16,6 @@ const Preview: React.FC<ComponentPreviewProps<TimeComponentSchema>> = ({componen
     key,
     label,
     description,
-    placeholder,
     tooltip,
     validate = {},
     disabled = false,
@@ -30,7 +29,6 @@ const Preview: React.FC<ComponentPreviewProps<TimeComponentSchema>> = ({componen
       label={label}
       description={description}
       tooltip={tooltip}
-      placeholder={placeholder}
       required={required}
       readOnly={disabled}
     />

@@ -14,12 +14,6 @@ export default {
 
     component: {
       id: 'kiweljhr',
-      storage: 'url',
-      webcam: false,
-      options: {
-        withCredentials: true,
-      },
-      url: '',
       type: 'file',
       key: 'file',
       label: 'A file upload',

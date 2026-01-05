@@ -27,10 +27,8 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
     description,
     tooltip,
     validate = defaultValidate,
-    autocomplete = '',
     disabled = false,
     multiple,
-    inputMask,
   } = component;
   const {required = false, pattern} = validate;
   return (
@@ -41,9 +39,8 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
       description={description}
       tooltip={tooltip}
       required={required}
-      autoComplete={autocomplete}
       readOnly={disabled}
-      inputMask={inputMask}
+      placeholder="9999 AA"
       pattern={pattern}
     />
   );

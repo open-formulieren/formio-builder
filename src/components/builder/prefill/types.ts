@@ -1,6 +1,7 @@
-import {PrefillConfig, StrictComponentSchema} from '@open-formulieren/types';
+import {AnyComponentSchema} from '@open-formulieren/types';
+import {Prefill} from '@open-formulieren/types/dist/extensions';
 
-export type ComponentWithPrefill = StrictComponentSchema<any> & Required<PrefillConfig>;
+export type ComponentWithPrefill = Extract<Required<AnyComponentSchema>, Prefill>;
 
 export interface PrefillPluginOption {
   id: string;

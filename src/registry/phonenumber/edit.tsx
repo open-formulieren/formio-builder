@@ -120,7 +120,6 @@ const EditForm: EditFormDefinition<PhoneNumberComponentSchema> = () => {
   the cost of some repetition.
  */
 EditForm.defaultValues = {
-  inputMask: null,
   // basic tab
   label: '',
   key: '',

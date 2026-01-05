@@ -139,7 +139,6 @@ EditForm.defaultValues = {
     pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
     plugins: [],
   },
-  validateOn: 'blur',
   translatedErrors: {},
   registration: {
     attribute: '',

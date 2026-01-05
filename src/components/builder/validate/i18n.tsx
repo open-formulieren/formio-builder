@@ -1,4 +1,3 @@
-import {PossibleValidatorErrorKeys, SchemaWithValidation} from '@open-formulieren/types';
 import {useField} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useEffect} from 'react';
@@ -7,21 +6,23 @@ import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 import {BuilderContext} from '@/context';
 
 import {DataMap, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '../../formio';
+import type {PossibleValidatorErrorKeys, SchemaWithValidation} from './types';
 
 export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
   keys: PossibleValidatorErrorKeys<S>[],
   prefix: string = ''
 ): void {
+  type TranslatedErrors = S['translatedErrors'];
   const fieldName = `${prefix}${prefix ? '.' : ''}translatedErrors`;
   const {supportedLanguageCodes} = useContext(BuilderContext);
-  const [{value}, , {setValue}] = useField<S['translatedErrors']>(fieldName);
+  const [{value}, , {setValue}] = useField<TranslatedErrors>(fieldName);
 
   useEffect(() => {
     const newValue = value
       ? {...value}
-      : (Object.fromEntries(supportedLanguageCodes.map(code => [code, {}])) as NonNullable<
-          S['translatedErrors']
-        >);
+      : (Object.fromEntries(
+          supportedLanguageCodes.map(code => [code, {}])
+        ) as NonNullable<TranslatedErrors>);
     const emptyDefaults = Object.fromEntries(keys.map(k => [k, '']));
     for (const code of supportedLanguageCodes) {
       newValue[code] = {...emptyDefaults, ...newValue[code]};

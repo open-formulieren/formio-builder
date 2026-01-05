@@ -64,7 +64,6 @@ export const MultipleLanguages: Story = {
     expect(args.onSubmit).toHaveBeenCalledWith({
       id: 'wekruya',
       type: 'softRequiredErrors',
-      label: '',
       html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
       openForms: {
         translations: {

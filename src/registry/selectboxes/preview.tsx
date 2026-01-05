@@ -9,11 +9,7 @@ import {SelectBoxes} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
-import {
-  checkIsManualOptions,
-  checkIsReferenceListsOptions,
-  checkIsVariableOptions,
-} from './helpers';
+import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
 
 /**
  * Show a formio selectboxes component preview.
@@ -33,9 +29,6 @@ const Preview: React.FC<ComponentPreviewProps<SelectboxesComponentSchema>> = ({c
     loading,
     error,
   } = useAsync(async () => {
-    if (checkIsManualOptions(component)) {
-      return component?.values || [];
-    }
     if (checkIsVariableOptions(component)) {
       return [
         {
@@ -60,7 +53,10 @@ const Preview: React.FC<ComponentPreviewProps<SelectboxesComponentSchema>> = ({c
       );
       return items ? transformItems(items, intl) : [];
     }
-    return [];
+
+    // fallback should not be necessary, but we're not 100% sure all existing components
+    // are correct.
+    return component.values || [];
   }, [component]);
 
   if (error) {

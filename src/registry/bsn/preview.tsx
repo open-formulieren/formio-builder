@@ -12,16 +12,7 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<BsnComponentSchema>> = ({component}) => {
-  const {
-    key,
-    label,
-    description,
-    tooltip,
-    validate = {},
-    disabled = false,
-    multiple,
-    inputMask,
-  } = component;
+  const {key, label, description, tooltip, validate = {}, disabled = false, multiple} = component;
   const {required = false} = validate;
   return (
     <TextField
@@ -32,7 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<BsnComponentSchema>> = ({component
       tooltip={tooltip}
       required={required}
       readOnly={disabled}
-      inputMask={inputMask}
+      inputMask="999999999"
     />
   );
 };

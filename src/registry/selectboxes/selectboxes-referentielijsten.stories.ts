@@ -193,6 +193,7 @@ export const ServiceAndTableRequired: Story = {
 
     const dataSourceInput = canvas.getByLabelText('Data source');
     await rsSelect(canvas, dataSourceInput, 'Reference lists API');
+    await canvas.findByLabelText('Reference lists service');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 

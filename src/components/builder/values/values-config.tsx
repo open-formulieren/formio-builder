@@ -1,34 +1,11 @@
-import {useFormikContext} from 'formik';
+import {getIn, useFormikContext} from 'formik';
 import {useLayoutEffect} from 'react';
-
-import {hasOwnProperty} from '@/types';
 
 import ItemsExpression from './items-expression';
 import {ReferenceListsServiceSelect, ReferenceListsTableCode} from './reference-lists';
 import {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
 import ValuesTable, {ValuesTableProps} from './values-table';
-
-/**
- * Check if the dotted `path` exists on `obj`.
- *
- * @example
- * ```
- * isNestedKeySet({my: {path: 'irrelevant'}}, 'my.path') // true
- * ```
- */
-function isNestedKeySet(obj: {}, path: string): boolean {
-  const bits = path.split('.');
-  for (const bit of bits) {
-    // as soon as any node does not have the respective path set, exit, the full deep
-    // path will then also not be set.
-    if (!hasOwnProperty(obj, bit)) {
-      return false;
-    }
-    obj = obj[bit] as {};
-  }
-  return true;
-}
 
 export interface ValuesConfigProps<T> {
   name: ValuesTableProps<T>['name'];
@@ -66,15 +43,14 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         if (values.openForms.hasOwnProperty('service')) {
           setFieldValue('openForms.service', undefined);
         }
-        if (!isNestedKeySet(values, name)) {
+        const currentValues = getIn(values, name);
+        if (!currentValues || (Array.isArray(currentValues) && currentValues.length === 0)) {
           setFieldValue(name, [{value: '', label: '', openForms: {translations: {}}}]);
         }
         break;
       }
       case 'variable': {
-        if (isNestedKeySet(values, name)) {
-          setFieldValue(name, undefined);
-        }
+        setFieldValue(name, []);
         if (values.openForms.hasOwnProperty('code')) {
           setFieldValue('openForms.code', undefined);
         }
@@ -84,9 +60,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
         break;
       }
       case 'referenceLists': {
-        if (isNestedKeySet(values, name)) {
-          setFieldValue(name, undefined);
-        }
+        setFieldValue(name, []);
         if (values.openForms.hasOwnProperty('itemsExpression')) {
           setFieldValue('openForms.itemsExpression', undefined);
         }

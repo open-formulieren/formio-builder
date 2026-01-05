@@ -137,7 +137,6 @@ EditForm.defaultValues = {
     required: false,
     plugins: [],
   },
-  validateOn: 'blur',
   translatedErrors: {},
   registration: {
     attribute: '',

@@ -708,6 +708,12 @@
     "description": "Label for the 'overlays' builder field",
     "originalDefault": "Overlays"
   },
+  "OaeVI8": {
+    "defaultMessage": "Prefix",
+    "description": "Component translations 'prefix' property label",
+    "isTranslated": true,
+    "originalDefault": "Prefix"
+  },
   "OlPsaw": {
     "defaultMessage": "Foutcode",
     "description": "Label for translation of validation error code",
@@ -1377,11 +1383,6 @@
     "isTranslated": true,
     "originalDefault": "Latitude"
   },
-  "jtWzSW": {
-    "defaultMessage": "optie 2: € 15,99",
-    "description": "productPrice dummy option",
-    "originalDefault": "option 2: € 15,99"
-  },
   "k1+ljn": {
     "defaultMessage": "Omlaag",
     "description": "Options table: move option down",
@@ -1646,11 +1647,6 @@
     "defaultMessage": "Reguliere expressie",
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular expression for city"
-  },
-  "sxdJ/8": {
-    "defaultMessage": "optie 1: € 10,99",
-    "description": "productPrice dummy option",
-    "originalDefault": "option 1: € 10,99"
   },
   "t10YHv": {
     "defaultMessage": "Laag",

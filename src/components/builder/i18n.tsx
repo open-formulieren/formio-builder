@@ -1,4 +1,5 @@
-import {OFExtensions, SupportedLocales} from '@open-formulieren/types';
+import {SupportedLocales} from '@open-formulieren/types';
+import {OFExtensions} from '@open-formulieren/types/dist/extensions';
 import clsx from 'clsx';
 import {useFormikContext} from 'formik';
 import React from 'react';
