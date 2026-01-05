@@ -220,7 +220,9 @@ export const AddOverlay: Story = {
     await step('Expect new overlay to be active', async () => {
       const mapLayersButton = await componentPreview.findByRole('button', {name: 'Layers'});
 
-      expect(mapLayersButton).toBeVisible();
+      await waitFor(() => {
+        expect(mapLayersButton).toBeVisible();
+      });
       await userEvent.click(mapLayersButton);
 
       const layerCheckbox = await componentPreview.findByLabelText('PDOK BAG');
