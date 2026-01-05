@@ -2854,7 +2854,9 @@ export const Signature: Story = {
     await step('Change label', async () => {
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-      await expect(await preview.findByText('Updated preview label')).toBeVisible();
+      await waitFor(async () => {
+        expect(await preview.findByText('Updated preview label')).toBeVisible();
+      });
     });
 
     await step('Change key', async () => {
