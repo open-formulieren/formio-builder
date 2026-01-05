@@ -1,5 +1,17 @@
 # Changes
 
+## 0.47.0 (2026-01-05)
+
+Small improvements and bugfixes release.
+
+- [`OF#5247`][OF#5247] The map initial center latitude and longitude are now validated to be within
+  the bounds of the Netherlands.
+- [`OF#5723`][OF#5723] Fixed the map overlay menu closing automatically while changing the overlay
+  name/label.
+
+[OF#5247]: https://github.com/open-formulieren/open-forms/issues/5247
+[OF#5723]: https://github.com/open-formulieren/open-forms/issues/5723
+
 ## 0.46.2 (2025-12-02)
 
 Bugfix release.
