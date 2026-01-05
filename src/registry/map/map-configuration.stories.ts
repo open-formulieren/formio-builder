@@ -264,7 +264,10 @@ export const EditOverlay: Story = {
 
     await step('Validate initial values', async () => {
       // Validate tile layer value
-      expect(canvas.getByRole('combobox', {name: 'Tile layer'})).toBeVisible();
+      await waitFor(() => {
+        expect(canvas.getByRole('combobox', {name: 'Tile layer'})).toBeVisible();
+      });
+
       expect(canvas.getByText('PDOK BAG')).toBeVisible();
       // Validate label value
       expect(canvas.getByLabelText('Label')).toHaveDisplayValue('BAG pand layer');
