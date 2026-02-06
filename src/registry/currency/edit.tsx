@@ -1,4 +1,5 @@
 import {CurrencyComponentSchema} from '@open-formulieren/types';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -19,6 +20,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, NumberField, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -30,8 +32,11 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<CurrencyComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
 
-  Validate.useManageValidatorsTranslations<CurrencyComponentSchema>(['required', 'min', 'max']);
+  Validate.useManageValidatorsTranslations<CurrencyComponentSchema>(
+    formMode === 'appointment' ? ['required'] : ['required', 'min', 'max']
+  );
 
   return (
     <Tabs>
@@ -145,11 +150,14 @@ EditForm.defaultValues = {
 
 const DefaultValue: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <NumberField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -161,11 +169,14 @@ const DefaultValue: React.FC = () => {
 
 const DecimalLimit: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'decimalLimit' builder field",
     defaultMessage: 'The maximum number of decimal places.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <NumberField
       name="decimalLimit"
       label={
@@ -181,11 +192,14 @@ const DecimalLimit: React.FC = () => {
 
 const AllowNegative: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'allowNegative' builder field",
     defaultMessage: 'Allow negative values.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="allowNegative"
       label={

@@ -103,12 +103,14 @@ export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
 
 const DeriveAddress = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'DeriveAddress' builder field",
     defaultMessage:
       'When enabled, the street name and city are derived from the entered postcode and house number.',
   });
-  return (
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="deriveAddress"
       label={
@@ -124,6 +126,7 @@ const DeriveAddress = () => {
 
 const ColumnsLayout: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
 
   const singleColumn = intl.formatMessage({
     description: 'Single column label',
@@ -134,7 +137,7 @@ const ColumnsLayout: React.FC = () => {
     defaultMessage: 'Double column',
   });
 
-  return (
+  return formMode === 'appointment' ? null : (
     <Select
       name="layout"
       label={
@@ -156,6 +159,10 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<AddressNLComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
+
+  const isDefaultFormMode = formMode === 'default';
+
   Validate.useManageValidatorsTranslations<AddressNLComponentSchema>(['required']);
 
   Validate.useManageValidatorsTranslations<PostcodeSchema>(
@@ -212,77 +219,81 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
 
-        {/* Postcode field validation */}
-        <Panel
-          title={
-            <FormattedMessage
-              description="Title of postcode field validation panel"
-              defaultMessage="Postcode"
-            />
-          }
-          tooltip={intl.formatMessage({
-            description: 'Tooltip postcode field validation panel',
-            defaultMessage: 'Validation for the postcode field',
-          })}
-          collapsible
-          initialCollapsed
-        >
-          <SubcomponentValidation
-            prefix="openForms.components"
-            component="postcode"
-            label={
-              <FormattedMessage
-                description="Label for 'validate.pattern' builder field"
-                defaultMessage="Regular expression for postcode"
+        {isDefaultFormMode && (
+          <>
+            {/* Postcode field validation */}
+            <Panel
+              title={
+                <FormattedMessage
+                  description="Title of postcode field validation panel"
+                  defaultMessage="Postcode"
+                />
+              }
+              tooltip={intl.formatMessage({
+                description: 'Tooltip postcode field validation panel',
+                defaultMessage: 'Validation for the postcode field',
+              })}
+              collapsible
+              initialCollapsed
+            >
+              <SubcomponentValidation
+                prefix="openForms.components"
+                component="postcode"
+                label={
+                  <FormattedMessage
+                    description="Label for 'validate.pattern' builder field"
+                    defaultMessage="Regular expression for postcode"
+                  />
+                }
+                tooltip={intl.formatMessage({
+                  description: "Tooltip for 'validate.pattern' builder field",
+                  defaultMessage:
+                    'The regular expression pattern test that the postcode field value must pass before the form can be submitted.',
+                })}
+                placeholder={intl.formatMessage({
+                  description: "Placeholder for 'validate.pattern' builder field",
+                  defaultMessage: 'Regular expression for postcode',
+                })}
               />
-            }
-            tooltip={intl.formatMessage({
-              description: "Tooltip for 'validate.pattern' builder field",
-              defaultMessage:
-                'The regular expression pattern test that the postcode field value must pass before the form can be submitted.',
-            })}
-            placeholder={intl.formatMessage({
-              description: "Placeholder for 'validate.pattern' builder field",
-              defaultMessage: 'Regular expression for postcode',
-            })}
-          />
-        </Panel>
+            </Panel>
 
-        {/* City field validation */}
-        <Panel
-          title={
-            <FormattedMessage
-              description="Title of city field validation panel"
-              defaultMessage="City"
-            />
-          }
-          tooltip={intl.formatMessage({
-            description: 'Tooltip city field validation panel',
-            defaultMessage: 'Validation for the city field',
-          })}
-          collapsible
-          initialCollapsed
-        >
-          <SubcomponentValidation
-            prefix="openForms.components"
-            component="city"
-            label={
-              <FormattedMessage
-                description="Label for 'validate.pattern' builder field"
-                defaultMessage="Regular expression for city"
+            {/* City field validation */}
+            <Panel
+              title={
+                <FormattedMessage
+                  description="Title of city field validation panel"
+                  defaultMessage="City"
+                />
+              }
+              tooltip={intl.formatMessage({
+                description: 'Tooltip city field validation panel',
+                defaultMessage: 'Validation for the city field',
+              })}
+              collapsible
+              initialCollapsed
+            >
+              <SubcomponentValidation
+                prefix="openForms.components"
+                component="city"
+                label={
+                  <FormattedMessage
+                    description="Label for 'validate.pattern' builder field"
+                    defaultMessage="Regular expression for city"
+                  />
+                }
+                tooltip={intl.formatMessage({
+                  description: "Tooltip for 'validate.pattern' builder field",
+                  defaultMessage:
+                    'The regular expression pattern test that the city field value must pass before the form can be submitted.',
+                })}
+                placeholder={intl.formatMessage({
+                  description: "Placeholder for 'validate.pattern' builder field",
+                  defaultMessage: 'Regular expression for city',
+                })}
               />
-            }
-            tooltip={intl.formatMessage({
-              description: "Tooltip for 'validate.pattern' builder field",
-              defaultMessage:
-                'The regular expression pattern test that the city field value must pass before the form can be submitted.',
-            })}
-            placeholder={intl.formatMessage({
-              description: "Placeholder for 'validate.pattern' builder field",
-              defaultMessage: 'Regular expression for city',
-            })}
-          />
-        </Panel>
+            </Panel>
+          </>
+        )}
       </TabPanel>
 
       {/* Registration tab */}

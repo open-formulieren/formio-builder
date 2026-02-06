@@ -1,5 +1,6 @@
 import {TimeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -22,6 +23,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TimeField} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {EditFormDefinition} from '@/registry/types';
 import {useErrorChecker} from '@/utils/errors';
 
@@ -35,13 +37,13 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
     values: {multiple = false},
   } = useFormikContext<TimeComponentSchema>();
   const {hasAnyError} = useErrorChecker<TimeComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
 
-  Validate.useManageValidatorsTranslations<TimeComponentSchema>([
-    'required',
-    'minTime',
-    'maxTime',
-    'invalid_time',
-  ]);
+  const isAppointmentFormMode = formMode === 'appointment';
+
+  Validate.useManageValidatorsTranslations<TimeComponentSchema>(
+    isAppointmentFormMode ? ['required'] : ['required', 'minTime', 'maxTime', 'invalid_time']
+  );
 
   return (
     <Tabs>
@@ -157,11 +159,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TimeField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -173,11 +178,14 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const MinTime: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.minTime' builder field",
     defaultMessage: 'The earliest possible value that can be entered.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TimeField
       name="validate.minTime"
       label={
@@ -193,11 +201,14 @@ const MinTime: React.FC = () => {
 
 const MaxTime: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.maxTime' builder field",
     defaultMessage: 'The latest possible value that can be entered.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TimeField
       name="validate.maxTime"
       label={

@@ -1,5 +1,6 @@
 import type {CustomerProfileComponentSchema} from '@open-formulieren/types';
 import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
+import {useContext} from 'react';
 import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
 import {
@@ -19,6 +20,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -130,13 +132,16 @@ EditForm.defaultValues = {
 
 const ShouldUpdateCustomerData: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'shouldUpdateCustomerData' builder field",
     defaultMessage:
       'When this is checked, Open Forms automatically updates the customer profile ' +
       'when a digital address is added.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="shouldUpdateCustomerData"
       label={
@@ -163,12 +168,14 @@ const DigitalAddressTypeOptionLabels = defineMessages<DigitalAddressType>({
 
 const DigitalAddressTypes: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const options = Object.entries(DigitalAddressTypeOptionLabels).map(([value, label]) => ({
     value,
     label: intl.formatMessage(label),
   }));
 
-  return (
+  return formMode === 'appointment' ? null : (
     <Select
       name="digitalAddressTypes"
       label={

@@ -1,4 +1,5 @@
 import {FileComponentSchema} from '@open-formulieren/types';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -19,6 +20,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -31,6 +33,7 @@ import RegistrationTabFields from './registration-tab';
 const EditForm: EditFormDefinition<FileComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
+  const {formMode} = useContext(BuilderContext);
 
   const {hasAnyError} = useErrorChecker<FileComponentSchema>();
 
@@ -64,6 +67,7 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
             'fileMaxSize',
             'maxNumberOfFiles'
           )}
+          hidden={formMode === 'appointment'}
         >
           <FormattedMessage
             description="Component edit form tab title for 'File' tab"

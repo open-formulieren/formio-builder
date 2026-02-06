@@ -1,4 +1,5 @@
 import {NpFamilyMembersComponentSchema} from '@open-formulieren/types';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -19,6 +20,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -136,11 +138,14 @@ EditForm.defaultValues = {
 
 const IncludePartners: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'includePartners' builder field",
     defaultMessage: 'Whether to add partners information to the component.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="includePartners"
       label={
@@ -156,11 +161,14 @@ const IncludePartners: React.FC = () => {
 
 const IncludeChildren: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'includeChildren' builder field",
     defaultMessage: 'Whether to add children information to the component.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="includeChildren"
       label={

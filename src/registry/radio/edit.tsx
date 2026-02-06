@@ -1,7 +1,7 @@
 import {Option, RadioComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
-import {useLayoutEffect} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -24,6 +24,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Radio, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -170,12 +171,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return (
+  return formMode === 'appointment' ? null : (
     <Radio
       name="defaultValue"
       options={options}

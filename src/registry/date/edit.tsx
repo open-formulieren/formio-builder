@@ -1,5 +1,6 @@
 import {DateComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -23,6 +24,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {EditFormDefinition} from '@/registry/types';
 import {useErrorChecker} from '@/utils/errors';
 
@@ -37,15 +39,15 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
   const {
     values: {multiple = false},
   } = useFormikContext<DateComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
+
+  const isAppointmentFormMode = formMode === 'appointment';
 
   const {hasAnyError} = useErrorChecker<DateComponentSchema>();
 
-  Validate.useManageValidatorsTranslations<DateComponentSchema>([
-    'required',
-    'minDate',
-    'maxDate',
-    'invalid_date',
-  ]);
+  Validate.useManageValidatorsTranslations<DateComponentSchema>(
+    isAppointmentFormMode ? ['required'] : ['required', 'minDate', 'maxDate', 'invalid_date']
+  );
 
   return (
     <Tabs>
@@ -184,11 +186,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <DateField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
