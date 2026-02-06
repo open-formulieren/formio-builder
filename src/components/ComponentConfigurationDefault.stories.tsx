@@ -33,7 +33,7 @@ import {
 } from './builder/values/reference-lists/types';
 
 export default {
-  title: 'Public API/ComponentConfiguration',
+  title: 'Public API/ComponentConfiguration/Default type of form',
   component: ComponentConfiguration,
   args: {
     isNew: true,
@@ -116,6 +116,7 @@ interface TemplateArgs {
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
   builderInfo: BuilderInfo;
+  formMode: 'default' | 'appointment';
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (c: AnyComponentSchema) => void;
@@ -135,6 +136,7 @@ const Template: StoryFn<TemplateArgs> = ({
   fileTypes,
   isNew,
   builderInfo,
+  formMode,
   onCancel,
   onRemove,
   onSubmit,
@@ -162,6 +164,7 @@ const Template: StoryFn<TemplateArgs> = ({
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
+    formMode={formMode}
     onCancel={onCancel}
     onRemove={onRemove}
     onSubmit={onSubmit}

@@ -337,6 +337,8 @@ export const DEFAULT_MAP_OVERLAY_TILE_LAYERS: MapOverlayTileLayer[] = [
   },
 ];
 
+export const DEFAULT_FORM_MODE: string = 'default';
+
 export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
