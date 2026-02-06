@@ -1,9 +1,14 @@
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+
+import {BuilderContext} from '@/context';
 
 import {NumberField} from '../../formio';
 
 const Min: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.min' builder field",
     defaultMessage: 'The minimum value this field can have before the form can be submitted.',
@@ -12,7 +17,8 @@ const Min: React.FC = () => {
     description: "Placeholder for 'validate.min' builder field",
     defaultMessage: 'Minimum value',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <NumberField
       name="validate.min"
       label={

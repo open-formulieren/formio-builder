@@ -4,6 +4,7 @@ import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {TextArea, TextField} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {PathsForValueType} from '@/types';
 
 import {ComponentTranslationsContext} from '../i18n';
@@ -28,7 +29,9 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
   const {activeLanguage} = useContext(ComponentTranslationsContext);
   const {getFieldProps} = useFormikContext<S>();
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
-  return (
+  const {formMode} = useContext(BuilderContext);
+
+  return formMode === 'appointment' ? null : (
     // Same markup as ComponentTranslations<S> body
     <>
       <tbody>

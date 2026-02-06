@@ -1,4 +1,7 @@
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+
+import {BuilderContext} from '@/context';
 
 import {TextField} from '../../formio';
 
@@ -8,6 +11,8 @@ import {TextField} from '../../formio';
  */
 const RegexValidation: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.pattern' builder field",
     defaultMessage:
@@ -17,7 +22,8 @@ const RegexValidation: React.FC = () => {
     description: "Placeholder for 'validate.pattern' builder field",
     defaultMessage: 'Regular Expression Pattern',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TextField
       name="validate.pattern"
       label={

@@ -69,6 +69,7 @@ export interface BuilderContextType {
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
+  formMode: 'default' | 'appointment';
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
@@ -94,6 +95,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',
+  formMode: 'default',
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

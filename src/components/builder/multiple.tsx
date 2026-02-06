@@ -1,7 +1,9 @@
 import {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
+import {BuilderContext} from '@/context';
 import {hasOwnProperty} from '@/types';
 
 import {Checkbox} from '../formio';
@@ -24,6 +26,7 @@ function Multiple<T = unknown>({updateDefaultValue = true}: MultipleProps) {
   const intl = useIntl();
   const {values, getFieldProps, setFieldValue} = useFormikContext<T>();
   const {onChange: formikOnChange} = getFieldProps<boolean>('multiple');
+  const {formMode} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'Multiple values' builder field",
@@ -46,7 +49,7 @@ function Multiple<T = unknown>({updateDefaultValue = true}: MultipleProps) {
     setFieldValue('defaultValue', newDefaultValue);
   };
 
-  return (
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="multiple"
       label={
