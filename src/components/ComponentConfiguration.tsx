@@ -52,7 +52,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   isNew,
   component,
   builderInfo,
-  formMode,
+  formMode = 'default',
   onCancel,
   onRemove,
   onSubmit,

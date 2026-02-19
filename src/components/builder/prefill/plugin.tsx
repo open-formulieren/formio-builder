@@ -26,7 +26,7 @@ function isPluginOptions(
 const PrefillPluginSelect: React.FC = () => {
   const intl = useIntl();
   const {values} = useFormikContext<ComponentWithPrefill>();
-  const {getPrefillPlugins, formMode} = useContext(BuilderContext);
+  const {getPrefillPlugins} = useContext(BuilderContext);
 
   const {
     value: options,
@@ -42,7 +42,7 @@ const PrefillPluginSelect: React.FC = () => {
   });
   const _options = isPluginOptions(options) ? options : [];
 
-  return formMode === 'appointment' ? null : (
+  return (
     <Select
       name="prefill.plugin"
       label={

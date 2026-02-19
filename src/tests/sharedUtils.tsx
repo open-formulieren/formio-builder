@@ -6,6 +6,7 @@ import {
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
 import type {DocumentTypeOption, MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
+import type {FormMode} from '@/context';
 import {AnyComponentSchema} from '@/types';
 
 import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
@@ -337,7 +338,7 @@ export const DEFAULT_MAP_OVERLAY_TILE_LAYERS: MapOverlayTileLayer[] = [
   },
 ];
 
-export const DEFAULT_FORM_MODE: string = 'default';
+export const DEFAULT_FORM_MODE: FormMode = 'default';
 
 export function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));

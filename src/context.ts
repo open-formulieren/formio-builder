@@ -61,6 +61,13 @@ export interface MapOverlayTileLayer {
 }
 
 /*
+Form mode.
+
+This is the type of the form.
+*/
+export type FormMode = 'default' | 'appointment';
+
+/*
   Builder
  */
 
@@ -69,7 +76,7 @@ export interface BuilderContextType {
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
-  formMode: 'default' | 'appointment';
+  formMode: FormMode;
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;

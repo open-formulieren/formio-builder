@@ -1,8 +1,6 @@
-import {useContext} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import Select from '@/components/formio/select';
-import {BuilderContext} from '@/context';
 
 const IDENTIFIER_ROLE_OPTIONS = [
   {
@@ -23,7 +21,6 @@ const IDENTIFIER_ROLE_OPTIONS = [
 
 const PrefillIdentifierRoleSelect: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'prefill.identifierRole' builder field",
@@ -31,7 +28,7 @@ const PrefillIdentifierRoleSelect: React.FC = () => {
       'In case that multiple identifiers are returned (in the case of eHerkenning bewindvoering and DigiD Machtigen), should the prefill data related to the main identifier be used, or that related to the authorised person?',
   });
 
-  return formMode === 'appointment' ? null : (
+  return (
     <Select
       name="prefill.identifierRole"
       label={

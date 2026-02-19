@@ -30,7 +30,7 @@ const PrefillAttributeSelect: React.FC = () => {
   const {values, setFieldValue} = useFormikContext<ComponentWithPrefill>();
   const [{value: attribute}] =
     useField<ComponentWithPrefill['prefill']['attribute']>('prefill.attribute');
-  const {getPrefillAttributes, formMode} = useContext(BuilderContext);
+  const {getPrefillAttributes} = useContext(BuilderContext);
   const {plugin} = values.prefill;
   const previousPlugin = usePrevious(plugin);
 
@@ -57,7 +57,7 @@ const PrefillAttributeSelect: React.FC = () => {
   });
   const _options = isAttributeOptions(options) ? options : [];
 
-  return formMode === 'appointment' ? null : (
+  return (
     <Select
       name={fieldName}
       label={
