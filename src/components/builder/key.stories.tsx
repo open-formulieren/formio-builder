@@ -153,3 +153,18 @@ export const IsExistingDeriveFromLabel: Story = {
     });
   },
 };
+
+export const IsAppointmentForm: Story = {
+  name: 'Appointment form',
+  decorators: [FormikDecorator],
+
+  parameters: {
+    formik: {
+      initialValues: {key: 'explicitlySetKey'},
+    },
+    builder: {
+      enableContext: true,
+      formMode: 'appointment',
+    },
+  },
+};

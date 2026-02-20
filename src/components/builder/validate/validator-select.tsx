@@ -29,7 +29,7 @@ function isValidatorOptions(options: ValidatorOption[] | undefined): options is 
 const ValidatorPluginSelect: React.FC = () => {
   const intl = useIntl();
   const {values} = useFormikContext<ExtendedComponentSchema>();
-  const {getValidatorPlugins} = useContext(BuilderContext);
+  const {getValidatorPlugins, formMode} = useContext(BuilderContext);
 
   const {
     value: options,
@@ -45,7 +45,7 @@ const ValidatorPluginSelect: React.FC = () => {
   });
   const _options = isValidatorOptions(options) ? options : [];
 
-  return (
+  return formMode === 'appointment' ? null : (
     <Select
       name="validate.plugins"
       label={

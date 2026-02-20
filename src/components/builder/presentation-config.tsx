@@ -1,4 +1,7 @@
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+
+import {BuilderContext} from '@/context';
 
 import {Checkbox, Panel} from '../formio';
 
@@ -72,19 +75,23 @@ const PresentationConfig: React.FC<PresentationConfigProps> = ({
   exposeShowInSummary = true,
   exposeShowInEmail = true,
   exposeShowInPDF = true,
-}) => (
-  <Panel
-    title={
-      <FormattedMessage
-        description="Presentation configuration panel title"
-        defaultMessage="Display in summaries and confirmations"
-      />
-    }
-  >
-    {exposeShowInSummary && <ShowInSummary />}
-    {exposeShowInEmail && <ShowInEmail />}
-    {exposeShowInPDF && <ShowInPDF />}
-  </Panel>
-);
+}) => {
+  const {formMode} = useContext(BuilderContext);
+
+  return formMode === 'appointment' ? null : (
+    <Panel
+      title={
+        <FormattedMessage
+          description="Presentation configuration panel title"
+          defaultMessage="Display in summaries and confirmations"
+        />
+      }
+    >
+      {exposeShowInSummary && <ShowInSummary />}
+      {exposeShowInEmail && <ShowInEmail />}
+      {exposeShowInPDF && <ShowInPDF />}
+    </Panel>
+  );
+};
 
 export default PresentationConfig;

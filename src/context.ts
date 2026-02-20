@@ -61,6 +61,13 @@ export interface MapOverlayTileLayer {
 }
 
 /*
+Form mode.
+
+This is the type of the form.
+*/
+export type FormMode = 'default' | 'appointment';
+
+/*
   Builder
  */
 
@@ -69,6 +76,7 @@ export interface BuilderContextType {
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
+  formMode: FormMode;
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
@@ -94,6 +102,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',
+  formMode: 'default',
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

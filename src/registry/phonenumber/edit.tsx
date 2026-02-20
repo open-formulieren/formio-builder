@@ -1,5 +1,6 @@
 import {PhoneNumberComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -22,6 +23,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -36,8 +38,13 @@ const EditForm: EditFormDefinition<PhoneNumberComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values} = useFormikContext<PhoneNumberComponentSchema>();
   const {hasAnyError} = useErrorChecker<PhoneNumberComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
 
-  Validate.useManageValidatorsTranslations<PhoneNumberComponentSchema>(['required', 'pattern']);
+  const isAppointmentFormMode = formMode === 'appointment';
+
+  Validate.useManageValidatorsTranslations<PhoneNumberComponentSchema>(
+    isAppointmentFormMode ? ['required'] : ['required', 'pattern']
+  );
   return (
     <Tabs>
       <TabList>
@@ -158,11 +165,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TextField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}

@@ -64,41 +64,45 @@ export const ComparisonValueInput: React.FC = () => {
   return <InputComponent {...props} />;
 };
 
-const SimpleConditional: React.FC = () => (
-  <Panel
-    title={
-      <FormattedMessage
-        description="Simple conditional panel title"
-        defaultMessage="Simple conditional"
+const SimpleConditional: React.FC = () => {
+  const {formMode} = useContext(BuilderContext);
+
+  return formMode === 'appointment' ? null : (
+    <Panel
+      title={
+        <FormattedMessage
+          description="Simple conditional panel title"
+          defaultMessage="Simple conditional"
+        />
+      }
+    >
+      <Select
+        name="conditional.show"
+        label={
+          <FormattedMessage
+            description="Component property 'conditional.show' label"
+            defaultMessage="This component should display"
+          />
+        }
+        options={[
+          {value: true, label: 'True'},
+          {value: false, label: 'False'},
+        ]}
+        isClearable
       />
-    }
-  >
-    <Select
-      name="conditional.show"
-      label={
-        <FormattedMessage
-          description="Component property 'conditional.show' label"
-          defaultMessage="This component should display"
-        />
-      }
-      options={[
-        {value: true, label: 'True'},
-        {value: false, label: 'False'},
-      ]}
-      isClearable
-    />
-    <ComponentSelect
-      name="conditional.when"
-      label={
-        <FormattedMessage
-          description="Component property 'conditional.when' label"
-          defaultMessage="When the form component"
-        />
-      }
-      isClearable
-    />
-    <ComparisonValueInput />
-  </Panel>
-);
+      <ComponentSelect
+        name="conditional.when"
+        label={
+          <FormattedMessage
+            description="Component property 'conditional.when' label"
+            defaultMessage="When the form component"
+          />
+        }
+        isClearable
+      />
+      <ComparisonValueInput />
+    </Panel>
+  );
+};
 
 export default SimpleConditional;

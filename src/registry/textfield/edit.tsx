@@ -1,5 +1,6 @@
 import {TextFieldComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -27,6 +28,7 @@ import {
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
@@ -39,12 +41,14 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values} = useFormikContext<TextFieldComponentSchema>();
   const {hasAnyError} = useErrorChecker<TextFieldComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
 
-  Validate.useManageValidatorsTranslations<TextFieldComponentSchema>([
-    'required',
-    'maxLength',
-    'pattern',
-  ]);
+  const isAppointmentFormMode = formMode === 'appointment';
+
+  Validate.useManageValidatorsTranslations<TextFieldComponentSchema>(
+    isAppointmentFormMode ? ['required'] : ['required', 'maxLength', 'pattern']
+  );
+
   return (
     <Tabs>
       <TabList>
@@ -79,6 +83,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             'derivePostcode',
             'deriveHouseNumber'
           )}
+          hidden={isAppointmentFormMode}
         >
           <FormattedMessage
             description="Component edit form tab title for 'Location' tab"
@@ -224,11 +229,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TextField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -240,12 +248,15 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const DeriveStreetName: React.FC<{}> = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'deriveStreetName' builder field",
     defaultMessage:
       'If the postcode and house number are entered this field will autofill with the street name',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="deriveStreetName"
       label={
@@ -261,12 +272,15 @@ const DeriveStreetName: React.FC<{}> = () => {
 
 const DeriveCity: React.FC<{}> = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'deriveCity' builder field",
     defaultMessage:
       'If the postcode and house number are entered this field will autofill with the city',
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Checkbox
       name="deriveCity"
       label={
@@ -280,32 +294,40 @@ const DeriveCity: React.FC<{}> = () => {
   );
 };
 
-const DerivePostcode: React.FC<{}> = () => (
-  <ComponentSelect
-    name="derivePostcode"
-    label={
-      <FormattedMessage
-        description="Label for 'derivePostcode' builder field"
-        defaultMessage="Postcode component"
-      />
-    }
-    isSearchable
-    isClearable
-  />
-);
+const DerivePostcode: React.FC<{}> = () => {
+  const {formMode} = useContext(BuilderContext);
 
-const DeriveHouseNumber: React.FC<{}> = () => (
-  <ComponentSelect
-    name="deriveHouseNumber"
-    label={
-      <FormattedMessage
-        description="Label for 'deriveHouseNumber' builder field"
-        defaultMessage="House number component"
-      />
-    }
-    isSearchable
-    isClearable
-  />
-);
+  return formMode === 'appointment' ? null : (
+    <ComponentSelect
+      name="derivePostcode"
+      label={
+        <FormattedMessage
+          description="Label for 'derivePostcode' builder field"
+          defaultMessage="Postcode component"
+        />
+      }
+      isSearchable
+      isClearable
+    />
+  );
+};
+
+const DeriveHouseNumber: React.FC<{}> = () => {
+  const {formMode} = useContext(BuilderContext);
+
+  return formMode === 'appointment' ? null : (
+    <ComponentSelect
+      name="deriveHouseNumber"
+      label={
+        <FormattedMessage
+          description="Label for 'deriveHouseNumber' builder field"
+          defaultMessage="House number component"
+        />
+      }
+      isSearchable
+      isClearable
+    />
+  );
+};
 
 export default EditForm;

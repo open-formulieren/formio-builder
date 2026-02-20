@@ -41,6 +41,7 @@ const PrefillPluginSelect: React.FC = () => {
     defaultMessage: 'Select the plugin to use for the prefill functionality.',
   });
   const _options = isPluginOptions(options) ? options : [];
+
   return (
     <Select
       name="prefill.plugin"

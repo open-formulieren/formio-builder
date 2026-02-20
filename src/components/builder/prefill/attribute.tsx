@@ -56,6 +56,7 @@ const PrefillAttributeSelect: React.FC = () => {
     defaultMessage: 'Specify the attribute holding the pre-fill data.',
   });
   const _options = isAttributeOptions(options) ? options : [];
+
   return (
     <Select
       name={fieldName}

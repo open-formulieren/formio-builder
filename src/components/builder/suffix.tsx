@@ -1,15 +1,21 @@
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
+
+import {BuilderContext} from '@/context';
 
 import {TextField} from '../formio';
 
 const Suffix: React.FC = () => {
   const intl = useIntl();
+  const {formMode} = useContext(BuilderContext);
+
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'suffix' builder field",
     defaultMessage: `A short indicator that can provide more context for the expected field value.
       The '<sup> and <sub>' HTML tags are supported.`,
   });
-  return (
+
+  return formMode === 'appointment' ? null : (
     <TextField
       name="suffix"
       label={

@@ -1,5 +1,7 @@
 import {getIn, useFormikContext} from 'formik';
-import {useLayoutEffect} from 'react';
+import {useContext, useLayoutEffect} from 'react';
+
+import {BuilderContext} from '@/context';
 
 import ItemsExpression from './items-expression';
 import {ReferenceListsServiceSelect, ReferenceListsTableCode} from './reference-lists';
@@ -26,6 +28,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
   name,
   withOptionDescription,
 }: ValuesConfigProps<T>) {
+  const {formMode} = useContext(BuilderContext);
   const {values, setFieldValue} = useFormikContext<T>();
   const {dataSrc} = values.openForms;
 
@@ -71,7 +74,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
     // when that dropdown changes value.
   }, [dataSrc]);
 
-  return (
+  return formMode === 'appointment' ? null : (
     <>
       <ValuesSrc />
       {dataSrc === 'manual' && (

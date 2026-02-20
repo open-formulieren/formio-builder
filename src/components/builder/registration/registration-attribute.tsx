@@ -30,7 +30,7 @@ function isAttributeOptions(
 const RegistrationAttributeSelect: React.FC = () => {
   const intl = useIntl();
   const {values} = useFormikContext<ExtendedComponentSchema>();
-  const {getRegistrationAttributes} = useContext(BuilderContext);
+  const {getRegistrationAttributes, formMode} = useContext(BuilderContext);
 
   const {
     value: options,
@@ -45,7 +45,8 @@ const RegistrationAttributeSelect: React.FC = () => {
     defaultMessage: 'Save the value as this attribute in the registration backend system.',
   });
   const _options = isAttributeOptions(options) ? options : [];
-  return (
+
+  return formMode === 'appointment' ? null : (
     <Select
       name="registration.attribute"
       label={

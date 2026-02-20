@@ -1,8 +1,10 @@
 import {DateComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
+import {useContext} from 'react';
 import {MessageDescriptor, defineMessages, useIntl} from 'react-intl';
 
 import {Panel} from '@/components/formio';
+import {BuilderContext} from '@/context';
 import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import ModeSelect from './constraint-mode';
@@ -31,7 +33,9 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
   const {values} = useFormikContext<DateComponentSchema>();
   const mode = values?.openForms?.[constraint]?.mode || '';
   const {errors, hasErrors} = useValidationErrors(`openForms.${constraint}`);
-  return (
+  const {formMode} = useContext(BuilderContext);
+
+  return formMode === 'appointment' ? null : (
     <Panel
       title={intl.formatMessage(PANEL_TITLES[constraint], {configured: String(mode !== '')})}
       collapsible

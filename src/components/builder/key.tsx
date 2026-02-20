@@ -57,6 +57,7 @@ export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] 
 const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
   const {setFieldValue, getFieldProps}: KeyFormikContextType<ExtendedComponentSchema> =
     useFormikContext<ExtendedComponentSchema>();
+  const {formMode} = useContext(BuilderContext);
 
   const name = 'key';
   const fieldProps = getFieldProps(name);
@@ -83,6 +84,7 @@ const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
       }
       onChange={onChange}
       required
+      readOnly={formMode === 'appointment'}
     />
   );
 };
