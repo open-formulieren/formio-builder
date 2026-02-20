@@ -24,7 +24,7 @@ export interface ComponentTranslationsProps<S extends AnyComponentSchema> {
   propertyLabels: {
     [key in ExtractTranslatableProperties<S>]: string;
   };
-  ignoreKeysForTranslations?: string[];
+  ignoreKeysForTranslations?: ExtractTranslatableProperties<S>[];
   children?: React.ReactNode;
 }
 
@@ -39,7 +39,7 @@ ComponentTranslationsContext.displayName = 'ComponentTranslationsContext';
 
 export function ComponentTranslations<S extends AnyComponentSchema>({
   propertyLabels,
-  ignoreKeysForTranslations,
+  ignoreKeysForTranslations = [],
   children,
 }: ComponentTranslationsProps<S>) {
   const intl = useIntl();
@@ -53,9 +53,9 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
   // component schema.
   const properties = Object.keys(propertyLabels) as (ExtractTranslatableProperties<S> &
     StringValueProperties<S>)[];
-  const filteredProperties = !ignoreKeysForTranslations
-    ? properties
-    : properties.filter(property => !ignoreKeysForTranslations.includes(property));
+  const filteredProperties = properties.filter(
+    property => !ignoreKeysForTranslations.includes(property)
+  );
 
   const nameBase = `openForms.translations.${activeLanguage}`;
 

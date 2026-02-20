@@ -276,29 +276,6 @@ export const TextField: Story = {
   },
 };
 
-export const TextfieldAppointment: Story = {
-  render: Template,
-  name: 'type: textfield-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'textfield',
-      key: 'textfield',
-      label: 'A textfield in appointment form',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the textfield component',
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: '',
-      schema: {placeholder: ''},
-      weight: 10,
-    },
-  },
-};
-
 export const Email: Story = {
   render: Template,
   name: 'type: email',
@@ -383,29 +360,6 @@ export const Email: Story = {
     await userEvent.type(defaultInput0, '@example.com');
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const EmailAppointment: Story = {
-  render: Template,
-  name: 'type: email-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'email',
-      key: 'email',
-      label: 'An email in appointment form',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the email component',
-    },
-    builderInfo: {
-      title: 'Email',
-      group: 'basic',
-      icon: 'at',
-      schema: {placeholder: ''},
-      weight: 10,
-    },
-    formMode: 'appointment',
   },
 };
 
@@ -544,31 +498,6 @@ export const NumberField: Story = {
   },
 };
 
-export const NumberFieldAppointment: Story = {
-  render: Template,
-  name: 'type: number-appointment',
-
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'number',
-      key: 'number',
-      label: 'A number field',
-      validate: {
-        required: false,
-      },
-    },
-    builderInfo: {
-      title: 'Number',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {placeholder: ''},
-      weight: 30,
-    },
-    formMode: 'appointment',
-  },
-};
-
 export const Textarea: Story = {
   render: Template,
   name: 'type: textarea',
@@ -641,33 +570,6 @@ export const Textarea: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const TextareaAppointment: Story = {
-  render: Template,
-  name: 'type: textarea-appointment',
-
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'textarea',
-      key: 'textarea',
-      label: 'A textarea field',
-      autoExpand: false,
-      rows: 3,
-      validate: {
-        required: false,
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Textarea',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {placeholder: ''},
-      weight: 30,
-    },
   },
 };
 
@@ -753,29 +655,6 @@ export const DateField: Story = {
   },
 };
 
-export const DateFieldAppointment: Story = {
-  render: Template,
-  name: 'type: date-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'date',
-      key: 'date',
-      label: 'A date in appointment form',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the date component',
-    },
-    builderInfo: {
-      title: 'Date Field',
-      icon: 'calendar',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-    formMode: 'appointment',
-  },
-};
-
 export const DateTimeField: Story = {
   render: Template,
   name: 'type: datetime',
@@ -854,31 +733,6 @@ export const DateTimeField: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const DateTimeFieldAppointment: Story = {
-  render: Template,
-  name: 'type: datetime-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'datetime',
-      key: 'datetime',
-      label: 'A datetime field',
-      validate: {
-        required: false,
-      },
-    },
-
-    builderInfo: {
-      title: 'Date/Time Field',
-      icon: 'calendar-plus',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-    formMode: 'appointment',
   },
 };
 
@@ -963,30 +817,6 @@ export const TimeField: Story = {
   },
 };
 
-export const TimeFieldAppointment: Story = {
-  render: Template,
-  name: 'type: time-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'time',
-      key: 'time',
-      label: 'A time field',
-      validate: {
-        required: false,
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Time Field',
-      icon: 'clock-o',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
 export const Postcode: Story = {
   render: Template,
   name: 'type: postcode (deprecated)',
@@ -1068,31 +898,6 @@ export const Postcode: Story = {
   },
 };
 
-export const PostcodeAppointment: Story = {
-  render: Template,
-  name: 'type: postcode-appointment (deprecated)',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'postcode',
-      key: 'postcode',
-      label: 'A postcode field',
-      validate: {
-        required: false,
-        pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Postcode',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
 export const PhoneNumber: Story = {
   render: Template,
   name: 'type: phoneNumber',
@@ -1161,27 +966,6 @@ export const PhoneNumber: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const PhoneNumberAppointment: Story = {
-  render: Template,
-  name: 'type: phoneNumber-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'phoneNumber',
-      key: 'phoneNumber',
-      label: 'A phone number field',
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Phone number',
-      icon: 'phone-square',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
   },
 };
 
@@ -1554,33 +1338,6 @@ export const SelectBoxes: Story = {
   },
 };
 
-export const SelectBoxesAppointment: Story = {
-  render: Template,
-  name: 'type: selectboxes-appointment',
-  args: {
-    component: {
-      id: 'wqimsadk',
-      type: 'selectboxes',
-      key: 'selectboxes',
-      label: 'A selectboxes field',
-      openForms: {
-        dataSrc: 'manual',
-        translations: {},
-      },
-      values: [],
-      defaultValue: {},
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Select Boxes',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {},
-    },
-  },
-};
-
 export const Radio: Story = {
   render: Template,
   name: 'type: radio',
@@ -1798,34 +1555,6 @@ export const Radio: Story = {
       // @ts-expect-error
       args.onSubmit.mockClear();
     });
-  },
-};
-
-export const RadioAppointment: Story = {
-  render: Template,
-  name: 'type: radio-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'radio',
-      key: 'radio',
-      label: 'A radio in appointment form',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the radio component',
-      openForms: {
-        dataSrc: 'manual',
-        translations: {},
-      },
-      values: [],
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Radio',
-      icon: 'dot-circle-o',
-      group: 'basic',
-      weight: 100,
-      schema: {},
-    },
   },
 };
 
@@ -2074,34 +1803,6 @@ export const Select: Story = {
   },
 };
 
-export const SelectAppointment: Story = {
-  render: Template,
-  name: 'type: select-appointment',
-
-  args: {
-    component: {
-      id: 'wqimsadk',
-      type: 'select',
-      key: 'select',
-      label: 'A select field',
-      openForms: {
-        dataSrc: 'manual',
-        translations: {},
-      },
-      data: {values: []},
-      defaultValue: '',
-    } satisfies SelectComponentSchema,
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Select',
-      icon: 'th-list',
-      group: 'basic',
-      weight: 70,
-      schema: {},
-    },
-  },
-};
-
 export const BSN: Story = {
   render: Template,
   name: 'type: bsn',
@@ -2178,30 +1879,6 @@ export const BSN: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const BSNAppointment: Story = {
-  render: Template,
-  name: 'type: bsn-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'bsn',
-      key: 'bsn',
-      label: 'A BSN field',
-      validate: {
-        required: false,
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'BSN Field',
-      icon: 'id-card-o',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
   },
 };
 
@@ -2329,32 +2006,6 @@ export const Checkbox: Story = {
   },
 };
 
-export const CheckboxAppointment: Story = {
-  render: Template,
-  name: 'type: checkbox-appointment',
-
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'checkbox',
-      key: 'checkbox',
-      label: 'A checkbox field',
-      validate: {
-        required: false,
-      },
-      defaultValue: false,
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Checkbox',
-      icon: 'check-square',
-      group: 'basic',
-      weight: 50,
-      schema: {},
-    },
-  },
-};
-
 export const Currency: Story = {
   render: Template,
   name: 'type: currency',
@@ -2444,31 +2095,6 @@ export const Currency: Story = {
   },
 };
 
-export const CurrencyAppointment: Story = {
-  render: Template,
-  name: 'type: currency-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'currency',
-      currency: 'EUR',
-      key: 'currency',
-      label: 'A currency field',
-      validate: {
-        required: false,
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Currency',
-      icon: 'eur',
-      group: 'basic',
-      weight: 70,
-      schema: {},
-    },
-  },
-};
-
 export const Iban: Story = {
   render: Template,
   name: 'type: iban',
@@ -2545,30 +2171,6 @@ export const Iban: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const IbanAppointment: Story = {
-  render: Template,
-  name: 'type: iban-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'iban',
-      key: 'iban',
-      label: 'An IBAN field',
-      validate: {
-        required: false,
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'IBAN Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
   },
 };
 
@@ -2652,31 +2254,6 @@ export const LicensePlate: Story = {
   },
 };
 
-export const LicensePlateAppointment: Story = {
-  render: Template,
-  name: 'type: licenseplate-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'licenseplate',
-      key: 'licenseplate',
-      label: 'A license plate field',
-      validate: {
-        required: false,
-        pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
-      },
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'licenseplate Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
 export const NpFamilyMembers: Story = {
   render: Template,
   name: 'type: npFamilyMembers',
@@ -2755,29 +2332,6 @@ export const NpFamilyMembers: Story = {
   },
 };
 
-export const NpFamilyMembersAppointment: Story = {
-  render: Template,
-  name: 'type: npFamilyMembers-appointment',
-  args: {
-    component: {
-      id: 'wqimsadk',
-      type: 'npFamilyMembers',
-      key: 'npFamilyMembers',
-      label: 'An npFamilyMembers field',
-      includeChildren: true,
-      includePartners: false,
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'NP Family members',
-      icon: 'users',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
 export const AddressNL: Story = {
   render: Template,
   name: 'type: addressNL',
@@ -2851,32 +2405,6 @@ export const AddressNL: Story = {
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-  },
-};
-
-export const AddressNLAppointment: Story = {
-  render: Template,
-  name: 'type: addressNL-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'addressNL',
-      key: 'address',
-      label: 'A Dutch address',
-      validate: {
-        required: false,
-      },
-      deriveAddress: true,
-      layout: 'singleColumn',
-    } satisfies AddressNLComponentSchema,
-    builderInfo: {
-      title: 'Address Field',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-    formMode: 'appointment',
   },
 };
 
@@ -3334,27 +2862,6 @@ export const LeafletMap: Story = {
   },
 };
 
-export const LeafletMapAppointment: Story = {
-  render: Template,
-  name: 'type: map',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'map',
-      key: 'map',
-      label: 'A map',
-    },
-    formMode: 'appointment',
-    builderInfo: {
-      title: 'Map',
-      icon: 'map',
-      group: 'advanced',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
 export const Content: Story = {
   render: Template,
   name: 'type: content',
@@ -3518,22 +3025,6 @@ export const Partners: Story = {
   },
 };
 
-export const PartnersAppointment: Story = {
-  render: Template,
-  name: 'type: partners-appointment',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'partners',
-      key: 'partners',
-      label: 'Partners',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the Partners component',
-    },
-    formMode: 'appointment',
-  },
-};
-
 export const Children: Story = {
   render: Template,
   name: 'type: children',
@@ -3575,23 +3066,6 @@ export const Children: Story = {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalled();
     });
-  },
-};
-
-export const ChildrenAppointment: Story = {
-  render: Template,
-  name: 'type: children',
-  args: {
-    component: {
-      id: 'wekruya',
-      type: 'children',
-      key: 'children',
-      label: 'Children',
-      enableSelection: false,
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the Children component',
-    },
-    formMode: 'appointment',
   },
 };
 
