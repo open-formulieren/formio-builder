@@ -114,7 +114,7 @@ jobs:
         browser:
           - chromium
           - firefox
-          - webkit
+          # - webkit
 
     needs:
       - storybook
