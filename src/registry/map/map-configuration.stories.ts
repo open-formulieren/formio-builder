@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
 import {
   expect,
   fireEvent,
@@ -6,7 +6,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
   within,
-} from '@storybook/test';
+} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {BuilderContextDecorator} from '@/sb-decorators';

@@ -1,6 +1,6 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {expect, userEvent, waitFor, within} from '@storybook/test';
+import {Meta, StoryFn, StoryObj} from '@storybook/react-webpack5';
 import {Formik} from 'formik';
+import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import {TextField} from '@/components/formio';
 import {withFormik} from '@/sb-decorators';

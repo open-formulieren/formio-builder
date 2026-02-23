@@ -1,6 +1,6 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, fn, userEvent, waitFor, within} from '@storybook/test';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {expect, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {rsSelect} from '@/utils/storybookTestHelpers';

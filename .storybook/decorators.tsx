@@ -1,4 +1,4 @@
-import type {Decorator} from '@storybook/react';
+import type {Decorator} from '@storybook/react-webpack5';
 import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';

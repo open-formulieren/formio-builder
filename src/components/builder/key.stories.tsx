@@ -1,7 +1,7 @@
-import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react';
-import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
+import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react-webpack5';
 import {Formik} from 'formik';
 import {useRef} from 'react';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 

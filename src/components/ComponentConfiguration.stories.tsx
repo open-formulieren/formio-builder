@@ -6,9 +6,9 @@ import {
   SoftRequiredErrorsComponentSchema,
   SupportedLocales,
 } from '@open-formulieren/types';
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {expect, fireEvent, fn, userEvent, waitFor, within} from '@storybook/test';
+import {Meta, StoryFn, StoryObj} from '@storybook/react-webpack5';
 import React from 'react';
+import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import {FormMode} from '@/context';
 import {

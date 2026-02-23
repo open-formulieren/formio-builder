@@ -1,5 +1,5 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, fireEvent, userEvent, within} from '@storybook/test';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {expect, fireEvent, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
