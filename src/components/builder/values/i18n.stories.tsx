@@ -1,6 +1,6 @@
 import {Option} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, within} from '@storybook/test';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {expect, within} from 'storybook/test';
 
 import {withFormik} from '@/../.storybook/decorators';
 import {Component} from '@/components/formio';

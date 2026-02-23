@@ -1,5 +1,5 @@
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, userEvent, within} from '@storybook/test';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {expect, userEvent, within} from 'storybook/test';
 
 import Tooltip from './tooltip';
 

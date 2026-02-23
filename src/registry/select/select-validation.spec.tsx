@@ -1,6 +1,6 @@
 import {SelectComponentSchema} from '@open-formulieren/types';
-import {expect, within} from '@storybook/test';
 import userEvent from '@testing-library/user-event';
+import {expect, within} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {act, contextRender, screen} from '@/tests/test-utils';

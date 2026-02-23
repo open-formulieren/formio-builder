@@ -1,4 +1,4 @@
-import {userEvent, within} from '@storybook/test';
+import {userEvent, within} from 'storybook/test';
 
 /**
  * Wrapper to select an option in a react-select component

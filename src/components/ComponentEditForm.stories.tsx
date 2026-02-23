@@ -1,5 +1,5 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react';
-import {fn} from '@storybook/test';
+import {Meta, StoryFn, StoryObj} from '@storybook/react-webpack5';
+import {fn} from 'storybook/test';
 
 import ComponentEditForm from './ComponentEditForm';
 

@@ -1,6 +1,6 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react';
-import {expect, userEvent, waitFor, within} from '@storybook/test';
+import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 
