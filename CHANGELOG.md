@@ -1,5 +1,23 @@
 # Changes
 
+## 0.48.0 (2026-02-24)
+
+Feature and maintenance release.
+
+- [`OF#5820`][OF#5820] Form builder now supports `default` and `appointment` mode. Appointment mode
+  uses restricted functionality for specific components.
+- Addressed test flakiness in CI.
+- Fixed type errors due to changes in types repository.
+- Updated dependencies:
+  - [`OF#5991`][OF#5991] Storybook to v9.1.19.
+  - Types repository to v1.0.0.
+  - formatjs/ts-transformer.
+  - Typescript to v5.9.
+  - Replaced ttypescript with ts-patch.
+
+[OF#5820]: https://github.com/open-formulieren/open-forms/issues/5820
+[OF#5991]: https://github.com/open-formulieren/open-forms/issues/5991
+
 ## 0.47.0 (2026-01-05)
 
 Small improvements and bugfixes release.
