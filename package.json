@@ -88,6 +88,7 @@
     "@types/sanitize-html": "^2.9.0",
     "@types/signature_pad": "^2.3.6",
     "@types/webpack": "^5.28.1",
+    "@vitejs/plugin-react": "^4.7.0",
     "babel-loader": "^8.3.0",
     "babel-plugin-formatjs": "^10.4.0",
     "bootstrap": "^4.5.2",
@@ -111,7 +112,10 @@
     "ts-patch": "^3.3.0",
     "tsc-alias": "^1.8.6",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^6.2.0",
