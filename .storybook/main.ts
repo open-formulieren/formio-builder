@@ -1,5 +1,4 @@
-import type {StorybookConfig} from '@storybook/react-webpack5';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import type {StorybookConfig} from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   core: {
@@ -7,46 +6,15 @@ const config: StorybookConfig = {
     disableWhatsNewNotifications: true,
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: '@storybook/react-vite',
     options: {},
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    'storybook-react-intl',
-    '@storybook/addon-webpack5-compiler-babel',
-    {
-      name: '@storybook/addon-styling-webpack',
-      options: {
-        rules: [
-          // Replaces existing CSS rules with given rule
-          {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
-          },
-          // Replaces any existing Sass rules with given rules
-          {
-            test: /\.s[ac]ss$/i,
-            use: [
-              'style-loader',
-              'css-loader',
-              {
-                loader: 'sass-loader',
-                options: {implementation: require.resolve('sass')},
-              },
-            ],
-          },
-        ],
-      },
-    },
-    '@storybook/addon-docs',
-  ],
-  docs: {},
-  webpackFinal: async (config, {configType}) => {
+  addons: ['@storybook/addon-links', 'storybook-react-intl', '@storybook/addon-docs'],
+  viteFinal: async (config, {configType}) => {
     if (!config.resolve) {
       config.resolve = {};
     }
-    config.resolve.plugins = [new TsconfigPathsPlugin()];
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
     config.resolve.alias!['@open-formulieren/monaco-json-editor'] = require.resolve(
@@ -54,6 +22,7 @@ const config: StorybookConfig = {
     );
     return config;
   },
+  docs: {},
 };
 
 export default config;

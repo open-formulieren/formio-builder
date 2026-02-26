@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/v4-shims.css';
-import {Preview} from '@storybook/react-webpack5';
+import {Preview} from '@storybook/react-vite';
 import 'formiojs/dist/formio.builder.css';
 import 'leaflet/dist/leaflet.css';
 import '@/jsonEditor.scss';

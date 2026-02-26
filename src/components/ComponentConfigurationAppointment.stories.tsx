@@ -3,7 +3,7 @@ import {
   SelectComponentSchema,
   SupportedLocales,
 } from '@open-formulieren/types';
-import {Meta, StoryFn, StoryObj} from '@storybook/react-webpack5';
+import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import React from 'react';
 import {fn} from 'storybook/test';
 
