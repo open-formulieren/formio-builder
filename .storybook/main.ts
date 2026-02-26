@@ -1,5 +1,4 @@
 import type {StorybookConfig} from '@storybook/react-vite';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
   core: {
