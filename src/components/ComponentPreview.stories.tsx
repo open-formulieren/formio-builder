@@ -15,7 +15,7 @@ import {
   SelectboxesComponentSchema,
   TimeComponentSchema,
 } from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-webpack5';
+import {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import ComponentPreview from './ComponentPreview';
