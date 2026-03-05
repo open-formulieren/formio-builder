@@ -1,18 +1,17 @@
-const locales = ['en', 'nl'];
+import enMessages from '../i18n/compiled/en.json';
+import nlMessages from '../i18n/compiled/nl.json';
 
-const messages = locales.reduce(
-  (acc, lang) => ({
-    ...acc,
-    [lang]: require(`../i18n/compiled/${lang}.json`),
-  }),
-  {}
-);
+// Populate the messages object
+const messages = {
+  nl: nlMessages,
+  en: enMessages,
+};
 
 const formats = {}; // optional, if you have any formats
 
 export const reactIntl = {
   defaultLocale: 'en',
-  locales,
+  locales: Object.keys(messages),
   messages,
   formats,
 };

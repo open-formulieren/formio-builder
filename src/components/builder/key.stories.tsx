@@ -1,4 +1,4 @@
-import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react-webpack5';
+import {Meta, StoryContext, StoryFn, StoryObj} from '@storybook/react-vite';
 import {Formik} from 'formik';
 import {useRef} from 'react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
