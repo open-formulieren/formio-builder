@@ -30,7 +30,7 @@ export const ModalDecorator: Decorator = (Story, {parameters}) => {
       <ModalContext.Provider
         value={{
           // only for storybook integration, do not use this in real apps!
-          parentSelector: () => document.getElementById('storybook-root')!,
+          parentSelector: () => document.getElementById('storybook-root') ?? document.body,
           ariaHideApp: false,
         }}
       >
