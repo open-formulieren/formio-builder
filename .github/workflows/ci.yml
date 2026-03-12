@@ -105,19 +105,8 @@ jobs:
           npm run test:jest
 
   tests-storybook:
-    name: Run Storybook tests (${{ matrix.browser }})
+    name: Run Storybook tests
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        browser:
-          - chromium
-          - firefox
-          # - webkit
-
-    needs:
-      - storybook
 
     steps:
       - uses: actions/checkout@v4
@@ -135,18 +124,14 @@ jobs:
           npx playwright install --with-deps
           npm run compilemessages
 
-      - name: Download storybook artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: storybook-static
-
       - name: Serve storybook and run tests
-        run: |
-          cd storybook-static/ && tar -xvf artifact.tar && cd ..
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --quiet" \
-            "npx wait-on -l http://127.0.0.1:6006 && npm run test:storybook -- --browsers ${{ matrix.browser }}"
+        run: npm run test:storybook -- --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: storybook
 
   i18n-check:
     name: Check i18n messages extracted/translated

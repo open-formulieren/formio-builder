@@ -1,4 +1,8 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import type {StorybookConfig} from '@storybook/react-vite';
+import {createRequire} from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   core: {
@@ -10,16 +14,28 @@ const config: StorybookConfig = {
     options: {},
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', 'storybook-react-intl', '@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-links',
+    'storybook-react-intl',
+    '@storybook/addon-docs',
+    '@storybook/addon-vitest',
+  ],
   viteFinal: async (config, {configType}) => {
     if (!config.resolve) {
       config.resolve = {};
     }
+
+    if (!config.resolve.alias) {
+      config.resolve.alias = {};
+    }
+
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
-    config.resolve.alias!['@open-formulieren/monaco-json-editor'] = require.resolve(
-      './__mocks__/mockedJsonEditor.tsx'
-    );
+    config.resolve.alias['@open-formulieren/monaco-json-editor'] = new URL(
+      './__mocks__/mockedJsonEditor.tsx',
+      import.meta.url
+    ).pathname;
+
     return config;
   },
   docs: {},
