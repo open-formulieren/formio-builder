@@ -7,11 +7,11 @@
  * incorporate our domain-specific variables/constructs for a better editing experience.
  */
 import {CKEditor} from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@open-formulieren/ckeditor5-build-classic';
 import {AnyComponentSchema} from '@open-formulieren/types';
 import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
+import ClassicEditor from '@/components/CKEditor';
 import {TemplatingHint} from '@/components/builder';
 import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
