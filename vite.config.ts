@@ -1,13 +1,11 @@
-/// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {defineConfig} from 'vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import {playwright} from '@vitest/browser-playwright';
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin';
-import {coverageConfigDefaults} from 'vitest/config';
+import {defineConfig, coverageConfigDefaults} from 'vitest/config';
 
 import {dependencies, peerDependencies} from './package.json';
 
