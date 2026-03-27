@@ -63,7 +63,6 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
-    "@ckeditor/ckeditor5-build-multi-root": "^40.2.0",
     "@formatjs/cli": "^6.1.1",
     "@formatjs/ts-transformer": "^3.14.2",
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -114,12 +113,12 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@ckeditor/ckeditor5-react": "^11.0.1",
     "@floating-ui/react": "^0.26.4",
-    "@open-formulieren/ckeditor5-build-classic": "^1.0.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.2.0",
     "@open-formulieren/types": "^1.0.0",
+    "ckeditor5": "^47.6.1",
     "clsx": "^1.2.1",
     "formik": "^2.4.5",
     "leaflet": "^1.9.4",
@@ -145,7 +144,7 @@
       "<rootDir>/src"
     ],
     "moduleNameMapper": {
-      "@open-formulieren/ckeditor5-build-classic": "<rootDir>/src/tests/EditorStub.ts",
+      "@/components/CKEditor": "<rootDir>/src/tests/EditorStub.ts",
       "^.*\\.scss$": "<rootDir>/src/tests/StylesStub.ts",
       "@/(.*)$": "<rootDir>/src/$1"
     },
