@@ -1,5 +1,13 @@
 # Changes
 
+## 0.49.0 (2026-03-30)
+
+Maintenance release.
+
+- Upgraded WYSIWYG editor to CKEditor 47.
+- Switched Storybook tooling from Webpack to ViteJS.
+- Upgraded lodash-es to latest version with security patches.
+
 ## 0.48.0 (2026-02-24)
 
 Feature and maintenance release.
