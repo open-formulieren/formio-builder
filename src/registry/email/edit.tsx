@@ -9,6 +9,7 @@ import {
   ClearOnHide,
   Description,
   Hidden,
+  IsConfirmationRecipient,
   IsSensitiveData,
   Key,
   Label,
@@ -170,29 +171,6 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
       label={intl.formatMessage(LABELS.defaultValue)}
       tooltip={tooltip}
       multiple={multiple}
-    />
-  );
-};
-
-const IsConfirmationRecipient: React.FC = () => {
-  const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
-
-  const tooltip = intl.formatMessage({
-    description: "Tooltip for 'confirmationRecipient' builder field",
-    defaultMessage: 'Email-address in this field will receive the confirmation email.',
-  });
-
-  return formMode === 'appointment' ? null : (
-    <Checkbox
-      name="confirmationRecipient"
-      label={
-        <FormattedMessage
-          description="Label for 'confirmationRecipient' builder field"
-          defaultMessage="Receives confirmation email"
-        />
-      }
-      tooltip={tooltip}
     />
   );
 };

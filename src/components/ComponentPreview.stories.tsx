@@ -1312,6 +1312,7 @@ export const Profile: Story = {
       tooltip: 'An example for the tooltip',
       description: 'A description for the Profile component',
       digitalAddressTypes: ['email', 'phoneNumber'],
+      confirmationRecipient: false,
       shouldUpdateCustomerData: true,
     } satisfies CustomerProfileComponentSchema,
   },

@@ -1,5 +1,6 @@
 import type {CustomerProfileComponentSchema} from '@open-formulieren/types';
 import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
+import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
@@ -8,6 +9,7 @@ import {
   ClearOnHide,
   Description,
   Hidden,
+  IsConfirmationRecipient,
   IsSensitiveData,
   Key,
   Label,
@@ -32,6 +34,8 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<CustomerProfileComponentSchema>();
+  const {values} = useFormikContext<CustomerProfileComponentSchema>();
+  const includesEmailType = values.digitalAddressTypes.includes('email');
 
   Validate.useManageValidatorsTranslations<CustomerProfileComponentSchema>(['required']);
   return (
@@ -70,6 +74,7 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
+        {includesEmailType && <IsConfirmationRecipient />}
       </TabPanel>
 
       {/* Advanced tab */}
@@ -116,6 +121,7 @@ EditForm.defaultValues = {
   isSensitiveData: true,
   shouldUpdateCustomerData: true,
   digitalAddressTypes: ['email', 'phoneNumber'],
+  confirmationRecipient: false,
   // Advanced tab
   conditional: {
     show: undefined,
