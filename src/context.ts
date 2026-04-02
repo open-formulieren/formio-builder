@@ -65,7 +65,7 @@ Form mode.
 
 This is the type of the form.
 */
-export type FormMode = 'default' | 'appointment';
+export type FormType = 'regular' | 'appointment' | 'single_page';
 
 /*
   Builder
@@ -76,7 +76,7 @@ export interface BuilderContextType {
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
-  formMode: FormMode;
+  formType: FormType;
   getFormComponents: () => AnyComponentSchema[];
   getValidatorPlugins: (componentType: string) => Promise<ValidatorOption[]>;
   getRegistrationAttributes: (componentType: string) => Promise<RegistrationAttributeOption[]>;
@@ -102,7 +102,7 @@ const BuilderContext = React.createContext<BuilderContextType>({
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',
-  formMode: 'default',
+  formType: 'regular',
   getFormComponents: () => [],
   getValidatorPlugins: async () => [],
   getRegistrationAttributes: async () => [],

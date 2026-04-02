@@ -9,14 +9,14 @@ import {TextField} from '../formio';
 
 const AutoComplete: React.FC<{}> = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'autocomplete' builder field",
     defaultMessage: 'Display options to fill in the field, based on earlier typed values.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="autocomplete"
       label={

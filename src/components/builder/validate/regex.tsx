@@ -11,7 +11,7 @@ import {TextField} from '../../formio';
  */
 const RegexValidation: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.pattern' builder field",
@@ -23,7 +23,7 @@ const RegexValidation: React.FC = () => {
     defaultMessage: 'Regular Expression Pattern',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="validate.pattern"
       label={

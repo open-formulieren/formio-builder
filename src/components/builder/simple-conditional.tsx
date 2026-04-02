@@ -65,9 +65,9 @@ export const ComparisonValueInput: React.FC = () => {
 };
 
 const SimpleConditional: React.FC = () => {
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Panel
       title={
         <FormattedMessage

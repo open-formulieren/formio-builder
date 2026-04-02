@@ -156,14 +156,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="defaultValue"
       type="email"
@@ -176,14 +176,14 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const IsConfirmationRecipient: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'confirmationRecipient' builder field",
     defaultMessage: 'Email-address in this field will receive the confirmation email.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="confirmationRecipient"
       label={
@@ -199,7 +199,8 @@ const IsConfirmationRecipient: React.FC = () => {
 
 const RequireVerification = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
+  const hiddenFormTypes = new Set(['appointment', 'single_page']);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for email 'openForms.requireVerification' builder field",
@@ -208,7 +209,7 @@ const RequireVerification = () => {
     exists and that they have access to the account.`,
   });
 
-  return formMode === 'appointment' ? null : (
+  return hiddenFormTypes.has(formType) ? null : (
     <Checkbox
       name="openForms.requireVerification"
       label={

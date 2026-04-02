@@ -7,7 +7,7 @@ import {Checkbox} from '../formio';
 
 const IsSensitiveData = ({disabled = false}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'IsSensitiveData' builder field",
@@ -15,7 +15,7 @@ const IsSensitiveData = ({disabled = false}) => {
       'The data entered in this component will be removed in accordance with the privacy settings.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="isSensitiveData"
       label={
