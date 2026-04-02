@@ -6,7 +6,7 @@ import {BuilderContext} from '@/context';
 
 const EnableSelection = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'enableSelection' builder field",
@@ -14,7 +14,7 @@ const EnableSelection = () => {
       'Allow the selection of specific children that are retrieved from the external source for further processing.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="enableSelection"
       label={

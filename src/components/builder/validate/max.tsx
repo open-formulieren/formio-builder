@@ -7,7 +7,7 @@ import {NumberField} from '../../formio';
 
 const Max: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.max' builder field",
@@ -18,7 +18,7 @@ const Max: React.FC = () => {
     defaultMessage: 'Maximum value',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="validate.max"
       label={

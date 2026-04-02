@@ -29,9 +29,9 @@ export function ValuesTranslations<S>({name, withOptionDescription}: ValuesTrans
   const {activeLanguage} = useContext(ComponentTranslationsContext);
   const {getFieldProps} = useFormikContext<S>();
   const {value: options = []} = getFieldProps<Option[] | undefined>(name);
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     // Same markup as ComponentTranslations<S> body
     <>
       <tbody>

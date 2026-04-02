@@ -7,7 +7,7 @@ import {NumberField} from '../../formio';
 
 const MaxLength: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.maxLength' builder field",
@@ -18,7 +18,7 @@ const MaxLength: React.FC = () => {
     defaultMessage: 'Maximum length',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="validate.maxLength"
       label={

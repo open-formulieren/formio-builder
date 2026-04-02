@@ -132,7 +132,7 @@ EditForm.defaultValues = {
 
 const ShouldUpdateCustomerData: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'shouldUpdateCustomerData' builder field",
@@ -141,7 +141,7 @@ const ShouldUpdateCustomerData: React.FC = () => {
       'when a digital address is added.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="shouldUpdateCustomerData"
       label={
@@ -168,14 +168,14 @@ const DigitalAddressTypeOptionLabels = defineMessages<DigitalAddressType>({
 
 const DigitalAddressTypes: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const options = Object.entries(DigitalAddressTypeOptionLabels).map(([value, label]) => ({
     value,
     label: intl.formatMessage(label),
   }));
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Select
       name="digitalAddressTypes"
       label={

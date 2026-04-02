@@ -38,16 +38,16 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values, setFieldValue} = useFormikContext<SelectboxesComponentSchema>();
   const {hasAnyError} = useErrorChecker<SelectboxesComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const {
     openForms: {dataSrc},
     defaultValue,
   } = values;
-  const isAppointmentFormMode = formMode === 'appointment';
+  const isAppointmentFormType = formType === 'appointment';
 
   Validate.useManageValidatorsTranslations<SelectboxesComponentSchema>(
-    isAppointmentFormMode ? ['required'] : ['required', 'minSelectedCount', 'maxSelectedCount']
+    isAppointmentFormType ? ['required'] : ['required', 'minSelectedCount', 'maxSelectedCount']
   );
 
   const isManualOptions = checkIsManualOptions(values);
@@ -182,7 +182,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
   const {value = {}} = getFieldProps<SelectboxesComponentSchema['defaultValue'] | undefined>(
     'defaultValue'
   );
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
@@ -216,7 +216,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
     setFieldValue('defaultValue', explicitDefaults);
   }, [options]);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <SelectBoxes
       name="defaultValue"
       options={options}
@@ -228,14 +228,14 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
 
 const MinSelectedCheckboxes: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.minSelectedCount' builder field",
     defaultMessage: 'If specified, the user must check at least this many options.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="validate.minSelectedCount"
       label={
@@ -257,14 +257,14 @@ const MinSelectedCheckboxes: React.FC = () => {
 
 const MaxSelectedCheckboxes: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.maxSelectedCount' builder field",
     defaultMessage: 'If specified, the user must check at most this many options.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="validate.maxSelectedCount"
       label={

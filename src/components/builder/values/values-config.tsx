@@ -28,7 +28,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
   name,
   withOptionDescription,
 }: ValuesConfigProps<T>) {
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
   const {values, setFieldValue} = useFormikContext<T>();
   const {dataSrc} = values.openForms;
 
@@ -74,7 +74,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
     // when that dropdown changes value.
   }, [dataSrc]);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <>
       <ValuesSrc />
       {dataSrc === 'manual' && (
