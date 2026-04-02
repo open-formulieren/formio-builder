@@ -7,14 +7,14 @@ import {Checkbox} from '../formio';
 
 const ShowCharCount = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'ShowCharCount' builder field",
     defaultMessage: 'Show a live count of the number of characters.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="showCharCount"
       label={

@@ -33,9 +33,9 @@ const DateConstraintValidation: React.FC<DateConstraintProps> = ({constraint}) =
   const {values} = useFormikContext<DateComponentSchema>();
   const mode = values?.openForms?.[constraint]?.mode || '';
   const {errors, hasErrors} = useValidationErrors(`openForms.${constraint}`);
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Panel
       title={intl.formatMessage(PANEL_TITLES[constraint], {configured: String(mode !== '')})}
       collapsible

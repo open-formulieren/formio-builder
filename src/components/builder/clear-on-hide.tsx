@@ -7,7 +7,7 @@ import {Checkbox} from '../formio';
 
 const ClearOnHide = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'ClearOnHide' builder field",
@@ -15,7 +15,7 @@ const ClearOnHide = () => {
       'Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="clearOnHide"
       label={

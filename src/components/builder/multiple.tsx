@@ -26,7 +26,7 @@ function Multiple<T = unknown>({updateDefaultValue = true}: MultipleProps) {
   const intl = useIntl();
   const {values, getFieldProps, setFieldValue} = useFormikContext<T>();
   const {onChange: formikOnChange} = getFieldProps<boolean>('multiple');
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'Multiple values' builder field",
@@ -49,7 +49,7 @@ function Multiple<T = unknown>({updateDefaultValue = true}: MultipleProps) {
     setFieldValue('defaultValue', newDefaultValue);
   };
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="multiple"
       label={

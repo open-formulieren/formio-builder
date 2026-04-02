@@ -7,14 +7,14 @@ import {Checkbox} from '../formio';
 
 const ReadOnly = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'ReadOnly' builder field",
     defaultMessage: 'Make this component read only.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="disabled"
       label={

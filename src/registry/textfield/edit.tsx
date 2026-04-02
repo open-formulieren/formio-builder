@@ -41,12 +41,12 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values} = useFormikContext<TextFieldComponentSchema>();
   const {hasAnyError} = useErrorChecker<TextFieldComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  const isAppointmentFormMode = formMode === 'appointment';
+  const isAppointmentFormType = formType === 'appointment';
 
   Validate.useManageValidatorsTranslations<TextFieldComponentSchema>(
-    isAppointmentFormMode ? ['required'] : ['required', 'maxLength', 'pattern']
+    isAppointmentFormType ? ['required'] : ['required', 'maxLength', 'pattern']
   );
 
   return (
@@ -83,7 +83,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             'derivePostcode',
             'deriveHouseNumber'
           )}
-          hidden={isAppointmentFormMode}
+          hidden={isAppointmentFormType}
         >
           <FormattedMessage
             description="Component edit form tab title for 'Location' tab"
@@ -229,14 +229,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -248,7 +248,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const DeriveStreetName: React.FC<{}> = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'deriveStreetName' builder field",
@@ -256,7 +256,7 @@ const DeriveStreetName: React.FC<{}> = () => {
       'If the postcode and house number are entered this field will autofill with the street name',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="deriveStreetName"
       label={
@@ -272,7 +272,7 @@ const DeriveStreetName: React.FC<{}> = () => {
 
 const DeriveCity: React.FC<{}> = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'deriveCity' builder field",
@@ -280,7 +280,7 @@ const DeriveCity: React.FC<{}> = () => {
       'If the postcode and house number are entered this field will autofill with the city',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="deriveCity"
       label={
@@ -295,9 +295,9 @@ const DeriveCity: React.FC<{}> = () => {
 };
 
 const DerivePostcode: React.FC<{}> = () => {
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <ComponentSelect
       name="derivePostcode"
       label={
@@ -313,9 +313,9 @@ const DerivePostcode: React.FC<{}> = () => {
 };
 
 const DeriveHouseNumber: React.FC<{}> = () => {
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <ComponentSelect
       name="deriveHouseNumber"
       label={

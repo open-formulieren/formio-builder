@@ -32,10 +32,10 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<CurrencyComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   Validate.useManageValidatorsTranslations<CurrencyComponentSchema>(
-    formMode === 'appointment' ? ['required'] : ['required', 'min', 'max']
+    formType === 'appointment' ? ['required'] : ['required', 'min', 'max']
   );
 
   return (
@@ -150,14 +150,14 @@ EditForm.defaultValues = {
 
 const DefaultValue: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -169,14 +169,14 @@ const DefaultValue: React.FC = () => {
 
 const DecimalLimit: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'decimalLimit' builder field",
     defaultMessage: 'The maximum number of decimal places.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="decimalLimit"
       label={
@@ -192,14 +192,14 @@ const DecimalLimit: React.FC = () => {
 
 const AllowNegative: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'allowNegative' builder field",
     defaultMessage: 'Allow negative values.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="allowNegative"
       label={

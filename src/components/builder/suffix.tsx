@@ -7,7 +7,7 @@ import {TextField} from '../formio';
 
 const Suffix: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'suffix' builder field",
@@ -15,7 +15,7 @@ const Suffix: React.FC = () => {
       The '<sup> and <sub>' HTML tags are supported.`,
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="suffix"
       label={

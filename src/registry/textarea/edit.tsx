@@ -38,12 +38,12 @@ const EditForm: EditFormDefinition<TextareaComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values} = useFormikContext<TextareaComponentSchema>();
   const {hasAnyError} = useErrorChecker<TextareaComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  const isAppointmentFormMode = formMode === 'appointment';
+  const isAppointmentFormType = formType === 'appointment';
 
   Validate.useManageValidatorsTranslations<TextareaComponentSchema>(
-    isAppointmentFormMode ? ['required'] : ['required', 'maxLength', 'pattern']
+    isAppointmentFormType ? ['required'] : ['required', 'maxLength', 'pattern']
   );
 
   return (
@@ -175,14 +175,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextArea
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}
@@ -194,7 +194,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const AutoExpand: React.FC<{}> = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'AutoExpand' builder field",
@@ -202,7 +202,7 @@ const AutoExpand: React.FC<{}> = () => {
       'This will make the text area auto expand its height as the user is typing into the area.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="autoExpand"
       label={
@@ -218,14 +218,14 @@ const AutoExpand: React.FC<{}> = () => {
 
 const NumberOfRows: React.FC<{}> = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'NumberOfRows' builder field",
     defaultMessage: 'The number of rows for this text area.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <NumberField
       name="rows"
       label={

@@ -11,7 +11,7 @@ import {
   DEFAULT_COMPONENT_TREE,
   DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
-  DEFAULT_FORM_MODE,
+  DEFAULT_FORM_TYPE,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
   DEFAULT_PREFILL_ATTRIBUTES,
@@ -80,7 +80,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
   const defaultdocumentTypes =
     context.parameters.builder?.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES;
-  const defaultFormMode = context.parameters.builder?.formMode || DEFAULT_FORM_MODE;
+  const regularFormType = context.parameters.builder?.formType || DEFAULT_FORM_TYPE;
 
   return (
     <BuilderContext.Provider
@@ -88,7 +88,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         uniquifyKey: key => key,
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
-        formMode: defaultFormMode,
+        formType: regularFormType,
         getMapTileLayers: async () => {
           const itemsFromArgs = context?.args?.mapTileLayers as MapTileLayer[] | undefined;
           return itemsFromArgs || DEFAULT_MAP_TILE_LAYERS;

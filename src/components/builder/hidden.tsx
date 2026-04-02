@@ -7,14 +7,14 @@ import {Checkbox} from '../formio';
 
 const Hidden = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'Hidden' builder field",
     defaultMessage: 'Hide a field from the form.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="hidden"
       label={
