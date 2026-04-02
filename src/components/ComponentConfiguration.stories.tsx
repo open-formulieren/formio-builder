@@ -10,7 +10,7 @@ import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import React from 'react';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
-import {FormMode} from '@/context';
+import {FormType} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -117,7 +117,7 @@ interface TemplateArgs {
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
   builderInfo: BuilderInfo;
-  formMode: FormMode;
+  formType: FormType;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (c: AnyComponentSchema) => void;
@@ -137,7 +137,7 @@ const Template: StoryFn<TemplateArgs> = ({
   fileTypes,
   isNew,
   builderInfo,
-  formMode,
+  formType,
   onCancel,
   onRemove,
   onSubmit,
@@ -165,7 +165,7 @@ const Template: StoryFn<TemplateArgs> = ({
     component={component}
     isNew={isNew}
     builderInfo={builderInfo}
-    formMode={formMode}
+    formType={formType}
     onCancel={onCancel}
     onRemove={onRemove}
     onSubmit={onSubmit}
