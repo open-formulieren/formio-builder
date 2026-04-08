@@ -112,6 +112,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^11.0.1",
     "@floating-ui/react": "^0.26.4",
+    "@formio/vanilla-text-mask": "^5.1.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.2.0",
     "@open-formulieren/types": "^1.0.0",
@@ -121,6 +122,7 @@
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.21",
+    "proj4leaflet": "^1.0.2",
     "react-intl": "^6.3.2",
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.6",
