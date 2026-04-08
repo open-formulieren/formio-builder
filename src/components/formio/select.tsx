@@ -3,12 +3,12 @@ import React from 'react';
 import ReactSelect from 'react-select';
 import type {
   GroupBase,
+  MultiValue,
   OptionsOrGroups,
   Props as RSProps,
   StylesConfig,
   ThemeConfig,
-} from 'react-select/dist/declarations/src';
-import {MultiValue} from 'react-select/dist/declarations/src';
+} from 'react-select';
 
 import Component from './component';
 import Description from './description';

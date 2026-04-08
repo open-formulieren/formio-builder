@@ -13,7 +13,7 @@
   "scripts": {
     "build:esm": "vite build",
     "build:scss": "node bundle-scss.mjs && rm lib/css/index.js lib/css/index.js.map",
-    "build:typecheck": "tsc --noEmit -p tsconfig.prod.json",
+    "build:typecheck": "tsc --noEmit",
     "build": "run-p build:*",
     "test": "npm-run-all test:*",
     "test:storybook": "TZ=Europe/Amsterdam vitest --project=storybook",
