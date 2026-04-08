@@ -52,10 +52,6 @@
     "react": "^18.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.4",
     "@formatjs/cli": "^6.1.1",
     "@formatjs/ts-transformer": "^3.14.2",
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -80,7 +76,6 @@
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/browser-playwright": "^4.0.18",
     "@vitest/coverage-v8": "^4.0.18",
-    "babel-loader": "^8.3.0",
     "babel-plugin-formatjs": "^10.4.0",
     "bootstrap": "^4.5.2",
     "esbuild": "^0.27.4",
