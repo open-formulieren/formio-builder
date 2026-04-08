@@ -4,7 +4,6 @@
     "outDir": "lib/esm",
     "module": "esnext",
     "target": "es2017",
-    "lib": ["dom"],
     "jsx": "react-jsx",
     "declaration": true,
     "moduleResolution": "bundler",
@@ -18,6 +17,7 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "noErrorTruncation": true,
     "paths": {
       "@/*": ["./*"],
@@ -34,6 +34,6 @@
       {"transform": "./scss-transformer.ts"}
     ]
   },
-  "include": ["src", ".storybook"],
+  "include": ["src/**/*", ".storybook/**/*", "./vitest.setup.ts"],
   "exclude": ["node_modules", "lib"]
 }
