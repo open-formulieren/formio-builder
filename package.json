@@ -2,22 +2,16 @@
   "name": "@open-formulieren/formio-builder",
   "version": "0.49.0",
   "description": "An opinionated Formio webform builder for Open Forms",
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
+  "type": "module",
   "types": "./lib/esm/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js",
-      "default": "./lib/cjs/index.js"
-    },
+    ".": "./lib/esm/index.js",
     "./esm/": "./lib/esm/",
     "./css/": "./lib/css/",
     "./lib/": "./lib/"
   },
   "scripts": {
-    "build:esm": "tspc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "build:cjs": "tspc -p tsconfig.prod.json --module commonjs --outDir lib/cjs && tsc-alias -p tsconfig.prod.json --outDir lib/cjs",
+    "build:esm": "vite build",
     "build:scss": "node bundle-scss.mjs && rm lib/css/index.js lib/css/index.js.map",
     "build:typecheck": "tsc --noEmit -p tsconfig.prod.json",
     "build": "run-p build:*",
@@ -30,8 +24,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "makemessages": "formatjs extract",
-    "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled",
-    "watch": "tspc -p tsconfig.prod.json --watch"
+    "compilemessages": "formatjs compile-folder --ast i18n/messages i18n/compiled"
   },
   "files": [
     "lib/",

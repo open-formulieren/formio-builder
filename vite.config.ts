@@ -52,6 +52,7 @@ export default defineConfig(({mode}) => ({
     },
   },
   build: {
+    outDir: 'lib/esm',
     lib: {
       entry: resolve(_OF_INTERNAL_dirname, 'src/index.ts'),
       formats: ['es'],
