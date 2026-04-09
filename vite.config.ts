@@ -22,7 +22,7 @@ export const packageRegexes = externalPackages.map(
   packageName => new RegExp(`^${packageName}(/.*)?`)
 );
 
-export default defineConfig(({mode}) => ({
+export default defineConfig(({}) => ({
   plugins: [
     tsconfigPaths(),
     react({
@@ -48,7 +48,11 @@ export default defineConfig(({mode}) => ({
   },
   css: {
     preprocessorOptions: {
-      scss: {quietDeps: true},
+      scss: {
+        quietDeps: true,
+        // silence bootstrap @import statements
+        silenceDeprecations: ['import'],
+      },
     },
   },
   build: {
