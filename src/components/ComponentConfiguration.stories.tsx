@@ -8,6 +8,7 @@ import {
 } from '@open-formulieren/types';
 import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import React from 'react';
+import selectEvent from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import {FormMode} from '@/context';
@@ -3123,19 +3124,38 @@ export const Profile: Story = {
       expect(componentEditForm.getByText('Phone number')).toBeVisible();
 
       // Both digital addresses have inputs in the preview
-      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
-      expect(await componentPreview.getByLabelText('Phone number')).toBeVisible();
+      expect(componentPreview.getByLabelText('Email')).toBeVisible();
+      expect(componentPreview.getByLabelText('Phone number')).toBeVisible();
+
+      const confirmationCheckbox = componentEditForm.getByLabelText('Receives confirmation email');
+      expect(confirmationCheckbox).toBeVisible();
+      await expect(confirmationCheckbox).not.toBeChecked();
     });
 
     await step('Deselect phone number digital address type', async () => {
       await userEvent.click(componentEditForm.getByRole('button', {name: 'Remove Phone number'}));
 
       // The phone number field is removed
-      expect(await componentPreview.queryByLabelText('Phone number')).not.toBeInTheDocument();
-      expect(await componentPreview.getByLabelText('Email')).toBeVisible();
+      expect(componentPreview.queryByLabelText('Phone number')).not.toBeInTheDocument();
+      expect(componentPreview.getByLabelText('Email')).toBeVisible();
+      expect(componentEditForm.getByLabelText('Receives confirmation email')).toBeVisible();
+    });
+
+    await step('Deselect email', async () => {
+      await userEvent.click(componentEditForm.getByRole('button', {name: 'Remove Email'}));
+
+      // The email field and the receive confirmation email checkbox are removed
+      expect(componentPreview.queryByLabelText('Email')).not.toBeInTheDocument();
+      expect(
+        componentPreview.queryByLabelText('Receives confirmation email')
+      ).not.toBeInTheDocument();
     });
 
     await step('Submit form', async () => {
+      // Reselect the email address type
+      const typeSelect = componentEditForm.getByLabelText('Available digital address types');
+      selectEvent.select(typeSelect, 'Email');
+
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalled();
     });

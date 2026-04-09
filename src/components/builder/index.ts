@@ -22,6 +22,7 @@ export {default as RichText} from './rich-text';
 export {default as SimpleConditional} from './simple-conditional';
 export {default as Suffix} from './suffix';
 export {default as TemplatingHint} from './templating-hint';
+export {default as IsConfirmationRecipient} from './is-confirmation-email';
 export * as Validate from './validate';
 export * as Registration from './registration';
 export * as Prefill from './prefill';
