@@ -17,7 +17,7 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
     '@storybook/addon-vitest',
   ],
-  viteFinal: async (config, {configType}) => {
+  viteFinal: async (config,) => {
     if (!config.resolve) {
       config.resolve = {};
     }
@@ -28,6 +28,7 @@ const config: StorybookConfig = {
 
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
+    // @ts-ignore
     config.resolve.alias['@open-formulieren/monaco-json-editor'] = new URL(
       './__mocks__/mockedJsonEditor.tsx',
       import.meta.url

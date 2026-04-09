@@ -1,9 +1,8 @@
-import sanitizeHtml, {IOptions} from 'sanitize-html';
+import DOMPurify, {Config} from 'dompurify';
 
-const OPTIONS: IOptions = {
-  allowedTags: ['sub', 'sup'],
-  allowedAttributes: {},
-  allowedSchemes: [],
+const OPTIONS: Config = {
+  ALLOWED_TAGS: ['sub', 'sup'],
+  ALLOWED_ATTR: [],
 };
 
 export interface AffixProps {
@@ -11,7 +10,7 @@ export interface AffixProps {
 }
 
 const Affix: React.FC<JSX.IntrinsicElements['span'] & AffixProps> = ({children, ...props}) => {
-  const sanitizedContent = sanitizeHtml(children, OPTIONS);
+  const sanitizedContent = DOMPurify.sanitize(children, OPTIONS);
   return <span {...props} dangerouslySetInnerHTML={{__html: sanitizedContent}} />;
 };
 

@@ -113,6 +113,7 @@
     "@open-formulieren/types": "^1.0.0",
     "ckeditor5": "^47.6.1",
     "clsx": "^1.2.1",
+    "dompurify": "^3.3.3",
     "formik": "^2.4.5",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
@@ -126,7 +127,6 @@
     "react-signature-canvas": "^1.0.6",
     "react-tabs": "^4.2.1",
     "react-use": "^17.4.0",
-    "sanitize-html": "^2.11.0",
     "zod": "^3.21.4",
     "zod-formik-adapter": "^1.2.0"
   },
