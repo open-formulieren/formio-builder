@@ -1,6 +1,7 @@
 import {setProjectAnnotations} from '@storybook/react-vite';
+import {cleanup} from '@testing-library/react';
 import * as reactIntlAnnotations from 'storybook-react-intl/preview';
-import {beforeAll} from 'vitest';
+import {beforeAll, afterEach} from 'vitest';
 
 import * as projectAnnotations from './.storybook/preview';
 
@@ -9,3 +10,6 @@ import * as projectAnnotations from './.storybook/preview';
 const annotations = setProjectAnnotations([reactIntlAnnotations, projectAnnotations]);
 
 beforeAll(annotations.beforeAll);
+afterEach(() => {
+  cleanup();
+});

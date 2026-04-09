@@ -1,3 +1,5 @@
+import {expect, test} from 'vitest';
+
 import {getErrorNames} from './errors';
 
 test.each([

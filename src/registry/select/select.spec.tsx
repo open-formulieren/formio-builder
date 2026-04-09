@@ -1,20 +1,13 @@
 import {SelectComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
+import {expect, test, vi} from 'vitest';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {contextRender, screen, waitFor} from '@/tests/test-utils';
 
-beforeAll(() => {
-  jest.useFakeTimers();
-});
-
-afterAll(() => {
-  jest.useRealTimers();
-});
-
 test('Switch to multiple sets empty array as default value', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const onSubmit = jest.fn();
+  const user = userEvent.setup();
+  const onSubmit = vi.fn();
 
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
@@ -43,8 +36,8 @@ test('Switch to multiple sets empty array as default value', async () => {
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );
@@ -62,8 +55,8 @@ test('Switch to multiple sets empty array as default value', async () => {
 });
 
 test('Switch to multiple sets empty array as default value when initial is null', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const onSubmit = jest.fn();
+  const user = userEvent.setup();
+  const onSubmit = vi.fn();
 
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
@@ -93,8 +86,8 @@ test('Switch to multiple sets empty array as default value when initial is null'
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );
@@ -112,8 +105,8 @@ test('Switch to multiple sets empty array as default value when initial is null'
 });
 
 test('Switch to non multiple sets empty string as default value', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const onSubmit = jest.fn();
+  const user = userEvent.setup();
+  const onSubmit = vi.fn();
 
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
@@ -142,8 +135,8 @@ test('Switch to non multiple sets empty string as default value', async () => {
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );

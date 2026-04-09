@@ -1,4 +1,5 @@
 import {Components} from 'formiojs';
+import {expect, test} from 'vitest';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';
 

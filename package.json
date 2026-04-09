@@ -17,7 +17,7 @@
     "build": "run-p build:*",
     "test": "npm-run-all test:*",
     "test:storybook": "TZ=Europe/Amsterdam vitest --project=storybook",
-    "test:jest": "jest",
+    "test:vitest": "TZ=Europe/Amsterdam vitest --project=unit",
     "format": "prettier --write 'src/**/*' '.storybook/**/*'",
     "checkformat": "prettier --check 'src/**/*' '.storybook/**/*'",
     "start": "npm run storybook",

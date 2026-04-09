@@ -1,4 +1,5 @@
 import {MapComponentSchema} from '@open-formulieren/types';
+import {expect, test} from 'vitest';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';
 

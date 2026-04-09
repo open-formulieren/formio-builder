@@ -1,5 +1,6 @@
 import {FieldsetComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
+import {expect, test, vi} from 'vitest';
 
 import {contextRender, screen} from '@/tests/test-utils';
 
@@ -33,8 +34,8 @@ test('Mutating components after save does not mutate default values', async () =
         schema: {},
         weight: 10,
       }}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={component => (savedComponent = component)}
     />
   );

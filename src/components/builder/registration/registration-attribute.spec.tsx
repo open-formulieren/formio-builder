@@ -1,7 +1,8 @@
 import userEvent from '@testing-library/user-event';
 import {Formik} from 'formik';
+import {expect, test, vi} from 'vitest';
 
-import {act, contextRender, screen} from '@/tests/test-utils';
+import {act, contextRender, screen, waitFor} from '@/tests/test-utils';
 
 import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
 
@@ -11,19 +12,11 @@ const REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'dob', label: 'Date of Birth'},
 ];
 
-beforeAll(() => {
-  jest.useFakeTimers();
-});
-
-afterAll(() => {
-  jest.useRealTimers();
-});
-
 test('Available registration attributes are retrieved via context', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
+  const user = userEvent.setup();
 
   contextRender(
-    <Formik onSubmit={jest.fn()} initialValues={{registration: {attribute: ''}}}>
+    <Formik onSubmit={vi.fn()} initialValues={{registration: {attribute: ''}}}>
       <RegistrationAttributeSelect />
     </Formik>,
     {
@@ -50,5 +43,8 @@ test('Available registration attributes are retrieved via context', async () => 
   expect(await screen.findByText('BSN')).toBeVisible();
   expect(await screen.findByText('First name')).toBeVisible();
   expect(await screen.findByText('Date of Birth')).toBeVisible();
-  expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+  });
 });

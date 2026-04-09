@@ -91,13 +91,13 @@ jobs:
       - name: Run prettier linter
         run: npm run checkformat
 
-  tests-jest:
-    name: Run Jest tests
+  unit-tests:
+    name: Run unit tests
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: npm
@@ -105,11 +105,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up test environment
+        run: |
+          npx playwright install --with-deps
+          npm run compilemessages
+
       - name: Run tests
         run: |
-          npm run test:jest
+          npm run test:vitest -- --coverage
 
-  tests-storybook:
+      - name: Publish coverage report
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: vitest
+
+  interaction-tests:
     name: Run Storybook tests
     runs-on: ubuntu-latest
 
@@ -161,8 +172,8 @@ jobs:
     needs:
       - storybook
       - prettier
-      - tests-storybook
-      - tests-jest
+      - interaction-tests
+      - unit-tests
       - i18n-check
     # do not run in forks & only publish main branch
     if: github.ref_name == 'main' && github.repository_owner == 'open-formulieren'
@@ -227,8 +238,8 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build-package
-      - tests-storybook
-      - tests-jest
+      - interaction-tests
+      - unit-tests
       - prettier
       - i18n-check
 
