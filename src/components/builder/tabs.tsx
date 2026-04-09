@@ -5,6 +5,8 @@ import type {ReactTabsFunctionComponent, TabProps} from 'react-tabs';
 import {Tab} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
+const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_page']);
+
 type TabWithContent = ReactTabsFunctionComponent<TabProps & {hasErrors: boolean}>;
 
 const Basic: TabWithContent = props => (
@@ -57,10 +59,9 @@ Registration.tabsRole = 'Tab';
 
 const Prefill: TabWithContent = props => {
   const {formType} = useContext(BuilderContext);
-  const hiddenFormTypes = new Set(['appointment', 'single_page']);
 
   return (
-    <Tab {...props} hidden={hiddenFormTypes.has(formType)}>
+    <Tab {...props} hidden={HIDDEN_FORM_TYPES.has(formType)}>
       <FormattedMessage
         description="Component edit form tab title for 'Prefill' tab"
         defaultMessage="Prefill"

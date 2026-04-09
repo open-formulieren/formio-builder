@@ -1,4 +1,4 @@
-import {
+import type {
   AddressNLComponentSchema,
   ContentComponentSchema,
   FileComponentSchema,
@@ -6,12 +6,12 @@ import {
   SoftRequiredErrorsComponentSchema,
   SupportedLocales,
 } from '@open-formulieren/types';
-import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import React from 'react';
 import selectEvent from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
-import {FormType} from '@/context';
+import type {FormType} from '@/context';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -21,14 +21,14 @@ import {
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
 } from '@/tests/sharedUtils';
-import {AnyComponentSchema} from '@/types';
+import type {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
-import {BuilderInfo} from './ComponentEditForm';
-import {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
-import {RegistrationAttributeOption} from './builder/registration/registration-attribute';
-import {ValidatorOption} from './builder/validate/validator-select';
-import {
+import type {BuilderInfo} from './ComponentEditForm';
+import type {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
+import type {RegistrationAttributeOption} from './builder/registration/registration-attribute';
+import type {ValidatorOption} from './builder/validate/validator-select';
+import type {
   ReferenceListsServiceOption,
   ReferenceListsTable,
   ReferenceListsTableItem,

@@ -8,6 +8,8 @@ import {BuilderContext} from '@/context';
 
 import Select from '../../formio/select';
 
+const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_page']);
+
 export interface ValidatorOption {
   id: string;
   label: string;
@@ -31,8 +33,6 @@ const ValidatorPluginSelect: React.FC = () => {
   const {values} = useFormikContext<ExtendedComponentSchema>();
   const {getValidatorPlugins, formType} = useContext(BuilderContext);
 
-  const hiddenFormTypes = new Set(['appointment', 'single_page']);
-
   const {
     value: options,
     loading,
@@ -47,7 +47,7 @@ const ValidatorPluginSelect: React.FC = () => {
   });
   const _options = isValidatorOptions(options) ? options : [];
 
-  return hiddenFormTypes.has(formType) ? null : (
+  return HIDDEN_FORM_TYPES.has(formType) ? null : (
     <Select
       name="validate.plugins"
       label={
