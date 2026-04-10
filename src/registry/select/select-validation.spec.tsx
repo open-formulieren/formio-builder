@@ -1,20 +1,13 @@
 import {SelectComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
-import {expect, within} from 'storybook/test';
+import {within} from 'storybook/test';
+import {expect, test, vi} from 'vitest';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {act, contextRender, screen} from '@/tests/test-utils';
 
-beforeAll(() => {
-  jest.useFakeTimers();
-});
-
-afterAll(() => {
-  jest.useRealTimers();
-});
-
 test('Option values and labels are required fields', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
+  const user = userEvent.setup();
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
@@ -42,9 +35,9 @@ test('Option values and labels are required fields', async () => {
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
-      onSubmit={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
+      onSubmit={vi.fn()}
     />
   );
 
@@ -57,7 +50,7 @@ test('Option values and labels are required fields', async () => {
 });
 
 test('There is always at least one option', async () => {
-  const onSubmit = jest.fn();
+  const onSubmit = vi.fn();
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
@@ -85,8 +78,8 @@ test('There is always at least one option', async () => {
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );
@@ -97,8 +90,8 @@ test('There is always at least one option', async () => {
 });
 
 test('All translations are optional', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const onSubmit = jest.fn();
+  const user = userEvent.setup();
+  const onSubmit = vi.fn();
   const component: SelectComponentSchema = {
     id: 'wqimsadk',
     type: 'select',
@@ -126,8 +119,8 @@ test('All translations are optional', async () => {
       isNew
       component={component}
       builderInfo={builderInfo}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );

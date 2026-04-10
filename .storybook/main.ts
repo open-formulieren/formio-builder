@@ -10,19 +10,35 @@ const config: StorybookConfig = {
     options: {},
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', 'storybook-react-intl', '@storybook/addon-docs'],
-  viteFinal: async (config, {configType}) => {
+  addons: [
+    '@storybook/addon-links',
+    'storybook-react-intl',
+    '@storybook/addon-docs',
+    '@storybook/addon-vitest',
+  ],
+  viteFinal: async config => {
     if (!config.resolve) {
       config.resolve = {};
     }
+
+    if (!config.resolve.alias) {
+      config.resolve.alias = {};
+    }
+
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
-    config.resolve.alias!['@open-formulieren/monaco-json-editor'] = require.resolve(
-      './__mocks__/mockedJsonEditor.tsx'
-    );
+    // @ts-ignore
+    config.resolve.alias['@open-formulieren/monaco-json-editor'] = new URL(
+      './__mocks__/mockedJsonEditor.tsx',
+      import.meta.url
+    ).pathname;
+
     return config;
   },
   docs: {},
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
 };
 
 export default config;

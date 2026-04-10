@@ -180,7 +180,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
         required
         options={overlayTileLayers}
         valueProperty="uuid"
-        getOptionLabel={option => option.name}
+        getOptionLabel={(option: MapOverlayTileLayer) => option.name}
         onChange={event => {
           const layerUuid = event.target.value;
           const newLayer = overlayTileLayers?.find(layer => layer.uuid === layerUuid);

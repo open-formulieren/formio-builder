@@ -24,13 +24,15 @@ import {
   sleep,
 } from '@/tests/sharedUtils';
 
-export const ModalDecorator: Decorator = (Story, {parameters}) => {
-  if (parameters?.modal?.noModal)
+export const ModalDecorator: Decorator = (Story, context) => {
+  if (context.parameters?.modal?.noModal)
     return (
       <ModalContext.Provider
         value={{
           // only for storybook integration, do not use this in real apps!
-          parentSelector: () => document.getElementById('storybook-root')!,
+          parentSelector: () => {
+            return context.canvasElement;
+          },
           ariaHideApp: false,
         }}
       >

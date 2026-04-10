@@ -1,4 +1,13 @@
 {
   "extends": "./tsconfig",
-  "exclude": ["node_modules", "lib", "**/*.stories.*", "**/*.spec.*", "src/tests", ".storybook"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "**/*.stories.*",
+    "**/*.spec.*",
+    "src/tests",
+    ".storybook",
+    "./vitest.setup.ts",
+    "src/utils/storybookTestHelpers.ts",
+  ]
 }

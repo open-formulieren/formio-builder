@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import {Form, Formik} from 'formik';
+import {expect, test, vi} from 'vitest';
 
 import {contextRender, screen} from '@/tests/test-utils';
 
@@ -7,7 +8,7 @@ import {PrefillConfiguration} from '.';
 
 test('Clearing the prefill plugin', async () => {
   const user = userEvent.setup();
-  const onSubmit = jest.fn();
+  const onSubmit = vi.fn();
 
   contextRender(
     <Formik

@@ -1,4 +1,4 @@
-import {expect} from 'storybook/test';
+import {expect, test} from 'vitest';
 
 import {getWMSLayerOptionsFromXMLData} from '@/registry/map/getTileLayerOptions';
 

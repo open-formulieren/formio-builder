@@ -1,21 +1,14 @@
 import {ColumnsComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
+import {expect, test, vi} from 'vitest';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import {waitFor} from '@/tests/test-utils';
 import {contextRender, fireEvent, screen} from '@/tests/test-utils';
 
-beforeAll(() => {
-  jest.useFakeTimers();
-});
-
-afterAll(() => {
-  jest.useRealTimers();
-});
-
 test('(Added) column width sliders configure the width', async () => {
-  const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
-  const onSubmit = jest.fn();
+  const user = userEvent.setup();
+  const onSubmit = vi.fn();
 
   contextRender(
     <ComponentEditForm
@@ -27,8 +20,8 @@ test('(Added) column width sliders configure the width', async () => {
         columns: [],
       }}
       builderInfo={{title: 'Columns', icon: 'columns', group: 'layout', weight: 10, schema: {}}}
-      onCancel={jest.fn()}
-      onRemove={jest.fn()}
+      onCancel={vi.fn()}
+      onRemove={vi.fn()}
       onSubmit={onSubmit}
     />
   );

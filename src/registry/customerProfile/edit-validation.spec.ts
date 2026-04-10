@@ -1,5 +1,6 @@
 import {CustomerProfileComponentSchema} from '@open-formulieren/types';
 import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
+import {expect, test} from 'vitest';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';
 
