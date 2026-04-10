@@ -3,7 +3,7 @@
     "baseUrl": "src",
     "outDir": "lib/esm",
     "module": "esnext",
-    "target": "es2017",
+    "target": "ES2021",
     "jsx": "react-jsx",
     "declaration": true,
     "moduleResolution": "bundler",
