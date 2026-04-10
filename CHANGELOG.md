@@ -1,5 +1,22 @@
 # Changes
 
+## 0.50.0 (2026-04-10)
+
+Feature release.
+
+- [`OF#6106`][OF#6106] Updated configuration UI to limit configuration options for single-page/step
+  forms.
+- [`OF#5932`][OF#5932] Added configuration option on customer profile component to send confirmation
+  emails to the provided email address.
+- [`OF#5991`][OF#5991] Updated the build toolchains to Vite/Vitest, Storybook 10 and remove CommonJS
+  build - only ESM is now available.
+- Upgraded build tooling from Node v20 to v24.
+- Hardened NPM configuration to prevent post-install scripts from running by default.
+
+[OF#5991]: https://github.com/open-formulieren/open-forms/issues/5991
+[OF#5932]: https://github.com/open-formulieren/open-forms/issues/5932
+[OF#6106]: https://github.com/open-formulieren/open-forms/issues/6106
+
 ## 0.49.0 (2026-03-30)
 
 Maintenance release.
