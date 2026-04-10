@@ -76,9 +76,9 @@ const PresentationConfig: React.FC<PresentationConfigProps> = ({
   exposeShowInEmail = true,
   exposeShowInPDF = true,
 }) => {
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Panel
       title={
         <FormattedMessage

@@ -30,7 +30,7 @@ import type {
 } from './builder/values/reference-lists/types';
 
 export default {
-  title: 'Public API/ComponentConfiguration/Appointment mode',
+  title: 'Public API/ComponentConfiguration/Single page mode',
   component: ComponentConfiguration,
   args: {
     isNew: true,
@@ -127,11 +127,11 @@ export const Textfield: Story = {
       id: 'wekruya',
       type: 'textfield',
       key: 'textfield',
-      label: 'A textfield for an appointment form',
+      label: 'A textfield for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the textfield component',
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Text field',
       group: 'basic',
@@ -150,7 +150,7 @@ export const Email: Story = {
       id: 'wekruya',
       type: 'email',
       key: 'email',
-      label: 'An email for an appointment form',
+      label: 'An email for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the email component',
     },
@@ -161,7 +161,7 @@ export const Email: Story = {
       schema: {placeholder: ''},
       weight: 10,
     },
-    formType: 'appointment',
+    formType: 'single_page',
   },
 };
 
@@ -174,7 +174,7 @@ export const NumberField: Story = {
       id: 'wekruya',
       type: 'number',
       key: 'number',
-      label: 'A number field for an appointment form',
+      label: 'A number field for a single page form',
       validate: {
         required: false,
       },
@@ -186,7 +186,7 @@ export const NumberField: Story = {
       schema: {placeholder: ''},
       weight: 30,
     },
-    formType: 'appointment',
+    formType: 'single_page',
   },
 };
 
@@ -199,14 +199,14 @@ export const Textarea: Story = {
       id: 'wekruya',
       type: 'textarea',
       key: 'textarea',
-      label: 'A textarea field for an appointment form',
+      label: 'A textarea field for a single page form',
       autoExpand: false,
       rows: 3,
       validate: {
         required: false,
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Textarea',
       group: 'basic',
@@ -225,7 +225,7 @@ export const DateField: Story = {
       id: 'wekruya',
       type: 'date',
       key: 'date',
-      label: 'A date for an appointment form',
+      label: 'A date for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the date component',
     },
@@ -236,7 +236,7 @@ export const DateField: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'appointment',
+    formType: 'single_page',
   },
 };
 
@@ -248,7 +248,7 @@ export const DateTimeField: Story = {
       id: 'wekruya',
       type: 'datetime',
       key: 'datetime',
-      label: 'A datetime field for an appointment form',
+      label: 'A datetime field for a single page form',
       validate: {
         required: false,
       },
@@ -261,7 +261,7 @@ export const DateTimeField: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'appointment',
+    formType: 'single_page',
   },
 };
 
@@ -273,12 +273,12 @@ export const TimeField: Story = {
       id: 'wekruya',
       type: 'time',
       key: 'time',
-      label: 'A time field for an appointment form',
+      label: 'A time field for a single page form',
       validate: {
         required: false,
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Time Field',
       icon: 'clock-o',
@@ -297,13 +297,13 @@ export const Postcode: Story = {
       id: 'wekruya',
       type: 'postcode',
       key: 'postcode',
-      label: 'A postcode field for an appointment form',
+      label: 'A postcode field for a single page form',
       validate: {
         required: false,
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Postcode',
       icon: 'home',
@@ -322,9 +322,9 @@ export const PhoneNumber: Story = {
       id: 'wekruya',
       type: 'phoneNumber',
       key: 'phoneNumber',
-      label: 'A phone number field for an appointment form',
+      label: 'A phone number field for a single page form',
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Phone number',
       icon: 'phone-square',
@@ -343,7 +343,7 @@ export const SelectBoxes: Story = {
       id: 'wqimsadk',
       type: 'selectboxes',
       key: 'selectboxes',
-      label: 'A selectboxes field for an appointment form',
+      label: 'A selectboxes field for a single page form',
       openForms: {
         dataSrc: 'manual',
         translations: {},
@@ -351,7 +351,7 @@ export const SelectBoxes: Story = {
       values: [],
       defaultValue: {},
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Select Boxes',
       icon: 'plus-square',
@@ -370,7 +370,7 @@ export const Radio: Story = {
       id: 'wekruya',
       type: 'radio',
       key: 'radio',
-      label: 'A radio for an appointment form',
+      label: 'A radio for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the radio component',
       openForms: {
@@ -379,7 +379,7 @@ export const Radio: Story = {
       },
       values: [],
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Radio',
       icon: 'dot-circle-o',
@@ -399,7 +399,7 @@ export const Select: Story = {
       id: 'wqimsadk',
       type: 'select',
       key: 'select',
-      label: 'A select field for an appointment form',
+      label: 'A select field for a single page form',
       openForms: {
         dataSrc: 'manual',
         translations: {},
@@ -407,7 +407,7 @@ export const Select: Story = {
       data: {values: []},
       defaultValue: '',
     } satisfies SelectComponentSchema,
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Select',
       icon: 'th-list',
@@ -426,12 +426,12 @@ export const BSN: Story = {
       id: 'wekruya',
       type: 'bsn',
       key: 'bsn',
-      label: 'A BSN field for an appointment form',
+      label: 'A BSN field for a single page form',
       validate: {
         required: false,
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'BSN Field',
       icon: 'id-card-o',
@@ -451,13 +451,13 @@ export const Checkbox: Story = {
       id: 'wekruya',
       type: 'checkbox',
       key: 'checkbox',
-      label: 'A checkbox field for an appointment form',
+      label: 'A checkbox field for a single page form',
       validate: {
         required: false,
       },
       defaultValue: false,
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Checkbox',
       icon: 'check-square',
@@ -477,17 +477,40 @@ export const Currency: Story = {
       type: 'currency',
       currency: 'EUR',
       key: 'currency',
-      label: 'A currency field for an appointment form',
+      label: 'A currency field for a single page form',
       validate: {
         required: false,
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Currency',
       icon: 'eur',
       group: 'basic',
       weight: 70,
+      schema: {},
+    },
+  },
+};
+
+export const Signature: Story = {
+  render: Template,
+  name: 'type: signature',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'signature',
+      key: 'signature',
+      label: 'A signature field for a single page form',
+      footer: '',
+    },
+
+    builderInfo: {
+      title: 'Signature',
+      icon: 'pencil',
+      group: 'advanced',
+      weight: 10,
       schema: {},
     },
   },
@@ -501,12 +524,12 @@ export const Iban: Story = {
       id: 'wekruya',
       type: 'iban',
       key: 'iban',
-      label: 'An IBAN field for an appointment form',
+      label: 'An IBAN field for a single page form',
       validate: {
         required: false,
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'IBAN Field',
       icon: 'wallet',
@@ -525,39 +548,16 @@ export const LicensePlate: Story = {
       id: 'wekruya',
       type: 'licenseplate',
       key: 'licenseplate',
-      label: 'A license plate field for an appointment form',
+      label: 'A license plate field for a single page form',
       validate: {
         required: false,
         pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
       },
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'licenseplate Field',
       icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {},
-    },
-  },
-};
-
-export const NpFamilyMembers: Story = {
-  render: Template,
-  name: 'type: npFamilyMembers',
-  args: {
-    component: {
-      id: 'wqimsadk',
-      type: 'npFamilyMembers',
-      key: 'npFamilyMembers',
-      label: 'An npFamilyMembers field for an appointment form',
-      includeChildren: true,
-      includePartners: false,
-    },
-    formType: 'appointment',
-    builderInfo: {
-      title: 'NP Family members',
-      icon: 'users',
       group: 'basic',
       weight: 10,
       schema: {},
@@ -573,7 +573,7 @@ export const AddressNL: Story = {
       id: 'wekruya',
       type: 'addressNL',
       key: 'address',
-      label: 'A Dutch address for an appointment form',
+      label: 'A Dutch address for a single page form',
       validate: {
         required: false,
       },
@@ -587,7 +587,7 @@ export const AddressNL: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'appointment',
+    formType: 'single_page',
   },
 };
 
@@ -599,9 +599,9 @@ export const LeafletMap: Story = {
       id: 'wekruya',
       type: 'map',
       key: 'map',
-      label: 'A map for an appointment form',
+      label: 'A map for a single page form',
     },
-    formType: 'appointment',
+    formType: 'single_page',
     builderInfo: {
       title: 'Map',
       icon: 'map',
@@ -612,35 +612,96 @@ export const LeafletMap: Story = {
   },
 };
 
-export const Partners: Story = {
+export const FieldSet: Story = {
   render: Template,
-  name: 'type: partners',
+  name: 'type: fieldset',
+
   args: {
     component: {
       id: 'wekruya',
-      type: 'partners',
-      key: 'partners',
-      label: 'Partners for an appointment form',
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the Partners component',
+      type: 'fieldset',
+      key: 'fieldset',
+      label: 'A field set for a single page form',
+      hideHeader: false,
+      components: [],
     },
-    formType: 'appointment',
+
+    builderInfo: {
+      title: 'Field set',
+      icon: 'th-large',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
   },
 };
 
-export const Children: Story = {
+export const Columns: Story = {
   render: Template,
-  name: 'type: children',
+  name: 'type: columns',
+
   args: {
     component: {
       id: 'wekruya',
-      type: 'children',
-      key: 'children',
-      label: 'Children for an appointment form',
-      enableSelection: false,
-      tooltip: 'An example for the tooltip',
-      description: 'A description for the Children component',
+      type: 'columns',
+      key: 'columns',
+      columns: [],
     },
-    formType: 'appointment',
+
+    builderInfo: {
+      title: 'Columns',
+      icon: 'columns',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
+
+export const Content: Story = {
+  render: Template,
+  name: 'type: content',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'content',
+      key: 'content',
+      html: '<p>Hello storybook</p>',
+    },
+
+    builderInfo: {
+      title: 'Content',
+      icon: 'html5',
+      group: 'layout',
+      weight: 10,
+      schema: {},
+    },
+  },
+};
+
+export const EditGrid: Story = {
+  render: Template,
+  name: 'type: editgrid',
+
+  args: {
+    component: {
+      id: 'wekruya',
+      type: 'editgrid',
+      key: 'editgrid',
+      label: 'A repeating group for a single page form',
+      hideLabel: false,
+      groupLabel: 'Group',
+      disableAddingRemovingRows: false,
+      components: [],
+    },
+
+    builderInfo: {
+      title: 'Repeating group',
+      icon: 'repeat',
+      group: 'advanced',
+      weight: 10,
+      schema: {},
+    },
   },
 };

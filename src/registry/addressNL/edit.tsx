@@ -103,14 +103,14 @@ export const SubcomponentValidation: React.FC<SubcomponentValidationProps> = ({
 
 const DeriveAddress = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'DeriveAddress' builder field",
     defaultMessage:
       'When enabled, the street name and city are derived from the entered postcode and house number.',
   });
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="deriveAddress"
       label={
@@ -126,7 +126,7 @@ const DeriveAddress = () => {
 
 const ColumnsLayout: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const singleColumn = intl.formatMessage({
     description: 'Single column label',
@@ -137,7 +137,7 @@ const ColumnsLayout: React.FC = () => {
     defaultMessage: 'Double column',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Select
       name="layout"
       label={
@@ -159,9 +159,9 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
   const intl = useIntl();
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {hasAnyError} = useErrorChecker<AddressNLComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  const isDefaultFormMode = formMode === 'default';
+  const isAppointmentFormType = formType === 'appointment';
 
   Validate.useManageValidatorsTranslations<AddressNLComponentSchema>(['required']);
 
@@ -219,7 +219,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Validate.ValidatorPluginSelect />
         <Validate.ValidationErrorTranslations />
 
-        {isDefaultFormMode && (
+        {!isAppointmentFormType && (
           <>
             {/* Postcode field validation */}
             <Panel

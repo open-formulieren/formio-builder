@@ -39,14 +39,14 @@ const EditForm: EditFormDefinition<DateComponentSchema> = () => {
   const {
     values: {multiple = false},
   } = useFormikContext<DateComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  const isAppointmentFormMode = formMode === 'appointment';
+  const isAppointmentFormType = formType === 'appointment';
 
   const {hasAnyError} = useErrorChecker<DateComponentSchema>();
 
   Validate.useManageValidatorsTranslations<DateComponentSchema>(
-    isAppointmentFormMode ? ['required'] : ['required', 'minDate', 'maxDate', 'invalid_date']
+    isAppointmentFormType ? ['required'] : ['required', 'minDate', 'maxDate', 'invalid_date']
   );
 
   return (
@@ -186,14 +186,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <DateField
       name="defaultValue"
       label={<FormattedMessage {...LABELS.defaultValue} />}

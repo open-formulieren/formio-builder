@@ -164,7 +164,7 @@ export const IsAppointmentForm: Story = {
     },
     builder: {
       enableContext: true,
-      formMode: 'appointment',
+      formType: 'appointment',
     },
   },
 };

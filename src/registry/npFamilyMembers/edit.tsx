@@ -138,14 +138,14 @@ EditForm.defaultValues = {
 
 const IncludePartners: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'includePartners' builder field",
     defaultMessage: 'Whether to add partners information to the component.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="includePartners"
       label={
@@ -161,14 +161,14 @@ const IncludePartners: React.FC = () => {
 
 const IncludeChildren: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'includeChildren' builder field",
     defaultMessage: 'Whether to add children information to the component.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="includeChildren"
       label={

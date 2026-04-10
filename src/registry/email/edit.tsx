@@ -29,6 +29,8 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
+const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_page']);
+
 /**
  * Form to configure a Formio 'email' type component.
  */
@@ -157,14 +159,14 @@ interface DefaultValueProps {
 
 const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'defaultValue' builder field",
     defaultMessage: 'This will be the initial value for this field before user interaction.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <TextField
       name="defaultValue"
       type="email"
@@ -177,7 +179,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
 
 const RequireVerification = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for email 'openForms.requireVerification' builder field",
@@ -186,7 +188,7 @@ const RequireVerification = () => {
     exists and that they have access to the account.`,
   });
 
-  return formMode === 'appointment' ? null : (
+  return HIDDEN_FORM_TYPES.has(formType) ? null : (
     <Checkbox
       name="openForms.requireVerification"
       label={

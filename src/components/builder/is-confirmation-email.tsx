@@ -7,14 +7,14 @@ import {Checkbox} from '../formio';
 
 const IsConfirmationRecipient: React.FC = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'confirmationRecipient' builder field",
     defaultMessage: 'Email-address in this field will receive the confirmation email.',
   });
 
-  return formMode === 'appointment' ? null : (
+  return formType === 'appointment' ? null : (
     <Checkbox
       name="confirmationRecipient"
       label={

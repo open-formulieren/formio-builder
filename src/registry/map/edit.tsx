@@ -38,9 +38,9 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
   const [isKeyManuallySetRef, generatedKey] = useDeriveComponentKey();
   const {values, setValues} = useFormikContext<MapComponentSchema>();
   const {hasAnyError} = useErrorChecker<MapComponentSchema>();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
-  const isAppointmentFormMode = formMode === 'appointment';
+  const isAppointmentFormType = formType === 'appointment';
 
   Validate.useManageValidatorsTranslations<MapComponentSchema>(['required']);
 
@@ -81,7 +81,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'initialCenter',
             'interactions'
           )}
-          hidden={isAppointmentFormMode}
+          hidden={isAppointmentFormType}
         >
           <FormattedMessage
             description="Component edit form tab title for 'Map settings' tab"
@@ -90,7 +90,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         </Tab>
         <Tab
           hasErrors={hasAnyError('tileLayerIdentifier', 'overlays')}
-          hidden={isAppointmentFormMode}
+          hidden={isAppointmentFormType}
         >
           <FormattedMessage
             description="Component edit form tab title for 'Layers' tab"

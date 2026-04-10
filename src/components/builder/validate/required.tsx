@@ -7,7 +7,7 @@ import {Checkbox} from '../../formio';
 
 const Required = () => {
   const intl = useIntl();
-  const {formMode} = useContext(BuilderContext);
+  const {formType} = useContext(BuilderContext);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'validate.required' builder field",
@@ -23,7 +23,7 @@ const Required = () => {
         />
       }
       tooltip={tooltip}
-      disabled={formMode === 'appointment'}
+      disabled={formType === 'appointment'}
     />
   );
 };
