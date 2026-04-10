@@ -17,7 +17,7 @@ const config: StorybookConfig = {
     '@storybook/addon-docs',
     '@storybook/addon-vitest',
   ],
-  viteFinal: async (config,) => {
+  viteFinal: async config => {
     if (!config.resolve) {
       config.resolve = {};
     }
