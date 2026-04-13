@@ -1,0 +1,9 @@
+.offb-component-group {
+  summary {
+    display: block;
+  }
+
+  &__component-button {
+    color: var(--bs-body-color);
+  }
+}
