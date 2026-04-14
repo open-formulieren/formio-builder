@@ -1,4 +1,5 @@
 import type {StorybookConfig} from '@storybook/react-vite';
+import {fileURLToPath} from 'node:url';
 
 const config: StorybookConfig = {
   core: {
@@ -28,10 +29,9 @@ const config: StorybookConfig = {
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
     // @ts-ignore
-    config.resolve.alias['@open-formulieren/monaco-json-editor'] = new URL(
-      './__mocks__/mockedJsonEditor.tsx',
-      import.meta.url
-    ).pathname;
+    config.resolve.alias['@open-formulieren/monaco-json-editor'] = fileURLToPath(
+      new URL('./__mocks__/mockedJsonEditor.tsx', import.meta.url)
+    );
 
     return config;
   },
