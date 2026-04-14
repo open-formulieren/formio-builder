@@ -2,7 +2,7 @@ import {useFormikContext} from 'formik';
 import {ExtendedComponentSchema} from 'formiojs';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';

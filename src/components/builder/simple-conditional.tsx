@@ -4,7 +4,7 @@ import {Utils as FormioUtils} from 'formiojs';
 import type {ConditionalOptions} from 'formiojs';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
-import usePrevious from 'react-use/esm/usePrevious';
+import {usePrevious} from 'react-use';
 
 import {TextField} from '@/components/formio/textfield';
 import {BuilderContext} from '@/context';

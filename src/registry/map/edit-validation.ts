@@ -1,5 +1,5 @@
 // Import direct from the tiles lib, otherwise Leaflet is needed in unit tests for CRS.
-import {TILE_LAYER_RD} from '@open-formulieren/leaflet-tools/lib/tiles';
+import {TILE_LAYER_RD} from '@open-formulieren/leaflet-tools/lib/tiles.js';
 import {IntlShape} from 'react-intl';
 import {z} from 'zod';
 

@@ -3,7 +3,7 @@ import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import {Checkbox, Component, NumberField, Select, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';

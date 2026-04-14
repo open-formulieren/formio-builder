@@ -1,7 +1,7 @@
 import {CosignV1ComponentSchema} from '@open-formulieren/types';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import {
   BuilderTabs,
