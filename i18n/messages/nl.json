@@ -64,6 +64,11 @@
     "description": "Tooltip postcode field validation panel",
     "originalDefault": "Validation for the postcode field"
   },
+  "0O+VL8": {
+    "defaultMessage": "Getal",
+    "description": "Number component type label",
+    "originalDefault": "Number"
+  },
   "0OP7ho": {
     "defaultMessage": "Ontvangt bevestigingsmail",
     "description": "Label for 'confirmationRecipient' builder field",
@@ -171,6 +176,11 @@
     "isTranslated": true,
     "originalDefault": "CSS class"
   },
+  "3tz37g": {
+    "defaultMessage": "Selectievakjes",
+    "description": "Selectboxes component type label",
+    "originalDefault": "Selectboxes"
+  },
   "4/cCvG": {
     "defaultMessage": "Locatie",
     "description": "Component edit form tab title for 'Location' tab",
@@ -186,6 +196,11 @@
     "description": "Invalid postcode format validation error",
     "originalDefault": "{field} must be a valid postcode."
   },
+  "4D1HCF": {
+    "defaultMessage": "Kaart",
+    "description": "Map component type label",
+    "originalDefault": "Map"
+  },
   "4DkoO5": {
     "defaultMessage": "Dagen",
     "description": "Label for 'delta.days' in relative delta date constraint validation",
@@ -200,6 +215,12 @@
     "defaultMessage": "Sleep of <browse>selecteer</browse> bestanden om te uploaden.",
     "description": "file component: drag/select files to upload text",
     "originalDefault": "Drag or <browse>select</browse> files to upload."
+  },
+  "4xtxl1": {
+    "defaultMessage": "AddressNL",
+    "description": "AddressNL component type label",
+    "isTranslated": true,
+    "originalDefault": "AddressNL"
   },
   "5/jkH9": {
     "defaultMessage": "De maximale bestandsgrootte moet gelijk aan of kleiner dan de serverlimiet zijn.",
@@ -240,6 +261,12 @@
     "defaultMessage": "Maximale tijd",
     "description": "Label for 'validate.maxTime' builder field",
     "originalDefault": "Maximum time"
+  },
+  "6/3Dta": {
+    "defaultMessage": "BSN",
+    "description": "BSN component type label",
+    "isTranslated": true,
+    "originalDefault": "BSN"
   },
   "68Aey7": {
     "defaultMessage": "Wanneer dit is ingeschakeld, wordt het klantprofiel automatisch bijgewerkt door Open Formulieren zodra een digitaal adres wordt toegevoegd.",
@@ -337,6 +364,11 @@
     "description": "Label for child's date of birth",
     "originalDefault": "Date of birth"
   },
+  "9W0yX/": {
+    "defaultMessage": "Bestandsupload",
+    "description": "File component type label",
+    "originalDefault": "File upload"
+  },
   "9XqFGF": {
     "defaultMessage": "Gebruikercommunicatiemethodes bijwerken",
     "description": "Label for 'shouldUpdateCustomerData' builder field",
@@ -417,6 +449,12 @@
     "description": "Tooltip for 'validate.minSelectedCount' builder field",
     "originalDefault": "If specified, the user must check at least this many options."
   },
+  "Bfda2A": {
+    "defaultMessage": "Co-sign",
+    "description": "Cosign v2 component type label",
+    "isTranslated": true,
+    "originalDefault": "Co-sign"
+  },
   "BvRBef": {
     "defaultMessage": "Decimalen",
     "description": "Label for 'decimalLimit' builder field",
@@ -468,6 +506,11 @@
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
   },
+  "DDeDij": {
+    "defaultMessage": "Telefoonnummer",
+    "description": "PhoneNumber component type label",
+    "originalDefault": "Phone number"
+  },
   "DEetjI": {
     "defaultMessage": "Straatnaam",
     "description": "Label for addressNL streetName read only result",
@@ -514,6 +557,12 @@
     "description": "Label for 'allowNegative' builder field",
     "originalDefault": "Allow negative values"
   },
+  "E8UptU": {
+    "defaultMessage": "Partners",
+    "description": "Partners component type label",
+    "isTranslated": true,
+    "originalDefault": "Partners"
+  },
   "EacF3m": {
     "defaultMessage": "Registratie-attribuut",
     "description": "Label for 'registration.attribute' builder field",
@@ -555,10 +604,20 @@
     "description": "Label for the 'columns' builder field",
     "originalDefault": "Column sizes"
   },
+  "G+capl": {
+    "defaultMessage": "Profiel",
+    "description": "CustomerProfile component type label",
+    "originalDefault": "Profile"
+  },
   "GDWp6v": {
     "defaultMessage": "Waarde in gehele getallen, tussen {minZoom} en {maxZoom}.",
     "description": "Description for 'defaultZoom' builder field",
     "originalDefault": "Value in whole numbers, between {minZoom} and {maxZoom}."
+  },
+  "GHg1V/": {
+    "defaultMessage": "Bedrag",
+    "description": "Currency component type label",
+    "originalDefault": "Currency"
   },
   "Gjhh/5": {
     "defaultMessage": "Beschikbare vormen",
@@ -678,6 +737,11 @@
     "isTranslated": true,
     "originalDefault": "Longitude"
   },
+  "M/Akft": {
+    "defaultMessage": "Zoek veld(en)",
+    "description": "Components list search input accessible label",
+    "originalDefault": "Search component(s)"
+  },
   "M2+MHj": {
     "defaultMessage": "Voorvoegsels",
     "description": "Label for partner's affixes",
@@ -687,6 +751,16 @@
     "defaultMessage": "Blokkeer het toevoegen/verwijderen van groepen",
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
+  },
+  "N25aMd": {
+    "defaultMessage": "Gezinsleden",
+    "description": "NpFamilyMembers component type label",
+    "originalDefault": "Family members"
+  },
+  "N46vH2": {
+    "defaultMessage": "Zoek veld(en)",
+    "description": "Components list search input placeholder",
+    "originalDefault": "Search component(s)"
   },
   "NdaqDN": {
     "defaultMessage": "Waarde-omschrijving (<option></option>)",
@@ -713,6 +787,11 @@
     "description": "Component translations 'prefix' property label",
     "isTranslated": true,
     "originalDefault": "Prefix"
+  },
+  "OlHdZq": {
+    "defaultMessage": "Kenteken",
+    "description": "Licenseplate component type label",
+    "originalDefault": "License plate"
   },
   "OlPsaw": {
     "defaultMessage": "Foutcode",
@@ -780,6 +859,11 @@
     "description": "Option add/remove table header/label",
     "originalDefault": "Add/remove"
   },
+  "RulJnf": {
+    "defaultMessage": "Verouderd",
+    "description": "Deprecated component label",
+    "originalDefault": "Deprecated"
+  },
   "RxmRzd": {
     "defaultMessage": "Indien ingeschakeld, gebruik dan de algemene instellingen voor toegestane bestandstypen.",
     "description": "Tooltip for 'useConfigFiletypes' builder field",
@@ -824,6 +908,16 @@
     "defaultMessage": "Minimale datum",
     "description": "Date field 'minDate' fixed value label",
     "originalDefault": "Minimum date"
+  },
+  "TINs+z": {
+    "defaultMessage": "Kolommen",
+    "description": "Columns component type label",
+    "originalDefault": "Columns"
+  },
+  "TW+VxA": {
+    "defaultMessage": "Tekstvlak",
+    "description": "Textarea component type label",
+    "originalDefault": "Textarea"
   },
   "Tpg442": {
     "defaultMessage": "Waarde in decimale graden, tussen 3 en 7.5.",
@@ -993,10 +1087,21 @@
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
   },
+  "XiLc3z": {
+    "defaultMessage": "Co-sign",
+    "description": "CoSign v1 component type label",
+    "isTranslated": true,
+    "originalDefault": "Co-sign"
+  },
   "Xj1uvL": {
     "defaultMessage": "Verwijderen",
     "description": "Columns table: accessible label to remove a column",
     "originalDefault": "Remove"
+  },
+  "XsjoZd": {
+    "defaultMessage": "Datum & tijd",
+    "description": "Datetime component type label",
+    "originalDefault": "Date & time"
   },
   "Y1qhnH": {
     "defaultMessage": "Digitale adrestypen waarop een gebruiker te bereiken is.",
@@ -1022,6 +1127,12 @@
     "defaultMessage": "Geavanceerd",
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
+  },
+  "YKpmvq": {
+    "defaultMessage": "Postcode",
+    "description": "Postcode component type label",
+    "isTranslated": true,
+    "originalDefault": "Postcode"
   },
   "YObTjL": {
     "defaultMessage": "Code van de tabel waaruit de opties opgehaald worden",
@@ -1077,6 +1188,11 @@
     "defaultMessage": "Straatnaam afleiden",
     "description": "Label for 'deriveStreetName' builder field",
     "originalDefault": "Derive street name"
+  },
+  "auqTVZ": {
+    "defaultMessage": "Foutmeldingen aangeraden velden",
+    "description": "SoftRequiredErrors component type label",
+    "originalDefault": "Soft required errors"
   },
   "axygDt": {
     "defaultMessage": "Waarschuwing",
@@ -1194,6 +1310,11 @@
     "description": "Tooltip for 'enableSelection' builder field",
     "originalDefault": "Allow the selection of specific children that are retrieved from the external source for further processing."
   },
+  "e7ovEV": {
+    "defaultMessage": "Herhalende groep",
+    "description": "Editgrid component type label",
+    "originalDefault": "Repeating group"
+  },
   "eAmrdi": {
     "defaultMessage": "Aan het laden...",
     "description": "Loading content text",
@@ -1233,6 +1354,11 @@
     "defaultMessage": "Het e-mailadres in dit veld ontvangt de bevestigingsmail.",
     "description": "Tooltip for 'confirmationRecipient' builder field",
     "originalDefault": "Email-address in this field will receive the confirmation email."
+  },
+  "f9CqUS": {
+    "defaultMessage": "Opmaak",
+    "description": "Layout components group label",
+    "originalDefault": "Layout"
   },
   "fB4Vug": {
     "defaultMessage": "Achtergrond",
@@ -1296,6 +1422,11 @@
     "isTranslated": true,
     "originalDefault": "Postcode"
   },
+  "gv32/3": {
+    "defaultMessage": "Vrije tekst",
+    "description": "Content component type label",
+    "originalDefault": "Content"
+  },
   "h0B9Fr": {
     "defaultMessage": "De eigenschapsnaam mag alleen alfanumerieke tekens, onderstrepingstekens, punten en streepjes bevatten en mag niet worden afgesloten met een streepje of punt.",
     "description": "Form builder 'key' pattern validation error",
@@ -1327,10 +1458,20 @@
     "isTranslated": true,
     "originalDefault": "BSN"
   },
+  "hoyuwO": {
+    "defaultMessage": "Formuliervelden",
+    "description": "Regular components group label",
+    "originalDefault": "Form fields"
+  },
   "hwsnj9": {
     "defaultMessage": "Mobiel",
     "description": "Columns 'mobile' preview viewport",
     "originalDefault": "Mobile"
+  },
+  "i+nuPv": {
+    "defaultMessage": "Veldengroep",
+    "description": "Fieldset component type label",
+    "originalDefault": "Fieldset"
   },
   "i/P7yw": {
     "defaultMessage": "Je moet een tabel selecteren.",
@@ -1376,6 +1517,11 @@
     "defaultMessage": "Dit zorgt ervoor dat het tekstvlak automatisch groter wordt wanneer de gebruiker tekst invoert.",
     "description": "Tooltip for 'AutoExpand' builder field",
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
+  },
+  "jXYcaq": {
+    "defaultMessage": "Tekstveld",
+    "description": "Textfield component type label",
+    "originalDefault": "Textfield"
   },
   "jnHPfU": {
     "defaultMessage": "Latitude",
@@ -1469,10 +1615,21 @@
     "description": "Label for address housenumber",
     "originalDefault": "House number"
   },
+  "mgtQm3": {
+    "defaultMessage": "Speciale velden",
+    "description": "Special components group label",
+    "originalDefault": "Special fields"
+  },
   "mpzdoT": {
     "defaultMessage": "De som van de kolombreedtes mag niet meer dan 12 zijn.",
     "description": "Validation error for column sizes exceeding total value of 12",
     "originalDefault": "The sum of column sizes may not exceed 12."
+  },
+  "n8XxZg": {
+    "defaultMessage": "IBAN",
+    "description": "IBAN component type label",
+    "isTranslated": true,
+    "originalDefault": "IBAN"
   },
   "n9T2Oy": {
     "defaultMessage": "Wanneer dit is ingeschakeld, dan wordt het afbeeldingsformaat gewijzigd.",
@@ -1483,6 +1640,11 @@
     "defaultMessage": "Indien aangevinkt, dan worden gegevens van kinderen opgehaald en ingesloten.",
     "description": "Tooltip for 'includeChildren' builder field",
     "originalDefault": "Whether to add children information to the component."
+  },
+  "nKLmfd": {
+    "defaultMessage": "Voorgedefinieerd",
+    "description": "Preset components group label",
+    "originalDefault": "Preset"
   },
   "nSRkSW": {
     "defaultMessage": "Grootte",
@@ -1515,6 +1677,11 @@
     "defaultMessage": "Minimaal aantal aangevinkte opties (bijv. 1)",
     "description": "Placeholder for 'validate.minSelectedCount' builder field",
     "originalDefault": "Minimum selected checkboxes (e.g. 1)"
+  },
+  "oHr4Nz": {
+    "defaultMessage": "Kinderen",
+    "description": "Children component type label",
+    "originalDefault": "Children"
   },
   "oWJX5K": {
     "defaultMessage": "Suffix (bijv. m²)",
@@ -1607,6 +1774,11 @@
     "isTranslated": true,
     "originalDefault": "Postcode"
   },
+  "rZy0zu": {
+    "defaultMessage": "Datum",
+    "description": "Date component type label",
+    "originalDefault": "Date"
+  },
   "rkJLBr": {
     "defaultMessage": "'Groep toevoegen'-tekst",
     "description": "Label for 'addAnother' builder field",
@@ -1653,6 +1825,11 @@
     "description": "Map 'overlays' configuration: label for tile layer",
     "originalDefault": "Tile layer"
   },
+  "t5vd9s": {
+    "defaultMessage": "Tijd",
+    "description": "Time component type label",
+    "originalDefault": "Time"
+  },
   "tU1UVF": {
     "defaultMessage": "De minimale tijd die gekozen kan worden.",
     "description": "Tooltip for 'validate.minTime' builder field",
@@ -1693,6 +1870,12 @@
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
   },
+  "uXkEQJ": {
+    "defaultMessage": "Radio",
+    "description": "Radio component type label",
+    "isTranslated": true,
+    "originalDefault": "Radio"
+  },
   "unjdIB": {
     "defaultMessage": "Verberg de koptekst en de lijn boven de veldengroep in het formulier.",
     "description": "Tooltip for 'hideHeader' builder field",
@@ -1723,10 +1906,20 @@
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
+  "wBLfLz": {
+    "defaultMessage": "Handtekening",
+    "description": "Signature component type label",
+    "originalDefault": "Signature"
+  },
   "wJ7Yha": {
     "defaultMessage": "Kaartinstellingen",
     "description": "Component edit form tab title for 'Map settings' tab",
     "originalDefault": "Map settings"
+  },
+  "wLPbi4": {
+    "defaultMessage": "E-mail",
+    "description": "Email component type label",
+    "originalDefault": "Email"
   },
   "wOq8Pb": {
     "defaultMessage": "Vertaling voor het label van de optie met waarde \"{value}\"",
@@ -1783,6 +1976,11 @@
     "description": "Translations: translation column header",
     "originalDefault": "Translations"
   },
+  "yPD9g1": {
+    "defaultMessage": "Keuzelijst",
+    "description": "Select component type label",
+    "originalDefault": "Select"
+  },
   "yQUV3M": {
     "defaultMessage": "RSIN van de organisatie die document registreert in de Documenten API. Indien leeg, dan worden algemene instellingen gebruikt.",
     "description": "Tooltip for 'registration.bronorganisatie' builder field",
@@ -1797,6 +1995,11 @@
     "defaultMessage": "Selecteer een databron voor de keuzeopties.",
     "description": "Tooltip for 'openForms.dataSrc' builder field",
     "originalDefault": "How to specify the available options."
+  },
+  "yr8cz5": {
+    "defaultMessage": "Selectievakje",
+    "description": "Checkbox component type label",
+    "originalDefault": "Checkbox"
   },
   "yrz/oC": {
     "defaultMessage": "Kolombreedte, de waarde moet tussen 1 en 12 liggen.",
