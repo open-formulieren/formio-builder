@@ -1,5 +1,12 @@
 # Changes
 
+## 0.50.1 (2026-04-15)
+
+Bugfix release.
+
+- Fixed ESM imports for downstream projects.
+- Fixed JSON-editor mocks on non-Linux systems.
+
 ## 0.50.0 (2026-04-10)
 
 Feature release.
