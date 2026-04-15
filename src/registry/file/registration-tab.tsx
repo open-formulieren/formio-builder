@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import {Select, TextField} from '@/components/formio';
 import {BuilderContext, DocumentTypeOption, SelectOption} from '@/context';

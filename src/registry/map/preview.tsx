@@ -12,7 +12,7 @@ import {
   useMap,
 } from 'react-leaflet';
 import {EditControl} from 'react-leaflet-draw';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import Loader from '@/components/builder/loader';
 import {Component, Description} from '@/components/formio';

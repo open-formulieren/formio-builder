@@ -1,7 +1,7 @@
 import {FieldArray, type FieldArrayRenderProps, useField, useFormikContext} from 'formik';
 import {useContext, useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import Loader from '@/components/builder/loader';
 import {Component, Panel, Select, TextField} from '@/components/formio';

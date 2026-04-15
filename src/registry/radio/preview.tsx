@@ -1,7 +1,7 @@
 import {RadioComponentSchema} from '@open-formulieren/types';
 import {useContext} from 'react';
 import {useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
 import {transformItems} from '@/components/builder/values/reference-lists/utils';

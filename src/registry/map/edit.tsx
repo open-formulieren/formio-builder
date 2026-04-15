@@ -2,7 +2,7 @@ import {MapComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import useAsync from 'react-use/esm/useAsync';
+import {useAsync} from 'react-use';
 
 import {
   BuilderTabs,
