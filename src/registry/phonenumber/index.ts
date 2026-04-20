@@ -9,6 +9,6 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: {panel: Preview},
+  preview: {panel: Preview, designer: Preview},
   defaultValue: '',
 } satisfies RegistryEntry<PhoneNumberComponentSchema>;

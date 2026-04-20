@@ -11,6 +11,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: PanelPreview,
+    // @TODO add designer preview
   },
   defaultValue: undefined, // a fieldset component does not hold a value itself
 } satisfies RegistryEntry<FieldsetComponentSchema>;
