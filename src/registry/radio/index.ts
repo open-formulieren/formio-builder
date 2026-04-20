@@ -9,7 +9,7 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: {panel: Preview},
+  preview: {panel: Preview, designer: Preview},
   // default empty value for Formik - this ignores any manually configured options!
   defaultValue: '',
 } satisfies RegistryEntry<RadioComponentSchema>;

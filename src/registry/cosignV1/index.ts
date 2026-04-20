@@ -9,7 +9,7 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: {panel: Preview},
+  preview: {panel: Preview, designer: Preview},
   // component does not have a submission value but acts as a marker
   defaultValue: undefined,
 } satisfies RegistryEntry<CosignV1ComponentSchema>;
