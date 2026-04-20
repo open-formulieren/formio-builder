@@ -11,6 +11,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: PanelPreview,
+    // @TODO add designer preview
   },
   defaultValue: [],
 } satisfies RegistryEntry<EditGridComponentSchema>;
