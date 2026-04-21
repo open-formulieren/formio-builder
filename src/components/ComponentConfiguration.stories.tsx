@@ -12,6 +12,7 @@ import selectEvent from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import type {FormType} from '@/context';
+import type {BuilderInfo} from '@/registry/types';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -24,7 +25,6 @@ import {
 import type {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
-import type {BuilderInfo} from './ComponentEditForm';
 import type {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import type {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import type {ValidatorOption} from './builder/validate/validator-select';
@@ -122,7 +122,7 @@ interface TemplateArgs {
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
-  builderInfo: BuilderInfo;
+  builderInfo: BuilderInfo<AnyComponentSchema>;
   formType: FormType;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;

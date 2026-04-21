@@ -1,5 +1,5 @@
 import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
-import type {IntlShape} from 'react-intl';
+import type {IntlShape, MessageDescriptor} from 'react-intl';
 import {z} from 'zod';
 
 import type {BuilderContextType} from '@/context';
@@ -58,12 +58,30 @@ export interface Previews {
   designer?: React.FC<ComponentPreviewProps> | null;
 }
 
+export interface FormDesigner {
+  /**
+   * The label used in the form designer.
+   */
+  label: MessageDescriptor;
+}
+
+export interface BuilderInfo<S extends AnyComponentSchema> {
+  title: string;
+  group?: string;
+  icon: string;
+  documentation?: string;
+  schema: S;
+  weight?: number;
+}
+
 type DefaultValueOf<S> = S extends {defaultValue?: infer D} ? D : never;
 
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
   preview: Previews;
+  formDesigner: FormDesigner;
+  builderInfo: BuilderInfo<S>;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
