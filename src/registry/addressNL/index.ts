@@ -1,5 +1,6 @@
 import {AddressNLComponentSchema} from '@open-formulieren/types';
 
+import {COMPONENT_TYPE_LABELS} from '@/registry/messages';
 import {RegistryEntry} from '@/registry/types';
 
 import EditForm from './edit';
@@ -11,6 +12,10 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: Preview,
+  },
+  formDesigner: {
+    icon: 'home',
+    label: intl => intl.formatMessage(COMPONENT_TYPE_LABELS.addressNL),
   },
   defaultValue: {
     postcode: '',

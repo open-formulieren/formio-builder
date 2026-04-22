@@ -1,8 +1,8 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
-import {IntlShape} from 'react-intl';
+import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
-import {BuilderContextType} from '@/context';
+import type {BuilderContextType} from '@/context';
 
 // Edit form
 
@@ -49,12 +49,25 @@ export interface Previews {
   panel: React.FC<ComponentPreviewProps> | null;
 }
 
+export interface FormDesigner {
+  /**
+   * The icon used in the form designer.
+   */
+  icon: string;
+  /**
+   * The label used in the form designer.
+   */
+  label: (intl: IntlShape) => string;
+}
+
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
   preview: Previews;
+  formDesigner: FormDesigner;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
+  isDeprecated?: boolean;
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
   comparisonValue?: React.FC<ComparisonValueProps>;
 }

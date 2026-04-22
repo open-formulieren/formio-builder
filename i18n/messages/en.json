@@ -64,6 +64,11 @@
     "description": "Tooltip postcode field validation panel",
     "originalDefault": "Validation for the postcode field"
   },
+  "0O+VL8": {
+    "defaultMessage": "Number",
+    "description": "Number component type label",
+    "originalDefault": "Number"
+  },
   "0OP7ho": {
     "defaultMessage": "Receives confirmation email",
     "description": "Label for 'confirmationRecipient' builder field",
@@ -169,6 +174,11 @@
     "description": "Label for 'customClass' builder field",
     "originalDefault": "CSS class"
   },
+  "3tz37g": {
+    "defaultMessage": "Selectboxes",
+    "description": "Selectboxes component type label",
+    "originalDefault": "Selectboxes"
+  },
   "4/cCvG": {
     "defaultMessage": "Location",
     "description": "Component edit form tab title for 'Location' tab",
@@ -184,6 +194,11 @@
     "description": "Invalid postcode format validation error",
     "originalDefault": "{field} must be a valid postcode."
   },
+  "4D1HCF": {
+    "defaultMessage": "Map",
+    "description": "Map component type label",
+    "originalDefault": "Map"
+  },
   "4DkoO5": {
     "defaultMessage": "Days",
     "description": "Label for 'delta.days' in relative delta date constraint validation",
@@ -198,6 +213,11 @@
     "defaultMessage": "Drag or <browse>select</browse> files to upload.",
     "description": "file component: drag/select files to upload text",
     "originalDefault": "Drag or <browse>select</browse> files to upload."
+  },
+  "4xtxl1": {
+    "defaultMessage": "AddressNL",
+    "description": "AddressNL component type label",
+    "originalDefault": "AddressNL"
   },
   "5/jkH9": {
     "defaultMessage": "Specify a file size less than or equal to the server upload limit.",
@@ -238,6 +258,11 @@
     "defaultMessage": "Maximum time",
     "description": "Label for 'validate.maxTime' builder field",
     "originalDefault": "Maximum time"
+  },
+  "6/3Dta": {
+    "defaultMessage": "BSN",
+    "description": "BSN component type label",
+    "originalDefault": "BSN"
   },
   "68Aey7": {
     "defaultMessage": "When this is checked, Open Forms automatically updates the customer profile when a digital address is added.",
@@ -334,6 +359,11 @@
     "description": "Label for child's date of birth",
     "originalDefault": "Date of birth"
   },
+  "9W0yX/": {
+    "defaultMessage": "File upload",
+    "description": "File component type label",
+    "originalDefault": "File upload"
+  },
   "9XqFGF": {
     "defaultMessage": "Open Forms should update customer data after submission",
     "description": "Label for 'shouldUpdateCustomerData' builder field",
@@ -414,6 +444,11 @@
     "description": "Tooltip for 'validate.minSelectedCount' builder field",
     "originalDefault": "If specified, the user must check at least this many options."
   },
+  "Bfda2A": {
+    "defaultMessage": "Co-sign",
+    "description": "Cosign v2 component type label",
+    "originalDefault": "Co-sign"
+  },
   "BvRBef": {
     "defaultMessage": "Decimal places",
     "description": "Label for 'decimalLimit' builder field",
@@ -464,6 +499,11 @@
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
   },
+  "DDeDij": {
+    "defaultMessage": "Phone number",
+    "description": "PhoneNumber component type label",
+    "originalDefault": "Phone number"
+  },
   "DEetjI": {
     "defaultMessage": "Street name",
     "description": "Label for addressNL streetName read only result",
@@ -509,6 +549,11 @@
     "description": "Label for 'allowNegative' builder field",
     "originalDefault": "Allow negative values"
   },
+  "E8UptU": {
+    "defaultMessage": "Partners",
+    "description": "Partners component type label",
+    "originalDefault": "Partners"
+  },
   "EacF3m": {
     "defaultMessage": "Registration attribute",
     "description": "Label for 'registration.attribute' builder field",
@@ -549,10 +594,20 @@
     "description": "Label for the 'columns' builder field",
     "originalDefault": "Column sizes"
   },
+  "G+capl": {
+    "defaultMessage": "Profile",
+    "description": "CustomerProfile component type label",
+    "originalDefault": "Profile"
+  },
   "GDWp6v": {
     "defaultMessage": "Value in whole numbers, between {minZoom} and {maxZoom}.",
     "description": "Description for 'defaultZoom' builder field",
     "originalDefault": "Value in whole numbers, between {minZoom} and {maxZoom}."
+  },
+  "GHg1V/": {
+    "defaultMessage": "Currency",
+    "description": "Currency component type label",
+    "originalDefault": "Currency"
   },
   "Gjhh/5": {
     "defaultMessage": "Available drawing shapes",
@@ -669,6 +724,11 @@
     "description": "Label for 'initialCenter.lng' builder field",
     "originalDefault": "Longitude"
   },
+  "M/Akft": {
+    "defaultMessage": "Search component(s)",
+    "description": "Components list search input accessible label",
+    "originalDefault": "Search component(s)"
+  },
   "M2+MHj": {
     "defaultMessage": "Affixes",
     "description": "Label for partner's affixes",
@@ -678,6 +738,16 @@
     "defaultMessage": "Disable adding or removing groups",
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
+  },
+  "N25aMd": {
+    "defaultMessage": "Family members",
+    "description": "NpFamilyMembers component type label",
+    "originalDefault": "Family members"
+  },
+  "N46vH2": {
+    "defaultMessage": "Search component(s)",
+    "description": "Components list search input placeholder",
+    "originalDefault": "Search component(s)"
   },
   "NdaqDN": {
     "defaultMessage": "Option description (<option></option>)",
@@ -703,6 +773,11 @@
     "defaultMessage": "Prefix",
     "description": "Component translations 'prefix' property label",
     "originalDefault": "Prefix"
+  },
+  "OlHdZq": {
+    "defaultMessage": "License plate",
+    "description": "Licenseplate component type label",
+    "originalDefault": "License plate"
   },
   "OlPsaw": {
     "defaultMessage": "Error code",
@@ -769,6 +844,11 @@
     "description": "Option add/remove table header/label",
     "originalDefault": "Add/remove"
   },
+  "RulJnf": {
+    "defaultMessage": "Deprecated",
+    "description": "Deprecated component label",
+    "originalDefault": "Deprecated"
+  },
   "RxmRzd": {
     "defaultMessage": "When this is checked, the filetypes configured in the global settings will be used.",
     "description": "Tooltip for 'useConfigFiletypes' builder field",
@@ -813,6 +893,16 @@
     "defaultMessage": "Minimum date",
     "description": "Date field 'minDate' fixed value label",
     "originalDefault": "Minimum date"
+  },
+  "TINs+z": {
+    "defaultMessage": "Columns",
+    "description": "Columns component type label",
+    "originalDefault": "Columns"
+  },
+  "TW+VxA": {
+    "defaultMessage": "Textarea",
+    "description": "Textarea component type label",
+    "originalDefault": "Textarea"
   },
   "Tpg442": {
     "defaultMessage": "Value in decimal degrees, between 3 and 7.5.",
@@ -979,10 +1069,20 @@
     "description": "file component preview: file name column header",
     "originalDefault": "File name"
   },
+  "XiLc3z": {
+    "defaultMessage": "Co-sign",
+    "description": "CoSign v1 component type label",
+    "originalDefault": "Co-sign"
+  },
   "Xj1uvL": {
     "defaultMessage": "Remove",
     "description": "Columns table: accessible label to remove a column",
     "originalDefault": "Remove"
+  },
+  "XsjoZd": {
+    "defaultMessage": "Date & time",
+    "description": "Datetime component type label",
+    "originalDefault": "Date & time"
   },
   "Y1qhnH": {
     "defaultMessage": "Digital address types a user can be contacted on.",
@@ -1008,6 +1108,11 @@
     "defaultMessage": "Advanced",
     "description": "Component edit form tab title for 'Advanced' tab",
     "originalDefault": "Advanced"
+  },
+  "YKpmvq": {
+    "defaultMessage": "Postcode",
+    "description": "Postcode component type label",
+    "originalDefault": "Postcode"
   },
   "YObTjL": {
     "defaultMessage": "The code of the table from which the options will be retrieved.",
@@ -1063,6 +1168,11 @@
     "defaultMessage": "Derive street name",
     "description": "Label for 'deriveStreetName' builder field",
     "originalDefault": "Derive street name"
+  },
+  "auqTVZ": {
+    "defaultMessage": "Soft required errors",
+    "description": "SoftRequiredErrors component type label",
+    "originalDefault": "Soft required errors"
   },
   "axygDt": {
     "defaultMessage": "Warning",
@@ -1179,6 +1289,11 @@
     "description": "Tooltip for 'enableSelection' builder field",
     "originalDefault": "Allow the selection of specific children that are retrieved from the external source for further processing."
   },
+  "e7ovEV": {
+    "defaultMessage": "Repeating group",
+    "description": "Editgrid component type label",
+    "originalDefault": "Repeating group"
+  },
   "eAmrdi": {
     "defaultMessage": "Loading...",
     "description": "Loading content text",
@@ -1218,6 +1333,11 @@
     "defaultMessage": "Email-address in this field will receive the confirmation email.",
     "description": "Tooltip for 'confirmationRecipient' builder field",
     "originalDefault": "Email-address in this field will receive the confirmation email."
+  },
+  "f9CqUS": {
+    "defaultMessage": "Layout",
+    "description": "Layout components group label",
+    "originalDefault": "Layout"
   },
   "fB4Vug": {
     "defaultMessage": "Background",
@@ -1279,6 +1399,11 @@
     "description": "Label for address postcode",
     "originalDefault": "Postcode"
   },
+  "gv32/3": {
+    "defaultMessage": "Content",
+    "description": "Content component type label",
+    "originalDefault": "Content"
+  },
   "h0B9Fr": {
     "defaultMessage": "The property name must only contain alphanumeric characters, underscores, dots and dashes and should not be ended by dash or dot.",
     "description": "Form builder 'key' pattern validation error",
@@ -1309,10 +1434,20 @@
     "description": "Label for partner's BSN",
     "originalDefault": "BSN"
   },
+  "hoyuwO": {
+    "defaultMessage": "Form fields",
+    "description": "Regular components group label",
+    "originalDefault": "Form fields"
+  },
   "hwsnj9": {
     "defaultMessage": "Mobile",
     "description": "Columns 'mobile' preview viewport",
     "originalDefault": "Mobile"
+  },
+  "i+nuPv": {
+    "defaultMessage": "Fieldset",
+    "description": "Fieldset component type label",
+    "originalDefault": "Fieldset"
   },
   "i/P7yw": {
     "defaultMessage": "You must select a table.",
@@ -1358,6 +1493,11 @@
     "defaultMessage": "This will make the text area auto expand its height as the user is typing into the area.",
     "description": "Tooltip for 'AutoExpand' builder field",
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
+  },
+  "jXYcaq": {
+    "defaultMessage": "Textfield",
+    "description": "Textfield component type label",
+    "originalDefault": "Textfield"
   },
   "jnHPfU": {
     "defaultMessage": "Latitude",
@@ -1449,10 +1589,20 @@
     "description": "Label for address housenumber",
     "originalDefault": "House number"
   },
+  "mgtQm3": {
+    "defaultMessage": "Special fields",
+    "description": "Special components group label",
+    "originalDefault": "Special fields"
+  },
   "mpzdoT": {
     "defaultMessage": "The sum of column sizes may not exceed 12.",
     "description": "Validation error for column sizes exceeding total value of 12",
     "originalDefault": "The sum of column sizes may not exceed 12."
+  },
+  "n8XxZg": {
+    "defaultMessage": "IBAN",
+    "description": "IBAN component type label",
+    "originalDefault": "IBAN"
   },
   "n9T2Oy": {
     "defaultMessage": "When this is checked, any uploaded image(s) will be resized.",
@@ -1463,6 +1613,11 @@
     "defaultMessage": "Whether to add children information to the component.",
     "description": "Tooltip for 'includeChildren' builder field",
     "originalDefault": "Whether to add children information to the component."
+  },
+  "nKLmfd": {
+    "defaultMessage": "Preset",
+    "description": "Preset components group label",
+    "originalDefault": "Preset"
   },
   "nSRkSW": {
     "defaultMessage": "Size",
@@ -1493,6 +1648,11 @@
     "defaultMessage": "Minimum selected checkboxes (e.g. 1)",
     "description": "Placeholder for 'validate.minSelectedCount' builder field",
     "originalDefault": "Minimum selected checkboxes (e.g. 1)"
+  },
+  "oHr4Nz": {
+    "defaultMessage": "Children",
+    "description": "Children component type label",
+    "originalDefault": "Children"
   },
   "oWJX5K": {
     "defaultMessage": "Suffix (e.g. m²)",
@@ -1584,6 +1744,11 @@
     "description": "Title of postcode field validation panel",
     "originalDefault": "Postcode"
   },
+  "rZy0zu": {
+    "defaultMessage": "Date",
+    "description": "Date component type label",
+    "originalDefault": "Date"
+  },
   "rkJLBr": {
     "defaultMessage": "'Add another' text",
     "description": "Label for 'addAnother' builder field",
@@ -1629,6 +1794,11 @@
     "description": "Map 'overlays' configuration: label for tile layer",
     "originalDefault": "Tile layer"
   },
+  "t5vd9s": {
+    "defaultMessage": "Time",
+    "description": "Time component type label",
+    "originalDefault": "Time"
+  },
   "tU1UVF": {
     "defaultMessage": "The earliest possible value that can be entered.",
     "description": "Tooltip for 'validate.minTime' builder field",
@@ -1669,6 +1839,11 @@
     "description": "Label for content component CSS class 'error' option",
     "originalDefault": "Error"
   },
+  "uXkEQJ": {
+    "defaultMessage": "Radio",
+    "description": "Radio component type label",
+    "originalDefault": "Radio"
+  },
   "unjdIB": {
     "defaultMessage": "Do not display the configured label and top line as the header in the fieldset.",
     "description": "Tooltip for 'hideHeader' builder field",
@@ -1699,10 +1874,20 @@
     "description": "Tooltip for 'prefill.attribute' builder field",
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
+  "wBLfLz": {
+    "defaultMessage": "Signature",
+    "description": "Signature component type label",
+    "originalDefault": "Signature"
+  },
   "wJ7Yha": {
     "defaultMessage": "Map settings",
     "description": "Component edit form tab title for 'Map settings' tab",
     "originalDefault": "Map settings"
+  },
+  "wLPbi4": {
+    "defaultMessage": "Email",
+    "description": "Email component type label",
+    "originalDefault": "Email"
   },
   "wOq8Pb": {
     "defaultMessage": "Translation for option with value \"{value}\"",
@@ -1759,6 +1944,11 @@
     "description": "Translations: translation column header",
     "originalDefault": "Translations"
   },
+  "yPD9g1": {
+    "defaultMessage": "Select",
+    "description": "Select component type label",
+    "originalDefault": "Select"
+  },
   "yQUV3M": {
     "defaultMessage": "RSIN of the organization which creates the ENKELVOUDIGINFORMATIEOBJECT.",
     "description": "Tooltip for 'registration.bronorganisatie' builder field",
@@ -1773,6 +1963,11 @@
     "defaultMessage": "How to specify the available options.",
     "description": "Tooltip for 'openForms.dataSrc' builder field",
     "originalDefault": "How to specify the available options."
+  },
+  "yr8cz5": {
+    "defaultMessage": "Checkbox",
+    "description": "Checkbox component type label",
+    "originalDefault": "Checkbox"
   },
   "yrz/oC": {
     "defaultMessage": "Column size, value between 1 and 12.",
