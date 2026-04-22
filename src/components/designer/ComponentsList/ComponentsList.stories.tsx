@@ -261,7 +261,8 @@ export const Default: Story = {
       expect(specialFieldsList.getByRole('button', {name: 'Family members'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Signature'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Co-sign'})).toBeVisible();
-      expect(specialFieldsList.getByRole('button', {name: 'Co-sign (Old)'})).toBeVisible();
+      // There should be a co-sign component with a 'deprecated' marker.
+      expect(specialFieldsList.getByRole('button', {name: 'Co-sign Deprecated'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Map'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Repeating group'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'AddressNL'})).toBeVisible();

@@ -26,6 +26,7 @@ export default {
       ...EditForm.defaultValues,
     },
   },
+  isDeprecated: true,
   // component does not have a submission value but acts as a marker
   defaultValue: undefined,
 } satisfies RegistryEntry<CosignV1ComponentSchema>;

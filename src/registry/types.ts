@@ -82,6 +82,7 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   preview: Previews;
   formDesigner: FormDesigner;
   builderInfo: BuilderInfo<S>;
+  isDeprecated?: boolean;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
