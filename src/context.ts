@@ -65,7 +65,7 @@ Form mode.
 
 This is the type of the form.
 */
-export type FormType = 'regular' | 'appointment' | 'single_page';
+export type FormType = 'regular' | 'appointment' | 'single_step';
 
 /*
   Builder
