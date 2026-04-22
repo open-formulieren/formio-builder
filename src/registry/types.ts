@@ -67,6 +67,7 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   formDesigner: FormDesigner;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
+  isDeprecated?: boolean;
   defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
   comparisonValue?: React.FC<ComparisonValueProps>;
 }

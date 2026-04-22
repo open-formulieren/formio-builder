@@ -57,12 +57,13 @@ export const RegularComponentsGroup: React.FC<RegularComponentsGroupProps> = ({
     () =>
       group.components.map<GroupComponentDefinition>(componentType => {
         const component = components[componentType];
-        const {formDesigner} = getRegistryEntry(component.builderInfo.schema);
+        const {formDesigner, isDeprecated} = getRegistryEntry(component.builderInfo.schema);
 
         return {
           key: componentType,
           label: formDesigner.label(intl),
           icon: formDesigner.icon,
+          isDeprecated: isDeprecated,
           schema: component.builderInfo.schema,
         };
       }),
@@ -109,6 +110,7 @@ type GroupComponentDefinition = {
   key: string;
   label: string;
   icon: string;
+  isDeprecated?: boolean;
   // The schema can be either a regular component schema or a custom-defined preset component schema.
   schema: AnyComponentSchema | ExtendedComponentSchema;
 };
@@ -180,6 +182,15 @@ const GenericComponentsGroup: React.FC<GenericComponentsGroupProps> = ({
               >
                 <i className={clsx('fa', `fa-${component.icon}`, 'mr-2')} aria-hidden="true" />
                 {component.label}
+                {component.isDeprecated && (
+                  <span className="badge badge-warning ml-2">
+                    <i className="fa fa-triangle-exclamation" aria-hidden="true" />{' '}
+                    <FormattedMessage
+                      description="Deprecated component label"
+                      defaultMessage="Deprecated"
+                    />
+                  </span>
+                )}
               </button>
             </li>
           ))}

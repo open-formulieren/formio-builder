@@ -15,6 +15,7 @@ export default {
     icon: 'id-card-o',
     label: intl => intl.formatMessage(COMPONENT_TYPE_LABELS.coSign),
   },
+  isDeprecated: true,
   // component does not have a submission value but acts as a marker
   defaultValue: undefined,
 } satisfies RegistryEntry<CosignV1ComponentSchema>;
