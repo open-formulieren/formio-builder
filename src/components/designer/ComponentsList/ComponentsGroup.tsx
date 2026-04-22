@@ -57,6 +57,15 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
               >
                 <i className={clsx('fa', `fa-${component.icon}`, 'mr-2')} aria-hidden="true" />
                 {component.label}
+                {component.isDeprecated && (
+                  <span className="badge badge-warning ml-2">
+                    <i className="fa fa-triangle-exclamation" aria-hidden="true" />{' '}
+                    <FormattedMessage
+                      description="Deprecated component label"
+                      defaultMessage="Deprecated"
+                    />
+                  </span>
+                )}
               </button>
             </li>
           ))}
