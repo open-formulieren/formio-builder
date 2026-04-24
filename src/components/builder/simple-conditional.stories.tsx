@@ -1,3 +1,4 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
@@ -6,18 +7,20 @@ import {withFormik} from '@/sb-decorators';
 import SimpleConditional from './simple-conditional';
 
 const COMPONENT_TREE = [
-  {type: 'textfield', key: 'text1', label: 'Textfield 1'},
-  {type: 'currency', key: 'currency1', label: 'Currency 1'},
+  {id: 'text1', type: 'textfield', key: 'text1', label: 'Textfield 1'},
+  {id: 'currency1', type: 'currency', key: 'currency1', label: 'Currency 1', currency: 'EUR'},
   {
+    id: 'fieldset1',
     type: 'fieldset',
     key: 'fieldset1',
     label: 'Fieldset 1',
+    hideHeader: false,
     components: [
-      {type: 'textfield', key: 'text2', label: 'Textfield 2'},
-      {type: 'number', key: 'nested.number1', label: 'Nested number'},
+      {id: 'text2', type: 'textfield', key: 'text2', label: 'Textfield 2'},
+      {id: 'nested.number1', type: 'number', key: 'nested.number1', label: 'Nested number'},
     ],
   },
-];
+] satisfies AnyComponentSchema[];
 
 export default {
   title: 'Formio/Builder/SimpleConditional',
