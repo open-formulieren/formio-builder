@@ -8,7 +8,7 @@ import {BuilderContext} from '@/context';
 
 import Select from '../../formio/select';
 
-const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_page']);
+const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_step']);
 
 export interface ValidatorOption {
   id: string;

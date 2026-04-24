@@ -29,7 +29,7 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 
-const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_page']);
+const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_step']);
 
 /**
  * Form to configure a Formio 'email' type component.

@@ -131,7 +131,7 @@ export const Textfield: Story = {
       tooltip: 'An example for the tooltip',
       description: 'A description for the textfield component',
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Text field',
       group: 'basic',
@@ -161,7 +161,7 @@ export const Email: Story = {
       schema: {placeholder: ''},
       weight: 10,
     },
-    formType: 'single_page',
+    formType: 'single_step',
   },
 };
 
@@ -186,7 +186,7 @@ export const NumberField: Story = {
       schema: {placeholder: ''},
       weight: 30,
     },
-    formType: 'single_page',
+    formType: 'single_step',
   },
 };
 
@@ -206,7 +206,7 @@ export const Textarea: Story = {
         required: false,
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Textarea',
       group: 'basic',
@@ -236,7 +236,7 @@ export const DateField: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'single_page',
+    formType: 'single_step',
   },
 };
 
@@ -261,7 +261,7 @@ export const DateTimeField: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'single_page',
+    formType: 'single_step',
   },
 };
 
@@ -278,7 +278,7 @@ export const TimeField: Story = {
         required: false,
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Time Field',
       icon: 'clock-o',
@@ -303,7 +303,7 @@ export const Postcode: Story = {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Postcode',
       icon: 'home',
@@ -324,7 +324,7 @@ export const PhoneNumber: Story = {
       key: 'phoneNumber',
       label: 'A phone number field for a single page form',
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Phone number',
       icon: 'phone-square',
@@ -351,7 +351,7 @@ export const SelectBoxes: Story = {
       values: [],
       defaultValue: {},
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Select Boxes',
       icon: 'plus-square',
@@ -379,7 +379,7 @@ export const Radio: Story = {
       },
       values: [],
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Radio',
       icon: 'dot-circle-o',
@@ -407,7 +407,7 @@ export const Select: Story = {
       data: {values: []},
       defaultValue: '',
     } satisfies SelectComponentSchema,
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Select',
       icon: 'th-list',
@@ -431,7 +431,7 @@ export const BSN: Story = {
         required: false,
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'BSN Field',
       icon: 'id-card-o',
@@ -457,7 +457,7 @@ export const Checkbox: Story = {
       },
       defaultValue: false,
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Checkbox',
       icon: 'check-square',
@@ -482,7 +482,7 @@ export const Currency: Story = {
         required: false,
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Currency',
       icon: 'eur',
@@ -529,7 +529,7 @@ export const Iban: Story = {
         required: false,
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'IBAN Field',
       icon: 'wallet',
@@ -554,7 +554,7 @@ export const LicensePlate: Story = {
         pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
       },
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'licenseplate Field',
       icon: 'wallet',
@@ -587,7 +587,7 @@ export const AddressNL: Story = {
       weight: 10,
       schema: {},
     },
-    formType: 'single_page',
+    formType: 'single_step',
   },
 };
 
@@ -601,7 +601,7 @@ export const LeafletMap: Story = {
       key: 'map',
       label: 'A map for a single page form',
     },
-    formType: 'single_page',
+    formType: 'single_step',
     builderInfo: {
       title: 'Map',
       icon: 'map',
