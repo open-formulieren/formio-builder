@@ -1,5 +1,13 @@
 # Changes
 
+## 0.50.2 (2026-04-24)
+
+Patch release.
+
+- [`OF#6106`][OF#6106] Updated form type names according to backend changes.
+
+[OF#6106]: https://github.com/open-formulieren/open-forms/issues/6106
+
 ## 0.50.1 (2026-04-15)
 
 Bugfix release.
