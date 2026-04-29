@@ -22,21 +22,21 @@ const Preview: React.FC<ComponentPreviewProps<EditGridComponentSchema>> = ({comp
       tooltip={tooltip}
     >
       <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
-        <ContentPlaceholder>
+        <ContentPlaceholder variant="builder">
           <FormattedMessage
             description="Edit grid preview content description"
             defaultMessage="{groupLabel} 1"
             values={{groupLabel}}
           />
         </ContentPlaceholder>
-        <ContentPlaceholder>
+        <ContentPlaceholder variant="builder">
           <FormattedMessage
             description="Edit grid preview content description"
             defaultMessage="{groupLabel} 2"
             values={{groupLabel}}
           />
         </ContentPlaceholder>
-        <ContentPlaceholder>
+        <ContentPlaceholder variant="builder">
           <FormattedMessage
             description="Edit grid preview content description"
             defaultMessage="{groupLabel} 3"
