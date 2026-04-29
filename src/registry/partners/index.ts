@@ -10,6 +10,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: Preview,
+    designer: Preview,
   },
   defaultValue: [],
 } satisfies RegistryEntry<PartnersComponentSchema>;

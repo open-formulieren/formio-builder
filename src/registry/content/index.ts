@@ -9,6 +9,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: null,
+    // @TODO add designer preview
   },
   defaultValue: undefined, // a content component does not hold a value itself
 } satisfies RegistryEntry<ContentComponentSchema>;

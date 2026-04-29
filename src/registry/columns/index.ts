@@ -12,6 +12,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: PanelPreview,
+    // @TODO add designer preview
   },
   defaultValue: undefined, // a column component does not hold a value itself
 } satisfies RegistryEntry<ColumnsComponentSchema>;
