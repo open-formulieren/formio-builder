@@ -1,4 +1,12 @@
+// For the top-level drag container, we don't add padding or border
+.designer-preview-container > .offb-drag-container {
+  padding: 0;
+  border: none;
+}
+
 .designer-preview {
+  margin-block-end: 15px;
+
   &--hidden {
     background: repeating-linear-gradient(
       -45deg,
