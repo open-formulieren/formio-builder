@@ -8,6 +8,7 @@ import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
+import {DraggableItem, DropZone} from './dragDrop';
 
 export interface ComponentsPreviewProps {
   components: AnyComponentSchema[];
@@ -40,11 +41,15 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}
         throw new Error("Can't submit preview form");
       }}
     >
-      <div>
+      <div className="offb-designer-preview-container">
         <ErrorBoundary>
-          {components.map(component => (
-            <ComponentPreview key={component.key} component={component} />
-          ))}
+          <DropZone>
+            {components.map(component => (
+              <DraggableItem key={component.key}>
+                <ComponentPreview component={component} />
+              </DraggableItem>
+            ))}
+          </DropZone>
         </ErrorBoundary>
       </div>
     </Formik>
@@ -55,7 +60,7 @@ interface ComponentPreviewProps {
   component: AnyComponentSchema;
 }
 
-const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
+export const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const intl = useIntl();
   const entry = getRegistryEntry(component);
   const {
