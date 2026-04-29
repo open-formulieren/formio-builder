@@ -3122,16 +3122,44 @@ export const Columns: Story = {
   },
 };
 
-// @TODO implement preview component and play
+// @TODO add play
 export const FieldSet: Story = {
-  name: 'FieldSet',
+  name: 'Fieldset: Empty',
   args: {
     components: [
       {
-        id: 'wekruya',
-        type: 'fieldset',
+        id: 'fieldset',
         key: 'fieldset',
-        label: 'A fieldset preview',
+        type: 'fieldset',
+        label: 'Fieldset preview',
+        tooltip: 'Fieldset tooltip',
+        hideHeader: false,
+        components: [],
+      } satisfies FieldsetComponentSchema,
+      {
+        id: 'fieldsetHidden',
+        key: 'fieldsetHidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
+        tooltip: 'Fieldset tooltip',
+        hidden: true,
+        hideHeader: false,
+        components: [],
+      } satisfies FieldsetComponentSchema,
+    ],
+  },
+};
+
+// @TODO add play
+export const FieldSetWithComponents: Story = {
+  name: 'Fieldset: With components',
+  args: {
+    components: [
+      {
+        id: 'fieldset',
+        key: 'fieldset',
+        type: 'fieldset',
+        label: 'Fieldset preview',
         hideHeader: false,
         components: [
           {
@@ -3139,23 +3167,123 @@ export const FieldSet: Story = {
             key: 'someTextField',
             type: 'textfield',
             label: 'Nested text field',
-          },
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField1',
+            key: 'someTextField1',
+            type: 'textfield',
+            label: 'Another nested text field',
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField2',
+            key: 'someTextField2',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+            hidden: true,
+          } satisfies TextFieldComponentSchema,
         ],
       } satisfies FieldsetComponentSchema,
       {
         id: 'wekruyaHidden',
-        type: 'fieldset',
         key: 'fieldsetHidden',
-        label: 'A fieldset preview hidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
         hidden: true,
         hideHeader: false,
         components: [
           {
-            id: 'someTextField',
-            key: 'someTextField',
+            id: 'someTextField3',
+            key: 'someTextField3',
             type: 'textfield',
             label: 'Nested text field',
-          },
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField4',
+            key: 'someTextField4',
+            type: 'textfield',
+            label: 'Another nested text field',
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField5',
+            key: 'someTextField5',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+            hidden: true,
+          } satisfies TextFieldComponentSchema,
+        ],
+      } satisfies FieldsetComponentSchema,
+    ],
+  },
+};
+
+// @TODO add play
+export const FieldSetWithNestedComponents: Story = {
+  name: 'Fieldset: With nested components',
+  args: {
+    components: [
+      {
+        id: 'fieldset',
+        key: 'fieldset',
+        type: 'fieldset',
+        label: 'Fieldset preview',
+        hideHeader: false,
+        components: [
+          {
+            id: 'fieldset1',
+            key: 'fieldset1',
+            type: 'fieldset',
+            label: 'Nested fieldset preview',
+            hideHeader: false,
+            components: [
+              {
+                id: 'someTextField',
+                key: 'someTextField',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                description: 'Description of nested text field',
+                tooltip: 'Tooltip of nested text field',
+              } satisfies TextFieldComponentSchema,
+            ],
+          } satisfies FieldsetComponentSchema,
+        ],
+      } satisfies FieldsetComponentSchema,
+      {
+        id: 'fieldsetHidden',
+        key: 'fieldsetHidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
+        hidden: true,
+        hideHeader: false,
+        components: [
+          {
+            id: 'fieldsetHidden1',
+            key: 'fieldsetHidden1',
+            type: 'fieldset',
+            label: 'Nested fieldset preview',
+            hideHeader: false,
+            components: [
+              {
+                id: 'someTextField1',
+                key: 'someTextField1',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                description: 'Description of nested text field',
+                tooltip: 'Tooltip of nested text field',
+              } satisfies TextFieldComponentSchema,
+            ],
+          } satisfies FieldsetComponentSchema,
         ],
       } satisfies FieldsetComponentSchema,
     ],
