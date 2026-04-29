@@ -13,7 +13,7 @@ const Preview: React.FC<ComponentPreviewProps<FieldsetComponentSchema>> = ({comp
   const {label, hideHeader, tooltip} = component;
   return (
     <FieldSet label={hideHeader ? undefined : label} tooltip={tooltip}>
-      <ContentPlaceholder>
+      <ContentPlaceholder variant="builder">
         <FormattedMessage
           description="Fieldset preview content description"
           defaultMessage="Fieldset content"
