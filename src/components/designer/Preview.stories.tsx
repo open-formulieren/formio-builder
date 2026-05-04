@@ -3067,6 +3067,15 @@ export const SoftRequiredErrors: Story = {
       } satisfies SoftRequiredErrorsComponentSchema,
     ],
   },
+  play: ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const preview = canvas.getByTestId('input-softRequiredErrorsPreview');
+    expect(preview).toBeVisible();
+
+    // The content of the soft required errors preview matches the component configuration
+    expect(preview).toContainHTML((args.components[0] as SoftRequiredErrorsComponentSchema).html);
+  },
 };
 
 // @TODO implement preview component and play
