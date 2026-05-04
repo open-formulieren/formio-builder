@@ -1,4 +1,4 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {Formik} from 'formik';
 import {useIntl} from 'react-intl';
@@ -15,7 +15,7 @@ export interface ComponentsPreviewProps {
 }
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
-  const initialValues = components.reduce<Record<string, any>>((carry, component) => {
+  const initialValues = components.reduce<Record<string, JSONValue | {}>>((carry, component) => {
     const entry = getRegistryEntry(component);
     const {key} = component;
     const {defaultValue = ''} = entry;
