@@ -27,7 +27,15 @@ export default {
       icon: 'calendar',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'date',
+        key: 'date',
+        label: 'A date field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

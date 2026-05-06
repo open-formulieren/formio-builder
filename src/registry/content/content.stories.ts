@@ -37,7 +37,22 @@ export default {
       icon: 'html5',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'content',
+        key: 'content',
+        html: '',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Nederlandse inhoud</p>',
+            },
+            en: {
+              html: '<p>English content</p>',
+            },
+          },
+        },
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

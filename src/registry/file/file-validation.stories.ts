@@ -35,7 +35,22 @@ export default {
       icon: '',
       group: 'file',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'kiweljhr',
+        storage: 'url',
+        url: '',
+        type: 'file',
+        options: {withCredentials: true},
+        webcam: false,
+        key: 'file',
+        label: 'A file upload',
+        file: {
+          name: '',
+          type: [],
+          allowedTypesLabels: [],
+        },
+        filePattern: '',
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

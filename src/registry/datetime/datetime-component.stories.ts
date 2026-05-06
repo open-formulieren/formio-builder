@@ -29,7 +29,15 @@ export default {
       icon: 'calendar-plus',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'datetime',
+        key: 'datetime',
+        label: 'A datetime field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;
