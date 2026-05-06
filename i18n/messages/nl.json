@@ -744,6 +744,11 @@
     "isTranslated": true,
     "originalDefault": "Prefix"
   },
+  "Ob4chA": {
+    "defaultMessage": "The location derivation options have known usability problems and do not work when used inside repeating groups. We recommend that you use the 'AddressNL' component instead. Existing forms will continue to function as before, but this feature will not receive further improvements.",
+    "description": "Text field location support notice",
+    "originalDefault": "The location derivation options have known usability problems and do not work when used inside repeating groups. We recommend that you use the 'AddressNL' component instead. Existing forms will continue to function as before, but this feature will not receive further improvements."
+  },
   "OlPsaw": {
     "defaultMessage": "Foutcode",
     "description": "Label for translation of validation error code",
