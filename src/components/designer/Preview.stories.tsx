@@ -3456,7 +3456,6 @@ export const Partners: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const Children: Story = {
   name: 'Children',
   args: {
@@ -3465,7 +3464,7 @@ export const Children: Story = {
         id: 'wekruya',
         type: 'children',
         key: 'children',
-        label: 'A children preview',
+        label: 'Children preview',
         enableSelection: false,
         tooltip: 'An example for the tooltip',
         description: 'A preview of the children Formio component',
@@ -3474,13 +3473,115 @@ export const Children: Story = {
         id: 'wekruyaHidden',
         type: 'children',
         key: 'childrenHidden',
-        label: 'A children preview hidden',
+        label: 'Children preview hidden',
         enableSelection: false,
         tooltip: 'An example for the tooltip',
         description: 'A preview of the children Formio component in hidden state',
         hidden: true,
       } satisfies ChildrenComponentSchema,
     ],
+  },
+  play: ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    expect(canvas.getByText('Children preview')).toBeVisible();
+    expect(canvas.getByText('A preview of the children Formio component')).toBeVisible();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Children preview hidden');
+    expect(hiddenInputLabel).toBeVisible();
+    expect(
+      canvas.getByText('A preview of the children Formio component in hidden state')
+    ).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputWrapper).toBeInTheDocument();
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+  },
+};
+
+export const ChildrenWithSelection: Story = {
+  name: 'Children: with selection',
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'children',
+        key: 'childrenSelectionPreview',
+        label: 'Children preview with selection',
+        enableSelection: true,
+        tooltip: 'An example for the tooltip',
+        description: 'A preview of the children Formio component',
+      } satisfies ChildrenComponentSchema,
+      {
+        id: 'wekruyaHidden',
+        type: 'children',
+        key: 'childrenSelectionPreviewHidden',
+        label: 'Children preview hidden with selection',
+        enableSelection: true,
+        tooltip: 'An example for the tooltip',
+        description: 'A preview of the children Formio component in hidden state',
+        hidden: true,
+      } satisfies ChildrenComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    const inputLabel = canvas.getByText('Children preview with selection');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+
+    expect(inputLabel).toBeVisible();
+    expect(canvas.getByText('A preview of the children Formio component')).toBeVisible();
+    expect(inputWrapper).toBeVisible();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Children preview hidden with selection');
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+
+    expect(hiddenInputLabel).toBeVisible();
+    expect(
+      canvas.getByText('A preview of the children Formio component in hidden state')
+    ).toBeVisible();
+    expect(hiddenInputWrapper).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    await step('Interaction with children table', async () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      // The preview should have two checkboxes
+      const checkboxes = wrapper.getAllByRole('checkbox');
+      expect(checkboxes).toHaveLength(2);
+
+      // Both checkboxes are un-checked
+      expect(checkboxes[0]).not.toBeChecked();
+      expect(checkboxes[1]).not.toBeChecked();
+
+      // Interaction with the checkboxes is possible
+      await userEvent.click(checkboxes[0]);
+      expect(checkboxes[0]).toBeChecked();
+    });
+
+    await step('Interaction with hidden licenseplate multiple', async () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      // The preview should have two checkboxes
+      const checkboxes = wrapper.getAllByRole('checkbox');
+      expect(checkboxes).toHaveLength(2);
+
+      // Both checkboxes are un-checked
+      expect(checkboxes[0]).not.toBeChecked();
+      expect(checkboxes[1]).not.toBeChecked();
+
+      // Interaction with the checkboxes is possible
+      await userEvent.click(checkboxes[0]);
+      expect(checkboxes[0]).toBeChecked();
+    });
   },
 };
 
