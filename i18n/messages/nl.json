@@ -829,6 +829,11 @@
     "isTranslated": true,
     "originalDefault": "Prefix"
   },
+  "Ob4chA": {
+    "defaultMessage": "Er zijn bekende gebruiksproblemen bij de opties om locaties af te leiden en ze werken helemaal niet in herhalende groepen. We raden aan om in plaats hiervan het 'AddressNL'-component te gebruiken. Bestaande formulieren blijven werken zoals voorheen, maar deze functionaliteit hier wordt niet meer doorontwikkeld.",
+    "description": "Text field location support notice",
+    "originalDefault": "The location derivation options have known usability problems and do not work when used inside repeating groups. We recommend that you use the 'AddressNL' component instead. Existing forms will continue to function as before, but this feature will not receive further improvements."
+  },
   "OlHdZq": {
     "defaultMessage": "License plate",
     "description": "Licenseplate component type label",
