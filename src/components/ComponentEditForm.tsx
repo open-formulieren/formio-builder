@@ -1,6 +1,5 @@
 import {AnyComponentSchema} from '@open-formulieren/types';
 import {Form, Formik} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import {cloneDeep, merge} from 'lodash';
 import {PropsWithChildren, useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -16,7 +15,7 @@ export interface BuilderInfo {
   group: string;
   icon: string;
   documentation?: string;
-  schema: ExtendedComponentSchema;
+  schema: AnyComponentSchema;
   weight: number;
 }
 

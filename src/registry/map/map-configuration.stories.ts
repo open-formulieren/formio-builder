@@ -33,7 +33,12 @@ export default {
       icon: 'map',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'map',
+        key: 'map',
+        label: 'A map',
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

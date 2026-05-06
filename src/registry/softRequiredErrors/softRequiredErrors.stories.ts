@@ -37,7 +37,22 @@ export default {
       icon: 'html5',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'softRequiredErrors',
+        key: 'softRequiredErrors',
+        html: '',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+            },
+            en: {
+              html: '<p>Not all fields have been filled.</p>\n{{ missingFields }}',
+            },
+          },
+        },
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

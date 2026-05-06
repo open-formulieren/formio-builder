@@ -23,7 +23,15 @@ export default {
       title: 'Text field',
       group: 'basic',
       icon: 'terminal',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textfield',
+        key: 'textfield',
+        label: 'A text field',
+        validate: {
+          required: false,
+        },
+      },
       weight: 0,
     },
   },

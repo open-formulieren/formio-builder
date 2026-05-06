@@ -28,7 +28,7 @@ test('Option values and labels are required fields', async () => {
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm
@@ -71,7 +71,7 @@ test('There is always at least one option', async () => {
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm
@@ -112,7 +112,7 @@ test('All translations are optional', async () => {
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm

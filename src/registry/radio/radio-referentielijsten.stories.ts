@@ -33,7 +33,18 @@ export default {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'radio',
+        key: 'radio',
+        label: 'A radio field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [{value: '', label: ''}],
+        defaultValue: '',
+      } satisfies RadioComponentSchema,
     },
   },
 } as Meta<typeof ComponentEditForm>;

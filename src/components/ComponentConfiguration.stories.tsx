@@ -98,7 +98,12 @@ export default {
       title: 'Text field',
       group: 'basic',
       icon: 'terminal',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'A text field',
+      },
       weight: 0,
     },
   },
@@ -205,7 +210,10 @@ export const UnsupportedComponent: Story = {
       title: 'invalid',
       group: 'basic',
       icon: 'terminal',
-      schema: {placeholder: ''},
+      schema: {
+        // @ts-expect-error
+        type: 'an-invalid-type',
+      },
       weight: 0,
     },
   },
@@ -295,7 +303,15 @@ export const Email: Story = {
       title: 'Email',
       group: 'basic',
       icon: 'at',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'ikrnvhe',
+        type: 'email',
+        key: 'email',
+        label: 'An email field',
+        validate: {
+          required: false,
+        },
+      },
       weight: 10,
     },
   },
@@ -395,7 +411,15 @@ export const NumberField: Story = {
       title: 'Number',
       group: 'basic',
       icon: 'hashtag',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'number',
+        key: 'number',
+        label: 'A number field',
+        validate: {
+          required: false,
+        },
+      },
       weight: 30,
     },
   },
@@ -520,7 +544,17 @@ export const Textarea: Story = {
       title: 'Textarea',
       group: 'basic',
       icon: 'hashtag',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textarea',
+        key: 'textarea',
+        label: 'A textarea field',
+        autoExpand: false,
+        rows: 3,
+        validate: {
+          required: false,
+        },
+      },
       weight: 30,
     },
   },
@@ -594,7 +628,15 @@ export const DateField: Story = {
       icon: 'calendar',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'date',
+        key: 'date',
+        label: 'A date field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -676,7 +718,15 @@ export const DateTimeField: Story = {
       icon: 'calendar-plus',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'datetime',
+        key: 'datetime',
+        label: 'A datetime field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -757,7 +807,15 @@ export const TimeField: Story = {
       icon: 'clock-o',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'time',
+        key: 'time',
+        label: 'A time field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -839,7 +897,16 @@ export const Postcode: Story = {
       icon: 'home',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'postcode',
+        key: 'postcode',
+        label: 'A postcode field',
+        validate: {
+          required: false,
+          pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
+        },
+      },
     },
   },
 
@@ -916,7 +983,12 @@ export const PhoneNumber: Story = {
       icon: 'phone-square',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'phoneNumber',
+        key: 'phoneNumber',
+        label: 'A phone number field',
+      },
     },
   },
 
@@ -993,7 +1065,18 @@ export const FileUpload: Story = {
       icon: '',
       group: 'file',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'kiweljhr',
+        type: 'file',
+        key: 'file',
+        label: 'A file upload',
+        file: {
+          name: '',
+          type: [],
+          allowedTypesLabels: [],
+        },
+        filePattern: '',
+      },
     },
   },
 
@@ -1138,7 +1221,18 @@ export const SelectBoxes: Story = {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'selectboxes',
+        key: 'selectboxes',
+        label: 'A selectboxes field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [],
+        defaultValue: {},
+      },
     },
   },
 
@@ -1369,7 +1463,18 @@ export const Radio: Story = {
       icon: 'dot-circle-o',
       group: 'basic',
       weight: 100,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'radio',
+        key: 'radio',
+        label: 'A radio field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [],
+        defaultValue: '',
+      },
     },
   },
 
@@ -1589,7 +1694,18 @@ export const Select: Story = {
       icon: 'th-list',
       group: 'basic',
       weight: 70,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'select',
+        key: 'select',
+        label: 'A select field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        data: {values: []},
+        defaultValue: '',
+      },
     },
   },
 
@@ -1831,7 +1947,15 @@ export const BSN: Story = {
       icon: 'id-card-o',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'bsn',
+        key: 'bsn',
+        label: 'A BSN field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -1924,7 +2048,16 @@ export const Checkbox: Story = {
       icon: 'check-square',
       group: 'basic',
       weight: 50,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'checkbox',
+        key: 'checkbox',
+        label: 'A checkbox field',
+        validate: {
+          required: false,
+        },
+        defaultValue: false,
+      },
     },
   },
 
@@ -2048,7 +2181,16 @@ export const Currency: Story = {
       icon: 'eur',
       group: 'basic',
       weight: 70,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'currency',
+        currency: 'EUR',
+        key: 'currency',
+        label: 'A currency field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -2123,7 +2265,15 @@ export const Iban: Story = {
       icon: 'wallet',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'iban',
+        key: 'iban',
+        label: 'An IBAN field',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 
@@ -2203,7 +2353,16 @@ export const LicensePlate: Story = {
       icon: 'wallet',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'licenseplate',
+        key: 'licenseplate',
+        label: 'A license plate field',
+        validate: {
+          required: false,
+          pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
+        },
+      },
     },
   },
 
@@ -2281,7 +2440,14 @@ export const NpFamilyMembers: Story = {
       icon: 'users',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'npFamilyMembers',
+        key: 'npFamilyMembers',
+        label: 'An npFamilyMembers field',
+        includeChildren: true,
+        includePartners: false,
+      },
     },
   },
 
@@ -2374,7 +2540,30 @@ export const AddressNL: Story = {
       icon: 'home',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'addressNL',
+        key: 'address',
+        label: 'A Dutch address',
+        validate: {
+          required: false,
+        },
+        deriveAddress: false,
+        layout: 'singleColumn',
+        openForms: {
+          translations: {},
+          components: {
+            postcode: {
+              validate: {pattern: '1015 [a-zA-Z]{2}'},
+              translatedErrors: {},
+            },
+            city: {
+              validate: {pattern: 'Amsterdam'},
+              translatedErrors: {},
+            },
+          },
+        },
+      },
     },
   },
 
@@ -2433,7 +2622,12 @@ export const Columns: Story = {
       icon: 'columns',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'columns',
+        key: 'columns',
+        columns: [],
+      },
     },
   },
 
@@ -2487,7 +2681,14 @@ export const FieldSet: Story = {
       icon: 'th-large',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'fieldset',
+        key: 'fieldset',
+        label: 'A field set',
+        hideHeader: false,
+        components: [],
+      },
     },
   },
 
@@ -2561,7 +2762,16 @@ export const EditGrid: Story = {
       icon: 'repeat',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'editgrid',
+        key: 'editgrid',
+        label: 'A repeating group',
+        hideLabel: false,
+        groupLabel: 'Group',
+        disableAddingRemovingRows: false,
+        components: [],
+      },
     },
   },
 
@@ -2639,7 +2849,13 @@ export const CosignV1: Story = {
       icon: 'id-card-o',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'coSign',
+        key: 'coSign',
+        label: 'A cosign v1',
+        authPlugin: 'digid',
+      },
     },
   },
 
@@ -2689,7 +2905,12 @@ export const CosignV2: Story = {
       icon: 'pen-nib',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'cosign',
+        key: 'cosign',
+        label: 'A cosign v2',
+      },
     },
   },
 
@@ -2758,7 +2979,13 @@ export const Signature: Story = {
       icon: 'pencil',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'signature',
+        key: 'signature',
+        label: 'A signature',
+        footer: '',
+      },
     },
   },
 
@@ -2823,7 +3050,12 @@ export const LeafletMap: Story = {
       icon: 'map',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'map',
+        key: 'map',
+        label: 'A map',
+      },
     },
   },
 
@@ -2887,7 +3119,12 @@ export const Content: Story = {
       icon: 'html5',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'content',
+        key: 'content',
+        html: '<p>Hello storybook</p>',
+      },
     },
   },
 
@@ -2961,7 +3198,19 @@ export const SoftRequiredErrors: Story = {
       icon: 'html5',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'softRequiredErrors',
+        key: 'softRequiredErrors',
+        html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+        openForms: {
+          translations: {
+            nl: {
+              html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
+            },
+          },
+        },
+      },
     },
   },
 
@@ -3098,7 +3347,16 @@ export const Profile: Story = {
       icon: 'comments',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'customerProfile',
+        key: 'profile',
+        label: 'Profile',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the Profile component',
+        shouldUpdateCustomerData: true,
+        digitalAddressTypes: ['email', 'phoneNumber'],
+      },
     },
   },
 

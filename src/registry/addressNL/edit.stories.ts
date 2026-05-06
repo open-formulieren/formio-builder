@@ -21,7 +21,12 @@ export default {
       icon: 'home',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'addressNL',
+        key: 'address',
+        label: 'An address field',
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

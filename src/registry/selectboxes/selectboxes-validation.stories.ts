@@ -32,7 +32,18 @@ export default {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'selectboxes',
+        key: 'selectboxes',
+        label: 'A selectboxes field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [{value: '', label: ''}],
+        defaultValue: {},
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;
@@ -124,7 +135,23 @@ export const MinAndMaxSelectedInitialValues: Story = {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'selectboxes',
+        key: 'selectboxes',
+        label: 'A selectboxes field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [
+          {label: 'Option 1', value: '1'},
+          {label: 'Option 2', value: '2'},
+          {label: 'Option 3', value: '3'},
+          {label: 'Option 4', value: '4'},
+        ],
+        defaultValue: {},
+      },
     },
   },
   play: async ({canvasElement, step}) => {
