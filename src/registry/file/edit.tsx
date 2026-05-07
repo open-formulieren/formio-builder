@@ -177,10 +177,18 @@ EditForm.defaultValues = {
   maxNumberOfFiles: null,
   // registration tab
   registration: {
-    informatieobjecttype: '',
     bronorganisatie: '',
     docVertrouwelijkheidaanduiding: '',
     titel: '',
+    documentType: {
+      catalogue: {
+        domain: '',
+        rsin: '',
+      },
+      description: '',
+    },
+    // deprecated
+    informatieobjecttype: '',
   },
 };
 
