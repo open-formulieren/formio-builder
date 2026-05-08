@@ -1,5 +1,14 @@
 # Changes
 
+## 0.51.0 (2026-05-08)
+
+Feature release.
+
+- [`#283`][#283] Added new configuration fields for document type configuration in the `file`
+  registration options.
+
+[#283]: https://github.com/open-formulieren/formio-builder/issues/283
+
 ## 0.50.2 (2026-04-24)
 
 Patch release.
