@@ -50,7 +50,7 @@
     "originalDefault": "Set the text of the 'Save row' button."
   },
   "/xFb1n": {
-    "defaultMessage": "The 'domein' attribute for the Catalogus resource in the Catalogi API.",
+    "defaultMessage": "Het 'domein'-attribuut van de Catalogus-entiteit in de Catalogi API.",
     "description": "Tooltip for 'registration.documentType.catalogue.domain' builder field",
     "originalDefault": "The 'domein' attribute for the Catalogus resource in the Catalogi API."
   },
@@ -106,7 +106,7 @@
     "originalDefault": "Regular Expression Pattern"
   },
   "1andg+": {
-    "defaultMessage": "The 'rsin' attribute for the Catalogus resource in the Catalogi API.",
+    "defaultMessage": "Het 'rsin'-attribuut van de catalogus-entiteit in de Catalogi API.",
     "description": "Tooltip for 'registration.documentType.catalogue.rsin' builder field",
     "originalDefault": "The 'rsin' attribute for the Catalogus resource in the Catalogi API."
   },
@@ -126,7 +126,7 @@
     "originalDefault": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account."
   },
   "2KY/BC": {
-    "defaultMessage": "Specify the document type to use for the file uploads when sending them to the Documents API. The direct URL references are replaced with references to the catalogue and document type description.",
+    "defaultMessage": "Selecteer het documenttype voor de geüploade bestanden wanneer ze in de Documenten API opgeslagen worden. De directe URL-referenties zullen vervangen worden met refernties naar de catalogus en omschrijving van het informatieobjecttype.",
     "description": "Tooltip file component registration: document type configuration",
     "originalDefault": "Specify the document type to use for the file uploads when sending them to the Documents API. The direct URL references are replaced with references to the catalogue and document type description."
   },
@@ -187,7 +187,7 @@
     "originalDefault": "CSS class"
   },
   "3leP68": {
-    "defaultMessage": "Document type",
+    "defaultMessage": "Documenttype",
     "description": "File component registration: document type configuration",
     "originalDefault": "Document type"
   },
@@ -489,7 +489,7 @@
     "originalDefault": "Custom error messages for this component and their translations"
   },
   "DE7U4q": {
-    "defaultMessage": "The RSIN must consist of 9 numbers.",
+    "defaultMessage": "Het RSIN moet uit 9 getallen bestaan.",
     "description": "File registration validation error for invalid RSIN pattern",
     "originalDefault": "The RSIN must consist of 9 numbers."
   },
@@ -632,7 +632,7 @@
     "originalDefault": "The component type <code>{type}</code> is unknown. We can only display the JSON definition."
   },
   "J1zTQz": {
-    "defaultMessage": "Document type description",
+    "defaultMessage": "Informatieobjecttype-omschrijving",
     "description": "Label for 'registration.documentType.description' builder field",
     "originalDefault": "Document type description"
   },
@@ -1134,7 +1134,7 @@
     "originalDefault": "Whether to show this value in the submission summary"
   },
   "bh2ky5": {
-    "defaultMessage": "Catalogus domain",
+    "defaultMessage": "Catalogusdomein",
     "description": "Label for 'registration.documentType.catalogue.domain' builder field",
     "originalDefault": "Catalogus domain"
   },
@@ -1144,7 +1144,7 @@
     "originalDefault": "Provide the key of a static, component, or user defined variable."
   },
   "c770ER": {
-    "defaultMessage": "Catalogus RSIN",
+    "defaultMessage": "Catalogus-RSIN",
     "description": "Label for 'registration.documentType.catalogue.rsin' builder field",
     "originalDefault": "Catalogus RSIN"
   },
@@ -1174,7 +1174,7 @@
     "originalDefault": "Number of days. Empty values are ignored."
   },
   "ce0Nz4": {
-    "defaultMessage": "You must specify a document type description when a catalogue is configured.",
+    "defaultMessage": "Je moet een omschrijving opgeven wanneer je een catalogus instelt.",
     "description": "File registration validation error for missing document type description",
     "originalDefault": "You must specify a document type description when a catalogue is configured."
   },
@@ -1352,7 +1352,7 @@
     "originalDefault": "Fieldset content"
   },
   "hAc9vQ": {
-    "defaultMessage": "Legacy",
+    "defaultMessage": "Veroudered",
     "description": "File component registration: legacy configuration",
     "originalDefault": "Legacy"
   },
@@ -1577,7 +1577,7 @@
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
   "oiB6Kg": {
-    "defaultMessage": "The direct URL configuration is scheduled for removal. If both the URL and the fields above are configured, the new configuration is used.",
+    "defaultMessage": "De instelling met een URL naar een informatieobjecttype(versie) zal verwijderd worden. Indien je een URL én de bovenstaande velden ingesteld hebt, dan worden de nieuwe instellingen gebruikt.",
     "description": "Tooltip file component registration: legacy document type configuration",
     "originalDefault": "The direct URL configuration is scheduled for removal. If both the URL and the fields above are configured, the new configuration is used."
   },
@@ -1729,7 +1729,7 @@
     "originalDefault": "Derive address"
   },
   "tzAOAm": {
-    "defaultMessage": "You must specify both domain and RSIN.",
+    "defaultMessage": "Je moet het domein en RSIN beide instellen.",
     "description": "File registration validation error for missing catalogue rsin or RSIN",
     "originalDefault": "You must specify both domain and RSIN."
   },
@@ -1749,7 +1749,7 @@
     "originalDefault": "Translations"
   },
   "uOtaSP": {
-    "defaultMessage": "The document type will be retrieved in the specified catalogue. The version will automatically be selected based on the submission completion timestamp. When used with ZGW APIs, ensure that the document type belongs to the specified case type!",
+    "defaultMessage": "Het documenttype wordt opgehaald binnen de ingestelde catalogus. De juiste versie van het documenttype wordt automatisch bepaald aan de hand van de inzendingsdatum. Wanneer je via de ZGW-API's registreert, let er dan op dat het documenttype bij het ingestelde zaaktype hoort!",
     "description": "Tooltip for 'registration.documentType.description' builder field",
     "originalDefault": "The document type will be retrieved in the specified catalogue. The version will automatically be selected based on the submission completion timestamp. When used with ZGW APIs, ensure that the document type belongs to the specified case type!"
   },
@@ -1814,7 +1814,7 @@
     "originalDefault": "The regular expression pattern test that the field value must pass before the form can be submitted."
   },
   "wqhr+0": {
-    "defaultMessage": "Specify either none or all three of the fields below to configure the document type to use.",
+    "defaultMessage": "Vul alle drie de onderstaande velden velden in om een documenttype in te stellen, of laat ze allemaal leeg om niets in te stellen.",
     "description": "Description for 'registration.documentType' configuration",
     "originalDefault": "Specify either none or all three of the fields below to configure the document type to use."
   },
@@ -1829,7 +1829,7 @@
     "originalDefault": "Email"
   },
   "xUt2+r": {
-    "defaultMessage": "You must specify both domain and RSIN.",
+    "defaultMessage": "Je moet het domein en RSIN beide instellen.",
     "description": "File registration validation error for missing catalogue domain or RSIN",
     "originalDefault": "You must specify both domain and RSIN."
   },
