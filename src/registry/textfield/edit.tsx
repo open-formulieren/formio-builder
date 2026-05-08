@@ -137,6 +137,17 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
 
       {/* Location tab */}
       <TabPanel>
+        <div className="alert alert-info">
+          <FormattedMessage
+            description="Text field location support notice"
+            defaultMessage={`The location derivation options have known usability
+            problems and do not work when used inside repeating groups. We recommend
+            that you use the 'AddressNL' component instead. Existing forms will continue
+            to function as before, but this feature will not receive further improvements.
+          `}
+          />
+        </div>
+
         <Panel
           title={
             <FormattedMessage
