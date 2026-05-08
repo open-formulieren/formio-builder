@@ -49,6 +49,11 @@
     "description": "Tooltip for 'saveRow' builder field",
     "originalDefault": "Set the text of the 'Save row' button."
   },
+  "/xFb1n": {
+    "defaultMessage": "The 'domein' attribute for the Catalogus resource in the Catalogi API.",
+    "description": "Tooltip for 'registration.documentType.catalogue.domain' builder field",
+    "originalDefault": "The 'domein' attribute for the Catalogus resource in the Catalogi API."
+  },
   "/yDnA3": {
     "defaultMessage": "Geef aan of deze waarde in de (bevestigings-)PDF moet getoond worden. Deze PDF wordt vaak ook als bijlage meegestuurd tijdens de registratie.",
     "description": "Tooltip for 'showInPDF' builder field",
@@ -100,6 +105,11 @@
     "description": "Label for 'validate.pattern' builder field",
     "originalDefault": "Regular Expression Pattern"
   },
+  "1andg+": {
+    "defaultMessage": "The 'rsin' attribute for the Catalogus resource in the Catalogi API.",
+    "description": "Tooltip for 'registration.documentType.catalogue.rsin' builder field",
+    "originalDefault": "The 'rsin' attribute for the Catalogus resource in the Catalogi API."
+  },
   "1pC7IP": {
     "defaultMessage": "Specifieer een template voor de naam van het/de geüploade bestand(en). <code>'{{ fileName }}'</code> bevat de oorspronkelijke bestandsnaam.",
     "description": "Tooltip for 'file.name' builder field",
@@ -114,6 +124,11 @@
     "defaultMessage": "Wanneer e-mailadresverificatie ingeschakeld is, dan moet de gebruiker hun e-mail verifiëren voor ze het formulier kunnen insturen. Dit bewijst dat het e-mailadres geldig is en dat de gebruiker er toegang tot heeft.",
     "description": "Tooltip for email 'openForms.requireVerification' builder field",
     "originalDefault": "When email address verification is enabled, the user must verify their email address before they can submit the form. This proves the email address exists and that they have access to the account."
+  },
+  "2KY/BC": {
+    "defaultMessage": "Specify the document type to use for the file uploads when sending them to the Documents API. The direct URL references are replaced with references to the catalogue and document type description.",
+    "description": "Tooltip file component registration: document type configuration",
+    "originalDefault": "Specify the document type to use for the file uploads when sending them to the Documents API. The direct URL references are replaced with references to the catalogue and document type description."
   },
   "2Lg8Vc": {
     "defaultMessage": "Verberg veldengroepheader",
@@ -170,6 +185,11 @@
     "description": "Label for 'customClass' builder field",
     "isTranslated": true,
     "originalDefault": "CSS class"
+  },
+  "3leP68": {
+    "defaultMessage": "Document type",
+    "description": "File component registration: document type configuration",
+    "originalDefault": "Document type"
   },
   "4/cCvG": {
     "defaultMessage": "Locatie",
@@ -468,6 +488,11 @@
     "description": "Tooltip validation error translations panel",
     "originalDefault": "Custom error messages for this component and their translations"
   },
+  "DE7U4q": {
+    "defaultMessage": "The RSIN must consist of 9 numbers.",
+    "description": "File registration validation error for invalid RSIN pattern",
+    "originalDefault": "The RSIN must consist of 9 numbers."
+  },
   "DEetjI": {
     "defaultMessage": "Straatnaam",
     "description": "Label for addressNL streetName read only result",
@@ -605,6 +630,11 @@
     "defaultMessage": "Het componenttype <code>{type}</code> is niet bekend. We kunnen enkel de JSON-definitie weergeven.",
     "description": "Informational message about unsupported component",
     "originalDefault": "The component type <code>{type}</code> is unknown. We can only display the JSON definition."
+  },
+  "J1zTQz": {
+    "defaultMessage": "Document type description",
+    "description": "Label for 'registration.documentType.description' builder field",
+    "originalDefault": "Document type description"
   },
   "JDYF2q": {
     "defaultMessage": "Gegevens opgevoerd in dit component worden geschoond volgens de privacy-instellingen.",
@@ -1103,10 +1133,20 @@
     "description": "Tooltip for 'showInSummary' builder field",
     "originalDefault": "Whether to show this value in the submission summary"
   },
+  "bh2ky5": {
+    "defaultMessage": "Catalogus domain",
+    "description": "Label for 'registration.documentType.catalogue.domain' builder field",
+    "originalDefault": "Catalogus domain"
+  },
   "bvY9oJ": {
     "defaultMessage": "Geef de sleutel op van een vaste, veld- of zelfgedefinieerde variabele.",
     "description": "Tooltip for 'variable' in relative delta date constraint validation",
     "originalDefault": "Provide the key of a static, component, or user defined variable."
+  },
+  "c770ER": {
+    "defaultMessage": "Catalogus RSIN",
+    "description": "Label for 'registration.documentType.catalogue.rsin' builder field",
+    "originalDefault": "Catalogus RSIN"
   },
   "cAC5kL": {
     "defaultMessage": "Verwijder de waarde van dit veld van de inzending als dit veld verborgen is. Let op: De waarde van dit veld wordt dan ook niet gebruikt in logica regels!",
@@ -1132,6 +1172,11 @@
     "defaultMessage": "Aantal dagen. Lege waarden worden genegeerd.",
     "description": "Tooltip for 'delta.days' in relative delta date constraint validation",
     "originalDefault": "Number of days. Empty values are ignored."
+  },
+  "ce0Nz4": {
+    "defaultMessage": "You must specify a document type description when a catalogue is configured.",
+    "description": "File registration validation error for missing document type description",
+    "originalDefault": "You must specify a document type description when a catalogue is configured."
   },
   "ce1N0I": {
     "defaultMessage": "Plugin",
@@ -1305,6 +1350,11 @@
     "defaultMessage": "Veldengroepinhoud",
     "description": "Fieldset preview content description",
     "originalDefault": "Fieldset content"
+  },
+  "hAc9vQ": {
+    "defaultMessage": "Legacy",
+    "description": "File component registration: legacy configuration",
+    "originalDefault": "Legacy"
   },
   "hEVgKd": {
     "defaultMessage": "Foutmelding voor \"{key}\"",
@@ -1526,6 +1576,11 @@
     "description": "Tooltip for 'useConfigDefaultMapSettings' builder field",
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
+  "oiB6Kg": {
+    "defaultMessage": "The direct URL configuration is scheduled for removal. If both the URL and the fields above are configured, the new configuration is used.",
+    "description": "Tooltip file component registration: legacy document type configuration",
+    "originalDefault": "The direct URL configuration is scheduled for removal. If both the URL and the fields above are configured, the new configuration is used."
+  },
   "osSl3z": {
     "defaultMessage": "Stad",
     "description": "Label for addressNL city read only result",
@@ -1673,6 +1728,11 @@
     "description": "Label for 'DeriveAddress' builder field",
     "originalDefault": "Derive address"
   },
+  "tzAOAm": {
+    "defaultMessage": "You must specify both domain and RSIN.",
+    "description": "File registration validation error for missing catalogue rsin or RSIN",
+    "originalDefault": "You must specify both domain and RSIN."
+  },
   "u5XYQh": {
     "defaultMessage": "Voettekst",
     "description": "Component property 'footer' label",
@@ -1687,6 +1747,11 @@
     "defaultMessage": "Vertalingen",
     "description": "Component edit form tab title for 'Translations' tab",
     "originalDefault": "Translations"
+  },
+  "uOtaSP": {
+    "defaultMessage": "The document type will be retrieved in the specified catalogue. The version will automatically be selected based on the submission completion timestamp. When used with ZGW APIs, ensure that the document type belongs to the specified case type!",
+    "description": "Tooltip for 'registration.documentType.description' builder field",
+    "originalDefault": "The document type will be retrieved in the specified catalogue. The version will automatically be selected based on the submission completion timestamp. When used with ZGW APIs, ensure that the document type belongs to the specified case type!"
   },
   "uVVO4b": {
     "defaultMessage": "Fout",
@@ -1748,6 +1813,11 @@
     "description": "Tooltip for 'validate.pattern' builder field",
     "originalDefault": "The regular expression pattern test that the field value must pass before the form can be submitted."
   },
+  "wqhr+0": {
+    "defaultMessage": "Specify either none or all three of the fields below to configure the document type to use.",
+    "description": "Description for 'registration.documentType' configuration",
+    "originalDefault": "Specify either none or all three of the fields below to configure the document type to use."
+  },
   "xI6md8": {
     "defaultMessage": "Duur bijtellen/aftrekken",
     "description": "Label for 'operator' in relative delta date constraint validation",
@@ -1757,6 +1827,11 @@
     "defaultMessage": "E-mailadres",
     "description": "Label for digital address email",
     "originalDefault": "Email"
+  },
+  "xUt2+r": {
+    "defaultMessage": "You must specify both domain and RSIN.",
+    "description": "File registration validation error for missing catalogue domain or RSIN",
+    "originalDefault": "You must specify both domain and RSIN."
   },
   "xrfkiI": {
     "defaultMessage": "Laag: {overlayName}",

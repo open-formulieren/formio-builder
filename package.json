@@ -109,7 +109,7 @@
     "@formio/vanilla-text-mask": "^5.1.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.2.0",
-    "@open-formulieren/types": "^1.1.0",
+    "@open-formulieren/types": "^1.2.0",
     "ckeditor5": "^47.6.1",
     "clsx": "^1.2.1",
     "dompurify": "^3.3.3",

@@ -68,11 +68,76 @@ const buildFileMaxSizeSchema = (intl: IntlShape, builderContext: BuilderContextT
     });
 };
 
+const buildRegistrationSchema = (intl: IntlShape) =>
+  z.object({
+    documentType: z
+      .object({
+        catalogue: z.object({
+          domain: z.string().optional(),
+          rsin: z.string().optional(),
+        }),
+        description: z.string().optional(),
+      })
+      .optional()
+      .superRefine((documentType, ctx) => {
+        const hasAnyProperty =
+          !!documentType?.description ||
+          !!documentType?.catalogue.domain ||
+          !!documentType?.catalogue.rsin;
+        if (hasAnyProperty) {
+          if (!documentType.description) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: intl.formatMessage({
+                description:
+                  'File registration validation error for missing document type description',
+                defaultMessage:
+                  'You must specify a document type description when a catalogue is configured.',
+              }),
+              path: ['description'],
+            });
+          }
+          if (!documentType?.catalogue.domain) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: intl.formatMessage({
+                description:
+                  'File registration validation error for missing catalogue domain or RSIN',
+                defaultMessage: 'You must specify both domain and RSIN.',
+              }),
+              path: ['catalogue', 'domain'],
+            });
+          }
+          if (!documentType?.catalogue.rsin) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: intl.formatMessage({
+                description:
+                  'File registration validation error for missing catalogue rsin or RSIN',
+                defaultMessage: 'You must specify both domain and RSIN.',
+              }),
+              path: ['catalogue', 'rsin'],
+            });
+          } else if (!/^[0-9]{9}$/.test(documentType.catalogue.rsin)) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: intl.formatMessage({
+                description: 'File registration validation error for invalid RSIN pattern',
+                defaultMessage: 'The RSIN must consist of 9 numbers.',
+              }),
+              path: ['catalogue', 'rsin'],
+            });
+          }
+        }
+      }),
+  });
+
 const buildFileSchema = (intl: IntlShape, builderContext: BuilderContextType) =>
   z.object({
     of: ofSchema.optional(),
     maxNumberOfFiles: z.union([z.null(), z.number().int().positive().optional()]),
     fileMaxSize: buildFileMaxSizeSchema(intl, builderContext).optional(),
+    registration: buildRegistrationSchema(intl).optional(),
   });
 
 const schema: EditSchema = ({intl, builderContext}) => {

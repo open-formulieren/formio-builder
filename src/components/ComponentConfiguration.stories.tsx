@@ -1093,6 +1093,13 @@ export const FileUpload: Story = {
         maxNumberOfFiles: null,
         // registration tab
         registration: {
+          documentType: {
+            catalogue: {
+              domain: '',
+              rsin: '',
+            },
+            description: '',
+          },
           informatieobjecttype: '',
           bronorganisatie: '',
           docVertrouwelijkheidaanduiding: '',

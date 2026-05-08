@@ -34,11 +34,17 @@ export default {
 
 type Story = StoryObj<typeof RegistrationTabFields>;
 
+export const DocumentTypeViaCatalogue: Story = {
+  name: 'Registration tab - document type configuration',
+};
+
 export const DocumentTypes: Story = {
   name: 'Registration tab - document types',
 
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('button', {name: 'Legacy'}));
 
     const documentTypeSelect = canvas.getByLabelText('Information object type');
     documentTypeSelect.focus();

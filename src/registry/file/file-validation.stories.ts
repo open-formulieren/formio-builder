@@ -208,3 +208,30 @@ export const ValidateMaxFileSizeAgainstServerValue: Story = {
     });
   },
 };
+
+export const NewDocumentTypeConfiguration: Story = {
+  name: 'validate catalogue and document type',
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('tab', {name: 'Registration'}));
+
+    const catalogueDomain = canvas.getByLabelText('Catalogus domain');
+    const catalogueRSIN = canvas.getByLabelText('Catalogus RSIN');
+    const description = canvas.getByLabelText('Document type description');
+
+    await userEvent.clear(catalogueDomain);
+    await userEvent.clear(description);
+    await userEvent.type(catalogueRSIN, '12a');
+
+    await userEvent.keyboard('[Tab]');
+    expect(await canvas.findByText('The RSIN must consist of 9 numbers.')).toBeVisible();
+    expect(await canvas.findByText('You must specify both domain and RSIN.')).toBeVisible();
+    expect(
+      await canvas.findByText(
+        'You must specify a document type description when a catalogue is configured.'
+      )
+    ).toBeVisible();
+  },
+};
