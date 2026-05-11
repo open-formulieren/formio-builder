@@ -11,9 +11,6 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  // @TODO add designer preview. Current admin uses a normal preview without interactions
-  // See if we can use the existing Preview component, or if we need to add a
-  // 'without interactions' variant/prop.
-  preview: {panel: Preview},
+  preview: {panel: Preview, designer: Preview},
   defaultValue: undefined,
 } satisfies RegistryEntry<MapComponentSchema>;
