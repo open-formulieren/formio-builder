@@ -3069,7 +3069,6 @@ export const SoftRequiredErrors: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const Columns: Story = {
   name: 'Columns',
   args: {
@@ -3080,18 +3079,13 @@ export const Columns: Story = {
         key: 'columns',
         columns: [
           {
-            size: 4,
+            size: 6,
             sizeMobile: 4,
             components: [],
           },
           {
-            size: 4,
-            sizeMobile: 2,
-            components: [],
-          },
-          {
-            size: 4,
-            sizeMobile: 2,
+            size: 6,
+            sizeMobile: 4,
             components: [],
           },
         ],
@@ -3100,13 +3094,64 @@ export const Columns: Story = {
         id: 'wekruyaHidden',
         type: 'columns',
         key: 'columnsHidden',
+        hidden: true,
         columns: [
           {
-            size: 4,
+            size: 6,
             sizeMobile: 4,
             components: [],
           },
           {
+            size: 6,
+            sizeMobile: 4,
+            components: [],
+          },
+        ],
+      } satisfies ColumnsComponentSchema,
+    ],
+  },
+};
+
+export const ColumnsWithComponents: Story = {
+  name: 'Columns: with components',
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'columns',
+        key: 'columns',
+        columns: [
+          {
+            size: 4,
+            sizeMobile: 4,
+            components: [
+              {
+                type: 'textfield',
+                id: 'textfield',
+                key: 'textfieldPreview',
+                label: 'Textfield preview',
+                description: 'A preview of the textfield Formio component',
+                tooltip: 'A preview of the textfield Formio component',
+                defaultValue: 'Default value',
+                hidden: false,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+              {
+                type: 'textfield',
+                id: 'textfield2',
+                key: 'textfieldPreview2',
+                label: 'Textfield preview',
+                description: 'A preview of the textfield Formio component',
+                tooltip: 'A preview of the textfield Formio component',
+                defaultValue: 'Default value',
+                hidden: false,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+            ],
+          },
+          {
             size: 4,
             sizeMobile: 2,
             components: [],
@@ -3114,7 +3159,81 @@ export const Columns: Story = {
           {
             size: 4,
             sizeMobile: 2,
+            components: [
+              {
+                type: 'textfield',
+                id: 'textfieldHidden',
+                key: 'textfieldPreviewHidden',
+                label: 'Textfield preview hidden',
+                description: 'A preview of the textfield Formio component in hidden state',
+                tooltip: 'A preview of the textfield Formio component in hidden state',
+                defaultValue: 'Default value',
+                hidden: true,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+            ],
+          },
+        ],
+      } satisfies ColumnsComponentSchema,
+      {
+        id: 'wekruyaHidden',
+        type: 'columns',
+        key: 'columnsHidden',
+        hidden: true,
+        columns: [
+          {
+            size: 4,
+            sizeMobile: 4,
+            components: [
+              {
+                type: 'textfield',
+                id: 'textfield',
+                key: 'textfieldPreview',
+                label: 'Textfield preview',
+                description: 'A preview of the textfield Formio component',
+                tooltip: 'A preview of the textfield Formio component',
+                defaultValue: 'Default value',
+                hidden: false,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+              {
+                type: 'textfield',
+                id: 'textfield2',
+                key: 'textfieldPreview2',
+                label: 'Textfield preview',
+                description: 'A preview of the textfield Formio component',
+                tooltip: 'A preview of the textfield Formio component',
+                defaultValue: 'Default value',
+                hidden: false,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+            ],
+          },
+          {
+            size: 4,
+            sizeMobile: 2,
             components: [],
+          },
+          {
+            size: 4,
+            sizeMobile: 2,
+            components: [
+              {
+                type: 'textfield',
+                id: 'textfieldHidden',
+                key: 'textfieldPreviewHidden',
+                label: 'Textfield preview hidden',
+                description: 'A preview of the textfield Formio component in hidden state',
+                tooltip: 'A preview of the textfield Formio component in hidden state',
+                defaultValue: 'Default value',
+                hidden: true,
+                placeholder: 'Sample placeholder',
+                showCharCount: true,
+              } satisfies TextFieldComponentSchema,
+            ],
           },
         ],
       } satisfies ColumnsComponentSchema,
