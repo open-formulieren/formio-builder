@@ -3033,7 +3033,6 @@ export const LicensePlateMultiple: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const Content: Story = {
   name: 'Content',
   args: {
@@ -3042,15 +3041,45 @@ export const Content: Story = {
         id: 'content',
         type: 'content',
         key: 'content',
-        html: 'Custom content',
+        html: `
+          <p>Custom content</p>
+          <ul><li>List item 1</li><li>List item 2</li></ul>
+          <ol><li>List item 1</li><li>List item 2</li></ol>
+          <p><b>Bold</b> <s>or</s> and <i>italic</i> <u>content</u>, it can even contain <a href="#">links</a></p>
+`,
       } satisfies ContentComponentSchema,
       {
         id: 'contentHidden',
         type: 'content',
         key: 'contentHidden',
-        html: 'Custom content in hidden state',
+        html: `
+          <p>Custom hidden content</p>
+          <ul><li>List item 1</li><li>List item 2</li></ul>
+          <ol><li>List item 1</li><li>List item 2</li></ol>
+          <p><b>Bold</b> <s>or</s> and <i>italic</i> <u>content</u>, it can even contain <a href="#">links</a></p>
+`,
+        hidden: true,
       } satisfies ContentComponentSchema,
     ],
+  },
+  play: ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const regularContent = canvas.getByTestId('input-content');
+    const hiddenContent = canvas.getByTestId('input-contentHidden');
+    expect(regularContent).toBeVisible();
+    expect(hiddenContent).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenInputWrapper = hiddenContent.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputWrapper).toBeInTheDocument();
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    // The content of the regular content preview matches the component configuration
+    expect(regularContent).toContainHTML((args.components[0] as ContentComponentSchema).html);
+
+    // The content of the hidden content preview matches the component configuration
+    expect(hiddenContent).toContainHTML((args.components[1] as ContentComponentSchema).html);
   },
 };
 
