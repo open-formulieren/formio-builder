@@ -69,7 +69,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const intl = useIntl();
   const builderContext = useContext(BuilderContext);
 
-  const registryEntry = getRegistryEntry(component);
+  const registryEntry = getRegistryEntry(component.type);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
   const hasPreview = registryEntry.preview.panel !== null;
 
