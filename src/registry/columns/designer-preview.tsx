@@ -16,7 +16,7 @@ const Preview: React.FC<ComponentPreviewProps<ColumnsComponentSchema>> = ({compo
   return (
     <Component type="columns" field={key} htmlId={`editform-${key}`}>
       <ErrorBoundary>
-        <div className="row">
+        <div className="row" data-testid={`columns-${key}`}>
           {columns.map((column, index) => (
             <div
               className={clsx('col', `col-${column.size}`)}

@@ -3110,6 +3110,40 @@ export const Columns: Story = {
       } satisfies ColumnsComponentSchema,
     ],
   },
+  play: ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const regularColumns = canvas.getByTestId('columns-columns');
+    expect(regularColumns).toBeVisible();
+
+    const hiddenColumns = canvas.getByTestId('columns-columnsHidden');
+    expect(hiddenColumns).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenColumnsWrapper = hiddenColumns.closest('[data-testid="designerPreview"]');
+    expect(hiddenColumnsWrapper).toBeInTheDocument();
+    expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
+
+    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+
+    step('Validate columns content', () => {
+      const columns = within(regularColumns).getAllByTestId('columns-column-', {exact: false});
+      expect(columns).toHaveLength(2);
+
+      // Expect both columns to be empty and contain the instructions text
+      expect(within(columns[0]).getByText(addComponentInstructionText)).toBeVisible();
+      expect(within(columns[1]).getByText(addComponentInstructionText)).toBeVisible();
+    });
+
+    step('Validate hidden columns content', () => {
+      const columns = within(hiddenColumns).getAllByTestId('columnsHidden-column-', {exact: false});
+      expect(columns).toHaveLength(2);
+
+      // Expect both columns to be empty and contain the instructions text
+      expect(within(columns[0]).getByText(addComponentInstructionText)).toBeVisible();
+      expect(within(columns[1]).getByText(addComponentInstructionText)).toBeVisible();
+    });
+  },
 };
 
 export const ColumnsWithComponents: Story = {
@@ -3188,8 +3222,8 @@ export const ColumnsWithComponents: Story = {
             components: [
               {
                 type: 'textfield',
-                id: 'textfield',
-                key: 'textfieldPreview',
+                id: 'textfield3',
+                key: 'textfieldPreview3',
                 label: 'Textfield preview',
                 description: 'A preview of the textfield Formio component',
                 tooltip: 'A preview of the textfield Formio component',
@@ -3200,8 +3234,8 @@ export const ColumnsWithComponents: Story = {
               } satisfies TextFieldComponentSchema,
               {
                 type: 'textfield',
-                id: 'textfield2',
-                key: 'textfieldPreview2',
+                id: 'textfield4',
+                key: 'textfieldPreview4',
                 label: 'Textfield preview',
                 description: 'A preview of the textfield Formio component',
                 tooltip: 'A preview of the textfield Formio component',
@@ -3223,8 +3257,8 @@ export const ColumnsWithComponents: Story = {
             components: [
               {
                 type: 'textfield',
-                id: 'textfieldHidden',
-                key: 'textfieldPreviewHidden',
+                id: 'textfieldHidden2',
+                key: 'textfieldPreviewHidden2',
                 label: 'Textfield preview hidden',
                 description: 'A preview of the textfield Formio component in hidden state',
                 tooltip: 'A preview of the textfield Formio component in hidden state',
@@ -3238,6 +3272,93 @@ export const ColumnsWithComponents: Story = {
         ],
       } satisfies ColumnsComponentSchema,
     ],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const regularColumns = canvas.getByTestId('columns-columns');
+    const hiddenColumns = canvas.getByTestId('columns-columnsHidden');
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenColumnsWrapper = hiddenColumns.closest('[data-testid="designerPreview"]');
+    expect(hiddenColumnsWrapper).toBeInTheDocument();
+    expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
+
+    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+
+    await step('Validate columns content', async () => {
+      const columns = within(regularColumns).getAllByTestId('columns-column-', {exact: false});
+      expect(columns).toHaveLength(3);
+
+      const column1 = within(columns[0]);
+      const column2 = within(columns[1]);
+      const column3 = within(columns[2]);
+
+      // expect the first column to contain 2 visible components
+      expect(column1.getAllByTestId('designerPreview')).toHaveLength(2);
+      const input1 = column1.getByTestId('input-textfieldPreview');
+      const input2 = column1.getByTestId('input-textfieldPreview2');
+
+      expect(input1).toBeVisible();
+      expect(input2).toBeVisible();
+
+      // Interaction with the nested components is possible
+      expect(input1).toHaveDisplayValue('');
+      await userEvent.type(input1, 'Some cool test values');
+      expect(input1).toHaveDisplayValue('Some cool test values');
+
+      // Expect the second column to be empty and contain the instructions text
+      expect(column2.queryAllByTestId('designerPreview')).toHaveLength(0);
+      expect(column2.getByText(addComponentInstructionText)).toBeVisible();
+
+      // Expect the last column to contain 1 hidden component
+      expect(column3.getAllByTestId('designerPreview')).toHaveLength(1);
+      const hiddenInput = column3.getByTestId('input-textfieldPreviewHidden');
+      expect(hiddenInput).toBeVisible();
+
+      // Expect the wrapper of the hidden input to have a descriptive "is hidden" title
+      const hiddenColumnsWrapper = hiddenInput.closest('[data-testid="designerPreview"]');
+      expect(hiddenColumnsWrapper).toBeInTheDocument();
+      expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
+    });
+
+    await step('Validate hidden columns content', async () => {
+      const columns = within(hiddenColumns).getAllByTestId('columnsHidden-column-', {
+        exact: false,
+      });
+      expect(columns).toHaveLength(3);
+
+      const column1 = within(columns[0]);
+      const column2 = within(columns[1]);
+      const column3 = within(columns[2]);
+
+      // expect the first column to contain 2 visible components
+      expect(column1.getAllByTestId('designerPreview')).toHaveLength(2);
+      const input1 = column1.getByTestId('input-textfieldPreview3');
+      const input2 = column1.getByTestId('input-textfieldPreview4');
+
+      expect(input1).toBeVisible();
+      expect(input2).toBeVisible();
+
+      // Interaction with the nested components is possible
+      expect(input1).toHaveDisplayValue('');
+      await userEvent.type(input1, 'Some cool test values');
+      expect(input1).toHaveDisplayValue('Some cool test values');
+
+      // Expect the second column to be empty and contain the instructions text
+      expect(column2.queryAllByTestId('designerPreview')).toHaveLength(0);
+      expect(column2.getByText(addComponentInstructionText)).toBeVisible();
+
+      // Expect the last column to contain 1 hidden component
+      expect(column3.getAllByTestId('designerPreview')).toHaveLength(1);
+      const hiddenInput = column3.getByTestId('input-textfieldPreviewHidden2');
+      expect(hiddenInput).toBeVisible();
+
+      // Expect the wrapper of the hidden input to have a descriptive "is hidden" title
+      const hiddenColumnsWrapper = hiddenInput.closest('[data-testid="designerPreview"]');
+      expect(hiddenColumnsWrapper).toBeInTheDocument();
+      expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
+    });
   },
 };
 
