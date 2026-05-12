@@ -89,7 +89,7 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
   onComponentChange,
 }) => {
   const {key} = component;
-  const entry = getRegistryEntry(component);
+  const entry = getRegistryEntry(component.type);
   const {
     preview: {panel: PanelPreviewComponent},
     defaultValue = '',
