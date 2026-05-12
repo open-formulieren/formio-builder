@@ -1,8 +1,8 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
-import {IntlShape} from 'react-intl';
+import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
-import {BuilderContextType} from '@/context';
+import type {BuilderContextType} from '@/context';
 
 // Edit form
 
@@ -47,7 +47,18 @@ export interface Previews {
    * form field interaction.
    */
   panel: React.FC<ComponentPreviewProps> | null;
+  /**
+   * The component preview rendered in the form designer.
+   *
+   * The preview updates as the component configuration itself is modified through form
+   * field interaction and is saved.
+   *
+   * @TODO make this required once all components have a preview component assigned.
+   */
+  designer?: React.FC<ComponentPreviewProps> | null;
 }
+
+type DefaultValueOf<S> = S extends {defaultValue?: infer D} ? D : never;
 
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
@@ -55,7 +66,7 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   preview: Previews;
   // textfield -> string, numberfield -> number etc. This is used for the formik
   // initial data
-  defaultValue: unknown; // TODO: there must be a way to grab S['defaultValue'] if it's set...
+  defaultValue: DefaultValueOf<S> | JSONValue | undefined;
   comparisonValue?: React.FC<ComparisonValueProps>;
 }
 

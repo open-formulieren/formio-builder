@@ -1319,6 +1319,11 @@
     "description": "Label for 'openForms.service' builder field",
     "originalDefault": "Reference lists service"
   },
+  "gg3Osx": {
+    "defaultMessage": "Hidden component",
+    "description": "Form designer preview hidden component title",
+    "originalDefault": "Hidden component"
+  },
   "guySt0": {
     "defaultMessage": "Postcode",
     "description": "Label for address postcode",

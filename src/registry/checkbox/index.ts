@@ -9,7 +9,7 @@ import Preview from './preview';
 export default {
   edit: EditForm,
   editSchema: validationSchema,
-  preview: {panel: Preview},
+  preview: {panel: Preview, designer: Preview},
   defaultValue: false, // formik field value
   comparisonValue: ComparisonValueInput,
 } satisfies RegistryEntry<CheckboxComponentSchema>;

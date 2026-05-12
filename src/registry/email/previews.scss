@@ -1,11 +1,12 @@
-.component-preview.component-preview--email {
-  // single value preview
+.component-preview.component-preview--email,
+.offb-designer-preview.offb-designer-preview--component-type-email {
+  // single value preview with verification button
   .form-group > div:has(input + button) {
     display: flex;
     gap: 15px;
   }
 
-  // multiple value preview
+  // multiple value preview with verification button
   td:has(input + button) {
     display: flex;
     gap: 15px;

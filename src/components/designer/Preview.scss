@@ -1,0 +1,25 @@
+// For the top-level drop zone, we don't add padding or border styling
+.offb-designer-preview-container > .offb-drop-zone {
+  padding: 0;
+  border: none;
+}
+
+.offb-designer-preview {
+  margin-block-end: 15px;
+
+  &--hidden {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgb(255, 231, 97),
+      rgb(255, 231, 97) 10px,
+      rgb(255, 254, 170) 0px,
+      rgb(255, 254, 170) 20px
+    );
+    border-radius: 10px;
+    padding: 8px;
+
+    &:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+}
