@@ -3162,7 +3162,6 @@ export const FieldSet: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const EditGrid: Story = {
   name: 'EditGrid',
   args: {
@@ -3171,7 +3170,80 @@ export const EditGrid: Story = {
         id: 'wekruya',
         type: 'editgrid',
         key: 'editgrid',
-        label: 'A repeating group preview',
+        label: 'Repeating group preview',
+        description: 'A preview of the editgrid Formio component',
+        tooltip: 'A preview of the editgrid Formio component',
+        groupLabel: 'Item',
+        disableAddingRemovingRows: false,
+        components: [],
+      } satisfies EditGridComponentSchema,
+      {
+        id: 'wekruyaHidden',
+        type: 'editgrid',
+        key: 'editgridHidden',
+        label: 'Repeating group preview hidden',
+        description: 'A preview of the editgrid Formio component in hidden state',
+        tooltip: 'A preview of the editgrid Formio component in hidden state',
+        groupLabel: 'Item',
+        hidden: true,
+        disableAddingRemovingRows: false,
+        components: [],
+      } satisfies EditGridComponentSchema,
+    ],
+  },
+  play: ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    const inputLabel = canvas.getByText('Repeating group preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+    expect(inputLabel).toBeVisible();
+    expect(inputWrapper).toBeInTheDocument();
+    expect(canvas.getByText('A preview of the editgrid Formio component')).toBeVisible();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Repeating group preview hidden');
+    expect(hiddenInputLabel).toBeVisible();
+    expect(
+      canvas.getByText('A preview of the editgrid Formio component in hidden state')
+    ).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputWrapper).toBeInTheDocument();
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+
+    step('Validate editgrid content', () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      // Expect the editgrid to be empty, and to contain the instruction text
+      expect(wrapper.queryAllByTestId('designerPreview')).toHaveLength(0);
+      expect(wrapper.getByText(addComponentInstructionText)).toBeVisible();
+    });
+
+    step('Validate hidden editgrid content', () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      // Expect the editgrid to be empty, and to contain the instruction text
+      expect(wrapper.queryAllByTestId('designerPreview')).toHaveLength(0);
+      expect(wrapper.getByText(addComponentInstructionText)).toBeVisible();
+    });
+  },
+};
+
+export const EditGridWithComponents: Story = {
+  name: 'EditGrid: with components',
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'editgrid',
+        key: 'editgrid',
+        label: 'Repeating group preview',
+        description: 'A preview of the editgrid Formio component',
+        tooltip: 'A preview of the editgrid Formio component',
         groupLabel: 'Item',
         disableAddingRemovingRows: false,
         components: [
@@ -3180,6 +3252,25 @@ export const EditGrid: Story = {
             key: 'someTextField',
             type: 'textfield',
             label: 'Nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+          },
+          {
+            id: 'someTextField2',
+            key: 'someTextField2',
+            type: 'textfield',
+            label: 'Second nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+          },
+          {
+            id: 'someHiddenTextField',
+            key: 'someHiddenTextField',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+            hidden: true,
           },
         ],
       } satisfies EditGridComponentSchema,
@@ -3187,20 +3278,228 @@ export const EditGrid: Story = {
         id: 'wekruyaHidden',
         type: 'editgrid',
         key: 'editgridHidden',
-        label: 'A repeating group preview hidden',
+        label: 'Repeating group preview hidden',
+        description: 'A preview of the editgrid Formio component in hidden state',
+        tooltip: 'A preview of the editgrid Formio component in hidden state',
         groupLabel: 'Item',
         hidden: true,
         disableAddingRemovingRows: false,
         components: [
           {
-            id: 'someTextField',
-            key: 'someTextField',
+            id: 'someTextField3',
+            key: 'someTextField3',
             type: 'textfield',
             label: 'Nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+          },
+          {
+            id: 'someTextField4',
+            key: 'someTextField4',
+            type: 'textfield',
+            label: 'Second nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+          },
+          {
+            id: 'someHiddenTextField2',
+            key: 'someHiddenTextField2',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            tooltip: 'Some tooltip',
+            description: 'Text field description',
+            hidden: true,
           },
         ],
       } satisfies EditGridComponentSchema,
     ],
+  },
+  play: ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    const inputLabel = canvas.getByText('Repeating group preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+    expect(inputLabel).toBeVisible();
+    expect(inputWrapper).toBeInTheDocument();
+    expect(canvas.getByText('A preview of the editgrid Formio component')).toBeVisible();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Repeating group preview hidden');
+    expect(hiddenInputLabel).toBeVisible();
+    expect(
+      canvas.getByText('A preview of the editgrid Formio component in hidden state')
+    ).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputWrapper).toBeInTheDocument();
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    step('Validate editgrid content', () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      // Expect the editgrid to contain 3 visible components
+      const componentWrappers = wrapper.queryAllByTestId('designerPreview');
+      expect(componentWrappers).toHaveLength(3);
+      expect(componentWrappers[0]).toBeVisible();
+      expect(componentWrappers[1]).toBeVisible();
+      expect(componentWrappers[2]).toBeVisible();
+
+      // The third nested component is hidden
+      expect(componentWrappers[2]).toHaveAttribute('title', 'Hidden component');
+    });
+
+    step('Validate hidden editgrid content', () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      // Expect the editgrid to contain 3 visible components
+      const componentWrappers = wrapper.queryAllByTestId('designerPreview');
+      expect(componentWrappers).toHaveLength(3);
+      expect(componentWrappers[0]).toBeVisible();
+      expect(componentWrappers[1]).toBeVisible();
+      expect(componentWrappers[2]).toBeVisible();
+
+      // The third nested component is hidden
+      expect(componentWrappers[2]).toHaveAttribute('title', 'Hidden component');
+    });
+  },
+};
+
+export const EditGridWithNestedEditGrid: Story = {
+  name: 'EditGrid: with nested EditGrid',
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'editgrid',
+        key: 'editgrid',
+        label: 'Repeating group preview',
+        description: 'A preview of the editgrid Formio component',
+        tooltip: 'A preview of the editgrid Formio component',
+        groupLabel: 'Item',
+        disableAddingRemovingRows: false,
+        components: [
+          {
+            id: 'nestedEditgrid',
+            type: 'editgrid',
+            key: 'nestedEditgrid',
+            label: 'Nested repeating group preview',
+            description: 'A preview of the nested editgrid Formio component',
+            tooltip: 'A preview of the editgrid Formio component',
+            groupLabel: 'Item',
+            disableAddingRemovingRows: false,
+            components: [
+              {
+                id: 'someTextField',
+                key: 'someTextField',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                tooltip: 'Some tooltip',
+                description: 'Deep nested text field description',
+              },
+            ],
+          } satisfies EditGridComponentSchema,
+        ],
+      } satisfies EditGridComponentSchema,
+      {
+        id: 'wekruyaHidden',
+        type: 'editgrid',
+        key: 'editgridHidden',
+        label: 'Repeating group preview hidden',
+        description: 'A preview of the editgrid Formio component in hidden state',
+        tooltip: 'A preview of the editgrid Formio component in hidden state',
+        groupLabel: 'Item',
+        hidden: true,
+        disableAddingRemovingRows: false,
+        components: [
+          {
+            id: 'nestedEditgrid',
+            type: 'editgrid',
+            key: 'nestedEditgrid',
+            label: 'Nested repeating group preview',
+            description: 'A preview of the nested editgrid Formio component',
+            tooltip: 'A preview of the editgrid Formio component',
+            groupLabel: 'Item',
+            disableAddingRemovingRows: false,
+            components: [
+              {
+                id: 'someTextField2',
+                key: 'someTextField2',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                tooltip: 'Some tooltip',
+                description: 'Deep nested text field description',
+              },
+            ],
+          } satisfies EditGridComponentSchema,
+        ],
+      } satisfies EditGridComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    const inputLabel = canvas.getByText('Repeating group preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+    expect(inputLabel).toBeVisible();
+    expect(inputWrapper).toBeInTheDocument();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Repeating group preview hidden');
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputLabel).toBeVisible();
+    expect(hiddenInputWrapper).toBeInTheDocument();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    await step('Validate editgrid content', async () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      const nestedEditgrid = wrapper.getByText('Nested repeating group preview');
+      const nestedEditgridWrapper = nestedEditgrid.closest('[data-testid="designerPreview"]');
+
+      expect(nestedEditgrid).toBeVisible();
+      expect(nestedEditgridWrapper).toBeInTheDocument();
+
+      // The deeply nested input is fully visible and accessible
+      const nestedWrapper = within(nestedEditgridWrapper as HTMLElement);
+      const deepNestedInput = nestedWrapper.getByLabelText('Deep nested text field');
+      const deepNestedInputDescription = nestedWrapper.getByText(
+        'Deep nested text field description'
+      );
+      expect(deepNestedInput).toBeVisible();
+      expect(deepNestedInputDescription).toBeVisible();
+
+      expect(deepNestedInput).toHaveDisplayValue('');
+      await userEvent.type(deepNestedInput, 'something cool');
+      expect(deepNestedInput).toHaveDisplayValue('something cool');
+    });
+
+    await step('Validate hidden editgrid content', async () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      const nestedEditgrid = wrapper.getByText('Nested repeating group preview');
+      const nestedEditgridWrapper = nestedEditgrid.closest('[data-testid="designerPreview"]');
+
+      expect(nestedEditgrid).toBeVisible();
+      expect(nestedEditgridWrapper).toBeInTheDocument();
+
+      // The deeply nested input is fully visible and accessible
+      const nestedWrapper = within(nestedEditgridWrapper as HTMLElement);
+      const deepNestedInput = nestedWrapper.getByLabelText('Deep nested text field');
+      const deepNestedInputDescription = nestedWrapper.getByText(
+        'Deep nested text field description'
+      );
+      expect(deepNestedInput).toBeVisible();
+      expect(deepNestedInputDescription).toBeVisible();
+
+      expect(deepNestedInput).toHaveDisplayValue('');
+      await userEvent.type(deepNestedInput, 'something cool');
+      expect(deepNestedInput).toHaveDisplayValue('something cool');
+    });
   },
 };
 
