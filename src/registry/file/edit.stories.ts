@@ -35,7 +35,20 @@ export default {
       icon: '',
       group: 'file',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'kiweljhr',
+        type: 'file',
+        key: 'file',
+        label: 'A file upload',
+        file: {
+          name: '',
+          type: [],
+          allowedTypesLabels: [],
+        },
+        filePattern: '',
+        // @ts-expect-error this is what is actually produced by Formio
+        defaultValue: null,
+      },
     },
   },
 } satisfies Meta<typeof ComponentEditForm>;

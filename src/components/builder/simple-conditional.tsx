@@ -43,7 +43,7 @@ export const ComparisonValueInput: React.FC = () => {
 
   if (!chosenComponent) return null;
 
-  const registryEntry = getRegistryEntry(chosenComponent);
+  const registryEntry = getRegistryEntry(chosenComponent.type);
   const {comparisonValue} = registryEntry;
   const InputComponent = comparisonValue || TextField;
 

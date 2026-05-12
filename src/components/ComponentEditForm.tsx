@@ -1,6 +1,5 @@
 import {AnyComponentSchema} from '@open-formulieren/types';
 import {Form, Formik} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import {cloneDeep, merge} from 'lodash';
 import {PropsWithChildren, useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -8,22 +7,14 @@ import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
+import {BuilderInfo} from '@/registry/types';
 
 import GenericComponentPreview from './ComponentPreview';
-
-export interface BuilderInfo {
-  title: string;
-  group: string;
-  icon: string;
-  documentation?: string;
-  schema: ExtendedComponentSchema;
-  weight: number;
-}
 
 export interface ComponentEditFormProps {
   isNew: boolean;
   component: AnyComponentSchema;
-  builderInfo: BuilderInfo;
+  builderInfo: BuilderInfo<AnyComponentSchema>;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (component: AnyComponentSchema) => void;
@@ -69,7 +60,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const intl = useIntl();
   const builderContext = useContext(BuilderContext);
 
-  const registryEntry = getRegistryEntry(component);
+  const registryEntry = getRegistryEntry(component.type);
   const {edit: EditForm, editSchema: zodSchema} = registryEntry;
   const hasPreview = registryEntry.preview.panel !== null;
 

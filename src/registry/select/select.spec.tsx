@@ -29,7 +29,7 @@ test('Switch to multiple sets empty array as default value', async () => {
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm
@@ -79,7 +79,7 @@ test('Switch to multiple sets empty array as default value when initial is null'
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm
@@ -128,7 +128,7 @@ test('Switch to non multiple sets empty string as default value', async () => {
     icon: 'th-list',
     group: 'basic',
     weight: 70,
-    schema: {},
+    schema: component,
   };
   contextRender(
     <ComponentEditForm

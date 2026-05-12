@@ -48,7 +48,12 @@ export const Default: Story = {
       title: 'Text field',
       group: 'basic',
       icon: 'terminal',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textfield',
+        label: 'Text field',
+        key: 'textField',
+      },
       weight: 0,
     },
   },

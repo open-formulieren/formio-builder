@@ -24,7 +24,12 @@ export default {
       icon: 'columns',
       group: 'layout',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'columns',
+        key: 'columns',
+        columns: [],
+      },
     },
   },
 } satisfies Meta<typeof ComponentEditForm>;

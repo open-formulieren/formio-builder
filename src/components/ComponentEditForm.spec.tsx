@@ -31,7 +31,14 @@ test('Mutating components after save does not mutate default values', async () =
         title: 'foo',
         group: 'bar',
         icon: 'baz',
-        schema: {},
+        schema: {
+          id: 'fieldset',
+          type: 'fieldset',
+          key: 'fieldset',
+          label: 'Field set',
+          components: [],
+          hideHeader: false,
+        },
         weight: 10,
       }}
       onCancel={vi.fn()}

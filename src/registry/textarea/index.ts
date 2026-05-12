@@ -1,4 +1,5 @@
 import {TextareaComponentSchema} from '@open-formulieren/types';
+import {defineMessage} from 'react-intl';
 
 import {RegistryEntry} from '@/registry/types';
 
@@ -10,5 +11,20 @@ export default {
   edit: EditForm,
   editSchema: validationSchema,
   preview: {panel: Preview, designer: Preview},
+  formDesigner: {
+    label: defineMessage({
+      description: 'Textarea component type label',
+      defaultMessage: 'Textarea',
+    }),
+  },
+  builderInfo: {
+    title: 'Textarea',
+    icon: 'font',
+    schema: {
+      id: 'eqegfc',
+      type: 'textarea',
+      ...EditForm.defaultValues,
+    },
+  },
   defaultValue: '',
 } satisfies RegistryEntry<TextareaComponentSchema>;
