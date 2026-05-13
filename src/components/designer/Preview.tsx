@@ -1,6 +1,5 @@
-import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
-import {Formik} from 'formik';
 import {useIntl} from 'react-intl';
 
 import ErrorBoundary from '@/components/error/ErrorBoundary';
@@ -15,44 +14,18 @@ export interface ComponentsPreviewProps {
 }
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
-  const initialValues = components.reduce<Record<string, JSONValue | {}>>((carry, component) => {
-    const entry = getRegistryEntry(component);
-    const {key} = component;
-    const {defaultValue = ''} = entry;
-
-    const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-    const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
-      ? component.defaultValue
-      : defaultValue;
-
-    const previewDefaultValue = isMultiple
-      ? componentDefaultValue ?? []
-      : componentDefaultValue ?? defaultValue;
-
-    carry[key] = previewDefaultValue;
-    return carry;
-  }, {});
-
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={() => {
-        throw new Error("Can't submit preview form");
-      }}
-    >
-      <div className="offb-designer-preview-container">
-        <ErrorBoundary>
-          <DropZone>
-            {components.map(component => (
-              <DraggableItem key={component.key}>
-                <ComponentPreview component={component} />
-              </DraggableItem>
-            ))}
-          </DropZone>
-        </ErrorBoundary>
-      </div>
-    </Formik>
+    <div className="offb-designer-preview-container">
+      <ErrorBoundary>
+        <DropZone id="main-dropzone">
+          {components.map((component, index) => (
+            <DraggableItem key={component.key} id={component.key} index={index}>
+              <ComponentPreview component={component} />
+            </DraggableItem>
+          ))}
+        </DropZone>
+      </ErrorBoundary>
+    </div>
   );
 };
 
