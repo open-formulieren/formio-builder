@@ -1,10 +1,13 @@
 import type {TextFieldComponentSchema} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
+import {withFormik} from '@/sb-decorators';
+
 import FormDesigner from './FormDesigner';
 
 export default {
   title: 'Form designer/Form designer',
+  decorators: [withFormik],
   component: FormDesigner,
   parameters: {
     modal: {noModal: true},

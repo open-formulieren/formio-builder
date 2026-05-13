@@ -7,7 +7,10 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useRef} from 'react';
 import {useImmer} from 'use-immer';
 
-import {DraggableMenuItem, DropZone, SortableComponent} from './dragDrop';
+import {getRegistryEntry} from '@/registry';
+
+import ComponentsPreview from './Preview';
+import {DraggableMenuItem} from './dragDrop';
 
 const getData = (prop: Draggable | Droppable | null) => prop?.data ?? {};
 
@@ -19,8 +22,8 @@ export interface FormDesignerProps {
 
 const FormDesigner: React.FC<FormDesignerProps> = ({components}) => {
   const spacerInsertedRef = useRef<boolean>(false);
-  const [items, setItems] = useImmer<{fields: string[]}>({
-    fields: ['Item 1', 'Item 2', 'Item 3'],
+  const [items, setItems] = useImmer<{fields: (AnyComponentSchema | 'spacer')[]}>({
+    fields: components,
   });
 
   const insertSpacer = (index: number) => {
@@ -56,9 +59,18 @@ const FormDesigner: React.FC<FormDesignerProps> = ({components}) => {
   };
 
   const insertComponent = (type: AnyComponentSchema['type'], finalPosition: number) => {
+    const {edit} = getRegistryEntry(type);
+    const componentDefinition = {
+      id: `${Date.now()}`,
+      type: type,
+      ...edit.defaultValues,
+      key: `${Date.now()}`,
+      label: type,
+    } as AnyComponentSchema;
+
     setItems(draft => {
       const spacerIndex = draft.fields.findIndex(item => item === 'spacer');
-      draft.fields.splice(spacerIndex, 1, `${type} ${Date.now()}`);
+      draft.fields.splice(spacerIndex, 1, componentDefinition);
 
       draft.fields = arrayMove(draft.fields, spacerIndex, finalPosition);
       spacerInsertedRef.current = false;
@@ -115,24 +127,7 @@ const FormDesigner: React.FC<FormDesignerProps> = ({components}) => {
           <DraggableMenuItem type="select" />
         </div>
         <div className="col col-10">
-          {/* @TODO replace with ComponentsPreview */}
-          <DropZone id="main-dropzone">
-            {items.fields.map((component, index) => (
-              <SortableComponent
-                key={component}
-                id={component}
-                index={index}
-                groupName="main-dropzone"
-              >
-                <span
-                  className="badge badge-pill badge-primary"
-                  style={{padding: '1rem', marginBottom: '1rem'}}
-                >
-                  {component}
-                </span>
-              </SortableComponent>
-            ))}
-          </DropZone>
+          <ComponentsPreview components={items.fields} />
         </div>
       </div>
     </DragDropProvider>

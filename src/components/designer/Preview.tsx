@@ -7,10 +7,10 @@ import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
-import {DraggableItem, DropZone} from './dragDrop';
+import {DropZone, SortableComponent} from './dragDrop';
 
 export interface ComponentsPreviewProps {
-  components: AnyComponentSchema[];
+  components: (AnyComponentSchema | 'spacer')[];
 }
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
@@ -18,11 +18,26 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}
     <div className="offb-designer-preview-container">
       <ErrorBoundary>
         <DropZone id="main-dropzone">
-          {components.map((component, index) => (
-            <DraggableItem key={component.key} id={component.key} index={index}>
-              <ComponentPreview component={component} />
-            </DraggableItem>
-          ))}
+          {components.map((component, index) =>
+            component === 'spacer' ? (
+              <span
+                key="spacer"
+                className="badge badge-pill badge-primary"
+                style={{padding: '1rem', marginBottom: '1rem'}}
+              >
+                {component}
+              </span>
+            ) : (
+              <SortableComponent
+                key={component.key}
+                id={component.key}
+                index={index}
+                groupName="main-dropzone"
+              >
+                <ComponentPreview component={component} />
+              </SortableComponent>
+            )
+          )}
         </DropZone>
       </ErrorBoundary>
     </div>
