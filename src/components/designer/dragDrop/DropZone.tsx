@@ -1,13 +1,23 @@
+import {useDroppable} from '@dnd-kit/react';
+
 import './DropZone.scss';
+
+export interface DropZoneProps {
+  id: string;
+  children: React.ReactNode;
+}
 
 /**
  * A drag-and-drop container for components.
- *
- * This is a placeholder for now. When implementing the actual drag-and-drop,
- * this component will serve as the drop-zone.
  */
-const DropZone: React.FC<React.PropsWithChildren> = ({children}) => (
-  <div className="offb-drop-zone">{children}</div>
-);
+const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
+  const {ref} = useDroppable({id});
+
+  return (
+    <div className="offb-drop-zone" ref={ref}>
+      {children}
+    </div>
+  );
+};
 
 export default DropZone;

@@ -1,58 +1,61 @@
-import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
-import {Formik} from 'formik';
-import {useIntl} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 
+import ContentPlaceholder from '@/components/ContentPlaceholder';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
-import {DraggableItem, DropZone} from './dragDrop';
+import {DropZone, SortableComponent} from './dragDrop';
+import type {ComponentPlaceholder} from './types';
+import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 export interface ComponentsPreviewProps {
-  components: AnyComponentSchema[];
+  components: (AnyComponentSchema | ComponentPlaceholder)[];
 }
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
-  const initialValues = components.reduce<Record<string, JSONValue | {}>>((carry, component) => {
-    const entry = getRegistryEntry(component.type);
-    const {key} = component;
-    const {defaultValue = ''} = entry;
+  return (
+    <div className="offb-designer-preview-container">
+      <ErrorBoundary>
+        <DropZone id="main-dropzone">
+          {components.map((component, index) =>
+            component.type === COMPONENT_PLACEHOLDER_TYPE ? (
+              <ComponentPlaceholderPreview componentType={component.componentType} />
+            ) : (
+              <SortableComponent
+                key={component.key}
+                id={component.id}
+                index={index}
+                groupName="main-dropzone"
+                component={component}
+              >
+                <ComponentPreview component={component} />
+              </SortableComponent>
+            )
+          )}
+        </DropZone>
+      </ErrorBoundary>
+    </div>
+  );
+};
 
-    const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-    const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
-      ? component.defaultValue
-      : defaultValue;
+interface ComponentPlaceholderPreviewProps {
+  componentType: AnyComponentSchema['type'];
+}
 
-    const previewDefaultValue = isMultiple
-      ? componentDefaultValue ?? []
-      : componentDefaultValue ?? defaultValue;
-
-    carry[key] = previewDefaultValue;
-    return carry;
-  }, {});
+const ComponentPlaceholderPreview: React.FC<ComponentPlaceholderPreviewProps> = ({
+  componentType,
+}) => {
+  const {formDesigner, builderInfo} = getRegistryEntry(componentType);
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={() => {
-        throw new Error("Can't submit preview form");
-      }}
-    >
-      <div className="offb-designer-preview-container">
-        <ErrorBoundary>
-          <DropZone>
-            {components.map(component => (
-              <DraggableItem key={component.key}>
-                <ComponentPreview component={component} />
-              </DraggableItem>
-            ))}
-          </DropZone>
-        </ErrorBoundary>
-      </div>
-    </Formik>
+    <ContentPlaceholder key="spacer" variant="designer">
+      <i className={clsx('fa', `fa-${builderInfo.icon}`, 'mr-2')} aria-hidden="true" />
+      <FormattedMessage {...formDesigner.label} />
+    </ContentPlaceholder>
   );
 };
 

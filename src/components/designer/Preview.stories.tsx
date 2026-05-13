@@ -32,10 +32,13 @@ import type {
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fireEvent, userEvent, waitFor, within} from 'storybook/test';
 
+import {withFormik} from '@/sb-decorators';
+
 import Preview from './Preview';
 
 export default {
   title: 'Form designer/Preview',
+  decorators: [withFormik],
   component: Preview,
   parameters: {
     modal: {noModal: true},
@@ -1124,6 +1127,9 @@ export const TimeFieldMultiple: Story = {
 };
 
 export const Postcode: Story = {
+  parameters: {
+    formik: {initialValues: {postcodePreview: '9999 AA', postcodePreviewHidden: '9999 AA'}},
+  },
   args: {
     components: [
       {

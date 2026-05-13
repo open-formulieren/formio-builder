@@ -49,6 +49,25 @@ export const isKnownComponentType = (
   return Boolean(component.type && hasOwnProperty(REGISTRY, component.type));
 };
 
+export const isNestedChildren = (
+  children: AnyComponentSchema[] | AnyComponentSchema[][]
+): children is AnyComponentSchema[][] => children.length > 0 && Array.isArray(children[0]);
+
+export const getChildComponents = (
+  component: AnyComponentSchema
+): AnyComponentSchema[] | AnyComponentSchema[][] => {
+  switch (component.type) {
+    case 'editgrid':
+    case 'fieldset': {
+      return component.components;
+    }
+    case 'columns': {
+      return component.columns.map(column => column.components);
+    }
+  }
+  return [];
+};
+
 export const getRegistryEntry = (
   componentType: AnyComponentSchema['type']
 ): RegistryEntry<AnyComponentSchema> => {
