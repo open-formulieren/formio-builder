@@ -32,10 +32,13 @@ const Preview: React.FC<ComponentPreviewProps<ColumnsComponentSchema>> = ({compo
                   ))
                 ) : (
                   <ContentPlaceholder variant="designer">
-                    <FormattedMessage
-                      description="Column designer preview content description"
-                      defaultMessage="Drag a component in the form and release the mouse button"
-                    />
+                    +
+                    <div className="sr-only">
+                      <FormattedMessage
+                        description="Column designer preview content description"
+                        defaultMessage="Drag a component in the form and release the mouse button"
+                      />
+                    </div>
                   </ContentPlaceholder>
                 )}
               </DropZone>

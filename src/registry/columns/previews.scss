@@ -49,18 +49,4 @@
   .col {
     padding-inline: calc($gapSize / 2);
   }
-
-  .offb-content-placeholder--designer {
-    // Because the placeholder would wrap weirdly in smaller columns we hide the text
-    // and show a '+' instead.
-    line-height: 0;
-    text-indent: -9999px;
-
-    &::after {
-      display: block;
-      content: '+';
-      line-height: normal;
-      text-indent: 0;
-    }
-  }
 }
