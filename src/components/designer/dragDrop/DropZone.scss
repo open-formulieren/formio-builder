@@ -1,8 +1,14 @@
 .offb-drop-zone {
+  height: 100%;
   padding: 10px;
   border: dotted 2px #e8e8e8;
 
   &:hover {
     border-color: #ccc;
+  }
+
+  .offb-designer-preview,
+  .offb-content-placeholder {
+    margin-block-end: 1rem;
   }
 }

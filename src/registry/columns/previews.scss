@@ -38,3 +38,15 @@
     grid-column: span var(--_col-preview-span);
   }
 }
+
+.offb-designer-preview.offb-designer-preview--component-type-columns {
+  // Reduce the gap between columns
+  $gapSize: 6px;
+
+  .row {
+    margin-inline: calc($gapSize / 2 * -1);
+  }
+  .col {
+    padding-inline: calc($gapSize / 2);
+  }
+}

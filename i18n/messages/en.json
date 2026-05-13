@@ -844,6 +844,11 @@
     "description": "Date field 'minDate' fixed value label",
     "originalDefault": "Minimum date"
   },
+  "TkvPrw": {
+    "defaultMessage": "Drag a component in the form and release the mouse button",
+    "description": "Column designer preview content description",
+    "originalDefault": "Drag a component in the form and release the mouse button"
+  },
   "Tpg442": {
     "defaultMessage": "Value in decimal degrees, between 3 and 7.5.",
     "description": "Description for 'initialCenter.lng' builder field",

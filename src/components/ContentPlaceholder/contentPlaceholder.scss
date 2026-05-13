@@ -1,22 +1,38 @@
 .offb-content-placeholder {
   text-align: center;
-  font-style: italic;
 
-  padding-inline: 10px;
-  padding-block: 20px;
-  border: solid 1px var(--offb-content-placeholder-border-color, #ccc);
+  border-style: solid;
+  border-width: 1px;
   border-radius: 2px;
 
-  background-size: 50px 50px;
-  background-color: var(--offb-content-placeholder-background-color, #eee);
-  background-image: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.04) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.04) 50%,
-    rgba(0, 0, 0, 0.04) 75%,
-    transparent 75%,
-    transparent
-  );
+  &--designer {
+    padding-inline: 20px;
+    padding-block: 10px;
+
+    color: var(--offb-content-placeholder-designer-text-color, #0c5460);
+    background-color: var(--offb-content-placeholder-designer-background-color, #d1ecf1);
+    border-color: var(--offb-content-placeholder-designer-border-color, #bee5eb);
+  }
+
+  &--builder {
+    font-style: italic;
+
+    padding-inline: 10px;
+    padding-block: 20px;
+
+    border-color: var(--offb-content-placeholder-builder-border-color, #ccc);
+
+    background-size: 50px 50px;
+    background-color: var(--offb-content-placeholder-builder-background-color, #eee);
+    background-image: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.04) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.04) 75%,
+      transparent 75%,
+      transparent
+    );
+  }
 }
