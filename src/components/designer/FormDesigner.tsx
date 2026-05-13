@@ -1,3 +1,4 @@
+import type {Draggable, Droppable} from '@dnd-kit/dom';
 import {arrayMove} from '@dnd-kit/helpers';
 import type {DragEndEvent, DragOverEvent} from '@dnd-kit/react';
 import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
@@ -6,95 +7,112 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useRef} from 'react';
 import {useImmer} from 'use-immer';
 
-import {DropZone} from '@/components/designer/dragDrop';
-import DraggableMenuItem from '@/components/designer/dragDrop/DraggableMenuItem';
-import SortableComponent from '@/components/designer/dragDrop/SortableComponent';
+import {DraggableMenuItem, DropZone, SortableComponent} from './dragDrop';
+
+const getData = (prop: Draggable | Droppable | null) => prop?.data ?? {};
+
+const getTargetIndex = (target: Droppable | null) => (isSortable(target) ? target.index : -1);
 
 export interface FormDesignerProps {
   components: AnyComponentSchema[];
 }
 
-const ToolboxItems: AnyComponentSchema['type'][] = ['textfield', 'select'];
-
 const FormDesigner: React.FC<FormDesignerProps> = ({components}) => {
+  const spacerInsertedRef = useRef<boolean>(false);
   const [items, setItems] = useImmer<{fields: string[]}>({
     fields: ['Item 1', 'Item 2', 'Item 3'],
   });
-  const spacerInsertedRef = useRef<boolean>(false);
 
-  const getData = prop => prop?.data ?? {};
+  const insertSpacer = (index: number) => {
+    setItems(draft => {
+      // If there are no fields, add a spacer to the first position.
+      if (!draft.fields.length) {
+        draft.fields.push('spacer');
+        return;
+      }
 
-  const onDragOver = (event: DragOverEvent) => {
+      // Place the spacer at the correct position.
+      draft.fields.splice(index, 0, 'spacer');
+    });
+    spacerInsertedRef.current = true;
+  };
+
+  const moveSpacer = (index: number) => {
+    setItems(draft => {
+      const spacerIndex = draft.fields.findIndex(item => item === 'spacer');
+      if (index === spacerIndex) {
+        return;
+      }
+
+      draft.fields = arrayMove(draft.fields, spacerIndex, index);
+    });
+  };
+
+  const removeSpacer = () => {
+    setItems(draft => {
+      draft.fields = draft.fields.filter(i => i !== 'spacer');
+    });
+    spacerInsertedRef.current = false;
+  };
+
+  const insertComponent = (type: AnyComponentSchema['type'], finalPosition: number) => {
+    setItems(draft => {
+      const spacerIndex = draft.fields.findIndex(item => item === 'spacer');
+      draft.fields.splice(spacerIndex, 1, `${type} ${Date.now()}`);
+
+      draft.fields = arrayMove(draft.fields, spacerIndex, finalPosition);
+      spacerInsertedRef.current = false;
+    });
+  };
+
+  const handleDragOver = (event: DragOverEvent) => {
     const {source, target} = event.operation;
     const sourceData = getData(source);
 
     // When moving an existing item, just let dnd-kit handle it.
     if (!sourceData?.fromSidebar) return;
-    if (!isSortable(target)) return;
 
-    console.log({target, source, index: target?.index});
-
-    if (!spacerInsertedRef.current) {
-      setItems(draft => {
-        if (!draft.fields.length) {
-          draft.fields.push('spacer');
-        } else {
-          const nextIndex = target?.index > -1 ? target?.index : draft.fields.length;
-          draft.fields.splice(nextIndex, 0, 'spacer');
-        }
-      });
-      spacerInsertedRef.current = true;
-    } else if (!target) {
-      setItems(draft => draft.fields.filter(i => i !== 'spacer'));
-      spacerInsertedRef.current = false;
-    } else {
-      setItems(draft => {
-        const spacerIndex = draft.fields.findIndex(item => item === 'spacer');
-        const nextIndex = target?.index > -1 ? target?.index : draft.fields.length - 1;
-
-        if (nextIndex === spacerIndex) {
-          return;
-        }
-        draft.fields = arrayMove(draft.fields, spacerIndex, nextIndex);
-      });
-    }
-  };
-  const onDragEnd = (event: DragEndEvent) => {
-    const {source, target} = event.operation;
-    spacerInsertedRef.current = false;
-
-    // Dropped the draggable outside the dropzone.
-    if (!target || !isSortable(target)) {
-      setItems(draft => {
-        draft.fields = draft.fields.filter(i => i !== 'spacer');
-      });
+    // When moved outside the dropzone, remove the spacer.
+    if (!target) {
+      removeSpacer();
       return;
     }
 
-    const sourceData = getData(source);
-    if (sourceData?.fromSidebar) {
-      const componentType: AnyComponentSchema['type'] = sourceData.componentType;
-
-      setItems(draft => {
-        const spacerIndex = draft.fields.findIndex(item => item === 'spacer');
-        draft.fields.splice(spacerIndex, 1, `${componentType} ${Date.now()}`);
-
-        draft.fields = arrayMove(draft.fields, spacerIndex, target?.index || 0);
-      });
+    if (!spacerInsertedRef.current) {
+      insertSpacer(getTargetIndex(target));
+    } else {
+      moveSpacer(getTargetIndex(target));
     }
   };
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const {source, target} = event.operation;
+    const sourceData = getData(source);
+
+    // When moving an existing item, just let dnd-kit handle it.
+    if (!sourceData?.fromSidebar) return;
+
+    // Dropped the draggable outside the dropzone.
+    if (!target) {
+      removeSpacer();
+      return;
+    }
+
+    // Replace the spacer with the new component.
+    insertComponent(sourceData.componentType, getTargetIndex(target));
+  };
+
   return (
-    <DragDropProvider onDragOver={onDragOver} onDragEnd={onDragEnd}>
+    <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
       <DragOverlay disabled={source => !source?.data?.fromSidebar} dropAnimation={null}>
         <div>Draggable fo</div>
       </DragOverlay>
 
       <div className="row">
         <div className="col col-2">
-          {ToolboxItems.map(item => (
-            <DraggableMenuItem key={item} type={item} />
-          ))}
+          {/* @TODO replace with ComponentsList */}
+          <DraggableMenuItem type="textfield" />
+          <DraggableMenuItem type="select" />
         </div>
         <div className="col col-10">
           {/* @TODO replace with ComponentsPreview */}
