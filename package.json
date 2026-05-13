@@ -105,6 +105,8 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^11.0.1",
+    "@dnd-kit/helpers": "^0.4.0",
+    "@dnd-kit/react": "^0.4.0",
     "@floating-ui/react": "^0.26.4",
     "@formio/vanilla-text-mask": "^5.1.1",
     "@open-formulieren/leaflet-tools": "^1.0.0",
@@ -114,6 +116,7 @@
     "clsx": "^1.2.1",
     "dompurify": "^3.3.3",
     "formik": "^2.4.5",
+    "immer": "^11.1.8",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.21",
@@ -126,6 +129,7 @@
     "react-signature-canvas": "^1.0.6",
     "react-tabs": "^4.2.1",
     "react-use": "^17.4.0",
+    "use-immer": "^0.11.0",
     "zod": "^3.21.4",
     "zod-formik-adapter": "^1.2.0"
   }
