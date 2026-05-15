@@ -634,6 +634,11 @@
     "description": "Tooltip for 'IsSensitiveData' builder field",
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
+  "JGqzCP": {
+    "defaultMessage": "Drag a component in the form and release the mouse button",
+    "description": "Fieldset designer preview content description",
+    "originalDefault": "Drag a component in the form and release the mouse button"
+  },
   "JKnHMC": {
     "defaultMessage": "Lastname",
     "description": "Label for partner's lastname",
