@@ -3617,7 +3617,6 @@ export const Signature: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const LeafletMap: Story = {
   name: 'Map',
   args: {
@@ -3626,18 +3625,40 @@ export const LeafletMap: Story = {
         id: 'wekruya',
         type: 'map',
         key: 'map',
-        label: 'A map preview',
+        label: 'Map preview',
+        description: 'A preview of the map Formio component',
+        interactions: {marker: true, polyline: false, polygon: false},
         useConfigDefaultMapSettings: true,
       },
       {
         id: 'wekruyaHidden',
         type: 'map',
         key: 'mapHidden',
-        label: 'A map preview hidden',
+        label: 'Map preview hidden',
+        description: 'A preview of the map Formio component in hidden state',
+        interactions: {marker: true, polyline: false, polygon: false},
         useConfigDefaultMapSettings: true,
-        hidden: true, // must be ignored
+        hidden: true,
       },
     ],
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label and description to be shown
+    const inputLabel = await canvas.findByText('Map preview');
+    expect(inputLabel).toBeVisible();
+    expect(canvas.getByText('A preview of the map Formio component')).toBeVisible();
+
+    // Expect the label and description of the hidden component to be visible
+    const hiddenInputLabel = await canvas.findByText('Map preview hidden');
+    expect(hiddenInputLabel).toBeVisible();
+    expect(canvas.getByText('A preview of the map Formio component in hidden state')).toBeVisible();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+    expect(hiddenInputWrapper).toBeInTheDocument();
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
   },
 };
 
