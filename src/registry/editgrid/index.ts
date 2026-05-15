@@ -2,6 +2,7 @@ import {EditGridComponentSchema} from '@open-formulieren/types';
 
 import {RegistryEntry} from '@/registry/types';
 
+import DesignerPreview from './designer-preview';
 import EditForm from './edit';
 import validationSchema from './edit-validation';
 import PanelPreview from './panel-preview';
@@ -11,7 +12,7 @@ export default {
   editSchema: validationSchema,
   preview: {
     panel: PanelPreview,
-    // @TODO add designer preview
+    designer: DesignerPreview,
   },
   defaultValue: [],
 } satisfies RegistryEntry<EditGridComponentSchema>;

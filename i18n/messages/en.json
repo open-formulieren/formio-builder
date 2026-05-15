@@ -1539,6 +1539,11 @@
     "description": "Component property 'Tooltip' label",
     "originalDefault": "Tooltip"
   },
+  "o//vqb": {
+    "defaultMessage": "Drag a component in the form and release the mouse button",
+    "description": "Editgrid designer preview content description",
+    "originalDefault": "Drag a component in the form and release the mouse button"
+  },
   "o5Mfn3": {
     "defaultMessage": "Include children",
     "description": "Label for 'includeChildren' builder field",

@@ -1561,6 +1561,11 @@
     "isTranslated": true,
     "originalDefault": "Tooltip"
   },
+  "o//vqb": {
+    "defaultMessage": "Sleep een component in het formulier en laat de muisknop los",
+    "description": "Editgrid designer preview content description",
+    "originalDefault": "Drag a component in the form and release the mouse button"
+  },
   "o5Mfn3": {
     "defaultMessage": "Inclusief kinderen",
     "description": "Label for 'includeChildren' builder field",
