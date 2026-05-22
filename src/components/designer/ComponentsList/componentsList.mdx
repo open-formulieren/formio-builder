@@ -1,0 +1,61 @@
+import {ArgTypes, Canvas, Meta} from '@storybook/addon-docs/blocks';
+
+import * as ComponentsListStories from './ComponentsList.stories';
+
+<Meta of={ComponentsListStories} name="Docs" />
+
+# Components list
+
+The `ComponentsList` showcases all the components that can be used in the form designer. The list is
+populated with the component groups and component definitions that are defined in the backend
+application, and a collection of custom-defined preset component definitions.
+
+In the `ComponentsList` component the different component groups are normalized, filtered and sorted
+into one standardized collection. The normalized component groups are then displayed using the
+`ComponentsGroup` component.
+
+The filtering of the component groups is done in the `ComponentsList` component, to simplify the
+implementation of the `ComponentsGroup` component and have the search results available in one
+place, so we can display a "no search results found" message when needed.
+
+The UI and functionality of the `ComponentsList` component is based on the react-formio FormBuilder
+component.
+
+## Component groups
+
+The `ComponentsList` component groups the components by the following groups:
+
+- **Regular** – the basic form components (e.g., text fields, checkboxes)
+- **Special** – more specific and/or complex form components (e.g., BSN, repeating groups, partners)
+- **Layout** – structural components (e.g., columns, fieldsets)
+- **Preset** – components that have predefined HTML autocomplete attributes.
+
+The component groups, and the components within these groups, are managed by the backend
+application.
+
+## Search functionality
+
+The `ComponentsList` component contains a search field which filters components by both their
+technical name and display label.
+
+When the search term provides no search results, the `ComponentsList` component displays a "no
+results found" message.
+
+## Example
+
+In the example below, the list is populated with all the components that are available in the
+application.
+
+<Canvas of={ComponentsListStories.Default} />
+
+## Props
+
+<ArgTypes />
+
+## (Future) usage
+
+The `ComponentsList` component should be used in conjunction with the `FormDesigner` component.
+
+The `ComponentsGroup` will provide the source of draggable components that can be used in the form
+designer to construct a form definition. These draggable components should be dropped in the
+upcoming `FormDesigner` component, which will be responsible for rendering the form definition.

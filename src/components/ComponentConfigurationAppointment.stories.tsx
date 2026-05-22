@@ -8,6 +8,7 @@ import React from 'react';
 import {fn} from 'storybook/test';
 
 import type {FormType} from '@/context';
+import type {BuilderInfo} from '@/registry/types';
 import {
   CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
@@ -19,7 +20,6 @@ import {
 import type {AnyComponentSchema} from '@/types';
 
 import ComponentConfiguration from './ComponentConfiguration';
-import type {BuilderInfo} from './ComponentEditForm';
 import type {PrefillAttributeOption, PrefillPluginOption} from './builder/prefill';
 import type {RegistrationAttributeOption} from './builder/registration/registration-attribute';
 import type {ValidatorOption} from './builder/validate/validator-select';
@@ -42,7 +42,14 @@ export default {
       title: 'Text field',
       group: 'basic',
       icon: 'terminal',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textfield',
+        key: 'textfield',
+        label: 'A textfield for an appointment form',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the textfield component',
+      },
       weight: 0,
     },
   },
@@ -61,7 +68,7 @@ interface TemplateArgs {
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
-  builderInfo: BuilderInfo;
+  builderInfo: BuilderInfo<AnyComponentSchema>;
   formType: FormType;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -136,7 +143,14 @@ export const Textfield: Story = {
       title: 'Text field',
       group: 'basic',
       icon: '',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textfield',
+        key: 'textfield',
+        label: 'A textfield for an appointment form',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the textfield component',
+      },
       weight: 10,
     },
   },
@@ -158,7 +172,14 @@ export const Email: Story = {
       title: 'Email',
       group: 'basic',
       icon: 'at',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'email',
+        key: 'email',
+        label: 'An email for an appointment form',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the email component',
+      },
       weight: 10,
     },
     formType: 'appointment',
@@ -183,7 +204,15 @@ export const NumberField: Story = {
       title: 'Number',
       group: 'basic',
       icon: 'hashtag',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'number',
+        key: 'number',
+        label: 'A number field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
       weight: 30,
     },
     formType: 'appointment',
@@ -211,7 +240,17 @@ export const Textarea: Story = {
       title: 'Textarea',
       group: 'basic',
       icon: 'hashtag',
-      schema: {placeholder: ''},
+      schema: {
+        id: 'wekruya',
+        type: 'textarea',
+        key: 'textarea',
+        label: 'A textarea field for an appointment form',
+        autoExpand: false,
+        rows: 3,
+        validate: {
+          required: false,
+        },
+      },
       weight: 30,
     },
   },
@@ -234,7 +273,14 @@ export const DateField: Story = {
       icon: 'calendar',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'date',
+        key: 'date',
+        label: 'A date for an appointment form',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the date component',
+      },
     },
     formType: 'appointment',
   },
@@ -259,7 +305,15 @@ export const DateTimeField: Story = {
       icon: 'calendar-plus',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'datetime',
+        key: 'datetime',
+        label: 'A datetime field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
     },
     formType: 'appointment',
   },
@@ -284,7 +338,15 @@ export const TimeField: Story = {
       icon: 'clock-o',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'time',
+        key: 'time',
+        label: 'A time field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 };
@@ -309,7 +371,16 @@ export const Postcode: Story = {
       icon: 'home',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'postcode',
+        key: 'postcode',
+        label: 'A postcode field for an appointment form',
+        validate: {
+          required: false,
+          pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
+        },
+      },
     },
   },
 };
@@ -330,7 +401,12 @@ export const PhoneNumber: Story = {
       icon: 'phone-square',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'phoneNumber',
+        key: 'phoneNumber',
+        label: 'A phone number field for an appointment form',
+      },
     },
   },
 };
@@ -357,7 +433,18 @@ export const SelectBoxes: Story = {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'selectboxes',
+        key: 'selectboxes',
+        label: 'A selectboxes field for an appointment form',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [],
+        defaultValue: {},
+      },
     },
   },
 };
@@ -385,7 +472,19 @@ export const Radio: Story = {
       icon: 'dot-circle-o',
       group: 'basic',
       weight: 100,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'radio',
+        key: 'radio',
+        label: 'A radio for an appointment form',
+        tooltip: 'An example for the tooltip',
+        description: 'A description for the radio component',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [],
+      },
     },
   },
 };
@@ -413,7 +512,18 @@ export const Select: Story = {
       icon: 'th-list',
       group: 'basic',
       weight: 70,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'select',
+        key: 'select',
+        label: 'A select field for an appointment form',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        data: {values: []},
+        defaultValue: '',
+      },
     },
   },
 };
@@ -437,7 +547,15 @@ export const BSN: Story = {
       icon: 'id-card-o',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'bsn',
+        key: 'bsn',
+        label: 'A BSN field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 };
@@ -463,7 +581,16 @@ export const Checkbox: Story = {
       icon: 'check-square',
       group: 'basic',
       weight: 50,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'checkbox',
+        key: 'checkbox',
+        label: 'A checkbox field for an appointment form',
+        validate: {
+          required: false,
+        },
+        defaultValue: false,
+      },
     },
   },
 };
@@ -488,7 +615,16 @@ export const Currency: Story = {
       icon: 'eur',
       group: 'basic',
       weight: 70,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'currency',
+        currency: 'EUR',
+        key: 'currency',
+        label: 'A currency field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 };
@@ -512,7 +648,15 @@ export const Iban: Story = {
       icon: 'wallet',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'iban',
+        key: 'iban',
+        label: 'An IBAN field for an appointment form',
+        validate: {
+          required: false,
+        },
+      },
     },
   },
 };
@@ -537,7 +681,16 @@ export const LicensePlate: Story = {
       icon: 'wallet',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'licenseplate',
+        key: 'licenseplate',
+        label: 'A license plate field for an appointment form',
+        validate: {
+          required: false,
+          pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
+        },
+      },
     },
   },
 };
@@ -560,7 +713,14 @@ export const NpFamilyMembers: Story = {
       icon: 'users',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'npFamilyMembers',
+        key: 'npFamilyMembers',
+        label: 'An npFamilyMembers field for an appointment form',
+        includeChildren: true,
+        includePartners: false,
+      },
     },
   },
 };
@@ -585,7 +745,17 @@ export const AddressNL: Story = {
       icon: 'home',
       group: 'basic',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'addressNL',
+        key: 'address',
+        label: 'A Dutch address for an appointment form',
+        validate: {
+          required: false,
+        },
+        deriveAddress: true,
+        layout: 'singleColumn',
+      },
     },
     formType: 'appointment',
   },
@@ -607,7 +777,12 @@ export const LeafletMap: Story = {
       icon: 'map',
       group: 'advanced',
       weight: 10,
-      schema: {},
+      schema: {
+        id: 'wekruya',
+        type: 'map',
+        key: 'map',
+        label: 'A map for an appointment form',
+      },
     },
   },
 };

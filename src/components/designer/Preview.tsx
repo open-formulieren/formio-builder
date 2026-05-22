@@ -16,7 +16,7 @@ export interface ComponentsPreviewProps {
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
   const initialValues = components.reduce<Record<string, JSONValue | {}>>((carry, component) => {
-    const entry = getRegistryEntry(component);
+    const entry = getRegistryEntry(component.type);
     const {key} = component;
     const {defaultValue = ''} = entry;
 
@@ -62,7 +62,7 @@ interface ComponentPreviewProps {
 
 export const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) => {
   const intl = useIntl();
-  const entry = getRegistryEntry(component);
+  const entry = getRegistryEntry(component.type);
   const {
     preview: {designer: PreviewComponent},
   } = entry;

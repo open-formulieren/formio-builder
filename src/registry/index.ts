@@ -50,9 +50,9 @@ export const isKnownComponentType = (
 };
 
 export const getRegistryEntry = (
-  component: AnyComponentSchema
+  componentType: AnyComponentSchema['type']
 ): RegistryEntry<AnyComponentSchema> => {
-  const entry = REGISTRY[component.type];
+  const entry = REGISTRY[componentType];
   return entry;
 };
 

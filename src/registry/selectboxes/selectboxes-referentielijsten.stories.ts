@@ -32,7 +32,18 @@ export default {
       icon: 'plus-square',
       group: 'basic',
       weight: 60,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'selectboxes',
+        key: 'selectboxes',
+        label: 'A selectboxes field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [{value: '', label: ''}],
+        defaultValue: {},
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;

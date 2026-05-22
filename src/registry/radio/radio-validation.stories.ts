@@ -29,7 +29,18 @@ export default {
       icon: 'dot-circle-o',
       group: 'basic',
       weight: 100,
-      schema: {},
+      schema: {
+        id: 'wqimsadk',
+        type: 'radio',
+        key: 'radio',
+        label: 'A radio field',
+        openForms: {
+          dataSrc: 'manual',
+          translations: {},
+        },
+        values: [{value: '', label: ''}],
+        defaultValue: '',
+      },
     },
   },
 } as Meta<typeof ComponentEditForm>;
