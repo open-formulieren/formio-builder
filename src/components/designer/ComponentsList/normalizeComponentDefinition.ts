@@ -1,8 +1,7 @@
 import type {IntlShape} from 'react-intl';
 
+import type {ComponentGroup, NormalizedComponentDefinition} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
-
-import type {ComponentGroup, NormalizedComponentDefinition} from '../types';
 
 /**
  * Normalize the component definitions for a given component group.

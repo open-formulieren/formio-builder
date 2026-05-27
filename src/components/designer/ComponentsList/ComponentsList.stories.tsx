@@ -51,12 +51,12 @@ export const Default: Story = {
       expect(presetFieldsContainer).not.toHaveAttribute('open');
     });
 
-    await step('Validating components in "Formuliervelden" group', () => {
+    await step('Validating components in "Formuliervelden" group', async () => {
       // The 'Formuliervelden' group should display 15 components
-      const formFieldsContainer = within(canvas.getByTestId('component-group--basic'));
+      const formFieldsContainer = within(regularFieldsContainer);
       const formFieldsList = within(formFieldsContainer.getByRole('list'));
 
-      expect(formFieldsList.getAllByRole('button')).toHaveLength(15);
+      expect(await formFieldsList.findAllByRole('button')).toHaveLength(15);
 
       expect(formFieldsList.getByRole('button', {name: 'Textfield'})).toBeVisible();
       expect(formFieldsList.getByRole('button', {name: 'Textarea'})).toBeVisible();
@@ -165,7 +165,7 @@ export const SearchForComponents: Story = {
     const layoutFieldsContainer = canvas.getByTestId('component-group--layout');
     const presetFieldsContainer = canvas.getByTestId('component-group--preset');
 
-    await step('Initial state', () => {
+    await step('Initial state', async () => {
       // Expect search input to be empty
       expect(searchInput).toHaveValue('');
 
@@ -188,10 +188,10 @@ export const SearchForComponents: Story = {
       expect(presetFieldsContainer).not.toHaveAttribute('open');
 
       // The 'Formuliervelden' group should display all 15 components
-      const formFieldsContainer = within(canvas.getByTestId('component-group--basic'));
+      const formFieldsContainer = within(regularFieldsContainer);
       const formFieldsList = within(formFieldsContainer.getByRole('list'));
 
-      expect(formFieldsList.getAllByRole('button')).toHaveLength(15);
+      expect(await formFieldsList.findAllByRole('button')).toHaveLength(15);
     });
 
     // Validate the results when searching

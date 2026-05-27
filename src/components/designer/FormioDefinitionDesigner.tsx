@@ -16,8 +16,8 @@ import {
 import {getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {getRegistryEntry} from '@/registry';
 
+import ComponentsList from './ComponentsList';
 import ComponentsPreview, {ComponentPreview} from './Preview';
-import {DraggableMenuItem} from './dragDrop';
 import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
 import type {ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
@@ -107,9 +107,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({comp
 
       <div className="row">
         <div className="col col-2">
-          {/* @TODO replace with ComponentsList */}
-          <DraggableMenuItem type="textfield">Textfield</DraggableMenuItem>
-          <DraggableMenuItem type="select">Select</DraggableMenuItem>
+          <ComponentsList />
         </div>
         <div className="col col-10">
           <ComponentsPreview components={items.components} />

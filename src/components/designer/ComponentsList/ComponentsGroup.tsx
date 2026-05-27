@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
-import type {NormalizedComponentDefinition} from '../types';
+import {DraggableMenuItem} from '@/components/designer/dragDrop';
+import type {NormalizedComponentDefinition} from '@/components/designer/types';
+
 import './ComponentsGroup.scss';
 
 interface ComponentsGroupProps {
@@ -43,30 +45,31 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
         <ul className="list-unstyled mb-0">
           {componentDefinitions.map((component, index) => (
             <li key={`${component.schema.key}-${component.schema.type}-${index}`}>
-              <button
-                type="button"
-                className={clsx(
-                  'btn',
-                  'btn-outline-primary',
-                  'btn-block',
-                  'btn-sm',
-                  'text-left',
-                  'border-0',
-                  'offb-component-group__component-button'
-                )}
-              >
-                <i className={clsx('fa', `fa-${component.icon}`, 'mr-2')} aria-hidden="true" />
-                {component.label}
-                {component.isDeprecated && (
-                  <span className="badge badge-warning ml-2">
-                    <i className="fa fa-triangle-exclamation" aria-hidden="true" />{' '}
-                    <FormattedMessage
-                      description="Deprecated component label"
-                      defaultMessage="Deprecated"
-                    />
-                  </span>
-                )}
-              </button>
+              <DraggableMenuItem type={component.schema.type}>
+                <span
+                  className={clsx(
+                    'btn',
+                    'btn-outline-primary',
+                    'btn-block',
+                    'btn-sm',
+                    'text-left',
+                    'border-0',
+                    'offb-component-group__component-button'
+                  )}
+                >
+                  <i className={clsx('fa', `fa-${component.icon}`, 'mr-2')} aria-hidden="true" />
+                  {component.label}
+                  {component.isDeprecated && (
+                    <span className="badge badge-warning ml-2">
+                      <i className="fa fa-triangle-exclamation" aria-hidden="true" />{' '}
+                      <FormattedMessage
+                        description="Deprecated component label"
+                        defaultMessage="Deprecated"
+                      />
+                    </span>
+                  )}
+                </span>
+              </DraggableMenuItem>
             </li>
           ))}
         </ul>
