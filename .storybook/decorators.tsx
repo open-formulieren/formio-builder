@@ -3,12 +3,14 @@ import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
-import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
+import {BuilderContext, DesignerContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_FILE_TYPES,
+  DEFAULT_FORM_DESIGNER_GROUPS,
+  DEFAULT_FORM_DESIGNER_PRESETS,
   DEFAULT_FORM_TYPE,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
@@ -142,6 +144,19 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
     >
       <Story />
     </BuilderContext.Provider>
+  );
+};
+
+export const DesignerContextDecorator: Decorator = (Story, context) => {
+  return (
+    <DesignerContext.Provider
+      value={{
+        groups: context.parameters?.designer?.groups || DEFAULT_FORM_DESIGNER_GROUPS,
+        presets: context.parameters?.designer?.presets || DEFAULT_FORM_DESIGNER_PRESETS,
+      }}
+    >
+      <Story />
+    </DesignerContext.Provider>
   );
 };
 

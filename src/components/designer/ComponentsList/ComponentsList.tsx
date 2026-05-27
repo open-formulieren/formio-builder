@@ -1,12 +1,9 @@
-import {useDeferredValue, useMemo, useState} from 'react';
+import {useContext, useDeferredValue, useMemo, useState} from 'react';
 import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
-import type {
-  ComponentGroup,
-  GroupName,
-  NormalizedComponentGroups,
-  PresetComponentDefinition,
-} from '../types';
+import type {GroupName, NormalizedComponentGroups} from '@/components/designer/types';
+import {DesignerContext} from '@/context';
+
 import ComponentsGroup from './ComponentsGroup';
 import './ComponentsList.scss';
 import {normalizeComponentDefinition} from './normalizeComponentDefinition';
@@ -30,18 +27,8 @@ const COMPONENT_GROUP_LABELS = defineMessages<GroupName>({
   },
 });
 
-export interface ComponentsListProps {
-  /**
-   * The regular component groups that are shown in the builder.
-   */
-  groups: ComponentGroup[];
-  /**
-   * Custom-defined component presets that are shown in the builder.
-   */
-  presets: PresetComponentDefinition[];
-}
-
-const ComponentsList: React.FC<ComponentsListProps> = ({groups, presets}) => {
+const ComponentsList: React.FC = () => {
+  const {groups, presets} = useContext(DesignerContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const deferredQuery = useDeferredValue(searchQuery);
 

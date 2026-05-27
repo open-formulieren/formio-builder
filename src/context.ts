@@ -10,6 +10,7 @@ import {
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
+import type {ComponentGroup, PresetComponentDefinition} from '@/components/designer/types';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
@@ -106,6 +107,25 @@ const BuilderContext = React.createContext<BuilderContextType>({
 BuilderContext.displayName = 'BuilderContext';
 
 /*
+  Designer
+ */
+export interface DesignerContextType {
+  /**
+   * The regular component groups that are shown in the builder.
+   */
+  groups: ComponentGroup[];
+  /**
+   * Custom-defined component presets that are shown in the builder.
+   */
+  presets: PresetComponentDefinition[];
+}
+
+const DesignerContext = React.createContext<DesignerContextType>({
+  groups: [],
+  presets: [],
+});
+
+/*
   Rendering
  */
 export interface RenderContextType {
@@ -117,4 +137,4 @@ const RenderContext = React.createContext<RenderContextType>({
   bareInput: false,
 });
 
-export {BuilderContext, RenderContext};
+export {BuilderContext, DesignerContext, RenderContext};
