@@ -153,6 +153,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
           display: 'flex',
           flexDirection: 'column',
           minBlockSize: '400px',
+          zIndex: 0, // Prevent the map component from covering tooltips
         }}
       >
         <TileLayer {...TILE_LAYER_RD} url={tileLayerUrl()} />
