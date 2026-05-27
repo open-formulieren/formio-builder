@@ -206,6 +206,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
+        <HideLabel />
       </TabPanel>
 
       {/* Advanced tab */}
@@ -334,6 +335,7 @@ EditForm.defaultValues = {
   showInPDF: true,
   hidden: false,
   clearOnHide: true,
+  hideLabel: false,
   isSensitiveData: true,
   deriveAddress: false,
   layout: 'doubleColumn',
@@ -365,6 +367,27 @@ EditForm.defaultValues = {
       },
     },
   },
+};
+
+const HideLabel: React.FC = () => {
+  const intl = useIntl();
+  const tooltip = intl.formatMessage({
+    description: "Tooltip for 'hideLabel' builder field",
+    defaultMessage: `Do not display the configured label and top line as the header
+    in the container fieldset.`,
+  });
+  return (
+    <Checkbox
+      name="hideLabel"
+      label={
+        <FormattedMessage
+          description="Label for 'hideLabel' builder field"
+          defaultMessage="Hide label"
+        />
+      }
+      tooltip={tooltip}
+    />
+  );
 };
 
 export default EditForm;

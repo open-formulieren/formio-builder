@@ -15,11 +15,20 @@ import './preview.scss';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, deriveAddress, layout} = component;
+  const {
+    key,
+    label,
+    description,
+    tooltip,
+    validate = {},
+    deriveAddress,
+    layout,
+    hideLabel,
+  } = component;
 
   const {required = false} = validate;
   return (
-    <FieldSet field={key} label={label} tooltip={tooltip}>
+    <FieldSet field={key} label={hideLabel ? undefined : label} tooltip={tooltip}>
       {description && <Description text={description} />}
       <div className={clsx('offb-addressnl-preview', `offb-addressnl-preview--${layout}`)}>
         <TextField
