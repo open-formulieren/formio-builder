@@ -4,6 +4,7 @@ import React from 'react';
 import {useValidationErrors} from '@/utils/errors';
 import {ErrorList} from '@/utils/errors';
 
+import './fieldset.scss';
 import Tooltip from './tooltip';
 
 export interface FieldsetProps {
@@ -15,7 +16,7 @@ export interface FieldsetProps {
 
 const Fieldset: React.FC<FieldsetProps> = ({field = '', label, tooltip = '', children}) => {
   const {errors} = useValidationErrors(field);
-  const className = clsx('field-group');
+  const className = clsx('field-group', 'offb-fieldset');
 
   return (
     <div className={className}>

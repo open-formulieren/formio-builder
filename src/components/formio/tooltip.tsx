@@ -57,6 +57,7 @@ const Tooltip: React.FC<TooltipProps> = ({text}) => {
       />
       {isOpen && (
         <div
+          className="offb-tooltip-content"
           ref={refs.setFloating}
           style={{
             maxInlineSize: 'var(--of-builder-tooltip-max-inline-size, 200px)',
