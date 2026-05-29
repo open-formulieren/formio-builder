@@ -107,7 +107,7 @@ jobs:
 
       - name: Set up test environment
         run: |
-          npx playwright install --with-deps
+          npx playwright install chromium --with-deps
           npm run compilemessages
 
       - name: Run tests
@@ -137,7 +137,7 @@ jobs:
       # Reference: https://storybook.js.org/docs/6.5/react/writing-tests/test-runner#run-against-non-deployed-storybooks
       - name: Set up test environment
         run: |
-          npx playwright install --with-deps
+          npx playwright install chromium --with-deps
           npm run compilemessages
 
       - name: Serve storybook and run tests
