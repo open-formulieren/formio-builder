@@ -3400,16 +3400,78 @@ export const ColumnsWithComponents: Story = {
   },
 };
 
-// @TODO implement preview component and play
 export const FieldSet: Story = {
-  name: 'FieldSet',
+  name: 'Fieldset: Empty',
   args: {
     components: [
       {
-        id: 'wekruya',
-        type: 'fieldset',
+        id: 'fieldset',
         key: 'fieldset',
-        label: 'A fieldset preview',
+        type: 'fieldset',
+        label: 'Fieldset preview',
+        tooltip: 'Fieldset tooltip',
+        hideHeader: false,
+        components: [],
+      } satisfies FieldsetComponentSchema,
+      {
+        id: 'fieldsetHidden',
+        key: 'fieldsetHidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
+        tooltip: 'Fieldset tooltip',
+        hidden: true,
+        hideHeader: false,
+        components: [],
+      } satisfies FieldsetComponentSchema,
+    ],
+  },
+  play: ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    // Expect label to be shown
+    const inputLabel = canvas.getByText('Fieldset preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+
+    expect(inputLabel).toBeVisible();
+    expect(inputWrapper).toBeInTheDocument();
+
+    // Expect the label of the hidden component to be visible
+    const hiddenInputLabel = canvas.getByText('Fieldset preview hidden');
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+
+    expect(hiddenInputLabel).toBeVisible();
+    expect(hiddenInputWrapper).toBeInTheDocument();
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    step('Validate fieldset component', () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      expect(
+        wrapper.getByText('Drag a component in the form and release the mouse button')
+      ).toBeVisible();
+    });
+
+    step('Validate hidden fieldset component', () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      expect(
+        wrapper.getByText('Drag a component in the form and release the mouse button')
+      ).toBeVisible();
+    });
+  },
+};
+
+export const FieldSetWithComponents: Story = {
+  name: 'Fieldset: With components',
+  args: {
+    components: [
+      {
+        id: 'fieldset',
+        key: 'fieldset',
+        type: 'fieldset',
+        label: 'Fieldset preview',
         hideHeader: false,
         components: [
           {
@@ -3417,26 +3479,291 @@ export const FieldSet: Story = {
             key: 'someTextField',
             type: 'textfield',
             label: 'Nested text field',
-          },
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField1',
+            key: 'someTextField1',
+            type: 'textfield',
+            label: 'Another nested text field',
+            description: 'Description of another nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField2',
+            key: 'someTextField2',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            description: 'Description of hidden nested text field',
+            tooltip: 'Tooltip of nested text field',
+            hidden: true,
+          } satisfies TextFieldComponentSchema,
         ],
       } satisfies FieldsetComponentSchema,
       {
         id: 'wekruyaHidden',
-        type: 'fieldset',
         key: 'fieldsetHidden',
-        label: 'A fieldset preview hidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
         hidden: true,
         hideHeader: false,
         components: [
           {
-            id: 'someTextField',
-            key: 'someTextField',
+            id: 'someTextField3',
+            key: 'someTextField3',
             type: 'textfield',
             label: 'Nested text field',
-          },
+            description: 'Description of nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField4',
+            key: 'someTextField4',
+            type: 'textfield',
+            label: 'Another nested text field',
+            description: 'Description of another nested text field',
+            tooltip: 'Tooltip of nested text field',
+          } satisfies TextFieldComponentSchema,
+          {
+            id: 'someTextField5',
+            key: 'someTextField5',
+            type: 'textfield',
+            label: 'Hidden nested text field',
+            description: 'Description of hidden nested text field',
+            tooltip: 'Tooltip of nested text field',
+            hidden: true,
+          } satisfies TextFieldComponentSchema,
         ],
       } satisfies FieldsetComponentSchema,
     ],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const inputLabel = canvas.getByText('Fieldset preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+
+    const hiddenInputLabel = canvas.getByText('Fieldset preview hidden');
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    await step('Interaction with fieldset component', async () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      // The 'empty' message should not be displayed when there are nested components
+      expect(
+        wrapper.queryByText('Drag a component in the form and release the mouse button')
+      ).not.toBeInTheDocument();
+
+      const input1 = wrapper.getByLabelText('Nested text field');
+      const input2 = wrapper.getByLabelText('Another nested text field');
+      const hiddenInput = wrapper.getByLabelText('Hidden nested text field');
+      const inputDecription1 = wrapper.getByText('Description of nested text field');
+      const inputDecription2 = wrapper.getByText('Description of another nested text field');
+      const hiddenInputDecription = wrapper.getByText('Description of hidden nested text field');
+      const nestedHiddenInputWrapper = hiddenInput.closest('[data-testid="designerPreview"]');
+
+      // All nested inputs and descriptions are visible
+      expect(input1).toBeVisible();
+      expect(input2).toBeVisible();
+      expect(hiddenInput).toBeVisible();
+      expect(inputDecription1).toBeVisible();
+      expect(inputDecription2).toBeVisible();
+      expect(hiddenInputDecription).toBeVisible();
+
+      // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+      expect(nestedHiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+      // Assert initial state
+      expect(input1).toHaveDisplayValue('');
+      expect(input2).toHaveDisplayValue('');
+      expect(hiddenInput).toHaveDisplayValue('');
+
+      // Interact
+      await userEvent.type(input1, 'input value');
+      await userEvent.type(input2, 'another example value');
+      await userEvent.type(hiddenInput, 'psssttt, im hiding');
+
+      // New values
+      expect(input1).toHaveDisplayValue('input value');
+      expect(input2).toHaveDisplayValue('another example value');
+      expect(hiddenInput).toHaveDisplayValue('psssttt, im hiding');
+    });
+
+    await step('Interaction with hidden fieldset component', async () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      // The 'empty' message should not be displayed when there are nested components
+      expect(
+        wrapper.queryByText('Drag a component in the form and release the mouse button')
+      ).not.toBeInTheDocument();
+
+      const input1 = wrapper.getByLabelText('Nested text field');
+      const input2 = wrapper.getByLabelText('Another nested text field');
+      const hiddenInput = wrapper.getByLabelText('Hidden nested text field');
+      const inputDecription1 = wrapper.getByText('Description of nested text field');
+      const inputDecription2 = wrapper.getByText('Description of another nested text field');
+      const hiddenInputDecription = wrapper.getByText('Description of hidden nested text field');
+      const nestedHiddenInputWrapper = hiddenInput.closest('[data-testid="designerPreview"]');
+
+      // All nested inputs and descriptions are visible
+      expect(input1).toBeVisible();
+      expect(input2).toBeVisible();
+      expect(hiddenInput).toBeVisible();
+      expect(inputDecription1).toBeVisible();
+      expect(inputDecription2).toBeVisible();
+      expect(hiddenInputDecription).toBeVisible();
+
+      // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+      expect(nestedHiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+      // Assert initial state
+      expect(input1).toHaveDisplayValue('');
+      expect(input2).toHaveDisplayValue('');
+      expect(hiddenInput).toHaveDisplayValue('');
+
+      // Interact
+      await userEvent.type(input1, 'input value');
+      await userEvent.type(input2, 'another example value');
+      await userEvent.type(hiddenInput, 'psssttt, im hiding');
+
+      // New values
+      expect(input1).toHaveDisplayValue('input value');
+      expect(input2).toHaveDisplayValue('another example value');
+      expect(hiddenInput).toHaveDisplayValue('psssttt, im hiding');
+    });
+  },
+};
+
+export const FieldSetWithNestedComponents: Story = {
+  name: 'Fieldset: With nested components',
+  args: {
+    components: [
+      {
+        id: 'fieldset',
+        key: 'fieldset',
+        type: 'fieldset',
+        label: 'Fieldset preview',
+        hideHeader: false,
+        components: [
+          {
+            id: 'fieldset1',
+            key: 'fieldset1',
+            type: 'fieldset',
+            label: 'Nested fieldset preview',
+            hideHeader: false,
+            components: [
+              {
+                id: 'someTextField',
+                key: 'someTextField',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                description: 'Description of nested text field',
+                tooltip: 'Tooltip of nested text field',
+              } satisfies TextFieldComponentSchema,
+            ],
+          } satisfies FieldsetComponentSchema,
+        ],
+      } satisfies FieldsetComponentSchema,
+      {
+        id: 'fieldsetHidden',
+        key: 'fieldsetHidden',
+        type: 'fieldset',
+        label: 'Fieldset preview hidden',
+        hidden: true,
+        hideHeader: false,
+        components: [
+          {
+            id: 'fieldsetHidden1',
+            key: 'fieldsetHidden1',
+            type: 'fieldset',
+            label: 'Nested fieldset preview',
+            hideHeader: false,
+            components: [
+              {
+                id: 'someTextField1',
+                key: 'someTextField1',
+                type: 'textfield',
+                label: 'Deep nested text field',
+                description: 'Description of nested text field',
+                tooltip: 'Tooltip of nested text field',
+              } satisfies TextFieldComponentSchema,
+            ],
+          } satisfies FieldsetComponentSchema,
+        ],
+      } satisfies FieldsetComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+
+    const inputLabel = canvas.getByText('Fieldset preview');
+    const inputWrapper = inputLabel.closest('[data-testid="designerPreview"]');
+
+    const hiddenInputLabel = canvas.getByText('Fieldset preview hidden');
+    const hiddenInputWrapper = hiddenInputLabel.closest('[data-testid="designerPreview"]');
+
+    // Expect the wrapper of the hidden component to have a descriptive "is hidden" title
+    expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
+
+    await step('Interaction with fieldset component', async () => {
+      const wrapper = within(inputWrapper as HTMLElement);
+
+      // The 'empty' message should not be displayed when there are nested components
+      expect(
+        wrapper.queryByText('Drag a component in the form and release the mouse button')
+      ).not.toBeInTheDocument();
+
+      const nestedFieldset = wrapper.getByText('Nested fieldset preview');
+      const nestedFieldsetWrapper = nestedFieldset.closest('[data-testid="designerPreview"]');
+
+      expect(nestedFieldset).toBeVisible();
+      expect(nestedFieldsetWrapper).toBeInTheDocument();
+
+      // The deeply nested input is fully visible and accessible
+      const nestedWrapper = within(nestedFieldsetWrapper as HTMLElement);
+      const deepNestedInput = nestedWrapper.getByLabelText('Deep nested text field');
+      const deepNestedInputDescription = nestedWrapper.getByText(
+        'Description of nested text field'
+      );
+      expect(deepNestedInput).toBeVisible();
+      expect(deepNestedInputDescription).toBeVisible();
+
+      expect(deepNestedInput).toHaveDisplayValue('');
+      await userEvent.type(deepNestedInput, 'something cool');
+      expect(deepNestedInput).toHaveDisplayValue('something cool');
+    });
+
+    await step('Interaction with hidden fieldset component', async () => {
+      const wrapper = within(hiddenInputWrapper as HTMLElement);
+
+      // The 'empty' message should not be displayed when there are nested components
+      expect(
+        wrapper.queryByText('Drag a component in the form and release the mouse button')
+      ).not.toBeInTheDocument();
+
+      const nestedFieldset = wrapper.getByText('Nested fieldset preview');
+      const nestedFieldsetWrapper = nestedFieldset.closest('[data-testid="designerPreview"]');
+
+      expect(nestedFieldset).toBeVisible();
+      expect(nestedFieldsetWrapper).toBeInTheDocument();
+
+      // The deeply nested input is fully visible and accessible
+      const nestedWrapper = within(nestedFieldsetWrapper as HTMLElement);
+      const deepNestedInput = nestedWrapper.getByLabelText('Deep nested text field');
+      const deepNestedInputDescription = nestedWrapper.getByText(
+        'Description of nested text field'
+      );
+      expect(deepNestedInput).toBeVisible();
+      expect(deepNestedInputDescription).toBeVisible();
+
+      expect(deepNestedInput).toHaveDisplayValue('');
+      await userEvent.type(deepNestedInput, 'something cool');
+      expect(deepNestedInput).toHaveDisplayValue('something cool');
+    });
   },
 };
 
