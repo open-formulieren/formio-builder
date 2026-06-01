@@ -14,33 +14,66 @@ import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 export interface ComponentsPreviewProps {
   components: (AnyComponentSchema | ComponentPlaceholder)[];
+  dropzoneId: string;
+  hideEmptyMessage?: boolean;
 }
 
-export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({components}) => {
+export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
+  components,
+  dropzoneId,
+  hideEmptyMessage = false,
+}) => {
+  const hasComponents =
+    components.filter(component => component.type !== COMPONENT_PLACEHOLDER_TYPE).length > 0;
+
   return (
-    <div className="offb-designer-preview-container">
-      <ErrorBoundary>
-        <DropZone id="main-dropzone">
-          {components.map((component, index) =>
-            component.type === COMPONENT_PLACEHOLDER_TYPE ? (
-              <ComponentPlaceholderPreview componentType={component.componentType} />
-            ) : (
-              <SortableComponent
-                key={component.key}
-                id={component.id}
-                index={index}
-                groupName="main-dropzone"
-                component={component}
-              >
-                <ComponentPreview component={component} />
-              </SortableComponent>
-            )
-          )}
-        </DropZone>
-      </ErrorBoundary>
-    </div>
+    <ErrorBoundary>
+      <DropZone id={dropzoneId}>
+        {!hasComponents && <EmptyComponentsPreviewMessage hideEmptyMessage={hideEmptyMessage} />}
+        {components.map((component, index) =>
+          component.type === COMPONENT_PLACEHOLDER_TYPE ? (
+            <ComponentPlaceholderPreview
+              key="placeholder"
+              componentType={component.componentType}
+            />
+          ) : (
+            <SortableComponent
+              key={component.key}
+              id={component.id}
+              index={index}
+              groupName={dropzoneId}
+              component={component}
+            >
+              <ComponentPreview component={component} />
+            </SortableComponent>
+          )
+        )}
+      </DropZone>
+    </ErrorBoundary>
   );
 };
+
+interface EmptyComponentsPreviewMessageProps {
+  hideEmptyMessage: boolean;
+}
+
+const EmptyComponentsPreviewMessage: React.FC<EmptyComponentsPreviewMessageProps> = ({
+  hideEmptyMessage,
+}) => (
+  <ContentPlaceholder variant="designer">
+    {hideEmptyMessage && '+'}
+    <div
+      className={clsx({
+        'sr-only': hideEmptyMessage,
+      })}
+    >
+      <FormattedMessage
+        description="Components preview empty content description"
+        defaultMessage="Drag a component in the form and release the mouse button."
+      />
+    </div>
+  </ContentPlaceholder>
+);
 
 interface ComponentPlaceholderPreviewProps {
   componentType: AnyComponentSchema['type'];

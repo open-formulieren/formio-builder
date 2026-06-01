@@ -1,14 +1,22 @@
 .offb-drop-zone {
   height: 100%;
-  padding: 10px;
-  border: dotted 2px #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   &:hover {
     border-color: #ccc;
   }
 
-  .offb-designer-preview,
-  .offb-content-placeholder {
-    margin-block-end: 1rem;
+  .offb-designer-preview {
+    .form-group {
+      // The margin-bottom for the preview items is managed by the drop-zone component.
+      margin-block-end: 0;
+    }
+  }
+
+  .offb-drop-zone {
+    padding: 10px;
+    border: dotted 2px #e8e8e8;
   }
 }

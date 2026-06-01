@@ -14,6 +14,7 @@ import {
   replacePlaceholderWithComponent,
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
+import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
@@ -110,7 +111,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({comp
           <ComponentsList />
         </div>
         <div className="col col-10">
-          <ComponentsPreview components={items.components} />
+          <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
         </div>
       </div>
     </DragDropProvider>
