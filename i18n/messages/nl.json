@@ -397,6 +397,11 @@
     "description": "Label for 'shouldUpdateCustomerData' builder field",
     "originalDefault": "Open Forms should update customer data after submission"
   },
+  "9dLBrj": {
+    "defaultMessage": "Do not display the configured label and top line as the header in the container fieldset.",
+    "description": "Tooltip for 'hideLabel' builder field",
+    "originalDefault": "Do not display the configured label and top line as the header in the container fieldset."
+  },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
     "description": "Operator 'subtract' option label",
