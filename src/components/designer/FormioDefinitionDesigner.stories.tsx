@@ -1,9 +1,54 @@
 import type {TextFieldComponentSchema} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
+import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import {DesignerContextDecorator, withFormik} from '@/sb-decorators';
 
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
+
+const dragTo = async (source: HTMLElement, target: HTMLElement) => {
+  // To drag the dnd elements, we need the actual page coordinates.
+  const sourceRect = source.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  const sourceX = sourceRect.left + sourceRect.width / 2;
+  const sourceY = sourceRect.top + sourceRect.height / 2;
+
+  const targetX = targetRect.left + targetRect.width / 2;
+  const targetY = targetRect.top + targetRect.height / 2;
+
+  // Start a drag by clicking the left mouse button and moving the mouse on the target.
+  await userEvent.pointer([
+    {
+      keys: '[MouseLeft>]',
+      target: source,
+      coords: {clientX: sourceX, clientY: sourceY},
+    },
+    {
+      pointerName: 'mouse',
+      coords: {clientX: sourceX + 10, clientY: sourceY + 10},
+    },
+    {
+      pointerName: 'mouse',
+      target,
+      coords: {clientX: targetX, clientY: targetY},
+    },
+  ]);
+
+  // Wait for the placeholder to be rendered in the dropzone.
+  await waitFor(() => {
+    expect(within(target).getByTestId('component-placeholder')).toBeInTheDocument();
+  });
+
+  // Click the left mouse button again to stop dragging/drop the component.
+  await userEvent.pointer([
+    {
+      keys: '[MouseLeft]',
+      target: document.body,
+      coords: {clientX: targetX, clientY: targetY},
+    },
+  ]);
+};
 
 export default {
   title: 'Form designer/Form designer',
@@ -15,6 +60,12 @@ export default {
 } satisfies Meta<typeof FormioDefinitionDesigner>;
 
 type Story = StoryObj<typeof FormioDefinitionDesigner>;
+
+export const Default: Story = {
+  args: {
+    components: [],
+  },
+};
 
 export const WithTextfieldComponents: Story = {
   args: {
@@ -44,5 +95,33 @@ export const WithTextfieldComponents: Story = {
         showCharCount: true,
       } satisfies TextFieldComponentSchema,
     ],
+  },
+};
+
+export const AddComponentToDropzone: Story = {
+  args: {
+    components: [],
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+    const basicComponentsList = canvas.getByTestId('component-group--basic');
+    const textareaDraggableItem = await within(basicComponentsList).findByRole('button', {
+      name: 'Textarea',
+    });
+    const dropzone = canvas.getByTestId('main-dropzone');
+
+    // As there are no components, a "how to add components" message should be displayed.
+    expect(
+      within(dropzone).getByText('Drag a component in the form and release the mouse button.')
+    ).toBeVisible();
+
+    await dragTo(textareaDraggableItem, dropzone);
+
+    // The textarea component should be added to the dropzone
+    expect(within(dropzone).getByTestId('input-textarea'));
+    // As the dropzone isn't empty anymore, the instructions message should be gone.
+    expect(
+      within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
+    ).not.toBeInTheDocument();
   },
 };

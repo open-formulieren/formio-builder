@@ -85,7 +85,7 @@ const ComponentPlaceholderPreview: React.FC<ComponentPlaceholderPreviewProps> = 
   const {formDesigner, builderInfo} = getRegistryEntry(componentType);
 
   return (
-    <ContentPlaceholder key="spacer" variant="designer">
+    <ContentPlaceholder key="spacer" variant="designer" testId="component-placeholder">
       <i className={clsx('fa', `fa-${builderInfo.icon}`, 'mr-2')} aria-hidden="true" />
       <FormattedMessage {...formDesigner.label} />
     </ContentPlaceholder>

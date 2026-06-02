@@ -14,7 +14,7 @@ const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
   const {ref} = useDroppable({id});
 
   return (
-    <div className="offb-drop-zone" ref={ref}>
+    <div className="offb-drop-zone" data-testid={id} ref={ref}>
       {children}
     </div>
   );
