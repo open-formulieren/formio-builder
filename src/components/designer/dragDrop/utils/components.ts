@@ -1,7 +1,11 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import type {Draft} from 'immer';
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 
+import {
+  MAIN_DROPZONE_ID,
+  getComponentKeyFromDropzoneId,
+} from '@/components/designer/dragDrop/utils/dropzone';
 import type {ComponentPlaceholder} from '@/components/designer/types';
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
@@ -10,14 +14,33 @@ import {hasOwnProperty} from '@/types';
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 type DraftComponentDefinitions = Draft<{components: ComponentDefinition[]}>;
 
+const hasNestedChildren = (
+  children: AnyComponentSchema[] | AnyComponentSchema[][]
+): children is AnyComponentSchema[][] => children.length > 0 && Array.isArray(children[0]);
+
+interface IterComponentsReturn {
+  /**
+   * The index of the current item.
+   */
+  index: number;
+  /**
+   * The current item.
+   */
+  component: ComponentDefinition;
+  /**
+   * The collection of items that the current item belongs to.
+   */
+  collection: ComponentDefinition[];
+}
+
 /**
  * Recursively (and depth-first) iterate over all components in the component definition.
  */
 function* iterComponents(
   componentDefinitions: ComponentDefinition[]
-): Generator<ComponentDefinition> {
-  for (const component of componentDefinitions) {
-    yield component;
+): Generator<IterComponentsReturn> {
+  for (const [index, component] of componentDefinitions.entries()) {
+    yield {index, component, collection: componentDefinitions};
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
     const {getChildComponents} = getRegistryEntry(component.type);
@@ -25,12 +48,68 @@ function* iterComponents(
     const children = getChildComponents ? getChildComponents(component) : [];
     if (!children.length) continue;
 
-    yield* iterComponents(children);
+    if (hasNestedChildren(children)) {
+      for (const child of children) {
+        yield* iterComponents(child);
+      }
+    } else {
+      yield* iterComponents(children);
+    }
   }
 }
 
 /**
- * Recursively find all component keys that start with the given string.
+ * Get the components for a given dropzone.
+ */
+export const getDropzoneComponents = (
+  draft: DraftComponentDefinitions,
+  dropzoneId: string
+): ComponentDefinition[] | undefined => {
+  if (dropzoneId === MAIN_DROPZONE_ID) {
+    return draft.components;
+  }
+
+  const parentKey = getComponentKeyFromDropzoneId(dropzoneId);
+  return findDropzoneComponentsByKey(draft.components, parentKey);
+};
+
+/**
+ * Search for a layout component that belongs to the given dropzone key and return its
+ * children components.
+ *
+ * In the case of the columns component, the dropzone key contains the column index, and
+ * we must return the children of that column.
+ */
+const findDropzoneComponentsByKey = (
+  componentDefinitions: ComponentDefinition[],
+  key: string
+): ComponentDefinition[] | undefined => {
+  for (const {component} of iterComponents(componentDefinitions)) {
+    if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
+
+    // Without the getChildComponents method, we cannot retrieve the component children.
+    const {getChildComponents} = getRegistryEntry(component.type);
+    if (!getChildComponents) continue;
+
+    const children = getChildComponents(component);
+
+    // If the children are an array of arrays, we are dealing with a columns component.
+    // The column index is part of the dropzone key, so we have to find the correct
+    // column.
+    if (hasNestedChildren(children)) {
+      for (const [index, child] of children.entries()) {
+        if (`${component.key}.${index}` === key) return child;
+      }
+    } else if (component.key === key) {
+      return children;
+    }
+  }
+
+  return undefined;
+};
+
+/**
+ * Find all component keys that start with the given string.
  */
 const findComponentKeysStartingWith = (
   startsWith: string,
@@ -38,7 +117,7 @@ const findComponentKeysStartingWith = (
 ): string[] => {
   const similarKeys: string[] = [];
 
-  for (const component of iterComponents(componentNamespace)) {
+  for (const {component} of iterComponents(componentNamespace)) {
     if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key.startsWith(startsWith)) {
       similarKeys.push(component.key);
     }
@@ -107,74 +186,43 @@ export const createComponent = <S extends AnyComponentSchema>(
 };
 
 /**
- * Recursively remove the placeholder from the components.
- */
-const removePlaceholderFromComponents = (componentDefinitions: ComponentDefinition[]) => {
-  const index = componentDefinitions.findIndex(
-    component => component.type === COMPONENT_PLACEHOLDER_TYPE
-  );
-
-  // If the placeholder is found, remove it.
-  if (index >= 0) {
-    componentDefinitions.splice(index, 1);
-    return;
-  }
-
-  // Implement recursive search into nested dropzones
-};
-
-/**
- * Remove the placeholder from the draft.
+ * Remove the placeholder from the draft components.
  */
 export const removePlaceholderFromDraft = (draft: DraftComponentDefinitions) => {
-  removePlaceholderFromComponents(draft.components);
-};
-
-/**
- * Recursively remove a component from the componentDefinitions, using the component key
- * as an identifier.
- */
-const removeComponentFromComponents = (
-  componentDefinitions: ComponentDefinition[],
-  key: string
-) => {
-  const index = componentDefinitions.findIndex(
-    component => component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key === key
-  );
-
-  // If the placeholder is found, remove it.
-  if (index >= 0) {
-    componentDefinitions.splice(index, 1);
-    return;
+  for (const {index, component, collection} of iterComponents(draft.components)) {
+    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+      collection.splice(index, 1);
+      return;
+    }
   }
-
-  // Implement recursive search into nested dropzones
 };
 
 /**
- * Remove a component from the draft, using the component key as an identifier, and
- * return the removed component.
+ * Remove a component from the draft components, using the component key as an
+ * identifier.
  */
 export const removeComponentFromDraft = (draft: DraftComponentDefinitions, key: string) => {
-  removeComponentFromComponents(draft.components, key);
+  for (const {index, component, collection} of iterComponents(draft.components)) {
+    if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key === key) {
+      collection.splice(index, 1);
+      return;
+    }
+  }
 };
 
 /**
- * Recursively search for the placeholder in the components and replace it with the given
- * component.
+ * Search for the placeholder in the components and replace it with the given component.
  */
 export const replacePlaceholderWithComponent = (
   componentDefinitions: ComponentDefinition[],
   component: AnyComponentSchema
 ) => {
-  const index = componentDefinitions.findIndex(
-    componentDefinition => componentDefinition.type === COMPONENT_PLACEHOLDER_TYPE
-  );
-
-  if (index >= 0) {
-    componentDefinitions[index] = component;
-    return;
+  for (const {index, component: componentDefinition, collection} of iterComponents(
+    componentDefinitions
+  )) {
+    if (componentDefinition.type === COMPONENT_PLACEHOLDER_TYPE) {
+      collection[index] = component;
+      return;
+    }
   }
-
-  // Implement recursive search into nested dropzones
 };
