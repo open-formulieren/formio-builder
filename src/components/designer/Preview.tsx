@@ -1,3 +1,4 @@
+import {useDragOperation} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -9,6 +10,7 @@ import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
 import {DropZone, SortableComponent} from './dragDrop';
+import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
 import type {ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
@@ -23,8 +25,13 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
   dropzoneId,
   hideEmptyMessage = false,
 }) => {
-  const hasComponents =
-    components.filter(component => component.type !== COMPONENT_PLACEHOLDER_TYPE).length > 0;
+  const {target} = useDragOperation();
+  const targetDropzone = getTargetDropzoneId(target);
+
+  const isDraggingAboveDropzone = targetDropzone !== undefined && targetDropzone === dropzoneId;
+  // Count the number of components in the dropzone, excluding dragged components.
+  const componentCountThreshold = isDraggingAboveDropzone ? 1 : 0;
+  const hasComponents = components.length > componentCountThreshold;
 
   return (
     <ErrorBoundary>

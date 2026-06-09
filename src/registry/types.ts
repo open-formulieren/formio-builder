@@ -87,7 +87,10 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   // initial data
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
   comparisonValue?: React.FC<ComparisonValueProps>;
-  getChildComponents?: (component: S) => AnyComponentSchema[];
+  // All components that can have children should implement this method.
+  // The children should be returned as a one-level array, unless the nested structure is
+  // significant for the component (like in the case of a columns component).
+  getChildComponents?: (component: S) => AnyComponentSchema[] | AnyComponentSchema[][];
 }
 
 // Registry made up of registry entries, one for each possible component schema
