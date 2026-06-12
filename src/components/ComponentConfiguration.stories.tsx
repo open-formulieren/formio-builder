@@ -14,10 +14,8 @@ import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test'
 import type {FormType} from '@/context';
 import type {BuilderInfo} from '@/registry/types';
 import {
-  CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
-  DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
@@ -165,8 +163,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getMapTileLayers={async () => DEFAULT_MAP_TILE_LAYERS}
     getMapOverlayTileLayers={async () => DEFAULT_MAP_OVERLAY_TILE_LAYERS}
     serverUploadLimit="50MB"
-    getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
-    getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
     component={component}
     isNew={isNew}
@@ -1174,20 +1170,6 @@ export const FileUpload: Story = {
         },
         fileMaxSize: '10MB',
         maxNumberOfFiles: null,
-        // registration tab
-        registration: {
-          documentType: {
-            catalogue: {
-              domain: '',
-              rsin: '',
-            },
-            description: '',
-          },
-          informatieobjecttype: '',
-          bronorganisatie: '',
-          docVertrouwelijkheidaanduiding: '',
-          titel: '',
-        },
         // custom extensions
         openForms: {
           softRequired: false,

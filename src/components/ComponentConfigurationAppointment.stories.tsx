@@ -10,10 +10,8 @@ import {fn} from 'storybook/test';
 import type {FormType} from '@/context';
 import type {BuilderInfo} from '@/registry/types';
 import {
-  CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
-  DEFAULT_DOCUMENT_TYPES,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
 } from '@/tests/sharedUtils';
@@ -111,8 +109,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getMapTileLayers={async () => DEFAULT_MAP_TILE_LAYERS}
     getMapOverlayTileLayers={async () => DEFAULT_MAP_OVERLAY_TILE_LAYERS}
     serverUploadLimit="50MB"
-    getDocumentTypes={async () => DEFAULT_DOCUMENT_TYPES}
-    getConfidentialityLevels={async () => CONFIDENTIALITY_LEVELS}
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
     component={component}
     isNew={isNew}

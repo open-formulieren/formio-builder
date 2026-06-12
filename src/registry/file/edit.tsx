@@ -23,7 +23,6 @@ import {useErrorChecker} from '@/utils/errors';
 
 import {EditFormDefinition} from '../types';
 import FileTabFields from './file-tab';
-import RegistrationTabFields from './registration-tab';
 
 /**
  * Form to configure a Formio 'file' type component.
@@ -106,7 +105,11 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
 
       {/* Registration tab */}
       <TabPanel>
-        <RegistrationTabFields />
+        <FormattedMessage
+          description="File component registration tab configuration moved notice"
+          defaultMessage={`The file registration options have been moved to the 'variables'
+          tab of the form edit page.`}
+        />
       </TabPanel>
 
       {/* Translations */}
@@ -175,21 +178,6 @@ EditForm.defaultValues = {
   },
   fileMaxSize: '10MB',
   maxNumberOfFiles: null,
-  // registration tab
-  registration: {
-    bronorganisatie: '',
-    docVertrouwelijkheidaanduiding: '',
-    titel: '',
-    documentType: {
-      catalogue: {
-        domain: '',
-        rsin: '',
-      },
-      description: '',
-    },
-    // deprecated
-    informatieobjecttype: '',
-  },
 };
 
 export default EditForm;
