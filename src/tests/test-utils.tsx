@@ -16,13 +16,11 @@ import {
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
 import {BuilderContext, BuilderContextType} from '@/context';
-import type {DocumentTypeOption, SelectOption} from '@/context';
+import type {SelectOption} from '@/context';
 import {
-  CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
-  DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
   DEFAULT_FORM_TYPE,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
@@ -48,7 +46,6 @@ interface BuilderOptions {
   prefillAttributes: {[key: string]: PrefillAttributeOption[]};
   prefillAttributesDelay: number;
   fileTypes: SelectOption[];
-  documentTypes: DocumentTypeOption[];
   confidentialityLevels: SelectOption[];
   referenceListsServices: ReferenceListsServiceOption[];
   referenceListsTables: ReferenceListsTable[];
@@ -121,9 +118,6 @@ const contextRender = (
               },
               getFileTypes: async () => builderOptions.fileTypes || DEFAULT_FILE_TYPES,
               serverUploadLimit: '50MB',
-              getDocumentTypes: async () => builderOptions.documentTypes || DEFAULT_DOCUMENT_TYPES,
-              getConfidentialityLevels: async () =>
-                builderOptions.confidentialityLevels || CONFIDENTIALITY_LEVELS,
               getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
             }}
           >
@@ -207,8 +201,6 @@ const dummyBuilderContext: BuilderContextType = {
   getReferenceListsTableItems: async () => [],
   getFileTypes: async () => [],
   serverUploadLimit: '(unknown)',
-  getDocumentTypes: async () => [],
-  getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
 };
 

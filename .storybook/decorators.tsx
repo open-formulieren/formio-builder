@@ -5,11 +5,9 @@ import {ModalContext} from '@/components/Modal';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
 import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
-  CONFIDENTIALITY_LEVELS,
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
-  DEFAULT_DOCUMENT_TYPES,
   DEFAULT_FILE_TYPES,
   DEFAULT_FORM_TYPE,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
@@ -80,8 +78,6 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultPrefillAttributes =
     context.parameters.builder?.defaultPrefillAttributes || DEFAULT_PREFILL_ATTRIBUTES;
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
-  const defaultdocumentTypes =
-    context.parameters.builder?.defaultdocumentTypes || DEFAULT_DOCUMENT_TYPES;
   const regularFormType = context.parameters.builder?.formType || DEFAULT_FORM_TYPE;
 
   return (
@@ -141,8 +137,6 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
           return context?.args?.fileTypes || defaultFileTypes;
         },
         serverUploadLimit: '50MB',
-        getDocumentTypes: async () => context?.args?.documentTypes || defaultdocumentTypes,
-        getConfidentialityLevels: async () => CONFIDENTIALITY_LEVELS,
         getAuthPlugins: async () => DEFAULT_AUTH_PLUGINS,
       }}
     >

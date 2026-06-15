@@ -5,7 +5,7 @@ import {
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import type {DocumentTypeOption, MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
+import type {MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
 import type {FormType} from '@/context';
 import {AnyComponentSchema} from '@/types';
 
@@ -195,45 +195,6 @@ export const DEFAULT_FILE_TYPES: SelectOption[] = [
     value:
       'application/acad.dwg,application/autocad_dwg.dwg,application/dwg.dwg,application/x-acad.dwg,application/x-autocad.dwg,application/x-dwg.dwg,drawing/dwg.dwg,image/vnd.dwg,image/x-dwg.dwg',
   },
-];
-
-export const DEFAULT_DOCUMENT_TYPES: DocumentTypeOption[] = [
-  {
-    backendLabel: '',
-    catalogueLabel: 'VTH (RSIN: 000000000)',
-    url: 'https://example.com/iotype/123',
-    description: 'Vergunning',
-  },
-  {
-    backendLabel: 'Open Zaak',
-    catalogueLabel: 'VTH (RSIN: 000000000)',
-
-    url: 'https://example.com/iotype/456',
-    description: 'Vergunning',
-  },
-  {
-    backendLabel: 'Open Zaak',
-    catalogueLabel: 'VTH (RSIN: 000000000)',
-    url: 'https://example.com/iotype/789',
-    description: 'Ontheffing',
-  },
-  {
-    backendLabel: 'Open Zaak',
-    catalogueLabel: 'Test catalogus name',
-    url: 'https://example.com/iotype/abc',
-    description: 'Aanvraag',
-  },
-];
-
-export const CONFIDENTIALITY_LEVELS: SelectOption[] = [
-  {label: 'Openbaar', value: 'openbaar'},
-  {label: 'Beperkt openbaar', value: 'beperkt_openbaar'},
-  {label: 'Intern', value: 'intern'},
-  {label: 'Zaakvertrouwelijk', value: 'zaakvertrouwelijk'},
-  {label: 'Vertrouwelijk', value: 'vertrouwelijk'},
-  {label: 'Confidentieel', value: 'confidentieel'},
-  {label: 'Geheim', value: 'geheim'},
-  {label: 'Zeer geheim', value: 'zeer_geheim'},
 ];
 
 export const DEFAULT_AUTH_PLUGINS: AuthPluginOption[] = [

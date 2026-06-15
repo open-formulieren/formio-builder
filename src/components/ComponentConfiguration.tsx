@@ -46,8 +46,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   getPrefillAttributes,
   getFileTypes,
   serverUploadLimit,
-  getDocumentTypes,
-  getConfidentialityLevels,
   getAuthPlugins,
   isNew,
   component,
@@ -80,8 +78,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
         getPrefillAttributes,
         getFileTypes,
         serverUploadLimit,
-        getDocumentTypes,
-        getConfidentialityLevels,
         getAuthPlugins,
       }}
     >

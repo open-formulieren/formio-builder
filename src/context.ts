@@ -22,19 +22,6 @@ export interface SelectOption {
 }
 
 /*
-  ZGW Document types integration
-
-  This datastructure is created by the Open Forms backend which takes the registration
-  backends on the form into account.
- */
-export interface DocumentTypeOption {
-  backendLabel: string;
-  catalogueLabel: string;
-  url: string;
-  description: string;
-}
-
-/*
   Map background tile layers
 
   This datastructure is created by the Open Forms backend.
@@ -90,8 +77,6 @@ export interface BuilderContextType {
   getPrefillAttributes: (plugin: string) => Promise<PrefillAttributeOption[]>;
   getFileTypes: () => Promise<SelectOption[]>;
   serverUploadLimit: string;
-  getDocumentTypes: () => Promise<Array<DocumentTypeOption>>;
-  getConfidentialityLevels: () => Promise<SelectOption[]>;
   getAuthPlugins: () => Promise<AuthPluginOption[]>;
   getMapTileLayers: () => Promise<MapTileLayer[]>;
   getMapOverlayTileLayers: () => Promise<MapOverlayTileLayer[]>;
@@ -113,8 +98,6 @@ const BuilderContext = React.createContext<BuilderContextType>({
   getPrefillAttributes: async () => [],
   getFileTypes: async () => [],
   serverUploadLimit: '(unknown)',
-  getDocumentTypes: async () => [],
-  getConfidentialityLevels: async () => [],
   getAuthPlugins: async () => [],
   getMapTileLayers: async () => [],
   getMapOverlayTileLayers: async () => [],
