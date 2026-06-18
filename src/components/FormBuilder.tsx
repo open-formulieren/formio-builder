@@ -14,6 +14,11 @@ export interface FormBuilderProps {
    */
   components: AnyComponentSchema[];
   /**
+   * A flatmap of all components in the form. Used when creating component keys to
+   * validate complete uniqueness.
+   */
+  componentNamespace: AnyComponentSchema[];
+  /**
    * The regular component groups that are shown in the form builder components list.
    */
   groups: ComponentGroup[];
@@ -21,9 +26,16 @@ export interface FormBuilderProps {
    * Custom-defined component presets that are shown in the form builder components list.
    */
   presets: PresetComponentDefinition[];
+  onChange: (components: AnyComponentSchema[]) => void;
 }
 
-const FormBuilder: React.FC<FormBuilderProps> = ({components, presets, groups}) => {
+const FormBuilder: React.FC<FormBuilderProps> = ({
+  components,
+  componentNamespace,
+  presets,
+  groups,
+  onChange,
+}) => {
   const initialValues = components.reduce<Record<string, JSONValue | {}>>((carry, component) => {
     const entry = getRegistryEntry(component.type);
     const {key} = component;
@@ -43,7 +55,7 @@ const FormBuilder: React.FC<FormBuilderProps> = ({components, presets, groups}) 
   }, {});
 
   return (
-    <DesignerContext.Provider value={{groups, presets}}>
+    <DesignerContext.Provider value={{componentNamespace, groups, presets}}>
       <Formik
         enableReinitialize
         initialValues={initialValues}
@@ -51,7 +63,7 @@ const FormBuilder: React.FC<FormBuilderProps> = ({components, presets, groups}) 
           throw new Error("Can't submit preview form");
         }}
       >
-        <FormioDefinitionDesigner components={components} />
+        <FormioDefinitionDesigner components={components} onChange={onChange} />
       </Formik>
     </DesignerContext.Provider>
   );

@@ -1,10 +1,14 @@
-import type {TextFieldComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema, TextFieldComponentSchema} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
+import {useState} from 'react';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
 
+import {DesignerContext} from '@/context';
 import {DesignerContextDecorator, withFormik} from '@/sb-decorators';
+import {DEFAULT_FORM_DESIGNER_GROUPS, DEFAULT_FORM_DESIGNER_PRESETS} from '@/tests/sharedUtils';
 
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
+import type {FormioDefinitionDesignerProps} from './FormioDefinitionDesigner';
 
 const dragTo = async (source: HTMLElement, target: HTMLElement) => {
   // To drag the dnd elements, we need the actual page coordinates.
@@ -50,10 +54,35 @@ const dragTo = async (source: HTMLElement, target: HTMLElement) => {
   ]);
 };
 
+/**
+ * Mimic a real implementation of the FormioDefinitionDesigner component, where adding
+ * new components updates the componentNamespace, ensuring that component keys remain
+ * unique.
+ */
+const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps) => {
+  const [namespace, setNamespace] = useState<AnyComponentSchema[]>(props.components.flat(1));
+
+  return (
+    <DesignerContext.Provider
+      value={{
+        componentNamespace: namespace,
+        groups: DEFAULT_FORM_DESIGNER_GROUPS,
+        presets: DEFAULT_FORM_DESIGNER_PRESETS,
+      }}
+    >
+      <FormioDefinitionDesigner
+        {...props}
+        onChange={components => setNamespace(components.flat(1))}
+      />
+    </DesignerContext.Provider>
+  );
+};
+
 export default {
   title: 'Form designer/Form designer',
   decorators: [withFormik, DesignerContextDecorator],
   component: FormioDefinitionDesigner,
+  render: StorybookFormioDefinitionDesigner,
   parameters: {
     modal: {noModal: true},
   },
@@ -118,7 +147,7 @@ export const AddComponentToDropzone: Story = {
     await dragTo(textareaDraggableItem, dropzone);
 
     // The textarea component should be added to the dropzone
-    expect(within(dropzone).getByTestId('input-textarea'));
+    expect(within(dropzone).getByTestId('input-Textarea'));
     // As the dropzone isn't empty anymore, the instructions message should be gone.
     expect(
       within(dropzone).queryByText('Drag a component in the form and release the mouse button.')

@@ -111,6 +111,10 @@ BuilderContext.displayName = 'BuilderContext';
  */
 export interface DesignerContextType {
   /**
+   * A flatmap of all components in the form.
+   */
+  componentNamespace: AnyComponentSchema[];
+  /**
    * The regular component groups that are shown in the builder.
    */
   groups: ComponentGroup[];
@@ -121,6 +125,7 @@ export interface DesignerContextType {
 }
 
 const DesignerContext = React.createContext<DesignerContextType>({
+  componentNamespace: [],
   groups: [],
   presets: [],
 });

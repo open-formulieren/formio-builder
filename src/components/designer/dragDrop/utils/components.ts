@@ -1,5 +1,6 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import type {Draft} from 'immer';
+import {IntlShape} from 'react-intl';
 
 import type {ComponentPlaceholder} from '@/components/designer/types';
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
@@ -36,11 +37,11 @@ function* iterComponents(
  */
 const findComponentKeysStartingWith = (
   startsWith: string,
-  componentDefinitions: ComponentDefinition[]
+  componentNamespace: AnyComponentSchema[]
 ): string[] => {
   const similarKeys: string[] = [];
 
-  for (const component of iterComponents(componentDefinitions)) {
+  for (const component of iterComponents(componentNamespace)) {
     if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key.startsWith(startsWith)) {
       similarKeys.push(component.key);
     }
@@ -50,30 +51,37 @@ const findComponentKeysStartingWith = (
 };
 
 /**
- * Create a unique component key for the given component type.
+ * Create a unique component key for the provided component label.
  *
- * It looks through the existing componentDefinitions and searches for component keys
- * that start with the component type. If there are components with similar keys, it will
- * append a number to the end of the key to make it unique.
+ * The component label is turned into a key by removing all non-alphanumeric characters,
+ * making every word after the first capitalized, and joining them together.
+ *
+ * The component key is validated against the componentNamespace to ensure it is unique,
+ * adding additional numbering if necessary.
  * This is similar to the current Formio form builder implementation.
  */
 const createComponentKey = (
-  componentType: AnyComponentSchema['type'],
-  componentDefinitions: ComponentDefinition[]
+  componentLabel: string,
+  componentNamespace: AnyComponentSchema[]
 ): string => {
-  const componentsWithSimilarKeys = findComponentKeysStartingWith(
-    componentType,
-    componentDefinitions
-  );
+  // Remove all non-alphanumeric characters, make every word after the first capitalized,
+  // and join them together.
+  // @TODO handle special characters, like umlauts, etc.
+  const componentKey = componentLabel
+    .split(/[^a-zA-Z0-9]/g)
+    .filter(Boolean) // Remove empty strings
+    .map((str, index) => (index > 0 ? str[0].toUpperCase() + str.slice(1) : str))
+    .join('');
 
-  let componentKey: string = componentType;
+  const componentsWithSimilarKeys = findComponentKeysStartingWith(componentKey, componentNamespace);
   let index = 0;
+  let uniqueKey = componentKey;
 
-  while (componentsWithSimilarKeys.includes(componentKey)) {
+  while (componentsWithSimilarKeys.includes(uniqueKey)) {
     index++;
-    componentKey = `${componentType}${index}`;
+    uniqueKey = `${componentKey}${index}`;
   }
-  return componentKey;
+  return uniqueKey;
 };
 
 /**
@@ -83,17 +91,19 @@ const createComponentKey = (
  */
 export const createComponent = <S extends AnyComponentSchema>(
   componentType: S['type'],
-  componentDefinitions: ComponentDefinition[]
+  componentNamespace: AnyComponentSchema[],
+  intl: IntlShape
 ): S => {
-  const {edit, builderInfo} = getRegistryEntry(componentType);
+  const {edit, formDesigner} = getRegistryEntry(componentType);
+  const label = intl.formatMessage(formDesigner.label);
 
   // Define component with their editor default values, and some generic defaults.
   return {
     ...edit.defaultValues,
     id: window.crypto.randomUUID(),
     type: componentType,
-    key: createComponentKey(componentType, componentDefinitions),
-    ...(edit.defaultValues.hasOwnProperty('label') ? {label: builderInfo.title} : {}),
+    key: createComponentKey(label, componentNamespace),
+    ...(edit.defaultValues.hasOwnProperty('label') ? {label} : {}),
   } as S;
 };
 

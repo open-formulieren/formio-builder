@@ -151,6 +151,7 @@ export const DesignerContextDecorator: Decorator = (Story, context) => {
   return (
     <DesignerContext.Provider
       value={{
+        componentNamespace: context.parameters?.designer?.componentNamespace || [],
         groups: context.parameters?.designer?.groups || DEFAULT_FORM_DESIGNER_GROUPS,
         presets: context.parameters?.designer?.presets || DEFAULT_FORM_DESIGNER_PRESETS,
       }}
