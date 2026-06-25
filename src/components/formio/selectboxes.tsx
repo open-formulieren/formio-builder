@@ -1,8 +1,10 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {CheckboxInput} from './checkbox';
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 
 export interface Option {
   value: string;
@@ -16,6 +18,7 @@ export interface SelectBoxesProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: string;
   isLoading?: boolean;
 }
@@ -26,6 +29,7 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   isLoading = false,
 }) => {
@@ -53,6 +57,7 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
       </div>
 
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

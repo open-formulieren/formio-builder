@@ -22,6 +22,7 @@ import {
   ValuesTranslations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Radio, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -64,6 +65,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -88,6 +90,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />

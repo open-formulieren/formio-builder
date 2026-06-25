@@ -1,3 +1,4 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {useContext, useLayoutEffect, useRef} from 'react';
@@ -8,6 +9,7 @@ import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 import {withMultiple} from './multiple';
 
 export interface TextAreaProps {
@@ -15,6 +17,7 @@ export interface TextAreaProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: React.ReactNode;
   showCharCount?: boolean;
   autoExpand?: boolean;
@@ -26,6 +29,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   showCharCount = false,
   autoExpand = false,
@@ -98,6 +102,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
       <div>{inputField}</div>
       {charCount}
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

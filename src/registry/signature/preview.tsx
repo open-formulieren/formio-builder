@@ -6,6 +6,7 @@ import {useLayoutEffect, useRef} from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
 import {Component, Description} from '@/components/formio';
+import FAQItems from '@/components/formio/faq-items';
 
 import type {ComponentPreviewProps} from '../types';
 import './previews.scss';
@@ -21,7 +22,7 @@ const BG_COLOR = 'rgb(245,245,235)';
  */
 const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({component}) => {
   const {getFieldProps, getFieldHelpers} = useFormikContext();
-  const {key, label, description, tooltip, validate = {}, footer = ''} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}, footer = ''} = component;
   const {setValue} = getFieldHelpers<SignatureValue | ''>(key);
   const {required = false} = validate;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -109,6 +110,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
       </div>
 
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

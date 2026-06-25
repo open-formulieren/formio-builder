@@ -2,6 +2,7 @@ import type {FileComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {Component, Description} from '@/components/formio';
+import FAQItems from '@/components/formio/faq-items';
 
 import type {ComponentPreviewProps} from '../types';
 import './previews.scss';
@@ -14,7 +15,7 @@ import './previews.scss';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<FileComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}} = component;
   const {required = false} = validate;
 
   return (
@@ -77,6 +78,7 @@ const Preview: React.FC<ComponentPreviewProps<FileComponentSchema>> = ({componen
         </div>
       </div>
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

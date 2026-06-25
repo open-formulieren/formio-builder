@@ -18,6 +18,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, NumberField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -47,6 +48,7 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -70,6 +72,7 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />

@@ -14,6 +14,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -58,6 +59,7 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
             'groupLabel',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -82,6 +84,7 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <GroupLabel />
         <Hidden />
         <ClearOnHide />

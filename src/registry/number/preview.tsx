@@ -13,7 +13,7 @@ import type {ComponentPreviewProps} from '../types';
  */
 const Preview: React.FC<ComponentPreviewProps<NumberComponentSchema>> = ({component}) => {
   // FIXME: incorporate decimalLimit and allowNegative
-  const {key, label, description, tooltip, validate = {}, suffix = ''} = component;
+  const {key, label, description, tooltip, validate = {}, faqItems = [], suffix = ''} = component;
   const {required = false} = validate;
   return (
     <NumberField
@@ -21,6 +21,7 @@ const Preview: React.FC<ComponentPreviewProps<NumberComponentSchema>> = ({compon
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       suffix={suffix}
     />

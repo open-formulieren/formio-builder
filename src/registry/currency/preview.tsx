@@ -13,14 +13,16 @@ import type {ComponentPreviewProps} from '../types';
  */
 const Preview: React.FC<ComponentPreviewProps<CurrencyComponentSchema>> = ({component}) => {
   // FIXME: incorporate decimalLimit and allowNegative
-  const {key, label, description, tooltip, validate = {}} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}} = component;
   const {required = false} = validate;
+
   return (
     <NumberField
       name={key}
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       prefix="€"
     />

@@ -1,3 +1,4 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import type {ChangeEvent} from 'react';
@@ -7,12 +8,14 @@ import {useValidationErrors} from '@/utils/errors';
 import Affix from './affix';
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 
 export interface NumberProps {
   name: string;
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: React.ReactNode;
   prefix?: string;
   suffix?: string;
@@ -27,6 +30,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   prefix = '',
   suffix = '',
@@ -40,7 +44,6 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   const {setValue} = getFieldHelpers<NumberFieldValue>(name);
 
   const htmlId = `editform-${name}`;
-
   return (
     <Component
       type="number"
@@ -75,6 +78,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
         </Wrapper>
       </div>
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

@@ -1,3 +1,4 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {useField} from 'formik';
 import type React from 'react';
 import ReactSelect from 'react-select';
@@ -12,6 +13,7 @@ import type {
 
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 
 // alias so that we can keep track of them and improve with generics at some point.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,6 +31,7 @@ export interface SelectProps<
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: React.ReactNode;
   isClearable?: boolean;
   valueProperty?: string;
@@ -183,6 +186,7 @@ function Select<
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   isClearable = false,
   isLoading = false,
@@ -249,6 +253,7 @@ function Select<
         />
       </div>
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 }
