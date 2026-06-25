@@ -1,6 +1,7 @@
 import {PostcodeComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 import {POSTCODE_REGEX} from './constants';
@@ -26,11 +27,13 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = defaultValidate,
     disabled = false,
     multiple,
   } = component;
   const {required = false, pattern} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextField
       name={key}
@@ -38,6 +41,7 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       readOnly={disabled}
       placeholder="9999 AA"

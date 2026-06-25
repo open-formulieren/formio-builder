@@ -6,6 +6,7 @@ import {useAsync} from 'react-use';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
 import {transformItems} from '@/components/builder/values/reference-lists/utils';
 import {SelectBoxes} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 import {BuilderContext} from '@/context';
 
 import {ComponentPreviewProps} from '../types';
@@ -20,7 +21,7 @@ import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
  */
 const Preview: React.FC<ComponentPreviewProps<SelectboxesComponentSchema>> = ({component}) => {
   const intl = useIntl();
-  const {key, label, description, tooltip, validate} = component;
+  const {key, label, description, tooltip, faqItems = [], validate} = component;
   const {required = false} = validate || {};
   const {getReferenceListsTableItems} = useContext(BuilderContext);
 
@@ -63,12 +64,14 @@ const Preview: React.FC<ComponentPreviewProps<SelectboxesComponentSchema>> = ({c
     throw error;
   }
 
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <SelectBoxes
       name={key}
       options={options}
       label={label}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       description={description}
       isLoading={loading}

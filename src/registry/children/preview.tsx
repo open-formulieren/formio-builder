@@ -3,11 +3,12 @@ import {FormattedMessage} from 'react-intl';
 
 import {Description} from '@/components/formio';
 import {FieldSet, TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
 const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip} = component;
+  const {key, label, description, tooltip, faqItems = []} = component;
 
   return (
     <FieldSet field={key} label={label} tooltip={tooltip}>
@@ -40,6 +41,10 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
         disabled
       />
       {description && <Description text={description} />}
+
+      {faqItems.map(faqItem => (
+        <FAQItem faqItem={faqItem} />
+      ))}
     </FieldSet>
   );
 };

@@ -13,6 +13,7 @@ export interface NumberProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: React.ReactNode;
   prefix?: string;
   suffix?: string;
@@ -27,6 +28,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   prefix = '',
   suffix = '',
@@ -75,6 +77,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
         </Wrapper>
       </div>
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 };

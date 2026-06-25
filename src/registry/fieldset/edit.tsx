@@ -12,6 +12,7 @@ import {
   Translations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -31,7 +32,15 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
     <Tabs>
       <TabList>
         <BuilderTabs.Basic
-          hasErrors={hasAnyError('label', 'key', 'tooltip', 'hidden', 'clearOnHide', 'hideHeader')}
+          hasErrors={hasAnyError(
+            'label',
+            'key',
+            'tooltip',
+            'faqItems',
+            'hidden',
+            'clearOnHide',
+            'hideHeader'
+          )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
@@ -42,6 +51,7 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
         <Label />
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Tooltip />
+        <FAQItems />
         <Hidden />
         <ClearOnHide />
         <HideHeader />

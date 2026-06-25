@@ -16,6 +16,7 @@ export interface SelectBoxesProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: string;
   isLoading?: boolean;
 }
@@ -26,6 +27,7 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   isLoading = false,
 }) => {
@@ -52,6 +54,7 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
       </div>
 
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 };

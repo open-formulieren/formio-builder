@@ -1,6 +1,7 @@
 import {CurrencyComponentSchema} from '@open-formulieren/types';
 
 import {NumberField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -13,14 +14,17 @@ import {ComponentPreviewProps} from '../types';
  */
 const Preview: React.FC<ComponentPreviewProps<CurrencyComponentSchema>> = ({component}) => {
   // FIXME: incorporate decimalLimit and allowNegative
-  const {key, label, description, tooltip, validate = {}} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}} = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
+
   return (
     <NumberField
       name={key}
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       prefix="€"
     />

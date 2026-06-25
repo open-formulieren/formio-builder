@@ -364,6 +364,11 @@
     "description": "Tooltip for 'hideLabel' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the container fieldset."
   },
+  "9eMmYy": {
+    "defaultMessage": "Label",
+    "description": "Label for translation message for FAQ label",
+    "originalDefault": "Label"
+  },
   "9lk1eS": {
     "defaultMessage": "Subtract",
     "description": "Operator 'subtract' option label",
@@ -639,6 +644,11 @@
     "description": "npFamilyMembers dummy option for child",
     "originalDefault": "Child 1"
   },
+  "IHinJF": {
+    "defaultMessage": "FAQ items",
+    "description": "Title of the FAQ items heading",
+    "originalDefault": "FAQ items"
+  },
   "IOko1U": {
     "defaultMessage": "Remove",
     "description": "Values table: accessible label to remove an option",
@@ -904,6 +914,11 @@
     "description": "Textarea component type label",
     "originalDefault": "Textarea"
   },
+  "Tc7kj/": {
+    "defaultMessage": "FAQ items for this component",
+    "description": "FAQ items tooltip in the form builder",
+    "originalDefault": "FAQ items for this component"
+  },
   "TkvPrw": {
     "defaultMessage": "Drag a component in the form and release the mouse button",
     "description": "Column designer preview content description",
@@ -1008,6 +1023,11 @@
     "defaultMessage": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ...",
     "description": "Tooltip for 'groupLabel' builder field",
     "originalDefault": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ..."
+  },
+  "VpHR3S": {
+    "defaultMessage": "Remove FAQ item",
+    "description": "'Remove item' screenreader button text",
+    "originalDefault": "Remove FAQ item"
   },
   "VyA4fK": {
     "defaultMessage": "Show in email",
@@ -1213,6 +1233,11 @@
     "defaultMessage": "Provide the key of a static, component, or user defined variable.",
     "description": "Tooltip for 'variable' in relative delta date constraint validation",
     "originalDefault": "Provide the key of a static, component, or user defined variable."
+  },
+  "c/NYGP": {
+    "defaultMessage": "Content",
+    "description": "Label for translation message for FAQ content",
+    "originalDefault": "Content"
   },
   "cAC5kL": {
     "defaultMessage": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!",

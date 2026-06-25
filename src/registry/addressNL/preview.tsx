@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 import './preview.scss';
@@ -20,6 +21,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     deriveAddress,
     layout,
@@ -30,6 +32,10 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
   return (
     <FieldSet field={key} label={hideLabel ? undefined : label} tooltip={tooltip}>
       {description && <Description text={description} />}
+      {faqItems.map(faqItem => (
+        <FAQItem faqItem={faqItem} />
+      ))}
+
       <div className={clsx('offb-addressnl-preview', `offb-addressnl-preview--${layout}`)}>
         <TextField
           name={`${key}.postcode`}
