@@ -28,6 +28,7 @@ export interface SelectProps<
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: React.ReactNode;
   isClearable?: boolean;
   valueProperty?: string;
@@ -179,6 +180,7 @@ function Select<
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   isClearable = false,
   isLoading = false,
@@ -245,6 +247,7 @@ function Select<
         />
       </div>
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 }

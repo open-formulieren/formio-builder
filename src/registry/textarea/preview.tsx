@@ -1,6 +1,7 @@
 import {TextareaComponentSchema} from '@open-formulieren/types';
 
 import {TextArea} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -18,6 +19,7 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
     description,
     placeholder,
     tooltip,
+    faqItems = [],
     validate = {},
     autocomplete = '',
     disabled = false,
@@ -27,6 +29,7 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
     autoExpand = false,
   } = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextArea
       name={key}
@@ -34,6 +37,7 @@ const Preview: React.FC<ComponentPreviewProps<TextareaComponentSchema>> = ({comp
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       placeholder={placeholder}
       required={required}
       autoComplete={autocomplete}

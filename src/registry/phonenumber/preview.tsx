@@ -1,6 +1,7 @@
 import {PhoneNumberComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -12,8 +13,18 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<PhoneNumberComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, autocomplete = '', multiple} = component;
+  const {
+    key,
+    label,
+    description,
+    tooltip,
+    faqItems = [],
+    validate = {},
+    autocomplete = '',
+    multiple,
+  } = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextField
       name={key}
@@ -21,6 +32,7 @@ const Preview: React.FC<ComponentPreviewProps<PhoneNumberComponentSchema>> = ({c
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       autoComplete={autocomplete}
       inputMode="decimal"

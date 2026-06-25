@@ -17,6 +17,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -44,6 +45,7 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -79,6 +81,7 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <Multiple<FileComponentSchema> updateDefaultValue={false} />
         <Hidden />

@@ -59,6 +59,47 @@ export const WithToolTip: Story = {
   },
 };
 
+export const WithFAQItems: Story = {
+  args: {
+    faqItems: [
+      {
+        label: 'Moet ik dit invullen?',
+        content: 'Ja dat moet',
+        openforms: {
+          translations: {
+            nl: {
+              label: 'Moet ik dit invullen?',
+              content: 'Ja dat moet',
+            },
+            en: {
+              label: 'Should I fill this in?',
+              content: 'Yes you do',
+            },
+          },
+        },
+      },
+      {
+        label: '',
+        content: '',
+        openforms: {
+          translations: {
+            en: {
+              label: "I've XYZ, should I fill this in?",
+              content: 'Add XYZ',
+            },
+          },
+        },
+      },
+    ],
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+  },
+};
+
 export const WithDescription: Story = {
   args: {
     label: 'With description',

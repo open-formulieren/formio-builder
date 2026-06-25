@@ -2,6 +2,7 @@ import {EmailComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 import './previews.scss';
@@ -19,6 +20,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     autocomplete,
     multiple,
@@ -32,6 +34,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
       <FormattedMessage description="Email verification button text" defaultMessage="Verify" />
     </button>
   ) : null;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <>
       <TextField
@@ -40,6 +43,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
         label={label}
         description={description}
         tooltip={tooltip}
+        faqElements={faqElements}
         required={required}
         autoComplete={autocomplete}
         type="email"

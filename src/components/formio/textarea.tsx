@@ -15,6 +15,7 @@ export interface TextAreaProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: React.ReactNode;
   showCharCount?: boolean;
   autoExpand?: boolean;
@@ -26,6 +27,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   showCharCount = false,
   autoExpand = false,
@@ -98,6 +100,7 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
       <div>{inputField}</div>
       {charCount}
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 };

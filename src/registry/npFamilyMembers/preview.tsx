@@ -2,6 +2,7 @@ import {NpFamilyMembersComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {SelectBoxes} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -19,6 +20,7 @@ const Preview: React.FC<ComponentPreviewProps<NpFamilyMembersComponentSchema>> =
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     includeChildren,
     includePartners,
@@ -43,12 +45,14 @@ const Preview: React.FC<ComponentPreviewProps<NpFamilyMembersComponentSchema>> =
       }),
     });
   }
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <SelectBoxes
       name={key}
       options={options}
       label={label}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       description={description}
     />

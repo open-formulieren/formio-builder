@@ -14,6 +14,7 @@ export interface DateFieldProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: string;
 }
 
@@ -22,6 +23,7 @@ export const DateField: React.FC<JSX.IntrinsicElements['input'] & DateFieldProps
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   ...props
 }) => {
@@ -72,6 +74,7 @@ export const DateField: React.FC<JSX.IntrinsicElements['input'] & DateFieldProps
     >
       <div>{inputField}</div>
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 };
