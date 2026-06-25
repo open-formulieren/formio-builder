@@ -7,6 +7,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -19,6 +20,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -92,6 +94,11 @@ const EditForm: EditFormDefinition<CheckboxComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<CheckboxComponentSchema>
@@ -100,7 +107,9 @@ const EditForm: EditFormDefinition<CheckboxComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

@@ -7,6 +7,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -20,6 +21,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -46,6 +48,7 @@ const EditForm: EditFormDefinition<LicensePlateComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -93,6 +96,11 @@ const EditForm: EditFormDefinition<LicensePlateComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<LicensePlateComponentSchema>
@@ -101,7 +109,9 @@ const EditForm: EditFormDefinition<LicensePlateComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

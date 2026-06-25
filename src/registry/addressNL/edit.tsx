@@ -17,6 +17,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -29,6 +30,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
@@ -187,6 +189,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -309,6 +312,11 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<AddressNLComponentSchema>
@@ -317,7 +325,9 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

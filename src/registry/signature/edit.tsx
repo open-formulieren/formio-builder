@@ -5,6 +5,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -17,6 +18,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -46,6 +48,7 @@ const EditForm: EditFormDefinition<SignatureComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -91,6 +94,11 @@ const EditForm: EditFormDefinition<SignatureComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<SignatureComponentSchema>
@@ -100,7 +108,9 @@ const EditForm: EditFormDefinition<SignatureComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
             footer: intl.formatMessage(FOOTER_LABEL),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

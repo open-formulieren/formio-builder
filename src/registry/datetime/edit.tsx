@@ -7,6 +7,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -22,6 +23,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {DateTimeField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -57,6 +59,7 @@ const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -117,6 +120,10 @@ const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
       <TabPanel>
         <Prefill.PrefillConfiguration />
       </TabPanel>
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<DateTimeComponentSchema>
@@ -125,7 +132,9 @@ const EditForm: EditFormDefinition<DateTimeComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

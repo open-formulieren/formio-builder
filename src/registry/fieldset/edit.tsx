@@ -4,6 +4,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {
   BuilderTabs,
   ClearOnHide,
+  FAQItems,
   Hidden,
   Key,
   Label,
@@ -12,6 +13,7 @@ import {
   Translations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -31,7 +33,15 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
     <Tabs>
       <TabList>
         <BuilderTabs.Basic
-          hasErrors={hasAnyError('label', 'key', 'tooltip', 'hidden', 'clearOnHide', 'hideHeader')}
+          hasErrors={hasAnyError(
+            'label',
+            'key',
+            'tooltip',
+            'faqItems',
+            'hidden',
+            'clearOnHide',
+            'hideHeader'
+          )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
@@ -52,6 +62,11 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
         <SimpleConditional />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<FieldsetComponentSchema>
@@ -60,7 +75,9 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
             // FIXME: should be translatable in the type
             // tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

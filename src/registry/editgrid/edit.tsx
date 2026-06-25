@@ -5,6 +5,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -14,6 +15,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -58,6 +60,7 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
             'groupLabel',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -114,6 +117,11 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
         <Validate.MaxLength />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<EditGridComponentSchema>
@@ -126,7 +134,9 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
             saveRow: intl.formatMessage(SAVE_ROW_LABEL),
             removeRow: intl.formatMessage(REMOVE_ROW_LABEL),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

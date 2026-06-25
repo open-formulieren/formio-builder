@@ -9,6 +9,7 @@ import {
   ClearOnHide,
   ComponentSelect,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -26,6 +27,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -58,6 +60,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -164,6 +167,11 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
         </Panel>
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<TextFieldComponentSchema>
@@ -173,7 +181,9 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
             placeholder: intl.formatMessage(LABELS.placeholder),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

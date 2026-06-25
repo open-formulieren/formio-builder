@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type {CurrencyComponentSchema} from '@open-formulieren/types';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -6,6 +7,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -24,6 +26,7 @@ import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
 import type {EditFormDefinition} from '../types';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 
 /**
  * Form to configure a Formio 'currency' type component.
@@ -47,6 +50,7 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -98,6 +102,11 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<CurrencyComponentSchema>
@@ -106,7 +115,9 @@ const EditForm: EditFormDefinition<CurrencyComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

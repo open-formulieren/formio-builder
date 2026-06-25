@@ -8,6 +8,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsConfirmationRecipient,
   IsSensitiveData,
@@ -20,6 +21,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -47,6 +49,7 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -88,6 +91,11 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
         <Validate.ValidationErrorTranslations />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<CustomerProfileComponentSchema>
@@ -96,7 +104,9 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

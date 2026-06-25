@@ -18,6 +18,7 @@ const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({com
     description,
     placeholder,
     tooltip,
+    faqItems = [],
     validate = {},
     autocomplete = '',
     disabled = false,
@@ -32,6 +33,7 @@ const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({com
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       placeholder={placeholder}
       required={required}
       autoComplete={autocomplete}

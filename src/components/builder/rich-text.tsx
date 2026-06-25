@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Rich text editor.
  *
@@ -11,7 +12,8 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
-import ClassicEditor from '@/components/CKEditor';
+import type {AnyEditor} from '@/components/CKEditor';
+import Editor from '@/components/CKEditor';
 import {TemplatingHint} from '@/components/builder';
 import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -19,16 +21,16 @@ import {BuilderContext} from '@/context';
 import './richText.scss';
 
 export type ColorOption =
-  Required<Required<(typeof ClassicEditor)['defaultConfig']>['fontColor']>['colors'] extends Array<
-    infer C
-  >
+  Required<Required<(typeof Editor)['defaultConfig']>['fontColor']>['colors'] extends Array<infer C>
     ? C
     : never;
 
 export interface RichTextProps {
   name: string;
   required?: boolean;
+  editor?: AnyEditor;
   supportsBackendTemplating?: boolean;
+  onChange?: (value: string) => void;
 }
 
 /**
@@ -38,16 +40,26 @@ export interface RichTextProps {
  * classic editor build, with some extra plugins enabled to match the features used/exposed
  * by Formio.js.
  */
-const RichText: React.FC<RichTextProps> = ({name, required, supportsBackendTemplating = false}) => {
+const RichText: React.FC<RichTextProps> = ({
+  name,
+  required,
+  editor = Editor,
+  supportsBackendTemplating = false,
+}) => {
   const {richTextColors} = useContext(BuilderContext);
   const {
     values: {type},
   } = useFormikContext<AnyComponentSchema>();
   const [props, , helpers] = useField<string>(name);
   return (
-    <Component type={type} field={name} required={required} className="offb-rich-text">
+    <Component
+      type={type}
+      field={name}
+      required={required}
+      className="offb-rich-text"
+    >
       <CKEditor
-        editor={ClassicEditor}
+        editor={editor}
         config={{
           link: {
             decorators: {

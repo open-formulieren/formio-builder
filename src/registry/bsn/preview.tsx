@@ -12,8 +12,18 @@ import type {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<BsnComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, disabled = false, multiple} = component;
+  const {
+    key,
+    label,
+    description,
+    tooltip,
+    faqItems = [],
+    validate = {},
+    disabled = false,
+    multiple,
+  } = component;
   const {required = false} = validate;
+
   return (
     <TextField
       name={key}
@@ -21,6 +31,7 @@ const Preview: React.FC<ComponentPreviewProps<BsnComponentSchema>> = ({component
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       readOnly={disabled}
       inputMask="999999999"

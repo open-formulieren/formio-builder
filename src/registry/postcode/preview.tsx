@@ -26,6 +26,7 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = defaultValidate,
     disabled = false,
     multiple,
@@ -38,6 +39,7 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       readOnly={disabled}
       placeholder="9999 AA"

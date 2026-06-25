@@ -8,6 +8,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -22,6 +23,7 @@ import {
   ValuesTranslations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {Radio, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -64,6 +66,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -79,6 +82,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -113,6 +117,11 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<RadioComponentSchema>
@@ -123,6 +132,8 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
           }}
         >
           <ValuesTranslations<RadioComponentSchema> name="values" withOptionDescription />
+
+          <FAQItemsTranslations />
         </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>

@@ -7,6 +7,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -21,6 +22,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TimeField} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -54,6 +56,7 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -101,6 +104,10 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
       <TabPanel>
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<TimeComponentSchema>
@@ -109,7 +116,9 @@ const EditForm: EditFormDefinition<TimeComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

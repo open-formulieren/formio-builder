@@ -5,6 +5,7 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
   Hidden,
   IsSensitiveData,
   Key,
@@ -15,6 +16,7 @@ import {
   Translations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import {FAQItemsTranslations} from '@/components/builder/faq-items/i18n';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -38,6 +40,7 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData'
@@ -73,6 +76,11 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<PartnersComponentSchema>
@@ -81,7 +89,9 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );
