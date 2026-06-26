@@ -5,6 +5,7 @@ import {IntlShape} from 'react-intl';
 import type {ComponentPlaceholder} from '@/components/designer/types';
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import {getChildComponents, getRegistryEntry, isNestedChildren} from '@/registry';
+import {hasOwnProperty} from '@/types';
 
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 type DraftComponentDefinitions = Draft<{components: ComponentDefinition[]}>;
@@ -103,7 +104,9 @@ export const createComponent = <S extends AnyComponentSchema>(
     id: window.crypto.randomUUID(),
     type: componentType,
     key: createComponentKey(label, componentNamespace),
-    ...(edit.defaultValues.hasOwnProperty('label') ? {label} : {}),
+    ...(hasOwnProperty(edit.defaultValues, 'label') ? {label} : {}),
+    // type cast necessary because the discriminated union doesn't narrow and
+    // getRegistryEntry doesn't narrow either, essentially returning AnyComponentSchema
   } as S;
 };
 
