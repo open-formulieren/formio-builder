@@ -1,7 +1,6 @@
 import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
 import {Formik} from 'formik';
 
-import type {ComponentGroup, PresetComponentDefinition} from '@/components/designer/types';
 import {DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
@@ -18,24 +17,10 @@ export interface FormBuilderProps {
    * definitions. Used when creating component keys to validate complete uniqueness.
    */
   componentNamespace: AnyComponentSchema[];
-  /**
-   * The regular component groups that are shown in the form builder components list.
-   */
-  groups: ComponentGroup[];
-  /**
-   * Custom-defined component presets that are shown in the form builder components list.
-   */
-  presets: PresetComponentDefinition[];
   onChange: (components: AnyComponentSchema[]) => void;
 }
 
-const FormBuilder: React.FC<FormBuilderProps> = ({
-  components,
-  componentNamespace,
-  presets,
-  groups,
-  onChange,
-}) => {
+const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace, onChange}) => {
   // TODO: this initial values extraction is questionable, but scheduled for replacement
   // later on. We should ideally use the extractInitialValues implementation from the
   // formio renderer.
@@ -61,7 +46,7 @@ const FormBuilder: React.FC<FormBuilderProps> = ({
   }, {});
 
   return (
-    <DesignerContext.Provider value={{componentNamespace, groups, presets}}>
+    <DesignerContext.Provider value={{componentNamespace}}>
       <Formik
         enableReinitialize
         initialValues={initialValues}

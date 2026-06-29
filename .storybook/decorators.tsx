@@ -9,8 +9,6 @@ import {
   DEFAULT_COLORS,
   DEFAULT_COMPONENT_TREE,
   DEFAULT_FILE_TYPES,
-  DEFAULT_FORM_DESIGNER_GROUPS,
-  DEFAULT_FORM_DESIGNER_PRESETS,
   DEFAULT_FORM_TYPE,
   DEFAULT_MAP_OVERLAY_TILE_LAYERS,
   DEFAULT_MAP_TILE_LAYERS,
@@ -152,8 +150,6 @@ export const DesignerContextDecorator: Decorator = (Story, context) => {
     <DesignerContext.Provider
       value={{
         componentNamespace: context.parameters?.designer?.componentNamespace || [],
-        groups: context.parameters?.designer?.groups || DEFAULT_FORM_DESIGNER_GROUPS,
-        presets: context.parameters?.designer?.presets || DEFAULT_FORM_DESIGNER_PRESETS,
       }}
     >
       <Story />

@@ -5,7 +5,6 @@ import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import {DesignerContext} from '@/context';
 import {DesignerContextDecorator, withFormik} from '@/sb-decorators';
-import {DEFAULT_FORM_DESIGNER_GROUPS, DEFAULT_FORM_DESIGNER_PRESETS} from '@/tests/sharedUtils';
 
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
 import type {FormioDefinitionDesignerProps} from './FormioDefinitionDesigner';
@@ -66,8 +65,6 @@ const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps)
     <DesignerContext.Provider
       value={{
         componentNamespace: namespace,
-        groups: DEFAULT_FORM_DESIGNER_GROUPS,
-        presets: DEFAULT_FORM_DESIGNER_PRESETS,
       }}
     >
       <FormioDefinitionDesigner

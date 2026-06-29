@@ -1,14 +1,11 @@
 import {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
-import {DesignerContextDecorator} from '@/sb-decorators';
-
 import ComponentsList from './ComponentsList';
 
 export default {
   title: 'Form designer/ComponentsList',
   component: ComponentsList,
-  decorators: [DesignerContextDecorator],
   parameters: {
     controls: {hideNoControlsWarning: true},
     docs: {

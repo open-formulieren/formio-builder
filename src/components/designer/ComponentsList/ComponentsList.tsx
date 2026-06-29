@@ -1,34 +1,14 @@
-import {useContext, useDeferredValue, useMemo, useState} from 'react';
-import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
+import {useDeferredValue, useMemo, useState} from 'react';
+import {FormattedMessage, useIntl} from 'react-intl';
 
-import type {GroupName, NormalizedComponentGroups} from '@/components/designer/types';
-import {DesignerContext} from '@/context';
+import type {NormalizedComponentGroups} from '@/components/designer/types';
 
 import ComponentsGroup from './ComponentsGroup';
 import './ComponentsList.scss';
+import {FORM_DESIGNER_GROUPS, FORM_DESIGNER_GROUP_LABELS, FORM_DESIGNER_PRESETS} from './constants';
 import {normalizeComponentDefinition} from './normalizeComponentDefinition';
 
-const COMPONENT_GROUP_LABELS = defineMessages<GroupName>({
-  basic: {
-    description: 'Basic components group label',
-    defaultMessage: 'Form fields',
-  },
-  layout: {
-    description: 'Layout components group label',
-    defaultMessage: 'Layout',
-  },
-  special: {
-    description: 'Special components group label',
-    defaultMessage: 'Special fields',
-  },
-  preset: {
-    description: 'Preset components group label',
-    defaultMessage: 'Preset',
-  },
-});
-
 const ComponentsList: React.FC = () => {
-  const {groups, presets} = useContext(DesignerContext);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const deferredQuery = useDeferredValue(searchQuery);
 
@@ -37,7 +17,7 @@ const ComponentsList: React.FC = () => {
 
   const normalizedComponentGroups: NormalizedComponentGroups[] = useMemo(() => {
     // Sort the groups by weight and normalize the components in each group.
-    const normalizedGroups: NormalizedComponentGroups[] = groups.map(group => ({
+    const normalizedGroups: NormalizedComponentGroups[] = FORM_DESIGNER_GROUPS.map(group => ({
       groupName: group.name,
       components: normalizeComponentDefinition(group, intl),
     }));
@@ -45,10 +25,10 @@ const ComponentsList: React.FC = () => {
     // Add the preset group as last.
     normalizedGroups.push({
       groupName: 'preset',
-      components: presets,
+      components: FORM_DESIGNER_PRESETS,
     });
     return normalizedGroups;
-  }, [groups, intl]);
+  }, [intl]);
 
   const filteredComponentGroups = useMemo<NormalizedComponentGroups[]>(() => {
     // If not searching, return the normalizedComponentGroups as-is.
@@ -95,7 +75,7 @@ const ComponentsList: React.FC = () => {
             isSearching={isSearching}
             isDefault={index === 0}
             testId={`component-group--${groupName}`}
-            title={<FormattedMessage {...COMPONENT_GROUP_LABELS[groupName]} />}
+            title={<FormattedMessage {...FORM_DESIGNER_GROUP_LABELS[groupName]} />}
             componentDefinitions={components}
           />
         ))

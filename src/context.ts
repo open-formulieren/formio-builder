@@ -10,7 +10,6 @@ import {
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import type {ComponentGroup, PresetComponentDefinition} from '@/components/designer/types';
 import {AuthPluginOption} from '@/registry/cosignV1/edit';
 import {AnyComponentSchema} from '@/types';
 
@@ -111,23 +110,14 @@ BuilderContext.displayName = 'BuilderContext';
  */
 export interface DesignerContextType {
   /**
-   * A flatmap of all components in the form.
+   * A collection of all components in the form, created by flattening the form
+   * definitions.
    */
   componentNamespace: AnyComponentSchema[];
-  /**
-   * The regular component groups that are shown in the builder.
-   */
-  groups: ComponentGroup[];
-  /**
-   * Custom-defined component presets that are shown in the builder.
-   */
-  presets: PresetComponentDefinition[];
 }
 
 const DesignerContext = React.createContext<DesignerContextType>({
   componentNamespace: [],
-  groups: [],
-  presets: [],
 });
 
 /*
