@@ -87,6 +87,7 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   // initial data
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
   comparisonValue?: React.FC<ComparisonValueProps>;
+  getChildComponents?: (component: S) => AnyComponentSchema[];
 }
 
 // Registry made up of registry entries, one for each possible component schema

@@ -4,7 +4,7 @@ import {IntlShape} from 'react-intl';
 
 import type {ComponentPlaceholder} from '@/components/designer/types';
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
-import {getChildComponents, getRegistryEntry, isNestedChildren} from '@/registry';
+import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
@@ -20,16 +20,12 @@ function* iterComponents(
     yield component;
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
-    const children = getChildComponents(component);
+    const {getChildComponents} = getRegistryEntry(component.type);
+
+    const children = getChildComponents ? getChildComponents(component) : [];
     if (!children.length) continue;
 
-    if (isNestedChildren(children)) {
-      for (const child of children) {
-        yield* iterComponents(child);
-      }
-    } else {
-      yield* iterComponents(children);
-    }
+    yield* iterComponents(children);
   }
 }
 
