@@ -1,19 +1,19 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 
-import Index from './index';
+import ContentPlaceholder from './ContentPlaceholder';
 
 export default {
   title: 'Generic/Content placeholder',
-  component: Index,
+  component: ContentPlaceholder,
   parameters: {
     modal: {noModal: true},
   },
   args: {
     children: 'Content placeholder',
   },
-} as Meta<typeof Index>;
+} as Meta<typeof ContentPlaceholder>;
 
-type Story = StoryObj<typeof Index>;
+type Story = StoryObj<typeof ContentPlaceholder>;
 
 export const Builder: Story = {
   args: {

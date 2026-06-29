@@ -32,10 +32,13 @@ import type {
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fireEvent, userEvent, waitFor, within} from 'storybook/test';
 
+import {withFormik} from '@/sb-decorators';
+
 import Preview from './Preview';
 
 export default {
   title: 'Form designer/Preview',
+  decorators: [withFormik],
   component: Preview,
   parameters: {
     modal: {noModal: true},
@@ -1124,6 +1127,9 @@ export const TimeFieldMultiple: Story = {
 };
 
 export const Postcode: Story = {
+  parameters: {
+    formik: {initialValues: {postcodePreview: '9999 AA', postcodePreviewHidden: '9999 AA'}},
+  },
   args: {
     components: [
       {
@@ -3162,7 +3168,8 @@ export const Columns: Story = {
     expect(hiddenColumnsWrapper).toBeInTheDocument();
     expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
 
-    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+    const addComponentInstructionText =
+      'Drag a component in the form and release the mouse button.';
 
     step('Validate columns content', () => {
       const columns = within(regularColumns).getAllByTestId('columns-column-', {exact: false});
@@ -3322,7 +3329,8 @@ export const ColumnsWithComponents: Story = {
     expect(hiddenColumnsWrapper).toBeInTheDocument();
     expect(hiddenColumnsWrapper).toHaveAttribute('title', 'Hidden component');
 
-    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+    const addComponentInstructionText =
+      'Drag a component in the form and release the mouse button.';
 
     await step('Validate columns content', async () => {
       const columns = within(regularColumns).getAllByTestId('columns-column-', {exact: false});
@@ -3449,7 +3457,7 @@ export const FieldSet: Story = {
       const wrapper = within(inputWrapper as HTMLElement);
 
       expect(
-        wrapper.getByText('Drag a component in the form and release the mouse button')
+        wrapper.getByText('Drag a component in the form and release the mouse button.')
       ).toBeVisible();
     });
 
@@ -3457,7 +3465,7 @@ export const FieldSet: Story = {
       const wrapper = within(hiddenInputWrapper as HTMLElement);
 
       expect(
-        wrapper.getByText('Drag a component in the form and release the mouse button')
+        wrapper.getByText('Drag a component in the form and release the mouse button.')
       ).toBeVisible();
     });
   },
@@ -3555,7 +3563,7 @@ export const FieldSetWithComponents: Story = {
 
       // The 'empty' message should not be displayed when there are nested components
       expect(
-        wrapper.queryByText('Drag a component in the form and release the mouse button')
+        wrapper.queryByText('Drag a component in the form and release the mouse button.')
       ).not.toBeInTheDocument();
 
       const input1 = wrapper.getByLabelText('Nested text field');
@@ -3598,7 +3606,7 @@ export const FieldSetWithComponents: Story = {
 
       // The 'empty' message should not be displayed when there are nested components
       expect(
-        wrapper.queryByText('Drag a component in the form and release the mouse button')
+        wrapper.queryByText('Drag a component in the form and release the mouse button.')
       ).not.toBeInTheDocument();
 
       const input1 = wrapper.getByLabelText('Nested text field');
@@ -3714,7 +3722,7 @@ export const FieldSetWithNestedComponents: Story = {
 
       // The 'empty' message should not be displayed when there are nested components
       expect(
-        wrapper.queryByText('Drag a component in the form and release the mouse button')
+        wrapper.queryByText('Drag a component in the form and release the mouse button.')
       ).not.toBeInTheDocument();
 
       const nestedFieldset = wrapper.getByText('Nested fieldset preview');
@@ -3742,7 +3750,7 @@ export const FieldSetWithNestedComponents: Story = {
 
       // The 'empty' message should not be displayed when there are nested components
       expect(
-        wrapper.queryByText('Drag a component in the form and release the mouse button')
+        wrapper.queryByText('Drag a component in the form and release the mouse button.')
       ).not.toBeInTheDocument();
 
       const nestedFieldset = wrapper.getByText('Nested fieldset preview');
@@ -3818,7 +3826,8 @@ export const EditGrid: Story = {
     expect(hiddenInputWrapper).toBeInTheDocument();
     expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
 
-    const addComponentInstructionText = 'Drag a component in the form and release the mouse button';
+    const addComponentInstructionText =
+      'Drag a component in the form and release the mouse button.';
 
     step('Validate editgrid content', () => {
       const wrapper = within(inputWrapper as HTMLElement);

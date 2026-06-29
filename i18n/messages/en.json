@@ -89,6 +89,11 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
+  "1Q5hq3": {
+    "defaultMessage": "Drag a component in the form and release the mouse button.",
+    "description": "Components preview empty content description",
+    "originalDefault": "Drag a component in the form and release the mouse button."
+  },
   "1U0I5C": {
     "defaultMessage": "Firstnames",
     "description": "Label for child's first names",
@@ -654,11 +659,6 @@
     "description": "Tooltip for 'IsSensitiveData' builder field",
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
-  "JGqzCP": {
-    "defaultMessage": "Drag a component in the form and release the mouse button",
-    "description": "Fieldset designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
-  },
   "JKnHMC": {
     "defaultMessage": "Lastname",
     "description": "Label for partner's lastname",
@@ -903,11 +903,6 @@
     "defaultMessage": "Textarea",
     "description": "Textarea component type label",
     "originalDefault": "Textarea"
-  },
-  "TkvPrw": {
-    "defaultMessage": "Drag a component in the form and release the mouse button",
-    "description": "Column designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
   },
   "Tpg442": {
     "defaultMessage": "Value in decimal degrees, between 3 and 7.5.",
@@ -1638,11 +1633,6 @@
     "defaultMessage": "Tooltip",
     "description": "Component property 'Tooltip' label",
     "originalDefault": "Tooltip"
-  },
-  "o//vqb": {
-    "defaultMessage": "Drag a component in the form and release the mouse button",
-    "description": "Editgrid designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
   },
   "o5Mfn3": {
     "defaultMessage": "Include children",

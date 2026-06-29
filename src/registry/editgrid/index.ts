@@ -31,4 +31,5 @@ export default {
     },
   },
   defaultValue: [],
+  getChildComponents: component => component.components,
 } satisfies RegistryEntry<EditGridComponentSchema>;

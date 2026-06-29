@@ -106,6 +106,21 @@ const BuilderContext = React.createContext<BuilderContextType>({
 BuilderContext.displayName = 'BuilderContext';
 
 /*
+  Designer
+ */
+export interface DesignerContextType {
+  /**
+   * A collection of all components in the form, created by flattening the form
+   * definitions.
+   */
+  componentNamespace: AnyComponentSchema[];
+}
+
+const DesignerContext = React.createContext<DesignerContextType>({
+  componentNamespace: [],
+});
+
+/*
   Rendering
  */
 export interface RenderContextType {
@@ -117,4 +132,4 @@ const RenderContext = React.createContext<RenderContextType>({
   bareInput: false,
 });
 
-export {BuilderContext, RenderContext};
+export {BuilderContext, DesignerContext, RenderContext};

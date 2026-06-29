@@ -31,4 +31,5 @@ export default {
     },
   },
   defaultValue: undefined, // a fieldset component does not hold a value itself
+  getChildComponents: component => component.components,
 } satisfies RegistryEntry<FieldsetComponentSchema>;

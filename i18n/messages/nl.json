@@ -90,6 +90,11 @@
     "description": "Label for 'delta.months' in relative delta date constraint validation",
     "originalDefault": "Months"
   },
+  "1Q5hq3": {
+    "defaultMessage": "Sleep een component in het formulier en laat de muisknop los.",
+    "description": "Components preview empty content description",
+    "originalDefault": "Drag a component in the form and release the mouse button."
+  },
   "1U0I5C": {
     "defaultMessage": "Voornamen",
     "description": "Label for child's first names",
@@ -661,11 +666,6 @@
     "description": "Tooltip for 'IsSensitiveData' builder field",
     "originalDefault": "The data entered in this component will be removed in accordance with the privacy settings."
   },
-  "JGqzCP": {
-    "defaultMessage": "Sleep een component in het formulier en laat de muisknop los",
-    "description": "Fieldset designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
-  },
   "JKnHMC": {
     "defaultMessage": "Achternaam",
     "description": "Label for partner's lastname",
@@ -914,11 +914,6 @@
     "defaultMessage": "Tekstvlak",
     "description": "Textarea component type label",
     "originalDefault": "Textarea"
-  },
-  "TkvPrw": {
-    "defaultMessage": "Sleep een component in het formulier en laat de muisknop los",
-    "description": "Column designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
   },
   "Tpg442": {
     "defaultMessage": "Waarde in decimale graden, tussen 3 en 7.5.",
@@ -1659,11 +1654,6 @@
     "description": "Component property 'Tooltip' label",
     "isTranslated": true,
     "originalDefault": "Tooltip"
-  },
-  "o//vqb": {
-    "defaultMessage": "Sleep een component in het formulier en laat de muisknop los",
-    "description": "Editgrid designer preview content description",
-    "originalDefault": "Drag a component in the form and release the mouse button"
   },
   "o5Mfn3": {
     "defaultMessage": "Inclusief kinderen",

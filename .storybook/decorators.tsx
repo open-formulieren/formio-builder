@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
-import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
+import {BuilderContext, DesignerContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
@@ -142,6 +142,18 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
     >
       <Story />
     </BuilderContext.Provider>
+  );
+};
+
+export const DesignerContextDecorator: Decorator = (Story, context) => {
+  return (
+    <DesignerContext.Provider
+      value={{
+        componentNamespace: context.parameters?.designer?.componentNamespace || [],
+      }}
+    >
+      <Story />
+    </DesignerContext.Provider>
   );
 };
 

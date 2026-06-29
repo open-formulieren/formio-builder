@@ -1,5 +1,16 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
 
+export const COMPONENT_PLACEHOLDER_TYPE = 'componentPlaceholder';
+
+/**
+ * A temporary component placeholder used when adding a new component to a FormDesigner
+ * dropzone.
+ */
+export interface ComponentPlaceholder {
+  type: typeof COMPONENT_PLACEHOLDER_TYPE;
+  componentType: AnyComponentSchema['type'];
+}
+
 /**
  * Configuration for a custom preset component.
  */
