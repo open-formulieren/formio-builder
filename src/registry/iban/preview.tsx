@@ -1,6 +1,7 @@
 import {IbanComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -12,8 +13,9 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<IbanComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, multiple} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}, multiple} = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextField
       name={key}
@@ -21,6 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<IbanComponentSchema>> = ({componen
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
     />
   );

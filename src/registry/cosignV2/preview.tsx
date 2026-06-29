@@ -1,6 +1,7 @@
 import {CosignV2ComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -12,8 +13,9 @@ import {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<CosignV2ComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, autocomplete} = component;
+  const {key, label, description, tooltip, faqItems = [], validate = {}, autocomplete} = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextField
       name={key}
@@ -21,6 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<CosignV2ComponentSchema>> = ({comp
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       autoComplete={autocomplete}
       type="email"

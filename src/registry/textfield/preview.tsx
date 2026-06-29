@@ -1,6 +1,7 @@
 import {TextFieldComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -18,6 +19,7 @@ const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({com
     description,
     placeholder,
     tooltip,
+    faqItems = [],
     validate = {},
     autocomplete = '',
     disabled = false,
@@ -25,6 +27,7 @@ const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({com
     multiple,
   } = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <TextField
       name={key}
@@ -32,6 +35,7 @@ const Preview: React.FC<ComponentPreviewProps<TextFieldComponentSchema>> = ({com
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       placeholder={placeholder}
       required={required}
       autoComplete={autocomplete}

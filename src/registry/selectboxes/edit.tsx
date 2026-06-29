@@ -22,6 +22,7 @@ import {
   ValuesTranslations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {NumberField, SelectBoxes, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -68,6 +69,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -92,6 +94,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />

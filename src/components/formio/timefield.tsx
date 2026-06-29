@@ -14,6 +14,7 @@ export interface TimeFieldProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqElements?: React.ReactNode;
   description?: string;
 }
 
@@ -23,6 +24,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
   label,
   required = false,
   tooltip = '',
+  faqElements = undefined,
   description = '',
   ...props
 }) => {
@@ -73,6 +75,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
     >
       <div>{inputField}</div>
       {description && <Description text={description} />}
+      {faqElements}
     </Component>
   );
 };

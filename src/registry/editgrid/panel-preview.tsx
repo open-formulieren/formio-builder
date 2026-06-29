@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';
 import {Component, Description} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -10,7 +11,16 @@ import {ComponentPreviewProps} from '../types';
  * Show a formio fieldset component preview.
  */
 const Preview: React.FC<ComponentPreviewProps<EditGridComponentSchema>> = ({component}) => {
-  const {label, key, description, validate = {}, tooltip, groupLabel, hideLabel} = component;
+  const {
+    label,
+    key,
+    description,
+    validate = {},
+    tooltip,
+    faqItems = [],
+    groupLabel,
+    hideLabel,
+  } = component;
   const {required = false} = validate;
   return (
     <Component
@@ -46,6 +56,9 @@ const Preview: React.FC<ComponentPreviewProps<EditGridComponentSchema>> = ({comp
       </div>
 
       {description && <Description text={description} />}
+      {faqItems.map(faqItem => (
+        <FAQItem faqItem={faqItem} />
+      ))}
     </Component>
   );
 };

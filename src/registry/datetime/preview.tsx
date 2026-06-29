@@ -1,6 +1,7 @@
 import {DateTimeComponentSchema} from '@open-formulieren/types';
 
 import {DateTimeField} from '@/components/formio';
+import FAQItem from '@/components/formio/faq-item';
 
 import {ComponentPreviewProps} from '../types';
 
@@ -17,11 +18,13 @@ const Preview: React.FC<ComponentPreviewProps<DateTimeComponentSchema>> = ({comp
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     disabled = false,
     multiple = false,
   } = component;
   const {required = false} = validate;
+  const faqElements = faqItems.map(faqItem => <FAQItem faqItem={faqItem} />);
   return (
     <DateTimeField
       name={key}
@@ -29,6 +32,7 @@ const Preview: React.FC<ComponentPreviewProps<DateTimeComponentSchema>> = ({comp
       label={label}
       description={description}
       tooltip={tooltip}
+      faqElements={faqElements}
       required={required}
       readOnly={disabled}
     />
