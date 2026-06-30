@@ -214,11 +214,11 @@ export const removeComponentFromDraft = (draft: DraftComponentDefinitions, key: 
  * Search for the placeholder in the components and replace it with the given component.
  */
 export const replacePlaceholderWithComponent = (
-  componentDefinitions: ComponentDefinition[],
+  draft: DraftComponentDefinitions,
   component: AnyComponentSchema
 ) => {
   for (const {index, component: componentDefinition, collection} of iterComponents(
-    componentDefinitions
+    draft.components
   )) {
     if (componentDefinition.type === COMPONENT_PLACEHOLDER_TYPE) {
       collection[index] = component;

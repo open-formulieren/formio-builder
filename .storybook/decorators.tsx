@@ -172,3 +172,14 @@ export const withFormik: Decorator = (Story, context) => {
     </Formik>
   );
 };
+
+export const overrideWindowConfirm: Decorator = (Story, context) => {
+  window.confirm = () => {
+    if (context.parameters?.windowConfirm) {
+      context.parameters?.windowConfirm();
+    }
+    return true;
+  };
+
+  return <Story />;
+};

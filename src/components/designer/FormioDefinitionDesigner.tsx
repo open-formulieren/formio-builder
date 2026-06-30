@@ -11,6 +11,7 @@ import {useImmer} from 'use-immer';
 import {
   createComponent,
   getDropzoneComponents,
+  hasNestedChildren,
   removeComponentFromDraft,
   removePlaceholderFromDraft,
   replacePlaceholderWithComponent,
@@ -119,10 +120,38 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
 
     const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
     setItems(draft => {
-      replacePlaceholderWithComponent(draft.components, newComponent);
+      replacePlaceholderWithComponent(draft, newComponent);
 
       // @TODO cleanup, kinda dirty
       // At this point draft.components should only contain component definitions.
+      onChange(current(draft.components) as AnyComponentSchema[]);
+    });
+  };
+
+  const deleteComponent = (component: AnyComponentSchema) => {
+    const {getChildComponents} = getRegistryEntry(component.type);
+    const children = getChildComponents ? getChildComponents(component) : [];
+
+    // Check if component has children components
+    const isParent = hasNestedChildren(children)
+      ? children.some(child => child.length > 0)
+      : children.length > 0;
+
+    if (
+      isParent &&
+      !confirm(
+        intl.formatMessage({
+          description: 'Form designer delete parent component confirmation message',
+          defaultMessage:
+            'Removing this component will also remove all of its children. Are you sure you want to do this?',
+        })
+      )
+    ) {
+      return;
+    }
+
+    setItems(draft => {
+      removeComponentFromDraft(draft, component.key);
       onChange(current(draft.components) as AnyComponentSchema[]);
     });
   };
@@ -131,7 +160,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     <DesignerContext.Provider
       value={{
         editComponent: () => {},
-        deleteComponent: () => {},
+        deleteComponent,
       }}
     >
       <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
