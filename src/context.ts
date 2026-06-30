@@ -109,15 +109,13 @@ BuilderContext.displayName = 'BuilderContext';
   Designer
  */
 export interface DesignerContextType {
-  /**
-   * A collection of all components in the form, created by flattening the form
-   * definitions.
-   */
-  componentNamespace: AnyComponentSchema[];
+  editComponent: (component: AnyComponentSchema) => void;
+  deleteComponent: (component: AnyComponentSchema) => void;
 }
 
 const DesignerContext = React.createContext<DesignerContextType>({
-  componentNamespace: [],
+  editComponent: () => {},
+  deleteComponent: () => {},
 });
 
 /*

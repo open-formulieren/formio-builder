@@ -7,10 +7,9 @@ import type {
 } from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {useState} from 'react';
-import {expect, userEvent, waitFor, within} from 'storybook/test';
+import {expect, fn, userEvent, waitFor, within} from 'storybook/test';
 
-import {DesignerContext} from '@/context';
-import {DesignerContextDecorator, withFormik} from '@/sb-decorators';
+import {withFormik} from '@/sb-decorators';
 
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
 import type {FormioDefinitionDesignerProps} from './FormioDefinitionDesigner';
@@ -65,29 +64,32 @@ const dragTo = async (source: HTMLElement, target: HTMLElement) => {
  * unique.
  */
 const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps) => {
-  const [namespace, setNamespace] = useState<AnyComponentSchema[]>(props.components.flat(1));
+  const [components, setComponents] = useState<AnyComponentSchema[]>(props.components);
 
   return (
-    <DesignerContext.Provider
-      value={{
-        componentNamespace: namespace,
+    <FormioDefinitionDesigner
+      {...props}
+      components={components}
+      componentNamespace={components.flat(1)}
+      onChange={components => {
+        setComponents(components);
+        // Call the original onChange function
+        props.onChange(components);
       }}
-    >
-      <FormioDefinitionDesigner
-        {...props}
-        onChange={components => setNamespace(components.flat(1))}
-      />
-    </DesignerContext.Provider>
+    />
   );
 };
 
 export default {
   title: 'Form designer/Form designer',
-  decorators: [withFormik, DesignerContextDecorator],
+  decorators: [withFormik],
   component: FormioDefinitionDesigner,
   render: StorybookFormioDefinitionDesigner,
   parameters: {
     modal: {noModal: true},
+  },
+  args: {
+    onChange: fn(),
   },
 } satisfies Meta<typeof FormioDefinitionDesigner>;
 
