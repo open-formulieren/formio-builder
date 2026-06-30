@@ -127,11 +127,37 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     });
   };
 
+  const deleteComponent = (component: AnyComponentSchema) => {
+    const {getComponentSlots} = getRegistryEntry(component.type);
+
+    // Check if component has children components
+    const isParent =
+      getComponentSlots && getComponentSlots(component).some(slot => slot.collection.length > 0);
+
+    if (
+      isParent &&
+      !confirm(
+        intl.formatMessage({
+          description: 'Form designer delete parent component confirmation message',
+          defaultMessage:
+            'Removing this component will also remove all of its children. Are you sure you want to continue?',
+        })
+      )
+    ) {
+      return;
+    }
+
+    setItems(draft => {
+      removeComponent(draft.components, component.key);
+      onChange(current(draft.components) as AnyComponentSchema[]);
+    });
+  };
+
   return (
     <DesignerContext.Provider
       value={{
         editComponent: () => {},
-        deleteComponent: () => {},
+        deleteComponent,
       }}
     >
       <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
