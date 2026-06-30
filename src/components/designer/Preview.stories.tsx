@@ -40,6 +40,9 @@ export default {
   title: 'Form designer/Preview',
   decorators: [withFormik],
   component: Preview,
+  args: {
+    withoutComponentControls: true,
+  },
   parameters: {
     modal: {noModal: true},
   },

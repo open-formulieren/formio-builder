@@ -18,12 +18,14 @@ export interface ComponentsPreviewProps {
   components: (AnyComponentSchema | ComponentPlaceholder)[];
   dropzoneId: string;
   hideEmptyMessage?: boolean;
+  withoutComponentControls?: boolean;
 }
 
 export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
   components,
   dropzoneId,
   hideEmptyMessage = false,
+  withoutComponentControls = false,
 }) => {
   const {target} = useDragOperation();
   const dropzone = getTargetDropzoneId(target);
@@ -49,6 +51,7 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
               index={index}
               groupName={dropzoneId}
               component={component}
+              hasControls={!withoutComponentControls}
             >
               <ComponentPreview component={component} />
             </SortableComponent>

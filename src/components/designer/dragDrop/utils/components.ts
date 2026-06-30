@@ -14,7 +14,7 @@ import {hasOwnProperty} from '@/types';
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 type DraftComponentDefinitions = Draft<{components: ComponentDefinition[]}>;
 
-const hasNestedChildren = (
+export const hasNestedChildren = (
   children: AnyComponentSchema[] | AnyComponentSchema[][]
 ): children is AnyComponentSchema[][] => children.length > 0 && Array.isArray(children[0]);
 
