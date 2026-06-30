@@ -5,19 +5,24 @@ import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {current} from 'immer';
+import {useCallback, useMemo, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useImmer} from 'use-immer';
 
+import ComponentEditForm from '@/components/ComponentEditForm';
+import Modal from '@/components/Modal';
 import {
+  assertNoPlaceholders,
   createComponent,
   getDropzoneComponents,
   removeComponent,
   removePlaceholder,
+  replaceComponent,
   replacePlaceholderWithComponent,
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
-import {DesignerContext} from '@/context';
+import {DesignerContext, DesignerContextType} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
@@ -45,6 +50,10 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   const [items, setItems] = useImmer<{components: ComponentDefinition[]}>({
     components,
   });
+  const [componentToEdit, setComponentToEdit] = useState<{
+    component: AnyComponentSchema;
+    isNew: boolean;
+  } | null>(null);
 
   const movePlaceholder = (
     index: number,
@@ -121,45 +130,86 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     setItems(draft => {
       replacePlaceholderWithComponent(draft.components, newComponent);
 
-      // @TODO cleanup, kinda dirty
-      // At this point draft.components should only contain component definitions.
-      onChange(current(draft.components) as AnyComponentSchema[]);
+      // After replacing the placeholder with the new component, we can be certain that
+      // the collection only contains component schemas.
+      const components: ComponentDefinition[] = current(draft.components);
+      assertNoPlaceholders(components);
+      onChange(components);
     });
+
+    // Open the modal for the new component.
+    openModal(newComponent, true);
   };
 
-  const deleteComponent = (component: AnyComponentSchema) => {
-    const {getComponentSlots} = getRegistryEntry(component.type);
+  const openModal = useCallback(
+    (component: AnyComponentSchema, isNew: boolean = false) => {
+      setComponentToEdit({component, isNew});
+    },
+    [setComponentToEdit]
+  );
 
-    // Check if component has children components
-    const isParent =
-      getComponentSlots && getComponentSlots(component).some(slot => slot.collection.length > 0);
+  const closeModal = () => {
+    setComponentToEdit(null);
+  };
 
-    if (
-      isParent &&
-      !confirm(
-        intl.formatMessage({
-          description: 'Form designer delete parent component confirmation message',
-          defaultMessage:
-            'Removing this component will also remove all of its children. Are you sure you want to continue?',
-        })
-      )
-    ) {
-      return;
-    }
-
+  const updateComponent = (component: AnyComponentSchema, previousComponentKey: string) => {
     setItems(draft => {
-      removeComponent(draft.components, component.key);
-      onChange(current(draft.components) as AnyComponentSchema[]);
+      replaceComponent(draft.components, previousComponentKey, component);
+
+      // Placeholders are only used for the drag and drop functionality, so there should
+      // not be any in the collection at this point. Additionally, we should only send
+      // component schemas to the backend.
+      const components: ComponentDefinition[] = current(draft.components);
+      assertNoPlaceholders(components);
+      onChange(components);
     });
   };
+
+  const deleteComponent = useCallback(
+    (component: AnyComponentSchema) => {
+      const {getComponentSlots} = getRegistryEntry(component.type);
+
+      // Check if component has children components
+      const isParent =
+        getComponentSlots && getComponentSlots(component).some(slot => slot.collection.length > 0);
+
+      if (
+        isParent &&
+        !confirm(
+          intl.formatMessage({
+            description: 'Form designer delete parent component confirmation message',
+            defaultMessage:
+              'Removing this component will also remove all of its children. Are you sure you want to continue?',
+          })
+        )
+      ) {
+        return;
+      }
+
+      setItems(draft => {
+        removeComponent(draft.components, component.key);
+
+        // Placeholders are only used for the drag and drop functionality, so there should
+        // not be any in the collection at this point. Additionally, we should only send
+        // component schemas to the backend.
+        const components: ComponentDefinition[] = current(draft.components);
+        assertNoPlaceholders(components);
+        onChange(components);
+      });
+    },
+    [setItems]
+  );
+
+  const designerContext = useMemo<DesignerContextType>(
+    () => ({
+      editComponent: openModal,
+      deleteComponent,
+    }),
+    [openModal, deleteComponent]
+  );
 
   return (
-    <DesignerContext.Provider
-      value={{
-        editComponent: () => {},
-        deleteComponent,
-      }}
-    >
+    <DesignerContext.Provider value={designerContext}>
       <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
         <DragOverlay dropAnimation={null}>
           {source =>
@@ -179,8 +229,57 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
           </div>
         </div>
+        {componentToEdit && (
+          <ComponentEditModal
+            component={componentToEdit.component}
+            isNew={componentToEdit.isNew}
+            onSubmit={component => {
+              updateComponent(component, componentToEdit.component.key);
+              closeModal();
+            }}
+            onRemove={() => {
+              deleteComponent(componentToEdit.component);
+              closeModal();
+            }}
+            onClose={closeModal}
+          />
+        )}
       </DragDropProvider>
     </DesignerContext.Provider>
+  );
+};
+
+interface ComponentEditModalProps {
+  component: AnyComponentSchema;
+  isNew?: boolean;
+  onSubmit: (component: AnyComponentSchema) => void;
+  onRemove: () => void;
+  onClose: () => void;
+}
+
+const ComponentEditModal: React.FC<ComponentEditModalProps> = ({
+  component,
+  isNew = false,
+  onSubmit,
+  onRemove,
+  onClose,
+}) => {
+  const {builderInfo} = getRegistryEntry(component.type);
+
+  // When the component is new, closing the modal without saving should remove it.
+  const closeModal = () => (isNew ? onRemove() : onClose());
+
+  return (
+    <Modal isOpen closeModal={closeModal}>
+      <ComponentEditForm
+        component={component}
+        isNew={isNew}
+        builderInfo={builderInfo}
+        onSubmit={onSubmit}
+        onRemove={onRemove}
+        onCancel={closeModal}
+      />
+    </Modal>
   );
 };
 

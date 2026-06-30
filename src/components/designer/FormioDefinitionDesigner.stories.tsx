@@ -152,9 +152,18 @@ export const AddComponentToDropzone: Story = {
 
     await dragTo(textareaDraggableItem, dropzone);
 
+    // The edit modal for the textarea component should be opened
+    const modal = canvas.getByRole('dialog');
+    await waitFor(() => {
+      expect(modal).toBeVisible();
+    });
+
+    // Save the component
+    await userEvent.click(within(modal).getByRole('button', {name: 'Save'}));
+
     // Wait for the component to be added, and the instructions message to be removed.
     await waitFor(() => {
-      expect(within(dropzone).getByTestId('input-Textarea')).toBeVisible();
+      expect(within(dropzone).getByTestId('input-textarea')).toBeVisible();
 
       expect(
         within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
