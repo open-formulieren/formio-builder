@@ -88,6 +88,9 @@ export default {
   render: StorybookFormioDefinitionDesigner,
   parameters: {
     modal: {noModal: true},
+    formik: {
+      wrapForm: false,
+    },
   },
   args: {
     onChange: fn(),
@@ -246,6 +249,52 @@ export const ComponentInEditgrid: Story = {
   },
 };
 
+export const EditComponent: Story = {
+  args: {
+    components: [
+      {
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'Textfield',
+      } satisfies TextFieldComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const textfieldComponent = canvas.getByTestId('sortable-item-textfield');
+    expect(textfieldComponent).toBeVisible();
+
+    // Start editing the textfield component
+    within(textfieldComponent).getByLabelText('Textfield').focus();
+    await userEvent.click(within(textfieldComponent).getByRole('button', {name: 'Edit component'}));
+
+    const modal = canvas.queryByRole('dialog');
+    await waitFor(() => {
+      expect(modal).toBeVisible();
+    });
+
+    const labelField = within(modal as HTMLElement).getByLabelText('Label');
+    await userEvent.clear(labelField);
+    await userEvent.type(labelField, 'Some cool textfield label');
+
+    await userEvent.click(within(modal as HTMLElement).getByRole('button', {name: 'Save'}));
+
+    // The onChange should have been called with the updated components
+    expect(args.onChange).toHaveBeenCalledWith([
+      expect.objectContaining({
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'Some cool textfield label',
+      }),
+    ]);
+
+    expect(canvas.getByText('Some cool textfield label')).toBeVisible();
+  },
+};
+
 export const DeleteComponent: Story = {
   args: {
     components: [
@@ -387,5 +436,98 @@ export const DeleteComponentWithChildren: Story = {
 
     // The onChange should have been called with the updated components
     expect(args.onChange).toHaveBeenCalledWith([]);
+  },
+};
+
+export const DeleteComponentFromEditModal: Story = {
+  args: {
+    components: [
+      {
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'Textfield',
+      } satisfies TextFieldComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+
+    const textfieldComponent = canvas.getByTestId('sortable-item-textfield');
+    expect(textfieldComponent).toBeVisible();
+
+    // Start editing the textfield component
+    within(textfieldComponent).getByLabelText('Textfield').focus();
+    await userEvent.click(within(textfieldComponent).getByRole('button', {name: 'Edit component'}));
+
+    const modal = canvas.queryByRole('dialog');
+    await waitFor(() => {
+      expect(modal).toBeVisible();
+    });
+
+    await userEvent.click(within(modal as HTMLElement).getByRole('button', {name: 'Remove'}));
+
+    // The onChange should have been called with the updated components
+    expect(args.onChange).toHaveBeenCalledWith([]);
+
+    expect(
+      canvas.getByText('Drag a component in the form and release the mouse button.')
+    ).toBeVisible();
+  },
+};
+
+export const DeleteComponentWithChildrenFromEditModal: Story = {
+  decorators: [overrideWindowConfirm],
+  args: {
+    components: [
+      {
+        id: 'editgrid',
+        key: 'editgrid',
+        type: 'editgrid',
+        label: 'Editgrid',
+        groupLabel: 'item',
+        disableAddingRemovingRows: false,
+        components: [
+          {
+            id: 'textfield',
+            key: 'textfield',
+            type: 'textfield',
+            label: 'Textfield',
+          } satisfies TextFieldComponentSchema,
+        ],
+      } satisfies EditGridComponentSchema,
+    ],
+  },
+  parameters: {
+    windowConfirm: fn(),
+  },
+  play: async ({canvasElement, args, parameters}) => {
+    const canvas = within(canvasElement);
+
+    const editgridComponent = canvas.getByTestId('sortable-item-editgrid');
+    expect(editgridComponent).toBeVisible();
+
+    // Start editing the editgrid component
+    within(editgridComponent).getByLabelText('Textfield').focus();
+    await userEvent.click(
+      within(editgridComponent).getAllByRole('button', {name: 'Edit component'})[0]
+    );
+
+    const modal = canvas.queryByRole('dialog');
+    await waitFor(() => {
+      expect(modal).toBeVisible();
+    });
+
+    await userEvent.click(within(modal as HTMLElement).getByRole('button', {name: 'Remove'}));
+
+    // The window.confirm should have been called
+    expect(parameters.windowConfirm).toHaveBeenCalled();
+
+    // The onChange should have been called with the updated components
+    expect(args.onChange).toHaveBeenCalledWith([]);
+
+    expect(
+      canvas.getByText('Drag a component in the form and release the mouse button.')
+    ).toBeVisible();
   },
 };
