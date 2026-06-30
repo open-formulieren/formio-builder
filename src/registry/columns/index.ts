@@ -32,5 +32,5 @@ export default {
     },
   },
   defaultValue: undefined, // a column component does not hold a value itself
-  getChildComponents: component => component.columns.map(column => column.components).flat(1),
+  getChildComponents: component => component.columns.map(column => column.components),
 } satisfies RegistryEntry<ColumnsComponentSchema>;

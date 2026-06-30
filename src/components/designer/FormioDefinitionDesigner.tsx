@@ -11,11 +11,12 @@ import {useImmer} from 'use-immer';
 
 import {
   createComponent,
+  getDropzoneComponents,
   removeComponentFromDraft,
   removePlaceholderFromDraft,
   replacePlaceholderWithComponent,
 } from '@/components/designer/dragDrop/utils/components';
-import {getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
+import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
 import {DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
@@ -45,7 +46,11 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     components,
   });
 
-  const movePlaceholder = (index: number, componentType: AnyComponentSchema['type']) => {
+  const movePlaceholder = (
+    index: number,
+    dropzoneId: string,
+    componentType: AnyComponentSchema['type']
+  ) => {
     const placeholder: ComponentPlaceholder = {
       type: COMPONENT_PLACEHOLDER_TYPE,
       componentType,
@@ -54,15 +59,21 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     setItems(draft => {
       removePlaceholderFromDraft(draft);
 
-      draft.components.splice(index, 0, placeholder);
+      const dropzoneComponents = getDropzoneComponents(draft, dropzoneId);
+      if (dropzoneComponents === undefined) return;
+
+      dropzoneComponents.splice(index, 0, placeholder);
     });
   };
 
-  const moveComponent = (index: number, component: AnyComponentSchema) => {
+  const moveComponent = (index: number, dropzoneId: string, component: AnyComponentSchema) => {
     setItems(draft => {
       removeComponentFromDraft(draft, component.key);
 
-      draft.components.splice(index, 0, component);
+      const dropzoneComponents = getDropzoneComponents(draft, dropzoneId);
+      if (dropzoneComponents === undefined) return;
+
+      dropzoneComponents.splice(index, 0, component);
     });
   };
 
@@ -79,23 +90,32 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
       return;
     }
 
-    const targetIndex = getTargetIndex(target, items.components.length);
+    const dropzoneId = getTargetDropzoneId(target);
+    if (!dropzoneId) return;
+
+    const dropzoneComponents = getDropzoneComponents(items, dropzoneId);
+    if (dropzoneComponents === undefined) return;
+
+    const targetIndex = getTargetIndex(target, dropzoneComponents.length);
     if (targetIndex === undefined) return;
 
     if (isNewComponent) {
-      movePlaceholder(targetIndex, sourceData.componentType);
+      movePlaceholder(targetIndex, dropzoneId, sourceData.componentType);
     } else if (sourceData?.component) {
-      moveComponent(targetIndex, sourceData.component);
+      moveComponent(targetIndex, dropzoneId, sourceData.component);
     }
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const {source} = event.operation;
+    const {source, target} = event.operation;
     const sourceData = getData(source);
     const isNewComponent: boolean = sourceData?.fromSidebar;
 
     // For existing components we don't need any additional actions.
     if (!isNewComponent) return;
+
+    // If there is no target, it means the drag ended outside the dropzone.
+    if (!target) return;
 
     const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
     setItems(draft => {
