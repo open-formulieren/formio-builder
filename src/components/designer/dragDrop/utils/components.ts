@@ -226,3 +226,24 @@ export const replacePlaceholderWithComponent = (
     }
   }
 };
+
+/**
+ * Replace a component in the components with the given component.
+ */
+export const replaceComponent = (
+  draft: DraftComponentDefinitions,
+  componentToReplaceKey: string,
+  component: AnyComponentSchema
+) => {
+  for (const {index, component: componentDefinition, collection} of iterComponents(
+    draft.components
+  )) {
+    if (
+      componentDefinition.type !== COMPONENT_PLACEHOLDER_TYPE &&
+      componentDefinition.key === componentToReplaceKey
+    ) {
+      collection[index] = component;
+      return;
+    }
+  }
+};

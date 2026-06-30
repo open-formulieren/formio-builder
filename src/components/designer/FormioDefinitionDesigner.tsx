@@ -5,15 +5,19 @@ import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {current} from 'immer';
+import {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useImmer} from 'use-immer';
 
+import ComponentEditForm from '@/components/ComponentEditForm';
+import Modal from '@/components/Modal';
 import {
   createComponent,
   getDropzoneComponents,
   hasNestedChildren,
   removeComponentFromDraft,
   removePlaceholderFromDraft,
+  replaceComponent,
   replacePlaceholderWithComponent,
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
@@ -46,6 +50,10 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   const [items, setItems] = useImmer<{components: (AnyComponentSchema | ComponentPlaceholder)[]}>({
     components,
   });
+  const [componentToEdit, setComponentToEdit] = useState<{
+    component: AnyComponentSchema;
+    isNew: boolean;
+  } | null>(null);
 
   const movePlaceholder = (
     index: number,
@@ -121,9 +129,24 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
     setItems(draft => {
       replacePlaceholderWithComponent(draft, newComponent);
+      onChange(current(draft.components) as AnyComponentSchema[]);
+    });
 
-      // @TODO cleanup, kinda dirty
-      // At this point draft.components should only contain component definitions.
+    // Open the modal for the new component.
+    openModal(newComponent, true);
+  };
+
+  const openModal = (component: AnyComponentSchema, isNew: boolean = false) => {
+    setComponentToEdit({component, isNew});
+  };
+
+  const closeModal = () => {
+    setComponentToEdit(null);
+  };
+
+  const updateComponent = (component: AnyComponentSchema, previousComponentKey: string) => {
+    setItems(draft => {
+      replaceComponent(draft, previousComponentKey, component);
       onChange(current(draft.components) as AnyComponentSchema[]);
     });
   };
@@ -159,7 +182,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   return (
     <DesignerContext.Provider
       value={{
-        editComponent: () => {},
+        editComponent: openModal,
         deleteComponent,
       }}
     >
@@ -182,8 +205,57 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
           </div>
         </div>
+        {componentToEdit && (
+          <ComponentEditModal
+            component={componentToEdit.component}
+            isNew={componentToEdit.isNew}
+            onSubmit={component => {
+              updateComponent(component, componentToEdit?.component.key);
+              closeModal();
+            }}
+            onRemove={() => {
+              deleteComponent(componentToEdit?.component);
+              closeModal();
+            }}
+            onClose={closeModal}
+          />
+        )}
       </DragDropProvider>
     </DesignerContext.Provider>
+  );
+};
+
+interface ComponentEditModalProps {
+  component: AnyComponentSchema;
+  isNew?: boolean;
+  onSubmit: (component: AnyComponentSchema) => void;
+  onRemove: () => void;
+  onClose: () => void;
+}
+
+const ComponentEditModal: React.FC<ComponentEditModalProps> = ({
+  component,
+  isNew = false,
+  onSubmit,
+  onRemove,
+  onClose,
+}) => {
+  const {builderInfo} = getRegistryEntry(component.type);
+
+  // When the component is new, closing the modal without saving should remove it.
+  const closeModal = () => (isNew ? onRemove() : onClose());
+
+  return (
+    <Modal isOpen closeModal={closeModal}>
+      <ComponentEditForm
+        component={component}
+        isNew={isNew}
+        builderInfo={builderInfo}
+        onSubmit={onSubmit}
+        onRemove={onRemove}
+        onCancel={closeModal}
+      />
+    </Modal>
   );
 };
 
