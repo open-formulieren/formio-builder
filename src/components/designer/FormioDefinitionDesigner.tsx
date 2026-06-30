@@ -5,7 +5,6 @@ import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {current} from 'immer';
-import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useImmer} from 'use-immer';
 
@@ -33,14 +32,15 @@ const getData = (
 
 export interface FormioDefinitionDesignerProps {
   components: AnyComponentSchema[];
+  componentNamespace: AnyComponentSchema[];
   onChange: (components: AnyComponentSchema[]) => void;
 }
 
 const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   components,
+  componentNamespace,
   onChange,
 }) => {
-  const {componentNamespace} = useContext(DesignerContext);
   const intl = useIntl();
   const [items, setItems] = useImmer<{components: (AnyComponentSchema | ComponentPlaceholder)[]}>({
     components,
@@ -128,26 +128,33 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   };
 
   return (
-    <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
-      <DragOverlay dropAnimation={null}>
-        {source =>
-          source.data?.fromSidebar ? (
-            <PlaceholderDragOverlay componentType={source.data.componentType} />
-          ) : (
-            <ComponentPreview component={source.data.component} />
-          )
-        }
-      </DragOverlay>
+    <DesignerContext.Provider
+      value={{
+        editComponent: () => {},
+        deleteComponent: () => {},
+      }}
+    >
+      <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+        <DragOverlay dropAnimation={null}>
+          {source =>
+            source.data?.fromSidebar ? (
+              <PlaceholderDragOverlay componentType={source.data.componentType} />
+            ) : (
+              <ComponentPreview component={source.data.component} />
+            )
+          }
+        </DragOverlay>
 
-      <div className="row">
-        <div className="col col-2">
-          <ComponentsList />
+        <div className="row">
+          <div className="col col-2">
+            <ComponentsList />
+          </div>
+          <div className="col col-10">
+            <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
+          </div>
         </div>
-        <div className="col col-10">
-          <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
-        </div>
-      </div>
-    </DragDropProvider>
+      </DragDropProvider>
+    </DesignerContext.Provider>
   );
 };
 
