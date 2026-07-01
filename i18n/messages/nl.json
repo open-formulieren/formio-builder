@@ -85,6 +85,11 @@
     "description": "Component edit form tab title for 'Layers' tab",
     "originalDefault": "Layers"
   },
+  "0gGl1O": {
+    "defaultMessage": "Verwijderen",
+    "description": "Form designer preview delete component button title",
+    "originalDefault": "Delete component"
+  },
   "0gbtNe": {
     "defaultMessage": "Maanden",
     "description": "Label for 'delta.months' in relative delta date constraint validation",
@@ -748,6 +753,11 @@
     "description": "Label for 'disableAddingRemovingRows' builder field",
     "originalDefault": "Disable adding or removing groups"
   },
+  "MpgfEL": {
+    "defaultMessage": "Verwijder component",
+    "description": "Form designer preview delete component button label",
+    "originalDefault": "Delete component"
+  },
   "N25aMd": {
     "defaultMessage": "Family members",
     "description": "NpFamilyMembers component type label",
@@ -762,6 +772,11 @@
     "defaultMessage": "Waarde-omschrijving (<option></option>)",
     "description": "Label for option description location",
     "originalDefault": "Option description (<option></option>)"
+  },
+  "Nnn8u4": {
+    "defaultMessage": "Wijzig component",
+    "description": "Form designer preview edit component button label",
+    "originalDefault": "Edit component"
   },
   "Nsifca": {
     "defaultMessage": "De maximale datum die gekozen kan worden.",
@@ -1512,6 +1527,11 @@
     "description": "Label for 'deriveHouseNumber' builder field",
     "originalDefault": "House number component"
   },
+  "jRp/wy": {
+    "defaultMessage": "Als je dit component verwijdert, worden ook alle onderliggende componenten verwijderd. Weet je zeker dat je dit wilt doen?",
+    "description": "Form designer delete parent component confirmation message",
+    "originalDefault": "Removing this component will also remove all of its children. Are you sure you want to do this?"
+  },
   "jV58dA": {
     "defaultMessage": "Dit zorgt ervoor dat het tekstvlak automatisch groter wordt wanneer de gebruiker tekst invoert.",
     "description": "Tooltip for 'AutoExpand' builder field",
@@ -1976,6 +1996,11 @@
     "defaultMessage": "Selecteer een databron voor de keuzeopties.",
     "description": "Tooltip for 'openForms.dataSrc' builder field",
     "originalDefault": "How to specify the available options."
+  },
+  "yaI9aD": {
+    "defaultMessage": "Wijzigen",
+    "description": "Form designer preview edit component button title",
+    "originalDefault": "Edit component"
   },
   "yr8cz5": {
     "defaultMessage": "Checkbox",
