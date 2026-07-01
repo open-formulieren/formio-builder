@@ -1,6 +1,8 @@
 import type {Data} from '@dnd-kit/abstract';
 import {useSortable} from '@dnd-kit/react/sortable';
 import type {AnyComponentSchema} from '@open-formulieren/types';
+import clsx from 'clsx';
+import React from 'react';
 
 import ComponentControls from './ComponentControls';
 import './SortableComponent.scss';
@@ -27,7 +29,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
   children,
 }) => {
   const {collisionPriority} = useDropzoneContext();
-  const {ref} = useSortable<SortableItemData>({
+  const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
     group: groupName,
@@ -37,11 +39,41 @@ const SortableItem: React.FC<SortableItemProps> = ({
     },
   });
   return (
-    <div ref={ref} className="offb-dnd-sortable-item" data-testid={`sortable-item-${id}`}>
-      {hasControls && <ComponentControls component={component} />}
+    <SortableItemView
+      ref={ref}
+      testId={`sortable-item-${id}`}
+      className={clsx('offb-dnd-sortable-item', {
+        'offb-dnd-sortable-item--is-dragging': isDragging,
+      })}
+      component={component}
+      showControls={hasControls && !isDragging}
+    >
       {children}
-    </div>
+    </SortableItemView>
   );
 };
 
+interface SortableItemViewProps extends React.PropsWithChildren {
+  testId?: string;
+  component: AnyComponentSchema;
+  className?: string;
+  showControls?: boolean;
+}
+
+const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
+  ({testId, component, showControls = false, className, children}, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx('offb-dnd-sortable-item-view', className)}
+        data-testid={testId}
+      >
+        {showControls && <ComponentControls component={component} />}
+        {children}
+      </div>
+    );
+  }
+);
+
+export {SortableItemView};
 export default SortableItem;

@@ -1,3 +1,9 @@
 .offb-dnd-sortable-item {
+  &--is-dragging {
+    opacity: 0.4;
+  }
+}
+
+.offb-dnd-sortable-item-view {
   position: relative;
 }

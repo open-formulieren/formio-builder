@@ -11,6 +11,7 @@ import {useImmer} from 'use-immer';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import Modal from '@/components/Modal';
+import {SortableItemView} from '@/components/designer/dragDrop';
 import {
   assertNoPlaceholders,
   createComponent,
@@ -216,7 +217,9 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             source.data?.fromSidebar ? (
               <PlaceholderDragOverlay componentType={source.data.componentType} />
             ) : (
-              <ComponentPreview component={source.data.component} />
+              <SortableItemView component={source.data.component} showControls>
+                <ComponentPreview component={source.data.component} />
+              </SortableItemView>
             )
           }
         </DragOverlay>
