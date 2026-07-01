@@ -5,15 +5,20 @@ import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {current} from 'immer';
-import {useContext} from 'react';
+import {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useImmer} from 'use-immer';
 
+import ComponentEditForm from '@/components/ComponentEditForm';
+import Modal from '@/components/Modal';
+import {SortableItemView} from '@/components/designer/dragDrop';
 import {
   createComponent,
   getDropzoneComponents,
+  hasNestedChildren,
   removeComponentFromDraft,
   removePlaceholderFromDraft,
+  replaceComponent,
   replacePlaceholderWithComponent,
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
@@ -33,18 +38,23 @@ const getData = (
 
 export interface FormioDefinitionDesignerProps {
   components: AnyComponentSchema[];
+  componentNamespace: AnyComponentSchema[];
   onChange: (components: AnyComponentSchema[]) => void;
 }
 
 const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   components,
+  componentNamespace,
   onChange,
 }) => {
-  const {componentNamespace} = useContext(DesignerContext);
   const intl = useIntl();
   const [items, setItems] = useImmer<{components: (AnyComponentSchema | ComponentPlaceholder)[]}>({
     components,
   });
+  const [componentToEdit, setComponentToEdit] = useState<{
+    component: AnyComponentSchema;
+    isNew: boolean;
+  } | null>(null);
 
   const movePlaceholder = (
     index: number,
@@ -119,35 +129,136 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
 
     const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
     setItems(draft => {
-      replacePlaceholderWithComponent(draft.components, newComponent);
+      replacePlaceholderWithComponent(draft, newComponent);
+      onChange(current(draft.components) as AnyComponentSchema[]);
+    });
 
-      // @TODO cleanup, kinda dirty
-      // At this point draft.components should only contain component definitions.
+    // Open the modal for the new component.
+    openModal(newComponent, true);
+  };
+
+  const openModal = (component: AnyComponentSchema, isNew: boolean = false) => {
+    setComponentToEdit({component, isNew});
+  };
+
+  const closeModal = () => {
+    setComponentToEdit(null);
+  };
+
+  const updateComponent = (component: AnyComponentSchema, previousComponentKey: string) => {
+    setItems(draft => {
+      replaceComponent(draft, previousComponentKey, component);
+      onChange(current(draft.components) as AnyComponentSchema[]);
+    });
+  };
+
+  const deleteComponent = (component: AnyComponentSchema) => {
+    const {getChildComponents} = getRegistryEntry(component.type);
+    const children = getChildComponents ? getChildComponents(component) : [];
+
+    // Check if component has children components
+    const isParent = hasNestedChildren(children)
+      ? children.some(child => child.length > 0)
+      : children.length > 0;
+
+    if (
+      isParent &&
+      !confirm(
+        intl.formatMessage({
+          description: 'Form designer delete parent component confirmation message',
+          defaultMessage:
+            'Removing this component will also remove all of its children. Are you sure you want to do this?',
+        })
+      )
+    ) {
+      return;
+    }
+
+    setItems(draft => {
+      removeComponentFromDraft(draft, component.key);
       onChange(current(draft.components) as AnyComponentSchema[]);
     });
   };
 
   return (
-    <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
-      <DragOverlay dropAnimation={null}>
-        {source =>
-          source.data?.fromSidebar ? (
-            <PlaceholderDragOverlay componentType={source.data.componentType} />
-          ) : (
-            <ComponentPreview component={source.data.component} />
-          )
-        }
-      </DragOverlay>
+    <DesignerContext.Provider
+      value={{
+        editComponent: openModal,
+        deleteComponent,
+      }}
+    >
+      <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+        <DragOverlay dropAnimation={null}>
+          {source =>
+            source.data?.fromSidebar ? (
+              <PlaceholderDragOverlay componentType={source.data.componentType} />
+            ) : (
+              <SortableItemView component={source.data.component} showControls>
+                <ComponentPreview component={source.data.component} />
+              </SortableItemView>
+            )
+          }
+        </DragOverlay>
 
-      <div className="row">
-        <div className="col col-2">
-          <ComponentsList />
+        <div className="row">
+          <div className="col col-2">
+            <ComponentsList />
+          </div>
+          <div className="col col-10">
+            <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
+          </div>
         </div>
-        <div className="col col-10">
-          <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
-        </div>
-      </div>
-    </DragDropProvider>
+        {componentToEdit && (
+          <ComponentEditModal
+            component={componentToEdit.component}
+            isNew={componentToEdit.isNew}
+            onSubmit={component => {
+              updateComponent(component, componentToEdit?.component.key);
+              closeModal();
+            }}
+            onRemove={() => {
+              deleteComponent(componentToEdit?.component);
+              closeModal();
+            }}
+            onClose={closeModal}
+          />
+        )}
+      </DragDropProvider>
+    </DesignerContext.Provider>
+  );
+};
+
+interface ComponentEditModalProps {
+  component: AnyComponentSchema;
+  isNew?: boolean;
+  onSubmit: (component: AnyComponentSchema) => void;
+  onRemove: () => void;
+  onClose: () => void;
+}
+
+const ComponentEditModal: React.FC<ComponentEditModalProps> = ({
+  component,
+  isNew = false,
+  onSubmit,
+  onRemove,
+  onClose,
+}) => {
+  const {builderInfo} = getRegistryEntry(component.type);
+
+  // When the component is new, closing the modal without saving should remove it.
+  const closeModal = () => (isNew ? onRemove() : onClose());
+
+  return (
+    <Modal isOpen closeModal={closeModal}>
+      <ComponentEditForm
+        component={component}
+        isNew={isNew}
+        builderInfo={builderInfo}
+        onSubmit={onSubmit}
+        onRemove={onRemove}
+        onCancel={closeModal}
+      />
+    </Modal>
   );
 };
 

@@ -14,7 +14,7 @@ import {hasOwnProperty} from '@/types';
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 type DraftComponentDefinitions = Draft<{components: ComponentDefinition[]}>;
 
-const hasNestedChildren = (
+export const hasNestedChildren = (
   children: AnyComponentSchema[] | AnyComponentSchema[][]
 ): children is AnyComponentSchema[][] => children.length > 0 && Array.isArray(children[0]);
 
@@ -214,13 +214,34 @@ export const removeComponentFromDraft = (draft: DraftComponentDefinitions, key: 
  * Search for the placeholder in the components and replace it with the given component.
  */
 export const replacePlaceholderWithComponent = (
-  componentDefinitions: ComponentDefinition[],
+  draft: DraftComponentDefinitions,
   component: AnyComponentSchema
 ) => {
   for (const {index, component: componentDefinition, collection} of iterComponents(
-    componentDefinitions
+    draft.components
   )) {
     if (componentDefinition.type === COMPONENT_PLACEHOLDER_TYPE) {
+      collection[index] = component;
+      return;
+    }
+  }
+};
+
+/**
+ * Replace a component in the components with the given component.
+ */
+export const replaceComponent = (
+  draft: DraftComponentDefinitions,
+  componentToReplaceKey: string,
+  component: AnyComponentSchema
+) => {
+  for (const {index, component: componentDefinition, collection} of iterComponents(
+    draft.components
+  )) {
+    if (
+      componentDefinition.type !== COMPONENT_PLACEHOLDER_TYPE &&
+      componentDefinition.key === componentToReplaceKey
+    ) {
       collection[index] = component;
       return;
     }

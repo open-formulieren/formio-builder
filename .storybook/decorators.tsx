@@ -3,7 +3,7 @@ import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
 import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
-import {BuilderContext, DesignerContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
+import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
@@ -145,18 +145,6 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   );
 };
 
-export const DesignerContextDecorator: Decorator = (Story, context) => {
-  return (
-    <DesignerContext.Provider
-      value={{
-        componentNamespace: context.parameters?.designer?.componentNamespace || [],
-      }}
-    >
-      <Story />
-    </DesignerContext.Provider>
-  );
-};
-
 export const withFormik: Decorator = (Story, context) => {
   const isDisabled = context.parameters?.formik?.disable ?? false;
   if (isDisabled) {
@@ -183,4 +171,15 @@ export const withFormik: Decorator = (Story, context) => {
       )}
     </Formik>
   );
+};
+
+export const overrideWindowConfirm: Decorator = (Story, context) => {
+  window.confirm = () => {
+    if (context.parameters?.windowConfirm) {
+      context.parameters?.windowConfirm();
+    }
+    return true;
+  };
+
+  return <Story />;
 };

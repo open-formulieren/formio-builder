@@ -1,7 +1,11 @@
 import type {Data} from '@dnd-kit/abstract';
 import {useSortable} from '@dnd-kit/react/sortable';
 import type {AnyComponentSchema} from '@open-formulieren/types';
+import clsx from 'clsx';
+import React from 'react';
 
+import ComponentControls from './ComponentControls';
+import './SortableComponent.scss';
 import {useDropzoneContext} from './context';
 
 export interface SortableItemData extends Data {
@@ -13,11 +17,19 @@ interface SortableItemProps extends React.PropsWithChildren {
   index: number;
   groupName: string;
   component: AnyComponentSchema;
+  hasControls?: boolean;
 }
 
-const SortableItem: React.FC<SortableItemProps> = ({id, index, groupName, component, children}) => {
+const SortableItem: React.FC<SortableItemProps> = ({
+  id,
+  index,
+  groupName,
+  component,
+  hasControls = true,
+  children,
+}) => {
   const {collisionPriority} = useDropzoneContext();
-  const {ref} = useSortable<SortableItemData>({
+  const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
     group: groupName,
@@ -26,7 +38,42 @@ const SortableItem: React.FC<SortableItemProps> = ({id, index, groupName, compon
       component,
     },
   });
-  return <div ref={ref}>{children}</div>;
+  return (
+    <SortableItemView
+      ref={ref}
+      testId={`sortable-item-${id}`}
+      className={clsx('offb-dnd-sortable-item', {
+        'offb-dnd-sortable-item--is-dragging': isDragging,
+      })}
+      component={component}
+      showControls={hasControls && !isDragging}
+    >
+      {children}
+    </SortableItemView>
+  );
 };
 
+interface SortableItemViewProps extends React.PropsWithChildren {
+  testId?: string;
+  component: AnyComponentSchema;
+  className?: string;
+  showControls?: boolean;
+}
+
+const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
+  ({testId, component, showControls = false, className, children}, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx('offb-dnd-sortable-item-view', className)}
+        data-testid={testId}
+      >
+        {showControls && <ComponentControls component={component} />}
+        {children}
+      </div>
+    );
+  }
+);
+
+export {SortableItemView};
 export default SortableItem;
