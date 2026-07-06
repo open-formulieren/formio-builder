@@ -1,8 +1,7 @@
-import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
+import {getRegistryEntry} from '@open-formulieren/formio-renderer';
+import {extractInitialValues} from '@open-formulieren/formio-renderer/values.js';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Formik} from 'formik';
-
-import {getRegistryEntry} from '@/registry';
-import {hasOwnProperty} from '@/types';
 
 import FormioDefinitionDesigner from './designer/FormioDefinitionDesigner';
 
@@ -20,32 +19,7 @@ export interface FormBuilderProps {
 }
 
 const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace, onChange}) => {
-  // TODO: this initial values extraction is questionable, but scheduled for replacement
-  // later on. We should ideally use the extractInitialValues implementation from the
-  // formio renderer.
-  const initialValues = components.reduce<Record<string, JSONValue | object>>(
-    (carry, component) => {
-      const entry = getRegistryEntry(component.type);
-      const {key} = component;
-      // FIXME: this is wrong for non-string based component tyeps (file, addressNL,
-      // customerProfile,...). We need to use the formio-renderer single source of truth
-      // for this information.
-      const {defaultValue = ''} = entry;
-
-      const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-      const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
-        ? component.defaultValue
-        : defaultValue;
-
-      const previewDefaultValue = isMultiple
-        ? (componentDefaultValue ?? [])
-        : (componentDefaultValue ?? defaultValue);
-
-      carry[key] = previewDefaultValue;
-      return carry;
-    },
-    {}
-  );
+  const initialValues = extractInitialValues(components, getRegistryEntry);
 
   return (
     <Formik
