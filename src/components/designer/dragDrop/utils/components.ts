@@ -12,10 +12,6 @@ import {hasOwnProperty} from '@/types';
 
 type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 
-const hasNestedChildren = (
-  children: AnyComponentSchema[] | AnyComponentSchema[][]
-): children is AnyComponentSchema[][] => children.length > 0 && Array.isArray(children[0]);
-
 interface IterComponentsResult {
   /**
    * The index of the current item.
@@ -41,17 +37,11 @@ function* iterComponents(
     yield {index, component, collection: componentDefinitions};
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
-    const {getChildComponents} = getRegistryEntry(component.type);
+    const {getComponentSlots} = getRegistryEntry(component.type);
+    if (!getComponentSlots) continue;
 
-    const children = getChildComponents ? getChildComponents(component) : [];
-    if (!children.length) continue;
-
-    if (hasNestedChildren(children)) {
-      for (const child of children) {
-        yield* iterComponents(child);
-      }
-    } else {
-      yield* iterComponents(children);
+    for (const slot of getComponentSlots(component)) {
+      yield* iterComponents(slot.collection);
     }
   }
 }
@@ -77,26 +67,16 @@ export const getDropzoneComponents = (
  */
 const findDropzoneComponentsByParentReference = (
   componentDefinitions: ComponentDefinition[],
-  key: string
+  parentReference: string
 ): ComponentDefinition[] | undefined => {
   for (const {component} of iterComponents(componentDefinitions)) {
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
-    // Without the getChildComponents method, we cannot retrieve the component children.
-    const {getChildComponents} = getRegistryEntry(component.type);
-    if (!getChildComponents) continue;
+    const {getComponentSlots} = getRegistryEntry(component.type);
+    if (!getComponentSlots) continue;
 
-    const children = getChildComponents(component);
-
-    // If the children are an array of arrays, we are dealing with a columns component.
-    // The column index is part of the dropzone key, so we have to find the correct
-    // column.
-    if (hasNestedChildren(children)) {
-      for (const [index, child] of children.entries()) {
-        if (`${component.key}.${index}` === key) return child;
-      }
-    } else if (component.key === key) {
-      return children;
+    for (const slot of getComponentSlots(component)) {
+      if (slot.reference === parentReference) return slot.collection;
     }
   }
 

@@ -76,6 +76,19 @@ export interface BuilderInfo<S extends AnyComponentSchema> {
 
 type DefaultValueOf<S> = S extends {defaultValue?: infer D} ? D : never;
 
+export interface ComponentSlot {
+  /**
+   * Reference to the collection the components belong to.
+   *
+   * Example: for the columns component this is '[parent component key].[column index]'
+   */
+  reference: string;
+  /**
+   * The components in this slot.
+   */
+  collection: AnyComponentSchema[];
+}
+
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
@@ -88,9 +101,9 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
   comparisonValue?: React.FC<ComparisonValueProps>;
   // All components that can have children should implement this method.
-  // The children should be returned as a one-level array, unless the nested structure is
-  // significant for the component (like in the case of a columns component).
-  getChildComponents?: (component: S) => AnyComponentSchema[] | AnyComponentSchema[][];
+  // It returns an array of component slots, with references to where those slots are
+  // located in the form builder structure.
+  getComponentSlots?: (component: S) => ComponentSlot[];
 }
 
 // Registry made up of registry entries, one for each possible component schema
