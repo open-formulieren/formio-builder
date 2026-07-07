@@ -1,13 +1,13 @@
 import type {IntlShape} from 'react-intl';
 
-import type {ComponentGroup, NormalizedComponentDefinition} from '@/components/designer/types';
+import type {ComponentGroup, NormalizedComponentConfiguration} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
 
 /**
- * Normalize the component definitions for a given component group.
+ * Normalize the component configurations for a given component group.
  */
-export const normalizeComponentDefinition = (group: ComponentGroup, intl: IntlShape) =>
-  group.components.map<NormalizedComponentDefinition>(componentType => {
+export const normalizeComponentConfiguration = (group: ComponentGroup, intl: IntlShape) =>
+  group.components.map<NormalizedComponentConfiguration>(componentType => {
     const {formDesigner, isDeprecated, builderInfo} = getRegistryEntry(componentType);
 
     return {

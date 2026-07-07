@@ -24,7 +24,7 @@ import {getRegistryEntry} from '@/registry';
 import ComponentsList from './ComponentsList';
 import ComponentsPreview, {ComponentPreview} from './Preview';
 import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
-import type {ComponentPlaceholder} from './types';
+import type {ComponentDefinition, ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 const getData = (
@@ -42,7 +42,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
 }) => {
   const {componentNamespace} = useContext(DesignerContext);
   const intl = useIntl();
-  const [items, setItems] = useImmer<{components: (AnyComponentSchema | ComponentPlaceholder)[]}>({
+  const [items, setItems] = useImmer<{components: ComponentDefinition[]}>({
     components,
   });
 

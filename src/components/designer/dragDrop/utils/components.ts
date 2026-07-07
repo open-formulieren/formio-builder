@@ -5,12 +5,10 @@ import {
   MAIN_DROPZONE_ID,
   getComponentKeyFromDropzoneId,
 } from '@/components/designer/dragDrop/utils/dropzone';
-import type {ComponentPlaceholder} from '@/components/designer/types';
+import type {ComponentDefinition} from '@/components/designer/types';
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
-
-type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
 
 interface IterComponentsResult {
   /**

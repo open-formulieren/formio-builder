@@ -3,6 +3,12 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 export const COMPONENT_PLACEHOLDER_TYPE = 'componentPlaceholder';
 
 /**
+ * The component definition that is used in the FormDesigner. This can be a component
+ * schema, or a placeholder for a new component.
+ */
+export type ComponentDefinition = AnyComponentSchema | ComponentPlaceholder;
+
+/**
  * A temporary component placeholder used when adding a new component to a FormDesigner
  * dropzone.
  */
@@ -14,7 +20,7 @@ export interface ComponentPlaceholder {
 /**
  * Configuration for a custom preset component.
  */
-export type PresetComponentDefinition = {
+export type PresetComponentConfiguration = {
   key: string;
   label: string;
   icon: string;
@@ -22,11 +28,12 @@ export type PresetComponentDefinition = {
 };
 
 /**
- * A normalized component definition, containing UI information and the component schema.
+ * A normalized component configuration, containing UI information and the component
+ * schema.
  *
  * This is used to render the component in the designer.
  */
-export type NormalizedComponentDefinition = {
+export type NormalizedComponentConfiguration = {
   key: string;
   label: string;
   icon: string;
@@ -37,17 +44,18 @@ export type NormalizedComponentDefinition = {
 /**
  * A normalized component group, containing the group name and the components in that group.
  *
- * Because we support multiple group sources, backend defined and custom preset groups,
+ * Because we support multiple group sources, backend-defined and custom preset groups,
  * we need to normalize the groups to a common format.
  *
- * For the backend defined `ComponentGroup`, we fetch the component definitions from the
- * backend project.
+ * For the backend-defined components, we use a statically defined collection of
+ * component definitions.
  *
- * For the custom preset groups, we simply use the `PresetComponentDefinition` objects.
+ * For the custom preset groups, we simply use the `PresetComponentConfiguration`
+ * objects.
  */
 export type NormalizedComponentGroups = {
   groupName: GroupName;
-  components: NormalizedComponentDefinition[];
+  components: NormalizedComponentConfiguration[];
 };
 
 /**

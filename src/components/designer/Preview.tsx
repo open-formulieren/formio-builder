@@ -11,11 +11,11 @@ import {hasOwnProperty} from '@/types';
 import './Preview.scss';
 import {DropZone, SortableComponent} from './dragDrop';
 import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
-import type {ComponentPlaceholder} from './types';
+import type {ComponentDefinition} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 export interface ComponentsPreviewProps {
-  components: (AnyComponentSchema | ComponentPlaceholder)[];
+  components: ComponentDefinition[];
   dropzoneId: string;
   hideEmptyMessage?: boolean;
 }

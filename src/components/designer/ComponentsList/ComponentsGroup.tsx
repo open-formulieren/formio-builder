@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
 import {DraggableMenuItem} from '@/components/designer/dragDrop';
-import type {NormalizedComponentDefinition} from '@/components/designer/types';
+import type {NormalizedComponentConfiguration} from '@/components/designer/types';
 
 import './ComponentsGroup.scss';
 
@@ -11,7 +11,7 @@ interface ComponentsGroupProps {
   isSearching?: boolean;
   isDefault?: boolean;
   title: React.ReactNode;
-  componentDefinitions: NormalizedComponentDefinition[];
+  componentConfigurations: NormalizedComponentConfiguration[];
 }
 
 /**
@@ -25,9 +25,9 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
   isSearching,
   isDefault,
   title,
-  componentDefinitions,
+  componentConfigurations,
 }) => {
-  if (componentDefinitions.length === 0) return null;
+  if (componentConfigurations.length === 0) return null;
 
   return (
     <details
@@ -43,7 +43,7 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
 
       <div className="card-body p-2">
         <ul className="list-unstyled mb-0">
-          {componentDefinitions.map((component, index) => (
+          {componentConfigurations.map((component, index) => (
             <li key={`${component.schema.key}-${component.schema.type}-${index}`}>
               <DraggableMenuItem type={component.schema.type}>
                 <span
