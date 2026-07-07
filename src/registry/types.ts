@@ -52,10 +52,8 @@ export interface Previews {
    *
    * The preview updates as the component configuration itself is modified through form
    * field interaction and is saved.
-   *
-   * @TODO make this required once all components have a preview component assigned.
    */
-  designer?: React.FC<ComponentPreviewProps> | null;
+  designer: React.FC<ComponentPreviewProps> | null;
 }
 
 export interface FormDesigner {

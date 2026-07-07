@@ -109,8 +109,7 @@ export const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) =
   const {
     preview: {designer: PreviewComponent},
   } = entry;
-  // @TODO Remove the undefined check when all components have a designer preview.
-  if (PreviewComponent === undefined || PreviewComponent === null) {
+  if (PreviewComponent === null) {
     console.info(`No designer preview found for component ${component.type}.`);
     return null;
   }
