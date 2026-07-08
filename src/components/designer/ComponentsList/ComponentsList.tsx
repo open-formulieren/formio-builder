@@ -6,7 +6,7 @@ import type {NormalizedComponentGroups} from '@/components/designer/types';
 import ComponentsGroup from './ComponentsGroup';
 import './ComponentsList.scss';
 import {FORM_DESIGNER_GROUPS, FORM_DESIGNER_GROUP_LABELS, FORM_DESIGNER_PRESETS} from './constants';
-import {normalizeComponentDefinition} from './normalizeComponentDefinition';
+import {normalizeComponentConfiguration} from './normalizeComponentConfiguration';
 
 const ComponentsList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -19,7 +19,7 @@ const ComponentsList: React.FC = () => {
     // Sort the groups by weight and normalize the components in each group.
     const normalizedGroups: NormalizedComponentGroups[] = FORM_DESIGNER_GROUPS.map(group => ({
       groupName: group.name,
-      components: normalizeComponentDefinition(group, intl),
+      components: normalizeComponentConfiguration(group, intl),
     }));
 
     // Add the preset group as last.
@@ -76,7 +76,7 @@ const ComponentsList: React.FC = () => {
             isDefault={index === 0}
             testId={`component-group--${groupName}`}
             title={<FormattedMessage {...FORM_DESIGNER_GROUP_LABELS[groupName]} />}
-            componentDefinitions={components}
+            componentConfigurations={components}
           />
         ))
       ) : (

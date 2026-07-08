@@ -43,6 +43,9 @@ export default {
   parameters: {
     modal: {noModal: true},
   },
+  args: {
+    dropzoneId: 'dropzone',
+  },
 } as Meta<typeof Preview>;
 
 type Story = StoryObj<typeof Preview>;
@@ -651,7 +654,6 @@ export const NumberField: Story = {
   },
 };
 
-// @TODO replace preview component with variant without input prefix and update test
 export const CurrencyField: Story = {
   args: {
     components: [

@@ -3,7 +3,7 @@ import {defineMessages} from 'react-intl';
 import type {
   ComponentGroup,
   GroupName,
-  PresetComponentDefinition,
+  PresetComponentConfiguration,
 } from '@/components/designer/types';
 
 export const FORM_DESIGNER_GROUP_LABELS = defineMessages<GroupName>({
@@ -70,7 +70,7 @@ export const FORM_DESIGNER_GROUPS: ComponentGroup[] = [
   },
 ];
 
-export const FORM_DESIGNER_PRESETS: PresetComponentDefinition[] = [
+export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
   {
     label: 'Volledige naam',
     key: 'fullName',

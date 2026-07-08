@@ -32,5 +32,9 @@ export default {
     },
   },
   defaultValue: undefined, // a column component does not hold a value itself
-  getChildComponents: component => component.columns.map(column => column.components).flat(1),
+  getComponentSlots: component =>
+    component.columns.map((column, index) => ({
+      reference: `${component.key}.${index}`,
+      collection: column.components,
+    })),
 } satisfies RegistryEntry<ColumnsComponentSchema>;

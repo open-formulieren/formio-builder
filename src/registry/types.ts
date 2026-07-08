@@ -52,10 +52,8 @@ export interface Previews {
    *
    * The preview updates as the component configuration itself is modified through form
    * field interaction and is saved.
-   *
-   * @TODO make this required once all components have a preview component assigned.
    */
-  designer?: React.FC<ComponentPreviewProps> | null;
+  designer: React.FC<ComponentPreviewProps> | null;
 }
 
 export interface FormDesigner {
@@ -76,6 +74,19 @@ export interface BuilderInfo<S extends AnyComponentSchema> {
 
 type DefaultValueOf<S> = S extends {defaultValue?: infer D} ? D : never;
 
+export interface ComponentSlot {
+  /**
+   * Reference to the collection the components belong to.
+   *
+   * Example: for the columns component this is '[parent component key].[column index]'
+   */
+  reference: string;
+  /**
+   * The components in this slot.
+   */
+  collection: AnyComponentSchema[];
+}
+
 export interface RegistryEntry<S extends AnyComponentSchema> {
   edit: EditFormDefinition<S>;
   editSchema: EditSchema;
@@ -87,7 +98,10 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   // initial data
   defaultValue: DefaultValueOf<S> | JSONValue | undefined;
   comparisonValue?: React.FC<ComparisonValueProps>;
-  getChildComponents?: (component: S) => AnyComponentSchema[];
+  // All components that can have children should implement this method.
+  // It returns an array of component slots, with references to where those slots are
+  // located in the form builder structure.
+  getComponentSlots?: (component: S) => ComponentSlot[];
 }
 
 // Registry made up of registry entries, one for each possible component schema

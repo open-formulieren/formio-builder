@@ -1,3 +1,4 @@
+import {useDragOperation} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import clsx from 'clsx';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -9,11 +10,12 @@ import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
 import {DropZone, SortableComponent} from './dragDrop';
-import type {ComponentPlaceholder} from './types';
+import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
+import type {ComponentDefinition} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 export interface ComponentsPreviewProps {
-  components: (AnyComponentSchema | ComponentPlaceholder)[];
+  components: ComponentDefinition[];
   dropzoneId: string;
   hideEmptyMessage?: boolean;
 }
@@ -23,8 +25,13 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
   dropzoneId,
   hideEmptyMessage = false,
 }) => {
-  const hasComponents =
-    components.filter(component => component.type !== COMPONENT_PLACEHOLDER_TYPE).length > 0;
+  const {target} = useDragOperation();
+  const targetDropzone = getTargetDropzoneId(target);
+
+  const isDraggingAboveDropzone = targetDropzone !== undefined && targetDropzone === dropzoneId;
+  // Count the number of components in the dropzone, excluding dragged components.
+  const componentCountThreshold = isDraggingAboveDropzone ? 1 : 0;
+  const hasComponents = components.length > componentCountThreshold;
 
   return (
     <ErrorBoundary>
@@ -102,8 +109,7 @@ export const ComponentPreview: React.FC<ComponentPreviewProps> = ({component}) =
   const {
     preview: {designer: PreviewComponent},
   } = entry;
-  // @TODO Remove the undefined check when all components have a designer preview.
-  if (PreviewComponent === undefined || PreviewComponent === null) {
+  if (PreviewComponent === null) {
     console.info(`No designer preview found for component ${component.type}.`);
     return null;
   }

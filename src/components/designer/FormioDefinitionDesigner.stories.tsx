@@ -1,4 +1,10 @@
-import type {AnyComponentSchema, TextFieldComponentSchema} from '@open-formulieren/types';
+import type {
+  AnyComponentSchema,
+  ColumnsComponentSchema,
+  EditGridComponentSchema,
+  FieldsetComponentSchema,
+  TextFieldComponentSchema,
+} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {useState} from 'react';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
@@ -143,11 +149,89 @@ export const AddComponentToDropzone: Story = {
 
     await dragTo(textareaDraggableItem, dropzone);
 
-    // The textarea component should be added to the dropzone
-    expect(within(dropzone).getByTestId('input-Textarea'));
-    // As the dropzone isn't empty anymore, the instructions message should be gone.
-    expect(
-      within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
-    ).not.toBeInTheDocument();
+    // Wait for the component to be added, and the instructions message to be removed.
+    await waitFor(() => {
+      expect(within(dropzone).getByTestId('input-Textarea')).toBeVisible();
+
+      expect(
+        within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
+      ).not.toBeInTheDocument();
+    });
+  },
+};
+
+export const ComponentInColumns: Story = {
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'columns',
+        key: 'columns',
+        columns: [
+          {
+            size: 6,
+            sizeMobile: 4,
+            components: [
+              {
+                id: 'textfield',
+                type: 'textfield',
+                key: 'textfield',
+                label: 'Textfield',
+              } satisfies TextFieldComponentSchema,
+            ],
+          },
+          {
+            size: 6,
+            sizeMobile: 4,
+            components: [],
+          },
+        ],
+      } satisfies ColumnsComponentSchema,
+    ],
+  },
+};
+
+export const ComponentInFieldset: Story = {
+  args: {
+    components: [
+      {
+        id: 'fieldset',
+        key: 'fieldset',
+        type: 'fieldset',
+        label: 'Fieldset',
+        hideHeader: false,
+        components: [
+          {
+            id: 'textfield',
+            type: 'textfield',
+            key: 'textfield',
+            label: 'Textfield',
+          } satisfies TextFieldComponentSchema,
+        ],
+      } satisfies FieldsetComponentSchema,
+    ],
+  },
+};
+
+export const ComponentInEditgrid: Story = {
+  args: {
+    components: [
+      {
+        id: 'wekruya',
+        type: 'editgrid',
+        key: 'editgrid',
+        label: 'Repeating group',
+        groupLabel: 'Item',
+        disableAddingRemovingRows: false,
+        components: [
+          {
+            id: 'textfield',
+            type: 'textfield',
+            key: 'textfield',
+            label: 'Textfield',
+          } satisfies TextFieldComponentSchema,
+        ],
+      } satisfies EditGridComponentSchema,
+    ],
   },
 };
