@@ -7,9 +7,11 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {useState} from 'react';
 import {fn} from 'storybook/test';
 
-import FormBuilder, {FormBuilderProps} from './FormBuilder';
+import {DEFAULT_COLORS} from '@/tests/sharedUtils';
 
-const StorybookFormBuilder = (props: FormBuilderProps) => {
+import FormBuilder, {MergedFormBuilderProps} from './FormBuilder';
+
+const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
   const [components, setComponents] = useState<AnyComponentSchema[]>(props.components);
 
   return (
@@ -30,6 +32,35 @@ export default {
     modal: {noModal: true},
   },
   args: {
+    uniquifyKey: key => key,
+    supportedLanguageCodes: ['nl'],
+    richTextColors: DEFAULT_COLORS,
+    theme: 'light',
+    formType: 'regular',
+    validatorPlugins: [
+      {id: 'phone-intl', label: 'Phone (international)'},
+      {id: 'phone-nl', label: 'Phone (Dutch)'},
+      {id: 'license-plate', label: 'License plate'},
+    ],
+    registrationAttributes: [
+      {id: 'bsn', label: 'BSN'},
+      {id: 'firstName', label: 'First name'},
+      {id: 'dob', label: 'Date of Birth'},
+    ],
+    prefillPlugins: [
+      {id: 'stuf-bg', label: 'StUF-BG'},
+      {id: 'haalcentraal', label: 'Haal Centraal'},
+    ],
+    prefillAttributes: {
+      'stuf-bg': [
+        {id: 'BSN', label: 'BSN'},
+        {id: 'geslachtsNaam', label: 'Geslachtsnaam'},
+      ],
+      haalcentraal: [
+        {id: 'burgerservicenummer', label: 'BSN'},
+        {id: 'lastName', label: 'Achternaam'},
+      ],
+    },
     onChange: fn(),
     componentNamespace: [],
     components: [

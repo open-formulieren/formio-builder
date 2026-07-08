@@ -3,6 +3,9 @@ import {extractInitialValues} from '@open-formulieren/formio-renderer/values.js'
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Formik} from 'formik';
 
+import type {BuilderContextType} from '@/context';
+import {BuilderContext} from '@/context';
+
 import FormioDefinitionDesigner from './designer/FormioDefinitionDesigner';
 
 export interface FormBuilderProps {
@@ -18,23 +21,70 @@ export interface FormBuilderProps {
   onChange: (components: AnyComponentSchema[]) => void;
 }
 
-const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace, onChange}) => {
+export type MergedFormBuilderProps = FormBuilderProps & BuilderContextType;
+
+const FormBuilder: React.FC<MergedFormBuilderProps> = ({
+  components,
+  componentNamespace,
+  onChange,
+  uniquifyKey,
+  supportedLanguageCodes = ['nl', 'en'],
+  richTextColors,
+  theme,
+  formType,
+  getFormComponents,
+  getValidatorPlugins,
+  getRegistrationAttributes,
+  getServices,
+  getReferenceListsTables,
+  getReferenceListsTableItems,
+  getPrefillPlugins,
+  getPrefillAttributes,
+  getFileTypes,
+  serverUploadLimit,
+  getAuthPlugins,
+  getMapTileLayers,
+  getMapOverlayTileLayers,
+}) => {
   const initialValues = extractInitialValues(components, getRegistryEntry);
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={() => {
-        throw new Error("Can't submit preview form");
+    <BuilderContext.Provider
+      value={{
+        uniquifyKey,
+        supportedLanguageCodes,
+        richTextColors,
+        formType,
+        getMapTileLayers,
+        getMapOverlayTileLayers,
+        theme,
+        getFormComponents,
+        getValidatorPlugins,
+        getRegistrationAttributes,
+        getServices,
+        getReferenceListsTables,
+        getReferenceListsTableItems,
+        getPrefillPlugins,
+        getPrefillAttributes,
+        getFileTypes,
+        serverUploadLimit,
+        getAuthPlugins,
       }}
     >
-      <FormioDefinitionDesigner
-        components={components}
-        componentNamespace={componentNamespace}
-        onChange={onChange}
-      />
-    </Formik>
+      <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        onSubmit={() => {
+          throw new Error("Can't submit preview form");
+        }}
+      >
+        <FormioDefinitionDesigner
+          components={components}
+          componentNamespace={componentNamespace}
+          onChange={onChange}
+        />
+      </Formik>
+    </BuilderContext.Provider>
   );
 };
 
