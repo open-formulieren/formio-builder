@@ -3,10 +3,13 @@ import {extractInitialValues} from '@open-formulieren/formio-renderer/values.js'
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Formik} from 'formik';
 
+import type {ComponentEvent} from '@/components/designer/types';
 import type {BuilderContextType} from '@/context';
 import {BuilderContext} from '@/context';
 
 import FormioDefinitionDesigner from './designer/FormioDefinitionDesigner';
+
+type FormSchema = {display: 'form'; components: AnyComponentSchema[]};
 
 export interface FormBuilderProps {
   /**
@@ -18,7 +21,14 @@ export interface FormBuilderProps {
    * definitions. Used when creating component keys to validate complete uniqueness.
    */
   componentNamespace: AnyComponentSchema[];
-  onChange: (components: AnyComponentSchema[]) => void;
+  /**
+   * Callback invoked when the form definition changes.
+   *
+   * This contains the entire new components structure, and possible events that
+   * happened in the form builder. The event is optional and is only present when the
+   * change was triggered by component create, update, or delete events.
+   */
+  onChange: (form: FormSchema, event?: ComponentEvent) => void;
 }
 
 export type MergedFormBuilderProps = FormBuilderProps & BuilderContextType;
@@ -79,9 +89,9 @@ const FormBuilder: React.FC<MergedFormBuilderProps> = ({
         }}
       >
         <FormioDefinitionDesigner
-          components={components}
+          initialComponents={components}
           componentNamespace={componentNamespace}
-          onChange={onChange}
+          onChange={(components, event) => onChange({display: 'form', components}, event)}
         />
       </Formik>
     </BuilderContext.Provider>

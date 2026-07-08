@@ -65,17 +65,17 @@ const dragTo = async (source: HTMLElement, target: HTMLElement) => {
  * unique.
  */
 const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps) => {
-  const [components, setComponents] = useState<AnyComponentSchema[]>(props.components);
+  const [components, setComponents] = useState<AnyComponentSchema[]>(props.initialComponents);
 
   return (
     <FormioDefinitionDesigner
       {...props}
-      components={components}
+      initialComponents={components}
       componentNamespace={components.flat(1)}
-      onChange={components => {
-        setComponents(components);
+      onChange={(...args) => {
+        setComponents(args[0]);
         // Call the original onChange function
-        props.onChange(components);
+        props.onChange(...args);
       }}
     />
   );
@@ -104,13 +104,13 @@ type Story = StoryObj<typeof FormioDefinitionDesigner>;
 
 export const Default: Story = {
   args: {
-    components: [],
+    initialComponents: [],
   },
 };
 
 export const WithTextfieldComponents: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         type: 'textfield',
         id: 'textfield',
@@ -141,9 +141,9 @@ export const WithTextfieldComponents: Story = {
 
 export const AddComponentToDropzone: Story = {
   args: {
-    components: [],
+    initialComponents: [],
   },
-  play: async ({canvasElement}) => {
+  play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
     const basicComponentsList = canvas.getByTestId('component-group--basic');
     const textareaDraggableItem = await within(basicComponentsList).findByRole('button', {
@@ -166,6 +166,21 @@ export const AddComponentToDropzone: Story = {
 
     // Save the component
     await userEvent.click(within(modal).getByRole('button', {name: 'Save'}));
+    expect(args.onChange).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({
+          key: 'textarea',
+          label: 'Textarea',
+          type: 'textarea',
+        }),
+      ],
+      expect.objectContaining({
+        type: 'created',
+        // Storybook has a hard time differentiating multiple similar objects when using
+        // `expect.objectContaining`. So let's stick to the poor man's `expect.anything`.
+        component: expect.anything(),
+      })
+    );
 
     // Wait for the component to be added, and the instructions message to be removed.
     await waitFor(() => {
@@ -180,7 +195,7 @@ export const AddComponentToDropzone: Story = {
 
 export const ComponentInColumns: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'wekruya',
         type: 'columns',
@@ -211,7 +226,7 @@ export const ComponentInColumns: Story = {
 
 export const ComponentInFieldset: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'fieldset',
         key: 'fieldset',
@@ -233,7 +248,7 @@ export const ComponentInFieldset: Story = {
 
 export const ComponentInEditgrid: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'wekruya',
         type: 'editgrid',
@@ -256,7 +271,7 @@ export const ComponentInEditgrid: Story = {
 
 export const EditComponent: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'textfield',
         key: 'textfield',
@@ -287,14 +302,23 @@ export const EditComponent: Story = {
     await userEvent.click(within(modal).getByRole('button', {name: 'Save'}));
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([
+    expect(args.onChange).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({
+          id: 'textfield',
+          key: 'textfield',
+          type: 'textfield',
+          label: 'Some cool textfield label',
+        }),
+      ],
       expect.objectContaining({
-        id: 'textfield',
-        key: 'textfield',
-        type: 'textfield',
-        label: 'Some cool textfield label',
-      }),
-    ]);
+        type: 'updated',
+        // Storybook has a hard time differentiating multiple similar objects when using
+        // `expect.objectContaining`. So let's stick to the poor man's `expect.anything`.
+        component: expect.anything(),
+        originalComponent: expect.anything(),
+      })
+    );
 
     expect(canvas.getByText('Some cool textfield label')).toBeVisible();
   },
@@ -302,7 +326,7 @@ export const EditComponent: Story = {
 
 export const DeleteComponent: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'textfield',
         key: 'textfield',
@@ -339,20 +363,31 @@ export const DeleteComponent: Story = {
     await userEvent.click(within(selectComponent).getByRole('button', {name: 'Delete component'}));
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([
+    expect(args.onChange).toHaveBeenCalledWith(
+      [
+        {
+          id: 'textfield',
+          key: 'textfield',
+          type: 'textfield',
+          label: 'Textfield',
+        },
+      ],
       {
-        id: 'textfield',
-        key: 'textfield',
-        type: 'textfield',
-        label: 'Textfield',
-      },
-    ]);
+        type: 'deleted',
+        component: expect.objectContaining({
+          id: 'select',
+          key: 'select',
+          type: 'select',
+          label: 'Select',
+        }),
+      }
+    );
   },
 };
 
 export const DeleteNestedComponent: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'editgrid',
         key: 'editgrid',
@@ -385,24 +420,35 @@ export const DeleteNestedComponent: Story = {
     );
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([
+    expect(args.onChange).toHaveBeenCalledWith(
+      [
+        {
+          id: 'editgrid',
+          key: 'editgrid',
+          type: 'editgrid',
+          label: 'Editgrid',
+          groupLabel: 'item',
+          disableAddingRemovingRows: false,
+          components: [],
+        } satisfies EditGridComponentSchema,
+      ],
       {
-        id: 'editgrid',
-        key: 'editgrid',
-        type: 'editgrid',
-        label: 'Editgrid',
-        groupLabel: 'item',
-        disableAddingRemovingRows: false,
-        components: [],
-      } satisfies EditGridComponentSchema,
-    ]);
+        type: 'deleted',
+        component: {
+          id: 'textfield',
+          key: 'textfield',
+          type: 'textfield',
+          label: 'Textfield',
+        },
+      }
+    );
   },
 };
 
 export const DeleteComponentWithChildren: Story = {
   decorators: [overrideWindowConfirm],
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'editgrid',
         key: 'editgrid',
@@ -440,13 +486,21 @@ export const DeleteComponentWithChildren: Story = {
     expect(parameters.windowConfirm).toHaveBeenCalled();
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([]);
+    expect(args.onChange).toHaveBeenCalledWith([], {
+      type: 'deleted',
+      component: expect.objectContaining({
+        id: 'editgrid',
+        key: 'editgrid',
+        type: 'editgrid',
+        label: 'Editgrid',
+      }),
+    });
   },
 };
 
 export const DeleteComponentFromEditModal: Story = {
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'textfield',
         key: 'textfield',
@@ -473,7 +527,15 @@ export const DeleteComponentFromEditModal: Story = {
     await userEvent.click(within(modal).getByRole('button', {name: 'Remove'}));
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([]);
+    expect(args.onChange).toHaveBeenCalledWith([], {
+      type: 'deleted',
+      component: {
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'Textfield',
+      },
+    });
 
     expect(
       canvas.getByText('Drag a component in the form and release the mouse button.')
@@ -484,7 +546,7 @@ export const DeleteComponentFromEditModal: Story = {
 export const DeleteComponentWithChildrenFromEditModal: Story = {
   decorators: [overrideWindowConfirm],
   args: {
-    components: [
+    initialComponents: [
       {
         id: 'editgrid',
         key: 'editgrid',
@@ -529,7 +591,15 @@ export const DeleteComponentWithChildrenFromEditModal: Story = {
     expect(parameters.windowConfirm).toHaveBeenCalled();
 
     // The onChange should have been called with the updated components
-    expect(args.onChange).toHaveBeenCalledWith([]);
+    expect(args.onChange).toHaveBeenCalledWith([], {
+      type: 'deleted',
+      component: expect.objectContaining({
+        id: 'editgrid',
+        key: 'editgrid',
+        type: 'editgrid',
+        label: 'Editgrid',
+      }),
+    });
 
     expect(
       canvas.getByText('Drag a component in the form and release the mouse button.')

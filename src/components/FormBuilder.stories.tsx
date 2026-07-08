@@ -9,7 +9,8 @@ import {fn} from 'storybook/test';
 
 import {DEFAULT_COLORS} from '@/tests/sharedUtils';
 
-import FormBuilder, {MergedFormBuilderProps} from './FormBuilder';
+import type {MergedFormBuilderProps} from './FormBuilder';
+import FormBuilder from './FormBuilder';
 
 const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
   const [components, setComponents] = useState<AnyComponentSchema[]>(props.components);
@@ -19,7 +20,7 @@ const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
       {...props}
       components={components}
       componentNamespace={components.flat(1)}
-      onChange={components => setComponents(components)}
+      onChange={form => setComponents(form.components)}
     />
   );
 };
@@ -62,6 +63,8 @@ export default {
       ],
     },
     onChange: fn(),
+    onComponentUpdated: fn(),
+    onComponentDeleted: fn(),
     componentNamespace: [],
     components: [
       {

@@ -221,6 +221,22 @@ export const replaceComponent = (
   }
 };
 
+/**
+ * Insert a component definition (a placeholder or component) at the given index in the
+ * given dropzone.
+ */
+export const insertComponentDefinition = (
+  index: number,
+  componentDefinitions: ComponentDefinition[],
+  dropzoneId: string,
+  componentDefinition: ComponentDefinition
+) => {
+  const dropzoneComponents = getDropzoneComponents(componentDefinitions, dropzoneId);
+  if (dropzoneComponents === undefined) return;
+
+  dropzoneComponents.splice(index, 0, componentDefinition);
+};
+
 export function assertNoPlaceholders(
   components: ComponentDefinition[]
 ): asserts components is AnyComponentSchema[] {
