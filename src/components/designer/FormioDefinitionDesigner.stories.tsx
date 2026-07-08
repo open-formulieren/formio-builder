@@ -149,12 +149,14 @@ export const AddComponentToDropzone: Story = {
 
     await dragTo(textareaDraggableItem, dropzone);
 
-    // The textarea component should be added to the dropzone
-    expect(within(dropzone).getByTestId('input-Textarea'));
-    // As the dropzone isn't empty anymore, the instructions message should be gone.
-    expect(
-      within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
-    ).not.toBeInTheDocument();
+    // Wait for the component to be added, and the instructions message to be removed.
+    await waitFor(() => {
+      expect(within(dropzone).getByTestId('input-Textarea')).toBeVisible();
+
+      expect(
+        within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
+      ).not.toBeInTheDocument();
+    });
   },
 };
 
