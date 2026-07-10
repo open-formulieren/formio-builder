@@ -42,7 +42,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
               expression: JSON.stringify(component.openForms.itemsExpression),
               code: chunks => <code>{chunks}</code>,
             }
-          ),
+          ) as unknown as string, // library doesn't narrow the type when using template fns :(
         },
       ];
     }

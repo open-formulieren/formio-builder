@@ -23,7 +23,7 @@ const FileName: React.FC = () => {
     {
       code: chunks => <code>{chunks}</code>,
     }
-  ) as string; // library doesn't narrow the type when using template fns :(
+  ) as unknown as string; // library doesn't narrow the type when using template fns :(
 
   return (
     <TextField
