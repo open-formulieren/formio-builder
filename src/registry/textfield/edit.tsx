@@ -1,4 +1,4 @@
-import {TextFieldComponentSchema} from '@open-formulieren/types';
+import type {TextFieldComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -31,7 +31,7 @@ import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/compon
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'textfield' type component.

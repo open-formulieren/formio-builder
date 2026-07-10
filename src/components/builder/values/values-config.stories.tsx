@@ -1,9 +1,9 @@
-import {
+import type {
   RadioComponentSchema,
   SelectComponentSchema,
   SelectboxesComponentSchema,
 } from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {Form, Formik} from 'formik';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 

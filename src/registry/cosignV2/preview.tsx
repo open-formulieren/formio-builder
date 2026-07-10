@@ -1,8 +1,8 @@
-import {CosignV2ComponentSchema} from '@open-formulieren/types';
+import type {CosignV2ComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio cosign v2 component preview.

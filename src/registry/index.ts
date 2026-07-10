@@ -34,7 +34,7 @@ import SoftRequiredErrors from './softRequiredErrors';
 import Textarea from './textarea';
 import TextField from './textfield';
 import TimeField from './time';
-import {Registry, RegistryEntry} from './types';
+import type {Registry, RegistryEntry} from './types';
 
 /**
  * Type guard to determine if the passed in 'component' is something we have type

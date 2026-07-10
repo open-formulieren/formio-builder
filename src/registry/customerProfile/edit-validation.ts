@@ -1,9 +1,9 @@
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 // We don't want to allow setting a default value for this component, since it's really user-specific
 // and most often prefilled from the communication preferences prefill plugin.

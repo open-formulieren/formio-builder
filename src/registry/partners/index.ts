@@ -1,7 +1,7 @@
-import {PartnersComponentSchema} from '@open-formulieren/types';
+import type {PartnersComponentSchema} from '@open-formulieren/types';
 import {defineMessage} from 'react-intl';
 
-import {RegistryEntry} from '../types';
+import type {RegistryEntry} from '../types';
 import EditForm from './edit';
 import validationSchema from './edit-validation';
 import Preview from './preview';

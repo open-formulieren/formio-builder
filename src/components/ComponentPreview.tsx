@@ -1,14 +1,17 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import clsx from 'clsx';
 import {Formik} from 'formik';
-import React, {useContext, useState} from 'react';
+import type React from 'react';
+import {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import PreviewModeToggle, {type PreviewState} from '@/components/PreviewModeToggle';
+import PreviewModeToggle from '@/components/PreviewModeToggle';
+import type {PreviewState} from '@/components/PreviewModeToggle';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import {type AnyComponentSchema, hasOwnProperty} from '@/types';
+import {hasOwnProperty} from '@/types';
+import type {AnyComponentSchema} from '@/types';
 
 /*
   Generic preview (preview + wrapper with view mode)
@@ -103,8 +106,8 @@ const GenericComponentPreview: React.FC<GenericComponentPreviewProps> = ({
     : defaultValue;
 
   const previewDefaultValue = isMultiple
-    ? componentDefaultValue ?? []
-    : componentDefaultValue ?? defaultValue;
+    ? (componentDefaultValue ?? [])
+    : (componentDefaultValue ?? defaultValue);
 
   const initialValues = key ? {[key]: previewDefaultValue} : {};
 

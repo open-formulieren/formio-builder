@@ -1,9 +1,9 @@
-import {FileComponentSchema} from '@open-formulieren/types';
+import type {FileComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {Component, Description} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio file component preview.

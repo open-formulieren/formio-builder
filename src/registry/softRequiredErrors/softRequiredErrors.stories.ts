@@ -1,5 +1,5 @@
-import {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';

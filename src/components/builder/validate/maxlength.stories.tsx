@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, waitFor, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';

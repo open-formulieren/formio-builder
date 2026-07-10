@@ -1,9 +1,10 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import ValidatorPluginSelect, {ValidatorOption} from './validator-select';
+import type {ValidatorOption} from './validator-select';
+import ValidatorPluginSelect from './validator-select';
 
 const DEFAULT_VALIDATOR_PLUGINS: ValidatorOption[] = [
   {id: 'plugin-1', label: 'Plugin 1'},

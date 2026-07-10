@@ -1,10 +1,9 @@
-import {PartnersComponentSchema} from '@open-formulieren/types';
+import type {PartnersComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
-import {Description} from '@/components/formio';
-import {FieldSet, TextField} from '@/components/formio';
+import {Description, FieldSet, TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 const Preview: React.FC<ComponentPreviewProps<PartnersComponentSchema>> = ({component}) => {
   const {key, label, description, tooltip} = component;

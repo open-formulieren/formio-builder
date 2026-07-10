@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import {Field, FormikHandlers, useFormikContext} from 'formik';
+import type {FormikHandlers} from 'formik';
+import {Field, useFormikContext} from 'formik';
 
 import {useValidationErrors} from '@/utils/errors';
 

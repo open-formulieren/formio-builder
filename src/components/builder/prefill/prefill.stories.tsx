@@ -1,9 +1,10 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import {PrefillAttributeOption, PrefillConfiguration, PrefillPluginOption} from '.';
+import type {PrefillAttributeOption, PrefillPluginOption} from '.';
+import {PrefillConfiguration} from '.';
 
 const DEFAULT_PREFILL_PLUGINS: PrefillPluginOption[] = [
   {id: 'plugin-1', label: 'Plugin 1'},

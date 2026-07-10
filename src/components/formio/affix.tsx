@@ -1,4 +1,5 @@
-import DOMPurify, {Config} from 'dompurify';
+import type {Config} from 'dompurify';
+import DOMPurify from 'dompurify';
 
 const OPTIONS: Config = {
   ALLOWED_TAGS: ['sub', 'sup'],

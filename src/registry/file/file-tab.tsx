@@ -1,4 +1,4 @@
-import {FileComponentSchema} from '@open-formulieren/types';
+import type {FileComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext} from 'react';

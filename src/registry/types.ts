@@ -1,6 +1,6 @@
 import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
 import type {IntlShape, MessageDescriptor} from 'react-intl';
-import {z} from 'zod';
+import type {z} from 'zod';
 
 import type {BuilderContextType} from '@/context';
 

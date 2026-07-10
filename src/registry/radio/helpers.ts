@@ -1,7 +1,7 @@
-import {RadioComponentSchema} from '@open-formulieren/types';
-import {JsonLogicExpression} from '@open-formulieren/types/dist/options';
+import type {RadioComponentSchema} from '@open-formulieren/types';
+import type {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 
-import {ComponentWithReferenceLists} from '@/components/builder/values/reference-lists/types';
+import type {ComponentWithReferenceLists} from '@/components/builder/values/reference-lists/types';
 
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.

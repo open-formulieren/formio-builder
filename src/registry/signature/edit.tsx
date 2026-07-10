@@ -1,4 +1,4 @@
-import {SignatureComponentSchema} from '@open-formulieren/types';
+import type {SignatureComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {
@@ -21,7 +21,7 @@ import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 const FOOTER_LABEL = defineMessage({
   description: "Component property 'footer' label",

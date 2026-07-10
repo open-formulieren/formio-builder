@@ -1,5 +1,5 @@
-import {SelectboxesComponentSchema} from '@open-formulieren/types';
-import {JsonLogicExpression} from '@open-formulieren/types/dist/options';
+import type {SelectboxesComponentSchema} from '@open-formulieren/types';
+import type {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 
 // A type guard is needed because TS cannot figure out it's a discriminated union
 // when the discriminator is nested.

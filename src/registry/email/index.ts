@@ -1,7 +1,7 @@
-import {EmailComponentSchema} from '@open-formulieren/types';
+import type {EmailComponentSchema} from '@open-formulieren/types';
 import {defineMessage} from 'react-intl';
 
-import {RegistryEntry} from '@/registry/types';
+import type {RegistryEntry} from '@/registry/types';
 
 import EditForm from './edit';
 import validationSchema from './edit-validation';

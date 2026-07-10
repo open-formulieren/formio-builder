@@ -1,5 +1,15 @@
-import {AddressNLComponentSchema} from '@open-formulieren/types';
-import {TextField} from 'components/formio';
+import type {AddressNLComponentSchema} from '@open-formulieren/types';
+import {
+  TextField,
+  Checkbox,
+  DataMap,
+  Panel,
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs,
+  Select,
+} from 'components/formio';
 import {useContext} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
@@ -20,13 +30,10 @@ import {
   useDeriveComponentKey,
 } from '@/components/builder';
 import {LABELS} from '@/components/builder/messages';
-import {Checkbox} from '@/components/formio';
-import {DataMap, Panel, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
-import {Select} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Helper type to extract information from existing types.

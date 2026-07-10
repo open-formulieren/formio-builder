@@ -1,4 +1,4 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 
 // Utility type to force distributive behaviour over AnyComponentSchema
 type ExtractDataSrcValues<T> = T extends {openForms: {dataSrc: infer U}} ? U : never;

@@ -1,8 +1,8 @@
-import {TextareaComponentSchema} from '@open-formulieren/types';
+import type {TextareaComponentSchema} from '@open-formulieren/types';
 
 import {TextArea} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio textarea component preview.

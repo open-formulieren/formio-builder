@@ -61,8 +61,8 @@ export type Paths<T> = T extends Primitive | Primitive[]
         ? T[K] extends Primitive | Primitive[]
           ? K
           : T[K] extends Function
-          ? never
-          : K | `${K}.${Paths<T[K]>}`
+            ? never
+            : K | `${K}.${Paths<T[K]>}`
         : never;
     }[keyof T];
 
@@ -72,8 +72,8 @@ export type GetValueAtPath<T, Path extends string> = T extends T
       ? GetValueAtPath<T[P], Rest>
       : never
     : Path extends keyof T
-    ? T[Path]
-    : never
+      ? T[Path]
+      : never
   : never;
 
 export type PathsForValueType<T, V> = keyof {

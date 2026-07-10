@@ -1,4 +1,4 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import {fn} from 'storybook/test';
 
 import ComponentEditForm from './ComponentEditForm';

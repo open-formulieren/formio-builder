@@ -1,4 +1,4 @@
-import {FieldsetComponentSchema} from '@open-formulieren/types';
+import type {FieldsetComponentSchema} from '@open-formulieren/types';
 
 import {ComponentsPreview} from '@/components/designer/Preview';
 import {getDropzoneId} from '@/components/designer/dragDrop/utils/dropzone';

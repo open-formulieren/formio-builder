@@ -1,5 +1,5 @@
 import {useFormikContext} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs';
+import type {ExtendedComponentSchema} from 'formiojs';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useAsync} from 'react-use';

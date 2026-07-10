@@ -6,7 +6,7 @@ import {useAsync} from 'react-use';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithReferenceLists} from './types';
+import type {ComponentWithReferenceLists} from './types';
 
 /**
  * Fetch the available Reference lists services and display them in a Select

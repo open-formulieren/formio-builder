@@ -1,4 +1,4 @@
-import {TimeComponentSchema} from '@open-formulieren/types';
+import type {TimeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -24,7 +24,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TimeField} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {EditFormDefinition} from '@/registry/types';
+import type {EditFormDefinition} from '@/registry/types';
 import {useErrorChecker} from '@/utils/errors';
 
 /**

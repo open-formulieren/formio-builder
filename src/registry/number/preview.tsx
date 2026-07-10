@@ -1,8 +1,8 @@
-import {NumberComponentSchema} from '@open-formulieren/types';
+import type {NumberComponentSchema} from '@open-formulieren/types';
 
 import {NumberField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio number component preview.

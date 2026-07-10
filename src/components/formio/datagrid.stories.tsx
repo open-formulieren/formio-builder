@@ -1,10 +1,11 @@
-import {Meta, StoryFn} from '@storybook/react-vite';
-import React from 'react';
+import type {Meta, StoryFn} from '@storybook/react-vite';
+import type React from 'react';
 
 import {withFormik} from '@/sb-decorators';
 
 import {NumberField, TextField} from '.';
-import DataGrid, {DataGridProps, DataGridRow} from './datagrid';
+import type {DataGridProps} from './datagrid';
+import DataGrid, {DataGridRow} from './datagrid';
 
 export default {
   title: 'Formio/Components/DataGrid',

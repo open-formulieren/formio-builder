@@ -1,10 +1,10 @@
-import {EditGridComponentSchema} from '@open-formulieren/types';
+import type {EditGridComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';
 import {Component, Description} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio fieldset component preview.

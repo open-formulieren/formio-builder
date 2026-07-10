@@ -1,8 +1,8 @@
-import {PostcodeComponentSchema} from '@open-formulieren/types';
+import type {PostcodeComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 import {POSTCODE_REGEX} from './constants';
 
 const defaultValidate = {

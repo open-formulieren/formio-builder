@@ -1,5 +1,5 @@
 import {useField} from 'formik';
-import React from 'react';
+import type React from 'react';
 import ReactSelect from 'react-select';
 import type {
   GroupBase,
@@ -22,7 +22,7 @@ type ValueType = any;
 export interface SelectProps<
   Option = unknown,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<RSProps<Option, IsMulti, Group>, 'onChange' | 'value'> {
   name: string;
   label?: React.ReactNode;
@@ -91,7 +91,7 @@ const BUILDER_SELECT_THEME: ThemeConfig = theme => ({
 export function getReactSelectStyles<
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(): StylesConfig<Option, IsMulti, Group> {
   return {
     control: (baseStyles, state) => ({
@@ -173,7 +173,7 @@ export function getReactSelectStyles<
 function Select<
   Option extends {[key: string]: any},
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >({
   name,
   label,

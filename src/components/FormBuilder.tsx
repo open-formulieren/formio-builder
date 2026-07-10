@@ -37,8 +37,8 @@ const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace
       : defaultValue;
 
     const previewDefaultValue = isMultiple
-      ? componentDefaultValue ?? []
-      : componentDefaultValue ?? defaultValue;
+      ? (componentDefaultValue ?? [])
+      : (componentDefaultValue ?? defaultValue);
 
     carry[key] = previewDefaultValue;
     return carry;

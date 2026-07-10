@@ -1,4 +1,4 @@
-import {FieldsetComponentSchema} from '@open-formulieren/types';
+import type {FieldsetComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 import {expect, test, vi} from 'vitest';
 

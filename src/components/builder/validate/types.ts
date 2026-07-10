@@ -1,4 +1,4 @@
-import {Validation, ValidatorNames} from '@open-formulieren/types/dist/validation';
+import type {Validation, ValidatorNames} from '@open-formulieren/types/dist/validation';
 
 export type SchemaWithValidation = Validation<ValidatorNames>;
 

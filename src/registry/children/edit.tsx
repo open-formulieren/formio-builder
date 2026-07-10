@@ -1,4 +1,4 @@
-import {ChildrenComponentSchema} from '@open-formulieren/types';
+import type {ChildrenComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {
@@ -19,7 +19,7 @@ import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import EnableSelection from './enable-selection';
 
 /**

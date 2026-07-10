@@ -4,7 +4,8 @@ import {expect, test, vi} from 'vitest';
 
 import {act, contextRender, screen, waitFor} from '@/tests/test-utils';
 
-import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
+import type {RegistrationAttributeOption} from './registration-attribute';
+import RegistrationAttributeSelect from './registration-attribute';
 
 const REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'bsn', label: 'BSN'},

@@ -1,7 +1,8 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import type {DateComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
-import {MessageDescriptor, defineMessages, useIntl} from 'react-intl';
+import type {MessageDescriptor} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 
 import {Panel} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -11,7 +12,7 @@ import ModeSelect from './constraint-mode';
 import FixedValueDateField from './fixed-value-datefield';
 import IncludeToday from './include-today';
 import RelativeDelta from './relative-delta';
-import {DateConstraintKey} from './types';
+import type {DateConstraintKey} from './types';
 
 const PANEL_TITLES: Record<DateConstraintKey, MessageDescriptor> = defineMessages({
   minDate: {

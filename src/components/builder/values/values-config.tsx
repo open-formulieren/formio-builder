@@ -5,9 +5,10 @@ import {BuilderContext} from '@/context';
 
 import ItemsExpression from './items-expression';
 import {ReferenceListsServiceSelect, ReferenceListsTableCode} from './reference-lists';
-import {SchemaWithDataSrc} from './types';
+import type {SchemaWithDataSrc} from './types';
 import ValuesSrc from './values-src';
-import ValuesTable, {ValuesTableProps} from './values-table';
+import type {ValuesTableProps} from './values-table';
+import ValuesTable from './values-table';
 
 export interface ValuesConfigProps<T> {
   name: ValuesTableProps<T>['name'];

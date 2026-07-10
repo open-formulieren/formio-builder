@@ -1,9 +1,9 @@
-import {Option} from '@open-formulieren/types';
+import type {Option} from '@open-formulieren/types';
 import {FieldArray, useFormikContext} from 'formik';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {Component} from '@/components/formio';
-import {PathsForValueType} from '@/types';
+import type {PathsForValueType} from '@/types';
 
 import OptionRow from './option-row';
 

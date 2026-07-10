@@ -1,6 +1,7 @@
 import {useField} from 'formik';
 import React from 'react';
-import {MessageDescriptor, useIntl} from 'react-intl';
+import type {MessageDescriptor} from 'react-intl';
+import {useIntl} from 'react-intl';
 
 import DataGrid, {DataGridRow} from './datagrid';
 import TextField from './textfield';

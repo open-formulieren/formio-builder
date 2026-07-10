@@ -1,7 +1,7 @@
-import {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
+import type {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
 import {defineMessage} from 'react-intl';
 
-import {RegistryEntry} from '../types';
+import type {RegistryEntry} from '../types';
 import DesignerPreview from './designer-preview';
 import EditForm from './edit';
 import validationSchema from './edit-validation';

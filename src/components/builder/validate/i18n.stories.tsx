@@ -1,10 +1,10 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
 import ValidationErrorTranslations, {useManageValidatorsTranslations} from './i18n';
-import {PossibleValidatorErrorKeys, SchemaWithValidation} from './types';
+import type {PossibleValidatorErrorKeys, SchemaWithValidation} from './types';
 
 interface Args {
   errorCodes: PossibleValidatorErrorKeys<SchemaWithValidation>[];

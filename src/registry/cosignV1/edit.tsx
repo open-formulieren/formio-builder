@@ -1,4 +1,4 @@
-import {CosignV1ComponentSchema} from '@open-formulieren/types';
+import type {CosignV1ComponentSchema} from '@open-formulieren/types';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useAsync} from 'react-use';
@@ -16,7 +16,7 @@ import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'coSign' (cosign v1) type component.

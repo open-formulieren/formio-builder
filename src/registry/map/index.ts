@@ -1,9 +1,9 @@
 // a hack - this library has side effects because it patches L from leaflet.
-import {MapComponentSchema} from '@open-formulieren/types';
+import type {MapComponentSchema} from '@open-formulieren/types';
 import 'proj4leaflet';
 import {defineMessage} from 'react-intl';
 
-import {RegistryEntry} from '@/registry/types';
+import type {RegistryEntry} from '@/registry/types';
 
 import EditForm from './edit';
 import validationSchema from './edit-validation';

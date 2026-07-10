@@ -1,8 +1,8 @@
-import {LicensePlateComponentSchema} from '@open-formulieren/types';
+import type {LicensePlateComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio iban component preview.

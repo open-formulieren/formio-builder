@@ -1,8 +1,8 @@
-import {CheckboxComponentSchema} from '@open-formulieren/types';
+import type {CheckboxComponentSchema} from '@open-formulieren/types';
 
 import {Checkbox} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio checkbox component preview.

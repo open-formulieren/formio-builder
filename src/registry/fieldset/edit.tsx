@@ -1,4 +1,4 @@
-import {FieldsetComponentSchema} from '@open-formulieren/types';
+import type {FieldsetComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -16,7 +16,7 @@ import {LABELS} from '@/components/builder/messages';
 import {Checkbox, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'fieldset' type component.

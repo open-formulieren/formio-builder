@@ -2,7 +2,7 @@ import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
 import {Select} from '@/components/formio';
 
-import {OptionValue} from './types';
+import type {OptionValue} from './types';
 
 const OPTION_LABELS = defineMessages<OptionValue>({
   manual: {

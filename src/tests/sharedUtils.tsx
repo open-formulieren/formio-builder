@@ -1,18 +1,17 @@
 // This module contains shared utilities and constants between Jest and Storybook.
 import type {ColorOption} from '@/components/builder/rich-text';
-import {
+import type {
   ReferenceListsServiceOption,
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import type {MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
-import type {FormType} from '@/context';
-import {AnyComponentSchema} from '@/types';
+import type {MapOverlayTileLayer, MapTileLayer, SelectOption, FormType} from '@/context';
+import type {AnyComponentSchema} from '@/types';
 
-import {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
-import {RegistrationAttributeOption} from '../components/builder/registration/registration-attribute';
-import {ValidatorOption} from '../components/builder/validate/validator-select';
-import {AuthPluginOption} from '../registry/cosignV1/edit';
+import type {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';
+import type {RegistrationAttributeOption} from '../components/builder/registration/registration-attribute';
+import type {ValidatorOption} from '../components/builder/validate/validator-select';
+import type {AuthPluginOption} from '../registry/cosignV1/edit';
 
 export const DEFAULT_COMPONENT_TREE: AnyComponentSchema[] = [
   {type: 'textfield', key: 'text1', label: 'Textfield 1', id: 'id1'},

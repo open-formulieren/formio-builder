@@ -7,7 +7,7 @@ import type {
   SupportedLocales,
 } from '@open-formulieren/types';
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
-import React from 'react';
+import type React from 'react';
 import selectEvent from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
@@ -1340,7 +1340,7 @@ export const SelectBoxes: Story = {
 
       // Check that all translations can be filled
       const inputs = editForm.getAllByRole('textbox');
-      for (let input of inputs) {
+      for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
         expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
@@ -1575,7 +1575,7 @@ export const Radio: Story = {
 
       // Check that all translations can be filled
       const inputs = editForm.getAllByRole('textbox');
-      for (let input of inputs) {
+      for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
         await expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
@@ -1820,7 +1820,7 @@ export const Select: Story = {
 
       // Check that all translations can be filled
       const inputs = editForm.getAllByRole('textbox');
-      for (let input of inputs) {
+      for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
         await expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);

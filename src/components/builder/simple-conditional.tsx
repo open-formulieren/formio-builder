@@ -1,4 +1,4 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {Utils as FormioUtils} from 'formiojs';
 import type {ConditionalOptions} from 'formiojs';
@@ -9,7 +9,7 @@ import {usePrevious} from 'react-use';
 import {TextField} from '@/components/formio/textfield';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import {ComparisonValueProps} from '@/registry/types';
+import type {ComparisonValueProps} from '@/registry/types';
 import {hasOwnProperty} from '@/types';
 
 import {Panel, Select} from '../formio';

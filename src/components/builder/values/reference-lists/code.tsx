@@ -6,7 +6,7 @@ import {useAsync} from 'react-use';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithReferenceLists, ReferenceListsTable} from './types';
+import type {ComponentWithReferenceLists, ReferenceListsTable} from './types';
 import {transformItems} from './utils';
 
 function isTableOptions(

@@ -1,10 +1,10 @@
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema, buildKeySchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
-import {DateConstraintKey} from './validation/types';
+import type {EditSchema} from '../types';
+import type {DateConstraintKey} from './validation/types';
 
 const dateSchema = z.coerce.date().optional();
 

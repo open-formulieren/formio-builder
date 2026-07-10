@@ -1,4 +1,4 @@
-import {Option, SelectComponentSchema} from '@open-formulieren/types';
+import type {Option, SelectComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useEffect, useLayoutEffect} from 'react';
@@ -28,7 +28,7 @@ import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
 
 /**

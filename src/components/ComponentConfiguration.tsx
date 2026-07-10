@@ -1,11 +1,13 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
-import {FallbackSchema} from '@open-formulieren/types';
+import type {FallbackSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
-import {BuilderContext, BuilderContextType} from '@/context';
+import type {BuilderContextType} from '@/context';
+import {BuilderContext} from '@/context';
 import {isKnownComponentType} from '@/registry';
 
-import ComponentEditForm, {ComponentEditFormProps} from './ComponentEditForm';
+import type {ComponentEditFormProps} from './ComponentEditForm';
+import ComponentEditForm from './ComponentEditForm';
 
 type MergedProps = BuilderContextType & ComponentEditFormProps;
 export type ComponentConfigurationProps = Omit<MergedProps, 'component'> & {

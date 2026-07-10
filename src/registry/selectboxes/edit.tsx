@@ -1,4 +1,4 @@
-import {Option, SelectboxesComponentSchema} from '@open-formulieren/types';
+import type {Option, SelectboxesComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useLayoutEffect} from 'react';
@@ -27,7 +27,7 @@ import {NumberField, SelectBoxes, TabList, TabPanel, Tabs} from '@/components/fo
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
 
 /**

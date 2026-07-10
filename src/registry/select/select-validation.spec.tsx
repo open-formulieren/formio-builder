@@ -1,4 +1,4 @@
-import {SelectComponentSchema} from '@open-formulieren/types';
+import type {SelectComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 import {within} from 'storybook/test';
 import {expect, test, vi} from 'vitest';
@@ -130,7 +130,7 @@ test('All translations are optional', async () => {
 
   // Check that all translations can be filled
   const inputs = editForm.getAllByRole('textbox');
-  for (let input of inputs) {
+  for (const input of inputs) {
     await user.type(input, 'manualTranslation');
     expect(input).toHaveValue('manualTranslation');
     await user.clear(input);

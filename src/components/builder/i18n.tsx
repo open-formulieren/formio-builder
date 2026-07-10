@@ -1,14 +1,13 @@
-import {SupportedLocales} from '@open-formulieren/types';
-import {OFExtensions} from '@open-formulieren/types/dist/extensions';
+import type {SupportedLocales} from '@open-formulieren/types';
+import type {OFExtensions} from '@open-formulieren/types/dist/extensions';
 import clsx from 'clsx';
 import {useFormikContext} from 'formik';
-import React from 'react';
-import {useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {BuilderContext} from '@/context';
-import {FilterByValueType} from '@/types';
-import {AnyComponentSchema} from '@/types/schemas';
+import type {FilterByValueType} from '@/types';
+import type {AnyComponentSchema} from '@/types/schemas';
 
 import {Component, TextField} from '../formio';
 import ComponentLabel from '../formio/component-label';

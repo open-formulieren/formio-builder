@@ -1,4 +1,4 @@
-import {CheckboxComponentSchema} from '@open-formulieren/types';
+import type {CheckboxComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -24,7 +24,7 @@ import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {ComparisonValueProps, EditFormDefinition} from '../types';
+import type {ComparisonValueProps, EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'checkbox' type component.

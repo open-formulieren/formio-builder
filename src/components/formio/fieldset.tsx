@@ -1,8 +1,7 @@
 import clsx from 'clsx';
-import React from 'react';
+import type React from 'react';
 
-import {useValidationErrors} from '@/utils/errors';
-import {ErrorList} from '@/utils/errors';
+import {useValidationErrors, ErrorList} from '@/utils/errors';
 
 import './fieldset.scss';
 import Tooltip from './tooltip';

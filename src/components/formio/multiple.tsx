@@ -20,7 +20,8 @@ import {FormattedMessage} from 'react-intl';
 
 import {RenderContext} from '@/context';
 
-import ComponentLabel, {ComponentLabelProps} from './component-label';
+import type {ComponentLabelProps} from './component-label';
+import ComponentLabel from './component-label';
 import Description from './description';
 
 /*

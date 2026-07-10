@@ -1,22 +1,21 @@
-import {SupportedLocales} from '@open-formulieren/types';
+import type {SupportedLocales} from '@open-formulieren/types';
 import {render as rtlRender} from '@testing-library/react';
 import type {RenderOptions, RenderResult} from '@testing-library/react';
 import {Formik} from 'formik';
 import type {FormikErrors, FormikTouched, FormikValues} from 'formik';
-import React from 'react';
-import {IntlProvider} from 'react-intl';
-import {createIntl, createIntlCache} from 'react-intl';
+import type React from 'react';
+import {IntlProvider, createIntl, createIntlCache} from 'react-intl';
 
-import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill';
-import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
-import {ValidatorOption} from '@/components/builder/validate/validator-select';
-import {
+import type {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill';
+import type {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
+import type {ValidatorOption} from '@/components/builder/validate/validator-select';
+import type {
   ReferenceListsServiceOption,
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import {BuilderContext, BuilderContextType} from '@/context';
-import type {SelectOption} from '@/context';
+import {BuilderContext} from '@/context';
+import type {SelectOption, BuilderContextType} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
@@ -34,7 +33,7 @@ import {
   DEFAULT_VALIDATOR_PLUGINS,
   sleep,
 } from '@/tests/sharedUtils';
-import {AnyComponentSchema} from '@/types';
+import type {AnyComponentSchema} from '@/types';
 
 interface BuilderOptions {
   supportedLanguageCodes: SupportedLocales[];

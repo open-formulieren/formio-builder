@@ -93,8 +93,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         },
         getMapOverlayTileLayers: async () => {
           const itemsFromArgs = context?.args?.mapOverlayTileLayers as
-            | MapOverlayTileLayer[]
-            | undefined;
+            MapOverlayTileLayer[] | undefined;
           return itemsFromArgs || DEFAULT_MAP_OVERLAY_TILE_LAYERS;
         },
         theme,
@@ -118,8 +117,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
         getReferenceListsTableItems: async (_, tableCode) => {
           await sleep(context.parameters?.builder?.referenceListsTableItemDelay || 0);
           const itemsFromArgs = context?.args?.referenceListsTableItems as
-            | Record<string, ReferenceListsTableItem[]>
-            | undefined;
+            Record<string, ReferenceListsTableItem[]> | undefined;
           const referenceListsTableItems = itemsFromArgs || defaultReferenceListsTableItems;
           const items = referenceListsTableItems[tableCode];
           return items;

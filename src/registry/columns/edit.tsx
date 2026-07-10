@@ -1,6 +1,7 @@
-import {ColumnsComponentSchema} from '@open-formulieren/types';
-import {Column} from '@open-formulieren/types/dist/components/columns';
-import {Field, FieldArray, FieldArrayRenderProps, useFormikContext} from 'formik';
+import type {ColumnsComponentSchema} from '@open-formulieren/types';
+import type {Column} from '@open-formulieren/types/dist/components/columns';
+import type {FieldArrayRenderProps} from 'formik';
+import {Field, FieldArray, useFormikContext} from 'formik';
 import {useContext, useEffect, useRef, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
@@ -8,7 +9,7 @@ import {ClearOnHide, Hidden, Key} from '@/components/builder';
 import {Component} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'columns' type component.

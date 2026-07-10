@@ -1,4 +1,4 @@
-import {SelectComponentSchema} from '@open-formulieren/types';
+import type {SelectComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 import {expect, test, vi} from 'vitest';
 

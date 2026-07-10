@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs';
+import type {ExtendedComponentSchema} from 'formiojs';
 import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
