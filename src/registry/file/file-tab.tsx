@@ -11,7 +11,7 @@ import {BuilderContext} from '@/context';
 const hasImageMimeType = (mimetypes: string[]): boolean =>
   mimetypes.some(mimeType => mimeType.startsWith('image/') || mimeType === '*');
 
-const FileName: React.FC<{}> = () => {
+const FileName: React.FC = () => {
   const intl = useIntl();
 
   const tooltip = intl.formatMessage(
@@ -43,7 +43,7 @@ const FileName: React.FC<{}> = () => {
   );
 };
 
-const FileTypesSelect: React.FC<{}> = () => {
+const FileTypesSelect: React.FC = () => {
   const {getFileTypes} = useContext(BuilderContext);
   const {values, initialValues, setFieldValue} = useFormikContext<FileComponentSchema>();
   const initialImageConfiguration = initialValues.of?.image;

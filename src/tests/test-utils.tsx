@@ -15,7 +15,7 @@ import type {
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
 import {BuilderContext} from '@/context';
-import type {SelectOption, BuilderContextType} from '@/context';
+import type {BuilderContextType, SelectOption} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,

@@ -1,5 +1,5 @@
 import type {AddressNLComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';

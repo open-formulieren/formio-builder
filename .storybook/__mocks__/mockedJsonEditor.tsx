@@ -1,5 +1,6 @@
-import clsx from 'clsx';
-import React, {useRef, useState} from 'react';
+import {clsx} from 'clsx';
+import type React from 'react';
+import {useRef, useState} from 'react';
 
 interface JSONEditorProps {
   value: unknown;

@@ -3,7 +3,7 @@ import {expect, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import SelectBoxes from './selectboxes';
+import {SelectBoxes} from './selectboxes';
 
 export default {
   title: 'Formio/Components/SelectBoxes',

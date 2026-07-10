@@ -5,7 +5,7 @@ import {withFormik} from '@/sb-decorators';
 
 import {NumberField, TextField} from '.';
 import type {DataGridProps} from './datagrid';
-import DataGrid, {DataGridRow} from './datagrid';
+import {DataGrid, DataGridRow} from './datagrid';
 
 export default {
   title: 'Formio/Components/DataGrid',

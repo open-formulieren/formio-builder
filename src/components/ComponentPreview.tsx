@@ -1,5 +1,5 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Formik} from 'formik';
 import type React from 'react';
 import {useContext, useState} from 'react';

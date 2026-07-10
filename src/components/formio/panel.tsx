@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {uniqueId} from 'lodash';
 import type React from 'react';
 import {useRef, useState} from 'react';
@@ -37,7 +37,7 @@ const Panel: React.FC<PanelProps> = ({
     setCollapsed(false);
   }
 
-  const headerProps: HeaderProps | {} = collapsible
+  const headerProps: HeaderProps | object = collapsible
     ? {
         onClick: () => setCollapsed(!collapsed),
         role: 'button',

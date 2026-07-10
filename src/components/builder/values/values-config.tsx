@@ -3,10 +3,10 @@ import {useContext, useLayoutEffect} from 'react';
 
 import {BuilderContext} from '@/context';
 
-import ItemsExpression from './items-expression';
+import {ItemsExpression} from './items-expression';
 import {ReferenceListsServiceSelect, ReferenceListsTableCode} from './reference-lists';
 import type {SchemaWithDataSrc} from './types';
-import ValuesSrc from './values-src';
+import {ValuesSrc} from './values-src';
 import type {ValuesTableProps} from './values-table';
 import ValuesTable from './values-table';
 
@@ -38,13 +38,13 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
   useLayoutEffect(() => {
     switch (dataSrc) {
       case 'manual': {
-        if (values.openForms.hasOwnProperty('itemsExpression')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'itemsExpression')) {
           setFieldValue('openForms.itemsExpression', undefined);
         }
-        if (values.openForms.hasOwnProperty('code')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'code')) {
           setFieldValue('openForms.code', undefined);
         }
-        if (values.openForms.hasOwnProperty('service')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'service')) {
           setFieldValue('openForms.service', undefined);
         }
         const currentValues = getIn(values, name);
@@ -55,17 +55,17 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
       }
       case 'variable': {
         setFieldValue(name, []);
-        if (values.openForms.hasOwnProperty('code')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'code')) {
           setFieldValue('openForms.code', undefined);
         }
-        if (values.openForms.hasOwnProperty('service')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'service')) {
           setFieldValue('openForms.service', undefined);
         }
         break;
       }
       case 'referenceLists': {
         setFieldValue(name, []);
-        if (values.openForms.hasOwnProperty('itemsExpression')) {
+        if (Object.prototype.hasOwnProperty.call(values.openForms, 'itemsExpression')) {
           setFieldValue('openForms.itemsExpression', undefined);
         }
         break;

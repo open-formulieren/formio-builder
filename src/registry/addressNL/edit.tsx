@@ -1,14 +1,14 @@
 import type {AddressNLComponentSchema} from '@open-formulieren/types';
 import {
-  TextField,
   Checkbox,
   DataMap,
   Panel,
+  Select,
   Tab,
   TabList,
   TabPanel,
   Tabs,
-  Select,
+  TextField,
 } from 'components/formio';
 import {useContext} from 'react';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';

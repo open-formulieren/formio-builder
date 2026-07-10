@@ -1,8 +1,8 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import type React from 'react';
 
 import type {AnyComponentSchema} from '@/types';
-import {useValidationErrors, ErrorList} from '@/utils/errors';
+import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import ComponentLabel from './component-label';
 import './component.scss';

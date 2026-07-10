@@ -3,7 +3,7 @@ import type {Meta, StoryFn} from '@storybook/react-vite';
 import {withFormik} from '@/sb-decorators';
 
 import {TextField} from '.';
-import DataMap from './datamap';
+import {DataMap} from './datamap';
 
 export default {
   title: 'Formio/Components/DataMap',

@@ -43,6 +43,7 @@ const EditForm: EditFormDefinition<SoftRequiredErrorsComponentSchema> = () => {
 
   // the `html` property edits in the JSON edit don't behave as expected, you need to
   // edit the language specific values, so remove it.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {html, ...jsonEditValues} = values;
 
   return (

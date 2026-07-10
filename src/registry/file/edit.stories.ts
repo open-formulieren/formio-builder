@@ -69,7 +69,7 @@ export const ToggleToMultiple: Story = {
     // Save and check that the default value was untouched
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-    // @ts-ignore
+    // @ts-expect-error mock is not covered in types
     const {defaultValue} = args.onSubmit.mock.calls[0][0];
     expect(defaultValue).toBeNull();
   },

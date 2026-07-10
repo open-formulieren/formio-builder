@@ -2,11 +2,11 @@ export * from './schemas';
 export * from './paths';
 
 // https://fettblog.eu/typescript-hasownproperty/
-export function hasOwnProperty<X extends {}, Y extends PropertyKey>(
+export function hasOwnProperty<X extends object, Y extends PropertyKey>(
   obj: X,
   prop: Y
 ): obj is X & Record<Y, unknown> {
-  return obj.hasOwnProperty(prop);
+  return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
 /**

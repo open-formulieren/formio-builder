@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import type {
   ReactTabsFunctionComponent,

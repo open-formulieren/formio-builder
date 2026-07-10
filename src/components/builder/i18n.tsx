@@ -1,6 +1,6 @@
 import type {SupportedLocales} from '@open-formulieren/types';
 import type {OFExtensions} from '@open-formulieren/types/dist/extensions';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {useFormikContext} from 'formik';
 import React, {useContext, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';

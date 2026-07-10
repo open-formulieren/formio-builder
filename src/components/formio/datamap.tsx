@@ -3,8 +3,8 @@ import React from 'react';
 import type {MessageDescriptor} from 'react-intl';
 import {useIntl} from 'react-intl';
 
-import DataGrid, {DataGridRow} from './datagrid';
-import TextField from './textfield';
+import {DataGrid, DataGridRow} from './datagrid';
+import {TextField} from './textfield';
 
 export interface DataMapProps {
   name: string;

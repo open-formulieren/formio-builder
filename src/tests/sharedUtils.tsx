@@ -5,7 +5,7 @@ import type {
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import type {MapOverlayTileLayer, MapTileLayer, SelectOption, FormType} from '@/context';
+import type {FormType, MapOverlayTileLayer, MapTileLayer, SelectOption} from '@/context';
 import type {AnyComponentSchema} from '@/types';
 
 import type {PrefillAttributeOption, PrefillPluginOption} from '../components/builder/prefill';

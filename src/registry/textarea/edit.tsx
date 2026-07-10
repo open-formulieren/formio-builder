@@ -192,7 +192,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   );
 };
 
-const AutoExpand: React.FC<{}> = () => {
+const AutoExpand: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -216,7 +216,7 @@ const AutoExpand: React.FC<{}> = () => {
   );
 };
 
-const NumberOfRows: React.FC<{}> = () => {
+const NumberOfRows: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 

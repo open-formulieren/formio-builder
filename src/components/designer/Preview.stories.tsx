@@ -2291,7 +2291,6 @@ export const SelectVariableReferenceLists: Story = {
 };
 
 export const BSN: Story = {
-  name: 'BSN',
   args: {
     components: [
       {
@@ -2348,7 +2347,6 @@ export const BSN: Story = {
 };
 
 export const BSNMultiple: Story = {
-  name: 'BSN Multiple',
   args: {
     components: [
       {
@@ -2449,7 +2447,6 @@ export const BSNMultiple: Story = {
 };
 
 export const IBAN: Story = {
-  name: 'IBAN',
   args: {
     components: [
       {
@@ -2507,7 +2504,6 @@ export const IBAN: Story = {
 };
 
 export const IBANMultiple: Story = {
-  name: 'IBAN Multiple',
   args: {
     components: [
       {
@@ -3043,7 +3039,6 @@ export const LicensePlateMultiple: Story = {
 };
 
 export const Content: Story = {
-  name: 'Content',
   args: {
     components: [
       {
@@ -3117,7 +3112,6 @@ export const SoftRequiredErrors: Story = {
 };
 
 export const Columns: Story = {
-  name: 'Columns',
   args: {
     components: [
       {
@@ -4208,7 +4202,6 @@ export const CosignV2: Story = {
 };
 
 export const Signature: Story = {
-  name: 'Signature',
   args: {
     components: [
       {
@@ -4303,7 +4296,6 @@ export const LeafletMap: Story = {
 };
 
 export const Partners: Story = {
-  name: 'Partners',
   args: {
     components: [
       {
@@ -4396,7 +4388,6 @@ export const Partners: Story = {
 };
 
 export const Children: Story = {
-  name: 'Children',
   args: {
     components: [
       {
@@ -4525,7 +4516,6 @@ export const ChildrenWithSelection: Story = {
 };
 
 export const Profile: Story = {
-  name: 'Profile',
   args: {
     components: [
       {

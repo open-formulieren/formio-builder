@@ -27,7 +27,7 @@ test.each([
   (obj: Record<string, Array<string | undefined>>, expected) => {
     // The 'undefined' should not be there, but array helpers behave weirdly, see
     // https://github.com/jaredpalmer/formik/issues/1811#issuecomment-552029935.
-    // @ts-expect-error
+    // @ts-expect-error Formik errors don't accept undefined array entries
     const names = getErrorNames(obj);
 
     expect(names).toEqual(expected);
@@ -44,7 +44,7 @@ test.each([
   (obj: Record<string, Record<string, string | undefined> | undefined>, expected: string[]) => {
     // The 'undefined' should not be there, but array helpers behave weirdly, see
     // https://github.com/jaredpalmer/formik/issues/1811#issuecomment-552029935.
-    // @ts-expect-error
+    // @ts-expect-error Formik errors don't accept this shape
     const names = getErrorNames(obj);
 
     expect(names).toEqual(expected);
@@ -64,7 +64,7 @@ test.each([
   (obj: Record<string, ArrayWithNested | undefined>, expected: string[]) => {
     // The 'undefined' should not be there, but array helpers behave weirdly, see
     // https://github.com/jaredpalmer/formik/issues/1811#issuecomment-552029935.
-    // @ts-expect-error
+    // @ts-expect-error Formik errors don't accept this shape
     const names = getErrorNames(obj);
 
     expect(names).toEqual(expected);

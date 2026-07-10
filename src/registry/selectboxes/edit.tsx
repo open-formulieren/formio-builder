@@ -198,7 +198,10 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
 
     // if all the option values are present in the default value map, there is nothing
     // to do and we bail early to prevent further form state mutations.
-    if (defaultValueKeys === new Set(optionValues)) return;
+    const hasSameKeys =
+      defaultValueKeys.size === optionValues.length &&
+      optionValues.every(optionValue => defaultValueKeys.has(optionValue));
+    if (hasSameKeys) return;
 
     // If no default value is present for an option, make it explicitly false.
     // Checking/unchecking persist the state either way, so we only need to do this once
@@ -209,7 +212,9 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
     const explicitDefaults: SelectboxesComponentSchema['defaultValue'] = {};
     optionValues.forEach(optionValue => {
       // if a value is specified already in the form state, use it, otherwise default to "unchecked".
-      const defaultForOption = value.hasOwnProperty(optionValue) ? value[optionValue] : false;
+      const defaultForOption = Object.prototype.hasOwnProperty.call(value, optionValue)
+        ? value[optionValue]
+        : false;
       explicitDefaults[optionValue] = defaultForOption;
     });
 

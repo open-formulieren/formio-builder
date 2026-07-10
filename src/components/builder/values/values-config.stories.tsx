@@ -9,7 +9,7 @@ import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test'
 
 import {withFormik} from '@/sb-decorators';
 
-import ValuesConfig from './values-config';
+import {ValuesConfig} from './values-config';
 
 export default {
   title: 'Formio/Builder/Values/ValuesConfig',

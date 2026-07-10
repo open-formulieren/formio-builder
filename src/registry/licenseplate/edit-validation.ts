@@ -6,7 +6,7 @@ import type {EditSchema} from '../types';
 
 const licenseplateSchema = z
   .string()
-  .regex(/^[a-zA-Z0-9]{1,3}\-[a-zA-Z0-9]{1,3}\-[a-zA-Z0-9]{1,3}$/)
+  .regex(/^[a-zA-Z0-9]{1,3}-[a-zA-Z0-9]{1,3}-[a-zA-Z0-9]{1,3}$/)
   .optional();
 
 // case for when component.multiple=false

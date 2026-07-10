@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import type {FormikHandlers} from 'formik';
 import {Field, useFormikContext} from 'formik';
 

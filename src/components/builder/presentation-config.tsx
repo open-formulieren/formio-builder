@@ -5,7 +5,7 @@ import {BuilderContext} from '@/context';
 
 import {Checkbox, Panel} from '../formio';
 
-const ShowInSummary: React.FC<{}> = () => {
+const ShowInSummary: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'showInSummary' builder field",
@@ -25,7 +25,7 @@ const ShowInSummary: React.FC<{}> = () => {
   );
 };
 
-const ShowInEmail: React.FC<{}> = () => {
+const ShowInEmail: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'showInEmail' builder field",
@@ -45,7 +45,7 @@ const ShowInEmail: React.FC<{}> = () => {
   );
 };
 
-const ShowInPDF: React.FC<{}> = () => {
+const ShowInPDF: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'showInPDF' builder field",

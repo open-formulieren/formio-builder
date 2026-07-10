@@ -3,7 +3,7 @@ import {expect, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import ItemsExpression from './items-expression';
+import {ItemsExpression} from './items-expression';
 
 export default {
   title: 'Formio/Builder/Values/ItemsExpression',

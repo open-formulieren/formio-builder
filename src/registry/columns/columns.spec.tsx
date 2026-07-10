@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import {expect, test, vi} from 'vitest';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
-import {waitFor, contextRender, fireEvent, screen} from '@/tests/test-utils';
+import {contextRender, fireEvent, screen, waitFor} from '@/tests/test-utils';
 
 test('(Added) column width sliders configure the width', async () => {
   const user = userEvent.setup();

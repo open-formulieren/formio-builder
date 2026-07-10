@@ -3,7 +3,7 @@ import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import TextArea from './textarea';
+import {default as TextArea} from './textarea';
 
 export default {
   title: 'Formio/Components/TextArea',

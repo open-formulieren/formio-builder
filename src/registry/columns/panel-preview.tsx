@@ -1,5 +1,5 @@
 import type {ColumnsComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 

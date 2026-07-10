@@ -8,7 +8,7 @@ import type {
 } from '@open-formulieren/types';
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import type React from 'react';
-import selectEvent from 'react-select-event';
+import {select} from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import type {FormType} from '@/context';
@@ -199,7 +199,7 @@ export const UnsupportedComponent: Story = {
 
   args: {
     component: {
-      // @ts-expect-error
+      // @ts-expect-error unsupported type value
       type: 'an-invalid-type',
     },
     builderInfo: {
@@ -207,7 +207,7 @@ export const UnsupportedComponent: Story = {
       group: 'basic',
       icon: 'terminal',
       schema: {
-        // @ts-expect-error
+        // @ts-expect-error unsupported type value
         type: 'an-invalid-type',
       },
       weight: 0,
@@ -1327,7 +1327,7 @@ export const SelectBoxes: Story = {
           attribute: '',
         },
       });
-      // @ts-expect-error
+      // @ts-expect-error for mockClear
       args.onSubmit.mockClear();
     });
 
@@ -1416,7 +1416,7 @@ export const SelectBoxes: Story = {
           attribute: '',
         },
       });
-      // @ts-expect-error
+      // @ts-expect-error mockClear
       args.onSubmit.mockClear();
     });
   },
@@ -1562,7 +1562,7 @@ export const Radio: Story = {
           attribute: '',
         },
       });
-      // @ts-expect-error
+      // @ts-expect-error mockClear
       args.onSubmit.mockClear();
     });
 
@@ -1647,7 +1647,7 @@ export const Radio: Story = {
           attribute: '',
         },
       });
-      // @ts-expect-error
+      // @ts-expect-error mockClear
       args.onSubmit.mockClear();
     });
   },
@@ -1807,7 +1807,7 @@ export const Select: Story = {
           attribute: '',
         },
       } satisfies SelectComponentSchema);
-      // @ts-expect-error
+      // @ts-expect-error mockClear
       args.onSubmit.mockClear();
     });
 
@@ -1903,7 +1903,7 @@ export const Select: Story = {
           attribute: '',
         },
       } satisfies SelectComponentSchema);
-      // @ts-expect-error
+      // @ts-expect-error mockClear
       args.onSubmit.mockClear();
     });
   },
@@ -3401,7 +3401,7 @@ export const Profile: Story = {
     await step('Submit form', async () => {
       // Reselect the email address type
       const typeSelect = componentEditForm.getByLabelText('Available digital address types');
-      selectEvent.select(typeSelect, 'Email');
+      select(typeSelect, 'Email');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalled();

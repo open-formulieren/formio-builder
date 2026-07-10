@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {useContext, useRef} from 'react';
 

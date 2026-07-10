@@ -3,7 +3,7 @@ import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import Radio from './radio';
+import {Radio} from './radio';
 
 export default {
   title: 'Formio/Components/Radio',

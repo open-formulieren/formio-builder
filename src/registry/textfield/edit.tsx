@@ -257,7 +257,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   );
 };
 
-const DeriveStreetName: React.FC<{}> = () => {
+const DeriveStreetName: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -281,7 +281,7 @@ const DeriveStreetName: React.FC<{}> = () => {
   );
 };
 
-const DeriveCity: React.FC<{}> = () => {
+const DeriveCity: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -305,7 +305,7 @@ const DeriveCity: React.FC<{}> = () => {
   );
 };
 
-const DerivePostcode: React.FC<{}> = () => {
+const DerivePostcode: React.FC = () => {
   const {formType} = useContext(BuilderContext);
 
   return formType === 'appointment' ? null : (
@@ -323,7 +323,7 @@ const DerivePostcode: React.FC<{}> = () => {
   );
 };
 
-const DeriveHouseNumber: React.FC<{}> = () => {
+const DeriveHouseNumber: React.FC = () => {
   const {formType} = useContext(BuilderContext);
 
   return formType === 'appointment' ? null : (

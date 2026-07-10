@@ -199,7 +199,7 @@ EditForm.defaultValues = {
   },
 };
 
-const UseConfigDefaultMapSettings: React.FC<{}> = () => {
+const UseConfigDefaultMapSettings: React.FC = () => {
   const intl = useIntl();
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'useConfigDefaultMapSettings' builder field",
