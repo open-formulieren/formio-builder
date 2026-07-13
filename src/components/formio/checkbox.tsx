@@ -33,6 +33,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
         as="input"
         type="checkbox"
         className={clsx('form-check-input', {'is-invalid': hasErrors})}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(e: React.ChangeEvent<any>) => {
           formikOnChange(e);
           onChange?.(e);

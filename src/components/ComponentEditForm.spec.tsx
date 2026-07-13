@@ -12,6 +12,7 @@ test('Mutating components after save does not mutate default values', async () =
 
   const user = userEvent.setup();
   expect(FieldSet.edit.defaultValues.components).toEqual([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let savedComponent: any;
 
   contextRender(

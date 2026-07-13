@@ -83,6 +83,7 @@ export const SelectBoxesVariable: SelectboxesStory = {
 };
 
 export const SelectBoxesResetState: StoryObj<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (values: any) => void;
 }> = {
   render: ({onSubmit}) => {

@@ -14,6 +14,7 @@ import Component from './component';
 import Description from './description';
 
 // alias so that we can keep track of them and improve with generics at some point.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ValueType = any;
 
 // See https://react-select.com/typescript
@@ -54,6 +55,7 @@ function isOptionGroup<Option, Group extends GroupBase<Option> = GroupBase<Optio
   return (opt as Group).options !== undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractSelectedValue<Option extends {[key: string]: any}, Group extends GroupBase<Option>>(
   options: OptionsOrGroups<Option, Group>,
   currentValue: ValueType,
@@ -171,6 +173,7 @@ export function getReactSelectStyles<
 
 // can't use React.FC with generics
 function Select<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Option extends {[key: string]: any},
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>,

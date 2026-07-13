@@ -10,6 +10,7 @@ test('A formio Number component passes validation', () => {
   const numberInstance = Components.create(
     {type: 'number', key: 'number', label: 'Number'},
     {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) as any;
 
   const data = numberInstance.component; // this has been extended with the defaults

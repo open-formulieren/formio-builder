@@ -63,6 +63,7 @@ const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
   const name = 'key';
   const fieldProps = getFieldProps(name);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChange = (event: React.ChangeEvent<any>) => {
     const {value} = event.target;
     if (!value) {

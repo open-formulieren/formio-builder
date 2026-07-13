@@ -8,6 +8,7 @@ import {hasOwnProperty} from '@/types';
 
 import {Checkbox} from '../formio';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const hasDefaultValue = (component: any): component is AnyComponentSchema & {defaultValue: any} => {
   return hasOwnProperty(component, 'defaultValue');
 };
