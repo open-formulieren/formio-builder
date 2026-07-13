@@ -80,8 +80,8 @@ jobs:
           path: lib/
           retention-days: 1
 
-  prettier:
-    name: Check frontend code formatting with prettier
+  code-quality:
+    name: Validate code formatting with prettier and eslint
     runs-on: ubuntu-latest
 
     steps:
@@ -98,6 +98,9 @@ jobs:
 
       - name: Run prettier linter
         run: npm run checkformat
+
+      - name: Run eslint linter
+        run: npm run lint
 
   zizmor:
     name: GitHub Actions Security Analysis with zizmor 🌈
@@ -201,7 +204,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - storybook
-      - prettier
+      - code-quality
       - interaction-tests
       - unit-tests
       - i18n-check
@@ -271,7 +274,7 @@ jobs:
       - build-package
       - interaction-tests
       - unit-tests
-      - prettier
+      - code-quality
       - i18n-check
 
     # do not publish in forks or non-tag pushes
