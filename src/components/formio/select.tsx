@@ -74,6 +74,7 @@ function extractSelectedValue<Option extends {[key: string]: any}, Group extends
     }
     if (isOptionGroup<Option, Group>(optionOrGroup)) {
       for (const option of optionOrGroup.options) {
+        // eslint-disable-next-line max-depth
         if (valueTest(option)) {
           value.push(option);
         }

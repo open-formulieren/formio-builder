@@ -83,6 +83,7 @@ export const Radio: React.FC<RadioProps> = ({
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label className="form-check-label">
               <RadioInput
                 name={name}
