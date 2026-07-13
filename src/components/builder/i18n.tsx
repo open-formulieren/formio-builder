@@ -84,6 +84,7 @@ export function ComponentTranslations<S extends AnyComponentSchema>({
               <ul className={`nav nav-tabs offb-i18n-header__tabs`}>
                 {supportedLanguageCodes.map(code => (
                   <li key={code} className={clsx('nav-item', {active: code === activeLanguage})}>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a
                       key={code}
                       href="#"

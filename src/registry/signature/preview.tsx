@@ -90,6 +90,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
       tooltip={tooltip}
     >
       <div ref={containerRef} className="signature-pad-body">
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className="btn btn-sm btn-light signature-pad-refresh" onClick={onClear}>
           <i className="fa fa-refresh" aria-label="Clear" />
         </a>

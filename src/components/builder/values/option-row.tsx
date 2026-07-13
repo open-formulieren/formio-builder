@@ -134,6 +134,7 @@ const OptionRow: React.FC<OptionRowProps> = ({
                   })}
                 />
                 &nbsp;
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a
                   href="#"
                   onClick={e => {
@@ -149,6 +150,7 @@ const OptionRow: React.FC<OptionRowProps> = ({
                 <TextArea name={`${fieldNamePrefix}.description`} />
               </>
             ) : (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 href="#"
                 onClick={e => {

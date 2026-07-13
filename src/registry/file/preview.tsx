@@ -57,6 +57,7 @@ const Preview: React.FC<ComponentPreviewProps<FileComponentSchema>> = ({componen
           defaultMessage="Drag or <browse>select</browse> files to upload."
           values={{
             browse: nodes => (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 href="#"
                 className="browser"
