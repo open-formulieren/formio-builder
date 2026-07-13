@@ -34,12 +34,12 @@ export interface CommonInputProps extends ComponentLabelProps {
   description?: React.ReactNode;
 }
 
-export interface MultipleProps<P extends {}, T extends unknown> {
+export interface MultipleProps<P extends object, T> {
   as: React.ComponentType<P>;
   defaultValue: T; // data type, which is component type specific (textfield -> string, number -> number)
 }
 
-const Multiple = <P extends {}, T>(props: MultipleProps<P, T> & CommonInputProps) => {
+const Multiple = <P extends object, T>(props: MultipleProps<P, T> & CommonInputProps) => {
   const {label, description, required, tooltip} = props;
   const {as: WrappedComponent, defaultValue, name, ...otherProps} = props;
   // TypeScript can't infer this itself with generics, as it doesn't know yet what P looks
@@ -117,11 +117,11 @@ export interface WithMultipleProps {
 /**
  * Wrap a given component into a higher order Multiple component.
  */
-export function withMultiple<P extends CommonInputProps, T extends unknown = unknown>(
+export function withMultiple<P extends CommonInputProps, T = unknown>(
   WrappedComponent: React.ComponentType<P>,
   defaultValue: T
 ) {
-  return (props: WithMultipleProps & P) => {
+  const WithMultipleComponent = (props: WithMultipleProps & P) => {
     const {multiple, ...otherProps} = props;
     // TypeScript can't infer this itself with generics, as it doesn't know yet what P looks
     // like by omitting multiple - but *we* know that HoC forward the remainder of the props.
@@ -133,6 +133,10 @@ export function withMultiple<P extends CommonInputProps, T extends unknown = unk
     // otherwise, go into array-of-fields mode
     return <Multiple<P, T> as={WrappedComponent} defaultValue={defaultValue} {...otherProps} />;
   };
+
+  WithMultipleComponent.displayName = `withMultiple(${WrappedComponent.displayName ?? 'Component'})`;
+
+  return WithMultipleComponent;
 }
 
 export default Multiple;
