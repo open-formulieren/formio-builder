@@ -52,6 +52,7 @@ const EditForm: EditFormDefinition<RadioComponentSchema> = () => {
   useLayoutEffect(() => {
     if (dataSrc !== 'variable' || isEqual(defaultValue, {})) return;
     setFieldValue('defaultValue', '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return (

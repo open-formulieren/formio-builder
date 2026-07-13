@@ -68,6 +68,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
       // `defaultValue` is guaranteed to be a an (empty) array thanks to the `if` branch above
     }
     setFieldValue('defaultValue', newDefaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiple]);
 
   Validate.useManageValidatorsTranslations<SelectComponentSchema>(['required']);
@@ -80,6 +81,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
     const emptyDefaultValue = multiple ? [] : '';
     if (dataSrc !== 'variable' || isEqual(defaultValue, emptyDefaultValue)) return;
     setFieldValue('defaultValue', emptyDefaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return (

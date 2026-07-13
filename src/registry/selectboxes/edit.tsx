@@ -57,6 +57,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
   useLayoutEffect(() => {
     if (dataSrc !== 'variable' || isEqual(defaultValue, {})) return;
     setFieldValue('defaultValue', {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return (
@@ -219,6 +220,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
     });
 
     setFieldValue('defaultValue', explicitDefaults);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   return formType === 'appointment' ? null : (

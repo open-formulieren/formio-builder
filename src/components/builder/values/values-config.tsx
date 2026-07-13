@@ -73,6 +73,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
     }
     // deliberate that we only provide dataSrc as dependency, the hook should only run
     // when that dropdown changes value.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return formType === 'appointment' ? null : (

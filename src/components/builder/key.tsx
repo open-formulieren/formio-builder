@@ -50,6 +50,7 @@ export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] 
     return () => {
       debouncedSetFieldValue.cancel();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setFieldValue, isNew, isManuallySetRef, generatedKey, currentKey]);
 
   return [isManuallySetRef, generatedKey];

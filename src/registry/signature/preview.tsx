@@ -63,6 +63,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
     return () => {
       window.removeEventListener('resize', onResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onEnd = () => {

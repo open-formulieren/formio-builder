@@ -29,6 +29,7 @@ export function useManageValidatorsTranslations<S extends SchemaWithValidation>(
     }
     if (isEqual(newValue, value)) return;
     setValue(newValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keys, value]);
 }
 

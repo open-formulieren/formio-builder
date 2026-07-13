@@ -39,6 +39,7 @@ export const ComparisonValueInput: React.FC = () => {
     if (previousWhen !== undefined && previousWhen !== conditional?.when) {
       setFieldValue('conditional.eq', '');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values, setFieldValue]);
 
   if (!chosenComponent) return null;

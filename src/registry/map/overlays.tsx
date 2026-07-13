@@ -129,6 +129,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
     if (!internalId) {
       setFieldValue(`${fieldNamePrefix}._OF_INTERNAL_id`, window.crypto.randomUUID());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [internalId, setFieldValue]);
 
   return (
