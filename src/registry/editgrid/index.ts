@@ -31,9 +31,11 @@ export default {
     },
   },
   defaultValue: [],
+  holdsData: true,
   getComponentSlots: component => [
     {
       reference: component.key,
+      useReferenceInComponentPath: true,
       collection: component.components,
     },
   ],

@@ -29,4 +29,5 @@ export default {
     },
   },
   defaultValue: undefined,
+  holdsData: true,
 } satisfies RegistryEntry<MapComponentSchema>;

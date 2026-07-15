@@ -28,4 +28,5 @@ export default {
   },
   // default empty value for Formik - this ignores any manually configured options!
   defaultValue: {},
+  holdsData: true,
 } satisfies RegistryEntry<SelectboxesComponentSchema>;

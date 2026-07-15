@@ -82,6 +82,10 @@ export interface ComponentSlot {
    */
   reference: string;
   /**
+   * Whether the reference should be used in the path of children components.
+   */
+  useReferenceInComponentPath?: boolean;
+  /**
    * The components in this slot.
    */
   collection: AnyComponentSchema[];
@@ -102,6 +106,8 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   // It returns an array of component slots, with references to where those slots are
   // located in the form builder structure.
   getComponentSlots?: (component: S) => ComponentSlot[];
+  // Whether this component holds data and is used for user interaction.
+  holdsData?: boolean;
 }
 
 // Registry made up of registry entries, one for each possible component schema

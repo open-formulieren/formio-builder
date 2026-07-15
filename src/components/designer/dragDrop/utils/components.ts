@@ -30,6 +30,10 @@ interface IterComponentsResult<
    * The collection of items that the current item belongs to.
    */
   collection: S[];
+  /**
+   * Whether the component itself holds data, or if it's simply used for presentation.
+   */
+  holdsData?: boolean;
 }
 
 /**
@@ -43,10 +47,14 @@ export function* iterComponents<
       .filter(Boolean)
       .join('.');
 
-    yield {index, component, path, collection: componentDefinitions};
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
+    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+      yield {index, component, path, collection: componentDefinitions};
+      continue;
+    }
 
-    const {getComponentSlots} = getRegistryEntry(component.type);
+    const {getComponentSlots, holdsData} = getRegistryEntry(component.type);
+    yield {index, component, path, collection: componentDefinitions, holdsData};
+
     if (!getComponentSlots) continue;
 
     for (const slot of getComponentSlots(component)) {
