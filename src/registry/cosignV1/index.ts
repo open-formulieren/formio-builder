@@ -29,4 +29,5 @@ export default {
   isDeprecated: true,
   // component does not have a submission value but acts as a marker
   defaultValue: undefined,
+  holdsData: true,
 } satisfies RegistryEntry<CosignV1ComponentSchema>;

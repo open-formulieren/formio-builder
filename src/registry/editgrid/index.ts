@@ -31,6 +31,7 @@ export default {
     },
   },
   defaultValue: [],
+  holdsData: true,
   getComponentSlots: component => [
     {
       reference: component.key,

@@ -7,57 +7,9 @@ import {
   getComponentKeyFromDropzoneId,
 } from '@/components/designer/dragDrop/utils/dropzone';
 import type {ComponentDefinition} from '@/components/designer/types';
-import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
+import {isPlaceholder, iterComponents} from '@/formio';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
-
-interface IterComponentsResult {
-  /**
-   * The index of the current item.
-   */
-  index: number;
-  /**
-   * The path to the current item.
-   */
-  dataPath: string;
-  /**
-   * The current item.
-   */
-  component: ComponentDefinition;
-  /**
-   * The collection of items that the current item belongs to.
-   */
-  collection: ComponentDefinition[];
-}
-
-/**
- * Recursively (and depth-first) iterate over all components in the component definition.
- */
-export function* iterComponents(
-  componentDefinitions: ComponentDefinition[],
-  parentKeysPrefix: string = ''
-): Generator<IterComponentsResult> {
-  for (const [index, component] of componentDefinitions.entries()) {
-    const dataPath = [parentKeysPrefix, hasOwnProperty(component, 'key') ? component.key : '']
-      .filter(Boolean)
-      .join('.');
-
-    yield {index, component, dataPath, collection: componentDefinitions};
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
-
-    const {getComponentSlots} = getRegistryEntry(component.type);
-    if (!getComponentSlots) continue;
-
-    for (const slot of getComponentSlots(component)) {
-      yield* iterComponents(
-        slot.collection,
-        slot.useReferenceInComponentDataPath
-          ? [parentKeysPrefix, slot.reference].filter(Boolean).join('.')
-          : parentKeysPrefix
-      );
-    }
-  }
-}
 
 /**
  * Get the components for a given dropzone.
@@ -83,7 +35,7 @@ const findDropzoneComponentsByParentReference = (
   parentReference: string
 ): ComponentDefinition[] | undefined => {
   for (const {component} of iterComponents(componentDefinitions)) {
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
+    if (isPlaceholder(component)) continue;
 
     const {getComponentSlots} = getRegistryEntry(component.type);
     if (!getComponentSlots) continue;
@@ -126,7 +78,7 @@ export const createComponent = <S extends AnyComponentSchema>(
  */
 export const removePlaceholder = (components: ComponentDefinition[]) => {
   for (const {index, component, collection} of iterComponents(components)) {
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+    if (isPlaceholder(component)) {
       collection.splice(index, 1);
       return;
     }
@@ -139,7 +91,7 @@ export const removePlaceholder = (components: ComponentDefinition[]) => {
  */
 export const removeComponent = (components: ComponentDefinition[], componentKey: string) => {
   for (const {index, component, collection} of iterComponents(components)) {
-    if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key === componentKey) {
+    if (!isPlaceholder(component) && component.key === componentKey) {
       collection.splice(index, 1);
       return;
     }
@@ -156,7 +108,7 @@ export const replacePlaceholderWithComponent = (
   for (const {index, component: componentDefinition, collection} of iterComponents(
     componentDefinitions
   )) {
-    if (componentDefinition.type === COMPONENT_PLACEHOLDER_TYPE) {
+    if (isPlaceholder(componentDefinition)) {
       collection[index] = component;
       return;
     }
@@ -174,10 +126,7 @@ export const replaceComponent = (
   for (const {index, component: componentDefinition, collection} of iterComponents(
     componentDefinitions
   )) {
-    if (
-      componentDefinition.type !== COMPONENT_PLACEHOLDER_TYPE &&
-      componentDefinition.key === componentToReplaceKey
-    ) {
+    if (!isPlaceholder(componentDefinition) && componentDefinition.key === componentToReplaceKey) {
       collection[index] = component;
       return;
     }
@@ -204,7 +153,7 @@ export function assertNoPlaceholders(
   components: ComponentDefinition[]
 ): asserts components is AnyComponentSchema[] {
   for (const {component} of iterComponents(components)) {
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+    if (isPlaceholder(component)) {
       throw new Error('Components must not contain a placeholder');
     }
   }
