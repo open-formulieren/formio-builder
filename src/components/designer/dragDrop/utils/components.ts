@@ -17,6 +17,10 @@ interface IterComponentsResult {
    */
   index: number;
   /**
+   * The path to the current item.
+   */
+  dataPath: string;
+  /**
    * The current item.
    */
   component: ComponentDefinition;
@@ -29,18 +33,28 @@ interface IterComponentsResult {
 /**
  * Recursively (and depth-first) iterate over all components in the component definition.
  */
-function* iterComponents(
-  componentDefinitions: ComponentDefinition[]
+export function* iterComponents(
+  componentDefinitions: ComponentDefinition[],
+  parentKeysPrefix: string = ''
 ): Generator<IterComponentsResult> {
   for (const [index, component] of componentDefinitions.entries()) {
-    yield {index, component, collection: componentDefinitions};
+    const dataPath = [parentKeysPrefix, hasOwnProperty(component, 'key') ? component.key : '']
+      .filter(Boolean)
+      .join('.');
+
+    yield {index, component, dataPath, collection: componentDefinitions};
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
     const {getComponentSlots} = getRegistryEntry(component.type);
     if (!getComponentSlots) continue;
 
     for (const slot of getComponentSlots(component)) {
-      yield* iterComponents(slot.collection);
+      yield* iterComponents(
+        slot.collection,
+        slot.useReferenceInComponentDataPath
+          ? [parentKeysPrefix, slot.reference].filter(Boolean).join('.')
+          : parentKeysPrefix
+      );
     }
   }
 }

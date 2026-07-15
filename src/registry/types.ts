@@ -82,6 +82,10 @@ export interface ComponentSlot {
    */
   reference: string;
   /**
+   * Whether the reference should be used in the data path of children components.
+   */
+  useReferenceInComponentDataPath?: boolean;
+  /**
    * The components in this slot.
    */
   collection: AnyComponentSchema[];

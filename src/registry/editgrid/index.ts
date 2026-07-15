@@ -34,6 +34,7 @@ export default {
   getComponentSlots: component => [
     {
       reference: component.key,
+      useReferenceInComponentDataPath: true,
       collection: component.components,
     },
   ],
