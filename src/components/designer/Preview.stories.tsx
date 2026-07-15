@@ -44,6 +44,7 @@ export default {
     modal: {noModal: true},
   },
   args: {
+    withoutComponentControls: true,
     dropzoneId: 'dropzone',
   },
 } as Meta<typeof Preview>;

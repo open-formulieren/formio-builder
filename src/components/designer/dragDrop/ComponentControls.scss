@@ -1,0 +1,20 @@
+.offb-component-controls {
+  position: absolute;
+  gap: 4px;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  z-index: 1;
+
+  .btn {
+    box-shadow: 0 0 10px 1px rgba(48, 113, 169, 0.6);
+  }
+}
+
+// Display the controls when hovering over or focusing on/within the parent sortable item.
+.offb-dnd-sortable-item {
+  &:not(:hover):not(:focus):not(:focus-within) {
+    > .offb-component-controls {
+      display: none;
+    }
+  }
+}

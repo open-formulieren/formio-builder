@@ -199,3 +199,34 @@ export const replacePlaceholderWithComponent = (
     }
   }
 };
+
+/**
+ * Replace a component in the components with the given component.
+ */
+export const replaceComponent = (
+  componentDefinitions: ComponentDefinition[],
+  componentToReplaceKey: string,
+  component: AnyComponentSchema
+) => {
+  for (const {index, component: componentDefinition, collection} of iterComponents(
+    componentDefinitions
+  )) {
+    if (
+      componentDefinition.type !== COMPONENT_PLACEHOLDER_TYPE &&
+      componentDefinition.key === componentToReplaceKey
+    ) {
+      collection[index] = component;
+      return;
+    }
+  }
+};
+
+export function assertNoPlaceholders(
+  components: ComponentDefinition[]
+): asserts components is AnyComponentSchema[] {
+  for (const {component} of iterComponents(components)) {
+    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+      throw new Error('Components must not contain a placeholder');
+    }
+  }
+}

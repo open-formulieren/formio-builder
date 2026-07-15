@@ -84,6 +84,11 @@
     "description": "Component edit form tab title for 'Layers' tab",
     "originalDefault": "Layers"
   },
+  "0gGl1O": {
+    "defaultMessage": "Delete component",
+    "description": "Form designer preview delete component button title",
+    "originalDefault": "Delete component"
+  },
   "0gbtNe": {
     "defaultMessage": "Months",
     "description": "Label for 'delta.months' in relative delta date constraint validation",
@@ -1514,6 +1519,11 @@
     "description": "Options table: move option down",
     "originalDefault": "Move down"
   },
+  "k8V0/f": {
+    "defaultMessage": "Removing this component will also remove all of its children. Are you sure you want to continue?",
+    "description": "Form designer delete parent component confirmation message",
+    "originalDefault": "Removing this component will also remove all of its children. Are you sure you want to continue?"
+  },
   "k9tAyW": {
     "defaultMessage": "Error message",
     "description": "Label for translation message for validation error code",
@@ -1953,6 +1963,11 @@
     "defaultMessage": "How to specify the available options.",
     "description": "Tooltip for 'openForms.dataSrc' builder field",
     "originalDefault": "How to specify the available options."
+  },
+  "yaI9aD": {
+    "defaultMessage": "Edit component",
+    "description": "Form designer preview edit component button title",
+    "originalDefault": "Edit component"
   },
   "yr8cz5": {
     "defaultMessage": "Checkbox",

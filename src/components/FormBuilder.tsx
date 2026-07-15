@@ -1,7 +1,6 @@
 import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
 import {Formik} from 'formik';
 
-import {DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
@@ -46,17 +45,19 @@ const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace
   }, {});
 
   return (
-    <DesignerContext.Provider value={{componentNamespace}}>
-      <Formik
-        enableReinitialize
-        initialValues={initialValues}
-        onSubmit={() => {
-          throw new Error("Can't submit preview form");
-        }}
-      >
-        <FormioDefinitionDesigner components={components} onChange={onChange} />
-      </Formik>
-    </DesignerContext.Provider>
+    <Formik
+      enableReinitialize
+      initialValues={initialValues}
+      onSubmit={() => {
+        throw new Error("Can't submit preview form");
+      }}
+    >
+      <FormioDefinitionDesigner
+        components={components}
+        componentNamespace={componentNamespace}
+        onChange={onChange}
+      />
+    </Formik>
   );
 };
 
