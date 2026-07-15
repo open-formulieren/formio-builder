@@ -11,36 +11,49 @@ import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
-interface IterComponentsResult {
+interface IterComponentsResult<
+  S extends ComponentDefinition | AnyComponentSchema = ComponentDefinition,
+> {
   /**
    * The index of the current item.
    */
   index: number;
   /**
+   * The path to the current item.
+   */
+  path: string;
+  /**
    * The current item.
    */
-  component: ComponentDefinition;
+  component: S;
   /**
    * The collection of items that the current item belongs to.
    */
-  collection: ComponentDefinition[];
+  collection: S[];
 }
 
 /**
  * Recursively (and depth-first) iterate over all components in the component definition.
  */
-function* iterComponents(
-  componentDefinitions: ComponentDefinition[]
-): Generator<IterComponentsResult> {
+export function* iterComponents<
+  S extends ComponentDefinition | AnyComponentSchema = ComponentDefinition,
+>(componentDefinitions: S[], parentPath: string = ''): Generator<IterComponentsResult<S>> {
   for (const [index, component] of componentDefinitions.entries()) {
-    yield {index, component, collection: componentDefinitions};
+    const path = [parentPath, hasOwnProperty(component, 'key') ? component.key : '']
+      .filter(Boolean)
+      .join('.');
+
+    yield {index, component, path, collection: componentDefinitions};
     if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
 
     const {getComponentSlots} = getRegistryEntry(component.type);
     if (!getComponentSlots) continue;
 
     for (const slot of getComponentSlots(component)) {
-      yield* iterComponents(slot.collection);
+      yield* iterComponents<S>(
+        slot.collection as S[],
+        slot.useReferenceInComponentPath ? `${parentPath}.${slot.reference}` : parentPath
+      );
     }
   }
 }
