@@ -16,6 +16,8 @@ on:
       - ready_for_review
   workflow_dispatch:
 
+permissions: {}
+
 concurrency:
   group: '${{ github.workflow }}-${{ github.ref_name }}' # unique builds for branch/tag name
   cancel-in-progress: false  # do not cancel in progress, but only in-between builds
@@ -308,6 +310,6 @@ jobs:
       - name: Publish package to NPM
         run: |
           # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          VERSION=$(echo "${GITHUB_REF}" | sed -e 's,.*/\(.*\),\1,')
 
           npm publish --access public --new-version=$VERSION
