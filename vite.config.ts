@@ -1,11 +1,12 @@
 import react from '@vitejs/plugin-react';
+import {playwright} from '@vitest/browser-playwright';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import dts from 'vite-plugin-dts';
+import eslint from 'vite-plugin-eslint2';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import {playwright} from '@vitest/browser-playwright';
+import {coverageConfigDefaults, defineConfig} from 'vitest/config';
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin';
-import {defineConfig, coverageConfigDefaults} from 'vitest/config';
 
 import {dependencies, peerDependencies} from './package.json';
 
@@ -22,7 +23,7 @@ export const packageRegexes = externalPackages.map(
   packageName => new RegExp(`^${packageName}(/.*)?`)
 );
 
-export default defineConfig(({}) => ({
+export default defineConfig(({mode}) => ({
   plugins: [
     tsconfigPaths(),
     react({
@@ -37,6 +38,10 @@ export default defineConfig(({}) => ({
           ],
         ],
       },
+    }),
+    eslint({
+      build: true,
+      emitErrorAsWarning: mode === 'development',
     }),
     dts({tsconfigPath: './tsconfig.prod.json'}),
   ],
