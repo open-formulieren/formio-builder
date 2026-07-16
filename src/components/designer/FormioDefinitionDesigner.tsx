@@ -23,7 +23,8 @@ import {
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
-import {DesignerContext, DesignerContextType} from '@/context';
+import type {DesignerContextType} from '@/context';
+import {DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
@@ -198,6 +199,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
         onChange(components);
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setItems]
   );
 

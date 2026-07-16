@@ -1,7 +1,7 @@
 import type {Data} from '@dnd-kit/abstract';
 import {useSortable} from '@dnd-kit/react/sortable';
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import React from 'react';
 
 import ComponentControls from './ComponentControls';
@@ -60,6 +60,7 @@ interface SortableItemViewProps extends React.PropsWithChildren {
   showControls?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
   ({testId, component, showControls = false, className, children}, ref) => {
     return (
@@ -74,6 +75,8 @@ const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
     );
   }
 );
+
+SortableItemView.displayName = 'SortableItemView';
 
 export {SortableItemView};
 export default SortableItem;
