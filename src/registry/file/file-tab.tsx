@@ -1,4 +1,4 @@
-import {FileComponentSchema} from '@open-formulieren/types';
+import type {FileComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext} from 'react';
@@ -11,7 +11,7 @@ import {BuilderContext} from '@/context';
 const hasImageMimeType = (mimetypes: string[]): boolean =>
   mimetypes.some(mimeType => mimeType.startsWith('image/') || mimeType === '*');
 
-const FileName: React.FC<{}> = () => {
+const FileName: React.FC = () => {
   const intl = useIntl();
 
   const tooltip = intl.formatMessage(
@@ -23,7 +23,7 @@ const FileName: React.FC<{}> = () => {
     {
       code: chunks => <code>{chunks}</code>,
     }
-  ) as string; // library doesn't narrow the type when using template fns :(
+  ) as unknown as string; // library doesn't narrow the type when using template fns :(
 
   return (
     <TextField
@@ -43,7 +43,7 @@ const FileName: React.FC<{}> = () => {
   );
 };
 
-const FileTypesSelect: React.FC<{}> = () => {
+const FileTypesSelect: React.FC = () => {
   const {getFileTypes} = useContext(BuilderContext);
   const {values, initialValues, setFieldValue} = useFormikContext<FileComponentSchema>();
   const initialImageConfiguration = initialValues.of?.image;

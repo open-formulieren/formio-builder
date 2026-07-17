@@ -1,9 +1,9 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import DateTimeField from './datetimefield';
+import {default as DateTimeField} from './datetimefield';
 
 export default {
   title: 'Formio/Components/DateTimeField',

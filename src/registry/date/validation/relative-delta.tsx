@@ -2,7 +2,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import {NumberField, Select, TextField} from '@/components/formio';
 
-import {DateConstraintKey} from './types';
+import type {DateConstraintKey} from './types';
 
 export interface OperatorSelectProps {
   name: `openForms.${DateConstraintKey}.operator`;

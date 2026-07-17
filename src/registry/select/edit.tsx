@@ -1,4 +1,4 @@
-import {Option, SelectComponentSchema} from '@open-formulieren/types';
+import type {Option, SelectComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useEffect, useLayoutEffect} from 'react';
@@ -28,7 +28,7 @@ import {Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
 
 /**
@@ -68,6 +68,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
       // `defaultValue` is guaranteed to be a an (empty) array thanks to the `if` branch above
     }
     setFieldValue('defaultValue', newDefaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [multiple]);
 
   Validate.useManageValidatorsTranslations<SelectComponentSchema>(['required']);
@@ -80,6 +81,7 @@ const EditForm: EditFormDefinition<SelectComponentSchema> = () => {
     const emptyDefaultValue = multiple ? [] : '';
     if (dataSrc !== 'variable' || isEqual(defaultValue, emptyDefaultValue)) return;
     setFieldValue('defaultValue', emptyDefaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return (

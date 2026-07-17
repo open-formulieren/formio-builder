@@ -7,7 +7,7 @@ import {TextField} from '../formio';
 
 // for possible values, see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
 
-const AutoComplete: React.FC<{}> = () => {
+const AutoComplete: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 

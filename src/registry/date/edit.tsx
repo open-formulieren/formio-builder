@@ -1,4 +1,4 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import type {DateComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -25,7 +25,7 @@ import {
 import {LABELS} from '@/components/builder/messages';
 import {DateField, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {EditFormDefinition} from '@/registry/types';
+import type {EditFormDefinition} from '@/registry/types';
 import {useErrorChecker} from '@/utils/errors';
 
 import DateConstraintValidation from './validation';

@@ -1,11 +1,11 @@
-import {ColumnsComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import type {ColumnsComponentSchema} from '@open-formulieren/types';
+import {clsx} from 'clsx';
 import {useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import ModeToggle from '@/components/ModeToggle';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 type ViewportMode = 'desktop' | 'mobile';
 

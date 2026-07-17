@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import ComponentsList from './ComponentsList';
@@ -196,12 +196,10 @@ export const SearchForComponents: Story = {
       // Expect all component groups are opened and the options to be filtered
       await userEvent.type(searchInput, 'b');
 
-      const regularFieldsPanelButton = await within(regularFieldsContainer).findByText(
-        'Form fields'
-      );
-      const specialFieldsPanelButton = await within(specialFieldsContainer).findByText(
-        'Special fields'
-      );
+      const regularFieldsPanelButton =
+        await within(regularFieldsContainer).findByText('Form fields');
+      const specialFieldsPanelButton =
+        await within(specialFieldsContainer).findByText('Special fields');
       const layoutFieldsPanelButton = within(layoutFieldsContainer).queryByText('Layout');
       const presetFieldsPanelButton = await within(presetFieldsContainer).findByText('Preset');
 

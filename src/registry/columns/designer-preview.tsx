@@ -1,5 +1,5 @@
 import type {ColumnsComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 
 import {ComponentsPreview} from '@/components/designer/Preview';
 import {getColumnDropzoneId} from '@/components/designer/dragDrop/utils/dropzone';

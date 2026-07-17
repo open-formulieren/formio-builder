@@ -1,4 +1,4 @@
-import {CosignV2ComponentSchema} from '@open-formulieren/types';
+import type {CosignV2ComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {
@@ -22,7 +22,7 @@ import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'cosign' (cosign v2) type component.

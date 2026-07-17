@@ -1,10 +1,11 @@
-import {IntlShape, defineMessages} from 'react-intl';
+import type {IntlShape} from 'react-intl';
+import {defineMessages} from 'react-intl';
 import {z} from 'zod';
 
 import {LABELS} from '@/components/builder/messages';
 import {buildCommonSchema, getErrorMap, isInvalidStringIssue} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 const VALIDATION_MESSAGES = defineMessages({
   email: {

@@ -1,13 +1,14 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Form, Formik} from 'formik';
 import {cloneDeep, merge} from 'lodash';
-import {PropsWithChildren, useContext} from 'react';
+import type {PropsWithChildren} from 'react';
+import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import {BuilderInfo} from '@/registry/types';
+import type {BuilderInfo} from '@/registry/types';
 
 import GenericComponentPreview from './ComponentPreview';
 
@@ -111,7 +112,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                   <a
                     target="_blank"
                     href="https://open-forms.readthedocs.io/en/stable/manual/forms/form_fields.html"
-                    rel="nofollower noopener"
+                    rel="nofollower noopener noreferrer"
                   >
                     <i className="fa fa-window-restore"></i>&nbsp;
                     <FormattedMessage description="Link to manual title" defaultMessage="Manual" />

@@ -1,4 +1,4 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -8,6 +8,7 @@ import {hasOwnProperty} from '@/types';
 
 import {Checkbox} from '../formio';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const hasDefaultValue = (component: any): component is AnyComponentSchema & {defaultValue: any} => {
   return hasOwnProperty(component, 'defaultValue');
 };

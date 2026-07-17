@@ -1,11 +1,11 @@
-import {Option} from '@open-formulieren/types';
+import type {Option} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {TextArea, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {PathsForValueType} from '@/types';
+import type {PathsForValueType} from '@/types';
 
 import {ComponentTranslationsContext} from '../i18n';
 

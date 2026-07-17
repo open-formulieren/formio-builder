@@ -12,7 +12,7 @@
  * @deprecated Do not use this (anymore) for user-facing forms.
  *
  */
-// @ts-ignore there are no type definitions
+// @ts-expect-error there are no type definitions
 import {conformToMask} from '@formio/vanilla-text-mask';
 import {Utils} from 'formiojs';
 

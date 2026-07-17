@@ -10,6 +10,7 @@ test('A formio Currency component passes validation', () => {
   const numberInstance = Components.create(
     {type: 'currency', key: 'currency', label: 'Number', currency: 'EUR'},
     {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) as any;
 
   const data = numberInstance.component; // this has been extended with the defaults

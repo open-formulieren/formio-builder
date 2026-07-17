@@ -1,5 +1,5 @@
-import {AnyComponentSchema} from '@open-formulieren/types';
-import {Prefill} from '@open-formulieren/types/dist/extensions';
+import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {Prefill} from '@open-formulieren/types/dist/extensions';
 
 export type ComponentWithPrefill = Extract<Required<AnyComponentSchema>, Prefill>;
 

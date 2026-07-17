@@ -1,6 +1,6 @@
-import {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
+import type {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 const Preview: React.FC<ComponentPreviewProps<SoftRequiredErrorsComponentSchema>> = ({
   component,

@@ -1,11 +1,11 @@
-import {Option} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Option} from '@open-formulieren/types';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, within} from 'storybook/test';
 
 import {withFormik} from '@/../.storybook/decorators';
 import {Component} from '@/components/formio';
 
-import ValuesTranslations from './i18n';
+import {ValuesTranslations} from './i18n';
 
 const ValuesTranslationsComponent = ValuesTranslations<{
   values: Option[];

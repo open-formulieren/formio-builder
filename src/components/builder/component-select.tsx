@@ -1,11 +1,12 @@
 import {useFormikContext} from 'formik';
-import {ExtendedComponentSchema, Utils as FormioUtils} from 'formiojs';
+import type {ExtendedComponentSchema} from 'formiojs';
+import {Utils as FormioUtils} from 'formiojs';
 import {useContext} from 'react';
 
 import {BuilderContext} from '@/context';
 
 import {Select} from '../formio';
-import {SelectProps} from '../formio/select';
+import type {SelectProps} from '../formio/select';
 
 interface ComponentOption {
   value: string;

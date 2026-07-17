@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Tab, TabList, TabPanel, Tabs} from 'react-tabs';
 import type {
   ReactTabsFunctionComponent,
@@ -20,6 +20,7 @@ const CustomTab: ReactTabsFunctionComponent<TabProps & {hasErrors?: boolean}> = 
   });
   return (
     <Tab className="nav-item" selectedClassName="active" {...props}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a href="#" onClick={e => e.preventDefault()} className={linkClassName}>
         {children}
       </a>

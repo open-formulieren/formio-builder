@@ -1,14 +1,14 @@
-import {SelectComponentSchema} from '@open-formulieren/types';
+import type {SelectComponentSchema} from '@open-formulieren/types';
 import {useContext} from 'react';
 import {useIntl} from 'react-intl';
 import {useAsync} from 'react-use';
 
-import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
+import type {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
 import {transformItems} from '@/components/builder/values/reference-lists/utils';
 import {Select} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
 
 /**
@@ -42,7 +42,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
               expression: JSON.stringify(component.openForms.itemsExpression),
               code: chunks => <code>{chunks}</code>,
             }
-          ),
+          ) as unknown as string, // library doesn't narrow the type when using template fns :(
         },
       ];
     }

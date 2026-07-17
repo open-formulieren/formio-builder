@@ -1,6 +1,6 @@
 import {useDragOperation} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';

@@ -49,12 +49,15 @@ const Tooltip: React.FC<TooltipProps> = ({text}) => {
 
   return (
     <>
+      {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
       <i
         ref={refs.setReference}
         className="fa fa-question-circle text-muted"
         tabIndex={0}
         {...getReferenceProps()}
       />
+      {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
+
       {isOpen && (
         <div
           className="offb-tooltip-content"

@@ -2,7 +2,7 @@ import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 const textareaSchema = z.string().optional();
 

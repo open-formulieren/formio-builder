@@ -1,4 +1,4 @@
-import {FieldsetComponentSchema} from '@open-formulieren/types';
+import type {FieldsetComponentSchema} from '@open-formulieren/types';
 import userEvent from '@testing-library/user-event';
 import {expect, test, vi} from 'vitest';
 
@@ -12,6 +12,7 @@ test('Mutating components after save does not mutate default values', async () =
 
   const user = userEvent.setup();
   expect(FieldSet.edit.defaultValues.components).toEqual([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let savedComponent: any;
 
   contextRender(

@@ -1,15 +1,17 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
-import {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
+import type {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import type React from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 
-import PreviewModeToggle, {PreviewState} from '@/components/PreviewModeToggle';
+import type {PreviewState} from '@/components/PreviewModeToggle';
+import PreviewModeToggle from '@/components/PreviewModeToggle';
 import {Key, RichText} from '@/components/builder';
 import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'content' type component.
@@ -41,6 +43,7 @@ const EditForm: EditFormDefinition<SoftRequiredErrorsComponentSchema> = () => {
 
   // the `html` property edits in the JSON edit don't behave as expected, you need to
   // edit the language specific values, so remove it.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {html, ...jsonEditValues} = values;
 
   return (

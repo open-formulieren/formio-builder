@@ -3,7 +3,7 @@ import type {Draggable, Droppable} from '@dnd-kit/dom';
 import type {DragEndEvent, DragOverEvent} from '@dnd-kit/react';
 import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {current} from 'immer';
 import {useCallback, useMemo, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -23,11 +23,12 @@ import {
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
-import {DesignerContext, DesignerContextType} from '@/context';
+import type {DesignerContextType} from '@/context';
+import {DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
-import ComponentsPreview, {ComponentPreview} from './Preview';
+import {ComponentPreview, ComponentsPreview} from './Preview';
 import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
 import type {ComponentDefinition, ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
@@ -198,6 +199,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
         onChange(components);
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setItems]
   );
 

@@ -1,5 +1,6 @@
-import {Option} from '@open-formulieren/types';
-import {FieldArrayRenderProps, useFormikContext} from 'formik';
+import type {Option} from '@open-formulieren/types';
+import type {FieldArrayRenderProps} from 'formik';
+import {useFormikContext} from 'formik';
 import {camelCase} from 'lodash';
 import {useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -133,6 +134,7 @@ const OptionRow: React.FC<OptionRowProps> = ({
                   })}
                 />
                 &nbsp;
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a
                   href="#"
                   onClick={e => {
@@ -148,6 +150,7 @@ const OptionRow: React.FC<OptionRowProps> = ({
                 <TextArea name={`${fieldNamePrefix}.description`} />
               </>
             ) : (
+              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <a
                 href="#"
                 onClick={e => {

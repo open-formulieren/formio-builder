@@ -1,8 +1,8 @@
-import {BsnComponentSchema} from '@open-formulieren/types';
+import type {BsnComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio bsn component preview.

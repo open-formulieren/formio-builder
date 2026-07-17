@@ -1,4 +1,4 @@
-import {
+import type {
   AddressNLComponentSchema,
   BsnComponentSchema,
   ChildrenComponentSchema,
@@ -15,7 +15,7 @@ import {
   SelectboxesComponentSchema,
   TimeComponentSchema,
 } from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import ComponentPreview from './ComponentPreview';
@@ -53,7 +53,6 @@ export const TextField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Textfield preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
@@ -131,7 +130,6 @@ export const Email: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Email preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
@@ -218,7 +216,6 @@ export const NumberField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Number preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
@@ -248,7 +245,6 @@ export const DateField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Date preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native date inputs is not reliable, so no such checks here
@@ -313,7 +309,6 @@ export const DateTimeField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('DateTime preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native datetime inputs is not reliable, so no such checks here
@@ -378,7 +373,6 @@ export const TimeField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Time preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native time inputs is not reliable, so no such checks here
@@ -423,7 +417,6 @@ export const TimeFieldMultiple: Story = {
 };
 
 export const Postcode: Story = {
-  name: 'Postcode',
   args: {
     component: {
       type: 'postcode',
@@ -447,7 +440,6 @@ export const Postcode: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Postcode preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     expect(input).toHaveAttribute('placeholder', '9999 AA');
@@ -457,7 +449,6 @@ export const Postcode: Story = {
 };
 
 export const PostcodeMultiple: Story = {
-  name: 'Postcode Multiple',
   args: {
     component: {
       type: 'postcode',
@@ -519,7 +510,6 @@ export const PhoneNumber: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Phone number preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     await userEvent.type(input, '+316 12345678');
@@ -628,7 +618,7 @@ export const SelectBoxes: Story = {
 
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
-    // @ts-ignore
+    // @ts-expect-error object is not null
     await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
 
     // check the toggle state of a checkbox
@@ -718,7 +708,7 @@ export const Radio: Story = {
 
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
-    // @ts-ignore
+    // @ts-expect-error object is not null
     await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
 
     // check the toggle state of a checkbox
@@ -817,7 +807,7 @@ export const Select: Story = {
     await expect(canvas.queryByText('Option 2')).toBeNull();
 
     // opening the dropdown displays the options
-    // @ts-expect-error
+    // @ts-expect-error label
     canvas.getByLabelText(args.component.label).focus();
     await userEvent.keyboard('[ArrowDown]');
     await waitFor(async () => {
@@ -884,7 +874,7 @@ export const SelectMultiple: Story = {
     await expect(canvas.queryByText('Option 2')).toBeNull();
 
     // opening the dropdown displays the options, select two of them
-    // @ts-expect-error
+    // @ts-expect-error for label
     const searchInput = canvas.getByLabelText(args.component.label);
     searchInput.focus();
     await userEvent.keyboard('[ArrowDown]');
@@ -956,7 +946,6 @@ export const SelectVariableReferenceLists: Story = {
 };
 
 export const BSN: Story = {
-  name: 'BSN',
   args: {
     component: {
       type: 'bsn',
@@ -977,7 +966,6 @@ export const BSN: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('BSN preview');
-    // @ts-ignore
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
     expect(input).toHaveAttribute('placeholder', '_________');
@@ -987,7 +975,6 @@ export const BSN: Story = {
 };
 
 export const BSNMultiple: Story = {
-  name: 'BSN Multiple',
   args: {
     component: {
       type: 'bsn',
@@ -1070,7 +1057,6 @@ export const AddressNL: Story = {
 };
 
 export const Columns: Story = {
-  name: 'Columns',
   args: {
     component: {
       id: 'wekruya',
@@ -1223,7 +1209,6 @@ export const CosignV2: Story = {
 };
 
 export const Signature: Story = {
-  name: 'Signature',
   args: {
     component: {
       id: 'wekruya',
@@ -1273,7 +1258,6 @@ export const LeafletMap: Story = {
 };
 
 export const Partners: Story = {
-  name: 'Partners',
   args: {
     component: {
       id: 'wekruya',
@@ -1287,7 +1271,6 @@ export const Partners: Story = {
 };
 
 export const Children: Story = {
-  name: 'Children',
   args: {
     component: {
       id: 'wekruya',
@@ -1302,7 +1285,6 @@ export const Children: Story = {
 };
 
 export const Profile: Story = {
-  name: 'Profile',
   args: {
     component: {
       id: 'wekruya',

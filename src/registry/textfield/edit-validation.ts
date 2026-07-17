@@ -1,6 +1,6 @@
 import {buildCommonSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 const schema: EditSchema = ({intl}) => buildCommonSchema(intl);
 

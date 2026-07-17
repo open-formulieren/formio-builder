@@ -1,9 +1,9 @@
-import {EmailComponentSchema} from '@open-formulieren/types';
+import type {EmailComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 import './previews.scss';
 
 /**

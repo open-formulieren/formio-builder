@@ -1,4 +1,4 @@
-import {Option, SelectboxesComponentSchema} from '@open-formulieren/types';
+import type {Option, SelectboxesComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {isEqual} from 'lodash';
 import {useContext, useLayoutEffect} from 'react';
@@ -27,7 +27,7 @@ import {NumberField, SelectBoxes, TabList, TabPanel, Tabs} from '@/components/fo
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import {checkIsManualOptions} from './helpers';
 
 /**
@@ -57,6 +57,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
   useLayoutEffect(() => {
     if (dataSrc !== 'variable' || isEqual(defaultValue, {})) return;
     setFieldValue('defaultValue', {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSrc]);
 
   return (
@@ -198,7 +199,10 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
 
     // if all the option values are present in the default value map, there is nothing
     // to do and we bail early to prevent further form state mutations.
-    if (defaultValueKeys === new Set(optionValues)) return;
+    const hasSameKeys =
+      defaultValueKeys.size === optionValues.length &&
+      optionValues.every(optionValue => defaultValueKeys.has(optionValue));
+    if (hasSameKeys) return;
 
     // If no default value is present for an option, make it explicitly false.
     // Checking/unchecking persist the state either way, so we only need to do this once
@@ -209,11 +213,14 @@ const DefaultValue: React.FC<DefaultValueProps> = ({options}) => {
     const explicitDefaults: SelectboxesComponentSchema['defaultValue'] = {};
     optionValues.forEach(optionValue => {
       // if a value is specified already in the form state, use it, otherwise default to "unchecked".
-      const defaultForOption = value.hasOwnProperty(optionValue) ? value[optionValue] : false;
+      const defaultForOption = Object.prototype.hasOwnProperty.call(value, optionValue)
+        ? value[optionValue]
+        : false;
       explicitDefaults[optionValue] = defaultForOption;
     });
 
     setFieldValue('defaultValue', explicitDefaults);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   return formType === 'appointment' ? null : (

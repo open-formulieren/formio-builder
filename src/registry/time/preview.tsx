@@ -1,8 +1,8 @@
-import {TimeComponentSchema} from '@open-formulieren/types';
+import type {TimeComponentSchema} from '@open-formulieren/types';
 
 import {TimeField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio time component preview.

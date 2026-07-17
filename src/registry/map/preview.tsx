@@ -17,7 +17,7 @@ import {useAsync} from 'react-use';
 import Loader from '@/components/builder/loader';
 import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
-import {ComponentPreviewProps} from '@/registry/types';
+import type {ComponentPreviewProps} from '@/registry/types';
 
 import zodSchema from './edit-validation';
 import './previews.scss';

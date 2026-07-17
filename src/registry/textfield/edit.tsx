@@ -1,4 +1,4 @@
-import {TextFieldComponentSchema} from '@open-formulieren/types';
+import type {TextFieldComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -31,7 +31,7 @@ import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/compon
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'textfield' type component.
@@ -257,7 +257,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   );
 };
 
-const DeriveStreetName: React.FC<{}> = () => {
+const DeriveStreetName: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -281,7 +281,7 @@ const DeriveStreetName: React.FC<{}> = () => {
   );
 };
 
-const DeriveCity: React.FC<{}> = () => {
+const DeriveCity: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -305,7 +305,7 @@ const DeriveCity: React.FC<{}> = () => {
   );
 };
 
-const DerivePostcode: React.FC<{}> = () => {
+const DerivePostcode: React.FC = () => {
   const {formType} = useContext(BuilderContext);
 
   return formType === 'appointment' ? null : (
@@ -323,7 +323,7 @@ const DerivePostcode: React.FC<{}> = () => {
   );
 };
 
-const DeriveHouseNumber: React.FC<{}> = () => {
+const DeriveHouseNumber: React.FC = () => {
   const {formType} = useContext(BuilderContext);
 
   return formType === 'appointment' ? null : (

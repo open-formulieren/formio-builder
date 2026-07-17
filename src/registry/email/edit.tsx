@@ -1,4 +1,4 @@
-import {EmailComponentSchema} from '@open-formulieren/types';
+import type {EmailComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -27,7 +27,7 @@ import {Checkbox, TabList, TabPanel, Tabs, TextField} from '@/components/formio'
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_step']);
 

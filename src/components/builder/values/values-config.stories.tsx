@@ -1,15 +1,15 @@
-import {
+import type {
   RadioComponentSchema,
   SelectComponentSchema,
   SelectboxesComponentSchema,
 } from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {Form, Formik} from 'formik';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import ValuesConfig from './values-config';
+import {ValuesConfig} from './values-config';
 
 export default {
   title: 'Formio/Builder/Values/ValuesConfig',
@@ -83,6 +83,7 @@ export const SelectBoxesVariable: SelectboxesStory = {
 };
 
 export const SelectBoxesResetState: StoryObj<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (values: any) => void;
 }> = {
   render: ({onSubmit}) => {

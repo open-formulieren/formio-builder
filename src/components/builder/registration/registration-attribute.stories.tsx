@@ -1,8 +1,9 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 
 import {withFormik} from '@/sb-decorators';
 
-import RegistrationAttributeSelect, {RegistrationAttributeOption} from './registration-attribute';
+import type {RegistrationAttributeOption} from './registration-attribute';
+import RegistrationAttributeSelect from './registration-attribute';
 
 const DEFAULT_REGISTRATION_ATTRIBUTES: RegistrationAttributeOption[] = [
   {id: 'bsn', label: 'BSN'},

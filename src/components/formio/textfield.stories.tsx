@@ -1,9 +1,9 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import TextField from './textfield';
+import {default as TextField} from './textfield';
 
 export default {
   title: 'Formio/Components/TextField',

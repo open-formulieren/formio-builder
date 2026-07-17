@@ -1,8 +1,8 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import type {DateComponentSchema} from '@open-formulieren/types';
 
 import {DateField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio date component preview.

@@ -1,6 +1,6 @@
-import {DateTimeComponentSchema} from '@open-formulieren/types';
+import type {DateTimeComponentSchema} from '@open-formulieren/types';
 
-import {FilterByValueType} from '@/types';
+import type {FilterByValueType} from '@/types';
 
 // A bunch of derived types from the DateTimeComponentSchema that makes working with the
 // schema a bit more readable while keeping everything exhaustive and type safe.

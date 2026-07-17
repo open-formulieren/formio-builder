@@ -1,10 +1,10 @@
-import {AddressNLComponentSchema} from '@open-formulieren/types';
-import clsx from 'clsx';
+import type {AddressNLComponentSchema} from '@open-formulieren/types';
+import {clsx} from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
 import {Description, FieldSet, TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 import './preview.scss';
 
 /**

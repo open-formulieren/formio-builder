@@ -1,6 +1,6 @@
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 
-import {ReferenceListsTable, ReferenceListsTableItem} from './types';
+import type {ReferenceListsTable, ReferenceListsTableItem} from './types';
 
 // Transform options to the desired shape for the options of the Select component
 export function transformItems(

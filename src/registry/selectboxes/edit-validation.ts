@@ -1,9 +1,9 @@
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema, jsonSchema, optionSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 // z.object(...).or(z.object(...)) based on openForms.dataSrc doesn't seem to work,
 // looks like the union validation only works if the discriminator is in the top level

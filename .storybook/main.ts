@@ -28,7 +28,7 @@ const config: StorybookConfig = {
 
     // The Monaco JSON Editor is mocked with a textarea component (the one used before),
     // as it doesn't play well with Storybook.
-    // @ts-ignore
+    // @ts-expect-error mock
     config.resolve.alias['@open-formulieren/monaco-json-editor'] = fileURLToPath(
       new URL('./__mocks__/mockedJsonEditor.tsx', import.meta.url)
     );

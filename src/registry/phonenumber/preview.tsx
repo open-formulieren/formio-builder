@@ -1,8 +1,8 @@
-import {PhoneNumberComponentSchema} from '@open-formulieren/types';
+import type {PhoneNumberComponentSchema} from '@open-formulieren/types';
 
 import {TextField} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio textfield component preview.

@@ -1,5 +1,5 @@
 import type {CustomerProfileComponentSchema} from '@open-formulieren/types';
-import {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
+import type {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
@@ -25,7 +25,7 @@ import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'customerProfile' type component.

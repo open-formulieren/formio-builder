@@ -1,10 +1,11 @@
-import {DateTimeComponentSchema} from '@open-formulieren/types';
+import type {DateTimeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {FormattedMessage, MessageDescriptor, defineMessage, useIntl} from 'react-intl';
+import type {MessageDescriptor} from 'react-intl';
+import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {Select} from '@/components/formio';
 
-import {AllModes, AllPossibleConstraints, DateConstraintKey, NonEmptyModes} from './types';
+import type {AllModes, AllPossibleConstraints, DateConstraintKey, NonEmptyModes} from './types';
 
 // Mappings of value-label to produce dropdown options. Note that you need to filter out
 // only the options relevant to the particular field.

@@ -1,9 +1,9 @@
-import {CosignV1ComponentSchema} from '@open-formulieren/types';
+import type {CosignV1ComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import {Component, Description} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio cosignV1 component preview.

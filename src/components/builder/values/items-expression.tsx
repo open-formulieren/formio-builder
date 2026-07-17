@@ -1,5 +1,5 @@
 import {JSONEditor} from '@open-formulieren/monaco-json-editor';
-import {JsonLogicExpression} from '@open-formulieren/types/dist/options';
+import type {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';

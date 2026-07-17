@@ -1,17 +1,17 @@
-import {SupportedLocales} from '@open-formulieren/types';
+import type {SupportedLocales} from '@open-formulieren/types';
 import React from 'react';
 
-import {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
-import {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
+import type {PrefillAttributeOption, PrefillPluginOption} from '@/components/builder/prefill/types';
+import type {RegistrationAttributeOption} from '@/components/builder/registration/registration-attribute';
 import type {ColorOption} from '@/components/builder/rich-text';
-import {ValidatorOption} from '@/components/builder/validate/validator-select';
-import {
+import type {ValidatorOption} from '@/components/builder/validate/validator-select';
+import type {
   ReferenceListsServiceOption,
   ReferenceListsTable,
   ReferenceListsTableItem,
 } from '@/components/builder/values/reference-lists/types';
-import {AuthPluginOption} from '@/registry/cosignV1/edit';
-import {AnyComponentSchema} from '@/types';
+import type {AuthPluginOption} from '@/registry/cosignV1/edit';
+import type {AnyComponentSchema} from '@/types';
 
 /*
   Generic select options

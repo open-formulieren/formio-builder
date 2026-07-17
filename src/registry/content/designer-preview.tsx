@@ -1,6 +1,6 @@
-import {ContentComponentSchema} from '@open-formulieren/types';
+import type {ContentComponentSchema} from '@open-formulieren/types';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 import './designer-preview.scss';
 
 const Preview: React.FC<ComponentPreviewProps<ContentComponentSchema>> = ({component}) => {

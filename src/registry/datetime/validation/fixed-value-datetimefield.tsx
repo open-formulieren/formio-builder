@@ -1,8 +1,9 @@
-import {MessageDescriptor, defineMessages, useIntl} from 'react-intl';
+import type {MessageDescriptor} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 
 import {DateTimeField} from '@/components/formio';
 
-import {DateConstraintKey} from './types';
+import type {DateConstraintKey} from './types';
 
 type FixedValueTranslations = {
   label: MessageDescriptor;

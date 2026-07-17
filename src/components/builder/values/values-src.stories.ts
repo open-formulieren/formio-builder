@@ -1,8 +1,8 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 
 import {withFormik} from '@/sb-decorators';
 
-import ValuesSrc from './values-src';
+import {ValuesSrc} from './values-src';
 
 export default {
   title: 'Formio/Builder/Values/ValuesSrc',

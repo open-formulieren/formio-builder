@@ -1,15 +1,17 @@
-import {FieldArray, type FieldArrayRenderProps, useField, useFormikContext} from 'formik';
+import {FieldArray, useField, useFormikContext} from 'formik';
+import type {FieldArrayRenderProps} from 'formik';
 import {useContext, useLayoutEffect} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useAsync} from 'react-use';
 
 import Loader from '@/components/builder/loader';
 import {Component, Panel, Select, TextField} from '@/components/formio';
-import {BuilderContext, type MapOverlayTileLayer} from '@/context';
+import {BuilderContext} from '@/context';
+import type {MapOverlayTileLayer} from '@/context';
 
 import {getWMSLayerOptions} from './getTileLayerOptions';
 import './overlays.scss';
-import {ExtendedMapOverlay} from './types';
+import type {ExtendedMapOverlay} from './types';
 
 const Overlays: React.FC = () => {
   const intl = useIntl();
@@ -127,6 +129,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
     if (!internalId) {
       setFieldValue(`${fieldNamePrefix}._OF_INTERNAL_id`, window.crypto.randomUUID());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [internalId, setFieldValue]);
 
   return (

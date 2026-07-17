@@ -1,5 +1,6 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import {FormikErrors, useFormikContext} from 'formik';
+import type {FormikErrors} from 'formik';
+import {useFormikContext} from 'formik';
 
 import type {Paths} from '@/types';
 

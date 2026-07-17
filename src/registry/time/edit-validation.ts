@@ -1,9 +1,9 @@
-import {IntlShape} from 'react-intl';
+import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 const buildTime24hSchema = (intl: IntlShape) =>
   z.string().refine(

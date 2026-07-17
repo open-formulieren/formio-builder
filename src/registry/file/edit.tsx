@@ -1,4 +1,4 @@
-import {FileComponentSchema} from '@open-formulieren/types';
+import type {FileComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {
@@ -21,7 +21,7 @@ import {LABELS} from '@/components/builder/messages';
 import {Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import FileTabFields from './file-tab';
 
 /**

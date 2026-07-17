@@ -1,4 +1,4 @@
-import {PostcodeComponentSchema} from '@open-formulieren/types';
+import type {PostcodeComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -27,7 +27,7 @@ import {TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 import {POSTCODE_REGEX} from './constants';
 
 /**

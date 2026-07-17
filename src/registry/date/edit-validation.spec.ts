@@ -1,4 +1,4 @@
-import {DateComponentSchema} from '@open-formulieren/types';
+import type {DateComponentSchema} from '@open-formulieren/types';
 import {expect, test} from 'vitest';
 
 import {dummyBuilderContext, dummyIntl} from '@/tests/test-utils';

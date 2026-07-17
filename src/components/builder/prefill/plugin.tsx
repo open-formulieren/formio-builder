@@ -6,7 +6,7 @@ import {useAsync} from 'react-use';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import {ComponentWithPrefill, PrefillPluginOption} from './types';
+import type {ComponentWithPrefill, PrefillPluginOption} from './types';
 
 function isPluginOptions(
   options: PrefillPluginOption[] | undefined

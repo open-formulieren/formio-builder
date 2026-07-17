@@ -1,4 +1,4 @@
-import {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import {Formik} from 'formik';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
 
@@ -73,6 +73,7 @@ const Body: React.FC<BodyProps> = ({fieldLabels}) => {
 
 interface StoryArgs extends BodyProps {
   initialValues: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   };
 }

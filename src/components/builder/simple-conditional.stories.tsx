@@ -1,10 +1,10 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
-import SimpleConditional from './simple-conditional';
+import {default as SimpleConditional} from './simple-conditional';
 
 const COMPONENT_TREE = [
   {id: 'text1', type: 'textfield', key: 'text1', label: 'Textfield 1'},

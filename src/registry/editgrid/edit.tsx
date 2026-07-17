@@ -1,4 +1,4 @@
-import {EditGridComponentSchema} from '@open-formulieren/types';
+import type {EditGridComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
 
 import {
@@ -18,7 +18,7 @@ import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Panel, Tab, TabList, TabPanel, Tabs, TextField} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 const GROUP_LABEL = defineMessage({
   description: "Label for 'groupLabel' builder field",

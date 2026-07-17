@@ -1,6 +1,6 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {ChangeEvent} from 'react';
+import type {ChangeEvent} from 'react';
 
 import {useValidationErrors} from '@/utils/errors';
 

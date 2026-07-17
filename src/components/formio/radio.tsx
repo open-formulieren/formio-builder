@@ -1,6 +1,6 @@
-import clsx from 'clsx';
+import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs';
+import type {ExtendedComponentSchema} from 'formiojs';
 import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
@@ -83,6 +83,7 @@ export const Radio: React.FC<RadioProps> = ({
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label className="form-check-label">
               <RadioInput
                 name={name}

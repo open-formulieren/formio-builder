@@ -60,9 +60,9 @@ export type Paths<T> = T extends Primitive | Primitive[]
       [K in keyof T]-?: K extends string
         ? T[K] extends Primitive | Primitive[]
           ? K
-          : T[K] extends Function
-          ? never
-          : K | `${K}.${Paths<T[K]>}`
+          : T[K] extends (...args: never[]) => unknown // eslint doesn't like Function type
+            ? never
+            : K | `${K}.${Paths<T[K]>}`
         : never;
     }[keyof T];
 
@@ -72,8 +72,8 @@ export type GetValueAtPath<T, Path extends string> = T extends T
       ? GetValueAtPath<T[P], Rest>
       : never
     : Path extends keyof T
-    ? T[Path]
-    : never
+      ? T[Path]
+      : never
   : never;
 
 export type PathsForValueType<T, V> = keyof {

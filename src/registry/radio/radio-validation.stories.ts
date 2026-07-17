@@ -1,4 +1,4 @@
-import {Meta, StoryObj} from '@storybook/react-vite';
+import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
@@ -79,7 +79,7 @@ export const TranslationsArentRequired: Story = {
 
       // Check that all translations can be filled
       const inputs = editForm.getAllByRole('textbox');
-      for (let input of inputs) {
+      for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
         expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);

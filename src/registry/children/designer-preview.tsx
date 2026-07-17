@@ -28,7 +28,7 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
         <tbody>
           <tr>
             {enableSelection && (
-              <td scope="row">
+              <td>
                 <input type="checkbox" />
               </td>
             )}
@@ -38,7 +38,7 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
           </tr>
           <tr>
             {enableSelection && (
-              <td scope="row">
+              <td>
                 <input type="checkbox" />
               </td>
             )}

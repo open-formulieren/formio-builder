@@ -25,6 +25,5 @@ export {default as Radio} from './radio';
 export {default as NumberField} from './number';
 export {default as TextArea} from './textarea';
 export * from './datagrid';
-export {default as DataGrid} from './datagrid';
 export {default as DataMap} from './datamap';
 export {default as FieldSet} from './fieldset';

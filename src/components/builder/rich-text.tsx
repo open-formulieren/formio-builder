@@ -7,7 +7,7 @@
  * incorporate our domain-specific variables/constructs for a better editing experience.
  */
 import {CKEditor} from '@ckeditor/ckeditor5-react';
-import {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
@@ -18,11 +18,12 @@ import {BuilderContext} from '@/context';
 
 import './richText.scss';
 
-export type ColorOption = Required<
-  Required<(typeof ClassicEditor)['defaultConfig']>['fontColor']
->['colors'] extends Array<infer C>
-  ? C
-  : never;
+export type ColorOption =
+  Required<Required<(typeof ClassicEditor)['defaultConfig']>['fontColor']>['colors'] extends Array<
+    infer C
+  >
+    ? C
+    : never;
 
 export interface RichTextProps {
   name: string;

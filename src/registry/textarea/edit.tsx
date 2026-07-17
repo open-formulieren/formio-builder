@@ -1,4 +1,4 @@
-import {TextareaComponentSchema} from '@open-formulieren/types';
+import type {TextareaComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -28,7 +28,7 @@ import {Checkbox, NumberField, TabList, TabPanel, Tabs, TextArea} from '@/compon
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
 
-import {EditFormDefinition} from '../types';
+import type {EditFormDefinition} from '../types';
 
 /**
  * Form to configure a Formio 'textarea' type component.
@@ -192,7 +192,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
   );
 };
 
-const AutoExpand: React.FC<{}> = () => {
+const AutoExpand: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 
@@ -216,7 +216,7 @@ const AutoExpand: React.FC<{}> = () => {
   );
 };
 
-const NumberOfRows: React.FC<{}> = () => {
+const NumberOfRows: React.FC = () => {
   const intl = useIntl();
   const {formType} = useContext(BuilderContext);
 

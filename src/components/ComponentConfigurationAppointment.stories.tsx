@@ -4,7 +4,7 @@ import type {
   SupportedLocales,
 } from '@open-formulieren/types';
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
-import React from 'react';
+import type React from 'react';
 import {fn} from 'storybook/test';
 
 import type {FormType} from '@/context';

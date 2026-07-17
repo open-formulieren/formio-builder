@@ -2,7 +2,7 @@ import {z} from 'zod';
 
 import {buildCommonSchema} from '@/registry/validation';
 
-import {EditSchema} from '../types';
+import type {EditSchema} from '../types';
 
 // undefined (optional) for unspecified, otherwise a finite numeric value. Note that
 // null would be nicer, but formio's schema does not support null for validate.min,

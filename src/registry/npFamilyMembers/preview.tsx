@@ -1,9 +1,9 @@
-import {NpFamilyMembersComponentSchema} from '@open-formulieren/types';
+import type {NpFamilyMembersComponentSchema} from '@open-formulieren/types';
 import {useIntl} from 'react-intl';
 
 import {SelectBoxes} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 /**
  * Show a formio npFamilyMembers component preview.

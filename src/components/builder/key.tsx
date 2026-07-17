@@ -1,5 +1,6 @@
-import {FormikContextType, useFormikContext} from 'formik';
-import {ExtendedComponentSchema} from 'formiojs/types/components/schema';
+import type {FormikContextType} from 'formik';
+import {useFormikContext} from 'formik';
+import type {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import {camelCase, debounce} from 'lodash';
 import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage} from 'react-intl';
@@ -49,6 +50,7 @@ export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] 
     return () => {
       debouncedSetFieldValue.cancel();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setFieldValue, isNew, isManuallySetRef, generatedKey, currentKey]);
 
   return [isManuallySetRef, generatedKey];
@@ -62,6 +64,7 @@ const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
   const name = 'key';
   const fieldProps = getFieldProps(name);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChange = (event: React.ChangeEvent<any>) => {
     const {value} = event.target;
     if (!value) {

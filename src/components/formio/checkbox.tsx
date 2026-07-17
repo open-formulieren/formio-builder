@@ -1,5 +1,6 @@
-import clsx from 'clsx';
-import {Field, FormikHandlers, useFormikContext} from 'formik';
+import {clsx} from 'clsx';
+import type {FormikHandlers} from 'formik';
+import {Field, useFormikContext} from 'formik';
 
 import {useValidationErrors} from '@/utils/errors';
 
@@ -32,6 +33,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
         as="input"
         type="checkbox"
         className={clsx('form-check-input', {'is-invalid': hasErrors})}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(e: React.ChangeEvent<any>) => {
           formikOnChange(e);
           onChange?.(e);

@@ -1,5 +1,5 @@
-import {SignatureComponentSchema} from '@open-formulieren/types';
-import {SignatureValue} from '@open-formulieren/types/dist/components/signature';
+import type {SignatureComponentSchema} from '@open-formulieren/types';
+import type {SignatureValue} from '@open-formulieren/types/dist/components/signature';
 import {useFormikContext} from 'formik';
 import {debounce} from 'lodash';
 import {useLayoutEffect, useRef} from 'react';
@@ -7,7 +7,7 @@ import SignatureCanvas from 'react-signature-canvas';
 
 import {Component, Description} from '@/components/formio';
 
-import {ComponentPreviewProps} from '../types';
+import type {ComponentPreviewProps} from '../types';
 
 const BG_COLOR = 'rgb(245,245,235)';
 
@@ -63,6 +63,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
     return () => {
       window.removeEventListener('resize', onResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onEnd = () => {
@@ -90,6 +91,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
       tooltip={tooltip}
     >
       <div ref={containerRef} className="signature-pad-body">
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
         <a className="btn btn-sm btn-light signature-pad-refresh" onClick={onClear}>
           <i className="fa fa-refresh" aria-label="Clear" />
         </a>

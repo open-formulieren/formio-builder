@@ -1,5 +1,5 @@
 import {useField} from 'formik';
-import React from 'react';
+import type React from 'react';
 import ReactSelect from 'react-select';
 import type {
   GroupBase,
@@ -14,6 +14,7 @@ import Component from './component';
 import Description from './description';
 
 // alias so that we can keep track of them and improve with generics at some point.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ValueType = any;
 
 // See https://react-select.com/typescript
@@ -22,7 +23,7 @@ type ValueType = any;
 export interface SelectProps<
   Option = unknown,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 > extends Omit<RSProps<Option, IsMulti, Group>, 'onChange' | 'value'> {
   name: string;
   label?: React.ReactNode;
@@ -54,6 +55,7 @@ function isOptionGroup<Option, Group extends GroupBase<Option> = GroupBase<Optio
   return (opt as Group).options !== undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractSelectedValue<Option extends {[key: string]: any}, Group extends GroupBase<Option>>(
   options: OptionsOrGroups<Option, Group>,
   currentValue: ValueType,
@@ -72,6 +74,7 @@ function extractSelectedValue<Option extends {[key: string]: any}, Group extends
     }
     if (isOptionGroup<Option, Group>(optionOrGroup)) {
       for (const option of optionOrGroup.options) {
+        // eslint-disable-next-line max-depth
         if (valueTest(option)) {
           value.push(option);
         }
@@ -91,7 +94,7 @@ const BUILDER_SELECT_THEME: ThemeConfig = theme => ({
 export function getReactSelectStyles<
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(): StylesConfig<Option, IsMulti, Group> {
   return {
     control: (baseStyles, state) => ({
@@ -171,9 +174,10 @@ export function getReactSelectStyles<
 
 // can't use React.FC with generics
 function Select<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Option extends {[key: string]: any},
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >({
   name,
   label,
