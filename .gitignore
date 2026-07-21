@@ -6,3 +6,4 @@ storybook-static/
 i18n/compiled/*.json
 .idea/
 *.tgz
+.eslintcache
