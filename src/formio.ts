@@ -1,3 +1,5 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
+
 import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import type {ComponentDefinition, ComponentPlaceholder} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
@@ -50,6 +52,18 @@ export function* iterComponents(
     }
   }
 }
+
+export const findComponent = (
+  componentDefinitions: AnyComponentSchema[],
+  componentKey: string
+): AnyComponentSchema | null => {
+  for (const {component} of iterComponents(componentDefinitions)) {
+    if (!isPlaceholder(component) && component.key === componentKey) {
+      return component;
+    }
+  }
+  return null;
+};
 
 export const isPlaceholder = (
   component: ComponentDefinition

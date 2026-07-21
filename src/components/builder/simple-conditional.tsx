@@ -1,13 +1,13 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {Conditional} from '@open-formulieren/types/dist/extensions';
 import {useFormikContext} from 'formik';
-import {Utils as FormioUtils} from 'formiojs';
-import type {ConditionalOptions} from 'formiojs';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {usePrevious} from 'react-use';
 
 import {TextField} from '@/components/formio/textfield';
 import {BuilderContext} from '@/context';
+import {findComponent} from '@/formio';
 import {getRegistryEntry} from '@/registry';
 import type {ComparisonValueProps} from '@/registry/types';
 import {hasOwnProperty} from '@/types';
@@ -15,17 +15,13 @@ import {hasOwnProperty} from '@/types';
 import {Panel, Select} from '../formio';
 import ComponentSelect from './component-select';
 
-export interface SimpleConditional {
-  conditional?: Omit<ConditionalOptions, 'json'>;
-}
-
 export const ComparisonValueInput: React.FC = () => {
   const {getFormComponents} = useContext(BuilderContext);
-  const {values, setFieldValue} = useFormikContext<SimpleConditional>();
+  const {values, setFieldValue} = useFormikContext<Conditional>();
 
   const componentKey = values?.conditional?.when;
-  const chosenComponent: AnyComponentSchema = componentKey
-    ? FormioUtils.getComponent(getFormComponents(), componentKey, false)
+  const chosenComponent: AnyComponentSchema | null = componentKey
+    ? findComponent(getFormComponents(), componentKey)
     : null;
   const previousWhen = usePrevious(componentKey);
 
