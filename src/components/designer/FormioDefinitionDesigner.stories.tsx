@@ -71,7 +71,6 @@ const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps)
     <FormioDefinitionDesigner
       {...props}
       initialComponents={components}
-      componentNamespace={components.flat(1)}
       onChange={(...args) => {
         setComponents(args[0]);
         // Call the original onChange function

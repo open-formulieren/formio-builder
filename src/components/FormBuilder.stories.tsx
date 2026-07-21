@@ -19,7 +19,6 @@ const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
     <FormBuilder
       {...props}
       components={components}
-      componentNamespace={components.flat(1)}
       onChange={form => setComponents(form.components)}
     />
   );
@@ -65,7 +64,6 @@ export default {
     onChange: fn(),
     onComponentUpdated: fn(),
     onComponentDeleted: fn(),
-    componentNamespace: [],
     components: [
       {
         type: 'textfield',

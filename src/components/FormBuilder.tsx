@@ -17,11 +17,6 @@ export interface FormBuilderProps {
    */
   components: AnyComponentSchema[];
   /**
-   * A collection of all components in the form, created by flattening the form
-   * definitions. Used when creating component keys to validate complete uniqueness.
-   */
-  componentNamespace: AnyComponentSchema[];
-  /**
    * Callback invoked when the form definition changes.
    *
    * This contains the entire new components structure, and possible events that
@@ -35,7 +30,6 @@ export type MergedFormBuilderProps = FormBuilderProps & BuilderContextType;
 
 const FormBuilder: React.FC<MergedFormBuilderProps> = ({
   components,
-  componentNamespace,
   onChange,
   uniquifyKey,
   supportedLanguageCodes = ['nl', 'en'],
@@ -90,7 +84,6 @@ const FormBuilder: React.FC<MergedFormBuilderProps> = ({
       >
         <FormioDefinitionDesigner
           initialComponents={components}
-          componentNamespace={componentNamespace}
           onChange={(components, event) => onChange({display: 'form', components}, event)}
         />
       </Formik>

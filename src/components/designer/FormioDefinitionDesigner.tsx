@@ -5,7 +5,7 @@ import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {produce} from 'immer';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useContext, useMemo, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
@@ -24,7 +24,7 @@ import {
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
 import type {DesignerContextType} from '@/context';
-import {DesignerContext} from '@/context';
+import {BuilderContext, DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
@@ -46,11 +46,6 @@ export interface FormioDefinitionDesignerProps {
    */
   initialComponents: AnyComponentSchema[];
   /**
-   * The component namespaces used to determine key uniqueness when creating new
-   * components.
-   */
-  componentNamespace: AnyComponentSchema[];
-  /**
    * Callback function that is called when the components have been changed.
    *
    * The `event` is an optional argument that is only present when a component is
@@ -62,7 +57,6 @@ export interface FormioDefinitionDesignerProps {
 
 const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   initialComponents,
-  componentNamespace,
   onChange,
 }) => {
   const intl = useIntl();
@@ -71,6 +65,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     component: AnyComponentSchema;
     isNew: boolean;
   } | null>(null);
+  const {uniquifyKey} = useContext(BuilderContext);
 
   const movePlaceholder = (
     index: number,
@@ -143,7 +138,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     if (!target) return;
 
     // Create the new component and open it in the edit modal.
-    const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
+    const newComponent = createComponent(sourceData.componentType, uniquifyKey, intl);
     openModal(newComponent, true);
   };
 

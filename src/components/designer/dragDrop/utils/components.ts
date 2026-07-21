@@ -1,4 +1,5 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
+import {camelCase} from 'lodash';
 import type {IntlShape} from 'react-intl';
 
 import {
@@ -82,65 +83,13 @@ const findDropzoneComponentsByParentReference = (
 };
 
 /**
- * Find all component keys that start with the given string.
- */
-const findComponentKeysStartingWith = (
-  startsWith: string,
-  componentNamespace: AnyComponentSchema[]
-): string[] => {
-  const similarKeys: string[] = [];
-
-  for (const {component} of iterComponents(componentNamespace)) {
-    if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key.startsWith(startsWith)) {
-      similarKeys.push(component.key);
-    }
-  }
-
-  return similarKeys;
-};
-
-/**
- * Create a unique component key for the provided component label.
- *
- * The component label is turned into a key by removing all non-alphanumeric characters,
- * making every word after the first capitalized, and joining them together.
- *
- * The component key is validated against the componentNamespace to ensure it is unique,
- * adding additional numbering if necessary.
- * This is similar to the current Formio form builder implementation.
- */
-const createComponentKey = (
-  componentLabel: string,
-  componentNamespace: AnyComponentSchema[]
-): string => {
-  // Remove all non-alphanumeric characters, make every word after the first capitalized,
-  // and join them together.
-  // @TODO handle special characters, like umlauts, etc.
-  const componentKey = componentLabel
-    .split(/[^a-zA-Z0-9]/g)
-    .filter(Boolean) // Remove empty strings
-    .map((str, index) => (index > 0 ? str[0].toUpperCase() + str.slice(1) : str))
-    .join('');
-
-  const componentsWithSimilarKeys = findComponentKeysStartingWith(componentKey, componentNamespace);
-  let index = 0;
-  let uniqueKey = componentKey;
-
-  while (componentsWithSimilarKeys.includes(uniqueKey)) {
-    index++;
-    uniqueKey = `${componentKey}${index}`;
-  }
-  return uniqueKey;
-};
-
-/**
  * Create a new component with a unique key for the given component type.
  *
  * The componentDefinitions are used to create a truly unique key.
  */
 export const createComponent = <S extends AnyComponentSchema>(
   componentType: S['type'],
-  componentNamespace: AnyComponentSchema[],
+  uniquifyKey: (key: string) => string,
   intl: IntlShape
 ): S => {
   const {edit, formDesigner} = getRegistryEntry(componentType);
@@ -151,7 +100,7 @@ export const createComponent = <S extends AnyComponentSchema>(
     ...edit.defaultValues,
     id: window.crypto.randomUUID(),
     type: componentType,
-    key: createComponentKey(label, componentNamespace),
+    key: uniquifyKey(camelCase(label)),
     ...(hasOwnProperty(edit.defaultValues, 'label') ? {label} : {}),
     // type cast necessary because the discriminated union doesn't narrow and
     // getRegistryEntry doesn't narrow either, essentially returning AnyComponentSchema
