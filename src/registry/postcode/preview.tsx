@@ -40,7 +40,7 @@ const Preview: React.FC<ComponentPreviewProps<PostcodeComponentSchema>> = ({comp
       tooltip={tooltip}
       required={required}
       readOnly={disabled}
-      placeholder="9999 AA"
+      placeholder="1234 AB"
       pattern={pattern}
     />
   );

@@ -442,7 +442,7 @@ export const Postcode: Story = {
     const input = canvas.getByLabelText('Postcode preview');
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
-    expect(input).toHaveAttribute('placeholder', '9999 AA');
+    expect(input).toHaveAttribute('placeholder', '1234 AB');
     await userEvent.type(input, '1015 CJ');
     expect(input).toHaveDisplayValue('1015 CJ');
   },
@@ -968,7 +968,7 @@ export const BSN: Story = {
     const input = canvas.getByLabelText('BSN preview');
     await expect(input.getAttribute('name')).toBe(args.component.key);
 
-    expect(input).toHaveAttribute('placeholder', '_________');
+    expect(input).toHaveAttribute('placeholder', 'XXXXXXXXX');
     await userEvent.type(input, '123456789');
     expect(input).toHaveDisplayValue('123456789');
   },
