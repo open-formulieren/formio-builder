@@ -2,8 +2,9 @@ import type {Decorator} from '@storybook/react-vite';
 import {Formik} from 'formik';
 
 import {ModalContext} from '@/components/Modal';
-import {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
-import {BuilderContext, MapOverlayTileLayer, MapTileLayer} from '@/context';
+import type {ReferenceListsTableItem} from '@/components/builder/values/reference-lists/types';
+import {BuilderContext} from '@/context';
+import type {MapOverlayTileLayer, MapTileLayer} from '@/context';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
