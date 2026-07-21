@@ -207,6 +207,18 @@ export const insertComponentDefinition = (
   dropzoneComponents.splice(index, 0, componentDefinition);
 };
 
+export const findComponent = <S extends ComponentDefinition | AnyComponentSchema>(
+  componentDefinitions: S[],
+  componentKey: string
+): S | null => {
+  for (const {component} of iterComponents(componentDefinitions)) {
+    if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key === componentKey) {
+      return component;
+    }
+  }
+  return null;
+};
+
 export function assertNoPlaceholders(
   components: ComponentDefinition[]
 ): asserts components is AnyComponentSchema[] {

@@ -1,12 +1,11 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
+import Select from 'components/formio/select';
 import {useFormikContext} from 'formik';
-import type {ExtendedComponentSchema} from 'formiojs';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useAsync} from 'react-use';
 
 import {BuilderContext} from '@/context';
-
-import Select from '../../formio/select';
 
 const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_step']);
 
@@ -30,7 +29,7 @@ function isValidatorOptions(options: ValidatorOption[] | undefined): options is 
  */
 const ValidatorPluginSelect: React.FC = () => {
   const intl = useIntl();
-  const {values} = useFormikContext<ExtendedComponentSchema>();
+  const {values} = useFormikContext<AnyComponentSchema>();
   const {getValidatorPlugins, formType} = useContext(BuilderContext);
 
   const {

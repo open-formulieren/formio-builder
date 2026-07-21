@@ -1,11 +1,10 @@
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import {Utils as FormioUtils} from 'formiojs';
-import type {ConditionalOptions} from 'formiojs';
 import {useContext, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {usePrevious} from 'react-use';
 
+import {findComponent} from '@/components/designer/dragDrop/utils/components';
 import {TextField} from '@/components/formio/textfield';
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
@@ -14,6 +13,20 @@ import {hasOwnProperty} from '@/types';
 
 import {Panel, Select} from '../formio';
 import ComponentSelect from './component-select';
+
+// Copied from formiojs/types/components/schema.d.ts
+interface ConditionalOptions {
+  /** If the field should show if the condition is true */
+  show?: boolean;
+  /** The field API key that it should compare its value against to determine if the condition is triggered. */
+  when?: string;
+  /** The value that should be checked against the comparison component */
+  eq?: string;
+  /** The JSON Logic to determine if this component is conditionally available.
+   * Fyi: http://jsonlogic.com/
+   */
+  json?: object;
+}
 
 export interface SimpleConditional {
   conditional?: Omit<ConditionalOptions, 'json'>;
@@ -24,8 +37,8 @@ export const ComparisonValueInput: React.FC = () => {
   const {values, setFieldValue} = useFormikContext<SimpleConditional>();
 
   const componentKey = values?.conditional?.when;
-  const chosenComponent: AnyComponentSchema = componentKey
-    ? FormioUtils.getComponent(getFormComponents(), componentKey, false)
+  const chosenComponent: AnyComponentSchema | null = componentKey
+    ? findComponent(getFormComponents(), componentKey)
     : null;
   const previousWhen = usePrevious(componentKey);
 
