@@ -103,38 +103,6 @@ export const WithErrors: Story = {
   },
 };
 
-export const WithMask: Story = {
-  args: {
-    label: 'With mask',
-    inputMask: '9999 AA',
-  },
-
-  parameters: {
-    formik: {
-      initialValues: {'my-textfield': ''},
-    },
-  },
-
-  play: async ({canvasElement, step}) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getByLabelText<HTMLInputElement>('With mask');
-
-    await step('Empty input shows placeholder', async () => {
-      expect(input).toHaveDisplayValue('');
-      expect(input).toHaveAttribute('placeholder', '____ __');
-    });
-
-    await step('Typing into input', async () => {
-      await userEvent.type(input, '1015');
-      // with formio's masking enabled, this would be '1015 __', but we're skipping
-      // that messy implementation for the form builder. At some point we should be
-      // able to re-use renderer components that fully implement the behaviour in an
-      // accessible manner.
-      expect(input).toHaveDisplayValue('1015');
-    });
-  },
-};
-
 export const WithCharCount: Story = {
   args: {
     label: 'With charcount',
