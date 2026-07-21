@@ -1,0 +1,38 @@
+// Port of essential formio-related styles, required once the formiojs dependency
+// is dropped.
+// TODO: clean up the design/styling code as part of the admin-ui redesign epic.
+
+.formio-component {
+  &.has-error {
+    // default bootstrap styles hide this (display: none)
+    .invalid-feedback {
+      display: block;
+      color: inherit;
+      margin-block-start: 4px;
+    }
+  }
+
+  td .form-group {
+    margin-block-end: 0;
+  }
+}
+
+.formio-errors {
+  .error {
+    color: var(--offb-formio-error-color, #dc3545);
+  }
+}
+
+.formio-collapse-icon {
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.btn-xxs {
+  padding: 2px;
+  font-size: 10px;
+  line-height: 1.2em;
+  border-radius: 0;
+  width: 18px;
+  height: 18px;
+}

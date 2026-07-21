@@ -8,6 +8,7 @@ import SignatureCanvas from 'react-signature-canvas';
 import {Component, Description} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
+import './previews.scss';
 
 const BG_COLOR = 'rgb(245,245,235)';
 

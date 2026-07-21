@@ -38,20 +38,15 @@ export const ModalDecorator: Decorator = (Story, context) => {
         <Story />
       </ModalContext.Provider>
     );
+  // See src/components/Modal.tsx for the markup/classnames
   return (
-    <div
-      className="formio-dialog formio-dialog-theme-default component-settings"
-      style={{position: 'relative'}}
-    >
-      <div className="formio-dialog-overlay" style={{position: 'relative'}}></div>
-      <div className="formio-dialog-content">
-        <div></div>
-        <button
-          aria-label="close"
-          className="formio-dialog-close float-right btn btn-secondary btn-sm"
-        ></button>
-        <div className="component-edit-container">
-          <Story />
+    <div className="offb-modal">
+      <div className="ReactModal__Overlay ReactModal__Overlay--after-open offb-modal__overlay">
+        <div className="ReactModal__Content ReactModal__Content--after-open offb-modal__content">
+          <button aria-label="close" className="offb-modal__close btn btn-secondary btn-sm" />
+          <div className="component-edit-container">
+            <Story />
+          </div>
         </div>
       </div>
     </div>

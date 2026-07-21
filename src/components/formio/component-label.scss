@@ -1,5 +1,9 @@
 .field-required {
+  position: relative;
+
   &:after {
+    content: ' *';
+    color: var(--offb-field-required-asterisk-color, red);
     z-index: unset;
   }
 }
