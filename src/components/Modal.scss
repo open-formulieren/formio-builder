@@ -1,0 +1,82 @@
+@use 'pkg:@bbt/bem';
+
+.offb-modal {
+  box-sizing: border-box;
+  color: #666;
+  font-size: 0.8em;
+
+  --_offb-modal-content-margin-block: var(--offb-modal-content-margin-block, 20px);
+
+  * {
+    box-sizing: inherit;
+  }
+
+  @include bem.element('overlay') {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  @include bem.element('close') {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+
+    // Taken from formio.builder.css
+    &:before {
+      content: '×';
+
+      display: block;
+      padding: 3px;
+      background: transparent;
+
+      color: #bbb;
+      cursor: pointer;
+      font-family: 'Helvetica', Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 26px;
+      text-align: center;
+    }
+
+    &:hover:before {
+      color: #777;
+    }
+  }
+
+  @include bem.element('content') {
+    position: absolute;
+    width: 80%;
+    max-width: 100%;
+    // leave space above and below the modal, but make sure it can be scrolled if the
+    // content is too large for the viewport
+    max-height: calc(100% - 2 * var(--_offb-modal-content-margin-block));
+    margin-block: var(--_offb-modal-content-margin-block);
+    overflow: auto;
+
+    background: var(--offb-modal-content-background, #f0f0f0);
+    border: var(--offb-modal-content-border, none);
+    border-radius: var(--offb-modal-content-border-radius, 5px);
+    padding: 15px;
+
+    font-size: 1.1em;
+    line-height: 1.5em;
+
+    box-shadow:
+      0 4px 8px 0 rgb(0 0 0 / 20%),
+      0 6px 20px 0 rgb(0 0 0 / 20%);
+  }
+}

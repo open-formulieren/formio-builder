@@ -4,6 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {Component, Description} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
+import './previews.scss';
 
 /**
  * Show a formio file component preview.

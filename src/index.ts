@@ -1,3 +1,4 @@
+import './formio.scss';
 import './jsonEditor.scss';
 
 export {default as ComponentEditForm} from '@/components/ComponentEditForm';

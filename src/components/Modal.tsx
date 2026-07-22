@@ -3,6 +3,8 @@ import {createContext, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import ReactModal from 'react-modal';
 
+import './Modal.scss';
+
 export interface ModalContextType {
   parentSelector?: () => HTMLElement;
   ariaHideApp?: boolean;
@@ -41,23 +43,15 @@ const Modal: React.FC<ModalProps> = ({isOpen, closeModal, className, children}: 
     <ReactModal
       isOpen={isOpen}
       onRequestClose={closeModal}
+      className={clsx('offb-modal__content', className)}
+      overlayClassName="offb-modal__overlay"
+      portalClassName="offb-modal"
       parentSelector={parentSelector}
       ariaHideApp={ariaHideApp}
-      portalClassName={
-        isOpen ? clsx('formio-dialog', 'formio-dialog-theme-default', className) : undefined
-      }
-      overlayClassName="formio-dialog-overlay"
-      className="formio-dialog-content"
-      overlayElement={(props, contentElement) => (
-        <>
-          <div {...props}></div>
-          {contentElement}
-        </>
-      )}
     >
       <button
         type="button"
-        className="formio-dialog-close float-right btn btn-secondary btn-sm"
+        className="offb-modal__close btn btn-secondary btn-sm"
         onClick={closeModal}
       >
         <span className="sr-only">
