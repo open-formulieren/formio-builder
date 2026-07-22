@@ -27,5 +27,6 @@ export default {
     },
   },
   defaultValue: false, // formik field value
+  holdsData: true,
   comparisonValue: ComparisonValueInput,
 } satisfies RegistryEntry<CheckboxComponentSchema>;

@@ -1,17 +1,27 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import type {FormikContextType} from 'formik';
 import {useFormikContext} from 'formik';
-import type {ExtendedComponentSchema} from 'formiojs/types/components/schema';
 import {camelCase, debounce} from 'lodash';
 import {useContext, useEffect, useRef} from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {BuilderContext} from '@/context';
+import {hasOwnProperty} from '@/types';
 
 import {TextField} from '../formio';
 
-const useGenerateUniqueKey = (component: ExtendedComponentSchema): string => {
+const getKeySeed = (component: AnyComponentSchema): string => {
+  for (const key of ['title', 'label', 'placeholder']) {
+    if (hasOwnProperty(component, key) && !!component[key]) {
+      return component[key] as string;
+    }
+  }
+  return component.type;
+};
+
+const useGenerateUniqueKey = (component: AnyComponentSchema): string => {
   const {uniquifyKey} = useContext(BuilderContext);
-  const seed = component.title || component.label || component.placeholder || component.type;
+  const seed = getKeySeed(component);
   return uniquifyKey(camelCase(seed));
 };
 
@@ -33,7 +43,7 @@ export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] 
     values,
     status = {},
     setFieldValue,
-  }: KeyFormikContextType<ExtendedComponentSchema> = useFormikContext<ExtendedComponentSchema>();
+  }: KeyFormikContextType<AnyComponentSchema> = useFormikContext<AnyComponentSchema>();
   const isManuallySetRef = useRef(false);
   const debouncedSetFieldValue = debounce(setFieldValue, 50);
 
@@ -57,8 +67,8 @@ export const useDeriveComponentKey = (): [KeyProps['isManuallySetRef'], string] 
 };
 
 const Key: React.FC<KeyProps> = ({isManuallySetRef, generatedValue}) => {
-  const {setFieldValue, getFieldProps}: KeyFormikContextType<ExtendedComponentSchema> =
-    useFormikContext<ExtendedComponentSchema>();
+  const {setFieldValue, getFieldProps}: KeyFormikContextType<AnyComponentSchema> =
+    useFormikContext<AnyComponentSchema>();
   const {formType} = useContext(BuilderContext);
 
   const name = 'key';

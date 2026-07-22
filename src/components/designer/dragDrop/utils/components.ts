@@ -11,36 +11,57 @@ import {COMPONENT_PLACEHOLDER_TYPE} from '@/components/designer/types';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
-interface IterComponentsResult {
+interface IterComponentsResult<
+  S extends ComponentDefinition | AnyComponentSchema = ComponentDefinition,
+> {
   /**
    * The index of the current item.
    */
   index: number;
   /**
+   * The path to the current item.
+   */
+  path: string;
+  /**
    * The current item.
    */
-  component: ComponentDefinition;
+  component: S;
   /**
    * The collection of items that the current item belongs to.
    */
-  collection: ComponentDefinition[];
+  collection: S[];
+  /**
+   * Whether the component itself holds data, or if it's simply used for presentation.
+   */
+  holdsData?: boolean;
 }
 
 /**
  * Recursively (and depth-first) iterate over all components in the component definition.
  */
-function* iterComponents(
-  componentDefinitions: ComponentDefinition[]
-): Generator<IterComponentsResult> {
+export function* iterComponents<
+  S extends ComponentDefinition | AnyComponentSchema = ComponentDefinition,
+>(componentDefinitions: S[], parentPath: string = ''): Generator<IterComponentsResult<S>> {
   for (const [index, component] of componentDefinitions.entries()) {
-    yield {index, component, collection: componentDefinitions};
-    if (component.type === COMPONENT_PLACEHOLDER_TYPE) continue;
+    const path = [parentPath, hasOwnProperty(component, 'key') ? component.key : '']
+      .filter(Boolean)
+      .join('.');
 
-    const {getComponentSlots} = getRegistryEntry(component.type);
+    if (component.type === COMPONENT_PLACEHOLDER_TYPE) {
+      yield {index, component, path, collection: componentDefinitions};
+      continue;
+    }
+
+    const {getComponentSlots, holdsData} = getRegistryEntry(component.type);
+    yield {index, component, path, collection: componentDefinitions, holdsData};
+
     if (!getComponentSlots) continue;
 
     for (const slot of getComponentSlots(component)) {
-      yield* iterComponents(slot.collection);
+      yield* iterComponents<S>(
+        slot.collection as S[],
+        slot.useReferenceInComponentPath ? `${parentPath}.${slot.reference}` : parentPath
+      );
     }
   }
 }
@@ -184,6 +205,18 @@ export const insertComponentDefinition = (
   if (dropzoneComponents === undefined) return;
 
   dropzoneComponents.splice(index, 0, componentDefinition);
+};
+
+export const findComponent = <S extends ComponentDefinition | AnyComponentSchema>(
+  componentDefinitions: S[],
+  componentKey: string
+): S | null => {
+  for (const {component} of iterComponents(componentDefinitions)) {
+    if (component.type !== COMPONENT_PLACEHOLDER_TYPE && component.key === componentKey) {
+      return component;
+    }
+  }
+  return null;
 };
 
 export function assertNoPlaceholders(

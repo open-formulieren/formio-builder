@@ -1,5 +1,5 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
-import type {ExtendedComponentSchema} from 'formiojs';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useAsync} from 'react-use';
@@ -29,7 +29,7 @@ function isAttributeOptions(
  */
 const RegistrationAttributeSelect: React.FC = () => {
   const intl = useIntl();
-  const {values} = useFormikContext<ExtendedComponentSchema>();
+  const {values} = useFormikContext<AnyComponentSchema>();
   const {getRegistrationAttributes, formType} = useContext(BuilderContext);
 
   const {

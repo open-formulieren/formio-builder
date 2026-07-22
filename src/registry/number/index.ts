@@ -27,5 +27,6 @@ export default {
     },
   },
   defaultValue: undefined, // formik field value
+  holdsData: true,
   comparisonValue: ComparisonValueInput,
 } satisfies RegistryEntry<NumberComponentSchema>;

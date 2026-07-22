@@ -2332,14 +2332,14 @@ export const BSN: Story = {
 
     await step('Interaction with BSN', async () => {
       // check that user can type into the fields
-      expect(regularInput).toHaveAttribute('placeholder', '_________');
+      expect(regularInput).toHaveAttribute('placeholder', 'XXXXXXXXX');
       await userEvent.type(regularInput, '111222333');
       await expect(regularInput).toHaveDisplayValue('111222333');
     });
 
     await step('Interaction with hidden BSN', async () => {
       // check that user can type into the fields
-      expect(hiddenInput).toHaveAttribute('placeholder', '_________');
+      expect(hiddenInput).toHaveAttribute('placeholder', 'XXXXXXXXX');
       await userEvent.type(hiddenInput, '111222333');
       await expect(hiddenInput).toHaveDisplayValue('111222333');
     });
@@ -2724,10 +2724,10 @@ export const AddressNL: Story = {
 
       // Assert initial state
       expect(postcode).toHaveDisplayValue('');
-      expect(postcode).toHaveAttribute('placeholder', '____ __');
+      expect(postcode).toHaveAttribute('placeholder', '1234 AB');
       expect(houseNumber).toHaveDisplayValue('');
+      expect(houseNumber).toHaveAttribute('placeholder', '123');
       expect(houseLetterAddition).toHaveDisplayValue('');
-      expect(houseLetterAddition).toHaveAttribute('placeholder', '_');
       expect(houseNumberAddition).toHaveDisplayValue('');
 
       // Interact
@@ -2752,10 +2752,10 @@ export const AddressNL: Story = {
 
       // Assert initial state
       expect(postcode).toHaveDisplayValue('');
-      expect(postcode).toHaveAttribute('placeholder', '____ __');
+      expect(postcode).toHaveAttribute('placeholder', '1234 AB');
       expect(houseNumber).toHaveDisplayValue('');
+      expect(houseNumber).toHaveAttribute('placeholder', '123');
       expect(houseLetterAddition).toHaveDisplayValue('');
-      expect(houseLetterAddition).toHaveAttribute('placeholder', '_');
       expect(houseNumberAddition).toHaveDisplayValue('');
 
       // Interact
