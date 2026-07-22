@@ -17,6 +17,11 @@ export type ComponentConfigurationProps = Omit<MergedProps, 'component'> & {
 /**
  * The main entrypoint to edit a component in the builder modal.
  *
+ * @deprecated - This component is deprecated and will in time become obsolete.
+ * This is currently used by the Formio FormBuilder, which will be replaced by our own
+ * FormBuilder, which also implements the BuilderContext.
+ * @TODO should be removed when the Formio FormBuilder is removed from the backend.
+ *
  * This component wraps around the context provider to expose Formio builder helper
  * functions and utilities down to the low-level components used to render the
  * configuration form.

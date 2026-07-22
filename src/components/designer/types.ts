@@ -2,6 +2,24 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 
 export const COMPONENT_PLACEHOLDER_TYPE = 'componentPlaceholder';
 
+export type ComponentCreatedEvent = {
+  type: 'created';
+  component: AnyComponentSchema;
+};
+
+export type ComponentUpdatedEvent = {
+  type: 'updated';
+  component: AnyComponentSchema;
+  originalComponent: AnyComponentSchema;
+};
+
+export type ComponentDeletedEvent = {
+  type: 'deleted';
+  component: AnyComponentSchema;
+};
+
+export type ComponentEvent = ComponentCreatedEvent | ComponentUpdatedEvent | ComponentDeletedEvent;
+
 /**
  * The component definition that is used in the FormDesigner. This can be a component
  * schema, or a placeholder for a new component.

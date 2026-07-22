@@ -1,10 +1,15 @@
-import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
+import {getRegistryEntry} from '@open-formulieren/formio-renderer';
+import {extractInitialValues} from '@open-formulieren/formio-renderer/values.js';
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {Formik} from 'formik';
 
-import {getRegistryEntry} from '@/registry';
-import {hasOwnProperty} from '@/types';
+import type {ComponentEvent} from '@/components/designer/types';
+import type {BuilderContextType} from '@/context';
+import {BuilderContext} from '@/context';
 
 import FormioDefinitionDesigner from './designer/FormioDefinitionDesigner';
+
+type FormSchema = {display: 'form'; components: AnyComponentSchema[]};
 
 export interface FormBuilderProps {
   /**
@@ -12,55 +17,77 @@ export interface FormBuilderProps {
    */
   components: AnyComponentSchema[];
   /**
-   * A collection of all components in the form, created by flattening the form
-   * definitions. Used when creating component keys to validate complete uniqueness.
+   * Callback invoked when the form definition changes.
+   *
+   * This contains the entire new components structure, and possible events that
+   * happened in the form builder. The event is optional and is only present when the
+   * change was triggered by component create, update, or delete events.
    */
-  componentNamespace: AnyComponentSchema[];
-  onChange: (components: AnyComponentSchema[]) => void;
+  onChange: (form: FormSchema, event?: ComponentEvent) => void;
 }
 
-const FormBuilder: React.FC<FormBuilderProps> = ({components, componentNamespace, onChange}) => {
-  // TODO: this initial values extraction is questionable, but scheduled for replacement
-  // later on. We should ideally use the extractInitialValues implementation from the
-  // formio renderer.
-  const initialValues = components.reduce<Record<string, JSONValue | object>>(
-    (carry, component) => {
-      const entry = getRegistryEntry(component.type);
-      const {key} = component;
-      // FIXME: this is wrong for non-string based component tyeps (file, addressNL,
-      // customerProfile,...). We need to use the formio-renderer single source of truth
-      // for this information.
-      const {defaultValue = ''} = entry;
+export type MergedFormBuilderProps = FormBuilderProps & BuilderContextType;
 
-      const isMultiple = hasOwnProperty(component, 'multiple') ? component.multiple : false;
-      const componentDefaultValue = hasOwnProperty(component, 'defaultValue')
-        ? component.defaultValue
-        : defaultValue;
-
-      const previewDefaultValue = isMultiple
-        ? (componentDefaultValue ?? [])
-        : (componentDefaultValue ?? defaultValue);
-
-      carry[key] = previewDefaultValue;
-      return carry;
-    },
-    {}
-  );
+const FormBuilder: React.FC<MergedFormBuilderProps> = ({
+  components,
+  onChange,
+  uniquifyKey,
+  supportedLanguageCodes = ['nl', 'en'],
+  richTextColors,
+  theme,
+  formType,
+  getFormComponents,
+  getValidatorPlugins,
+  getRegistrationAttributes,
+  getServices,
+  getReferenceListsTables,
+  getReferenceListsTableItems,
+  getPrefillPlugins,
+  getPrefillAttributes,
+  getFileTypes,
+  serverUploadLimit,
+  getAuthPlugins,
+  getMapTileLayers,
+  getMapOverlayTileLayers,
+}) => {
+  const initialValues = extractInitialValues(components, getRegistryEntry);
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={initialValues}
-      onSubmit={() => {
-        throw new Error("Can't submit preview form");
+    <BuilderContext.Provider
+      value={{
+        uniquifyKey,
+        supportedLanguageCodes,
+        richTextColors,
+        formType,
+        getMapTileLayers,
+        getMapOverlayTileLayers,
+        theme,
+        getFormComponents,
+        getValidatorPlugins,
+        getRegistrationAttributes,
+        getServices,
+        getReferenceListsTables,
+        getReferenceListsTableItems,
+        getPrefillPlugins,
+        getPrefillAttributes,
+        getFileTypes,
+        serverUploadLimit,
+        getAuthPlugins,
       }}
     >
-      <FormioDefinitionDesigner
-        components={components}
-        componentNamespace={componentNamespace}
-        onChange={onChange}
-      />
-    </Formik>
+      <Formik
+        enableReinitialize
+        initialValues={initialValues}
+        onSubmit={() => {
+          throw new Error("Can't submit preview form");
+        }}
+      >
+        <FormioDefinitionDesigner
+          initialComponents={components}
+          onChange={(components, event) => onChange({display: 'form', components}, event)}
+        />
+      </Formik>
+    </BuilderContext.Provider>
   );
 };
 

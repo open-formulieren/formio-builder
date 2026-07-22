@@ -4,10 +4,9 @@ import type {DragEndEvent, DragOverEvent} from '@dnd-kit/react';
 import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
-import {current} from 'immer';
-import {useCallback, useMemo, useState} from 'react';
+import {produce} from 'immer';
+import {useCallback, useContext, useMemo, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {useImmer} from 'use-immer';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import Modal from '@/components/Modal';
@@ -16,6 +15,7 @@ import {
   assertNoPlaceholders,
   createComponent,
   getDropzoneComponents,
+  insertComponentDefinition,
   removeComponent,
   removePlaceholder,
   replaceComponent,
@@ -24,13 +24,13 @@ import {
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
 import type {DesignerContextType} from '@/context';
-import {DesignerContext} from '@/context';
+import {BuilderContext, DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
 import ComponentsList from './ComponentsList';
 import {ComponentPreview, ComponentsPreview} from './Preview';
 import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
-import type {ComponentDefinition, ComponentPlaceholder} from './types';
+import type {ComponentDefinition, ComponentEvent, ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
 const getData = (
@@ -38,24 +38,34 @@ const getData = (
 ): SortableItemData | DraggableMenuItemData | Data => prop?.data ?? {};
 
 export interface FormioDefinitionDesignerProps {
-  components: AnyComponentSchema[];
-  componentNamespace: AnyComponentSchema[];
-  onChange: (components: AnyComponentSchema[]) => void;
+  /**
+   * The components to display in the designer.
+   *
+   * This is used as the initial value for local form designer state management, later
+   * updates are ignored.
+   */
+  initialComponents: AnyComponentSchema[];
+  /**
+   * Callback function that is called when the components have been changed.
+   *
+   * The `event` is an optional argument that is only present when a component is
+   * created, updated, or deleted. For other change events (i.e. dragging components
+   * around), this argument is not present.
+   */
+  onChange: (components: AnyComponentSchema[], event?: ComponentEvent) => void;
 }
 
 const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
-  components,
-  componentNamespace,
+  initialComponents,
   onChange,
 }) => {
   const intl = useIntl();
-  const [items, setItems] = useImmer<{components: ComponentDefinition[]}>({
-    components,
-  });
+  const [items, setItems] = useState<ComponentDefinition[]>(initialComponents);
   const [componentToEdit, setComponentToEdit] = useState<{
     component: AnyComponentSchema;
     isNew: boolean;
   } | null>(null);
+  const {uniquifyKey} = useContext(BuilderContext);
 
   const movePlaceholder = (
     index: number,
@@ -67,25 +77,19 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
       componentType,
     };
 
-    setItems(draft => {
-      removePlaceholder(draft.components);
-
-      const dropzoneComponents = getDropzoneComponents(draft.components, dropzoneId);
-      if (dropzoneComponents === undefined) return;
-
-      dropzoneComponents.splice(index, 0, placeholder);
+    const newItems = produce(items, draftItems => {
+      removePlaceholder(draftItems);
+      insertComponentDefinition(index, draftItems, dropzoneId, placeholder);
     });
+    setItems(newItems);
   };
 
   const moveComponent = (index: number, dropzoneId: string, component: AnyComponentSchema) => {
-    setItems(draft => {
-      removeComponent(draft.components, component.key);
-
-      const dropzoneComponents = getDropzoneComponents(draft.components, dropzoneId);
-      if (dropzoneComponents === undefined) return;
-
-      dropzoneComponents.splice(index, 0, component);
+    const newItems = produce(items, draftItems => {
+      removeComponent(draftItems, component.key);
+      insertComponentDefinition(index, draftItems, dropzoneId, component);
     });
+    setItems(newItems);
   };
 
   const handleDragOver = (event: DragOverEvent) => {
@@ -95,16 +99,17 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
 
     // When moving the placeholder outside the dropzone, remove it.
     if (!target && isNewComponent) {
-      setItems(draft => {
-        removePlaceholder(draft.components);
+      const newItems = produce(items, draftItems => {
+        removePlaceholder(draftItems);
       });
+      setItems(newItems);
       return;
     }
 
     const dropzoneId = getTargetDropzoneId(target);
     if (!dropzoneId) return;
 
-    const dropzoneComponents = getDropzoneComponents(items.components, dropzoneId);
+    const dropzoneComponents = getDropzoneComponents(items, dropzoneId);
     if (dropzoneComponents === undefined) return;
 
     const targetIndex = getTargetIndex(target, dropzoneComponents.length);
@@ -122,24 +127,18 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     const sourceData = getData(source);
     const isNewComponent: boolean = sourceData?.fromSidebar;
 
-    // For existing components we don't need any additional actions.
-    if (!isNewComponent) return;
+    // When moving an existing component, we simply persist the items state.
+    if (!isNewComponent) {
+      assertNoPlaceholders(items);
+      onChange(items);
+      return;
+    }
 
-    // If there is no target, it means the drag ended outside the dropzone.
+    // If there is no target, it means the drag ended outside a dropzone.
     if (!target) return;
 
-    const newComponent = createComponent(sourceData.componentType, componentNamespace, intl);
-    setItems(draft => {
-      replacePlaceholderWithComponent(draft.components, newComponent);
-
-      // After replacing the placeholder with the new component, we can be certain that
-      // the collection only contains component schemas.
-      const components: ComponentDefinition[] = current(draft.components);
-      assertNoPlaceholders(components);
-      onChange(components);
-    });
-
-    // Open the modal for the new component.
+    // Create the new component and open it in the edit modal.
+    const newComponent = createComponent(sourceData.componentType, uniquifyKey, intl);
     openModal(newComponent, true);
   };
 
@@ -154,17 +153,35 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     setComponentToEdit(null);
   };
 
-  const updateComponent = (component: AnyComponentSchema, previousComponentKey: string) => {
-    setItems(draft => {
-      replaceComponent(draft.components, previousComponentKey, component);
-
-      // Placeholders are only used for the drag and drop functionality, so there should
-      // not be any in the collection at this point. Additionally, we should only send
-      // component schemas to the backend.
-      const components: ComponentDefinition[] = current(draft.components);
-      assertNoPlaceholders(components);
-      onChange(components);
+  const updateComponent = (
+    component: AnyComponentSchema,
+    previousComponent: AnyComponentSchema,
+    isNew: boolean
+  ) => {
+    const newItems = produce(items, draftItems => {
+      if (isNew) {
+        replacePlaceholderWithComponent(draftItems, component);
+      } else {
+        replaceComponent(draftItems, previousComponent.key, component);
+      }
     });
+
+    setItems(newItems);
+    assertNoPlaceholders(newItems);
+
+    onChange(
+      newItems,
+      isNew
+        ? {
+            type: 'created',
+            component,
+          }
+        : {
+            type: 'updated',
+            component,
+            originalComponent: previousComponent,
+          }
+    );
   };
 
   const deleteComponent = useCallback(
@@ -188,20 +205,23 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
         return;
       }
 
-      setItems(draft => {
-        removeComponent(draft.components, component.key);
-
-        // Placeholders are only used for the drag and drop functionality, so there should
-        // not be any in the collection at this point. Additionally, we should only send
-        // component schemas to the backend.
-        const components: ComponentDefinition[] = current(draft.components);
-        assertNoPlaceholders(components);
-        onChange(components);
+      const newItems = produce(items, draftItems => {
+        removeComponent(draftItems, component.key);
       });
+      setItems(newItems);
+
+      assertNoPlaceholders(newItems);
+      onChange(newItems, {type: 'deleted', component});
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [setItems]
+    [intl, items, onChange]
   );
+
+  const deletePlaceholder = useCallback(() => {
+    const newItems = produce(items, draftItems => {
+      removePlaceholder(draftItems);
+    });
+    setItems(newItems);
+  }, [items]);
 
   const designerContext = useMemo<DesignerContextType>(
     () => ({
@@ -231,7 +251,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             <ComponentsList />
           </div>
           <div className="col col-10">
-            <ComponentsPreview components={items.components} dropzoneId={MAIN_DROPZONE_ID} />
+            <ComponentsPreview components={items} dropzoneId={MAIN_DROPZONE_ID} />
           </div>
         </div>
         {componentToEdit && (
@@ -239,14 +259,21 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             component={componentToEdit.component}
             isNew={componentToEdit.isNew}
             onSubmit={component => {
-              updateComponent(component, componentToEdit.component.key);
+              updateComponent(component, componentToEdit.component, componentToEdit.isNew);
               closeModal();
             }}
             onRemove={() => {
-              deleteComponent(componentToEdit.component);
+              if (componentToEdit.isNew) {
+                deletePlaceholder();
+              } else {
+                deleteComponent(componentToEdit.component);
+              }
               closeModal();
             }}
-            onClose={closeModal}
+            onClose={() => {
+              deletePlaceholder();
+              closeModal();
+            }}
           />
         )}
       </DragDropProvider>
@@ -271,18 +298,15 @@ const ComponentEditModal: React.FC<ComponentEditModalProps> = ({
 }) => {
   const {builderInfo} = getRegistryEntry(component.type);
 
-  // When the component is new, closing the modal without saving should remove it.
-  const closeModal = () => (isNew ? onRemove() : onClose());
-
   return (
-    <Modal isOpen closeModal={closeModal}>
+    <Modal isOpen closeModal={onClose}>
       <ComponentEditForm
         component={component}
         isNew={isNew}
         builderInfo={builderInfo}
         onSubmit={onSubmit}
         onRemove={onRemove}
-        onCancel={closeModal}
+        onCancel={onClose}
       />
     </Modal>
   );
