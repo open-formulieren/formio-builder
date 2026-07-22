@@ -150,7 +150,6 @@
     "react-signature-canvas": "^1.0.6",
     "react-tabs": "^4.2.1",
     "react-use": "^17.4.0",
-    "use-immer": "^0.11.0",
     "zod": "^3.25.76",
     "zod-formik-adapter": "^1.2.0"
   }
