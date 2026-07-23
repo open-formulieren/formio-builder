@@ -20,6 +20,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, Tab, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -64,6 +65,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'showInSummary',
             'showInEmail',
             'showInPDF',
@@ -107,6 +109,7 @@ const EditForm: EditFormDefinition<MapComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <Hidden />
         <ClearOnHide />

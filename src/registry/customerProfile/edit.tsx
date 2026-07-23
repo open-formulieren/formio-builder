@@ -20,6 +20,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {Checkbox, Select, TabList, TabPanel, Tabs} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -47,6 +48,7 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -68,6 +70,7 @@ const EditForm: EditFormDefinition<CustomerProfileComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <DigitalAddressTypes />
         <ShouldUpdateCustomerData />

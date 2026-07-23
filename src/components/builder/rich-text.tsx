@@ -8,10 +8,11 @@
  */
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {ClassicEditor} from 'ckeditor5';
 import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 
-import ClassicEditor from '@/components/CKEditor';
+import Editor from '@/components/CKEditor';
 import {TemplatingHint} from '@/components/builder';
 import {Component, Description} from '@/components/formio';
 import {BuilderContext} from '@/context';
@@ -19,16 +20,16 @@ import {BuilderContext} from '@/context';
 import './richText.scss';
 
 export type ColorOption =
-  Required<Required<(typeof ClassicEditor)['defaultConfig']>['fontColor']>['colors'] extends Array<
-    infer C
-  >
+  Required<Required<(typeof Editor)['defaultConfig']>['fontColor']>['colors'] extends Array<infer C>
     ? C
     : never;
 
 export interface RichTextProps {
   name: string;
   required?: boolean;
+  editor?: typeof ClassicEditor;
   supportsBackendTemplating?: boolean;
+  onChange?: (value: string) => void;
 }
 
 /**
@@ -38,7 +39,13 @@ export interface RichTextProps {
  * classic editor build, with some extra plugins enabled to match the features used/exposed
  * by Formio.js.
  */
-const RichText: React.FC<RichTextProps> = ({name, required, supportsBackendTemplating = false}) => {
+const RichText: React.FC<RichTextProps> = ({
+  name,
+  required,
+  editor = Editor,
+  supportsBackendTemplating = false,
+  onChange = () => {},
+}) => {
   const {richTextColors} = useContext(BuilderContext);
   const {
     values: {type},
@@ -47,7 +54,7 @@ const RichText: React.FC<RichTextProps> = ({name, required, supportsBackendTempl
   return (
     <Component type={type} field={name} required={required} className="offb-rich-text">
       <CKEditor
-        editor={ClassicEditor}
+        editor={editor}
         config={{
           link: {
             decorators: {
@@ -70,6 +77,7 @@ const RichText: React.FC<RichTextProps> = ({name, required, supportsBackendTempl
         onChange={(_, editor) => {
           const html = editor.getData();
           helpers.setValue(html);
+          onChange(html);
         }}
         onBlur={() => {
           helpers.setTouched(true);

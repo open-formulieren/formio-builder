@@ -1,3 +1,4 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {useContext, useRef} from 'react';
@@ -9,6 +10,7 @@ import {applyInputMask} from '@/utils/inputmask';
 
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 import {withMultiple} from './multiple';
 
 export interface TextFieldProps {
@@ -16,6 +18,7 @@ export interface TextFieldProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: React.ReactNode;
+  faqItems?: FAQItemType[];
   description?: React.ReactNode;
   showCharCount?: boolean;
   inputMask?: string;
@@ -28,6 +31,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   showCharCount = false,
   inputMask,
@@ -108,6 +112,7 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
       <div>{inputField}</div>
       {charCount}
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

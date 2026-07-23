@@ -1,3 +1,4 @@
+import type {FAQItem as FAQItemType} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {useContext} from 'react';
@@ -7,6 +8,7 @@ import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';
+import FAQItems from './faq-items';
 import {withMultiple} from './multiple';
 
 export interface TimeFieldProps {
@@ -14,6 +16,7 @@ export interface TimeFieldProps {
   label?: React.ReactNode;
   required?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: string;
 }
 
@@ -23,6 +26,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
   label,
   required = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   ...props
 }) => {
@@ -73,6 +77,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
     >
       <div>{inputField}</div>
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

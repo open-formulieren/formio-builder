@@ -19,6 +19,7 @@ const Preview: React.FC<ComponentPreviewProps<NpFamilyMembersComponentSchema>> =
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     includeChildren,
     includePartners,
@@ -49,6 +50,7 @@ const Preview: React.FC<ComponentPreviewProps<NpFamilyMembersComponentSchema>> =
       options={options}
       label={label}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       description={description}
     />

@@ -12,8 +12,7 @@ import type {ComponentPreviewProps} from '../types';
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<LicensePlateComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate, multiple} = component;
-
+  const {key, label, description, tooltip, faqItems = [], validate, multiple} = component;
   const {required = false} = validate;
   return (
     <TextField
@@ -22,6 +21,7 @@ const Preview: React.FC<ComponentPreviewProps<LicensePlateComponentSchema>> = ({
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
     />
   );

@@ -377,6 +377,11 @@
     "description": "Tooltip for 'hideLabel' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the container fieldset."
   },
+  "9eMmYy": {
+    "defaultMessage": "Label",
+    "description": "Label for translation message for FAQ label",
+    "originalDefault": "Label"
+  },
   "9lk1eS": {
     "defaultMessage": "Aftrekken",
     "description": "Operator 'subtract' option label",
@@ -656,6 +661,11 @@
     "description": "npFamilyMembers dummy option for child",
     "originalDefault": "Child 1"
   },
+  "IHinJF": {
+    "defaultMessage": "FAQ items",
+    "description": "Title of the FAQ items heading",
+    "originalDefault": "FAQ items"
+  },
   "IOko1U": {
     "defaultMessage": "Verwijderen",
     "description": "Values table: accessible label to remove an option",
@@ -920,6 +930,11 @@
     "description": "Textarea component type label",
     "originalDefault": "Textarea"
   },
+  "Tc7kj/": {
+    "defaultMessage": "FAQ items for this component",
+    "description": "FAQ items tooltip in the form builder",
+    "originalDefault": "FAQ items for this component"
+  },
   "Tpg442": {
     "defaultMessage": "Waarde in decimale graden, tussen 3 en 7.5.",
     "description": "Description for 'initialCenter.lng' builder field",
@@ -1021,6 +1036,11 @@
     "defaultMessage": "Het label dat boven elke herhaalde groep weergegeven wordt in de overzichtspagina, inzendings-PDF en bevestigingsmail. De index van de groep wordt hieraan toegevoegd, bijvoorbeeld als je 'Item' opgeeft, dan wordt dit weergegeven als 'Item 1', 'Item 2', ...",
     "description": "Tooltip for 'groupLabel' builder field",
     "originalDefault": "The label that will be shown above each repeating group in the summary page, the submission report and the confirmation email. The index of the item will be added next to it, i.e. if you enter 'Item' it will be displayed as 'Item 1', 'Item 2', ..."
+  },
+  "VpHR3S": {
+    "defaultMessage": "Remove FAQ item",
+    "description": "'Remove item' screenreader button text",
+    "originalDefault": "Remove FAQ item"
   },
   "VyA4fK": {
     "defaultMessage": "Weergeven in bevestigingsmail",
@@ -1227,6 +1247,11 @@
     "defaultMessage": "Geef de sleutel op van een vaste, veld- of zelfgedefinieerde variabele.",
     "description": "Tooltip for 'variable' in relative delta date constraint validation",
     "originalDefault": "Provide the key of a static, component, or user defined variable."
+  },
+  "c/NYGP": {
+    "defaultMessage": "Content",
+    "description": "Label for translation message for FAQ content",
+    "originalDefault": "Content"
   },
   "cAC5kL": {
     "defaultMessage": "Verwijder de waarde van dit veld van de inzending als dit veld verborgen is. Let op: De waarde van dit veld wordt dan ook niet gebruikt in logica regels!",

@@ -30,7 +30,59 @@ import {
 import type {EditorConfig} from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
 
-class Editor extends ClassicEditor {
+export class MinimalEditor extends ClassicEditor {
+  public static override builtinPlugins = [
+    Alignment,
+    Autoformat,
+    BlockQuote,
+    Bold,
+    Essentials,
+    FontColor,
+    FontFamily,
+    FontSize,
+    Heading,
+    Indent,
+    Italic,
+    List,
+    Paragraph,
+    Table,
+    TableToolbar,
+    TextTransformation,
+    Undo,
+  ];
+
+  public static override defaultConfig: EditorConfig = {
+    toolbar: {
+      items: [
+        'heading',
+        'fontFamily',
+        'fontSize',
+        'fontColor',
+        '|',
+        'bold',
+        'italic',
+        'bulletedList',
+        'numberedList',
+        '|',
+        'indent',
+        'outdent',
+        '|',
+        'alignment',
+        '|',
+        'blockQuote',
+        'undo',
+        'redo',
+      ],
+    },
+    language: 'en',
+    licenseKey: 'GPL',
+    table: {
+      contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells'],
+    },
+  };
+}
+
+export default class Editor extends ClassicEditor {
   public static override builtinPlugins = [
     Alignment,
     Autoformat,
@@ -104,5 +156,3 @@ class Editor extends ClassicEditor {
     licenseKey: 'GPL',
   };
 }
-
-export default Editor;

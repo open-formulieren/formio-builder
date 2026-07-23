@@ -3,16 +3,20 @@ import type {
   BsnComponentSchema,
   ChildrenComponentSchema,
   CosignV2ComponentSchema,
+  CurrencyComponentSchema,
   CustomerProfileComponentSchema,
   EditGridComponentSchema,
   FieldsetComponentSchema,
   FileComponentSchema,
+  IbanComponentSchema,
+  LicensePlateComponentSchema,
   PartnersComponentSchema,
   PhoneNumberComponentSchema,
   PostcodeComponentSchema,
   RadioComponentSchema,
   SelectComponentSchema,
   SelectboxesComponentSchema,
+  TextareaComponentSchema,
   TimeComponentSchema,
 } from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
@@ -30,6 +34,39 @@ export default {
 
 type Story = StoryObj<typeof ComponentPreview>;
 
+const faqConfiguration = {
+  faqItems: [
+    {
+      label: 'Moet ik dit invullen?',
+      content: 'Ja dat moet',
+      openForms: {
+        translations: {
+          nl: {
+            label: 'Moet ik dit invullen?',
+            content: 'Ja dat moet',
+          },
+          en: {
+            label: 'Should I fill this in?',
+            content: 'Yes you do',
+          },
+        },
+      },
+    },
+    {
+      label: '',
+      content: '',
+      openForms: {
+        translations: {
+          en: {
+            label: "I've XYZ, should I fill this in?",
+            content: 'Add XYZ',
+          },
+        },
+      },
+    },
+  ],
+};
+
 export const TextField: Story = {
   args: {
     component: {
@@ -41,6 +78,7 @@ export const TextField: Story = {
       hidden: true, // must be ignored
       placeholder: 'Sample placeholder',
       showCharCount: true,
+      ...faqConfiguration,
     },
   },
 
@@ -50,6 +88,10 @@ export const TextField: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Textfield preview');
     await canvas.findByText('A preview of the textfield Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Textfield preview');
@@ -118,6 +160,7 @@ export const Email: Story = {
       label: 'Email preview',
       description: 'A preview of the email Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     },
   },
 
@@ -127,6 +170,10 @@ export const Email: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Email preview');
     await canvas.findByText('A preview of the email Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Email preview');
@@ -204,6 +251,7 @@ export const NumberField: Story = {
       label: 'Number preview',
       description: 'A preview of the number Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     },
   },
 
@@ -213,6 +261,10 @@ export const NumberField: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Number preview');
     await canvas.findByText('A preview of the number Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Number preview');
@@ -233,6 +285,7 @@ export const DateField: Story = {
       label: 'Date preview',
       description: 'A preview of the date Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     },
   },
 
@@ -242,6 +295,10 @@ export const DateField: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Date preview');
     await canvas.findByText('A preview of the date Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Date preview');
@@ -297,6 +354,7 @@ export const DateTimeField: Story = {
       label: 'DateTime preview',
       description: 'A preview of the datetime Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     },
   },
 
@@ -306,6 +364,10 @@ export const DateTimeField: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('DateTime preview');
     await canvas.findByText('A preview of the datetime Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('DateTime preview');
@@ -361,6 +423,7 @@ export const TimeField: Story = {
       label: 'Time preview',
       description: 'A preview of the time Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     } satisfies TimeComponentSchema,
   },
 
@@ -370,6 +433,10 @@ export const TimeField: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Time preview');
     await canvas.findByText('A preview of the time Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Time preview');
@@ -428,6 +495,7 @@ export const Postcode: Story = {
       validate: {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
+      ...faqConfiguration,
     } satisfies PostcodeComponentSchema,
   },
 
@@ -437,6 +505,10 @@ export const Postcode: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Postcode preview');
     await canvas.findByText('A preview of the postcode Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Postcode preview');
@@ -498,6 +570,7 @@ export const PhoneNumber: Story = {
       label: 'Phone number preview',
       description: 'A preview of the phoneNumber Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     } satisfies PhoneNumberComponentSchema,
   },
 
@@ -507,6 +580,10 @@ export const PhoneNumber: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Phone number preview');
     await canvas.findByText('A preview of the phoneNumber Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Phone number preview');
@@ -570,6 +647,7 @@ export const File: Story = {
       },
       filePattern: '*',
       description: 'A preview of the file Formio component',
+      ...faqConfiguration,
     } satisfies FileComponentSchema,
   },
 
@@ -579,6 +657,10 @@ export const File: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('File upload preview');
     await canvas.findByText('A preview of the file Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -606,6 +688,7 @@ export const SelectBoxes: Story = {
         },
       ],
       defaultValue: {option1: false, option2: false},
+      ...faqConfiguration,
     } satisfies SelectboxesComponentSchema,
   },
 
@@ -615,6 +698,10 @@ export const SelectBoxes: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Selectboxes preview');
     await canvas.findByText('A preview of the selectboxes Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
@@ -696,6 +783,7 @@ export const Radio: Story = {
           label: 'Option 2',
         },
       ],
+      ...faqConfiguration,
     } satisfies RadioComponentSchema,
   },
 
@@ -705,6 +793,10 @@ export const Radio: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Radio preview');
     await canvas.findByText('A preview of the radio Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
@@ -792,6 +884,7 @@ export const Select: Story = {
           },
         ],
       },
+      ...faqConfiguration,
     } satisfies SelectComponentSchema,
   },
 
@@ -801,6 +894,10 @@ export const Select: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('Select preview');
     await canvas.findByText('A preview of the select Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // we expect no options to be selected
     await expect(canvas.queryByText('Option 1')).toBeNull();
@@ -954,6 +1051,7 @@ export const BSN: Story = {
       label: 'BSN preview',
       description: 'A preview of the BSN Formio component',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     } satisfies BsnComponentSchema,
   },
 
@@ -963,6 +1061,10 @@ export const BSN: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('BSN preview');
     await canvas.findByText('A preview of the BSN Formio component');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('BSN preview');
@@ -1023,6 +1125,7 @@ export const NpFamilyMembers: Story = {
       hidden: true, // must be ignored
       includeChildren: true,
       includePartners: true,
+      ...faqConfiguration,
     },
   },
 
@@ -1036,6 +1139,10 @@ export const NpFamilyMembers: Story = {
     // check that the checkboxes are rendered
     const checkboxes = await canvas.findAllByRole('checkbox');
     await expect(checkboxes).toHaveLength(2);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1052,7 +1159,15 @@ export const AddressNL: Story = {
       },
       deriveAddress: false,
       layout: 'singleColumn',
+      ...faqConfiguration,
     } satisfies AddressNLComponentSchema,
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1115,6 +1230,7 @@ export const FieldSet: Story = {
           label: 'Nested text field',
         },
       ],
+      ...faqConfiguration,
     } satisfies FieldsetComponentSchema,
   },
 
@@ -1124,6 +1240,10 @@ export const FieldSet: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('A fieldset preview');
     await expect(canvas.queryByText('Nested text field')).toBeNull();
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1147,6 +1267,7 @@ export const EditGrid: Story = {
           label: 'Nested text field',
         },
       ],
+      ...faqConfiguration,
     } satisfies EditGridComponentSchema,
   },
 
@@ -1158,6 +1279,11 @@ export const EditGrid: Story = {
     await canvas.findByText('Item 1');
     await canvas.findByText('Item 2');
     await canvas.findByText('Item 3');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+
     await expect(canvas.queryByText('Nested text field')).toBeNull();
   },
 };
@@ -1194,6 +1320,7 @@ export const CosignV2: Story = {
       key: 'cosign',
       label: 'A cosign v2 preview',
       hidden: true, // must be ignored
+      ...faqConfiguration,
     } satisfies CosignV2ComponentSchema,
   },
 
@@ -1203,6 +1330,11 @@ export const CosignV2: Story = {
     // check that the user-controlled content is visible
     await canvas.findByText('A cosign v2 preview');
     const previewInput = canvas.getByRole<HTMLInputElement>('textbox');
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+
     await waitFor(() => expect(previewInput).toBeVisible());
     await expect(previewInput.type).toBe('email');
   },
@@ -1217,6 +1349,7 @@ export const Signature: Story = {
       label: 'A signature preview',
       hidden: true, // must be ignored
       footer: 'Draw above',
+      ...faqConfiguration,
     },
   },
 
@@ -1228,6 +1361,10 @@ export const Signature: Story = {
       await expect(await canvas.findByText('A signature preview')).toBeVisible();
       await expect(await canvas.findByText('Draw above')).toBeVisible();
     });
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1241,6 +1378,7 @@ export const LeafletMap: Story = {
       label: 'A map preview',
       useConfigDefaultMapSettings: true,
       hidden: true, // must be ignored
+      ...faqConfiguration,
     },
   },
   play: async ({canvasElement}) => {
@@ -1254,6 +1392,10 @@ export const LeafletMap: Story = {
     // the map should be rendered, with zoom controls
     await expect(await canvas.findByRole('button', {name: 'Zoom in'})).toBeVisible();
     await expect(await canvas.findByRole('button', {name: 'Zoom out'})).toBeVisible();
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1266,7 +1408,15 @@ export const Partners: Story = {
       label: 'A partners preview',
       tooltip: 'An example for the tooltip',
       description: 'A description for the Partners component',
+      ...faqConfiguration,
     } satisfies PartnersComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1280,7 +1430,16 @@ export const Children: Story = {
       enableSelection: false,
       tooltip: 'An example for the tooltip',
       description: 'A description for the Children component',
+      ...faqConfiguration,
     } satisfies ChildrenComponentSchema,
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };
 
@@ -1296,6 +1455,101 @@ export const Profile: Story = {
       digitalAddressTypes: ['email', 'phoneNumber'],
       confirmationRecipient: false,
       shouldUpdateCustomerData: true,
+      ...faqConfiguration,
     } satisfies CustomerProfileComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+  },
+};
+
+export const Currency: Story = {
+  args: {
+    component: {
+      type: 'currency',
+      id: 'currency',
+      key: 'currencyPreview',
+      label: 'Currency preview',
+      description: 'A preview of the Currency Formio component',
+      currency: 'EUR',
+      ...faqConfiguration,
+    } satisfies CurrencyComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+  },
+};
+
+export const Iban: Story = {
+  name: 'IBAN',
+  args: {
+    component: {
+      type: 'iban',
+      id: 'iban',
+      key: 'ibanPreview',
+      label: 'Iban preview',
+      description: 'A preview of the Iban Formio component',
+      ...faqConfiguration,
+    } satisfies IbanComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+  },
+};
+
+export const LicensePlate: Story = {
+  args: {
+    component: {
+      type: 'licenseplate',
+      id: 'licenseplate',
+      key: 'licenseplatePreview',
+      label: 'License plate preview',
+      description: 'A preview of the License plate Formio component',
+      validate: {
+        pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
+      },
+      ...faqConfiguration,
+    } satisfies LicensePlateComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
+  },
+};
+
+export const TextArea: Story = {
+  args: {
+    component: {
+      type: 'textarea',
+      id: 'textarea',
+      key: 'textareaPreview',
+      label: 'Text area preview',
+      description: 'A preview of the Text area Formio component',
+      autoExpand: true,
+      rows: 5,
+      ...faqConfiguration,
+    } satisfies TextareaComponentSchema,
+  },
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    // check that the FAQ items are shown as expected
+    await canvas.findByText('Moet ik dit invullen?');
+    await canvas.findByText("I've XYZ, should I fill this in?");
   },
 };

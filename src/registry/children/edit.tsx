@@ -15,6 +15,7 @@ import {
   Translations,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {TabList, TabPanel, Tabs} from '@/components/formio';
 import {useErrorChecker} from '@/utils/errors';
@@ -39,6 +40,7 @@ const EditForm: EditFormDefinition<ChildrenComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -56,6 +58,7 @@ const EditForm: EditFormDefinition<ChildrenComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <Hidden />
         <ClearOnHide />
         {/*

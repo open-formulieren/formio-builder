@@ -29,6 +29,7 @@ import {
   Validate,
   useDeriveComponentKey,
 } from '@/components/builder';
+import FAQItems from '@/components/builder/faq-items';
 import {LABELS} from '@/components/builder/messages';
 import {BuilderContext} from '@/context';
 import {useErrorChecker} from '@/utils/errors';
@@ -187,6 +188,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
             'key',
             'description',
             'tooltip',
+            'faqItems',
             'hidden',
             'clearOnHide',
             'isSensitiveData',
@@ -207,6 +209,7 @@ const EditForm: EditFormDefinition<AddressNLComponentSchema> = () => {
         <Key isManuallySetRef={isKeyManuallySetRef} generatedValue={generatedKey} />
         <Description />
         <Tooltip />
+        <FAQItems />
         <PresentationConfig />
         <ColumnsLayout />
         <DeriveAddress />
