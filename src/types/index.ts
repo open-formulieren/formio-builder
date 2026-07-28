@@ -1,11 +1,23 @@
 export * from './schemas';
 export * from './paths';
 
+/**
+ * PropertyType extracts the type of a property given as `P` from the (union) type `T`.
+ *
+ * It helps narrowing down the property check on an object once it's established that
+ * a property exists.
+ */
+type PropertyType<T, P extends PropertyKey> = T extends unknown
+  ? P extends keyof T
+    ? T[P]
+    : never
+  : never;
+
 // https://fettblog.eu/typescript-hasownproperty/
 export function hasOwnProperty<X extends object, Y extends PropertyKey>(
   obj: X,
   prop: Y
-): obj is X & Record<Y, unknown> {
+): obj is X & Record<Y, PropertyType<X, Y>> {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 

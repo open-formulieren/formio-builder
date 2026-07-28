@@ -11,12 +11,13 @@ import {hasOwnProperty} from '@/types';
 import {TextField} from '../formio';
 
 const getKeySeed = (component: AnyComponentSchema): string => {
-  for (const key of ['title', 'label', 'placeholder']) {
-    if (hasOwnProperty(component, key) && !!component[key]) {
-      return component[key] as string;
-    }
+  let seed: string = component.type;
+  if (hasOwnProperty(component, 'label') && component.label) {
+    seed = component.label;
+  } else if (hasOwnProperty(component, 'placeholder') && component.placeholder) {
+    seed = component.placeholder;
   }
-  return component.type;
+  return seed;
 };
 
 const useGenerateUniqueKey = (component: AnyComponentSchema): string => {
