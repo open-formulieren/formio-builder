@@ -65,7 +65,7 @@
     "originalDefault": "Validation for the postcode field"
   },
   "0O+VL8": {
-    "defaultMessage": "Number",
+    "defaultMessage": "Getal",
     "description": "Number component type label",
     "originalDefault": "Number"
   },
@@ -182,7 +182,7 @@
     "originalDefault": "CSS class"
   },
   "3tz37g": {
-    "defaultMessage": "Selectboxes",
+    "defaultMessage": "Selectievakjes",
     "description": "Selectboxes component type label",
     "originalDefault": "Selectboxes"
   },
@@ -202,7 +202,7 @@
     "originalDefault": "{field} must be a valid postcode."
   },
   "4D1HCF": {
-    "defaultMessage": "Map",
+    "defaultMessage": "Kaart",
     "description": "Map component type label",
     "originalDefault": "Map"
   },
@@ -222,12 +222,12 @@
     "originalDefault": "Drag or <browse>select</browse> files to upload."
   },
   "4tUcbs": {
-    "defaultMessage": "Form fields",
+    "defaultMessage": "Formuliervelden",
     "description": "Basic components group label",
     "originalDefault": "Form fields"
   },
   "4xtxl1": {
-    "defaultMessage": "AddressNL",
+    "defaultMessage": "NL-adres",
     "description": "AddressNL component type label",
     "originalDefault": "AddressNL"
   },
@@ -269,6 +269,7 @@
   "6/3Dta": {
     "defaultMessage": "BSN",
     "description": "BSN component type label",
+    "isTranslated": true,
     "originalDefault": "BSN"
   },
   "68Aey7": {
@@ -363,7 +364,7 @@
     "originalDefault": "Date of birth"
   },
   "9W0yX/": {
-    "defaultMessage": "File upload",
+    "defaultMessage": "Bestandsupload",
     "description": "File component type label",
     "originalDefault": "File upload"
   },
@@ -373,7 +374,7 @@
     "originalDefault": "Open Forms should update customer data after submission"
   },
   "9dLBrj": {
-    "defaultMessage": "Do not display the configured label and top line as the header in the container fieldset.",
+    "defaultMessage": "Verberg het ingestelde label en de bovenrand in de header van de veldengroep.",
     "description": "Tooltip for 'hideLabel' builder field",
     "originalDefault": "Do not display the configured label and top line as the header in the container fieldset."
   },
@@ -453,7 +454,7 @@
     "originalDefault": "If specified, the user must check at least this many options."
   },
   "Bfda2A": {
-    "defaultMessage": "Co-sign",
+    "defaultMessage": "Mede-ondertekenen",
     "description": "Cosign v2 component type label",
     "originalDefault": "Co-sign"
   },
@@ -509,7 +510,7 @@
     "originalDefault": "Custom error messages for this component and their translations"
   },
   "DDeDij": {
-    "defaultMessage": "Phone number",
+    "defaultMessage": "Telefoonnummer",
     "description": "PhoneNumber component type label",
     "originalDefault": "Phone number"
   },
@@ -560,7 +561,7 @@
     "originalDefault": "Allow negative values"
   },
   "E8UptU": {
-    "defaultMessage": "Partners",
+    "defaultMessage": "Partner(s)",
     "description": "Partners component type label",
     "originalDefault": "Partners"
   },
@@ -606,7 +607,7 @@
     "originalDefault": "Column sizes"
   },
   "G+capl": {
-    "defaultMessage": "Profile",
+    "defaultMessage": "Profiel",
     "description": "CustomerProfile component type label",
     "originalDefault": "Profile"
   },
@@ -616,7 +617,7 @@
     "originalDefault": "Value in whole numbers, between {minZoom} and {maxZoom}."
   },
   "GHg1V/": {
-    "defaultMessage": "Currency",
+    "defaultMessage": "Bedrag",
     "description": "Currency component type label",
     "originalDefault": "Currency"
   },
@@ -739,7 +740,7 @@
     "originalDefault": "Longitude"
   },
   "M/Akft": {
-    "defaultMessage": "Search component(s)",
+    "defaultMessage": "Zoek component(en)",
     "description": "Components list search input accessible label",
     "originalDefault": "Search component(s)"
   },
@@ -754,12 +755,12 @@
     "originalDefault": "Disable adding or removing groups"
   },
   "N25aMd": {
-    "defaultMessage": "Family members",
+    "defaultMessage": "Gezinsleden",
     "description": "NpFamilyMembers component type label",
     "originalDefault": "Family members"
   },
   "N46vH2": {
-    "defaultMessage": "Search component(s)",
+    "defaultMessage": "Zoek component(en)",
     "description": "Components list search input placeholder",
     "originalDefault": "Search component(s)"
   },
@@ -795,7 +796,7 @@
     "originalDefault": "The location derivation options have known usability problems and do not work when used inside repeating groups. We recommend that you use the 'AddressNL' component instead. Existing forms will continue to function as before, but this feature will not receive further improvements."
   },
   "OlHdZq": {
-    "defaultMessage": "License plate",
+    "defaultMessage": "Kenteken",
     "description": "Licenseplate component type label",
     "originalDefault": "License plate"
   },
@@ -866,7 +867,7 @@
     "originalDefault": "Add/remove"
   },
   "RulJnf": {
-    "defaultMessage": "Deprecated",
+    "defaultMessage": "Verouderd",
     "description": "Deprecated component label",
     "originalDefault": "Deprecated"
   },
@@ -1089,7 +1090,7 @@
     "originalDefault": "File name"
   },
   "XiLc3z": {
-    "defaultMessage": "Co-sign",
+    "defaultMessage": "Mede-ondertekenen",
     "description": "CoSign v1 component type label",
     "originalDefault": "Co-sign"
   },
@@ -1099,7 +1100,7 @@
     "originalDefault": "Remove"
   },
   "XsjoZd": {
-    "defaultMessage": "Date & time",
+    "defaultMessage": "Datum en tijd",
     "description": "Datetime component type label",
     "originalDefault": "Date & time"
   },
@@ -1131,6 +1132,7 @@
   "YKpmvq": {
     "defaultMessage": "Postcode",
     "description": "Postcode component type label",
+    "isTranslated": true,
     "originalDefault": "Postcode"
   },
   "YObTjL": {
@@ -1164,7 +1166,7 @@
     "originalDefault": "Date of birth"
   },
   "Za0/8c": {
-    "defaultMessage": "The file registration options have been moved to the 'variables' tab of the form edit page.",
+    "defaultMessage": "De bijlage-registratieoptis zijn verplaatst naar de 'variabelen'-tab op de formulier-bewerkpagina.",
     "description": "File component registration tab configuration moved notice",
     "originalDefault": "The file registration options have been moved to the 'variables' tab of the form edit page."
   },
@@ -1194,7 +1196,7 @@
     "originalDefault": "Derive street name"
   },
   "auqTVZ": {
-    "defaultMessage": "Soft required errors",
+    "defaultMessage": "Foutmeldingen aangeraden velden",
     "description": "SoftRequiredErrors component type label",
     "originalDefault": "Soft required errors"
   },
@@ -1315,7 +1317,7 @@
     "originalDefault": "Allow the selection of specific children that are retrieved from the external source for further processing."
   },
   "e7ovEV": {
-    "defaultMessage": "Repeating group",
+    "defaultMessage": "Herhalende groep",
     "description": "Editgrid component type label",
     "originalDefault": "Repeating group"
   },
@@ -1362,6 +1364,7 @@
   "f9CqUS": {
     "defaultMessage": "Layout",
     "description": "Layout components group label",
+    "isTranslated": true,
     "originalDefault": "Layout"
   },
   "fB4Vug": {
@@ -1406,7 +1409,7 @@
     "originalDefault": "City"
   },
   "g8jZU+": {
-    "defaultMessage": "No matching components found.",
+    "defaultMessage": "Kon geen overeenkomstige componenten vinden.",
     "description": "Components list 'no results found' message",
     "originalDefault": "No matching components found."
   },
@@ -1432,7 +1435,7 @@
     "originalDefault": "Postcode"
   },
   "gv32/3": {
-    "defaultMessage": "Content",
+    "defaultMessage": "Vrije tekst",
     "description": "Content component type label",
     "originalDefault": "Content"
   },
@@ -1473,7 +1476,7 @@
     "originalDefault": "Mobile"
   },
   "i+nuPv": {
-    "defaultMessage": "Fieldset",
+    "defaultMessage": "Veldengroep",
     "description": "Fieldset component type label",
     "originalDefault": "Fieldset"
   },
@@ -1523,7 +1526,7 @@
     "originalDefault": "This will make the text area auto expand its height as the user is typing into the area."
   },
   "jXYcaq": {
-    "defaultMessage": "Textfield",
+    "defaultMessage": "Tekstveld",
     "description": "Textfield component type label",
     "originalDefault": "Textfield"
   },
@@ -1625,7 +1628,7 @@
     "originalDefault": "House number"
   },
   "mgtQm3": {
-    "defaultMessage": "Special fields",
+    "defaultMessage": "Speciale velden",
     "description": "Special components group label",
     "originalDefault": "Special fields"
   },
@@ -1637,6 +1640,7 @@
   "n8XxZg": {
     "defaultMessage": "IBAN",
     "description": "IBAN component type label",
+    "isTranslated": true,
     "originalDefault": "IBAN"
   },
   "n9T2Oy": {
@@ -1650,7 +1654,7 @@
     "originalDefault": "Whether to add children information to the component."
   },
   "nKLmfd": {
-    "defaultMessage": "Preset",
+    "defaultMessage": "Voorgedefinieerd",
     "description": "Preset components group label",
     "originalDefault": "Preset"
   },
@@ -1681,7 +1685,7 @@
     "originalDefault": "Minimum selected checkboxes (e.g. 1)"
   },
   "oHr4Nz": {
-    "defaultMessage": "Children",
+    "defaultMessage": "Kinderen",
     "description": "Children component type label",
     "originalDefault": "Children"
   },
@@ -1777,7 +1781,7 @@
     "originalDefault": "Postcode"
   },
   "rZy0zu": {
-    "defaultMessage": "Date",
+    "defaultMessage": "Datum",
     "description": "Date component type label",
     "originalDefault": "Date"
   },
@@ -1828,7 +1832,7 @@
     "originalDefault": "Tile layer"
   },
   "t5vd9s": {
-    "defaultMessage": "Time",
+    "defaultMessage": "Tijd",
     "description": "Time component type label",
     "originalDefault": "Time"
   },
@@ -1875,6 +1879,7 @@
   "uXkEQJ": {
     "defaultMessage": "Radio",
     "description": "Radio component type label",
+    "isTranslated": true,
     "originalDefault": "Radio"
   },
   "unjdIB": {
@@ -1903,7 +1908,7 @@
     "originalDefault": "Specify the attribute holding the pre-fill data."
   },
   "wBLfLz": {
-    "defaultMessage": "Signature",
+    "defaultMessage": "Handtekening",
     "description": "Signature component type label",
     "originalDefault": "Signature"
   },
@@ -1913,7 +1918,7 @@
     "originalDefault": "Map settings"
   },
   "wLPbi4": {
-    "defaultMessage": "Email",
+    "defaultMessage": "E-mail",
     "description": "Email component type label",
     "originalDefault": "Email"
   },
@@ -1973,7 +1978,7 @@
     "originalDefault": "Translations"
   },
   "yPD9g1": {
-    "defaultMessage": "Select",
+    "defaultMessage": "Keuzelijst",
     "description": "Select component type label",
     "originalDefault": "Select"
   },
@@ -1993,7 +1998,7 @@
     "originalDefault": "Edit component"
   },
   "yr8cz5": {
-    "defaultMessage": "Checkbox",
+    "defaultMessage": "Selectievakje",
     "description": "Checkbox component type label",
     "originalDefault": "Checkbox"
   },
