@@ -61,6 +61,8 @@ const Tooltip: React.FC<TooltipProps> = ({text}) => {
       {isOpen && (
         <div
           className="offb-tooltip-content"
+          // see https://github.com/floating-ui/floating-ui/discussions/3405#discussioncomment-14657647
+          // eslint-disable-next-line react-hooks/refs
           ref={refs.setFloating}
           style={{
             maxInlineSize: 'var(--of-builder-tooltip-max-inline-size, 200px)',

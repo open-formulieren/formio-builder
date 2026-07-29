@@ -2,7 +2,7 @@ import type {ColumnsComponentSchema} from '@open-formulieren/types';
 import type {Column} from '@open-formulieren/types/dist/components/columns';
 import type {FieldArrayRenderProps} from 'formik';
 import {Field, FieldArray, useFormikContext} from 'formik';
-import {useContext, useEffect, useRef, useState} from 'react';
+import {useContext, useRef} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import {ClearOnHide, Hidden, Key} from '@/components/builder';
@@ -127,18 +127,11 @@ const Columns: React.FC = () => {
   const intl = useIntl();
   const {getFieldProps, validateField} = useFormikContext();
   const {value: columns = []} = getFieldProps<Column[] | undefined>('columns');
-  const [mustValidate, setMustValidate] = useState(false);
 
   const tooltip = intl.formatMessage({
     description: "Tooltip for 'columns' builder field",
     defaultMessage: 'Specify the size of each column. The sum of all the widths should be 100%.',
   });
-
-  useEffect(() => {
-    if (!mustValidate) return;
-    validateField('columns');
-    setMustValidate(false);
-  }, [mustValidate, validateField]);
 
   return (
     <Component
@@ -202,7 +195,7 @@ const Columns: React.FC = () => {
                         sizeMobile: 4,
                         components: [],
                       } satisfies Column);
-                      setMustValidate(true);
+                      window.queueMicrotask(() => validateField('columns'));
                     }}
                   >
                     <i className="fa fa-plus" aria-hidden="true" />

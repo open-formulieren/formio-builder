@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild';
 import {sassPlugin} from 'esbuild-sass-plugin';
-import * as sass from 'sass';
+import {NodePackageImporter} from 'sass-embedded';
 
 await esbuild.build({
   entryPoints: ['src/index.ts'],
@@ -14,8 +14,8 @@ await esbuild.build({
   sourcemap: true,
   plugins: [
     sassPlugin({
-      embedded: false,
-      importers: [new sass.NodePackageImporter()],
+      embedded: true,
+      importers: [new NodePackageImporter()],
     }),
   ],
 });

@@ -36,7 +36,8 @@ test('Option values and labels are required fields', async () => {
   const labelInput = screen.getByLabelText('Option label');
   await user.type(labelInput, 'Foo');
   await user.clear(labelInput);
-  await user.keyboard('[Tab]');
+  const submitButton = screen.getByRole('button', {name: 'Save'});
+  await user.click(submitButton);
   expect(await screen.findByText('The option label is a required field.')).toBeVisible();
   expect(await screen.findByText('The option value is a required field.')).toBeVisible();
 });
