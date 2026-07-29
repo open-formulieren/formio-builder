@@ -66,11 +66,8 @@ export interface FormDesigner {
 
 export interface BuilderInfo<S extends AnyComponentSchema> {
   title: string;
-  group?: string;
   icon: string;
-  documentation?: string;
   schema: S;
-  weight?: number;
 }
 
 type DefaultValueOf<S> = S extends {defaultValue?: infer D} ? D : never;

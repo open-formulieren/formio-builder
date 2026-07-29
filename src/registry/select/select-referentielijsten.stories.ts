@@ -17,42 +17,18 @@ export default {
       type: 'select',
       key: 'select',
       label: 'A select field',
-      dataSrc: 'values',
-      dataType: 'string',
       openForms: {
         dataSrc: 'manual',
         translations: {},
       },
       data: {values: [{value: '', label: ''}]},
-      values: [{value: '', label: ''}],
       defaultValue: '',
     },
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'Select',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'select',
-        key: 'select',
-        label: 'A select field',
-        dataSrc: 'values',
-        dataType: 'string',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        data: {values: [{value: '', label: ''}]},
-        values: [{value: '', label: ''}],
-        defaultValue: '',
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

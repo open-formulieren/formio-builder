@@ -27,21 +27,8 @@ export default {
       key: 'map',
       label: 'A map',
     },
-
-    builderInfo: {
-      title: 'Map',
-      icon: 'map',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'map',
-        key: 'map',
-        label: 'A map',
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

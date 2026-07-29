@@ -18,19 +18,6 @@ export default {
       key: 'columns',
       columns: [],
     },
-
-    builderInfo: {
-      title: 'Columns',
-      icon: 'columns',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'columns',
-        key: 'columns',
-        columns: [],
-      },
-    },
   },
 } satisfies Meta<typeof ComponentEditForm>;
 

@@ -18,18 +18,6 @@ test('(Added) column width sliders configure the width', async () => {
         key: 'columns',
         columns: [],
       }}
-      builderInfo={{
-        title: 'Columns',
-        icon: 'columns',
-        group: 'layout',
-        weight: 10,
-        schema: {
-          id: 'wekruya',
-          type: 'columns',
-          key: 'columns',
-          columns: [],
-        },
-      }}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}

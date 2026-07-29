@@ -18,7 +18,6 @@ type Story = StoryObj<typeof ComponentEditForm>;
 const render: StoryFn<typeof ComponentEditForm> = ({
   isNew,
   component,
-  builderInfo,
   onCancel,
   onRemove,
   onSubmit,
@@ -26,7 +25,6 @@ const render: StoryFn<typeof ComponentEditForm> = ({
   <ComponentEditForm
     isNew={isNew}
     component={component}
-    builderInfo={builderInfo}
     onCancel={onCancel}
     onRemove={onRemove}
     onSubmit={onSubmit}
@@ -43,18 +41,6 @@ export const Default: Story = {
       type: 'textfield',
       label: 'Text field',
       key: 'textField',
-    },
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: 'terminal',
-      schema: {
-        id: 'wekruya',
-        type: 'textfield',
-        label: 'Text field',
-        key: 'textField',
-      },
-      weight: 0,
     },
   },
 };

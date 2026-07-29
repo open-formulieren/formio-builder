@@ -13,11 +13,7 @@ export default {
     isNew: true,
     component: {
       id: 'kiweljhr',
-      storage: 'url',
-      url: '',
       type: 'file',
-      options: {withCredentials: true},
-      webcam: false,
       key: 'file',
       label: 'A file upload',
       file: {
@@ -30,30 +26,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'File upload',
-      icon: '',
-      group: 'file',
-      weight: 10,
-      schema: {
-        id: 'kiweljhr',
-        storage: 'url',
-        url: '',
-        type: 'file',
-        options: {withCredentials: true},
-        webcam: false,
-        key: 'file',
-        label: 'A file upload',
-        file: {
-          name: '',
-          type: [],
-          allowedTypesLabels: [],
-        },
-        filePattern: '',
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

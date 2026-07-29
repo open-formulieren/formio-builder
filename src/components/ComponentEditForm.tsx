@@ -8,14 +8,12 @@ import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
-import type {BuilderInfo} from '@/registry/types';
 
 import GenericComponentPreview from './ComponentPreview';
 
 export interface ComponentEditFormProps {
   isNew: boolean;
   component: AnyComponentSchema;
-  builderInfo: BuilderInfo<AnyComponentSchema>;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSubmit: (component: AnyComponentSchema) => void;
@@ -53,7 +51,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({onSubmit, onCancel, onRemove}) => 
 const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   isNew,
   component,
-  builderInfo,
   onCancel,
   onRemove,
   onSubmit,
@@ -62,7 +59,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
   const builderContext = useContext(BuilderContext);
 
   const registryEntry = getRegistryEntry(component.type);
-  const {edit: EditForm, editSchema: zodSchema} = registryEntry;
+  const {edit: EditForm, editSchema: zodSchema, builderInfo} = registryEntry;
   const hasPreview = registryEntry.preview.panel !== null;
 
   let initialValues = cloneDeep(component);

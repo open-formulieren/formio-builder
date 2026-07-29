@@ -15,21 +15,11 @@ export default {
       type: 'addressNL',
       key: 'address',
       label: 'An address field',
-    },
-    builderInfo: {
-      title: 'Address NL',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'addressNL',
-        key: 'address',
-        label: 'An address field',
-      },
+      layout: 'singleColumn',
+      deriveAddress: false,
     },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

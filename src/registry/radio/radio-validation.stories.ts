@@ -23,27 +23,8 @@ export default {
       values: [{value: '', label: ''}],
       defaultValue: '',
     },
-
-    builderInfo: {
-      title: 'Radio',
-      icon: 'dot-circle-o',
-      group: 'basic',
-      weight: 100,
-      schema: {
-        id: 'wqimsadk',
-        type: 'radio',
-        key: 'radio',
-        label: 'A radio field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [{value: '', label: ''}],
-        defaultValue: '',
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 
@@ -90,7 +71,7 @@ export const TranslationsArentRequired: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      expect(await editForm.queryByText('Required')).toBeNull();
+      expect(editForm.queryByText('Required')).toBeNull();
     });
   },
 };

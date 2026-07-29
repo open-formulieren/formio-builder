@@ -31,31 +31,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-
-    builderInfo: {
-      title: 'Soft required errors',
-      icon: 'html5',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'softRequiredErrors',
-        key: 'softRequiredErrors',
-        html: '',
-        openForms: {
-          translations: {
-            nl: {
-              html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
-            },
-            en: {
-              html: '<p>Not all fields have been filled.</p>\n{{ missingFields }}',
-            },
-          },
-        },
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

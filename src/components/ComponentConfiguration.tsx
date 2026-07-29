@@ -30,7 +30,6 @@ export type ComponentConfigurationProps = Omit<MergedProps, 'component'> & {
  * @param options.getFormComponents        Function returning all other Formio components in the builder context.
  * @param options.isNew                    Whether the Formio component is a new component being added or an existing being edited.
  * @param options.component                The (starter) schema of the Formio component being edited.
- * @param options.builderInfo              Meta information from the builder configuration for the Formio component.
  * @param options.onCancel                 Callback to invoke when the 'cancel' button is clicked.
  * @param options.onRemove                 Callback to invoke when the 'remove' button is clicked.
  * @param options.onSubmit                 Callback to invoke when the form is saved. Receives the component
@@ -56,7 +55,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
   getAuthPlugins,
   isNew,
   component,
-  builderInfo,
   formType = 'regular',
   onCancel,
   onRemove,
@@ -91,7 +89,6 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
       <ComponentEditForm
         isNew={isNew}
         component={component}
-        builderInfo={builderInfo}
         onCancel={onCancel}
         onRemove={onRemove}
         onSubmit={onSubmit}

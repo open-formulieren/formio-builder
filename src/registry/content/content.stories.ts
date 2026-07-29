@@ -31,31 +31,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-
-    builderInfo: {
-      title: 'Content',
-      icon: 'html5',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'content',
-        key: 'content',
-        html: '',
-        openForms: {
-          translations: {
-            nl: {
-              html: '<p>Nederlandse inhoud</p>',
-            },
-            en: {
-              html: '<p>English content</p>',
-            },
-          },
-        },
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 
