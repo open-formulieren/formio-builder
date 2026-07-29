@@ -24,18 +24,10 @@ test('Switch to multiple sets empty array as default value', async () => {
     defaultValue: '',
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}
@@ -74,18 +66,10 @@ test('Switch to multiple sets empty array as default value when initial is null'
     defaultValue: null, // This can be set by Formio
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}
@@ -123,18 +107,10 @@ test('Switch to non multiple sets empty string as default value', async () => {
     multiple: true,
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}

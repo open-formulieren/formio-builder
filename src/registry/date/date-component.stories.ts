@@ -21,24 +21,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-
-    builderInfo: {
-      title: 'Date Field',
-      icon: 'calendar',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'date',
-        key: 'date',
-        label: 'A date field',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

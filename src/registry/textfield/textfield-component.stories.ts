@@ -18,24 +18,8 @@ export default {
         required: false,
       },
     },
-
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: 'terminal',
-      schema: {
-        id: 'wekruya',
-        type: 'textfield',
-        key: 'textfield',
-        label: 'A text field',
-        validate: {
-          required: false,
-        },
-      },
-      weight: 0,
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

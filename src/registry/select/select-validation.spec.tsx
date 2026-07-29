@@ -23,18 +23,10 @@ test('Option values and labels are required fields', async () => {
     defaultValue: '',
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={vi.fn()}
@@ -66,18 +58,10 @@ test('There is always at least one option', async () => {
     defaultValue: '',
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}
@@ -107,18 +91,10 @@ test('All translations are optional', async () => {
     defaultValue: '',
   };
 
-  const builderInfo = {
-    title: 'Select',
-    icon: 'th-list',
-    group: 'basic',
-    weight: 70,
-    schema: component,
-  };
   contextRender(
     <ComponentEditForm
       isNew
       component={component}
-      builderInfo={builderInfo}
       onCancel={vi.fn()}
       onRemove={vi.fn()}
       onSubmit={onSubmit}

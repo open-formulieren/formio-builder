@@ -12,7 +12,6 @@ import {select} from 'react-select-event';
 import {expect, fireEvent, fn, userEvent, waitFor, within} from 'storybook/test';
 
 import type {FormType} from '@/context';
-import type {BuilderInfo} from '@/registry/types';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
@@ -92,18 +91,6 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: 'terminal',
-      schema: {
-        id: 'textfield',
-        key: 'textfield',
-        type: 'textfield',
-        label: 'A text field',
-      },
-      weight: 0,
-    },
   },
 } as Meta<typeof ComponentConfiguration>;
 
@@ -120,7 +107,6 @@ interface TemplateArgs {
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
-  builderInfo: BuilderInfo<AnyComponentSchema>;
   formType: FormType;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -140,7 +126,6 @@ const Template: StoryFn<TemplateArgs> = ({
   referenceListsTableItems,
   fileTypes,
   isNew,
-  builderInfo,
   formType,
   onCancel,
   onRemove,
@@ -166,7 +151,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
     component={component}
     isNew={isNew}
-    builderInfo={builderInfo}
     formType={formType}
     onCancel={onCancel}
     onRemove={onRemove}
@@ -201,16 +185,6 @@ export const UnsupportedComponent: Story = {
     component: {
       // @ts-expect-error unsupported type value
       type: 'an-invalid-type',
-    },
-    builderInfo: {
-      title: 'invalid',
-      group: 'basic',
-      icon: 'terminal',
-      schema: {
-        // @ts-expect-error unsupported type value
-        type: 'an-invalid-type',
-      },
-      weight: 0,
     },
   },
 };
@@ -294,21 +268,6 @@ export const Email: Story = {
       validate: {
         required: false,
       },
-    },
-    builderInfo: {
-      title: 'Email',
-      group: 'basic',
-      icon: 'at',
-      schema: {
-        id: 'ikrnvhe',
-        type: 'email',
-        key: 'email',
-        label: 'An email field',
-        validate: {
-          required: false,
-        },
-      },
-      weight: 10,
     },
   },
 
@@ -402,22 +361,6 @@ export const NumberField: Story = {
         },
       },
     ],
-
-    builderInfo: {
-      title: 'Number',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {
-        id: 'wekruya',
-        type: 'number',
-        key: 'number',
-        label: 'A number field',
-        validate: {
-          required: false,
-        },
-      },
-      weight: 30,
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -535,24 +478,6 @@ export const Textarea: Story = {
         required: false,
       },
     },
-
-    builderInfo: {
-      title: 'Textarea',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {
-        id: 'wekruya',
-        type: 'textarea',
-        key: 'textarea',
-        label: 'A textarea field',
-        autoExpand: false,
-        rows: 3,
-        validate: {
-          required: false,
-        },
-      },
-      weight: 30,
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -616,22 +541,6 @@ export const DateField: Story = {
       label: 'A date field',
       validate: {
         required: false,
-      },
-    },
-
-    builderInfo: {
-      title: 'Date Field',
-      icon: 'calendar',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'date',
-        key: 'date',
-        label: 'A date field',
-        validate: {
-          required: false,
-        },
       },
     },
   },
@@ -708,22 +617,6 @@ export const DateTimeField: Story = {
         required: false,
       },
     },
-
-    builderInfo: {
-      title: 'Date/Time Field',
-      icon: 'calendar-plus',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'datetime',
-        key: 'datetime',
-        label: 'A datetime field',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -795,22 +688,6 @@ export const TimeField: Story = {
       label: 'A time field',
       validate: {
         required: false,
-      },
-    },
-
-    builderInfo: {
-      title: 'Time Field',
-      icon: 'clock-o',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'time',
-        key: 'time',
-        label: 'A time field',
-        validate: {
-          required: false,
-        },
       },
     },
   },
@@ -887,23 +764,6 @@ export const Postcode: Story = {
         pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
       },
     },
-
-    builderInfo: {
-      title: 'Postcode',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'postcode',
-        key: 'postcode',
-        label: 'A postcode field',
-        validate: {
-          required: false,
-          pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -973,19 +833,6 @@ export const PhoneNumber: Story = {
       key: 'phoneNumber',
       label: 'A phone number field',
     },
-
-    builderInfo: {
-      title: 'Phone number',
-      icon: 'phone-square',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'phoneNumber',
-        key: 'phoneNumber',
-        label: 'A phone number field',
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -1054,25 +901,6 @@ export const FileUpload: Story = {
         allowedTypesLabels: [],
       },
       filePattern: '',
-    },
-
-    builderInfo: {
-      title: 'File upload',
-      icon: '',
-      group: 'file',
-      weight: 10,
-      schema: {
-        id: 'kiweljhr',
-        type: 'file',
-        key: 'file',
-        label: 'A file upload',
-        file: {
-          name: '',
-          type: [],
-          allowedTypesLabels: [],
-        },
-        filePattern: '',
-      },
     },
   },
 
@@ -1196,25 +1024,6 @@ export const SelectBoxes: Story = {
       },
       values: [],
       defaultValue: {},
-    },
-
-    builderInfo: {
-      title: 'Select Boxes',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        key: 'selectboxes',
-        label: 'A selectboxes field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [],
-        defaultValue: {},
-      },
     },
   },
 
@@ -1439,25 +1248,6 @@ export const Radio: Story = {
       values: [],
       defaultValue: '',
     },
-
-    builderInfo: {
-      title: 'Radio',
-      icon: 'dot-circle-o',
-      group: 'basic',
-      weight: 100,
-      schema: {
-        id: 'wqimsadk',
-        type: 'radio',
-        key: 'radio',
-        label: 'A radio field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [],
-        defaultValue: '',
-      },
-    },
   },
 
   play: async ({canvasElement, step, args}) => {
@@ -1670,25 +1460,6 @@ export const Select: Story = {
       data: {values: []},
       defaultValue: '',
     } satisfies SelectComponentSchema,
-
-    builderInfo: {
-      title: 'Select',
-      icon: 'th-list',
-      group: 'basic',
-      weight: 70,
-      schema: {
-        id: 'wqimsadk',
-        type: 'select',
-        key: 'select',
-        label: 'A select field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        data: {values: []},
-        defaultValue: '',
-      },
-    },
   },
 
   play: async ({canvasElement, step, args}) => {
@@ -1923,22 +1694,6 @@ export const BSN: Story = {
         required: false,
       },
     },
-
-    builderInfo: {
-      title: 'BSN Field',
-      icon: 'id-card-o',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'bsn',
-        key: 'bsn',
-        label: 'A BSN field',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -2024,23 +1779,6 @@ export const Checkbox: Story = {
         defaultValue: false,
       },
     ],
-
-    builderInfo: {
-      title: 'Checkbox',
-      icon: 'check-square',
-      group: 'basic',
-      weight: 50,
-      schema: {
-        id: 'wekruya',
-        type: 'checkbox',
-        key: 'checkbox',
-        label: 'A checkbox field',
-        validate: {
-          required: false,
-        },
-        defaultValue: false,
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -2157,23 +1895,6 @@ export const Currency: Story = {
         },
       },
     ],
-
-    builderInfo: {
-      title: 'Currency',
-      icon: 'eur',
-      group: 'basic',
-      weight: 70,
-      schema: {
-        id: 'wekruya',
-        type: 'currency',
-        currency: 'EUR',
-        key: 'currency',
-        label: 'A currency field',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -2239,22 +1960,6 @@ export const Iban: Story = {
       label: 'An IBAN field',
       validate: {
         required: false,
-      },
-    },
-
-    builderInfo: {
-      title: 'IBAN Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'iban',
-        key: 'iban',
-        label: 'An IBAN field',
-        validate: {
-          required: false,
-        },
       },
     },
   },
@@ -2329,23 +2034,6 @@ export const LicensePlate: Story = {
         pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
       },
     },
-
-    builderInfo: {
-      title: 'licenseplate Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'licenseplate',
-        key: 'licenseplate',
-        label: 'A license plate field',
-        validate: {
-          required: false,
-          pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -2415,21 +2103,6 @@ export const NpFamilyMembers: Story = {
       label: 'An npFamilyMembers field',
       includeChildren: true,
       includePartners: false,
-    },
-
-    builderInfo: {
-      title: 'Family members',
-      icon: 'users',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wqimsadk',
-        type: 'npFamilyMembers',
-        key: 'npFamilyMembers',
-        label: 'An npFamilyMembers field',
-        includeChildren: true,
-        includePartners: false,
-      },
     },
   },
 
@@ -2517,36 +2190,6 @@ export const AddressNL: Story = {
         },
       },
     } satisfies AddressNLComponentSchema,
-    builderInfo: {
-      title: 'Address Field',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'addressNL',
-        key: 'address',
-        label: 'A Dutch address',
-        validate: {
-          required: false,
-        },
-        deriveAddress: false,
-        layout: 'singleColumn',
-        openForms: {
-          translations: {},
-          components: {
-            postcode: {
-              validate: {pattern: '1015 [a-zA-Z]{2}'},
-              translatedErrors: {},
-            },
-            city: {
-              validate: {pattern: 'Amsterdam'},
-              translatedErrors: {},
-            },
-          },
-        },
-      },
-    },
   },
 
   play: async ({canvasElement, args}) => {
@@ -2598,19 +2241,6 @@ export const Columns: Story = {
       key: 'columns',
       columns: [],
     },
-
-    builderInfo: {
-      title: 'Columns',
-      icon: 'columns',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'columns',
-        key: 'columns',
-        columns: [],
-      },
-    },
   },
 
   play: async ({canvasElement, args, step}) => {
@@ -2656,21 +2286,6 @@ export const FieldSet: Story = {
       label: 'A field set',
       hideHeader: false,
       components: [],
-    },
-
-    builderInfo: {
-      title: 'Field set',
-      icon: 'th-large',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'fieldset',
-        key: 'fieldset',
-        label: 'A field set',
-        hideHeader: false,
-        components: [],
-      },
     },
   },
 
@@ -2737,23 +2352,6 @@ export const EditGrid: Story = {
       groupLabel: 'Group',
       disableAddingRemovingRows: false,
       components: [],
-    },
-
-    builderInfo: {
-      title: 'Repeating group',
-      icon: 'repeat',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'editgrid',
-        key: 'editgrid',
-        label: 'A repeating group',
-        hideLabel: false,
-        groupLabel: 'Group',
-        disableAddingRemovingRows: false,
-        components: [],
-      },
     },
   },
 
@@ -2826,19 +2424,6 @@ export const CosignV1: Story = {
       label: 'A cosign v1',
       authPlugin: 'digid',
     },
-    builderInfo: {
-      title: 'Co-sign (old)',
-      icon: 'id-card-o',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'coSign',
-        key: 'coSign',
-        label: 'A cosign v1',
-        authPlugin: 'digid',
-      },
-    },
   },
 
   play: async ({canvasElement, step, args}) => {
@@ -2881,18 +2466,6 @@ export const CosignV2: Story = {
       type: 'cosign',
       key: 'cosign',
       label: 'A cosign v2',
-    },
-    builderInfo: {
-      title: 'Cosign',
-      icon: 'pen-nib',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'cosign',
-        key: 'cosign',
-        label: 'A cosign v2',
-      },
     },
   },
 
@@ -2955,20 +2528,6 @@ export const Signature: Story = {
       label: 'A signature',
       footer: '',
     },
-
-    builderInfo: {
-      title: 'Signature',
-      icon: 'pencil',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'signature',
-        key: 'signature',
-        label: 'A signature',
-        footer: '',
-      },
-    },
   },
 
   play: async ({canvasElement, step, args}) => {
@@ -3026,19 +2585,6 @@ export const LeafletMap: Story = {
       key: 'map',
       label: 'A map',
     },
-
-    builderInfo: {
-      title: 'Map',
-      icon: 'map',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'map',
-        key: 'map',
-        label: 'A map',
-      },
-    },
   },
 
   play: async ({canvasElement, step, args}) => {
@@ -3094,19 +2640,6 @@ export const Content: Story = {
       type: 'content',
       key: 'content',
       html: '<p>Hello storybook</p>',
-    },
-
-    builderInfo: {
-      title: 'Content',
-      icon: 'html5',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'content',
-        key: 'content',
-        html: '<p>Hello storybook</p>',
-      },
     },
   },
 
@@ -3170,26 +2703,6 @@ export const SoftRequiredErrors: Story = {
         translations: {
           nl: {
             html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
-          },
-        },
-      },
-    },
-
-    builderInfo: {
-      title: 'Soft required errors',
-      icon: 'html5',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'softRequiredErrors',
-        key: 'softRequiredErrors',
-        html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
-        openForms: {
-          translations: {
-            nl: {
-              html: '<p>Niet alle velden zijn ingevuld.</p>\n{{ missingFields }}',
-            },
           },
         },
       },
@@ -3322,23 +2835,6 @@ export const Profile: Story = {
       description: 'A description for the Profile component',
       shouldUpdateCustomerData: true,
       digitalAddressTypes: ['email', 'phoneNumber'],
-    },
-
-    builderInfo: {
-      title: 'Profile',
-      icon: 'comments',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'customerProfile',
-        key: 'profile',
-        label: 'Profile',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the Profile component',
-        shouldUpdateCustomerData: true,
-        digitalAddressTypes: ['email', 'phoneNumber'],
-      },
     },
   },
 

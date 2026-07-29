@@ -27,26 +27,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'Select',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        key: 'selectboxes',
-        label: 'A selectboxes field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [{value: '', label: ''}],
-        defaultValue: {},
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 

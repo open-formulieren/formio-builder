@@ -26,27 +26,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-
-    builderInfo: {
-      title: 'Select Boxes',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        key: 'selectboxes',
-        label: 'A selectboxes field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [{value: '', label: ''}],
-        defaultValue: {},
-      },
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 
@@ -103,7 +84,7 @@ export const TranslationsArentRequired: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      await expect(await editForm.queryByText('Required')).toBeNull();
+      expect(editForm.queryByText('Required')).toBeNull();
     });
   },
 };
@@ -128,30 +109,6 @@ export const MinAndMaxSelectedInitialValues: Story = {
         {label: 'Option 4', value: '4'},
       ],
       defaultValue: {},
-    },
-
-    builderInfo: {
-      title: 'Select Boxes',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        key: 'selectboxes',
-        label: 'A selectboxes field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [
-          {label: 'Option 1', value: '1'},
-          {label: 'Option 2', value: '2'},
-          {label: 'Option 3', value: '3'},
-          {label: 'Option 4', value: '4'},
-        ],
-        defaultValue: {},
-      },
     },
   },
   play: async ({canvasElement, step}) => {

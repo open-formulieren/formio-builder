@@ -8,7 +8,6 @@ import type React from 'react';
 import {fn} from 'storybook/test';
 
 import type {FormType} from '@/context';
-import type {BuilderInfo} from '@/registry/types';
 import {
   DEFAULT_AUTH_PLUGINS,
   DEFAULT_COLORS,
@@ -36,20 +35,6 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: 'terminal',
-      schema: {
-        id: 'wekruya',
-        type: 'textfield',
-        key: 'textfield',
-        label: 'A textfield for a single page form',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the textfield component',
-      },
-      weight: 0,
-    },
   },
 } satisfies Meta<typeof ComponentConfiguration>;
 
@@ -66,7 +51,6 @@ interface TemplateArgs {
   prefillAttributes: Record<string, PrefillAttributeOption[]>;
   fileTypes: Array<{value: string; label: string}>;
   isNew: boolean;
-  builderInfo: BuilderInfo<AnyComponentSchema>;
   formType: FormType;
   onCancel: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -86,7 +70,6 @@ const Template: StoryFn<TemplateArgs> = ({
   referenceListsTableItems,
   fileTypes,
   isNew,
-  builderInfo,
   formType,
   onCancel,
   onRemove,
@@ -112,7 +95,6 @@ const Template: StoryFn<TemplateArgs> = ({
     getAuthPlugins={async () => DEFAULT_AUTH_PLUGINS}
     component={component}
     isNew={isNew}
-    builderInfo={builderInfo}
     formType={formType}
     onCancel={onCancel}
     onRemove={onRemove}
@@ -135,20 +117,6 @@ export const Textfield: Story = {
       description: 'A description for the textfield component',
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Text field',
-      group: 'basic',
-      icon: '',
-      schema: {
-        id: 'wekruya',
-        type: 'textfield',
-        key: 'textfield',
-        label: 'A textfield for a single page form',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the textfield component',
-      },
-      weight: 10,
-    },
   },
 };
 
@@ -163,20 +131,6 @@ export const Email: Story = {
       label: 'An email for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the email component',
-    },
-    builderInfo: {
-      title: 'Email',
-      group: 'basic',
-      icon: 'at',
-      schema: {
-        id: 'wekruya',
-        type: 'email',
-        key: 'email',
-        label: 'An email for a single page form',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the email component',
-      },
-      weight: 10,
     },
     formType: 'single_step',
   },
@@ -195,21 +149,6 @@ export const NumberField: Story = {
       validate: {
         required: false,
       },
-    },
-    builderInfo: {
-      title: 'Number',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {
-        id: 'wekruya',
-        type: 'number',
-        key: 'number',
-        label: 'A number field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-      weight: 30,
     },
     formType: 'single_step',
   },
@@ -232,23 +171,6 @@ export const Textarea: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Textarea',
-      group: 'basic',
-      icon: 'hashtag',
-      schema: {
-        id: 'wekruya',
-        type: 'textarea',
-        key: 'textarea',
-        label: 'A textarea field for a single page form',
-        autoExpand: false,
-        rows: 3,
-        validate: {
-          required: false,
-        },
-      },
-      weight: 30,
-    },
   },
 };
 
@@ -263,20 +185,6 @@ export const DateField: Story = {
       label: 'A date for a single page form',
       tooltip: 'An example for the tooltip',
       description: 'A description for the date component',
-    },
-    builderInfo: {
-      title: 'Date Field',
-      icon: 'calendar',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'date',
-        key: 'date',
-        label: 'A date for a single page form',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the date component',
-      },
     },
     formType: 'single_step',
   },
@@ -296,21 +204,6 @@ export const DateTimeField: Story = {
       },
     },
 
-    builderInfo: {
-      title: 'Date/Time Field',
-      icon: 'calendar-plus',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'datetime',
-        key: 'datetime',
-        label: 'A datetime field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-    },
     formType: 'single_step',
   },
 };
@@ -329,21 +222,6 @@ export const TimeField: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Time Field',
-      icon: 'clock-o',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'time',
-        key: 'time',
-        label: 'A time field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 };
 
@@ -362,22 +240,6 @@ export const Postcode: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Postcode',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'postcode',
-        key: 'postcode',
-        label: 'A postcode field for a single page form',
-        validate: {
-          required: false,
-          pattern: '^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[a-zA-Z]{2}$',
-        },
-      },
-    },
   },
 };
 
@@ -392,18 +254,6 @@ export const PhoneNumber: Story = {
       label: 'A phone number field for a single page form',
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Phone number',
-      icon: 'phone-square',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'phoneNumber',
-        key: 'phoneNumber',
-        label: 'A phone number field for a single page form',
-      },
-    },
   },
 };
 
@@ -424,24 +274,6 @@ export const SelectBoxes: Story = {
       defaultValue: {},
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Select Boxes',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        key: 'selectboxes',
-        label: 'A selectboxes field for a single page form',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [],
-        defaultValue: {},
-      },
-    },
   },
 };
 
@@ -463,25 +295,6 @@ export const Radio: Story = {
       values: [],
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Radio',
-      icon: 'dot-circle-o',
-      group: 'basic',
-      weight: 100,
-      schema: {
-        id: 'wekruya',
-        type: 'radio',
-        key: 'radio',
-        label: 'A radio for a single page form',
-        tooltip: 'An example for the tooltip',
-        description: 'A description for the radio component',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [],
-      },
-    },
   },
 };
 
@@ -503,24 +316,6 @@ export const Select: Story = {
       defaultValue: '',
     } satisfies SelectComponentSchema,
     formType: 'single_step',
-    builderInfo: {
-      title: 'Select',
-      icon: 'th-list',
-      group: 'basic',
-      weight: 70,
-      schema: {
-        id: 'wqimsadk',
-        type: 'select',
-        key: 'select',
-        label: 'A select field for a single page form',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        data: {values: []},
-        defaultValue: '',
-      },
-    },
   },
 };
 
@@ -538,21 +333,6 @@ export const BSN: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'BSN Field',
-      icon: 'id-card-o',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'bsn',
-        key: 'bsn',
-        label: 'A BSN field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 };
 
@@ -572,22 +352,6 @@ export const Checkbox: Story = {
       defaultValue: false,
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Checkbox',
-      icon: 'check-square',
-      group: 'basic',
-      weight: 50,
-      schema: {
-        id: 'wekruya',
-        type: 'checkbox',
-        key: 'checkbox',
-        label: 'A checkbox field for a single page form',
-        validate: {
-          required: false,
-        },
-        defaultValue: false,
-      },
-    },
   },
 };
 
@@ -606,22 +370,6 @@ export const Currency: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Currency',
-      icon: 'eur',
-      group: 'basic',
-      weight: 70,
-      schema: {
-        id: 'wekruya',
-        type: 'currency',
-        currency: 'EUR',
-        key: 'currency',
-        label: 'A currency field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 };
 
@@ -636,20 +384,6 @@ export const Signature: Story = {
       key: 'signature',
       label: 'A signature field for a single page form',
       footer: '',
-    },
-
-    builderInfo: {
-      title: 'Signature',
-      icon: 'pencil',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'signature',
-        key: 'signature',
-        label: 'A signature field for a single page form',
-        footer: '',
-      },
     },
   },
 };
@@ -668,21 +402,6 @@ export const Iban: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'IBAN Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'iban',
-        key: 'iban',
-        label: 'An IBAN field for a single page form',
-        validate: {
-          required: false,
-        },
-      },
-    },
   },
 };
 
@@ -701,22 +420,6 @@ export const LicensePlate: Story = {
       },
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'licenseplate Field',
-      icon: 'wallet',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'licenseplate',
-        key: 'licenseplate',
-        label: 'A license plate field for a single page form',
-        validate: {
-          required: false,
-          pattern: '^[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}\\-[a-zA-Z0-9]{1,3}$',
-        },
-      },
-    },
   },
 };
 
@@ -735,23 +438,6 @@ export const AddressNL: Story = {
       deriveAddress: true,
       layout: 'singleColumn',
     } satisfies AddressNLComponentSchema,
-    builderInfo: {
-      title: 'Address Field',
-      icon: 'home',
-      group: 'basic',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'addressNL',
-        key: 'address',
-        label: 'A Dutch address for a single page form',
-        validate: {
-          required: false,
-        },
-        deriveAddress: true,
-        layout: 'singleColumn',
-      },
-    },
     formType: 'single_step',
   },
 };
@@ -767,18 +453,6 @@ export const LeafletMap: Story = {
       label: 'A map for a single page form',
     },
     formType: 'single_step',
-    builderInfo: {
-      title: 'Map',
-      icon: 'map',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'map',
-        key: 'map',
-        label: 'A map for a single page form',
-      },
-    },
   },
 };
 
@@ -795,21 +469,6 @@ export const FieldSet: Story = {
       hideHeader: false,
       components: [],
     },
-
-    builderInfo: {
-      title: 'Field set',
-      icon: 'th-large',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'fieldset',
-        key: 'fieldset',
-        label: 'A field set for a single page form',
-        hideHeader: false,
-        components: [],
-      },
-    },
   },
 };
 
@@ -824,19 +483,6 @@ export const Columns: Story = {
       key: 'columns',
       columns: [],
     },
-
-    builderInfo: {
-      title: 'Columns',
-      icon: 'columns',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'columns',
-        key: 'columns',
-        columns: [],
-      },
-    },
   },
 };
 
@@ -850,19 +496,6 @@ export const Content: Story = {
       type: 'content',
       key: 'content',
       html: '<p>Hello storybook</p>',
-    },
-
-    builderInfo: {
-      title: 'Content',
-      icon: 'html5',
-      group: 'layout',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'content',
-        key: 'content',
-        html: '<p>Hello storybook</p>',
-      },
     },
   },
 };
@@ -881,23 +514,6 @@ export const EditGrid: Story = {
       groupLabel: 'Group',
       disableAddingRemovingRows: false,
       components: [],
-    },
-
-    builderInfo: {
-      title: 'Repeating group',
-      icon: 'repeat',
-      group: 'advanced',
-      weight: 10,
-      schema: {
-        id: 'wekruya',
-        type: 'editgrid',
-        key: 'editgrid',
-        label: 'A repeating group for a single page form',
-        hideLabel: false,
-        groupLabel: 'Group',
-        disableAddingRemovingRows: false,
-        components: [],
-      },
     },
   },
 };

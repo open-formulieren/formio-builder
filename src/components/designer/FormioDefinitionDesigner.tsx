@@ -295,22 +295,17 @@ const ComponentEditModal: React.FC<ComponentEditModalProps> = ({
   onSubmit,
   onRemove,
   onClose,
-}) => {
-  const {builderInfo} = getRegistryEntry(component.type);
-
-  return (
-    <Modal isOpen closeModal={onClose}>
-      <ComponentEditForm
-        component={component}
-        isNew={isNew}
-        builderInfo={builderInfo}
-        onSubmit={onSubmit}
-        onRemove={onRemove}
-        onCancel={onClose}
-      />
-    </Modal>
-  );
-};
+}) => (
+  <Modal isOpen closeModal={onClose}>
+    <ComponentEditForm
+      component={component}
+      isNew={isNew}
+      onSubmit={onSubmit}
+      onRemove={onRemove}
+      onCancel={onClose}
+    />
+  </Modal>
+);
 
 interface PlaceholderDragOverlayProps {
   componentType: AnyComponentSchema['type'];

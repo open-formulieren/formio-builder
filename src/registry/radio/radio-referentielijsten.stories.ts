@@ -28,26 +28,8 @@ export default {
     onCancel: fn(),
     onRemove: fn(),
     onSubmit: fn(),
-    builderInfo: {
-      title: 'Radio',
-      icon: 'plus-square',
-      group: 'basic',
-      weight: 60,
-      schema: {
-        id: 'wqimsadk',
-        type: 'radio',
-        key: 'radio',
-        label: 'A radio field',
-        openForms: {
-          dataSrc: 'manual',
-          translations: {},
-        },
-        values: [{value: '', label: ''}],
-        defaultValue: '',
-      } satisfies RadioComponentSchema,
-    },
   },
-} as Meta<typeof ComponentEditForm>;
+} satisfies Meta<typeof ComponentEditForm>;
 
 type Story = StoryObj<typeof ComponentEditForm>;
 
