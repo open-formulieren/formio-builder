@@ -312,7 +312,13 @@ jobs:
 
       - name: Publish package to NPM
         run: |
-          # Strip git ref prefix from version
-          VERSION=$(echo "${GITHUB_REF}" | sed -e 's,.*/\(.*\),\1,')
+          case "${VERSION}" in
+            *"-alpha."*) npm_tag=next ;;
+            *"-beta."*) npm_tag=next ;;
+            *"-rc."*) npm_tag=next ;;
+            *) npm_tag=latest ;;
+          esac
 
-          npm publish --access public --new-version=$VERSION
+          npm publish --access public --tag="$npm_tag"
+        env:
+          VERSION: ${{ needs.setup.outputs.version }}
