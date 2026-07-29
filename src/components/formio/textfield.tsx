@@ -1,6 +1,6 @@
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {useContext, useRef} from 'react';
+import {useContext, useState} from 'react';
 
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
@@ -30,15 +30,20 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   showCharCount = false,
   onChange,
   childrenAfterField,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const {getFieldProps, getFieldMeta} = useFormikContext();
-  const {value, onChange: formikOnChange} = getFieldProps<string | undefined>(name);
+  const {
+    value,
+    onChange: formikOnChange,
+    onBlur: formikOnBlur,
+  } = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
   const {errors, hasErrors} = useValidationErrors(name);
-  // const [{value}, {touched}] = useField<string | undefined>(name);
-  const inputRef = useRef<HTMLInputElement>(null);
   const {bareInput} = useContext(RenderContext);
+  const [hasFocus, setHasFocus] = useState(false);
 
   const htmlId = `editform-${name}`;
   if (value === undefined && props.value === undefined) {
@@ -48,7 +53,6 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
   const inputField = (
     <>
       <Field
-        innerRef={inputRef}
         name={name}
         id={htmlId}
         as="input"
@@ -59,13 +63,21 @@ export const TextField: React.FC<JSX.IntrinsicElements['input'] & TextFieldProps
           formikOnChange(event);
           onChange?.(event);
         }}
+        onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
+          setHasFocus(true);
+          onFocus?.(event);
+        }}
+        onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+          formikOnBlur(event);
+          setHasFocus(false);
+          onBlur?.(event);
+        }}
         {...props}
       />
       {childrenAfterField}
     </>
   );
 
-  const hasFocus = inputRef.current === document.activeElement;
   const charCount = showCharCount && (touched || hasFocus) && value && (
     <CharCount value={value} maxLength={props.maxLength} />
   );

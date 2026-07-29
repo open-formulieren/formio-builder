@@ -1,6 +1,6 @@
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import {useContext, useLayoutEffect, useRef} from 'react';
+import {useContext, useLayoutEffect, useRef, useState} from 'react';
 
 import {RenderContext} from '@/context';
 import CharCount from '@/utils/charcount';
@@ -30,14 +30,21 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
   showCharCount = false,
   autoExpand = false,
   onChange,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const {getFieldProps, getFieldMeta} = useFormikContext();
-  const {value, onChange: formikOnChange} = getFieldProps<string | undefined>(name);
+  const {
+    value,
+    onChange: formikOnChange,
+    onBlur: formikOnBlur,
+  } = getFieldProps<string | undefined>(name);
   const {touched} = getFieldMeta<string | undefined>(name);
   const {errors, hasErrors} = useValidationErrors(name);
   const inputRef = useRef<HTMLInputElement>(null);
   const {bareInput} = useContext(RenderContext);
+  const [hasFocus, setHasFocus] = useState(false);
 
   useLayoutEffect(() => {
     const node = inputRef.current;
@@ -66,11 +73,19 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
         formikOnChange(event);
         onChange?.(event);
       }}
+      onFocus={(event: React.FocusEvent<HTMLTextAreaElement>) => {
+        setHasFocus(true);
+        onFocus?.(event);
+      }}
+      onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
+        formikOnBlur(event);
+        setHasFocus(false);
+        onBlur?.(event);
+      }}
       {...props}
     />
   );
 
-  const hasFocus = inputRef.current === document.activeElement;
   const charCount = showCharCount && (touched || hasFocus) && value && <CharCount value={value} />;
 
   // 'bare input' is actually a little bit more than just the input, looking at the

@@ -1,7 +1,5 @@
 import {clsx} from 'clsx';
-import {uniqueId} from 'lodash';
-import type React from 'react';
-import {useRef, useState} from 'react';
+import {useId, useState} from 'react';
 import {useIntl} from 'react-intl';
 
 import './panel.scss';
@@ -31,7 +29,7 @@ const Panel: React.FC<PanelProps> = ({
   children,
 }) => {
   const intl = useIntl();
-  const idRef = useRef(uniqueId('panel_body'));
+  const id = useId();
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   if (!collapsible && collapsed) {
     setCollapsed(false);
@@ -42,7 +40,7 @@ const Panel: React.FC<PanelProps> = ({
         onClick: () => setCollapsed(!collapsed),
         role: 'button',
         ['aria-expanded']: collapsed ? 'false' : 'true',
-        ['aria-controls']: idRef.current,
+        ['aria-controls']: id,
       }
     : {};
 
@@ -85,7 +83,7 @@ const Panel: React.FC<PanelProps> = ({
         {headerEnd}
       </div>
       {collapsed ? null : (
-        <div className="card-body" id={idRef.current}>
+        <div className="card-body" id={id}>
           {children}
         </div>
       )}
