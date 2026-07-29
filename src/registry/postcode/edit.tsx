@@ -189,7 +189,7 @@ const DefaultValue: React.FC<DefaultValueProps> = ({multiple}) => {
       label={<FormattedMessage {...LABELS.defaultValue} />}
       tooltip={tooltip}
       multiple={multiple}
-      inputMask="9999 AA"
+      placeholder="1234 AB"
     />
   );
 };

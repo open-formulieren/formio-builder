@@ -28,4 +28,5 @@ export default {
     },
   },
   defaultValue: '',
+  holdsData: true,
 } satisfies RegistryEntry<DateTimeComponentSchema>;

@@ -23,7 +23,7 @@ const Preview: React.FC<ComponentPreviewProps<BsnComponentSchema>> = ({component
       tooltip={tooltip}
       required={required}
       readOnly={disabled}
-      inputMask="999999999"
+      placeholder="XXXXXXXXX"
     />
   );
 };

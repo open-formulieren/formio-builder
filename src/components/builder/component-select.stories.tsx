@@ -1,4 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
+import {expect, userEvent, within} from 'storybook/test';
 
 import {withFormik} from '@/sb-decorators';
 
@@ -14,6 +15,32 @@ const COMPONENT_TREE = [
       {type: 'textfield', key: 'text2', label: 'Textfield 2'},
       {type: 'number', key: 'nested.number1', label: 'Nested number'},
     ],
+  },
+  {
+    type: 'columns',
+    key: 'columns',
+    label: 'Columns',
+    columns: [
+      {
+        size: 6,
+        sizeMobile: 4,
+        components: [{type: 'textfield', key: 'text3', label: 'Textfield 3'}],
+      },
+      {
+        size: 6,
+        sizeMobile: 4,
+        components: [],
+      },
+    ],
+  },
+  {
+    type: 'editgrid',
+    key: 'editgrid',
+    label: 'Repeating group',
+    hideLabel: false,
+    groupLabel: 'Group',
+    disableAddingRemovingRows: false,
+    components: [{type: 'textfield', key: 'text4', label: 'Textfield 4'}],
   },
 ];
 
@@ -50,4 +77,27 @@ export default {
   },
 } as Meta<typeof ComponentSelect>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByLabelText('Select component'));
+    const componentSelectMenu = await canvas.getByRole('listbox');
+
+    // Validate that fieldset and column components are not present
+    await expect(
+      within(componentSelectMenu).queryByText('Columns (columns)')
+    ).not.toBeInTheDocument();
+    await expect(
+      within(componentSelectMenu).queryByText('Fieldset 1 (fieldset1)')
+    ).not.toBeInTheDocument();
+
+    // The editgrid component should be an option
+    await expect(within(componentSelectMenu).getByText('Repeating group (editgrid)')).toBeVisible();
+
+    // Validate that the path of editgrid children is correct
+    await expect(
+      within(componentSelectMenu).getByText('Textfield 4 (editgrid.text4)')
+    ).toBeVisible();
+  },
+};

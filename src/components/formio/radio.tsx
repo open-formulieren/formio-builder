@@ -1,6 +1,6 @@
+import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
-import type {ExtendedComponentSchema} from 'formiojs';
 import {FormattedMessage} from 'react-intl';
 
 import {useValidationErrors} from '@/utils/errors';
@@ -68,7 +68,7 @@ export const Radio: React.FC<RadioProps> = ({
   description = '',
   isLoading = false,
 }) => {
-  const {getFieldProps, setFieldValue} = useFormikContext<ExtendedComponentSchema>();
+  const {getFieldProps, setFieldValue} = useFormikContext<AnyComponentSchema>();
   const {value} = getFieldProps(name);
   const hasSelection = !!options.find(opt => opt.value === value);
 

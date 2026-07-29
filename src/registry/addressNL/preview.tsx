@@ -36,8 +36,8 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
           label={
             <FormattedMessage description="Label for address postcode" defaultMessage="Postcode" />
           }
-          inputMask="9999 AA"
           required={required}
+          placeholder="1234 AB"
         />
         <TextField
           name={`${key}.houseNumber`}
@@ -48,6 +48,7 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
             />
           }
           required={required}
+          placeholder="123"
         />
         <TextField
           name={`${key}.houseLetter`}
@@ -57,7 +58,6 @@ const Preview: React.FC<ComponentPreviewProps<AddressNLComponentSchema>> = ({com
               defaultMessage="House letter addition"
             />
           }
-          inputMask="A"
         />
         <TextField
           name={`${key}.houseNumberAddition`}

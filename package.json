@@ -49,7 +49,6 @@
   },
   "homepage": "https://github.com/open-formulieren/formio-builder#readme",
   "peerDependencies": {
-    "formiojs": "~4.13.0 || ~4.14.0",
     "react": "^18.0.0"
   },
   "devDependencies": {
@@ -94,7 +93,6 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^6.1.1",
     "eslint-plugin-storybook": "^10.4.2",
-    "formiojs": "~4.13.0",
     "globals": "^17.7.0",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.48.0",

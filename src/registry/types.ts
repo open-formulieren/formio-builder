@@ -2,6 +2,7 @@ import type {AnyComponentSchema, JSONValue} from '@open-formulieren/types';
 import type {IntlShape, MessageDescriptor} from 'react-intl';
 import type {z} from 'zod';
 
+import type {ComponentDefinition} from '@/components/designer/types';
 import type {BuilderContextType} from '@/context';
 
 // Edit form
@@ -82,9 +83,13 @@ export interface ComponentSlot {
    */
   reference: string;
   /**
+   * Whether the reference should be used in the data path of children components.
+   */
+  useReferenceInComponentDataPath?: boolean;
+  /**
    * The components in this slot.
    */
-  collection: AnyComponentSchema[];
+  collection: ComponentDefinition[];
 }
 
 export interface RegistryEntry<S extends AnyComponentSchema> {
@@ -102,6 +107,8 @@ export interface RegistryEntry<S extends AnyComponentSchema> {
   // It returns an array of component slots, with references to where those slots are
   // located in the form builder structure.
   getComponentSlots?: (component: S) => ComponentSlot[];
+  // Whether this component holds data and is used for user interaction.
+  holdsData?: boolean;
 }
 
 // Registry made up of registry entries, one for each possible component schema
