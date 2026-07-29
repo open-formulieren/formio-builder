@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 import {playwright} from '@vitest/browser-playwright';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import * as sass from 'sass';
+import type {NodePackageImporter as _NodePackageImporter} from 'sass';
+import {NodePackageImporter} from 'sass-embedded';
 import dts from 'vite-plugin-dts';
 import eslint from 'vite-plugin-eslint2';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -55,10 +56,13 @@ export default defineConfig(({mode}) => ({
   css: {
     preprocessorOptions: {
       scss: {
+        api: 'modern',
         quietDeps: true,
         // silence bootstrap @import statements
         silenceDeprecations: ['import'],
-        importers: [new sass.NodePackageImporter()],
+        // due to both sass and sass-embedded being installed, these types get messed
+        // up
+        importers: [new NodePackageImporter()] as unknown as _NodePackageImporter[],
       },
     },
   },
