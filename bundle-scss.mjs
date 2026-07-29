@@ -4,7 +4,7 @@ import {NodePackageImporter} from 'sass-embedded';
 
 await esbuild.build({
   entryPoints: ['src/index.ts'],
-  outdir: 'lib/css',
+  outdir: 'dist/css',
   bundle: true,
   loader: {
     '.png': 'dataurl',

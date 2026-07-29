@@ -3,16 +3,16 @@
   "version": "0.51.0",
   "description": "An opinionated Formio webform builder for Open Forms",
   "type": "module",
-  "types": "./lib/esm/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./lib/esm/index.js",
-    "./esm/": "./lib/esm/",
-    "./css/": "./lib/css/",
-    "./lib/": "./lib/"
+    ".": "./dist/index.js",
+    "./css/": "./dist/css/",
+    "./*": "./dist/*",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build:esm": "vite build",
-    "build:scss": "node bundle-scss.mjs && rm lib/css/index.js lib/css/index.js.map",
+    "build:scss": "node bundle-scss.mjs && rm dist/css/index.js dist/css/index.js.map",
     "build:typecheck": "tsc --noEmit",
     "build": "run-p build:*",
     "test": "npm-run-all test:*",
@@ -28,7 +28,7 @@
     "lint": "eslint src"
   },
   "files": [
-    "lib/",
+    "dist/",
     "i18n"
   ],
   "repository": {
@@ -58,7 +58,6 @@
   "devDependencies": {
     "@bbt/bem": "^1.0.1",
     "@formatjs/cli": "^6.6.1",
-    "@formatjs/ts-transformer": "^4.0.0",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@maykinmedia/eslint-config": "^3.0.0",
     "@storybook/addon-docs": "10.3.5",

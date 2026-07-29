@@ -1,7 +1,6 @@
 # Generated
 node_modules/
 dist/
-lib/
 storybook-static/
 i18n/compiled/*.json
 .idea/
