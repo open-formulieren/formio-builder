@@ -1,5 +1,65 @@
 # Changes
 
+## 1.0.0 (2026-07-29)
+
+Feature release.
+
+This major version signifies API stability - we now expose the `FormBuilder` component as top-level
+public API for the entire form builder, including the drag and drop from the component menu. The
+dependency on `formiojs` is now removed.
+
+**Breaking changes**
+
+- Updated the package structure - public API imports should still work as they did.
+- Moved a number of packages to `peerDependencies` - these will not install by default if you're
+  still using `--legacy-peer-deps` in downstream projects.
+- [`OF#6281`][OF#6281] Removed the `file` component registration options - this is now handled in
+  the backend project.
+
+**New features**
+
+- Added the `FormBuilder` UI interface to design a full form definition:
+
+  - [`#266`][#266] Implement the component type menu structure for form definition designing.
+  - [`#267`][#267] Added/enabled component previews for a complete form definition in the builder
+    canvas.
+  - [`#268`][#268] Implemented drag and drop from component list/menu to the builder canvas.
+  - [`#269`][#269] Added support for dragging/dropping components into (layout) components like
+    `fieldset`, `columns` and `editgrid`.
+  - [`#270`][#270] Implemented the "action icons" on hover over a component in the builder canvas.
+  - [`#271`][#271] Prepared the public API for easy integration in the backend project.
+  - [`#292`][#292] Builder component metadata is now managed in each registry entry only.
+
+- [`FR#167`][FR#167] Enabled option to hide the fieldset header/label of an `addressNL` component.
+
+**Project maintenance**
+
+- [`OF#6126`][OF#6126] Hardened the CI pipeline against supply chain attacks.
+- [`#305`][#305] Removed dependency on `formiojs` styles/CSS.
+- [`#307`][#307] Dropped `formiojs` dependency.
+- Updated some dependencies for security updates.
+- Updated other dependencies that were very outdated (react-tabs, clsx...).
+- Moved a number of dependencies into `peerDependencies`.
+- Updated the build tooling to be ESM-only and output to `dist/`.
+- Switched to `sass-embedded` for SCSS compilation.
+- [`#61`][#61] Added ESLint.
+- Updated ESLint plugins and addressed linter errors.
+- Removed the `legacy-peer-deps` configuration.
+
+[OF#6126]: https://github.com/open-formulieren/open-forms/issues/6126
+[OF#6281]: https://github.com/open-formulieren/open-forms/issues/6281
+[#61]: https://github.com/open-formulieren/formio-builder/issues/61
+[#266]: https://github.com/open-formulieren/formio-builder/issues/266
+[#267]: https://github.com/open-formulieren/formio-builder/issues/267
+[#268]: https://github.com/open-formulieren/formio-builder/issues/268
+[#269]: https://github.com/open-formulieren/formio-builder/issues/269
+[#270]: https://github.com/open-formulieren/formio-builder/issues/270
+[#271]: https://github.com/open-formulieren/formio-builder/issues/271
+[#292]: https://github.com/open-formulieren/formio-builder/issues/292
+[#305]: https://github.com/open-formulieren/formio-builder/issues/305
+[#307]: https://github.com/open-formulieren/formio-builder/issues/307
+[FR#167]: https://github.com/open-formulieren/formio-renderer/issues/167
+
 ## 0.51.0 (2026-05-08)
 
 Feature release.

@@ -1,8 +1,7 @@
 # Formio builder for Open Forms
 
-This library implements the builder to build
-[Form.io 4.13.x](https://github.com/formio/formio.js/tree/4.13.x/) forms supporting the
-[Open Forms](https://github.com/open-formulieren/open-forms) extensions.
+This library implements the builder to create [Form.io](https://github.com/formio/formio.js) form
+definitions as they're used in [Open Forms](https://github.com/open-formulieren/open-forms).
 
 [![Run CI build and tests](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml/badge.svg)](https://github.com/open-formulieren/formio-builder/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/%40open-formulieren%2Fformio-builder)](https://www.npmjs.com/package/@open-formulieren/formio-builder)
@@ -40,7 +39,7 @@ For (code) contributions that do fit the goals of this library, please follow th
 - Create an issue with a description of the problem or required feature
 - Reference the issue ID in commit messages and pull requests
 - Functionality must be documented in Storybook
-- Functionality must be covered by tests - Jest (unit/integration) tests and/or Storybook
+- Functionality must be covered by tests - Vitest (unit/integration) tests and/or Storybook
   interaction tests
 
 ## Getting started
@@ -52,6 +51,7 @@ nvm use
 ```
 
 2. Install the dependencies
+
 ```bash
 npm install
 ```
@@ -74,7 +74,7 @@ npm test
 5. Check that the (Typescript) build compiles cleanly:
 
 ```bash
-npm run build:esm
+npm run build
 ```
 
 Additional NPM scripts can be found in `package.json`.
@@ -112,10 +112,11 @@ We don't let `npm` apply the git tags when releasing a new version, instead foll
 
 1. Create a new branch `release/x.y.z`.
 2. Update the `CHANGELOG.md` file.
-3. Bump the version of the package as follows (use either `major | minor | patch` in the `npm version` command):
+3. Bump the version of the package as follows (use either `major | minor | patch` in the
+   `npm version` command):
 
 ```bash
-npm version --no-git-tag-version minor
+npm version minor
 git commit -am ":bookmark: Bump to version <newVersion>"
 ```
 

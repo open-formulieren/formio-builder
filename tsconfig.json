@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "outDir": "lib/esm",
+    "outDir": "dist",
     "module": "esnext",
     "target": "ES2021",
     "jsx": "react-jsx",
@@ -22,18 +22,8 @@
     "paths": {
       "@/*": ["./*"],
       "@/sb-decorators": ["../.storybook/decorators.tsx"]
-    },
-    "plugins": [
-      {
-        "transform": "@formatjs/ts-transformer",
-        "import": "transform",
-        "type": "config",
-        "overrideIdFn": "[sha512:contenthash:base64:6]",
-        "ast": true
-      },
-      {"transform": "./scss-transformer.ts"}
-    ]
+    }
   },
   "include": ["src/**/*", ".storybook/**/*", "./vitest.setup.ts"],
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules", "dist"]
 }
