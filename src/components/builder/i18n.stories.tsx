@@ -1,3 +1,4 @@
+import type {FAQItem} from '@open-formulieren/types';
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite';
 import {Formik} from 'formik';
 import {expect, userEvent, waitFor, within} from 'storybook/test';
@@ -5,6 +6,7 @@ import {expect, userEvent, waitFor, within} from 'storybook/test';
 import {TextField} from '@/components/formio';
 import {withFormik} from '@/sb-decorators';
 
+import {FAQItemsTranslations} from './faq-items';
 import {ComponentTranslations} from './i18n';
 
 export default {
@@ -34,6 +36,38 @@ export default {
     initialValues: {
       label: 'Hi there {{ firstName }}',
       nonTranslatableField: '',
+      faqItems: [
+        {
+          id: '38380023-853d-451d-8d9d-fc8c71c4ffc2',
+          label: 'Should I fill this in?',
+          content: 'Yes you should',
+          openForms: {
+            translations: {
+              nl: {
+                label: 'Moet ik dit invullen?',
+                content: 'Ja dat moet',
+              },
+              en: {
+                label: 'Should I fill this in?',
+                content: 'Yes you should',
+              },
+            },
+          },
+        },
+        {
+          id: 'cd50ec95-a747-471d-91c7-67979032fd7c',
+          label: "I've XYZ, should I fill this in?",
+          content: 'Add XYZ',
+          openForms: {
+            translations: {
+              en: {
+                label: "I've XYZ, should I fill this in?",
+                content: 'Add XYZ',
+              },
+            },
+          },
+        },
+      ],
       openForms: {
         translations: {
           nl: {
@@ -50,6 +84,7 @@ interface BodyProps {
     label: string;
     description: string;
   };
+  faqItems: FAQItem[];
 }
 
 interface DummyComponent {
@@ -60,13 +95,15 @@ interface DummyComponent {
   description: string;
 }
 
-const Body: React.FC<BodyProps> = ({fieldLabels}) => {
+const Body: React.FC<BodyProps> = ({fieldLabels, faqItems}) => {
   return (
     <>
-      <TextField name="label" label="Label" />
+      <TextField name="label" label="Label" faqItems={faqItems} />
       <TextField name="description" label="Description" />
       <TextField name="nonTranslatableField" label="Non-translatable field" />
-      <ComponentTranslations<DummyComponent> propertyLabels={fieldLabels} />
+      <ComponentTranslations<DummyComponent> propertyLabels={fieldLabels}>
+        <FAQItemsTranslations />
+      </ComponentTranslations>
     </>
   );
 };
@@ -82,7 +119,7 @@ type Story = StoryObj<StoryArgs>;
 
 const render: StoryFn<React.FC<StoryArgs>> = ({fieldLabels, initialValues}) => (
   <Formik enableReinitialize initialValues={initialValues} onSubmit={console.log}>
-    <Body fieldLabels={fieldLabels} />
+    <Body fieldLabels={fieldLabels} faqItems={initialValues.faqItems} />
   </Formik>
 );
 
@@ -99,10 +136,26 @@ export const Default: Story = {
     const translationField2 = canvas.queryByLabelText('Translation for "nonTranslatableField"');
     expect(translationField2).toBeNull();
 
+    const faqLabel1 = canvas.getByLabelText(
+      'Translation for label with value "Should I fill this in?"'
+    );
+    expect(faqLabel1).toBeVisible();
+    const faqLabel2 = canvas.getByLabelText(
+      'Translation for label with value "I\'ve XYZ, should I fill this in?"'
+    );
+    expect(faqLabel2).toBeVisible();
+
     await waitFor(async () => {
       const literal1Reference = canvas.getByText('Hi there {{ firstName }}');
       expect(literal1Reference).toBeVisible();
       await canvas.findByDisplayValue('Hallo daar, {{ firstName }}');
+
+      const faqItem1Labels = canvas.getAllByText('Should I fill this in?');
+      await expect(faqItem1Labels.length).toEqual(2);
+      await expect(faqItem1Labels[0]).toBeVisible();
+      const faqItem2Labels = canvas.getAllByText("I've XYZ, should I fill this in?");
+      await expect(faqItem2Labels.length).toEqual(2);
+      await expect(faqItem2Labels[0]).toBeVisible();
     });
 
     // Enter a value in the non-translatable field

@@ -1,0 +1,44 @@
+.faq-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  &__add {
+    align-self: flex-start;
+
+    background-color: var(--default-button-bg, #017092);
+    color: white;
+
+    &:hover {
+      color: white;
+      opacity: 0.9;
+    }
+  }
+}
+
+.faq-item {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-areas: 'label controls' 'content controls';
+  gap: 0 1em;
+  padding: 0 1em;
+  border: 1px var(--border-color, #ccc) solid;
+
+  .faq-item__controls {
+    grid-area: controls;
+
+    // TODO: properly align the button(s) with the label input instead of relying
+    // on these hardcoded padding values.
+    padding: calc(1.5em + 0.75rem + 2px) 0;
+  }
+
+  &__label.field-required {
+    font-weight: bold;
+
+    color: var(--body-quiet-color);
+  }
+
+  &__remove {
+    border-radius: 5px;
+  }
+}

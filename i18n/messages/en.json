@@ -174,6 +174,11 @@
     "description": "Placeholder for 'validate.max' builder field",
     "originalDefault": "Maximum value"
   },
+  "3TrEX2": {
+    "defaultMessage": "Content",
+    "description": "Label for FAQ item content configuration field",
+    "originalDefault": "Content"
+  },
   "3h215E": {
     "defaultMessage": "CSS class",
     "description": "Label for 'customClass' builder field",
@@ -629,6 +634,11 @@
     "description": "Single column label",
     "originalDefault": "Single column"
   },
+  "GyPFbN": {
+    "defaultMessage": "FAQ item {index} content",
+    "description": "Label for FAQ item content",
+    "originalDefault": "FAQ item {index} content"
+  },
   "H4sILo": {
     "defaultMessage": "Derive city",
     "description": "Label for 'deriveCity' builder field",
@@ -754,6 +764,11 @@
     "description": "Components list search input placeholder",
     "originalDefault": "Search component(s)"
   },
+  "NGNhqX": {
+    "defaultMessage": "Label",
+    "description": "Label for FAQ item label configuration field",
+    "originalDefault": "Label"
+  },
   "NdaqDN": {
     "defaultMessage": "Option description (<option></option>)",
     "description": "Label for option description location",
@@ -874,6 +889,11 @@
     "description": "Label for 'date constraint mode' builder field",
     "originalDefault": "Mode preset"
   },
+  "SGQSae": {
+    "defaultMessage": "FAQ item {index} label",
+    "description": "Label for FAQ item label",
+    "originalDefault": "FAQ item {index} label"
+  },
   "SH67gH": {
     "defaultMessage": "In the future",
     "description": "Date constraint mode 'future' label",
@@ -988,6 +1008,11 @@
     "defaultMessage": "Maximum selected checkboxes (e.g. 1)",
     "description": "Placeholder for 'validate.maxSelectedCount' builder field",
     "originalDefault": "Maximum selected checkboxes (e.g. 1)"
+  },
+  "VU8w/6": {
+    "defaultMessage": "Translation for label with value \"{value}\"",
+    "description": "Accessible label for label for FAQ item",
+    "originalDefault": "Translation for label with value \"{value}\""
   },
   "VX9nvG": {
     "defaultMessage": "Maximum date {configured, select, false {(not set)} other {}}",
@@ -1213,6 +1238,11 @@
     "defaultMessage": "Provide the key of a static, component, or user defined variable.",
     "description": "Tooltip for 'variable' in relative delta date constraint validation",
     "originalDefault": "Provide the key of a static, component, or user defined variable."
+  },
+  "c8xuWX": {
+    "defaultMessage": "Add FAQ item",
+    "description": "'Add FAQ item' button text",
+    "originalDefault": "Add FAQ item"
   },
   "cAC5kL": {
     "defaultMessage": "Remove the value of this field from the submission if it is hidden. Note: the value of this field is then also not used in logic rules!",
@@ -1493,6 +1523,11 @@
     "defaultMessage": "Values",
     "description": "Label for the 'values' builder field",
     "originalDefault": "Values"
+  },
+  "jFF6Dp": {
+    "defaultMessage": "FAQ item translations",
+    "description": "Title for translation group for FAQ items",
+    "originalDefault": "FAQ item translations"
   },
   "jLg5l6": {
     "defaultMessage": "House number component",

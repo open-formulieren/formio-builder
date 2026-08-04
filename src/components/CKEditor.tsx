@@ -30,6 +30,18 @@ import {
 import type {EditorConfig} from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
 
+class MinimalEditor extends ClassicEditor {
+  public static override builtinPlugins = [Bold, Essentials, Italic, List, Paragraph, Undo];
+
+  public static override defaultConfig: EditorConfig = {
+    toolbar: {
+      items: ['bold', 'italic', 'bulletedList', 'numberedList', '|', 'undo', 'redo'],
+    },
+    language: 'en',
+    licenseKey: 'GPL',
+  };
+}
+
 class Editor extends ClassicEditor {
   public static override builtinPlugins = [
     Alignment,
@@ -105,4 +117,7 @@ class Editor extends ClassicEditor {
   };
 }
 
+type AnyEditor = typeof MinimalEditor | typeof Editor;
+
+export {MinimalEditor, AnyEditor};
 export default Editor;
