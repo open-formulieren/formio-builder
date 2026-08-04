@@ -1709,6 +1709,11 @@
     "description": "Tooltip for 'useConfigDefaultMapSettings' builder field",
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
+  "ocXvs8": {
+    "defaultMessage": "FAQ items",
+    "description": "Component edit form tab title for 'FAQ items' tab",
+    "originalDefault": "FAQ items"
+  },
   "osSl3z": {
     "defaultMessage": "City",
     "description": "Label for addressNL city read only result",

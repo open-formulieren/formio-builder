@@ -5,6 +5,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -45,6 +47,7 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -73,6 +76,11 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<PartnersComponentSchema>
@@ -81,7 +89,9 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

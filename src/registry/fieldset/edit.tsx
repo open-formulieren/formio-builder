@@ -4,6 +4,8 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {
   BuilderTabs,
   ClearOnHide,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   Key,
   Label,
@@ -34,6 +36,7 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
           hasErrors={hasAnyError('label', 'key', 'tooltip', 'hidden', 'clearOnHide', 'hideHeader')}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -52,6 +55,11 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
         <SimpleConditional />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<FieldsetComponentSchema>
@@ -60,7 +68,9 @@ const EditForm: EditFormDefinition<FieldsetComponentSchema> = () => {
             // FIXME: should be translatable in the type
             // tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

@@ -7,6 +7,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -63,6 +65,7 @@ const EditForm: EditFormDefinition<BsnComponentSchema> = () => {
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
         <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -103,6 +106,11 @@ const EditForm: EditFormDefinition<BsnComponentSchema> = () => {
         <Prefill.PrefillConfiguration />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<BsnComponentSchema>
@@ -111,7 +119,9 @@ const EditForm: EditFormDefinition<BsnComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

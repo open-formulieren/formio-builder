@@ -7,6 +7,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -70,6 +72,7 @@ const EditForm: EditFormDefinition<PostcodeComponentSchema> = () => {
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
         <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -110,6 +113,11 @@ const EditForm: EditFormDefinition<PostcodeComponentSchema> = () => {
         <Prefill.PrefillConfiguration />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<PostcodeComponentSchema>
@@ -118,7 +126,9 @@ const EditForm: EditFormDefinition<PostcodeComponentSchema> = () => {
             description: intl.formatMessage(LABELS.description),
             tooltip: intl.formatMessage(LABELS.tooltip),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

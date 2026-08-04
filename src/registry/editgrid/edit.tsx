@@ -5,6 +5,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -73,6 +75,7 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
           />
         </Tab>
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -114,6 +117,11 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
         <Validate.MaxLength />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<EditGridComponentSchema>
@@ -126,7 +134,9 @@ const EditForm: EditFormDefinition<EditGridComponentSchema> = () => {
             saveRow: intl.formatMessage(SAVE_ROW_LABEL),
             removeRow: intl.formatMessage(REMOVE_ROW_LABEL),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

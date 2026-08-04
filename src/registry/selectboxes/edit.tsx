@@ -8,6 +8,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -84,6 +86,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -120,6 +123,11 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
         <Registration.RegistrationAttributeSelect />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<SelectboxesComponentSchema>
@@ -130,6 +138,7 @@ const EditForm: EditFormDefinition<SelectboxesComponentSchema> = () => {
           }}
         >
           <ValuesTranslations<SelectboxesComponentSchema> name="values" withOptionDescription />
+          <FAQItemsTranslations />
         </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
