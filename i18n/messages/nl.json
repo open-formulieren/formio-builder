@@ -1322,7 +1322,7 @@
     "originalDefault": "Repeating group"
   },
   "eAmrdi": {
-    "defaultMessage": "Aan het laden...",
+    "defaultMessage": "Laden...",
     "description": "Loading content text",
     "originalDefault": "Loading..."
   },
@@ -1700,7 +1700,7 @@
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
   "osSl3z": {
-    "defaultMessage": "Stad",
+    "defaultMessage": "Plaats",
     "description": "Label for addressNL city read only result",
     "originalDefault": "City"
   },

@@ -1,5 +1,11 @@
 # Changes
 
+## 1.0.1 (2026-08-04)
+
+Patch release.
+
+- Aligning translations with the formio-renderer.
+
 ## 1.0.0 (2026-07-29)
 
 Feature release.
