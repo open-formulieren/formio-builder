@@ -17,6 +17,7 @@ const Preview: React.FC<ComponentPreviewProps<DateComponentSchema>> = ({componen
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     disabled = false,
     multiple = false,
@@ -29,6 +30,7 @@ const Preview: React.FC<ComponentPreviewProps<DateComponentSchema>> = ({componen
       label={label}
       description={description}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       readOnly={disabled}
     />

@@ -1,12 +1,12 @@
 import type {PartnersComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
-import {Description, FieldSet, TextField} from '@/components/formio';
+import {Description, FAQItems, FieldSet, TextField} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 
 const Preview: React.FC<ComponentPreviewProps<PartnersComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip} = component;
+  const {key, label, description, tooltip, faqItems = []} = component;
 
   return (
     <FieldSet field={key} label={label} tooltip={tooltip}>
@@ -52,6 +52,7 @@ const Preview: React.FC<ComponentPreviewProps<PartnersComponentSchema>> = ({comp
         disabled
       />
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </FieldSet>
   );
 };
