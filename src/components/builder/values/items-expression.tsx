@@ -4,7 +4,7 @@ import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {Component, Description} from '@/components/formio';
+import {Component} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 const NAME = 'openForms.itemsExpression';
@@ -33,6 +33,13 @@ export const ItemsExpression: React.FC = () => {
           defaultMessage="Items expression"
         />
       }
+      description={
+        <FormattedMessage
+          description="Description for the 'openForms.itemsExpression' builder field"
+          defaultMessage={`A JSON logic expression returning a variable (of array type)
+          whose items should be used as the options for this component.`}
+        />
+      }
     >
       <div>
         <JSONEditor
@@ -43,16 +50,6 @@ export const ItemsExpression: React.FC = () => {
           theme={builderContext.theme}
         />
       </div>
-
-      <Description
-        text={
-          <FormattedMessage
-            description="Description for the 'openForms.itemsExpression' builder field"
-            defaultMessage={`A JSON logic expression returning a variable (of array type)
-            whose items should be used as the options for this component.`}
-          />
-        }
-      />
     </Component>
   );
 };

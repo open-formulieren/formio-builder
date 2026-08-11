@@ -14,7 +14,7 @@ import {useContext} from 'react';
 import type {AnyEditor} from '@/components/CKEditor';
 import Editor from '@/components/CKEditor';
 import {TemplatingHint} from '@/components/builder';
-import {Component, Description} from '@/components/formio';
+import {Component} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
 import './richText.scss';
@@ -50,7 +50,13 @@ const RichText: React.FC<RichTextProps> = ({
   } = useFormikContext<AnyComponentSchema>();
   const [props, , helpers] = useField<string>(name);
   return (
-    <Component type={type} field={name} required={required} className="offb-rich-text">
+    <Component
+      type={type}
+      field={name}
+      required={required}
+      className="offb-rich-text"
+      description={supportsBackendTemplating && <TemplatingHint />}
+    >
       <CKEditor
         editor={editor}
         config={{
@@ -80,7 +86,6 @@ const RichText: React.FC<RichTextProps> = ({
           helpers.setTouched(true);
         }}
       />
-      {supportsBackendTemplating && <Description text={<TemplatingHint />} />}
     </Component>
   );
 };

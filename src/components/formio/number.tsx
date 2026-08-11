@@ -7,7 +7,6 @@ import {useValidationErrors} from '@/utils/errors';
 
 import Affix from './affix';
 import Component from './component';
-import Description from './description';
 import {FAQItems} from './faq-items';
 
 export interface NumberProps {
@@ -52,6 +51,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <div>
         <Wrapper suffix={suffix} prefix={prefix}>
@@ -77,7 +77,6 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
           />
         </Wrapper>
       </div>
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

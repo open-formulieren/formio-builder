@@ -1,7 +1,6 @@
 import type {ChildrenComponentSchema} from '@open-formulieren/types';
 
 import Component from '@/components/formio/component';
-import Description from '@/components/formio/description';
 
 import type {ComponentPreviewProps} from '../types';
 
@@ -15,6 +14,7 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
       htmlId={`editform-${key}`}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <table className="table table-sm table-striped">
         <thead>
@@ -48,7 +48,6 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
           </tr>
         </tbody>
       </table>
-      {description && <Description text={description} />}
     </Component>
   );
 };

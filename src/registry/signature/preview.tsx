@@ -5,7 +5,7 @@ import {debounce} from 'lodash';
 import {useLayoutEffect, useRef} from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
-import {Component, Description, FAQItems} from '@/components/formio';
+import {Component, FAQItems} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 import './previews.scss';
@@ -90,6 +90,7 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
       htmlId={`editform-${key}`}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <div ref={containerRef} className="signature-pad-body">
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
@@ -108,7 +109,6 @@ const Preview: React.FC<ComponentPreviewProps<SignatureComponentSchema>> = ({com
         <div className="signature-pad-footer">{footer}</div>
       </div>
 
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

@@ -8,7 +8,6 @@ import CharCount from '@/utils/charcount';
 import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
-import Description from './description';
 import {FAQItems} from './faq-items';
 import {withMultiple} from './multiple';
 
@@ -113,10 +112,10 @@ export const TextArea: React.FC<JSX.IntrinsicElements['textarea'] & TextAreaProp
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <div>{inputField}</div>
       {charCount}
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );
