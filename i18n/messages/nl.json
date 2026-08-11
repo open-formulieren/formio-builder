@@ -176,7 +176,7 @@
     "originalDefault": "Maximum value"
   },
   "3TrEX2": {
-    "defaultMessage": "Content",
+    "defaultMessage": "Uitleg",
     "description": "Label for FAQ item content configuration field",
     "originalDefault": "Content"
   },
@@ -642,7 +642,7 @@
     "originalDefault": "Single column"
   },
   "GyPFbN": {
-    "defaultMessage": "FAQ item {index} content",
+    "defaultMessage": "FAQ-item {index} uitleg",
     "description": "Label for FAQ item content",
     "originalDefault": "FAQ item {index} content"
   },
@@ -777,6 +777,7 @@
   "NGNhqX": {
     "defaultMessage": "Label",
     "description": "Label for FAQ item label configuration field",
+    "isTranslated": true,
     "originalDefault": "Label"
   },
   "NdaqDN": {
@@ -902,7 +903,7 @@
     "originalDefault": "Mode preset"
   },
   "SGQSae": {
-    "defaultMessage": "FAQ item {index} label",
+    "defaultMessage": "FAQ-item {index} label",
     "description": "Label for FAQ item label",
     "originalDefault": "FAQ item {index} label"
   },
@@ -1024,7 +1025,7 @@
     "originalDefault": "Maximum selected checkboxes (e.g. 1)"
   },
   "VU8w/6": {
-    "defaultMessage": "Translation for label with value \"{value}\"",
+    "defaultMessage": "Vertaling van label met waarde \"{value}\"",
     "description": "Accessible label for label for FAQ item",
     "originalDefault": "Translation for label with value \"{value}\""
   },
@@ -1256,7 +1257,7 @@
     "originalDefault": "Provide the key of a static, component, or user defined variable."
   },
   "c8xuWX": {
-    "defaultMessage": "Add FAQ item",
+    "defaultMessage": "Voeg FAQ-item toe",
     "description": "'Add FAQ item' button text",
     "originalDefault": "Add FAQ item"
   },
@@ -1546,7 +1547,7 @@
     "originalDefault": "Values"
   },
   "jFF6Dp": {
-    "defaultMessage": "FAQ item translations",
+    "defaultMessage": "FAQ-itemvertalingen",
     "description": "Title for translation group for FAQ items",
     "originalDefault": "FAQ item translations"
   },
@@ -1735,7 +1736,7 @@
     "originalDefault": "When this is checked, the map component settings configured in the global configuration will be used."
   },
   "ocXvs8": {
-    "defaultMessage": "FAQ items",
+    "defaultMessage": "FAQ-items",
     "description": "Component edit form tab title for 'FAQ items' tab",
     "originalDefault": "FAQ items"
   },
