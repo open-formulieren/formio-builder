@@ -40,23 +40,26 @@ export const SelectBoxes: React.FC<SelectBoxesProps> = ({
   }
 
   return (
-    <Component type="selectboxes" field={name} label={label} tooltip={tooltip} required={required}>
+    <Component
+      type="selectboxes"
+      field={name}
+      label={label}
+      tooltip={tooltip}
+      required={required}
+      description={description}
+    >
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label className="form-check-label">
-              <CheckboxInput
-                name={`${name}.${value}`}
-                label={label}
-                optionDescription={description}
-              />
+              <CheckboxInput name={`${name}.${value}`} label={label} />
             </label>
+            {description && <Description text={description} />}
           </div>
         ))}
       </div>
 
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

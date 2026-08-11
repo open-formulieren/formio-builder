@@ -1,7 +1,7 @@
 import type {CosignV1ComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
-import {Component, Description} from '@/components/formio';
+import {Component} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 
@@ -11,7 +11,13 @@ import type {ComponentPreviewProps} from '../types';
 const Preview: React.FC<ComponentPreviewProps<CosignV1ComponentSchema>> = ({component}) => {
   const {label, key, description, authPlugin} = component;
   return (
-    <Component type={component.type} field={key} htmlId={`editform-${key}`} label={label}>
+    <Component
+      type={component.type}
+      field={key}
+      htmlId={`editform-${key}`}
+      label={label}
+      description={description}
+    >
       <div>
         <button className="btn btn-primary" type="button">
           <FormattedMessage
@@ -21,7 +27,6 @@ const Preview: React.FC<ComponentPreviewProps<CosignV1ComponentSchema>> = ({comp
           />
         </button>
       </div>
-      {description && <Description text={description} />}
     </Component>
   );
 };

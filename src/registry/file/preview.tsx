@@ -1,7 +1,7 @@
 import type {FileComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
-import {Component, Description, FAQItems} from '@/components/formio';
+import {Component, FAQItems} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 import './previews.scss';
@@ -25,6 +25,7 @@ const Preview: React.FC<ComponentPreviewProps<FileComponentSchema>> = ({componen
       htmlId={`editform-${key}`}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <ul className="list-group list-group-striped">
         <li className="list-group-item list-group-header hidden-xs hidden-sm">
@@ -76,7 +77,6 @@ const Preview: React.FC<ComponentPreviewProps<FileComponentSchema>> = ({componen
           <div className="loader text-center" />
         </div>
       </div>
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

@@ -2,7 +2,7 @@ import type {EditGridComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';
-import {Component, Description, FAQItems} from '@/components/formio';
+import {Component, FAQItems} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 
@@ -29,6 +29,7 @@ const Preview: React.FC<ComponentPreviewProps<EditGridComponentSchema>> = ({comp
       htmlId={`editform-${key}`}
       label={hideLabel ? undefined : label}
       tooltip={tooltip}
+      description={description}
     >
       <div style={{display: 'flex', flexDirection: 'column', gap: '1em'}}>
         <ContentPlaceholder variant="builder">
@@ -53,8 +54,6 @@ const Preview: React.FC<ComponentPreviewProps<EditGridComponentSchema>> = ({comp
           />
         </ContentPlaceholder>
       </div>
-
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

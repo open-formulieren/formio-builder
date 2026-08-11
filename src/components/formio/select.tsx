@@ -12,7 +12,6 @@ import type {
 } from 'react-select';
 
 import Component from './component';
-import Description from './description';
 import {FAQItems} from './faq-items';
 
 // alias so that we can keep track of them and improve with generics at some point.
@@ -220,6 +219,7 @@ function Select<
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <div>
         {/* TODO: add classname/styling for error state */}
@@ -252,7 +252,6 @@ function Select<
           value={value}
         />
       </div>
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

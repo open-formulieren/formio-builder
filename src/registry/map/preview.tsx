@@ -15,7 +15,7 @@ import {EditControl} from 'react-leaflet-draw';
 import {useAsync} from 'react-use';
 
 import Loader from '@/components/builder/loader';
-import {Component, Description, FAQItems} from '@/components/formio';
+import {Component, FAQItems} from '@/components/formio';
 import {BuilderContext} from '@/context';
 import type {ComponentPreviewProps} from '@/registry/types';
 
@@ -144,6 +144,7 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
       htmlId={`editform-${key}`}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <MapContainer
         crs={CRS_RD}
@@ -194,7 +195,6 @@ const Preview: React.FC<ComponentPreviewProps<MapComponentSchema>> = ({component
         </FeatureGroup>
         <MapView lat={lat} lng={lng} zoom={zoom} />
       </MapContainer>
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

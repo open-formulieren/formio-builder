@@ -43,6 +43,7 @@ const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> =
   const {required = false} = validate;
   return (
     <FieldSet field={key} label={label} tooltip={tooltip}>
+      {description && <Description text={description} />}
       {digitalAddressTypes
         .sort((a, b) => a.localeCompare(b))
         .map((addressType, index) => (
@@ -54,7 +55,6 @@ const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> =
             type={fieldTypes[addressType]}
           />
         ))}
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </FieldSet>
   );

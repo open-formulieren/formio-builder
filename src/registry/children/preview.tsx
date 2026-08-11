@@ -10,6 +10,7 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
 
   return (
     <FieldSet field={key} label={label} tooltip={tooltip}>
+      {description && <Description text={description} />}
       <TextField
         name={`${key}.bsn`}
         label={<FormattedMessage description="Label for child's BSN" defaultMessage="BSN" />}
@@ -38,7 +39,6 @@ const Preview: React.FC<ComponentPreviewProps<ChildrenComponentSchema>> = ({comp
         value="2000-08-09"
         disabled
       />
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </FieldSet>
   );

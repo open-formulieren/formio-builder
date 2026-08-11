@@ -7,7 +7,6 @@ import {RenderContext} from '@/context';
 import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
-import Description from './description';
 import {FAQItems} from './faq-items';
 import {withMultiple} from './multiple';
 
@@ -74,9 +73,9 @@ export const DateTimeField: React.FC<JSX.IntrinsicElements['input'] & DateTimeFi
       htmlId={htmlId}
       label={label}
       tooltip={tooltip}
+      description={description}
     >
       <div>{inputField}</div>
-      {description && <Description text={description} />}
       <FAQItems items={faqItems} />
     </Component>
   );

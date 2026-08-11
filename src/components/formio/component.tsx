@@ -6,6 +6,7 @@ import {ErrorList, useValidationErrors} from '@/utils/errors';
 
 import ComponentLabel from './component-label';
 import './component.scss';
+import Description from './description';
 
 export interface ComponentProps {
   // XXX: eventually (most) of these literals will be included in AnyComponentType
@@ -17,6 +18,7 @@ export interface ComponentProps {
   htmlId?: string;
   children: React.ReactNode;
   className?: string;
+  description?: React.ReactNode;
 }
 
 const Component: React.FC<ComponentProps> = ({
@@ -27,6 +29,7 @@ const Component: React.FC<ComponentProps> = ({
   tooltip = '',
   children,
   className: extraClassName = '',
+  description = '',
   ...props
 }) => {
   const {errors} = useValidationErrors(field);
@@ -41,8 +44,9 @@ const Component: React.FC<ComponentProps> = ({
       {label && (
         <ComponentLabel label={label} required={required} htmlId={props.htmlId} tooltip={tooltip} />
       )}
-      {children}
+      {description && <Description text={description} />}
       <ErrorList errors={errors} />
+      {children}
     </div>
   );
 };

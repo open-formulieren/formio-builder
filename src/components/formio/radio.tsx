@@ -82,7 +82,14 @@ export const Radio: React.FC<RadioProps> = ({
   }
 
   return (
-    <Component type="radio" field={name} label={label} tooltip={tooltip} required={required}>
+    <Component
+      type="radio"
+      field={name}
+      label={label}
+      tooltip={tooltip}
+      required={required}
+      description={description}
+    >
       <div className="form-radio radio">
         {options.map(({value, label, description}, index) => (
           <div key={`option-${value}-${index}`} className="form-check">
@@ -98,8 +105,6 @@ export const Radio: React.FC<RadioProps> = ({
           </div>
         ))}
       </div>
-
-      {description && <Description text={description} />}
 
       {hasSelection && isClearable && (
         <button

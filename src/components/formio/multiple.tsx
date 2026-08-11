@@ -60,6 +60,7 @@ const Multiple = <P extends object, T>(props: MultipleProps<P, T> & CommonInputP
   return (
     <RenderContext.Provider value={{bareInput: true}}>
       {label && <ComponentLabel label={label} required={required} tooltip={tooltip} />}
+      {description && <Description text={description} />}
       <FieldArray name={name}>
         {arrayHelpers => (
           <table className="table table-bordered">
@@ -105,7 +106,6 @@ const Multiple = <P extends object, T>(props: MultipleProps<P, T> & CommonInputP
           </table>
         )}
       </FieldArray>
-      {description && <Description text={description} />}
     </RenderContext.Provider>
   );
 };
