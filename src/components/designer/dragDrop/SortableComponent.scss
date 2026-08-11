@@ -1,5 +1,7 @@
+@use '@/scss/bem';
+
 .offb-dnd-sortable-item {
-  &--is-dragging {
+  @include bem.modifier('is-dragging') {
     opacity: 0.4;
   }
 }

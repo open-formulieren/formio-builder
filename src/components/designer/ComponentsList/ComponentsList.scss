@@ -1,5 +1,7 @@
+@use '@/scss/bem';
+
 .offb-components-list {
-  &__search-input {
+  @include bem.element('search-input') {
     margin-block-end: 10px;
   }
 }

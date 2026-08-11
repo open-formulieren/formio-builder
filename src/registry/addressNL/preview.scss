@@ -1,9 +1,11 @@
+@use '@/scss/bem';
+
 .offb-addressnl-preview {
   display: grid;
   grid-template-columns: 1fr;
   column-gap: 10px;
 
-  &--doubleColumn {
+  @include bem.modifier('doubleColumn') {
     grid-template-columns: 1fr 1fr;
   }
 }

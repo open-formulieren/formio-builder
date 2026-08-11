@@ -1,18 +1,12 @@
+@use '@/scss/bem';
+
 .faq-items {
   display: flex;
   flex-direction: column;
   gap: 1em;
 
-  &__add {
+  @include bem.element('add') {
     align-self: flex-start;
-
-    background-color: var(--default-button-bg, #017092);
-    color: white;
-
-    &:hover {
-      color: white;
-      opacity: 0.9;
-    }
   }
 }
 
@@ -23,6 +17,7 @@
   gap: 0 1em;
   padding: 0 1em;
   border: 1px var(--border-color, #ccc) solid;
+  border-radius: 3px;
 
   .faq-item__controls {
     grid-area: controls;
@@ -32,13 +27,11 @@
     padding: calc(1.5em + 0.75rem + 2px) 0;
   }
 
-  &__label.field-required {
-    font-weight: bold;
-
-    color: var(--body-quiet-color);
+  @include bem.element('content-label') {
+    display: inline-block;
   }
 
-  &__remove {
+  @include bem.element('remove') {
     border-radius: 5px;
   }
 }

@@ -1,3 +1,5 @@
+@use '@/scss/bem';
+
 .offb-columns-panel-preview {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -17,7 +19,7 @@
     transparent
   );
 
-  &--mobile {
+  @include bem.modifier('mobile') {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
     row-gap: 14px;
@@ -26,7 +28,7 @@
     margin-inline: auto;
   }
 
-  &__column {
+  @include bem.element('column') {
     background-color: var(--offb-columns-preview-background-color, #eee);
     padding-inline: 5px;
     padding-block: 10px;
@@ -39,14 +41,16 @@
   }
 }
 
-.offb-designer-preview.offb-designer-preview--component-type-columns {
-  // Reduce the gap between columns
-  $gapSize: 6px;
+.offb-designer-preview {
+  @include bem.modifier('component-type-columns') {
+    // Reduce the gap between columns
+    $gapSize: 6px;
 
-  .row {
-    margin-inline: calc($gapSize / 2 * -1);
-  }
-  .col {
-    padding-inline: calc($gapSize / 2);
+    .row {
+      margin-inline: calc($gapSize / 2 * -1);
+    }
+    .col {
+      padding-inline: calc($gapSize / 2);
+    }
   }
 }

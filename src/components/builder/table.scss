@@ -1,20 +1,22 @@
+@use '@/scss/bem';
+
 .offb-table {
   // Ensures that the column widths are respected
   table-layout: fixed;
   width: 100%;
 
-  &__content {
-    &--allow-break {
+  @include bem.element('content') {
+    @include bem.modifier('allow-break') {
       overflow-wrap: break-word;
       hyphens: auto;
     }
   }
 
-  &__col {
-    &--width-25 {
+  @include bem.element('col') {
+    @include bem.modifier('width-25') {
       width: 25%;
     }
-    &--width-50 {
+    @include bem.modifier('width-50') {
       width: 50%;
     }
   }

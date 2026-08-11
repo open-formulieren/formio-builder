@@ -1,7 +1,11 @@
-.offb-designer-preview.offb-designer-preview--component-type-fieldset {
-  border: dotted 2px #e8e8e8;
+@use '@/scss/bem';
 
-  &:hover {
-    border-color: #ccc;
+.offb-designer-preview {
+  @include bem.modifier('component-type-fieldset') {
+    border: dotted 2px #e8e8e8;
+
+    &:hover {
+      border-color: #ccc;
+    }
   }
 }

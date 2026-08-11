@@ -33,7 +33,7 @@ const FAQItems = () => {
               </div>
 
               <div className="form-group">
-                <span className="faq-item__label col-form-label field-required">
+                <span className="faq-item__content-label col-form-label field-required">
                   <FormattedMessage
                     description="Label for FAQ item content configuration field"
                     defaultMessage="Content"
@@ -62,7 +62,7 @@ const FAQItems = () => {
 
           <button
             type="button"
-            className="faq-items__add btn"
+            className="btn btn-primary faq-items__add"
             onClick={() => {
               arrayHelpers.push({
                 id: window.crypto.randomUUID(),
