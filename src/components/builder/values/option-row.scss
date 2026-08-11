@@ -1,10 +1,12 @@
+@use '@/scss/bem';
+
 .offb-option-row {
-  &__icons_cell {
+  @include bem.element('icons_cell') {
     vertical-align: middle !important;
     border-bottom: none !important;
   }
 
-  &__sort-icons {
+  @include bem.element('sort-icons') {
     display: flex;
     flex-direction: column;
     gap: 0;

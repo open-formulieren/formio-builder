@@ -1,4 +1,8 @@
-.offb-designer-preview.offb-designer-preview--component-type-content {
-  padding-inline: 10px;
-  border: dashed 2px #dddddd;
+@use '@/scss/bem';
+
+.offb-designer-preview {
+  @include bem.modifier('component-type-content') {
+    padding-inline: 10px;
+    border: dashed 2px #dddddd;
+  }
 }

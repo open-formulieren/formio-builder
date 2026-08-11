@@ -1,9 +1,11 @@
+@use '@/scss/bem';
+
 .offb-component-group {
   summary {
     display: block;
   }
 
-  &__component-button {
+  @include bem.element('component-button') {
     color: var(--bs-body-color);
   }
 }

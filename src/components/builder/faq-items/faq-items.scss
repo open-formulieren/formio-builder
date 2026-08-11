@@ -1,9 +1,11 @@
+@use '@/scss/bem';
+
 .faq-items {
   display: flex;
   flex-direction: column;
   gap: 1em;
 
-  &__add {
+  @include bem.element('add') {
     align-self: flex-start;
 
     background-color: var(--default-button-bg, #017092);
@@ -38,7 +40,7 @@
     color: var(--body-quiet-color);
   }
 
-  &__remove {
+  @include bem.element('remove') {
     border-radius: 5px;
   }
 }

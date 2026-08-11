@@ -51,6 +51,7 @@ export default defineConfig(({mode}) => ({
     alias: {
       '@/components': resolve(_OF_INTERNAL_dirname, 'src/components'),
       '@/registry': resolve(_OF_INTERNAL_dirname, 'src/registry'),
+      '@/scss': resolve(_OF_INTERNAL_dirname, 'src/scss'),
     },
   },
   css: {

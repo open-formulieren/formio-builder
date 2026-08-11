@@ -1,5 +1,7 @@
+@use '@/scss/bem';
+
 .offb-overlay {
-  &__sort-icons {
+  @include bem.element('sort-icons') {
     display: flex;
     flex-direction: column;
     gap: 0;

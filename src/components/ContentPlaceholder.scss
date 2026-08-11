@@ -1,3 +1,5 @@
+@use '@/scss/bem';
+
 .offb-content-placeholder {
   text-align: center;
 
@@ -5,7 +7,7 @@
   border-width: 1px;
   border-radius: 2px;
 
-  &--designer {
+  @include bem.modifier('designer') {
     padding-inline: 20px;
     padding-block: 10px;
 
@@ -14,7 +16,7 @@
     border-color: var(--offb-content-placeholder-designer-border-color, #bee5eb);
   }
 
-  &--builder {
+  @include bem.modifier('builder') {
     font-style: italic;
 
     padding-inline: 10px;

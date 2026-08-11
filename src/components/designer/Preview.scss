@@ -1,5 +1,7 @@
+@use '@/scss/bem';
+
 .offb-designer-preview {
-  &--hidden {
+  @include bem.modifier('hidden') {
     background: repeating-linear-gradient(
       -45deg,
       rgb(255, 231, 97),
