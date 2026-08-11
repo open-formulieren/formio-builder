@@ -70,7 +70,7 @@ export const WithErrors: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+    expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    expect(canvas.queryByText('Example error')).toBeInTheDocument();
   },
 };

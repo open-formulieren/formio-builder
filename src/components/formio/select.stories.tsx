@@ -83,9 +83,9 @@ export const Multi: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Option 1')).toBeInTheDocument();
-    await expect(canvas.queryByText('Option 2')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('Option 3')).toBeInTheDocument();
+    expect(canvas.queryByText('Option 1')).toBeInTheDocument();
+    expect(canvas.queryByText('Option 2')).not.toBeInTheDocument();
+    expect(canvas.queryByText('Option 3')).toBeInTheDocument();
   },
 };
 
@@ -107,7 +107,7 @@ export const ArbitraryOptionShape: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText('sherlock')).toBeInTheDocument();
+    expect(canvas.getByText('sherlock')).toBeInTheDocument();
   },
 };
 
@@ -125,8 +125,8 @@ export const WithErrors: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+    expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    expect(canvas.queryByText('Example error')).toBeInTheDocument();
   },
 };
 

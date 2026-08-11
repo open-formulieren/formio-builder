@@ -208,15 +208,15 @@ export const TextField: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A text field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -226,7 +226,7 @@ export const TextField: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput).toHaveDisplayValue('');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -238,13 +238,13 @@ export const TextField: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
@@ -274,26 +274,26 @@ export const Email: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('An email field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('An email field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anEmailField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('anEmailField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
 
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-    await expect(await preview.findByText('Updated preview label')).toBeVisible();
+    expect(await preview.findByText('Updated preview label')).toBeVisible();
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('email');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('email');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -303,30 +303,30 @@ export const Email: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('email');
+    expect(defaultInput0.type).toEqual('email');
     await userEvent.type(defaultInput0, 'invalid');
     // fireEvent.blur doesn't seem to do anything? -> just click the button to add another one,
     // that also removes focus from the input
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByText('Default Value must be a valid email.')).toBeVisible();
+      expect(await canvas.findByText('Default Value must be a valid email.')).toBeVisible();
     });
 
     await userEvent.type(defaultInput0, '@example.com');
@@ -366,15 +366,15 @@ export const NumberField: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A number field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A number field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aNumberField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aNumberField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -384,8 +384,8 @@ export const NumberField: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('number');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('number');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -412,7 +412,7 @@ export const NumberField: Story = {
 
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
@@ -483,15 +483,15 @@ export const Textarea: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A textarea field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A textarea field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextareaField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aTextareaField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -501,7 +501,7 @@ export const Textarea: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput).toHaveDisplayValue('');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -512,13 +512,13 @@ export const Textarea: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
@@ -548,15 +548,15 @@ export const DateField: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A date field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A date field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aDateField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aDateField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -566,8 +566,8 @@ export const DateField: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('date');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('date');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -577,24 +577,24 @@ export const DateField: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('date');
+    expect(defaultInput0.type).toEqual('date');
     // userEvent.type does not reliably work with date input, and the native browser
     // datepicker helps in enforcing only valid dates.
 
@@ -622,15 +622,15 @@ export const DateTimeField: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A datetime field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A datetime field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aDatetimeField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aDatetimeField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -640,8 +640,8 @@ export const DateTimeField: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('datetime-local');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('datetime-local');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -651,24 +651,24 @@ export const DateTimeField: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('datetime-local');
+    expect(defaultInput0.type).toEqual('datetime-local');
     // userEvent.type does not reliably work with datetime-local input
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
@@ -695,15 +695,15 @@ export const TimeField: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A time field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A time field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aTimeField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aTimeField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -713,8 +713,8 @@ export const TimeField: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('time');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('time');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -724,24 +724,24 @@ export const TimeField: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('time');
+    expect(defaultInput0.type).toEqual('time');
     // userEvent.type does not reliably work with time input
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
@@ -769,15 +769,15 @@ export const Postcode: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A postcode field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A postcode field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aPostcodeField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aPostcodeField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -787,8 +787,8 @@ export const Postcode: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('text');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('text');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -798,24 +798,24 @@ export const Postcode: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     // check that default value is e-mail validated
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('text');
+    expect(defaultInput0.type).toEqual('text');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -838,15 +838,15 @@ export const PhoneNumber: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A phone number field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A phone number field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aPhoneNumberField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aPhoneNumberField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -856,7 +856,7 @@ export const PhoneNumber: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput).toHaveDisplayValue('');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -867,14 +867,14 @@ export const PhoneNumber: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
@@ -908,44 +908,44 @@ export const FileUpload: Story = {
     const canvas = within(canvasElement);
 
     await step('Basic tab', async () => {
-      await expect(canvas.getByLabelText('Label')).toHaveValue('A file upload');
+      expect(canvas.getByLabelText('Label')).toHaveValue('A file upload');
       await waitFor(async () => {
-        await expect(canvas.getByLabelText('Property Name')).toHaveValue('aFileUpload');
+        expect(canvas.getByLabelText('Property Name')).toHaveValue('aFileUpload');
       });
 
-      await expect(canvas.getByLabelText('Description')).toHaveValue('');
-      await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-      await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-      await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-      await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+      expect(canvas.getByLabelText('Description')).toHaveValue('');
+      expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+      expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+      expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+      expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
-      await expect(canvas.getByLabelText('Multiple values')).not.toBeChecked();
-      await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-      await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
-      await expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
+      expect(canvas.getByLabelText('Multiple values')).not.toBeChecked();
+      expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+      expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+      expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
     });
 
     await step('File tab', async () => {
       await userEvent.click(canvas.getByRole('link', {name: 'File'}));
 
       await waitFor(async () => {
-        await expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
-        await expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
+        expect(canvas.getByLabelText('Maximum file size')).toHaveDisplayValue('10MB');
+        expect(canvas.getByText('Note that the server upload limit is 50MB.')).toBeVisible();
       });
 
       // check that the file types are visible
       canvas.getByLabelText('File types').focus();
       await userEvent.keyboard('[ArrowDown]');
       await waitFor(async () => {
-        await expect(canvas.queryByText('any filetype')).toBeVisible();
+        expect(canvas.queryByText('any filetype')).toBeVisible();
       });
-      await expect(canvas.queryByText('.pdf')).toBeVisible();
+      expect(canvas.queryByText('.pdf')).toBeVisible();
       await userEvent.click(canvas.getByText('.jpg'));
       // wait for dropdown to close and selected option to be visible;
       await waitFor(async () => {
-        await expect(canvas.queryByText('.pdf')).toBeNull();
+        expect(canvas.queryByText('.pdf')).toBeNull();
       });
-      await expect(canvas.queryByText('.jpg')).toBeVisible();
+      expect(canvas.queryByText('.jpg')).toBeVisible();
     });
 
     await step('Submit configuration', async () => {
@@ -1032,15 +1032,15 @@ export const SelectBoxes: Story = {
     const editForm = within(canvas.getByTestId('componentEditForm'));
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A selectboxes field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A selectboxes field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aSelectboxesField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aSelectboxesField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
 
@@ -1049,7 +1049,7 @@ export const SelectBoxes: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByRole('checkbox');
-    await expect(previewInput).not.toBeChecked();
+    expect(previewInput).not.toBeChecked();
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1060,7 +1060,7 @@ export const SelectBoxes: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await step('Set up manual options', async () => {
       // enter some possible options
@@ -1175,8 +1175,8 @@ export const SelectBoxes: Story = {
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
       await userEvent.type(itemsExpressionInput, expression);
 
-      await expect(editForm.queryByLabelText('Default value')).toBeNull();
-      await expect(preview.getByRole('checkbox', {name: /Options from expression:/})).toBeVisible();
+      expect(editForm.queryByLabelText('Default value')).toBeNull();
+      expect(preview.getByRole('checkbox', {name: /Options from expression:/})).toBeVisible();
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalledWith({
@@ -1255,15 +1255,15 @@ export const Radio: Story = {
     const editForm = within(canvas.getByTestId('componentEditForm'));
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A radio field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A radio field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aRadioField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aRadioField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
 
@@ -1272,7 +1272,7 @@ export const Radio: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByRole('radio');
-    await expect(previewInput).toBeChecked(); // matches '' value
+    expect(previewInput).toBeChecked(); // matches '' value
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1283,7 +1283,7 @@ export const Radio: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await step('Set up manual options', async () => {
       // enter some possible options
@@ -1367,16 +1367,16 @@ export const Radio: Story = {
       const inputs = editForm.getAllByRole('textbox');
       for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
-        await expect(input).toHaveValue('manualTranslation');
+        expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
-        await expect(input).toHaveValue('');
+        expect(input).toHaveValue('');
       }
 
       // Removing focus from the last input
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      await expect(await editForm.queryByText('Required')).toBeNull();
+      expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1391,8 +1391,8 @@ export const Radio: Story = {
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
       await userEvent.type(itemsExpressionInput, expression);
 
-      await expect(editForm.queryByLabelText('Default value')).toBeNull();
-      await expect(preview.getByRole('radio', {name: /Options from expression:/})).toBeVisible();
+      expect(editForm.queryByLabelText('Default value')).toBeNull();
+      expect(preview.getByRole('radio', {name: /Options from expression:/})).toBeVisible();
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
       expect(args.onSubmit).toHaveBeenCalledWith({
@@ -1467,15 +1467,15 @@ export const Select: Story = {
     const editForm = within(canvas.getByTestId('componentEditForm'));
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A select field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A select field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aSelectField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aSelectField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
 
@@ -1492,7 +1492,7 @@ export const Select: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await step('Set up manual options', async () => {
       // enter some possible options
@@ -1593,16 +1593,16 @@ export const Select: Story = {
       const inputs = editForm.getAllByRole('textbox');
       for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
-        await expect(input).toHaveValue('manualTranslation');
+        expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
-        await expect(input).toHaveValue('');
+        expect(input).toHaveValue('');
       }
 
       // Removing focus from the last input
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      await expect(await editForm.queryByText('Required')).toBeNull();
+      expect(await editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1617,7 +1617,7 @@ export const Select: Story = {
       const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
       await userEvent.type(itemsExpressionInput, expression);
 
-      await expect(editForm.queryByLabelText('Default value')).toBeNull();
+      expect(editForm.queryByLabelText('Default value')).toBeNull();
 
       const previewSearchInput = preview.getByLabelText('Other label');
       previewSearchInput.focus();
@@ -1628,7 +1628,7 @@ export const Select: Story = {
         },
         {timeout: 200}
       );
-      // await expect(await preview.findByText(/"someVar"/)).toBeVisible();
+      // expect(await preview.findByText(/"someVar"/)).toBeVisible();
       await userEvent.keyboard('[Escape]');
 
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
@@ -1699,15 +1699,15 @@ export const BSN: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A BSN field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A BSN field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aBsnField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aBsnField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -1717,8 +1717,8 @@ export const BSN: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('text');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('text');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1728,23 +1728,23 @@ export const BSN: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('text');
+    expect(defaultInput0.type).toEqual('text');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -1784,15 +1784,15 @@ export const Checkbox: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A checkbox field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A checkbox field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCheckboxField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aCheckboxField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -1802,8 +1802,8 @@ export const Checkbox: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).not.toBeChecked();
-    await expect(previewInput.type).toEqual('checkbox');
+    expect(previewInput).not.toBeChecked();
+    expect(previewInput.type).toEqual('checkbox');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1827,7 +1827,7 @@ export const Checkbox: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     await waitFor(() => {
@@ -1900,15 +1900,15 @@ export const Currency: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A currency field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A currency field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCurrencyField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aCurrencyField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -1918,8 +1918,8 @@ export const Currency: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('number');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('number');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1941,7 +1941,7 @@ export const Currency: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -1967,15 +1967,15 @@ export const Iban: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('An IBAN field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('An IBAN field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anIbanField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('anIbanField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -1985,8 +1985,8 @@ export const Iban: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('text');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('text');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -1996,23 +1996,23 @@ export const Iban: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('text');
+    expect(defaultInput0.type).toEqual('text');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -2039,15 +2039,15 @@ export const LicensePlate: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A license plate field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A license plate field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aLicensePlateField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aLicensePlateField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -2057,8 +2057,8 @@ export const LicensePlate: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-    await expect(previewInput).toHaveDisplayValue('');
-    await expect(previewInput.type).toEqual('text');
+    expect(previewInput).toHaveDisplayValue('');
+    expect(previewInput.type).toEqual('text');
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -2068,23 +2068,23 @@ export const LicensePlate: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     // check that toggling the 'multiple' checkbox properly updates the preview and default
     // value field. We use fireEvent because firefox borks on userEvent.click, see:
     // https://github.com/testing-library/user-event/issues/1149
     fireEvent.click(canvas.getByLabelText<HTMLInputElement>('Multiple values'));
     await userEvent.click(preview.getByRole('button', {name: 'Add another'}));
-    // await expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
+    // expect(preview.getByTestId('input-customKey[0]')).toHaveDisplayValue('');
     // test for the default value inputs -> these don't have accessible labels/names :(
     const addButtons = canvas.getAllByRole('button', {name: 'Add another'});
     await userEvent.click(addButtons[0]);
     await waitFor(async () => {
-      await expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
+      expect(await canvas.findByTestId('input-defaultValue[0]')).toBeVisible();
     });
 
     const defaultInput0 = canvas.getByTestId<HTMLInputElement>('input-defaultValue[0]');
-    await expect(defaultInput0.type).toEqual('text');
+    expect(defaultInput0.type).toEqual('text');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -2110,21 +2110,21 @@ export const NpFamilyMembers: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('An npFamilyMembers field');
+    expect(canvas.getByLabelText('Label')).toHaveValue('An npFamilyMembers field');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('anNpFamilyMembersField');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('anNpFamilyMembersField');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
 
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-    await expect(await preview.findByText('Updated preview label')).toBeVisible();
+    expect(await preview.findByText('Updated preview label')).toBeVisible();
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -2135,28 +2135,28 @@ export const NpFamilyMembers: Story = {
     await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await step('Toggling options updates preview', async () => {
       const childrenCheckbox = await preview.findByLabelText('Child 1');
-      await expect(childrenCheckbox).toBeVisible();
-      await expect(childrenCheckbox).not.toBeChecked();
+      expect(childrenCheckbox).toBeVisible();
+      expect(childrenCheckbox).not.toBeChecked();
 
       let partnersCheckbox = preview.queryByLabelText('Partner 1');
-      await expect(partnersCheckbox).toBeNull();
+      expect(partnersCheckbox).toBeNull();
 
       const partnersOption = canvas.getByLabelText('Include partners');
       fireEvent.click(partnersOption);
       await waitFor(async () => {
-        await expect(partnersOption).toBeChecked();
+        expect(partnersOption).toBeChecked();
       });
       partnersCheckbox = await preview.findByLabelText('Partner 1');
-      await expect(partnersCheckbox).toBeVisible();
+      expect(partnersCheckbox).toBeVisible();
     });
 
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      await expect(args.onSubmit).toHaveBeenCalled();
+      expect(args.onSubmit).toHaveBeenCalled();
     });
   },
 };
@@ -2195,15 +2195,15 @@ export const AddressNL: Story = {
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A Dutch address');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A Dutch address');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aDutchAddress');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aDutchAddress');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -2213,7 +2213,7 @@ export const AddressNL: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByText('Updated preview label');
-    await expect(previewInput).toBeVisible();
+    expect(previewInput).toBeVisible();
 
     // Ensure that the manually entered key is kept instead of derived from the label,
     // even when key/label components are not mounted.
@@ -2223,7 +2223,7 @@ export const AddressNL: Story = {
     fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.clear(canvas.getByLabelText('Label'));
     await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-    await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+    expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
 
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
@@ -2269,7 +2269,7 @@ export const Columns: Story = {
 
     await step('Submit form', async () => {
       await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      await expect(args.onSubmit).toHaveBeenCalled();
+      expect(args.onSubmit).toHaveBeenCalled();
     });
   },
 };
@@ -2292,14 +2292,14 @@ export const FieldSet: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A field set');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A field set');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aFieldSet');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aFieldSet');
     });
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
-    await expect(canvas.getByLabelText('Hide fieldset header')).not.toBeChecked();
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+    expect(canvas.getByLabelText('Hide fieldset header')).not.toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -2309,7 +2309,7 @@ export const FieldSet: Story = {
     expect(await preview.findByText('Updated preview label'));
 
     const previewInput = preview.getByText('Updated preview label');
-    await expect(previewInput).toBeVisible();
+    expect(previewInput).toBeVisible();
 
     await step('Manually edit key', async () => {
       // Ensure that the manually entered key is kept instead of derived from the label,
@@ -2320,7 +2320,7 @@ export const FieldSet: Story = {
       fireEvent.change(keyInput, {target: {value: 'customKey'}});
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
     await step('Toggle hideHeader', async () => {
@@ -2358,16 +2358,16 @@ export const EditGrid: Story = {
   play: async ({canvasElement, step, args}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A repeating group');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A repeating group');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aRepeatingGroup');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aRepeatingGroup');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Group label')).toHaveValue('Group');
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
-    await expect(canvas.getByLabelText('Hide label')).not.toBeChecked();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Group label')).toHaveValue('Group');
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
+    expect(canvas.getByLabelText('Hide label')).not.toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     const preview = within(canvas.getByTestId('componentPreview'));
@@ -2385,7 +2385,7 @@ export const EditGrid: Story = {
       fireEvent.change(keyInput, {target: {value: 'customKey'}});
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
     await step('Toggle hideLabel', async () => {
@@ -2400,9 +2400,9 @@ export const EditGrid: Story = {
       const groupLabelInput = canvas.getByLabelText('Group label');
       await userEvent.clear(groupLabelInput);
       await userEvent.type(groupLabelInput, 'Duckling');
-      await expect(await preview.findByText('Duckling 1')).toBeVisible();
-      await expect(await preview.findByText('Duckling 2')).toBeVisible();
-      await expect(await preview.findByText('Duckling 3')).toBeVisible();
+      expect(await preview.findByText('Duckling 1')).toBeVisible();
+      expect(await preview.findByText('Duckling 2')).toBeVisible();
+      expect(await preview.findByText('Duckling 3')).toBeVisible();
     });
 
     await step('Submit form', async () => {
@@ -2430,9 +2430,9 @@ export const CosignV1: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v1');
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v1');
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
 
     // ensure that changing fields in the edit form properly update the preview
     await step('Change authPlugin', async () => {
@@ -2440,12 +2440,12 @@ export const CosignV1: Story = {
       await userEvent.keyboard('[ArrowDown]');
       await waitFor(async () => {
         const eHerkenningOption = canvas.getByText('eHerkenning, provides: kvk');
-        await expect(eHerkenningOption).toBeVisible();
+        expect(eHerkenningOption).toBeVisible();
         await userEvent.click(eHerkenningOption);
       });
       await waitFor(async () => {
         const previewBtn = preview.getByRole('button', {name: 'Cosign (eherkenning)'});
-        await expect(previewBtn).toBeVisible();
+        expect(previewBtn).toBeVisible();
       });
     });
 
@@ -2473,27 +2473,27 @@ export const CosignV2: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v2');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A cosign v2');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aCosignV2');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aCosignV2');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     await step('Change label', async () => {
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-      await expect(await preview.findByText('Updated preview label')).toBeVisible();
+      expect(await preview.findByText('Updated preview label')).toBeVisible();
 
       const previewInput = preview.getByLabelText<HTMLInputElement>('Updated preview label');
-      await expect(previewInput).toHaveDisplayValue('');
-      await expect(previewInput.type).toEqual('email');
+      expect(previewInput).toHaveDisplayValue('');
+      expect(previewInput.type).toEqual('email');
     });
 
     await step('Change key', async () => {
@@ -2505,7 +2505,7 @@ export const CosignV2: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
     await step('Submit form', async () => {
@@ -2534,17 +2534,17 @@ export const Signature: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A signature');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A signature');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aSignature');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aSignature');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     await step('Change label', async () => {
@@ -2564,7 +2564,7 @@ export const Signature: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
     await step('Submit form', async () => {
@@ -2591,24 +2591,24 @@ export const LeafletMap: Story = {
     const canvas = within(canvasElement);
     const preview = within(canvas.getByTestId('componentPreview'));
 
-    await expect(canvas.getByLabelText('Label')).toHaveValue('A map');
+    expect(canvas.getByLabelText('Label')).toHaveValue('A map');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('aMap');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('aMap');
     });
-    await expect(canvas.getByLabelText('Description')).toHaveValue('');
-    await expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
-    await expect(canvas.getByLabelText('Show in summary')).toBeChecked();
-    await expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
-    await expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
-    await expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
-    await expect(canvas.queryByLabelText('Default value')).not.toBeInTheDocument();
-    await expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
+    expect(canvas.getByLabelText('Description')).toHaveValue('');
+    expect(canvas.getByLabelText('Tooltip')).toHaveValue('');
+    expect(canvas.getByLabelText('Show in summary')).toBeChecked();
+    expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
+    expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
+    expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
+    expect(canvas.queryByLabelText('Default value')).not.toBeInTheDocument();
+    expect(canvas.queryByLabelText('Placeholder')).not.toBeInTheDocument();
 
     // ensure that changing fields in the edit form properly update the preview
     await step('Change label', async () => {
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Updated preview label');
-      await expect(await preview.findByText('Updated preview label')).toBeVisible();
+      expect(await preview.findByText('Updated preview label')).toBeVisible();
     });
 
     await step('Change key', async () => {
@@ -2620,7 +2620,7 @@ export const LeafletMap: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Basic'}));
       await userEvent.clear(canvas.getByLabelText('Label'));
       await userEvent.type(canvas.getByLabelText('Label'), 'Other label', {delay: 50});
-      await expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveDisplayValue('customKey');
     });
 
     await step('Submit form', async () => {
@@ -2872,7 +2872,7 @@ export const Profile: Story = {
 
       const confirmationCheckbox = componentEditForm.getByLabelText('Receives confirmation email');
       expect(confirmationCheckbox).toBeVisible();
-      await expect(confirmationCheckbox).not.toBeChecked();
+      expect(confirmationCheckbox).not.toBeChecked();
     });
 
     await step('Deselect phone number digital address type', async () => {

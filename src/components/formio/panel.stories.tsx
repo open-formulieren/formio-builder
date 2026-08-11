@@ -38,11 +38,11 @@ export const Collapsible: Story = {
 
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText(args.children as string)).toBeInTheDocument();
+    expect(canvas.queryByText(args.children as string)).toBeInTheDocument();
 
     const header = await canvas.findByText(args.title as string);
     await userEvent.click(header);
-    await expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
+    expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
   },
 };
 
@@ -54,11 +54,11 @@ export const CollapsibleInitiallyCollapsed: Story = {
 
   play: async ({canvasElement, args}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
+    expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
 
     const header = await canvas.findByText(args.title as string);
     await userEvent.click(header);
-    await expect(canvas.queryByText(args.children as string)).toBeInTheDocument();
+    expect(canvas.queryByText(args.children as string)).toBeInTheDocument();
   },
 };
 
@@ -72,11 +72,11 @@ export const CollapsibleWithExtraHeaderControls: Story = {
     const header = await canvas.findByText(args.title as string);
     const headerControls = canvas.getByRole('button', {name: 'Extra button'});
 
-    await expect(canvas.queryByText(args.children as string)).toBeVisible();
-    await expect(headerControls).toBeVisible();
+    expect(canvas.queryByText(args.children as string)).toBeVisible();
+    expect(headerControls).toBeVisible();
 
     await userEvent.click(header);
-    await expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
-    await expect(headerControls).toBeVisible();
+    expect(canvas.queryByText(args.children as string)).not.toBeInTheDocument();
+    expect(headerControls).toBeVisible();
   },
 };

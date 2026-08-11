@@ -104,14 +104,14 @@ export const TextField: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, 'typing in preview component');
-      await expect(regularInput).toHaveDisplayValue('typing in preview component');
+      expect(regularInput).toHaveDisplayValue('typing in preview component');
     });
 
     await step('Interaction with hidden textfield', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, 'typing in preview component');
-      await expect(hiddenInput).toHaveDisplayValue('typing in preview component');
+      expect(hiddenInput).toHaveDisplayValue('typing in preview component');
     });
   },
 };
@@ -172,24 +172,24 @@ export const TextFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       // during typing, we want immediate charcount feedback
       await userEvent.type(input1, 'Foo');
-      await expect(wrapper.queryByText('3 characters')).toBeInTheDocument();
-      await expect(input1).toHaveDisplayValue('Foo');
+      expect(wrapper.queryByText('3 characters')).toBeInTheDocument();
+      expect(input1).toHaveDisplayValue('Foo');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden textfield multiple', async () => {
@@ -201,24 +201,24 @@ export const TextFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       // during typing, we want immediate charcount feedback
       await userEvent.type(input1, 'Foo');
-      await expect(wrapper.queryByText('3 characters')).toBeInTheDocument();
-      await expect(input1).toHaveDisplayValue('Foo');
+      expect(wrapper.queryByText('3 characters')).toBeInTheDocument();
+      expect(input1).toHaveDisplayValue('Foo');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -275,14 +275,14 @@ export const Textarea: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, 'typing in preview component');
-      await expect(regularInput).toHaveDisplayValue('typing in preview component');
+      expect(regularInput).toHaveDisplayValue('typing in preview component');
     });
 
     await step('Interaction with hidden textarea', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, 'typing in preview component');
-      await expect(hiddenInput).toHaveDisplayValue('typing in preview component');
+      expect(hiddenInput).toHaveDisplayValue('typing in preview component');
     });
   },
 };
@@ -344,22 +344,22 @@ export const TextareaMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'Foo');
-      await expect(input1).toHaveDisplayValue('Foo');
+      expect(input1).toHaveDisplayValue('Foo');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden textarea multiple', async () => {
@@ -371,22 +371,22 @@ export const TextareaMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'Foo');
-      await expect(input1).toHaveDisplayValue('Foo');
+      expect(input1).toHaveDisplayValue('Foo');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -436,14 +436,14 @@ export const Email: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, 'hello@example.com');
-      await expect(regularInput).toHaveDisplayValue('hello@example.com');
+      expect(regularInput).toHaveDisplayValue('hello@example.com');
     });
 
     await step('Interaction with hidden email field', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, 'hello@example.com');
-      await expect(hiddenInput).toHaveDisplayValue('hello@example.com');
+      expect(hiddenInput).toHaveDisplayValue('hello@example.com');
     });
   },
 };
@@ -551,22 +551,22 @@ export const EmailMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'hello@example.com');
-      await expect(input1).toHaveDisplayValue('hello@example.com');
+      expect(input1).toHaveDisplayValue('hello@example.com');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden email multiple', async () => {
@@ -578,22 +578,22 @@ export const EmailMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'hello@example.com');
-      await expect(input1).toHaveDisplayValue('hello@example.com');
+      expect(input1).toHaveDisplayValue('hello@example.com');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -643,14 +643,14 @@ export const NumberField: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, '123');
-      await expect(regularInput).toHaveDisplayValue('123');
+      expect(regularInput).toHaveDisplayValue('123');
     });
 
     await step('Interaction with hidden number', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, '123');
-      await expect(hiddenInput).toHaveDisplayValue('123');
+      expect(hiddenInput).toHaveDisplayValue('123');
     });
   },
 };
@@ -703,14 +703,14 @@ export const CurrencyField: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, '123');
-      await expect(regularInput).toHaveDisplayValue('123');
+      expect(regularInput).toHaveDisplayValue('123');
     });
 
     await step('Interaction with hidden currency', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, '123');
-      await expect(hiddenInput).toHaveDisplayValue('123');
+      expect(hiddenInput).toHaveDisplayValue('123');
     });
   },
 };
@@ -810,20 +810,20 @@ export const DateFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden date multiple', async () => {
@@ -835,20 +835,20 @@ export const DateFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -948,20 +948,20 @@ export const DateTimeFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden datetime multiple', async () => {
@@ -973,20 +973,20 @@ export const DateTimeFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -1086,20 +1086,20 @@ export const TimeFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden time multiple', async () => {
@@ -1111,20 +1111,20 @@ export const TimeFieldMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -1183,22 +1183,22 @@ export const Postcode: Story = {
 
     await step('Interaction with postcode', async () => {
       // Expect input to show default value
-      await expect(regularInput).toHaveDisplayValue('9999 AA');
+      expect(regularInput).toHaveDisplayValue('9999 AA');
 
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, '1015 CJ');
-      await expect(regularInput).toHaveDisplayValue('1015 CJ');
+      expect(regularInput).toHaveDisplayValue('1015 CJ');
     });
 
     await step('Interaction with hidden postcode', async () => {
       // Expect input to show default value
-      await expect(hiddenInput).toHaveDisplayValue('9999 AA');
+      expect(hiddenInput).toHaveDisplayValue('9999 AA');
 
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, '1015 CJ');
-      await expect(hiddenInput).toHaveDisplayValue('1015 CJ');
+      expect(hiddenInput).toHaveDisplayValue('1015 CJ');
     });
   },
 };
@@ -1261,23 +1261,23 @@ export const PostcodeMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       // during typing, we want immediate charcount feedback
       await userEvent.type(input1, '1015 CJ');
-      await expect(input1).toHaveDisplayValue('1015 CJ');
+      expect(input1).toHaveDisplayValue('1015 CJ');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden postcode multiple', async () => {
@@ -1289,23 +1289,23 @@ export const PostcodeMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       // during typing, we want immediate charcount feedback
       await userEvent.type(input1, '1015 CJ');
-      await expect(input1).toHaveDisplayValue('1015 CJ');
+      expect(input1).toHaveDisplayValue('1015 CJ');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -1356,14 +1356,14 @@ export const PhoneNumber: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, '+316 12345678');
-      await expect(regularInput).toHaveDisplayValue('+316 12345678');
+      expect(regularInput).toHaveDisplayValue('+316 12345678');
     });
 
     await step('Interaction with hidden phoneNumber', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, '+316 12345678');
-      await expect(hiddenInput).toHaveDisplayValue('+316 12345678');
+      expect(hiddenInput).toHaveDisplayValue('+316 12345678');
     });
   },
 };
@@ -1421,22 +1421,22 @@ export const PhoneNumberMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, '+316 12345678');
-      await expect(input1).toHaveDisplayValue('+316 12345678');
+      expect(input1).toHaveDisplayValue('+316 12345678');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden phoneNumber multiple', async () => {
@@ -1448,22 +1448,22 @@ export const PhoneNumberMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, '+316 12345678');
-      await expect(input1).toHaveDisplayValue('+316 12345678');
+      expect(input1).toHaveDisplayValue('+316 12345678');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -1566,15 +1566,15 @@ export const Checkbox: Story = {
     expect(hiddenInputWrapper).toHaveAttribute('title', 'Hidden component');
 
     await step('Interaction with checkbox', async () => {
-      await expect(regularInput).not.toBeChecked();
+      expect(regularInput).not.toBeChecked();
       await fireEvent.click(regularInput);
-      await expect(regularInput).toBeChecked();
+      expect(regularInput).toBeChecked();
     });
 
     await step('Interaction with hidden checkbox', async () => {
-      await expect(hiddenInput).not.toBeChecked();
+      expect(hiddenInput).not.toBeChecked();
       await fireEvent.click(hiddenInput);
-      await expect(hiddenInput).toBeChecked();
+      expect(hiddenInput).toBeChecked();
     });
   },
 };
@@ -1659,9 +1659,9 @@ export const SelectBoxes: Story = {
       const firstOptionInput = wrapper.getByLabelText<HTMLInputElement>('Option 1');
 
       // check the toggle state of a checkbox
-      await expect(firstOptionInput).not.toBeChecked();
+      expect(firstOptionInput).not.toBeChecked();
       await fireEvent.click(wrapper.getByText('Option 1'));
-      await expect(firstOptionInput).toBeChecked();
+      expect(firstOptionInput).toBeChecked();
     });
 
     await step('Interaction with hidden selectboxes', async () => {
@@ -1671,9 +1671,9 @@ export const SelectBoxes: Story = {
       const firstOptionInput = wrapper.getByLabelText<HTMLInputElement>('Option 1');
 
       // check the toggle state of a checkbox
-      await expect(firstOptionInput).not.toBeChecked();
+      expect(firstOptionInput).not.toBeChecked();
       await fireEvent.click(wrapper.getByText('Option 1'));
-      await expect(firstOptionInput).toBeChecked();
+      expect(firstOptionInput).toBeChecked();
     });
   },
 };
@@ -1836,9 +1836,9 @@ export const Radio: Story = {
       const firstOptionInput = wrapper.getByLabelText<HTMLInputElement>('Option 1');
 
       // check the toggle state of a checkbox
-      await expect(firstOptionInput).not.toBeChecked();
+      expect(firstOptionInput).not.toBeChecked();
       await fireEvent.click(wrapper.getByText('Option 1'));
-      await expect(firstOptionInput).toBeChecked();
+      expect(firstOptionInput).toBeChecked();
     });
 
     await step('Interaction with hidden radio', async () => {
@@ -1848,9 +1848,9 @@ export const Radio: Story = {
       const firstOptionInput = wrapper.getByLabelText<HTMLInputElement>('Option 1');
 
       // check the toggle state of a checkbox
-      await expect(firstOptionInput).not.toBeChecked();
+      expect(firstOptionInput).not.toBeChecked();
       await fireEvent.click(wrapper.getByText('Option 1'));
-      await expect(firstOptionInput).toBeChecked();
+      expect(firstOptionInput).toBeChecked();
     });
   },
 };
@@ -2017,50 +2017,50 @@ export const Select: Story = {
       const wrapper = within(regularInputWrapper as HTMLElement);
 
       // we expect no options to be selected
-      await expect(wrapper.queryByText('Option 1')).toBeNull();
-      await expect(wrapper.queryByText('Option 2')).toBeNull();
+      expect(wrapper.queryByText('Option 1')).toBeNull();
+      expect(wrapper.queryByText('Option 2')).toBeNull();
 
       // opening the dropdown displays the options
       regularInput.focus();
       await userEvent.keyboard('[ArrowDown]');
       await waitFor(async () => {
-        await expect(await wrapper.findByText('Option 1')).toBeVisible();
+        expect(await wrapper.findByText('Option 1')).toBeVisible();
       });
-      await expect(await wrapper.findByText('Option 2')).toBeVisible();
+      expect(await wrapper.findByText('Option 2')).toBeVisible();
 
       // selecting an option by clicking it displays it as selected
       await userEvent.click(wrapper.getByText('Option 2'));
       // wait for the option list to be closed
       await waitFor(async () => {
-        await expect(wrapper.queryByRole('listbox')).toBeNull();
+        expect(wrapper.queryByRole('listbox')).toBeNull();
       });
       // selected value should still be displayed
-      await expect(await wrapper.findByText('Option 2')).toBeVisible();
+      expect(await wrapper.findByText('Option 2')).toBeVisible();
     });
 
     await step('Interaction with hidden select', async () => {
       const wrapper = within(hiddenInputWrapper as HTMLElement);
 
       // we expect no options to be selected
-      await expect(wrapper.queryByText('Option 1')).toBeNull();
-      await expect(wrapper.queryByText('Option 2')).toBeNull();
+      expect(wrapper.queryByText('Option 1')).toBeNull();
+      expect(wrapper.queryByText('Option 2')).toBeNull();
 
       // opening the dropdown displays the options
       hiddenInput.focus();
       await userEvent.keyboard('[ArrowDown]');
       await waitFor(async () => {
-        await expect(await wrapper.findByText('Option 1')).toBeVisible();
+        expect(await wrapper.findByText('Option 1')).toBeVisible();
       });
-      await expect(await wrapper.findByText('Option 2')).toBeVisible();
+      expect(await wrapper.findByText('Option 2')).toBeVisible();
 
       // selecting an option by clicking it displays it as selected
       await userEvent.click(wrapper.getByText('Option 2'));
       // wait for the option list to be closed
       await waitFor(async () => {
-        await expect(wrapper.queryByRole('listbox')).toBeNull();
+        expect(wrapper.queryByRole('listbox')).toBeNull();
       });
       // selected value should still be displayed
-      await expect(await wrapper.findByText('Option 2')).toBeVisible();
+      expect(await wrapper.findByText('Option 2')).toBeVisible();
     });
   },
 };
@@ -2158,8 +2158,8 @@ export const SelectMultiple: Story = {
       const wrapper = within(regularInputWrapper as HTMLElement);
 
       // we expect no options to be selected
-      await expect(wrapper.queryByText('Option 1')).toBeNull();
-      await expect(wrapper.queryByText('Option 3')).toBeNull();
+      expect(wrapper.queryByText('Option 1')).toBeNull();
+      expect(wrapper.queryByText('Option 3')).toBeNull();
 
       // opening the dropdown displays the options
       regularInput.focus();
@@ -2175,19 +2175,19 @@ export const SelectMultiple: Story = {
 
       // wait for the option list to be closed
       await waitFor(async () => {
-        await expect(wrapper.queryByRole('listbox')).toBeNull();
+        expect(wrapper.queryByRole('listbox')).toBeNull();
       });
       // selected value should still be displayed
-      await expect(await wrapper.findByText('Option 1')).toBeVisible();
-      await expect(await wrapper.findByText('Option 3')).toBeVisible();
+      expect(await wrapper.findByText('Option 1')).toBeVisible();
+      expect(await wrapper.findByText('Option 3')).toBeVisible();
     });
 
     await step('Interaction with hidden select', async () => {
       const wrapper = within(hiddenInputWrapper as HTMLElement);
 
       // we expect no options to be selected
-      await expect(wrapper.queryByText('Option 1')).toBeNull();
-      await expect(wrapper.queryByText('Option 3')).toBeNull();
+      expect(wrapper.queryByText('Option 1')).toBeNull();
+      expect(wrapper.queryByText('Option 3')).toBeNull();
 
       // opening the dropdown displays the options
       hiddenInput.focus();
@@ -2203,11 +2203,11 @@ export const SelectMultiple: Story = {
 
       // wait for the option list to be closed
       await waitFor(async () => {
-        await expect(wrapper.queryByRole('listbox')).toBeNull();
+        expect(wrapper.queryByRole('listbox')).toBeNull();
       });
       // selected value should still be displayed
-      await expect(await wrapper.findByText('Option 1')).toBeVisible();
-      await expect(await wrapper.findByText('Option 3')).toBeVisible();
+      expect(await wrapper.findByText('Option 1')).toBeVisible();
+      expect(await wrapper.findByText('Option 3')).toBeVisible();
     });
   },
 };
@@ -2334,14 +2334,14 @@ export const BSN: Story = {
       // check that user can type into the fields
       expect(regularInput).toHaveAttribute('placeholder', 'XXXXXXXXX');
       await userEvent.type(regularInput, '111222333');
-      await expect(regularInput).toHaveDisplayValue('111222333');
+      expect(regularInput).toHaveDisplayValue('111222333');
     });
 
     await step('Interaction with hidden BSN', async () => {
       // check that user can type into the fields
       expect(hiddenInput).toHaveAttribute('placeholder', 'XXXXXXXXX');
       await userEvent.type(hiddenInput, '111222333');
-      await expect(hiddenInput).toHaveDisplayValue('111222333');
+      expect(hiddenInput).toHaveDisplayValue('111222333');
     });
   },
 };
@@ -2399,22 +2399,22 @@ export const BSNMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, '111222333');
-      await expect(input1).toHaveDisplayValue('111222333');
+      expect(input1).toHaveDisplayValue('111222333');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden BSN multiple', async () => {
@@ -2426,22 +2426,22 @@ export const BSNMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, '111222333');
-      await expect(input1).toHaveDisplayValue('111222333');
+      expect(input1).toHaveDisplayValue('111222333');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -2492,13 +2492,13 @@ export const IBAN: Story = {
     await step('Interaction with IBAN', async () => {
       // check that user can type into the fields
       await userEvent.type(regularInput, 'NL02ABNA0123456789');
-      await expect(regularInput).toHaveDisplayValue('NL02ABNA0123456789');
+      expect(regularInput).toHaveDisplayValue('NL02ABNA0123456789');
     });
 
     await step('Interaction with hidden IBAN', async () => {
       // check that user can type into the fields
       await userEvent.type(hiddenInput, 'NL02ABNA0123456789');
-      await expect(hiddenInput).toHaveDisplayValue('NL02ABNA0123456789');
+      expect(hiddenInput).toHaveDisplayValue('NL02ABNA0123456789');
     });
   },
 };
@@ -2557,22 +2557,22 @@ export const IBANMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'NL02ABNA0123456789');
-      await expect(input1).toHaveDisplayValue('NL02ABNA0123456789');
+      expect(input1).toHaveDisplayValue('NL02ABNA0123456789');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden IBAN multiple', async () => {
@@ -2584,22 +2584,22 @@ export const IBANMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'NL02ABNA0123456789');
-      await expect(input1).toHaveDisplayValue('NL02ABNA0123456789');
+      expect(input1).toHaveDisplayValue('NL02ABNA0123456789');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };
@@ -2919,14 +2919,14 @@ export const LicensePlate: Story = {
       // check that user can type into the fields
       await userEvent.clear(regularInput);
       await userEvent.type(regularInput, 'A-123-BC');
-      await expect(regularInput).toHaveDisplayValue('A-123-BC');
+      expect(regularInput).toHaveDisplayValue('A-123-BC');
     });
 
     await step('Interaction with hidden licenseplate', async () => {
       // check that user can type into the fields
       await userEvent.clear(hiddenInput);
       await userEvent.type(hiddenInput, 'A-123-BC');
-      await expect(hiddenInput).toHaveDisplayValue('A-123-BC');
+      expect(hiddenInput).toHaveDisplayValue('A-123-BC');
     });
   },
 };
@@ -2991,22 +2991,22 @@ export const LicensePlateMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'A-123-BC');
-      await expect(input1).toHaveDisplayValue('A-123-BC');
+      expect(input1).toHaveDisplayValue('A-123-BC');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(canvas.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(canvas.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
 
     await step('Interaction with hidden licenseplate multiple', async () => {
@@ -3018,22 +3018,22 @@ export const LicensePlateMultiple: Story = {
 
       await userEvent.click(addButton);
       const input1 = await wrapper.getByTestId(`${subfieldTestId}[0]`);
-      await expect(input1).toHaveDisplayValue('');
+      expect(input1).toHaveDisplayValue('');
       await userEvent.type(input1, 'A-123-BC');
-      await expect(input1).toHaveDisplayValue('A-123-BC');
+      expect(input1).toHaveDisplayValue('A-123-BC');
 
       // the description should be rendered only once, even with > 1 inputs
       await userEvent.click(addButton);
       const input2 = wrapper.getByTestId(`${subfieldTestId}[1]`);
-      await expect(input2).toHaveDisplayValue('');
-      await expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
+      expect(input2).toHaveDisplayValue('');
+      expect(wrapper.queryAllByText('Description only once in hidden state')).toHaveLength(1);
 
       // finally, it should be possible delete rows again
       const removeButtons = await wrapper.findAllByRole('button', {name: 'Remove item'});
-      await expect(removeButtons.length).toBe(2);
+      expect(removeButtons.length).toBe(2);
       await userEvent.click(removeButtons[0]);
-      await expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
-      await expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
+      expect(wrapper.getByTestId(`${subfieldTestId}[0]`)).toHaveDisplayValue('');
+      expect(wrapper.queryByTestId(`${subfieldTestId}[1]`)).not.toBeInTheDocument();
     });
   },
 };

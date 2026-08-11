@@ -70,9 +70,9 @@ export const WithHtmlId: Story = {
     const canvas = within(canvasElement);
     const labelText = 'Clicking label focuses field';
 
-    await expect(canvas.getByLabelText(labelText)).not.toHaveFocus();
+    expect(canvas.getByLabelText(labelText)).not.toHaveFocus();
     await userEvent.click(canvas.getByText(labelText));
-    await expect(canvas.getByLabelText(labelText)).toHaveFocus();
+    expect(canvas.getByLabelText(labelText)).toHaveFocus();
   },
 };
 
@@ -94,5 +94,5 @@ WithErrors.argTypes = {
 };
 WithErrors.play = async ({canvasElement}) => {
   const canvas = within(canvasElement);
-  await expect(canvas.queryByText('Some error')).toBeInTheDocument();
+  expect(canvas.queryByText('Some error')).toBeInTheDocument();
 };
