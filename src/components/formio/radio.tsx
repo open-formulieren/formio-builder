@@ -1,4 +1,4 @@
-import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {AnyComponentSchema, FAQItem as FAQItemType} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import {Field, useFormikContext} from 'formik';
 import {FormattedMessage} from 'react-intl';
@@ -7,6 +7,7 @@ import {useValidationErrors} from '@/utils/errors';
 
 import Component from './component';
 import Description from './description';
+import {FAQItems} from './faq-items';
 
 export interface RadioInputProps {
   name: string;
@@ -45,6 +46,7 @@ export interface RadioProps {
   required?: boolean;
   isClearable?: boolean;
   tooltip?: string;
+  faqItems?: FAQItemType[];
   description?: string;
   isLoading?: boolean;
 }
@@ -65,6 +67,7 @@ export const Radio: React.FC<RadioProps> = ({
   required = false,
   isClearable = false,
   tooltip = '',
+  faqItems = [],
   description = '',
   isLoading = false,
 }) => {
@@ -111,6 +114,8 @@ export const Radio: React.FC<RadioProps> = ({
           />
         </button>
       )}
+
+      <FAQItems items={faqItems} />
     </Component>
   );
 };

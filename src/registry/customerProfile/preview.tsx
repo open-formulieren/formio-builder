@@ -2,7 +2,7 @@ import type {CustomerProfileComponentSchema} from '@open-formulieren/types';
 import type {DigitalAddressType} from '@open-formulieren/types/dist/components/customerProfile';
 import {FormattedMessage, defineMessages} from 'react-intl';
 
-import {Description, FieldSet, TextField} from '@/components/formio';
+import {Description, FAQItems, FieldSet, TextField} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 
@@ -30,7 +30,15 @@ const fieldTypes: Record<DigitalAddressType, string> = {
  * @open-formulieren/formio-renderer instead for a more accurate preview.
  */
 const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> = ({component}) => {
-  const {key, label, description, tooltip, validate = {}, digitalAddressTypes = []} = component;
+  const {
+    key,
+    label,
+    description,
+    tooltip,
+    faqItems = [],
+    validate = {},
+    digitalAddressTypes = [],
+  } = component;
 
   const {required = false} = validate;
   return (
@@ -47,6 +55,7 @@ const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> =
           />
         ))}
       {description && <Description text={description} />}
+      <FAQItems items={faqItems} />
     </FieldSet>
   );
 };

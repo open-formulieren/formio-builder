@@ -6,6 +6,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -67,6 +69,7 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
         <BuilderTabs.Registration hasErrors={hasAnyError('registration')} />
         <BuilderTabs.Prefill hasErrors={hasAnyError('prefill')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -110,6 +113,11 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
         <Prefill.PrefillConfiguration />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<NumberComponentSchema>
@@ -127,7 +135,9 @@ const EditForm: EditFormDefinition<NumberComponentSchema> = () => {
             }),
           }}
           ignoreKeysForTranslations={formType === 'appointment' ? ['prefix', 'suffix'] : []}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

@@ -71,6 +71,16 @@ const Prefill: TabWithContent = props => {
 };
 Prefill.tabsRole = 'Tab';
 
+const FAQItems: TabWithContent = props => (
+  <Tab {...props}>
+    <FormattedMessage
+      description="Component edit form tab title for 'FAQ items' tab"
+      defaultMessage="FAQ items"
+    />
+  </Tab>
+);
+FAQItems.tabsRole = 'Tab';
+
 const Translations: TabWithContent = props => (
   <Tab {...props}>
     <FormattedMessage
@@ -81,4 +91,4 @@ const Translations: TabWithContent = props => (
 );
 Translations.tabsRole = 'Tab';
 
-export {Basic, Advanced, Validation, Registration, Prefill, Translations};
+export {Basic, Advanced, Validation, Registration, Prefill, FAQItems, Translations};

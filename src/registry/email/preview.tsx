@@ -19,6 +19,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
     label,
     description,
     tooltip,
+    faqItems = [],
     validate = {},
     autocomplete,
     multiple,
@@ -40,6 +41,7 @@ const Preview: React.FC<ComponentPreviewProps<EmailComponentSchema>> = ({compone
         label={label}
         description={description}
         tooltip={tooltip}
+        faqItems={faqItems}
         required={required}
         autoComplete={autocomplete}
         type="email"

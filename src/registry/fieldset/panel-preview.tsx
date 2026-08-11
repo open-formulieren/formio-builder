@@ -2,7 +2,7 @@ import type {FieldsetComponentSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';
-import {FieldSet} from '@/components/formio';
+import {FAQItems, FieldSet} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
 
@@ -10,7 +10,7 @@ import type {ComponentPreviewProps} from '../types';
  * Show a formio fieldset component preview.
  */
 const Preview: React.FC<ComponentPreviewProps<FieldsetComponentSchema>> = ({component}) => {
-  const {label, hideHeader, tooltip} = component;
+  const {label, hideHeader, tooltip, faqItems = []} = component;
   return (
     <FieldSet label={hideHeader ? undefined : label} tooltip={tooltip}>
       <ContentPlaceholder variant="builder">
@@ -19,6 +19,8 @@ const Preview: React.FC<ComponentPreviewProps<FieldsetComponentSchema>> = ({comp
           defaultMessage="Fieldset content"
         />
       </ContentPlaceholder>
+
+      <FAQItems items={faqItems} />
     </FieldSet>
   );
 };

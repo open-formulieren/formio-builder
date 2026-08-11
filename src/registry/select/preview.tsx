@@ -20,7 +20,7 @@ import {checkIsReferenceListsOptions, checkIsVariableOptions} from './helpers';
  */
 const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({component}) => {
   const intl = useIntl();
-  const {key, label, description, tooltip, validate, multiple} = component;
+  const {key, label, description, tooltip, faqItems = [], validate, multiple} = component;
   const {required = false} = validate || {};
   const {getReferenceListsTableItems} = useContext(BuilderContext);
 
@@ -68,6 +68,7 @@ const Preview: React.FC<ComponentPreviewProps<SelectComponentSchema>> = ({compon
       options={options}
       label={label}
       tooltip={tooltip}
+      faqItems={faqItems}
       required={required}
       description={description}
       isMulti={!!multiple}

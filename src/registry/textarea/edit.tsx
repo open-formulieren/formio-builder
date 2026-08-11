@@ -8,6 +8,8 @@ import {
   BuilderTabs,
   ClearOnHide,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -73,6 +75,7 @@ const EditForm: EditFormDefinition<TextareaComponentSchema> = () => {
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
         <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -110,6 +113,11 @@ const EditForm: EditFormDefinition<TextareaComponentSchema> = () => {
         <Validate.ValidationErrorTranslations />
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<TextareaComponentSchema>
@@ -119,7 +127,9 @@ const EditForm: EditFormDefinition<TextareaComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
             placeholder: intl.formatMessage(LABELS.placeholder),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );

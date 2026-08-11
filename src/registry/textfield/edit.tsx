@@ -9,6 +9,8 @@ import {
   ClearOnHide,
   ComponentSelect,
   Description,
+  FAQItems,
+  FAQItemsTranslations,
   Hidden,
   IsSensitiveData,
   Key,
@@ -90,6 +92,7 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             defaultMessage="Location"
           />
         </Tab>
+        <BuilderTabs.FAQItems hasErrors={hasAnyError('faqItems')} />
         <BuilderTabs.Translations hasErrors={hasAnyError('openForms.translations')} />
       </TabList>
 
@@ -164,6 +167,11 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
         </Panel>
       </TabPanel>
 
+      {/* FAQItems tab */}
+      <TabPanel>
+        <FAQItems />
+      </TabPanel>
+
       {/* Translations */}
       <TabPanel>
         <Translations.ComponentTranslations<TextFieldComponentSchema>
@@ -173,7 +181,9 @@ const EditForm: EditFormDefinition<TextFieldComponentSchema> = () => {
             tooltip: intl.formatMessage(LABELS.tooltip),
             placeholder: intl.formatMessage(LABELS.placeholder),
           }}
-        />
+        >
+          <FAQItemsTranslations />
+        </Translations.ComponentTranslations>
       </TabPanel>
     </Tabs>
   );
