@@ -79,7 +79,7 @@ export const PluginBlankNoAttributes: Story = {
       await userEvent.keyboard('[Esc]');
       attributeInput.focus();
       await userEvent.keyboard('[ArrowDown]');
-      await expect(canvas.queryByText('No options')).toBeInTheDocument();
+      expect(canvas.queryByText('No options')).toBeInTheDocument();
     });
   },
 };
@@ -94,7 +94,7 @@ export const SelectingPluginFetchesAttributes: Story = {
     await canvas.getByLabelText('Plugin').focus();
     await userEvent.keyboard('[ArrowDown]');
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
     });
     await userEvent.click(canvas.getByText('Plugin 2'));
 
@@ -103,7 +103,7 @@ export const SelectingPluginFetchesAttributes: Story = {
     await userEvent.keyboard('[ArrowDown]');
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 2, attribute 2')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2, attribute 2')).toBeInTheDocument();
     });
   },
 };
@@ -126,28 +126,28 @@ export const ChangingPluginClearsAttribute: Story = {
     const canvas = within(canvasElement);
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
-      await expect(canvas.queryByText('Plugin 2, attribute 1')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2, attribute 1')).toBeInTheDocument();
     });
 
     // change plugin
     await canvas.getByLabelText('Plugin').focus();
     await userEvent.keyboard('[ArrowDown]');
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 1')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 1')).toBeInTheDocument();
     });
     await userEvent.click(canvas.getByText('Plugin 1'));
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 2, attribute 1')).not.toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2, attribute 1')).not.toBeInTheDocument();
     });
     // check the returned attributes for the plugin
     await canvas.getByLabelText('Plugin attribute').focus();
     await userEvent.keyboard('[ArrowDown]');
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 1, attribute 1')).toBeInTheDocument();
-      await expect(canvas.queryByText('Plugin 1, attribute 2')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 1, attribute 1')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 1, attribute 2')).toBeInTheDocument();
     });
   },
 };
@@ -171,21 +171,21 @@ export const ChangingIdentifierRole: Story = {
     const canvas = within(canvasElement);
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
-      await expect(canvas.queryByText('Plugin 2, attribute 1')).toBeInTheDocument();
-      await expect(canvas.queryByText('Main')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2')).toBeInTheDocument();
+      expect(canvas.queryByText('Plugin 2, attribute 1')).toBeInTheDocument();
+      expect(canvas.queryByText('Main')).toBeInTheDocument();
     });
 
     // change the identifier role
     await canvas.getByLabelText('Identifier role').focus();
     await userEvent.keyboard('[ArrowDown]');
     await waitFor(async () => {
-      await expect(canvas.queryByText('Authorised person')).toBeInTheDocument();
+      expect(canvas.queryByText('Authorised person')).toBeInTheDocument();
     });
     await userEvent.click(canvas.getByText('Authorised person'));
 
     await waitFor(async () => {
-      await expect(canvas.queryByText('Main')).not.toBeInTheDocument();
+      expect(canvas.queryByText('Main')).not.toBeInTheDocument();
     });
   },
 };

@@ -83,9 +83,9 @@ export const IsNewDeriveFromLabel: Story = {
     // derive from label
     await userEvent.clear(labelInput);
     await userEvent.type(labelInput, 'My label');
-    await expect(labelInput).toHaveValue('My label');
+    expect(labelInput).toHaveValue('My label');
     await waitFor(async () => {
-      await expect(keyInput).toHaveValue('myLabel');
+      expect(keyInput).toHaveValue('myLabel');
     });
   },
 };
@@ -110,9 +110,9 @@ export const DeriveFromLabelButSetManually: Story = {
     // derive from label first
     await userEvent.clear(labelInput);
     await userEvent.type(labelInput, 'My label');
-    await expect(labelInput).toHaveValue('My label');
+    expect(labelInput).toHaveValue('My label');
     await waitFor(async () => {
-      await expect(keyInput).toHaveValue('myLabel');
+      expect(keyInput).toHaveValue('myLabel');
     });
 
     // manually set the key, modifiying the label may then not touch the key anymore
@@ -122,9 +122,9 @@ export const DeriveFromLabelButSetManually: Story = {
     await fireEvent.change(keyInput, {target: {value: 'customKey'}});
     await userEvent.clear(labelInput);
     await userEvent.type(labelInput, 'Updated label');
-    await expect(labelInput).toHaveValue('Updated label');
+    expect(labelInput).toHaveValue('Updated label');
     await waitFor(async () => {
-      await expect(keyInput).toHaveValue('customKey');
+      expect(keyInput).toHaveValue('customKey');
     });
   },
 };
@@ -147,9 +147,9 @@ export const IsExistingDeriveFromLabel: Story = {
 
     await userEvent.clear(labelInput);
     await userEvent.type(labelInput, 'My label');
-    await expect(labelInput).toHaveValue('My label');
+    expect(labelInput).toHaveValue('My label');
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Property Name')).toHaveValue('explicitlySetKey');
+      expect(canvas.getByLabelText('Property Name')).toHaveValue('explicitlySetKey');
     });
   },
 };

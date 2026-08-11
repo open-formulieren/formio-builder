@@ -151,11 +151,11 @@ export const Default: Story = {
       await canvas.findByDisplayValue('Hallo daar, {{ firstName }}');
 
       const faqItem1Labels = canvas.getAllByText('Should I fill this in?');
-      await expect(faqItem1Labels.length).toEqual(2);
-      await expect(faqItem1Labels[0]).toBeVisible();
+      expect(faqItem1Labels.length).toEqual(2);
+      expect(faqItem1Labels[0]).toBeVisible();
       const faqItem2Labels = canvas.getAllByText("I've XYZ, should I fill this in?");
-      await expect(faqItem2Labels.length).toEqual(2);
-      await expect(faqItem2Labels[0]).toBeVisible();
+      expect(faqItem2Labels.length).toEqual(2);
+      expect(faqItem2Labels[0]).toBeVisible();
     });
 
     // Enter a value in the non-translatable field

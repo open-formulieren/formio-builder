@@ -51,6 +51,6 @@ export const WithErrors: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Some error')).toBeInTheDocument();
+    expect(canvas.queryByText('Some error')).toBeInTheDocument();
   },
 };

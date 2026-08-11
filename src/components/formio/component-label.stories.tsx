@@ -22,7 +22,7 @@ type Story = StoryObj<typeof ComponentLabel>;
 export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Example label text')).toBeInTheDocument();
+    expect(canvas.queryByText('Example label text')).toBeInTheDocument();
   },
 };
 

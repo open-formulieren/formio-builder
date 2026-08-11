@@ -47,8 +47,8 @@ export const WithInitialChecked: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('A')).not.toBeChecked();
-    await expect(canvas.getByLabelText('B')).toBeChecked();
+    expect(canvas.getByLabelText('A')).not.toBeChecked();
+    expect(canvas.getByLabelText('B')).toBeChecked();
   },
 };
 
@@ -84,8 +84,8 @@ export const WithErrors: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+    expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    expect(canvas.queryByText('Example error')).toBeInTheDocument();
   },
 };
 
@@ -113,14 +113,14 @@ export const Clearable: Story = {
 
     // Before clearing the default value
     expect(button).toBeVisible();
-    await expect(input1).toBeChecked();
-    await expect(input2).not.toBeChecked();
+    expect(input1).toBeChecked();
+    expect(input2).not.toBeChecked();
 
     // After clearing the default value
     await userEvent.click(button);
     expect(button).not.toBeVisible();
-    await expect(input1).not.toBeChecked();
-    await expect(input2).not.toBeChecked();
+    expect(input1).not.toBeChecked();
+    expect(input2).not.toBeChecked();
   },
 };
 

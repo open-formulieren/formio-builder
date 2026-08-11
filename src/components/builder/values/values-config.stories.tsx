@@ -119,7 +119,7 @@ export const SelectBoxesResetState: StoryObj<{
       // apparently userEvent.click(submitButton) doesn't do anything in Firefox :/
       fireEvent.click(btn);
       await waitFor(async () => {
-        await expect(canvas.queryByText('Submitting...')).toBeNull();
+        expect(canvas.queryByText('Submitting...')).toBeNull();
       });
     };
 
@@ -142,7 +142,7 @@ export const SelectBoxesResetState: StoryObj<{
 
       await userEvent.click(await canvas.findByText('Manually fill in'));
       const addBtn = await canvas.findByRole('button', {name: 'Add another'});
-      await expect(addBtn).toBeVisible();
+      expect(addBtn).toBeVisible();
 
       await doSubmit();
       await waitFor(() => {
@@ -191,7 +191,7 @@ export const SelectBoxesResetState: StoryObj<{
       await userEvent.keyboard('[ArrowDown]');
 
       await userEvent.click(await canvas.findByText('Manually fill in'));
-      await expect(await canvas.findByText('Manually fill in')).toBeVisible();
+      expect(await canvas.findByText('Manually fill in')).toBeVisible();
 
       await doSubmit();
       await waitFor(() => {

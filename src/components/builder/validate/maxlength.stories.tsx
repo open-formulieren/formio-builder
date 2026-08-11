@@ -33,7 +33,7 @@ export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Maximum length')).toHaveValue(1000);
+      expect(canvas.getByLabelText('Maximum length')).toHaveValue(1000);
     });
   },
 };
@@ -46,7 +46,7 @@ export const WithInitialValue: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
     await waitFor(async () => {
-      await expect(canvas.getByLabelText('Maximum length')).toHaveValue(100);
+      expect(canvas.getByLabelText('Maximum length')).toHaveValue(100);
     });
   },
 };

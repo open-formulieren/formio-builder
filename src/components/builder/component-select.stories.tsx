@@ -85,19 +85,15 @@ export const Default: Story = {
     const componentSelectMenu = await canvas.getByRole('listbox');
 
     // Validate that fieldset and column components are not present
-    await expect(
-      within(componentSelectMenu).queryByText('Columns (columns)')
-    ).not.toBeInTheDocument();
-    await expect(
+    expect(within(componentSelectMenu).queryByText('Columns (columns)')).not.toBeInTheDocument();
+    expect(
       within(componentSelectMenu).queryByText('Fieldset 1 (fieldset1)')
     ).not.toBeInTheDocument();
 
     // The editgrid component should be an option
-    await expect(within(componentSelectMenu).getByText('Repeating group (editgrid)')).toBeVisible();
+    expect(within(componentSelectMenu).getByText('Repeating group (editgrid)')).toBeVisible();
 
     // Validate that the path of editgrid children is correct
-    await expect(
-      within(componentSelectMenu).getByText('Textfield 4 (editgrid.text4)')
-    ).toBeVisible();
+    expect(within(componentSelectMenu).getByText('Textfield 4 (editgrid.text4)')).toBeVisible();
   },
 };

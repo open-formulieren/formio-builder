@@ -75,19 +75,19 @@ export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.queryByText('NL')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('EN')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('DE')).not.toBeInTheDocument();
+    expect(canvas.queryByText('NL')).not.toBeInTheDocument();
+    expect(canvas.queryByText('EN')).not.toBeInTheDocument();
+    expect(canvas.queryByText('DE')).not.toBeInTheDocument();
 
     await userEvent.click(canvas.getByText('Custom error messages'));
-    await expect(canvas.getByText('NL')).toBeInTheDocument();
-    await expect(canvas.getByText('EN')).toBeInTheDocument();
-    await expect(canvas.getByText('DE')).toBeInTheDocument();
+    expect(canvas.getByText('NL')).toBeInTheDocument();
+    expect(canvas.getByText('EN')).toBeInTheDocument();
+    expect(canvas.getByText('DE')).toBeInTheDocument();
 
-    await expect(canvas.queryByDisplayValue('Dit veld is verplicht.')).toBeInTheDocument();
-    await expect(canvas.queryByDisplayValue('This field is required.')).not.toBeInTheDocument();
+    expect(canvas.queryByDisplayValue('Dit veld is verplicht.')).toBeInTheDocument();
+    expect(canvas.queryByDisplayValue('This field is required.')).not.toBeInTheDocument();
 
     await userEvent.click(canvas.getByText('EN'));
-    await expect(canvas.queryByDisplayValue('This field is required.')).toBeInTheDocument();
+    expect(canvas.queryByDisplayValue('This field is required.')).toBeInTheDocument();
   },
 };

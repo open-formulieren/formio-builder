@@ -98,11 +98,11 @@ export const TextField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Textfield preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
     await userEvent.type(input, 'typing in preview component');
-    await expect(input).toHaveDisplayValue('typing in preview component');
+    expect(input).toHaveDisplayValue('typing in preview component');
   },
 };
 
@@ -133,24 +133,24 @@ export const TextFieldMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = await canvas.getByTestId('input-textfieldMultiplePreview[0]');
-    await expect(input1).toHaveDisplayValue('');
+    expect(input1).toHaveDisplayValue('');
     // during typing, we want immediate charcount feedback
     await userEvent.type(input1, 'Foo');
-    await expect(canvas.queryByText('3 characters')).toBeInTheDocument();
-    await expect(input1).toHaveDisplayValue('Foo');
+    expect(canvas.queryByText('3 characters')).toBeInTheDocument();
+    expect(input1).toHaveDisplayValue('Foo');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId('input-textfieldMultiplePreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-textfieldMultiplePreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-textfieldMultiplePreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-textfieldMultiplePreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-textfieldMultiplePreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -180,11 +180,11 @@ export const Email: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Email preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
     await userEvent.type(input, 'hello@example.com');
-    await expect(input).toHaveDisplayValue('hello@example.com');
+    expect(input).toHaveDisplayValue('hello@example.com');
   },
 };
 
@@ -224,24 +224,24 @@ export const EmailMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = await canvas.getByTestId<HTMLInputElement>('input-emailPreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('email');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('email');
     // during typing, we want immediate charcount feedback
     await userEvent.type(input1, 'hello@example.com');
-    await expect(input1).toHaveDisplayValue('hello@example.com');
+    expect(input1).toHaveDisplayValue('hello@example.com');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-emailPreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-emailPreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-emailPreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-emailPreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-emailPreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -271,11 +271,11 @@ export const NumberField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Number preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // check that user can type into the field
     await userEvent.type(input, '-3.14');
-    await expect(input).toHaveDisplayValue('-3.14');
+    expect(input).toHaveDisplayValue('-3.14');
   },
 };
 
@@ -305,7 +305,7 @@ export const DateField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Date preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native date inputs is not reliable, so no such checks here
   },
@@ -330,21 +330,21 @@ export const DateFieldMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-datePreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('date');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('date');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-datePreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-datePreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-datePreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-datePreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-datePreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -374,7 +374,7 @@ export const DateTimeField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('DateTime preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native datetime inputs is not reliable, so no such checks here
   },
@@ -399,21 +399,21 @@ export const DateTimeFieldMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-datetimePreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('datetime-local');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('datetime-local');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-datetimePreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-datetimePreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-datetimePreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-datetimePreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-datetimePreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -443,7 +443,7 @@ export const TimeField: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Time preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     // typing into native time inputs is not reliable, so no such checks here
   },
@@ -468,21 +468,21 @@ export const TimeFieldMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-timePreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('time');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('time');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-timePreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-timePreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-timePreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-timePreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-timePreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -515,7 +515,7 @@ export const Postcode: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Postcode preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     expect(input).toHaveAttribute('placeholder', '1234 AB');
     await userEvent.type(input, '1015 CJ');
@@ -545,21 +545,21 @@ export const PostcodeMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-postcodePreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('text');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('text');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-postcodePreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-postcodePreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-postcodePreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-postcodePreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-postcodePreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -590,7 +590,7 @@ export const PhoneNumber: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('Phone number preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     await userEvent.type(input, '+316 12345678');
     expect(input).toHaveDisplayValue('+316 12345678');
@@ -617,21 +617,21 @@ export const PhoneNumberMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-phoneNumberPreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('text');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('text');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-phoneNumberPreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-phoneNumberPreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-phoneNumberPreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-phoneNumberPreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-phoneNumberPreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -709,14 +709,14 @@ export const SelectBoxes: Story = {
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
     // @ts-expect-error object is not null
-    await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
+    expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
 
     // check the toggle state of a checkbox
-    await expect(firstOptionInput).not.toBeChecked();
+    expect(firstOptionInput).not.toBeChecked();
     // https://github.com/testing-library/user-event/issues/1149 applies to radio and
     // checkbox inputs
     fireEvent.click(canvas.getByText('Option 1'));
-    await expect(firstOptionInput).toBeChecked();
+    expect(firstOptionInput).toBeChecked();
   },
 };
 
@@ -804,14 +804,14 @@ export const Radio: Story = {
     // check that the input name is set correctly
     const firstOptionInput = canvas.getByLabelText<HTMLInputElement>('Option 1');
     // @ts-expect-error object is not null
-    await expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
+    expect(firstOptionInput.getAttribute('name').startsWith(args.component.key)).toBe(true);
 
     // check the toggle state of a checkbox
-    await expect(firstOptionInput).not.toBeChecked();
+    expect(firstOptionInput).not.toBeChecked();
     // https://github.com/testing-library/user-event/issues/1149 applies to radio and
     // checkbox inputs
     fireEvent.click(canvas.getByText('Option 1'));
-    await expect(firstOptionInput).toBeChecked();
+    expect(firstOptionInput).toBeChecked();
   },
 };
 
@@ -903,26 +903,26 @@ export const Select: Story = {
     await canvas.findByText('Ik heb XYZ, moet ik dit invullen?');
 
     // we expect no options to be selected
-    await expect(canvas.queryByText('Option 1')).toBeNull();
-    await expect(canvas.queryByText('Option 2')).toBeNull();
+    expect(canvas.queryByText('Option 1')).toBeNull();
+    expect(canvas.queryByText('Option 2')).toBeNull();
 
     // opening the dropdown displays the options
     // @ts-expect-error label
     canvas.getByLabelText(args.component.label).focus();
     await userEvent.keyboard('[ArrowDown]');
     await waitFor(async () => {
-      await expect(await canvas.findByText('Option 1')).toBeVisible();
+      expect(await canvas.findByText('Option 1')).toBeVisible();
     });
-    await expect(await canvas.findByText('Option 2')).toBeVisible();
+    expect(await canvas.findByText('Option 2')).toBeVisible();
 
     // selecting an option by clicking it displays it as selected
     await userEvent.click(canvas.getByText('Option 2'));
     // wait for the option list to be closed
     await waitFor(async () => {
-      await expect(canvas.queryByRole('listbox')).toBeNull();
+      expect(canvas.queryByRole('listbox')).toBeNull();
     });
     // selected value should still be displayed
-    await expect(await canvas.findByText('Option 2')).toBeVisible();
+    expect(await canvas.findByText('Option 2')).toBeVisible();
   },
 };
 
@@ -970,8 +970,8 @@ export const SelectMultiple: Story = {
     await canvas.findByText('A preview of the select Formio component');
 
     // we expect no options to be selected
-    await expect(canvas.queryByText('Option 1')).toBeNull();
-    await expect(canvas.queryByText('Option 2')).toBeNull();
+    expect(canvas.queryByText('Option 1')).toBeNull();
+    expect(canvas.queryByText('Option 2')).toBeNull();
 
     // opening the dropdown displays the options, select two of them
     // @ts-expect-error for label
@@ -988,14 +988,14 @@ export const SelectMultiple: Story = {
     });
     // wait for the option list to be closed
     await waitFor(async () => {
-      await expect(canvas.queryByRole('listbox')).toBeNull();
+      expect(canvas.queryByRole('listbox')).toBeNull();
     });
     // selected values should still be displayed
     await waitFor(async () => {
-      await expect(await canvas.findByText('Option 1')).toBeVisible();
+      expect(await canvas.findByText('Option 1')).toBeVisible();
     });
     await waitFor(async () => {
-      await expect(await canvas.findByText('Option 3')).toBeVisible();
+      expect(await canvas.findByText('Option 3')).toBeVisible();
     });
   },
 };
@@ -1071,7 +1071,7 @@ export const BSN: Story = {
 
     // check that the input name is set correctly
     const input = canvas.getByLabelText('BSN preview');
-    await expect(input.getAttribute('name')).toBe(args.component.key);
+    expect(input.getAttribute('name')).toBe(args.component.key);
 
     expect(input).toHaveAttribute('placeholder', 'XXXXXXXXX');
     await userEvent.type(input, '123456789');
@@ -1098,21 +1098,21 @@ export const BSNMultiple: Story = {
     // check that new items can be added
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input1 = canvas.getByTestId<HTMLInputElement>('input-bsnPreview[0]');
-    await expect(input1).toHaveDisplayValue('');
-    await expect(input1.type).toEqual('text');
+    expect(input1).toHaveDisplayValue('');
+    expect(input1.type).toEqual('text');
 
     // the description should be rendered only once, even with > 1 inputs
     await userEvent.click(canvas.getByRole('button', {name: 'Add another'}));
     const input2 = canvas.getByTestId<HTMLInputElement>('input-bsnPreview[1]');
-    await expect(input2).toHaveDisplayValue('');
-    await expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
+    expect(input2).toHaveDisplayValue('');
+    expect(canvas.queryAllByText('Description only once')).toHaveLength(1);
 
     // finally, it should be possible delete rows again
     const removeButtons = await canvas.findAllByRole('button', {name: 'Remove item'});
-    await expect(removeButtons.length).toBe(2);
+    expect(removeButtons.length).toBe(2);
     await userEvent.click(removeButtons[0]);
-    await expect(canvas.getByTestId('input-bsnPreview[0]')).toHaveDisplayValue('');
-    await expect(canvas.queryByTestId('input-bsnPreview[1]')).not.toBeInTheDocument();
+    expect(canvas.getByTestId('input-bsnPreview[0]')).toHaveDisplayValue('');
+    expect(canvas.queryByTestId('input-bsnPreview[1]')).not.toBeInTheDocument();
   },
 };
 
@@ -1141,7 +1141,7 @@ export const NpFamilyMembers: Story = {
 
     // check that the checkboxes are rendered
     const checkboxes = await canvas.findAllByRole('checkbox');
-    await expect(checkboxes).toHaveLength(2);
+    expect(checkboxes).toHaveLength(2);
 
     // check that the FAQ items are shown as expected
     await canvas.findByText('Moet ik dit invullen?');
@@ -1242,7 +1242,7 @@ export const FieldSet: Story = {
 
     // check that the user-controlled content is visible
     await canvas.findByText('A fieldset preview');
-    await expect(canvas.queryByText('Nested text field')).toBeNull();
+    expect(canvas.queryByText('Nested text field')).toBeNull();
 
     // check that the FAQ items are shown as expected
     await canvas.findByText('Moet ik dit invullen?');
@@ -1287,7 +1287,7 @@ export const EditGrid: Story = {
     await canvas.findByText('Moet ik dit invullen?');
     await canvas.findByText('Ik heb XYZ, moet ik dit invullen?');
 
-    await expect(canvas.queryByText('Nested text field')).toBeNull();
+    expect(canvas.queryByText('Nested text field')).toBeNull();
   },
 };
 
@@ -1339,7 +1339,7 @@ export const CosignV2: Story = {
     await canvas.findByText('Ik heb XYZ, moet ik dit invullen?');
 
     await waitFor(() => expect(previewInput).toBeVisible());
-    await expect(previewInput.type).toBe('email');
+    expect(previewInput.type).toBe('email');
   },
 };
 
@@ -1361,8 +1361,8 @@ export const Signature: Story = {
 
     // check that the user-controlled content is visible
     await waitFor(async () => {
-      await expect(await canvas.findByText('A signature preview')).toBeVisible();
-      await expect(await canvas.findByText('Draw above')).toBeVisible();
+      expect(await canvas.findByText('A signature preview')).toBeVisible();
+      expect(await canvas.findByText('Draw above')).toBeVisible();
     });
 
     // check that the FAQ items are shown as expected
@@ -1389,12 +1389,12 @@ export const LeafletMap: Story = {
 
     // check that the user-controlled content is visible
     await waitFor(async () => {
-      await expect(await canvas.findByText('A map preview')).toBeVisible();
+      expect(await canvas.findByText('A map preview')).toBeVisible();
     });
 
     // the map should be rendered, with zoom controls
-    await expect(await canvas.findByRole('button', {name: 'Zoom in'})).toBeVisible();
-    await expect(await canvas.findByRole('button', {name: 'Zoom out'})).toBeVisible();
+    expect(await canvas.findByRole('button', {name: 'Zoom in'})).toBeVisible();
+    expect(await canvas.findByRole('button', {name: 'Zoom out'})).toBeVisible();
 
     // check that the FAQ items are shown as expected
     await canvas.findByText('Moet ik dit invullen?');

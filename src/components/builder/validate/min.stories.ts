@@ -22,7 +22,7 @@ export const Default: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(await canvas.findByLabelText('Minimum value')).toHaveDisplayValue('');
+    expect(await canvas.findByLabelText('Minimum value')).toHaveDisplayValue('');
   },
 };
 
@@ -33,7 +33,7 @@ export const WithInitialValue: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(await canvas.findByLabelText('Minimum value')).toHaveValue(100);
+    expect(await canvas.findByLabelText('Minimum value')).toHaveValue(100);
   },
 };
 

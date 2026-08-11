@@ -50,13 +50,9 @@ export const ManualMinimumOneValue: Story = {
       expect(args.onSubmit).not.toHaveBeenCalled();
 
       await waitFor(async () => {
-        await expect(
-          await canvas.findByText('The option label is a required field.')
-        ).toBeVisible();
+        expect(await canvas.findByText('The option label is a required field.')).toBeVisible();
 
-        await expect(
-          await canvas.findByText('The option value is a required field.')
-        ).toBeVisible();
+        expect(await canvas.findByText('The option value is a required field.')).toBeVisible();
       });
     });
   },
@@ -75,9 +71,9 @@ export const TranslationsArentRequired: Story = {
       const inputs = editForm.getAllByRole('textbox');
       for (const input of inputs) {
         await userEvent.type(input, 'manualTranslation');
-        await expect(input).toHaveValue('manualTranslation');
+        expect(input).toHaveValue('manualTranslation');
         await userEvent.clear(input);
-        await expect(input).toHaveValue('');
+        expect(input).toHaveValue('');
       }
 
       // Removing focus from the last input
@@ -121,9 +117,7 @@ export const MinAndMaxSelectedInitialValues: Story = {
       expect(minSelectedInput).toHaveValue(-1);
       await userEvent.keyboard('[Tab]');
       expect(minSelectedInput).not.toHaveFocus();
-      await expect(
-        await canvas.findByText('Number must be greater than or equal to 0')
-      ).toBeVisible();
+      expect(await canvas.findByText('Number must be greater than or equal to 0')).toBeVisible();
     });
 
     await step('Navigate to validation tab and provide a float number', async () => {

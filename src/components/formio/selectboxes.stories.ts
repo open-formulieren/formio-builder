@@ -49,8 +49,8 @@ export const WithInitialChecked: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    await expect(canvas.getByLabelText('A')).not.toBeChecked();
-    await expect(canvas.getByLabelText('B')).toBeChecked();
+    expect(canvas.getByLabelText('A')).not.toBeChecked();
+    expect(canvas.getByLabelText('B')).toBeChecked();
   },
 };
 
@@ -86,7 +86,7 @@ export const WithErrors: Story = {
 
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
-    await expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
-    await expect(canvas.queryByText('Example error')).toBeInTheDocument();
+    expect(canvas.queryByText('Other error')).not.toBeInTheDocument();
+    expect(canvas.queryByText('Example error')).toBeInTheDocument();
   },
 };

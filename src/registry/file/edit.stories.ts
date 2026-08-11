@@ -43,7 +43,7 @@ export const ToggleToMultiple: Story = {
     // https://github.com/testing-library/user-event/issues/1149
     const multipleCheckbox = canvas.getByLabelText<HTMLInputElement>('Multiple values');
     fireEvent.click(multipleCheckbox);
-    await expect(multipleCheckbox).toBeChecked();
+    expect(multipleCheckbox).toBeChecked();
 
     // Save and check that the default value was untouched
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
