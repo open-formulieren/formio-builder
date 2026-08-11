@@ -1,5 +1,25 @@
 # Changes
 
+## 1.1.0 (2026-08-11)
+
+Feature release.
+
+**New features**
+
+- [`OF#6315`][OF#6315] Added support for component `faqItems` configuration, including managing
+  their translations.
+- [`OF#6182`][OF#6182] Updated the builder components to display description and error message
+  between label and input.
+
+[OF#6315]: https://github.com/open-formulieren/open-forms/issues/6315
+[OF#6182]: https://github.com/open-formulieren/open-forms/issues/6182
+
+**Project maintenance**
+
+- Cleaned up the assertion calls in storybook tests.
+- Use trict BEM class names in CSS.
+- Simplified the CSS build of the builder.
+
 ## 1.0.1 (2026-08-04)
 
 Patch release.
