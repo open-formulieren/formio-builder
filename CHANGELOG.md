@@ -17,7 +17,7 @@ Feature release.
 **Project maintenance**
 
 - Cleaned up the assertion calls in storybook tests.
-- Use trict BEM class names in CSS.
+- Use strict BEM class names in CSS.
 - Simplified the CSS build of the builder.
 
 ## 1.0.1 (2026-08-04)
