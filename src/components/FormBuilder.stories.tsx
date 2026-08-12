@@ -25,7 +25,7 @@ const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
 };
 
 export default {
-  title: 'Generic/Form builder',
+  title: 'Public API/Form builder',
   component: FormBuilder,
   render: StorybookFormBuilder,
   parameters: {
