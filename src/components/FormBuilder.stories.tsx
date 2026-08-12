@@ -25,7 +25,7 @@ const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
 };
 
 export default {
-  title: 'Generic/Form builder',
+  title: 'Public API/Form builder',
   component: FormBuilder,
   render: StorybookFormBuilder,
   parameters: {
@@ -93,4 +93,14 @@ export default {
 
 type Story = StoryObj<typeof FormBuilder>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {formType: 'regular'},
+};
+
+export const Appointment: Story = {
+  args: {formType: 'appointment'},
+};
+
+export const SingleStep: Story = {
+  args: {formType: 'single_step'},
+};
