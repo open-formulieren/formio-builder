@@ -5,6 +5,7 @@ import type {
   GroupName,
   PresetComponentConfiguration,
 } from '@/components/designer/types';
+import type {FormType} from '@/context';
 
 export const FORM_DESIGNER_GROUP_LABELS = defineMessages<GroupName>({
   basic: {
@@ -25,50 +26,93 @@ export const FORM_DESIGNER_GROUP_LABELS = defineMessages<GroupName>({
   },
 });
 
-export const FORM_DESIGNER_GROUPS: ComponentGroup[] = [
-  {
-    name: 'basic',
-    components: [
-      'textfield',
-      'textarea',
-      'checkbox',
-      'selectboxes',
-      'select',
-      'radio',
-      'number',
-      'currency',
-      'email',
-      'date',
-      'datetime',
-      'time',
-      'phoneNumber',
-      'postcode',
-      'file',
-    ],
-  },
-  {
-    name: 'special',
-    components: [
-      'iban',
-      'licenseplate',
-      'bsn',
-      'npFamilyMembers',
-      'signature',
-      'cosign',
-      'coSign',
-      'map',
-      'editgrid',
-      'addressNL',
-      'partners',
-      'children',
-      'customerProfile',
-    ],
-  },
-  {
-    name: 'layout',
-    components: ['content', 'fieldset', 'columns', 'softRequiredErrors'],
-  },
-];
+export const FORM_TYPE_FORM_DESIGNER_GROUPS: Record<FormType, ComponentGroup[]> = {
+  regular: [
+    {
+      name: 'basic',
+      components: [
+        'textfield',
+        'textarea',
+        'checkbox',
+        'selectboxes',
+        'select',
+        'radio',
+        'number',
+        'currency',
+        'email',
+        'date',
+        'datetime',
+        'time',
+        'phoneNumber',
+        'postcode',
+        'file',
+      ],
+    },
+    {
+      name: 'special',
+      components: [
+        'iban',
+        'licenseplate',
+        'bsn',
+        'npFamilyMembers',
+        'signature',
+        'cosign',
+        'coSign',
+        'map',
+        'editgrid',
+        'addressNL',
+        'partners',
+        'children',
+        'customerProfile',
+      ],
+    },
+    {
+      name: 'layout',
+      components: ['content', 'fieldset', 'columns', 'softRequiredErrors'],
+    },
+  ],
+  appointment: [
+    {
+      name: 'basic',
+      components: ['textfield', 'radio', 'email', 'date', 'phoneNumber'],
+    },
+  ],
+  single_step: [
+    {
+      name: 'basic',
+      components: [
+        'textfield',
+        'textarea',
+        'checkbox',
+        'selectboxes',
+        'select',
+        'radio',
+        'number',
+        'currency',
+        'email',
+        'date',
+        'datetime',
+        'time',
+        'phoneNumber',
+        'postcode',
+      ],
+    },
+    {
+      name: 'special',
+      components: ['iban', 'licenseplate', 'bsn', 'signature', 'map', 'editgrid', 'addressNL'],
+    },
+    {
+      name: 'layout',
+      components: ['content', 'fieldset', 'columns'],
+    },
+  ],
+};
+
+export const FORM_TYPE_USE_PRESETS: Record<FormType, boolean> = {
+  regular: true,
+  appointment: false,
+  single_step: true,
+};
 
 export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
   {
