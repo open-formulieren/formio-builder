@@ -1,8 +1,8 @@
 .offb-component-controls {
   position: absolute;
   gap: 4px;
-  inset-block-start: 0;
-  inset-inline-end: 0;
+  inset-block-start: var(--_offb-dnd-sortable-item-spacing, 0);
+  inset-inline-end: var(--_offb-dnd-sortable-item-spacing, 0);
   z-index: 1;
 
   .btn {

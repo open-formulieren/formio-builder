@@ -5,7 +5,7 @@ import {clsx} from 'clsx';
 import React from 'react';
 
 import ComponentControls from './ComponentControls';
-import './SortableComponent.scss';
+import './SortableItem.scss';
 import {useDropzoneContext} from './context';
 
 export interface SortableItemData extends Data {

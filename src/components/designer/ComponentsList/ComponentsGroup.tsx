@@ -42,7 +42,7 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
       </summary>
 
       <div className="card-body p-2">
-        <ul className="list-unstyled mb-0">
+        <ul className="list-unstyled mb-0 offb-component-group__component-list">
           {componentConfigurations.map((component, index) => (
             <li key={`${component.schema.key}-${component.schema.type}-${index}`}>
               <DraggableMenuItem type={component.schema.type}>
