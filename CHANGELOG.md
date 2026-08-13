@@ -1,5 +1,14 @@
 # Changes
 
+## 1.2.0 (2026-08-13)
+
+Feature release.
+
+**New features**
+
+- The available components in the builder are now configured for each available form type.
+- You can now control a number of styling aspects of the builder with design tokens.
+
 ## 1.1.0 (2026-08-11)
 
 Feature release.
