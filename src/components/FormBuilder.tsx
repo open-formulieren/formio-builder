@@ -53,41 +53,43 @@ const FormBuilder: React.FC<MergedFormBuilderProps> = ({
   const initialValues = extractInitialValues(components, getRegistryEntry);
 
   return (
-    <BuilderContext.Provider
-      value={{
-        uniquifyKey,
-        supportedLanguageCodes,
-        richTextColors,
-        formType,
-        getMapTileLayers,
-        getMapOverlayTileLayers,
-        theme,
-        getFormComponents,
-        getValidatorPlugins,
-        getRegistrationAttributes,
-        getServices,
-        getReferenceListsTables,
-        getReferenceListsTableItems,
-        getPrefillPlugins,
-        getPrefillAttributes,
-        getFileTypes,
-        serverUploadLimit,
-        getAuthPlugins,
-      }}
-    >
-      <Formik
-        enableReinitialize
-        initialValues={initialValues}
-        onSubmit={() => {
-          throw new Error("Can't submit preview form");
+    <div className="offb-builder">
+      <BuilderContext.Provider
+        value={{
+          uniquifyKey,
+          supportedLanguageCodes,
+          richTextColors,
+          formType,
+          getMapTileLayers,
+          getMapOverlayTileLayers,
+          theme,
+          getFormComponents,
+          getValidatorPlugins,
+          getRegistrationAttributes,
+          getServices,
+          getReferenceListsTables,
+          getReferenceListsTableItems,
+          getPrefillPlugins,
+          getPrefillAttributes,
+          getFileTypes,
+          serverUploadLimit,
+          getAuthPlugins,
         }}
       >
-        <FormioDefinitionDesigner
-          initialComponents={components}
-          onChange={(components, event) => onChange({display: 'form', components}, event)}
-        />
-      </Formik>
-    </BuilderContext.Provider>
+        <Formik
+          enableReinitialize
+          initialValues={initialValues}
+          onSubmit={() => {
+            throw new Error("Can't submit preview form");
+          }}
+        >
+          <FormioDefinitionDesigner
+            initialComponents={components}
+            onChange={(components, event) => onChange({display: 'form', components}, event)}
+          />
+        </Formik>
+      </BuilderContext.Provider>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {Component} from '@/components/formio';
 
 import type {ComponentPreviewProps} from '../types';
+import './previews.scss';
 
 /**
  * Show a formio cosignV1 component preview.
@@ -19,7 +20,7 @@ const Preview: React.FC<ComponentPreviewProps<CosignV1ComponentSchema>> = ({comp
       description={description}
     >
       <div>
-        <button className="btn btn-primary" type="button">
+        <button className="btn btn-primary offb-cosign-v1-auth-button" type="button">
           <FormattedMessage
             description="Preview of cosign v1: login button label"
             defaultMessage="Cosign ({authPlugin})"

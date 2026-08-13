@@ -9,7 +9,7 @@ import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 import './Preview.scss';
-import {DropZone, SortableComponent} from './dragDrop';
+import {DropZone, SortableItem} from './dragDrop';
 import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
 import type {ComponentDefinition} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
@@ -46,7 +46,7 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
               componentType={component.componentType}
             />
           ) : (
-            <SortableComponent
+            <SortableItem
               key={component.key}
               id={component.id}
               index={index}
@@ -55,7 +55,7 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
               hasControls={!withoutComponentControls}
             >
               <ComponentPreview component={component} />
-            </SortableComponent>
+            </SortableItem>
           )
         )}
       </DropZone>
