@@ -1,5 +1,11 @@
 # Changes
 
+## 1.2.2 (2026-08-14)
+
+Small bugfix release.
+
+- Restored the ordering of components in the form builder/designer menu.
+
 ## 1.2.1 (2026-08-14)
 
 Small bugfix release.
