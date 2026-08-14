@@ -4,13 +4,22 @@
   cursor: move;
 
   --_offb-dnd-sortable-item-spacing: 5px;
+  --_offb-dnd-sortable-item-border-width: 1px;
 
-  &:hover {
-    outline: solid 1px var(--offb-dnd-sortable-item-hover-border-color, #ced4da);
-    border-radius: 3px;
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+  &:focus {
     margin: calc(-1 * var(--_offb-dnd-sortable-item-spacing));
     padding: var(--_offb-dnd-sortable-item-spacing);
+  }
+
+  &:hover {
+    border: solid var(--_offb-dnd-sortable-item-border-width)
+      var(--offb-dnd-sortable-item-hover-border-color, #ced4da);
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+    margin: calc(
+      -1 * var(--_offb-dnd-sortable-item-spacing) - var(--_offb-dnd-sortable-item-border-width)
+    );
+    padding: calc(var(--_offb-dnd-sortable-item-spacing));
   }
 
   @include bem.modifier('is-dragging') {
