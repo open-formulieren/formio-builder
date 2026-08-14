@@ -3,7 +3,6 @@ import type {Draggable, Droppable} from '@dnd-kit/dom';
 import type {DragEndEvent, DragOverEvent} from '@dnd-kit/react';
 import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
-import {clsx} from 'clsx';
 import {produce} from 'immer';
 import {useCallback, useContext, useMemo, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -27,6 +26,7 @@ import type {DesignerContextType} from '@/context';
 import {BuilderContext, DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
 
+import ComponentIcon from './ComponentIcon';
 import ComponentsList from './ComponentsList';
 import {ComponentPreview, ComponentsPreview} from './Preview';
 import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
@@ -315,7 +315,7 @@ const PlaceholderDragOverlay: React.FC<PlaceholderDragOverlayProps> = ({componen
   const {formDesigner, builderInfo} = getRegistryEntry(componentType);
   return (
     <span className="btn btn-primary btn-block">
-      <i className={clsx('fa', `fa-${builderInfo.icon}`, 'mr-2')} aria-hidden="true" />
+      <ComponentIcon icon={builderInfo.icon} />
       <FormattedMessage {...formDesigner.label} />
     </span>
   );

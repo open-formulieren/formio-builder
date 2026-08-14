@@ -1192,7 +1192,7 @@
     "originalDefault": "Date of birth"
   },
   "Za0/8c": {
-    "defaultMessage": "De bijlage-registratieoptis zijn verplaatst naar de 'variabelen'-tab op de formulier-bewerkpagina.",
+    "defaultMessage": "De bijlage-registratieopties zijn verplaatst naar de 'variabelen'-tab op de formulier-bewerkpagina.",
     "description": "File component registration tab configuration moved notice",
     "originalDefault": "The file registration options have been moved to the 'variables' tab of the form edit page."
   },

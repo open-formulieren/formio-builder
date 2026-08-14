@@ -105,7 +105,7 @@ const OptionRow: React.FC<OptionRowProps> = ({
             })}
             onClick={() => arrayHelpers.remove(index)}
           >
-            <i className="fa fa-times-circle-o" />
+            <i className="fa far fa-times-circle" />
           </button>
         </td>
       </tr>

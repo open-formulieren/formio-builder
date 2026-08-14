@@ -116,7 +116,7 @@ const ColumnRow: React.FC<ColumnProps> = ({index, arrayHelpers}) => {
             setFieldError('columns', undefined);
           }}
         >
-          <i className="fa fa-times-circle-o" />
+          <i className="fa far fa-times-circle" />
         </button>
       </td>
     </>

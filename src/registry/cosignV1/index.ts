@@ -19,7 +19,7 @@ export default {
   },
   builderInfo: {
     title: 'Co-sign',
-    icon: 'id-card-o',
+    icon: 'id-card',
     schema: {
       id: 'yejak',
       type: 'coSign',

@@ -223,7 +223,7 @@ const OverlayTileLayer: React.FC<OverlayTileLayerProps> = ({
         className="btn btn-danger float-right"
         onClick={() => arrayHelpers.remove(index)}
       >
-        <i className="fa fa-times-circle-o" />{' '}
+        <i className="fa far fa-times-circle" />{' '}
         <FormattedMessage
           description="Map 'overlays' configuration: label for delete overlay button"
           defaultMessage="Remove overlay"
