@@ -54,7 +54,7 @@ const FAQItems = () => {
                   type="button"
                   onClick={() => arrayHelpers.remove(index)}
                 >
-                  <i className="fa fa-times-circle-o" aria-hidden="true" />
+                  <i className="fa far fa-times-circle" aria-hidden="true" />
                 </button>
               </div>
             </div>

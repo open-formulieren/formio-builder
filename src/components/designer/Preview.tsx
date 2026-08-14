@@ -8,6 +8,7 @@ import ErrorBoundary from '@/components/error/ErrorBoundary';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
+import ComponentIcon from './ComponentIcon';
 import './Preview.scss';
 import {DropZone, SortableItem} from './dragDrop';
 import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
@@ -96,7 +97,7 @@ const ComponentPlaceholderPreview: React.FC<ComponentPlaceholderPreviewProps> = 
 
   return (
     <ContentPlaceholder key="spacer" variant="designer" testId="component-placeholder">
-      <i className={clsx('fa', `fa-${builderInfo.icon}`, 'mr-2')} aria-hidden="true" />
+      <ComponentIcon icon={builderInfo.icon} />
       <FormattedMessage {...formDesigner.label} />
     </ContentPlaceholder>
   );

@@ -19,7 +19,7 @@ export default {
   },
   builderInfo: {
     title: 'Radio',
-    icon: 'dot-circle-o',
+    icon: 'dot-circle',
     schema: {
       id: 'yejak',
       type: 'radio',

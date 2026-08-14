@@ -82,7 +82,7 @@ const Multiple = <P extends object, T>(props: MultipleProps<P, T> & CommonInputP
                           defaultMessage="Remove item"
                         />
                       </span>
-                      <i className="fa fa-times-circle-o" aria-hidden="true" />
+                      <i className="fa far fa-times-circle" aria-hidden="true" />
                     </button>
                   </td>
                 </tr>

@@ -49,7 +49,7 @@ const ComponentControls: React.FC<ComponentControlsProps> = ({component}) => {
         <span className="sr-only">
           <FormattedMessage {...deleteComponentTitle} />
         </span>
-        <i className="fa fa-trash" aria-hidden="true" />
+        <i className="fa fa-trash-can" aria-hidden="true" />
       </button>
     </div>
   );

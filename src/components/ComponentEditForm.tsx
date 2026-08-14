@@ -111,7 +111,7 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
                     href="https://open-forms.readthedocs.io/en/stable/manual/forms/form_fields.html"
                     rel="nofollower noopener noreferrer"
                   >
-                    <i className="fa fa-window-restore"></i>&nbsp;
+                    <i className="fa far fa-window-restore"></i>&nbsp;
                     <FormattedMessage description="Link to manual title" defaultMessage="Manual" />
                   </a>
                 </div>

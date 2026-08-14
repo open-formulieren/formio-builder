@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
-import '@fortawesome/fontawesome-free/css/v4-shims.css';
 import type {Preview} from '@storybook/react-vite';
 import 'leaflet/dist/leaflet.css';
 import '@/formio.scss';

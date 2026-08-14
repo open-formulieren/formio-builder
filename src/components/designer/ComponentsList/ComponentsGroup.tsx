@@ -1,6 +1,7 @@
 import {clsx} from 'clsx';
 import {FormattedMessage} from 'react-intl';
 
+import ComponentIcon from '@/components/designer/ComponentIcon';
 import {DraggableMenuItem} from '@/components/designer/dragDrop';
 import type {NormalizedComponentConfiguration} from '@/components/designer/types';
 
@@ -57,7 +58,7 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
                     'offb-component-group__component-button'
                   )}
                 >
-                  <i className={clsx('fa', `fa-${component.icon}`, 'mr-2')} aria-hidden="true" />
+                  <ComponentIcon icon={component.icon} />
                   {component.label}
                   {component.isDeprecated && (
                     <span className="badge badge-warning ml-2">

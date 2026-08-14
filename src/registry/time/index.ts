@@ -19,7 +19,7 @@ export default {
   },
   builderInfo: {
     title: 'Time',
-    icon: 'clock-o',
+    icon: 'clock',
     schema: {
       id: 'ezftxdl',
       type: 'time',

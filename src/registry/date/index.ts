@@ -19,7 +19,7 @@ export default {
   },
   builderInfo: {
     title: 'Date',
-    icon: 'calendar',
+    icon: 'calendar-days',
     schema: {
       id: 'ezftxdl',
       type: 'date',
