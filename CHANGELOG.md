@@ -1,5 +1,16 @@
 # Changes
 
+## 1.2.1 (2026-08-14)
+
+Small bugfix release.
+
+- [`#271`][#271] Fixed font-awesome icon references for v6 usage without v4 shims.
+- Fixed a typo in a Dutch translation.
+- [`#271`][#271] Fixed the component controls (edit, remove) shifting in the layout when hovering
+  over a focused draggable item.
+
+[#271]: https://github.com/open-formulieren/formio-builder/issues/271
+
 ## 1.2.0 (2026-08-13)
 
 Feature release.
