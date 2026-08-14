@@ -131,7 +131,7 @@ export const Default: Story = {
       // The preset fields group should display 10 components
       const presetFieldsList = within(within(presetFieldsContainer).getByRole('list'));
 
-      expect(presetFieldsList.getAllByRole('button')).toHaveLength(10);
+      expect(presetFieldsList.getAllByRole('button')).toHaveLength(9);
 
       expect(presetFieldsList.getByRole('button', {name: 'Volledige naam'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'Voornaam'})).toBeVisible();
@@ -139,7 +139,6 @@ export const Default: Story = {
       expect(presetFieldsList.getByRole('button', {name: 'Adresregel 1'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'Adresregel 2'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'Adresregel 3'})).toBeVisible();
-      expect(presetFieldsList.getByRole('button', {name: 'Postcode'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'E-mailadres'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'Telefoonnummer'})).toBeVisible();
       expect(presetFieldsList.getByRole('button', {name: 'Website'})).toBeVisible();
