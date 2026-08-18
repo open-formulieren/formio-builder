@@ -1,3 +1,4 @@
+import type {Prefill} from '@open-formulieren/types/dist/extensions';
 import {useField, useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -6,7 +7,7 @@ import {useAsync, usePrevious} from 'react-use';
 import Select from '@/components/formio/select';
 import {BuilderContext} from '@/context';
 
-import type {ComponentWithPrefill, PrefillAttributeOption} from './types';
+import type {PrefillAttribute, PrefillAttributeOption} from './types';
 
 function isAttributeOptions(
   options: PrefillAttributeOption[] | undefined
@@ -26,9 +27,8 @@ function isAttributeOptions(
 const PrefillAttributeSelect: React.FC = () => {
   const fieldName = 'prefill.attribute';
   const intl = useIntl();
-  const {values, setFieldValue} = useFormikContext<ComponentWithPrefill>();
-  const [{value: attribute}] =
-    useField<ComponentWithPrefill['prefill']['attribute']>('prefill.attribute');
+  const {values, setFieldValue} = useFormikContext<Prefill>();
+  const [{value: attribute}] = useField<PrefillAttribute>('prefill.attribute');
   const {getPrefillAttributes} = useContext(BuilderContext);
   const plugin = values.prefill?.plugin ?? '';
   const previousPlugin = usePrevious(plugin);
