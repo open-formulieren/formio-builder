@@ -30,7 +30,7 @@ const PrefillAttributeSelect: React.FC = () => {
   const [{value: attribute}] =
     useField<ComponentWithPrefill['prefill']['attribute']>('prefill.attribute');
   const {getPrefillAttributes} = useContext(BuilderContext);
-  const {plugin} = values.prefill;
+  const plugin = values.prefill?.plugin ?? '';
   const previousPlugin = usePrevious(plugin);
 
   const {
