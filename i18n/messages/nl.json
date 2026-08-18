@@ -703,6 +703,11 @@
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
   },
+  "JrrqSP": {
+    "defaultMessage": "Je moet een attribuut selecteren.",
+    "description": "Validation error for missing prefill attribute",
+    "originalDefault": "You must select an attribute."
+  },
   "KMbfsU": {
     "defaultMessage": "Grootte (mobiel)",
     "description": "Column mobile size table header/label",
@@ -978,6 +983,11 @@
     "defaultMessage": "Begin-zoomniveau van de kaart.",
     "description": "Tooltip for 'defaultZoom' builder field",
     "originalDefault": "Zoom level for the map when it initially loads."
+  },
+  "Uag3X5": {
+    "defaultMessage": "Je moet een plugin selecteren.",
+    "description": "Validation error for missing prefill plugin",
+    "originalDefault": "You must select a plugin."
   },
   "UlVtQd": {
     "defaultMessage": "Omhoog",

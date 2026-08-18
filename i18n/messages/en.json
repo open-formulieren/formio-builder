@@ -694,6 +694,11 @@
     "description": "Label for 'Hidden' builder field",
     "originalDefault": "Hidden"
   },
+  "JrrqSP": {
+    "defaultMessage": "You must select an attribute.",
+    "description": "Validation error for missing prefill attribute",
+    "originalDefault": "You must select an attribute."
+  },
   "KMbfsU": {
     "defaultMessage": "Size (mobile)",
     "description": "Column mobile size table header/label",
@@ -963,6 +968,11 @@
     "defaultMessage": "Zoom level for the map when it initially loads.",
     "description": "Tooltip for 'defaultZoom' builder field",
     "originalDefault": "Zoom level for the map when it initially loads."
+  },
+  "Uag3X5": {
+    "defaultMessage": "You must select a plugin.",
+    "description": "Validation error for missing prefill plugin",
+    "originalDefault": "You must select a plugin."
   },
   "UlVtQd": {
     "defaultMessage": "Move up",
