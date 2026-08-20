@@ -1,8 +1,15 @@
+import type {Prefill} from '@open-formulieren/types/dist/extensions';
 import {FormattedMessage, defineMessage, useIntl} from 'react-intl';
+import type {MessageDescriptor} from 'react-intl';
 
 import Select from '@/components/formio/select';
 
-const IDENTIFIER_ROLE_OPTIONS = [
+interface IdentifierRoleOption {
+  label: MessageDescriptor;
+  value: NonNullable<Prefill['prefill']>['identifierRole'];
+}
+
+const IDENTIFIER_ROLE_OPTIONS: IdentifierRoleOption[] = [
   {
     label: defineMessage({
       description: 'Label identifier role main',

@@ -75,6 +75,41 @@ export const buildCommonSchema = (intl: IntlShape) =>
     key: buildKeySchema(intl),
   });
 
+export const buildPrefillSchema = (intl: IntlShape) =>
+  z.object({
+    prefill: z
+      .object({
+        plugin: z.string().optional(),
+        attribute: z.string().optional(),
+        identifierRole: z.union([z.literal('main'), z.literal('authorised_person')]),
+      })
+      .optional()
+      .superRefine((prefill, ctx) => {
+        if (!prefill) return;
+        const {plugin, attribute} = prefill;
+        if (plugin && !attribute) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['attribute'],
+            message: intl.formatMessage({
+              description: 'Validation error for missing prefill attribute',
+              defaultMessage: 'You must select an attribute.',
+            }),
+          });
+        }
+        if (!plugin && attribute) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['plugin'],
+            message: intl.formatMessage({
+              description: 'Validation error for missing prefill plugin',
+              defaultMessage: 'You must select a plugin.',
+            }),
+          });
+        }
+      }),
+  });
+
 // From https://zod.dev/?id=json-type
 const literalSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
 type Literal = z.infer<typeof literalSchema>;

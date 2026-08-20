@@ -1,7 +1,7 @@
 import type {IntlShape} from 'react-intl';
 import {z} from 'zod';
 
-import {buildCommonSchema, buildKeySchema} from '@/registry/validation';
+import {buildCommonSchema, buildKeySchema, buildPrefillSchema} from '@/registry/validation';
 
 import type {EditSchema} from '../types';
 import type {DateConstraintKey} from './validation/types';
@@ -81,6 +81,9 @@ const buildDateSpecific = (intl: IntlShape) =>
     });
 
 const schema: EditSchema = ({intl}) =>
-  buildCommonSchema(intl).and(defaultValueSchema).and(buildDateSpecific(intl));
+  buildCommonSchema(intl)
+    .and(defaultValueSchema)
+    .and(buildDateSpecific(intl))
+    .and(buildPrefillSchema(intl));
 
 export default schema;

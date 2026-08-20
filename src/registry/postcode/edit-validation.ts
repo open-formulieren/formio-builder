@@ -3,7 +3,12 @@ import {defineMessages} from 'react-intl';
 import {z} from 'zod';
 
 import {LABELS} from '@/components/builder/messages';
-import {buildCommonSchema, getErrorMap, isInvalidStringIssue} from '@/registry/validation';
+import {
+  buildCommonSchema,
+  buildPrefillSchema,
+  getErrorMap,
+  isInvalidStringIssue,
+} from '@/registry/validation';
 
 import type {EditSchema} from '../types';
 import {POSTCODE_REGEX} from './constants';
@@ -42,6 +47,7 @@ const buildDefaultValueSchema = (intl: IntlShape) => {
   return singleValueSchema.or(multipleValueSchema);
 };
 
-const schema: EditSchema = ({intl}) => buildCommonSchema(intl).and(buildDefaultValueSchema(intl));
+const schema: EditSchema = ({intl}) =>
+  buildCommonSchema(intl).and(buildDefaultValueSchema(intl)).and(buildPrefillSchema(intl));
 
 export default schema;

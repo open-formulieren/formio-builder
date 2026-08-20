@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-import {buildCommonSchema} from '@/registry/validation';
+import {buildCommonSchema, buildPrefillSchema} from '@/registry/validation';
 
 import type {EditSchema} from '../types';
 
@@ -24,6 +24,6 @@ const numberSpecific = z.object({
 });
 
 const schema: EditSchema = ({intl}) =>
-  buildCommonSchema(intl).and(defaultValueSchema).and(numberSpecific);
+  buildCommonSchema(intl).and(buildPrefillSchema(intl)).and(defaultValueSchema).and(numberSpecific);
 
 export default schema;

@@ -20,6 +20,7 @@ const StorybookFormBuilder = (props: MergedFormBuilderProps) => {
       {...props}
       components={components}
       onChange={form => setComponents(form.components)}
+      getFormComponents={() => components}
     />
   );
 };
@@ -30,6 +31,7 @@ export default {
   render: StorybookFormBuilder,
   parameters: {
     modal: {noModal: true},
+    builder: {enableContext: false},
   },
   args: {
     uniquifyKey: key => key,
@@ -37,33 +39,40 @@ export default {
     richTextColors: DEFAULT_COLORS,
     theme: 'light',
     formType: 'regular',
-    validatorPlugins: [
+    getValidatorPlugins: async () => [
       {id: 'phone-intl', label: 'Phone (international)'},
       {id: 'phone-nl', label: 'Phone (Dutch)'},
       {id: 'license-plate', label: 'License plate'},
     ],
-    registrationAttributes: [
+    getRegistrationAttributes: async () => [
       {id: 'bsn', label: 'BSN'},
       {id: 'firstName', label: 'First name'},
       {id: 'dob', label: 'Date of Birth'},
     ],
-    prefillPlugins: [
+    getServices: async () => [],
+    getReferenceListsTables: async () => [],
+    getReferenceListsTableItems: async () => [],
+    getPrefillPlugins: async () => [
       {id: 'stuf-bg', label: 'StUF-BG'},
       {id: 'haalcentraal', label: 'Haal Centraal'},
     ],
-    prefillAttributes: {
-      'stuf-bg': [
-        {id: 'BSN', label: 'BSN'},
-        {id: 'geslachtsNaam', label: 'Geslachtsnaam'},
-      ],
-      haalcentraal: [
-        {id: 'burgerservicenummer', label: 'BSN'},
-        {id: 'lastName', label: 'Achternaam'},
-      ],
-    },
+    getPrefillAttributes: async plugin =>
+      ({
+        'stuf-bg': [
+          {id: 'BSN', label: 'BSN'},
+          {id: 'geslachtsNaam', label: 'Geslachtsnaam'},
+        ],
+        haalcentraal: [
+          {id: 'burgerservicenummer', label: 'BSN'},
+          {id: 'lastName', label: 'Achternaam'},
+        ],
+      })[plugin] ?? [],
+    getFileTypes: async () => [],
+    serverUploadLimit: '50MB',
+    getAuthPlugins: async () => [],
+    getMapTileLayers: async () => [],
+    getMapOverlayTileLayers: async () => [],
     onChange: fn(),
-    onComponentUpdated: fn(),
-    onComponentDeleted: fn(),
     components: [
       {
         type: 'textfield',
@@ -89,7 +98,7 @@ export default {
       } satisfies EmailComponentSchema,
     ],
   },
-} as Meta<typeof FormBuilder>;
+} satisfies Meta<typeof FormBuilder>;
 
 type Story = StoryObj<typeof FormBuilder>;
 
