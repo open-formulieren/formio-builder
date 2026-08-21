@@ -3,7 +3,7 @@
     "baseUrl": "src",
     "outDir": "dist",
     "module": "esnext",
-    "target": "ES2021",
+    "target": "ES2023",
     "jsx": "react-jsx",
     "declaration": true,
     "moduleResolution": "bundler",

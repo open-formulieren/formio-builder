@@ -45,7 +45,7 @@ const Preview: React.FC<ComponentPreviewProps<CustomerProfileComponentSchema>> =
     <FieldSet field={key} label={label} tooltip={tooltip}>
       {description && <Description text={description} />}
       {digitalAddressTypes
-        .sort((a, b) => a.localeCompare(b))
+        .toSorted((a, b) => a.localeCompare(b))
         .map((addressType, index) => (
           <TextField
             key={addressType}
