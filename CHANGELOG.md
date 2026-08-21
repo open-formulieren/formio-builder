@@ -1,5 +1,20 @@
 # Changes
 
+## 1.3.0 (2026-08-21)
+
+Small feature and bugfix release.
+
+**New features**
+
+- [`OF#5629`][OF#5629] The component edit form now validates the prefill configuration.
+
+**Bugfixes**
+
+- [`OF#6549`][OF#6549] Fixed a form designer preview crash when adding a customer profile component.
+
+[OF#5629]: https://github.com/open-formulieren/open-forms/issues/5629
+[OF#6549]: https://github.com/open-formulieren/open-forms/issues/6549
+
 ## 1.2.2 (2026-08-14)
 
 Small bugfix release.
