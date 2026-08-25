@@ -107,6 +107,52 @@ export const Default: Story = {
   },
 };
 
+// As a story rather than vitest (unit) test because we don't have vitest browser mode
+// yet, see https://github.com/open-formulieren/formio-builder/issues/324
+export const WithValidateRequiredDefault: Story = {
+  args: {
+    initialComponents: [],
+  },
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement);
+    const dropzone = canvas.getByTestId('main-dropzone');
+
+    // may not cause crashes :)
+    await step("Add component that doesn't have validate property", async () => {
+      await userEvent.click(canvas.getByText('Layout', {exact: true}));
+      const componentsList = canvas.getByTestId('component-group--layout');
+      const newContentField = await within(componentsList).findByRole('button', {
+        name: 'Content',
+      });
+      await dragTo(newContentField, dropzone);
+
+      // The edit modal for the textarea component should be opened
+      const modal = await canvas.findByRole('dialog');
+      await waitFor(() => expect(modal).toBeVisible());
+
+      await userEvent.click(canvas.getByRole('button', {name: 'Cancel'}));
+      await waitFor(() => expect(modal).not.toBeVisible());
+    });
+
+    await step('Add textfield with validate.required default enabled', async () => {
+      const componentsList = canvas.getByTestId('component-group--basic');
+      const newTextField = await within(componentsList).findByRole('button', {
+        name: 'Textfield',
+      });
+      await dragTo(newTextField, dropzone);
+
+      // The edit modal for the textarea component should be opened
+      const modal = await canvas.findByRole('dialog');
+      await waitFor(() => expect(modal).toBeVisible());
+
+      // Check that the default for 'validate.required' is properly set.
+      await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
+      const validateRequiredCheckbox = canvas.getByLabelText('Required', {exact: true});
+      expect(validateRequiredCheckbox).toBeChecked();
+    });
+  },
+};
+
 export const WithTextfieldComponents: Story = {
   args: {
     initialComponents: [
