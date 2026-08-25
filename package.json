@@ -74,7 +74,6 @@
     "@types/proj4leaflet": "^1.0.10",
     "@types/react": "^18.2.45",
     "@types/react-modal": "^3.16.3",
-    "@types/react-signature-canvas": "^1.0.5",
     "@types/sanitize-html": "^2.9.0",
     "@types/signature_pad": "^2.3.6",
     "@utrecht/component-library-react": "^14.0.2",
@@ -141,7 +140,7 @@
     "react-leaflet-draw": "^0.20.6",
     "react-modal": "^3.16.1",
     "react-select": "^5.8.0",
-    "react-signature-canvas": "^1.0.6",
+    "react-signature-canvas": "1.1.0-alpha.2",
     "react-use": "^17.4.0",
     "zod": "^3.25.76",
     "zod-formik-adapter": "^1.2.0"
