@@ -152,6 +152,10 @@ export const WithValidateRequiredDefault: Story = {
       await userEvent.click(canvas.getByRole('link', {name: 'Validation'}));
       const validateRequiredCheckbox = canvas.getByLabelText('Required', {exact: true});
       expect(validateRequiredCheckbox).toBeChecked();
+
+      // check that we didn't mess up static defaults :)
+      const maxLength = canvas.getByLabelText('Maximum length', {exact: true});
+      expect(maxLength).toHaveDisplayValue('1000');
     });
   },
 };

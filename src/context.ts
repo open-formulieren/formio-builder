@@ -65,7 +65,7 @@ export interface BuilderContextType {
    * allows global configuration of this parameter. It only applies to components that
    * actually support the `validate.required` property.
    */
-  validateRequiredDefault?: boolean;
+  validateRequiredDefault: boolean;
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
