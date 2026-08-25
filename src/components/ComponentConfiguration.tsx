@@ -67,6 +67,7 @@ const ComponentConfiguration: React.FC<ComponentConfigurationProps> = ({
     <BuilderContext.Provider
       value={{
         uniquifyKey,
+        validateRequiredDefault: false,
         supportedLanguageCodes,
         richTextColors,
         formType,

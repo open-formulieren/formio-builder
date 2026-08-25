@@ -17,6 +17,12 @@ export interface FormBuilderProps {
    */
   components: AnyComponentSchema[];
   /**
+   * The initial value for `validate.required` for new components being added. The backend
+   * allows global configuration of this parameter. It only applies to components that
+   * actually support the `validate.required` property.
+   */
+  validateRequiredDefault?: boolean;
+  /**
    * Callback invoked when the form definition changes.
    *
    * This contains the entire new components structure, and possible events that
@@ -30,6 +36,7 @@ export type MergedFormBuilderProps = FormBuilderProps & BuilderContextType;
 
 const FormBuilder: React.FC<MergedFormBuilderProps> = ({
   components,
+  validateRequiredDefault = false,
   onChange,
   uniquifyKey,
   supportedLanguageCodes = ['nl', 'en'],
@@ -57,6 +64,7 @@ const FormBuilder: React.FC<MergedFormBuilderProps> = ({
       <BuilderContext.Provider
         value={{
           uniquifyKey,
+          validateRequiredDefault,
           supportedLanguageCodes,
           richTextColors,
           formType,

@@ -8,6 +8,7 @@ import {toFormikValidationSchema} from 'zod-formik-adapter';
 
 import {BuilderContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
+import {hasOwnProperty} from '@/types';
 
 import GenericComponentPreview from './ComponentPreview';
 
@@ -71,6 +72,13 @@ const ComponentEditForm: React.FC<ComponentEditFormProps> = ({
     // it causes.
     const defaultValues = cloneDeep(EditForm.defaultValues);
     initialValues = merge(defaultValues, initialValues);
+    if (
+      hasOwnProperty(initialValues, 'validate') &&
+      hasOwnProperty(initialValues.validate ?? {}, 'required')
+    ) {
+      const defaultRequired = builderContext.validateRequiredDefault;
+      initialValues = merge(initialValues, {validate: {required: defaultRequired}});
+    }
   }
 
   const Wrapper = hasPreview ? LayoutWithPreview : LayoutWithoutPreview;

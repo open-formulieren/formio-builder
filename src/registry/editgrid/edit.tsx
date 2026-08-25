@@ -162,6 +162,11 @@ EditForm.defaultValues = {
   clearOnHide: true,
   isSensitiveData: false,
   hideLabel: false,
+  // Validation tab
+  validate: {
+    required: false,
+    // maxLength: undefined, // doesn't allow null
+  },
   // display tab
   disableAddingRemovingRows: false,
   addAnother: '',
