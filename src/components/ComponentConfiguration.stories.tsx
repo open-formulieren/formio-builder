@@ -133,6 +133,7 @@ const Template: StoryFn<TemplateArgs> = ({
 }: TemplateArgs) => (
   <ComponentConfiguration
     uniquifyKey={(key: string) => key}
+    validateRequiredDefault={false}
     supportedLanguageCodes={supportedLanguageCodes}
     theme="light"
     richTextColors={DEFAULT_COLORS}

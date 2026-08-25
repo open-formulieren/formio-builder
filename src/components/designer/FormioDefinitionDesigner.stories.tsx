@@ -113,6 +113,9 @@ export const WithValidateRequiredDefault: Story = {
   args: {
     initialComponents: [],
   },
+  parameters: {
+    builder: {validateRequiredDefault: true},
+  },
   play: async ({canvasElement, step}) => {
     const canvas = within(canvasElement);
     const dropzone = canvas.getByTestId('main-dropzone');

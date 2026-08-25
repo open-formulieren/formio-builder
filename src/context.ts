@@ -60,6 +60,12 @@ export type FormType = 'regular' | 'appointment' | 'single_step';
 
 export interface BuilderContextType {
   uniquifyKey: (key: string) => string;
+  /**
+   * The initial value for `validate.required` for new components being added. The backend
+   * allows global configuration of this parameter. It only applies to components that
+   * actually support the `validate.required` property.
+   */
+  validateRequiredDefault?: boolean;
   supportedLanguageCodes: SupportedLocales[];
   richTextColors: ColorOption[];
   theme: 'light' | 'dark';
@@ -84,6 +90,7 @@ export interface BuilderContextType {
 
 const BuilderContext = React.createContext<BuilderContextType>({
   uniquifyKey: (key: string) => key,
+  validateRequiredDefault: false,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',

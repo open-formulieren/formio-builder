@@ -77,6 +77,7 @@ const contextRender = (
           <BuilderContext.Provider
             value={{
               uniquifyKey: key => key,
+              validateRequiredDefault: false,
               supportedLanguageCodes: builderOptions.supportedLanguageCodes || ['nl', 'en'],
               richTextColors: DEFAULT_COLORS,
               theme: 'light',
@@ -184,6 +185,7 @@ const dummyIntl = createIntl({locale: 'en', messages: {}}, cache);
 
 const dummyBuilderContext: BuilderContextType = {
   uniquifyKey: (key: string) => key,
+  validateRequiredDefault: false,
   supportedLanguageCodes: ['nl', 'en'],
   richTextColors: [],
   theme: 'light',

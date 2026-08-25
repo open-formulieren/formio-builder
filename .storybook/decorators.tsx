@@ -55,6 +55,7 @@ export const ModalDecorator: Decorator = (Story, context) => {
 
 export const BuilderContextDecorator: Decorator = (Story, context) => {
   if (!context.parameters?.builder?.enableContext) return <Story />;
+  const validateRequiredDefault = context.parameters.builder?.validateRequiredDefault ?? false;
   const supportedLanguageCodes = context.parameters.builder?.supportedLanguageCodes || ['nl', 'en'];
   const theme = context.parameters.builder?.theme || 'light';
   const defaultComponentTree =
@@ -80,6 +81,7 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
     <BuilderContext.Provider
       value={{
         uniquifyKey: key => key,
+        validateRequiredDefault: validateRequiredDefault,
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
         formType: regularFormType,
