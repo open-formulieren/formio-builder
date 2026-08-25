@@ -7,7 +7,7 @@ import React from 'react';
 
 import ComponentControls from './ComponentControls';
 import './SortableItem.scss';
-import {useDropzoneContext} from './context';
+import {SortableItemContext, useDropzoneContext, useSortableItemContext} from './context';
 
 export interface SortableItemData extends Data {
   component: AnyComponentSchema;
@@ -30,11 +30,13 @@ const SortableItem: React.FC<SortableItemProps> = ({
   children,
 }) => {
   const {collisionPriority} = useDropzoneContext();
+  const {isDragging: isDraggingParent} = useSortableItemContext();
   const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
     group: groupName,
     collisionPriority,
+    disabled: isDraggingParent,
     data: {
       component,
     },
@@ -50,7 +52,9 @@ const SortableItem: React.FC<SortableItemProps> = ({
       component={component}
       showControls={hasControls && !isDragging}
     >
-      {children}
+      <SortableItemContext.Provider value={{isDragging: isDragging || isDraggingParent}}>
+        {children}
+      </SortableItemContext.Provider>
     </SortableItemView>
   );
 };

@@ -1,7 +1,7 @@
 import {useDroppable} from '@dnd-kit/react';
 
 import './DropZone.scss';
-import {DropzoneContext, useDropzoneContext} from './context';
+import {DropzoneContext, useDropzoneContext, useSortableItemContext} from './context';
 
 export interface DropZoneProps {
   id: string;
@@ -13,7 +13,12 @@ export interface DropZoneProps {
  */
 const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
   const {collisionPriority} = useDropzoneContext();
-  const {ref} = useDroppable({id, collisionPriority});
+  const {isDragging} = useSortableItemContext();
+  const {ref} = useDroppable({
+    id,
+    collisionPriority: collisionPriority,
+    disabled: isDragging,
+  });
 
   return (
     <div className="offb-drop-zone" data-testid={id} ref={ref}>

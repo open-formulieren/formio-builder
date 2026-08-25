@@ -9,3 +9,13 @@ export const DropzoneContext = createContext<DropzoneContextType>({
 });
 
 export const useDropzoneContext = () => useContext(DropzoneContext);
+
+interface SortableItemContextType {
+  isDragging: boolean;
+}
+
+export const SortableItemContext = createContext<SortableItemContextType>({
+  isDragging: false,
+});
+
+export const useSortableItemContext = () => useContext(SortableItemContext);

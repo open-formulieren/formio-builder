@@ -10,6 +10,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import ComponentEditForm from '@/components/ComponentEditForm';
 import Modal from '@/components/Modal';
 import {SortableItemView} from '@/components/designer/dragDrop';
+import {SortableItemContext} from '@/components/designer/dragDrop/context';
 import {
   assertNoPlaceholders,
   createComponent,
@@ -256,7 +257,9 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
               <PlaceholderDragOverlay componentType={source.data.componentType} />
             ) : (
               <SortableItemView component={source.data.component} showControls>
-                <ComponentPreview component={source.data.component} />
+                <SortableItemContext.Provider value={{isDragging: true}}>
+                  <ComponentPreview component={source.data.component} />
+                </SortableItemContext.Provider>
               </SortableItemView>
             )
           }
