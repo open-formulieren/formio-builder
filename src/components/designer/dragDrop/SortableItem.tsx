@@ -1,4 +1,5 @@
 import type {Data} from '@dnd-kit/abstract';
+import {SortableKeyboardPlugin} from '@dnd-kit/dom/sortable';
 import {useSortable} from '@dnd-kit/react/sortable';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
@@ -37,6 +38,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
     data: {
       component,
     },
+    plugins: [SortableKeyboardPlugin],
   });
   return (
     <SortableItemView
