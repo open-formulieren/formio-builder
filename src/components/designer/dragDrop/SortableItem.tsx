@@ -68,6 +68,7 @@ const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
         ref={ref}
         className={clsx('offb-dnd-sortable-item-view', className)}
         data-testid={testId}
+        id={`sortable-item-${component.id}`}
       >
         {showControls && <ComponentControls component={component} />}
         {children}

@@ -112,7 +112,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     const dropzoneComponents = getDropzoneComponents(items, dropzoneId);
     if (dropzoneComponents === undefined) return;
 
-    const targetIndex = getTargetIndex(target, dropzoneComponents.length);
+    const targetIndex = getTargetIndex(event.operation, dropzoneComponents);
     if (targetIndex === undefined) return;
 
     if (isNewComponent) {
