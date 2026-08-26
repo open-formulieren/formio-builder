@@ -1,4 +1,5 @@
 import type {Data} from '@dnd-kit/abstract';
+import {SortableKeyboardPlugin} from '@dnd-kit/dom/sortable';
 import {useSortable} from '@dnd-kit/react/sortable';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
@@ -6,7 +7,7 @@ import React from 'react';
 
 import ComponentControls from './ComponentControls';
 import './SortableItem.scss';
-import {useDropzoneContext} from './context';
+import {SortableItemContext, useDropzoneContext, useSortableItemContext} from './context';
 
 export interface SortableItemData extends Data {
   component: AnyComponentSchema;
@@ -29,14 +30,17 @@ const SortableItem: React.FC<SortableItemProps> = ({
   children,
 }) => {
   const {collisionPriority} = useDropzoneContext();
+  const {isDragging: isDraggingParent} = useSortableItemContext();
   const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
     group: groupName,
     collisionPriority,
+    disabled: isDraggingParent,
     data: {
       component,
     },
+    plugins: [SortableKeyboardPlugin],
   });
   return (
     <SortableItemView
@@ -48,7 +52,9 @@ const SortableItem: React.FC<SortableItemProps> = ({
       component={component}
       showControls={hasControls && !isDragging}
     >
-      {children}
+      <SortableItemContext.Provider value={{isDragging: isDragging || isDraggingParent}}>
+        {children}
+      </SortableItemContext.Provider>
     </SortableItemView>
   );
 };
@@ -68,6 +74,7 @@ const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
         ref={ref}
         className={clsx('offb-dnd-sortable-item-view', className)}
         data-testid={testId}
+        id={`sortable-item-${component.id}`}
       >
         {showControls && <ComponentControls component={component} />}
         {children}

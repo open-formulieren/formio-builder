@@ -1,15 +1,16 @@
 import type {Data} from '@dnd-kit/abstract';
 import type {Draggable, Droppable} from '@dnd-kit/dom';
-import type {DragEndEvent, DragOverEvent} from '@dnd-kit/react';
+import type {DragEndEvent, DragMoveEvent} from '@dnd-kit/react';
 import {DragDropProvider, DragOverlay} from '@dnd-kit/react';
 import type {AnyComponentSchema} from '@open-formulieren/types';
 import {produce} from 'immer';
-import {useCallback, useContext, useMemo, useState} from 'react';
+import {useCallback, useContext, useMemo, useRef, useState} from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
 
 import ComponentEditForm from '@/components/ComponentEditForm';
 import Modal from '@/components/Modal';
 import {SortableItemView} from '@/components/designer/dragDrop';
+import {SortableItemContext} from '@/components/designer/dragDrop/context';
 import {
   assertNoPlaceholders,
   createComponent,
@@ -66,6 +67,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     isNew: boolean;
   } | null>(null);
   const {uniquifyKey} = useContext(BuilderContext);
+  const previousDragPositionRef = useRef<{index: number; dropzone: string} | null>(null);
 
   const movePlaceholder = (
     index: number,
@@ -92,7 +94,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     setItems(newItems);
   };
 
-  const handleDragOver = (event: DragOverEvent) => {
+  const handleDragMove = (event: DragMoveEvent) => {
     const {source, target} = event.operation;
     const sourceData = getData(source);
     const isNewComponent: boolean = sourceData?.fromSidebar || false;
@@ -103,6 +105,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
         removePlaceholder(draftItems);
       });
       setItems(newItems);
+      previousDragPositionRef.current = null;
       return;
     }
 
@@ -112,20 +115,34 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     const dropzoneComponents = getDropzoneComponents(items, dropzoneId);
     if (dropzoneComponents === undefined) return;
 
-    const targetIndex = getTargetIndex(target, dropzoneComponents.length);
+    const targetIndex = getTargetIndex(event.operation, dropzoneComponents);
     if (targetIndex === undefined) return;
 
+    if (
+      previousDragPositionRef.current &&
+      previousDragPositionRef.current.index === targetIndex &&
+      previousDragPositionRef.current.dropzone === dropzoneId
+    ) {
+      // Nothing changed
+      return;
+    }
+
+    // Move the dragged item to the new position.
     if (isNewComponent) {
       movePlaceholder(targetIndex, dropzoneId, sourceData.componentType);
     } else if (sourceData?.component) {
       moveComponent(targetIndex, dropzoneId, sourceData.component);
     }
+
+    // Update the previous drag position.
+    previousDragPositionRef.current = {index: targetIndex, dropzone: dropzoneId};
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const {source, target} = event.operation;
     const sourceData = getData(source);
     const isNewComponent: boolean = sourceData?.fromSidebar;
+    previousDragPositionRef.current = null;
 
     // When moving an existing component, we simply persist the items state.
     if (!isNewComponent) {
@@ -233,14 +250,16 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
 
   return (
     <DesignerContext.Provider value={designerContext}>
-      <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+      <DragDropProvider onDragMove={handleDragMove} onDragEnd={handleDragEnd}>
         <DragOverlay dropAnimation={null}>
           {source =>
             source.data?.fromSidebar ? (
               <PlaceholderDragOverlay componentType={source.data.componentType} />
             ) : (
               <SortableItemView component={source.data.component} showControls>
-                <ComponentPreview component={source.data.component} />
+                <SortableItemContext.Provider value={{isDragging: true}}>
+                  <ComponentPreview component={source.data.component} />
+                </SortableItemContext.Provider>
               </SortableItemView>
             )
           }
