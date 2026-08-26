@@ -3,7 +3,7 @@ import type {SignatureValue} from '@open-formulieren/types/dist/components/signa
 import {useFormikContext} from 'formik';
 import {debounce} from 'lodash';
 import {useLayoutEffect, useRef} from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import {SignatureCanvas} from 'react-signature-canvas';
 
 import {Component, FAQItems} from '@/components/formio';
 
