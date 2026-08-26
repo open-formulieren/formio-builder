@@ -1,5 +1,27 @@
 # Changes
 
+## 1.4.0 (2026-08-26)
+
+Feature and bugfix release.
+
+**New features**
+
+- [`OF#6570`][OF#6570] Added support for passing a default value for `validate.required` to the top
+  level `FormBuilder` component.
+
+**Bugfixes**
+
+- [`#296`][#296] Fixed a number of drag-and-drop interactions not working as expected.
+- [`OF#6573`][OF#6573] Fixed the signature preview crashing when integrated in the backend
+  webpack-based bundler toolchain.
+- [`OF#6575`][OF#6575] Fixed the incorrect (empty) default values for the `time` component `minTime`
+  and `maxTime` validation properties.
+
+[OF#6570]: https://github.com/open-formulieren/open-forms/issues/6570
+[OF#6573]: https://github.com/open-formulieren/open-forms/issues/6573
+[OF#6575]: https://github.com/open-formulieren/open-forms/issues/6575
+[#296]: https://github.com/open-formulieren/formio-builder/issues/296
+
 ## 1.3.0 (2026-08-21)
 
 Small feature and bugfix release.
