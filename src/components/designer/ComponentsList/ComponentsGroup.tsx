@@ -46,7 +46,7 @@ const ComponentsGroup: React.FC<ComponentsGroupProps> = ({
         <ul className="list-unstyled mb-0 offb-component-group__component-list">
           {componentConfigurations.map((component, index) => (
             <li key={`${component.schema.key}-${component.schema.type}-${index}`}>
-              <DraggableMenuItem type={component.schema.type}>
+              <DraggableMenuItem schema={component.schema}>
                 <span
                   className={clsx(
                     'btn',

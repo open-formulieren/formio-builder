@@ -34,6 +34,9 @@ import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
 import type {ComponentDefinition, ComponentEvent, ComponentPlaceholder} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
+// TODO: improve type safety - now any operation on `data` has the any type. Instead,
+// this should be a type assertion that helps narrowing down the type (we can make data
+// a discriminated union between SortableItemData and DraggableMenuItemData).
 const getData = (
   prop: Draggable<SortableItemData | DraggableMenuItemData | Data> | Droppable | null
 ): SortableItemData | DraggableMenuItemData | Data => prop?.data ?? {};
@@ -155,7 +158,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     if (!target) return;
 
     // Create the new component and open it in the edit modal.
-    const newComponent = createComponent(sourceData.componentType, uniquifyKey, intl);
+    const newComponent = createComponent(sourceData.schema, uniquifyKey, intl);
     openModal(newComponent, true);
   };
 

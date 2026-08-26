@@ -36,13 +36,21 @@ export interface ComponentPlaceholder {
 }
 
 /**
+ * A schema that may be missing some normally required properties. Intended to use as
+ * layer on top of a valid schema.
+ *
+ * The `type` key is required to enforce type safety.
+ */
+export type PartialSchema = Partial<AnyComponentSchema> & {type: AnyComponentSchema['type']};
+
+/**
  * Configuration for a custom preset component.
  */
 export type PresetComponentConfiguration = {
   key: string;
   label: string;
   icon: string;
-  schema: AnyComponentSchema;
+  schema: PartialSchema;
 };
 
 /**
