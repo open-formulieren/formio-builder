@@ -149,8 +149,8 @@ EditForm.defaultValues = {
   validate: {
     required: false,
     plugins: [],
-    minTime: '',
-    maxTime: '',
+    minTime: null,
+    maxTime: null,
   },
   translatedErrors: {},
   openForms: {
