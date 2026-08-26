@@ -121,8 +121,13 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^11.0.1",
+    "@dnd-kit/abstract": "^0.4.0",
+    "@dnd-kit/collision": "^0.4.0",
+    "@dnd-kit/dom": "^0.4.0",
+    "@dnd-kit/geometry": "^0.4.0",
     "@dnd-kit/helpers": "^0.4.0",
     "@dnd-kit/react": "^0.4.0",
+    "@dnd-kit/state": "^0.4.0",
     "@floating-ui/react": "^0.27.5",
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.2.0",
