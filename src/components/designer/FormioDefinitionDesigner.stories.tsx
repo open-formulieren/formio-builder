@@ -15,7 +15,7 @@ import {BuilderContextDecorator, overrideWindowConfirm, withFormik} from '@/sb-d
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
 import type {FormioDefinitionDesignerProps} from './FormioDefinitionDesigner';
 
-const dragTo = async (source: HTMLElement, target: HTMLElement) => {
+const dragTo = async (source: HTMLElement, target: HTMLElement, dropzone: HTMLElement) => {
   // To drag the dnd elements, we need the actual page coordinates.
   const sourceRect = source.getBoundingClientRect();
   const targetRect = target.getBoundingClientRect();
@@ -27,26 +27,40 @@ const dragTo = async (source: HTMLElement, target: HTMLElement) => {
   const targetY = targetRect.top + targetRect.height / 2;
 
   // Start a drag by clicking the left mouse button and moving the mouse on the target.
-  await userEvent.pointer([
-    {
-      keys: '[MouseLeft>]',
-      target: source,
-      coords: {clientX: sourceX, clientY: sourceY},
+  await userEvent.pointer({
+    keys: '[MouseLeft>]',
+    target: source,
+    coords: {
+      clientX: sourceX,
+      clientY: sourceY,
     },
-    {
-      pointerName: 'mouse',
-      coords: {clientX: sourceX + 10, clientY: sourceY + 10},
+  });
+
+  // Activate the drag.
+  await userEvent.pointer({
+    pointerName: 'mouse',
+    coords: {
+      clientX: sourceX + 10,
+      clientY: sourceY + 10,
     },
-    {
-      pointerName: 'mouse',
-      target,
-      coords: {clientX: targetX, clientY: targetY},
-    },
-  ]);
+  });
+
+  // Move mouse to the target to trigger the drag.
+  await userEvent.pointer({
+    pointerName: 'mouse',
+    target: dropzone,
+    coords: {clientX: targetX / 2, clientY: targetY / 2},
+  });
+
+  await userEvent.pointer({
+    pointerName: 'mouse',
+    target: dropzone,
+    coords: {clientX: targetX, clientY: targetY},
+  });
 
   // Wait for the placeholder to be rendered in the dropzone.
   await waitFor(() => {
-    expect(within(target).getByTestId('component-placeholder')).toBeInTheDocument();
+    expect(within(dropzone).getByTestId('component-placeholder')).toBeInTheDocument();
   });
 
   // Click the left mouse button again to stop dragging/drop the component.
@@ -127,7 +141,7 @@ export const WithValidateRequiredDefault: Story = {
       const newContentField = await within(componentsList).findByRole('button', {
         name: 'Content',
       });
-      await dragTo(newContentField, dropzone);
+      await dragTo(newContentField, dropzone, dropzone);
 
       // The edit modal for the textarea component should be opened
       const modal = await canvas.findByRole('dialog');
@@ -142,7 +156,7 @@ export const WithValidateRequiredDefault: Story = {
       const newTextField = await within(componentsList).findByRole('button', {
         name: 'Textfield',
       });
-      await dragTo(newTextField, dropzone);
+      await dragTo(newTextField, dropzone, dropzone);
 
       // The edit modal for the textarea component should be opened
       const modal = await canvas.findByRole('dialog');
@@ -208,7 +222,7 @@ export const AddComponentToDropzone: Story = {
       within(dropzone).getByText('Drag a component in the form and release the mouse button.')
     ).toBeVisible();
 
-    await dragTo(textareaDraggableItem, dropzone);
+    await dragTo(textareaDraggableItem, dropzone, dropzone);
 
     // The edit modal for the textarea component should be opened
     const modal = canvas.getByRole('dialog');
@@ -242,6 +256,84 @@ export const AddComponentToDropzone: Story = {
         within(dropzone).queryByText('Drag a component in the form and release the mouse button.')
       ).not.toBeInTheDocument();
     });
+  },
+};
+
+export const AddComponentBetweenComponents: Story = {
+  args: {
+    initialComponents: [
+      {
+        type: 'textfield',
+        id: 'textfield',
+        key: 'textfieldPreview',
+        label: 'Textfield preview',
+        description: 'A preview of the textfield Formio component',
+        tooltip: 'A preview of the textfield Formio component',
+        defaultValue: 'Default value',
+        hidden: false,
+        placeholder: 'Sample placeholder',
+        showCharCount: true,
+      } satisfies TextFieldComponentSchema,
+      {
+        type: 'textfield',
+        id: 'textfield2',
+        key: 'textfieldPreview2',
+        label: 'A second textfield preview',
+        description: 'A preview of the textfield Formio component',
+        tooltip: 'A preview of the textfield Formio component',
+        defaultValue: 'Default value',
+        hidden: false,
+        placeholder: 'Sample placeholder',
+        showCharCount: true,
+      } satisfies TextFieldComponentSchema,
+    ],
+  },
+  play: async ({canvasElement, args}) => {
+    const canvas = within(canvasElement);
+    const basicComponentsList = canvas.getByTestId('component-group--basic');
+    const textareaDraggableItem = await within(basicComponentsList).findByRole('button', {
+      name: 'Textarea',
+    });
+    const dropzone = canvas.getByTestId('main-dropzone');
+    const textfield2 = canvas.getByTestId('sortable-item-textfield2');
+
+    await dragTo(textareaDraggableItem, textfield2, dropzone);
+
+    // The edit modal for the textarea component should be opened
+    const modal = canvas.getByRole('dialog');
+    await waitFor(() => {
+      expect(modal).toBeVisible();
+    });
+
+    // Save the component
+    await userEvent.click(within(modal).getByRole('button', {name: 'Save'}));
+    expect(args.onChange).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({
+          type: 'textfield',
+          id: 'textfield',
+          key: 'textfieldPreview',
+          label: 'Textfield preview',
+        }),
+        expect.objectContaining({
+          key: 'textarea',
+          label: 'Textarea',
+          type: 'textarea',
+        }),
+        expect.objectContaining({
+          type: 'textfield',
+          id: 'textfield2',
+          key: 'textfieldPreview2',
+          label: 'A second textfield preview',
+        }),
+      ],
+      expect.objectContaining({
+        type: 'created',
+        // Storybook has a hard time differentiating multiple similar objects when using
+        // `expect.objectContaining`. So let's stick to the poor man's `expect.anything`.
+        component: expect.anything(),
+      })
+    );
   },
 };
 
