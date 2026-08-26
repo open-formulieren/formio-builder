@@ -26,6 +26,12 @@ const dragTo = async (source: HTMLElement, target: HTMLElement, dropzone: HTMLEl
   const targetX = targetRect.left + targetRect.width / 2;
   const targetY = targetRect.top + targetRect.height / 2;
 
+  const move = (from: number, to: number, progress: number): number =>
+    from + (to - from) * progress;
+
+  const waitForDndUpdate = (): Promise<void> =>
+    new Promise(resolve => requestAnimationFrame(() => resolve()));
+
   // Start a drag by clicking the left mouse button and moving the mouse on the target.
   await userEvent.pointer({
     keys: '[MouseLeft>]',
@@ -45,12 +51,24 @@ const dragTo = async (source: HTMLElement, target: HTMLElement, dropzone: HTMLEl
     },
   });
 
+  await waitForDndUpdate();
+
   // Move mouse to the target to trigger the drag.
   await userEvent.pointer({
     pointerName: 'mouse',
     target: dropzone,
-    coords: {clientX: targetX / 2, clientY: targetY / 2},
+    coords: {clientX: move(sourceX, targetX, 0.33), clientY: move(sourceY, targetY, 0.33)},
   });
+
+  await waitForDndUpdate();
+
+  await userEvent.pointer({
+    pointerName: 'mouse',
+    target: dropzone,
+    coords: {clientX: move(sourceX, targetX, 0.66), clientY: move(sourceY, targetY, 0.66)},
+  });
+
+  await waitForDndUpdate();
 
   await userEvent.pointer({
     pointerName: 'mouse',
@@ -58,10 +76,12 @@ const dragTo = async (source: HTMLElement, target: HTMLElement, dropzone: HTMLEl
     coords: {clientX: targetX, clientY: targetY},
   });
 
+  await waitForDndUpdate();
+
   // Wait for the placeholder to be rendered in the dropzone.
-  await waitFor(() => {
-    expect(within(dropzone).getByTestId('component-placeholder')).toBeInTheDocument();
-  });
+  const placeholder = await within(dropzone).findByTestId('component-placeholder');
+
+  await expect(placeholder).toBeInTheDocument();
 
   // Click the left mouse button again to stop dragging/drop the component.
   await userEvent.pointer([
@@ -295,9 +315,9 @@ export const AddComponentBetweenComponents: Story = {
       name: 'Textarea',
     });
     const dropzone = canvas.getByTestId('main-dropzone');
-    const textfield2 = canvas.getByTestId('sortable-item-textfield2');
+    const textfield = canvas.getByTestId('sortable-item-textfield');
 
-    await dragTo(textareaDraggableItem, textfield2, dropzone);
+    await dragTo(textareaDraggableItem, textfield, dropzone);
 
     // The edit modal for the textarea component should be opened
     const modal = canvas.getByRole('dialog');
