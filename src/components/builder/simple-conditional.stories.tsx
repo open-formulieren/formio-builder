@@ -1,4 +1,8 @@
-import type {AnyComponentSchema} from '@open-formulieren/types';
+import type {
+  AnyComponentSchema,
+  EditGridComponentSchema,
+  TextFieldComponentSchema,
+} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
@@ -134,5 +138,45 @@ export const SelectingACurrencyComponent: Story = {
 
     expect(eqInput).not.toBeNull();
     expect(eqInput!.type).toEqual('number');
+  },
+};
+
+export const ConditionalInsideEditGrid: Story = {
+  args: {
+    componentTree: [
+      {
+        id: 'editgrid',
+        type: 'editgrid',
+        key: 'editgrid',
+        label: 'Repeating group',
+        components: [
+          {
+            id: 'textfield',
+            key: 'textfield',
+            type: 'textfield',
+            label: 'Nested textfield',
+          } satisfies TextFieldComponentSchema,
+        ],
+        disableAddingRemovingRows: false,
+        groupLabel: 'Item',
+      } satisfies EditGridComponentSchema,
+    ],
+  },
+
+  play: async ({canvasElement}) => {
+    const canvas = within(canvasElement);
+
+    const showInput = canvas.getByLabelText('This component should display');
+    await userEvent.click(showInput);
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.click(canvas.getByText('True'));
+
+    const whenInput = canvas.getByLabelText('When the form component');
+    await userEvent.click(whenInput);
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.click(canvas.getByText('Nested textfield (editgrid.textfield)'));
+
+    const eqInput = await canvas.findByLabelText<HTMLInputElement>('Has the value');
+    expect(eqInput).toBeVisible();
   },
 };

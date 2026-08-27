@@ -15,7 +15,7 @@ import {hasOwnProperty} from '@/types';
 import {Panel, Select} from '../formio';
 import ComponentSelect from './component-select';
 
-export const ComparisonValueInput: React.FC = () => {
+const ComparisonValueInput: React.FC = () => {
   const {getFormComponents} = useContext(BuilderContext);
   const {values, setFieldValue} = useFormikContext<Conditional>();
 

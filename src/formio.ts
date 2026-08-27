@@ -57,8 +57,8 @@ export const findComponent = (
   componentDefinitions: AnyComponentSchema[],
   componentKey: string
 ): AnyComponentSchema | null => {
-  for (const {component} of iterComponents(componentDefinitions)) {
-    if (!isPlaceholder(component) && component.key === componentKey) {
+  for (const {component, dataPath} of iterComponents(componentDefinitions)) {
+    if (!isPlaceholder(component) && dataPath === componentKey) {
       return component;
     }
   }
