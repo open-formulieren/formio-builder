@@ -1,5 +1,16 @@
 # Changes
 
+## 1.4.1 (2026-08-27)
+
+Bugfix release.
+
+- [`OF#6589`][OF#6589] Fixed preset components not copying over their preset configuration.
+- [`OF#6590`][OF#6590] Fixed simple conditional configuration inside editgrids not showing the `eq`
+  value input.
+
+[OF#6589]: https://github.com/open-formulieren/open-forms/issues/6589
+[OF#6590]: https://github.com/open-formulieren/open-forms/issues/6590
+
 ## 1.4.0 (2026-08-26)
 
 Feature and bugfix release.
