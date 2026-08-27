@@ -120,11 +120,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'fullName',
     icon: 'terminal',
     schema: {
+      type: 'textfield',
       label: 'Volledige naam',
       autocomplete: 'name',
-      type: 'textfield',
-      id: 'fullName',
-      key: 'fullName',
     },
   },
   {
@@ -132,11 +130,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'firstName',
     icon: 'terminal',
     schema: {
+      type: 'textfield',
       label: 'Voornaam',
       autocomplete: 'given-name',
-      type: 'textfield',
-      key: 'firstName',
-      id: 'firstName',
     },
   },
   {
@@ -144,11 +140,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'lastName',
     icon: 'terminal',
     schema: {
+      type: 'textfield',
       label: 'Achternaam',
       autocomplete: 'family-name',
-      type: 'textfield',
-      key: 'lastName',
-      id: 'lastName',
     },
   },
   {
@@ -156,11 +150,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'addressLine1',
     icon: 'home',
     schema: {
+      type: 'textfield',
       label: 'Adresregel 1',
       autocomplete: 'address-line1',
-      type: 'textfield',
-      key: 'addressLine1',
-      id: 'addressLine1',
     },
   },
   {
@@ -168,11 +160,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'addressLine2',
     icon: 'home',
     schema: {
+      type: 'textfield',
       label: 'Adresregel 2',
       autocomplete: 'address-line2',
-      type: 'textfield',
-      key: 'addressLine2',
-      id: 'addressLine2',
     },
   },
   {
@@ -180,11 +170,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'addressLine3',
     icon: 'home',
     schema: {
+      type: 'textfield',
       label: 'Adresregel 3',
       autocomplete: 'address-line3',
-      type: 'textfield',
-      key: 'addressLine3',
-      id: 'addressLine3',
     },
   },
   {
@@ -192,11 +180,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'email',
     icon: 'at',
     schema: {
+      type: 'email',
       label: 'E-mailadres',
       autocomplete: 'email',
-      key: 'email',
-      type: 'email',
-      id: 'email',
     },
   },
   {
@@ -204,11 +190,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'phoneNumber',
     icon: 'phone-square',
     schema: {
+      type: 'phoneNumber',
       label: 'Telefoonnummer',
       autocomplete: 'tel',
-      id: 'phoneNumber',
-      key: 'phoneNumber',
-      type: 'phoneNumber',
     },
   },
   {
@@ -216,11 +200,9 @@ export const FORM_DESIGNER_PRESETS: PresetComponentConfiguration[] = [
     key: 'url',
     icon: 'link',
     schema: {
-      label: 'Website',
-      id: 'url',
-      autocomplete: 'url',
       type: 'textfield',
-      key: 'url',
+      label: 'Website',
+      autocomplete: 'url',
     },
   },
 ];

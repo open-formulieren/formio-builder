@@ -8,11 +8,13 @@ import ComponentsGroup from './ComponentsGroup';
 import './ComponentsList.scss';
 import {
   FORM_DESIGNER_GROUP_LABELS,
-  FORM_DESIGNER_PRESETS,
   FORM_TYPE_FORM_DESIGNER_GROUPS,
   FORM_TYPE_USE_PRESETS,
 } from './constants';
-import {normalizeComponentConfiguration} from './normalizeComponentConfiguration';
+import {
+  getFullyQualifiedPresetConfiguration,
+  normalizeComponentConfiguration,
+} from './normalizeComponentConfiguration';
 
 const ComponentsList: React.FC = () => {
   const {formType} = useContext(BuilderContext);
@@ -34,7 +36,7 @@ const ComponentsList: React.FC = () => {
       // Add the preset group as last.
       normalizedGroups.push({
         groupName: 'preset',
-        components: FORM_DESIGNER_PRESETS,
+        components: getFullyQualifiedPresetConfiguration(),
       });
     }
     return normalizedGroups;

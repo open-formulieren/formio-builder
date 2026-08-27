@@ -4,22 +4,23 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 import {useId} from 'react';
 
 export interface DraggableMenuItemData extends Data {
-  componentType: AnyComponentSchema['type'];
+  schema: AnyComponentSchema;
   fromSidebar: true;
 }
 
 interface DraggableMenuItemProps extends React.PropsWithChildren {
-  type: AnyComponentSchema['type'];
+  schema: AnyComponentSchema;
 }
 
-const DraggableMenuItem: React.FC<DraggableMenuItemProps> = ({type, children}) => {
+const DraggableMenuItem: React.FC<DraggableMenuItemProps> = ({schema, children}) => {
   const id = useId();
 
   const {ref} = useDraggable<DraggableMenuItemData>({
     id,
     data: {
-      componentType: type,
+      componentType: schema.type,
       fromSidebar: true,
+      schema,
     },
   });
 

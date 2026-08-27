@@ -49,28 +49,32 @@ const findDropzoneComponentsByParentReference = (
 };
 
 /**
- * Create a new component with a unique key for the given component type.
+ * Create a new component with a unique key for the given component schema.
  *
  * The componentDefinitions are used to create a truly unique key.
+ *
+ * @param schema - A fully preconfigured component schema, either from the component-specific
+ *                 defaults, or a schema from the defaults with overrides from the presets.
+ * @param uniquifyKey - Callback function that ensures the `key` candidate is made unique in
+ *                      the whole form (definition) namespace.
  */
 export const createComponent = <S extends AnyComponentSchema>(
-  componentType: S['type'],
+  schema: S,
   uniquifyKey: (key: string) => string,
   intl: IntlShape
 ): S => {
-  const {edit, formDesigner} = getRegistryEntry(componentType);
-  const label = intl.formatMessage(formDesigner.label);
-
+  const {formDesigner} = getRegistryEntry(schema.type);
+  const defaultLabel = intl.formatMessage(formDesigner.label);
+  const hasLabel = hasOwnProperty(schema, 'label');
+  const label = (hasLabel ? schema.label : '') || defaultLabel;
   // Define component with their editor default values, and some generic defaults.
-  return {
-    ...edit.defaultValues,
+  const updatedSchema: S = {
+    ...schema,
     id: window.crypto.randomUUID(),
-    type: componentType,
     key: uniquifyKey(camelCase(label)),
-    ...(hasOwnProperty(edit.defaultValues, 'label') ? {label} : {}),
-    // type cast necessary because the discriminated union doesn't narrow and
-    // getRegistryEntry doesn't narrow either, essentially returning AnyComponentSchema
-  } as S;
+    ...(hasLabel ? {label} : {}),
+  };
+  return updatedSchema;
 };
 
 /**
