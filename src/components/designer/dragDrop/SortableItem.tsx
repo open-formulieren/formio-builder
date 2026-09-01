@@ -43,19 +43,21 @@ const SortableItem: React.FC<SortableItemProps> = ({
     plugins: [SortableKeyboardPlugin],
   });
   return (
-    <SortableItemView
-      ref={ref}
-      testId={`sortable-item-${id}`}
-      className={clsx('offb-dnd-sortable-item', {
-        'offb-dnd-sortable-item--is-dragging': isDragging,
-      })}
-      component={component}
-      showControls={hasControls && !isDragging}
+    <SortableItemContext.Provider
+      value={{isDragging: isDragging || isDraggingParent, index, dropzoneId}}
     >
-      <SortableItemContext.Provider value={{isDragging: isDragging || isDraggingParent}}>
+      <SortableItemView
+        ref={ref}
+        testId={`sortable-item-${id}`}
+        className={clsx('offb-dnd-sortable-item', {
+          'offb-dnd-sortable-item--is-dragging': isDragging,
+        })}
+        component={component}
+        showControls={hasControls && !isDragging}
+      >
         {children}
-      </SortableItemContext.Provider>
-    </SortableItemView>
+      </SortableItemView>
+    </SortableItemContext.Provider>
   );
 };
 

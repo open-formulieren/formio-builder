@@ -117,11 +117,15 @@ BuilderContext.displayName = 'BuilderContext';
  */
 export interface DesignerContextType {
   editComponent: (component: AnyComponentSchema) => void;
+  copyComponent: (component: AnyComponentSchema) => void;
+  pasteComponent: (index: number, dropzoneId: string) => void;
   deleteComponent: (component: AnyComponentSchema) => void;
 }
 
 const DesignerContext = React.createContext<DesignerContextType>({
   editComponent: () => {},
+  copyComponent: () => {},
+  pasteComponent: () => {},
   deleteComponent: () => {},
 });
 
