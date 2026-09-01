@@ -20,9 +20,11 @@ import {
   removePlaceholder,
   replaceComponent,
   replacePlaceholderWithComponent,
+  uniquifyComponent,
 } from '@/components/designer/dragDrop/utils/components';
 import {getTargetDropzoneId, getTargetIndex} from '@/components/designer/dragDrop/utils/dragTarget';
 import {MAIN_DROPZONE_ID} from '@/components/designer/dragDrop/utils/dropzone';
+import {useComponentLocalStorage} from '@/components/designer/useComponentLocalStorage';
 import type {DesignerContextType} from '@/context';
 import {BuilderContext, DesignerContext} from '@/context';
 import {getRegistryEntry} from '@/registry';
@@ -71,6 +73,7 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
   } | null>(null);
   const {uniquifyKey} = useContext(BuilderContext);
   const previousDragPositionRef = useRef<{index: number; dropzone: string} | null>(null);
+  const [, setComponentLocalStorage] = useComponentLocalStorage();
 
   const movePlaceholder = (
     index: number,
@@ -243,12 +246,41 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
     setItems(newItems);
   }, [items]);
 
+  /**
+   * Add the given component inside the specified dropzone, on the specified index.
+   */
+  const addComponent = useCallback(
+    (component: AnyComponentSchema, index: number, dropzoneId: string) => {
+      // Ensure that the component id and key are unique.
+      const uniqueComponent = uniquifyComponent(component, uniquifyKey);
+
+      // Add the component to the items state.
+      const newItems = produce(items, draftItems => {
+        insertComponentDefinition(index, draftItems, dropzoneId, uniqueComponent);
+      });
+      setItems(newItems);
+
+      // Callback to a parent component to persist the new state.
+      assertNoPlaceholders(newItems);
+      onChange(newItems, {
+        type: 'created',
+        component: uniqueComponent,
+      });
+
+      // After pasting, clear the component local storage.
+      setComponentLocalStorage(undefined);
+    },
+    [items, onChange, setComponentLocalStorage, uniquifyKey]
+  );
+
   const designerContext = useMemo<DesignerContextType>(
     () => ({
       editComponent: openModal,
+      copyComponent: component => setComponentLocalStorage(component),
+      addComponent,
       deleteComponent,
     }),
-    [openModal, deleteComponent]
+    [openModal, setComponentLocalStorage, addComponent, deleteComponent]
   );
 
   return (
@@ -259,11 +291,11 @@ const FormioDefinitionDesigner: React.FC<FormioDefinitionDesignerProps> = ({
             source.data?.fromSidebar ? (
               <PlaceholderDragOverlay componentType={source.data.componentType} />
             ) : (
-              <SortableItemView component={source.data.component} showControls>
-                <SortableItemContext.Provider value={{isDragging: true}}>
+              <SortableItemContext.Provider value={{isDragging: true}}>
+                <SortableItemView component={source.data.component} showControls>
                   <ComponentPreview component={source.data.component} />
-                </SortableItemContext.Provider>
-              </SortableItemView>
+                </SortableItemView>
+              </SortableItemContext.Provider>
             )
           }
         </DragOverlay>

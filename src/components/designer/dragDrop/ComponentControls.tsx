@@ -4,6 +4,8 @@ import {useContext} from 'react';
 import type {MessageDescriptor} from 'react-intl';
 import {FormattedMessage, defineMessages, useIntl} from 'react-intl';
 
+import {useSortableItemContext} from '@/components/designer/dragDrop/context';
+import {useComponentLocalStorage} from '@/components/designer/useComponentLocalStorage';
 import {DesignerContext} from '@/context';
 
 import './ComponentControls.scss';
@@ -16,6 +18,14 @@ const COMPONENT_CONTROL_LABELS = defineMessages({
   editComponent: {
     description: 'Form designer preview edit component button title',
     defaultMessage: 'Edit component',
+  },
+  copyComponent: {
+    description: 'Form designer preview copy component button title',
+    defaultMessage: 'Copy component',
+  },
+  pasteBelowComponent: {
+    description: 'Form designer preview paste component button title',
+    defaultMessage: 'Paste below component',
   },
   deleteComponent: {
     description: 'Form designer preview delete component button title',
@@ -36,6 +46,8 @@ const ComponentControls: React.FC<ComponentControlsProps> = ({component}) => {
       })}
     >
       <EditControl component={component} />
+      <CopyControl component={component} />
+      <PasteBelowControl />
       <DeleteControl component={component} />
     </div>
   );
@@ -50,6 +62,41 @@ const EditControl: React.FC<ComponentControlsProps> = ({component}) => {
       icon="cog"
       label={COMPONENT_CONTROL_LABELS.editComponent}
       onClick={() => editComponent(component)}
+    />
+  );
+};
+
+const CopyControl: React.FC<ComponentControlsProps> = ({component}) => {
+  const {copyComponent} = useContext(DesignerContext);
+
+  return (
+    <ComponentControl
+      className="btn-light"
+      icon="copy"
+      label={COMPONENT_CONTROL_LABELS.copyComponent}
+      onClick={() => copyComponent(component)}
+    />
+  );
+};
+
+const PasteBelowControl: React.FC = () => {
+  const {index, dropzoneId} = useSortableItemContext();
+  const {addComponent} = useContext(DesignerContext);
+  const [componentLocalStorage] = useComponentLocalStorage();
+
+  if (componentLocalStorage === undefined) return null;
+
+  return (
+    <ComponentControl
+      className="btn-light"
+      icon="download"
+      label={COMPONENT_CONTROL_LABELS.pasteBelowComponent}
+      onClick={() => {
+        if (index != undefined && dropzoneId) {
+          // Paste the component below this component
+          addComponent(componentLocalStorage, index + 1, dropzoneId);
+        }
+      }}
     />
   );
 };

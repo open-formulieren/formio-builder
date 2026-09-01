@@ -78,6 +78,26 @@ export const createComponent = <S extends AnyComponentSchema>(
 };
 
 /**
+ * Uniquify a component by setting a unique `id` and `key` to the component and its children.
+ *
+ * @param component - The component to uniquify.
+ * @param uniquifyKey - Callback function that ensures the `key` candidate is made unique in
+ *                      the whole form (definition) namespace.
+ */
+export const uniquifyComponent = <S extends AnyComponentSchema>(
+  component: S,
+  uniquifyKey: (key: string) => string
+): S => {
+  for (const {component: innerComponent} of iterComponents([component])) {
+    if (isPlaceholder(innerComponent)) continue;
+
+    innerComponent.id = window.crypto.randomUUID();
+    innerComponent.key = uniquifyKey(innerComponent.key);
+  }
+  return component;
+};
+
+/**
  * Remove the placeholder from the components.
  */
 export const removePlaceholder = (components: ComponentDefinition[]) => {
