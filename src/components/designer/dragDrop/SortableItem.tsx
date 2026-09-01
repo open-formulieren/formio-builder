@@ -16,7 +16,7 @@ export interface SortableItemData extends Data {
 interface SortableItemProps extends React.PropsWithChildren {
   id: string;
   index: number;
-  groupName: string;
+  dropzoneId: string;
   component: AnyComponentSchema;
   hasControls?: boolean;
 }
@@ -24,7 +24,7 @@ interface SortableItemProps extends React.PropsWithChildren {
 const SortableItem: React.FC<SortableItemProps> = ({
   id,
   index,
-  groupName,
+  dropzoneId,
   component,
   hasControls = true,
   children,
@@ -34,7 +34,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
   const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
-    group: groupName,
+    group: dropzoneId,
     collisionPriority,
     disabled: isDraggingParent,
     data: {
