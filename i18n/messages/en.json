@@ -639,6 +639,11 @@
     "description": "Label for FAQ item content",
     "originalDefault": "FAQ item {index} content"
   },
+  "H0cQbc": {
+    "defaultMessage": "Paste below component",
+    "description": "Form designer preview paste component button title",
+    "originalDefault": "Paste below component"
+  },
   "H4sILo": {
     "defaultMessage": "Derive city",
     "description": "Label for 'deriveCity' builder field",
@@ -653,6 +658,11 @@
     "defaultMessage": "Read only",
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
+  },
+  "HXxrNu": {
+    "defaultMessage": "Component controls",
+    "description": "Form designer preview component controls accessible label",
+    "originalDefault": "Component controls"
   },
   "I7lkuw": {
     "defaultMessage": "Child 1",
@@ -708,6 +718,11 @@
     "defaultMessage": "Unfortunately something went wrong!",
     "description": "Generic error message",
     "originalDefault": "Unfortunately something went wrong!"
+  },
+  "KZSGP8": {
+    "defaultMessage": "Copy component",
+    "description": "Form designer preview copy component button title",
+    "originalDefault": "Copy component"
   },
   "Kdgpxf": {
     "defaultMessage": "Longitude coordinate of the initial center point of the map.",
