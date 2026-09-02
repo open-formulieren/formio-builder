@@ -7,6 +7,7 @@ import React from 'react';
 
 import ComponentControls from './ComponentControls';
 import './SortableItem.scss';
+import {collisionDetection} from './collisionDetection';
 import {SortableItemContext, useDropzoneContext, useSortableItemContext} from './context';
 
 export interface SortableItemData extends Data {
@@ -36,6 +37,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
     index,
     group: dropzoneId,
     collisionPriority,
+    collisionDetector: collisionDetection,
     disabled: isDraggingParent,
     data: {
       component,
