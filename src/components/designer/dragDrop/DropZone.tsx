@@ -1,5 +1,7 @@
 import {useDroppable} from '@dnd-kit/react';
 
+import {collisionDetection} from '@/components/designer/dragDrop/collisionDetection';
+
 import './DropZone.scss';
 import {DropzoneContext, useDropzoneContext, useSortableItemContext} from './context';
 
@@ -17,6 +19,7 @@ const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
   const {ref} = useDroppable({
     id,
     collisionPriority: collisionPriority,
+    collisionDetector: collisionDetection,
     disabled: isDragging,
   });
 

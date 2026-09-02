@@ -5,6 +5,8 @@ import type {AnyComponentSchema} from '@open-formulieren/types';
 import {clsx} from 'clsx';
 import React from 'react';
 
+import {collisionDetection} from '@/components/designer/dragDrop/collisionDetection';
+
 import ComponentControls from './ComponentControls';
 import './SortableItem.scss';
 import {SortableItemContext, useDropzoneContext, useSortableItemContext} from './context';
@@ -36,6 +38,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
     index,
     group: groupName,
     collisionPriority,
+    collisionDetector: collisionDetection,
     disabled: isDraggingParent,
     data: {
       component,
