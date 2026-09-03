@@ -646,6 +646,11 @@
     "description": "Label for FAQ item content",
     "originalDefault": "FAQ item {index} content"
   },
+  "H0cQbc": {
+    "defaultMessage": "Plak hieronder",
+    "description": "Form designer preview paste component button title",
+    "originalDefault": "Paste below component"
+  },
   "H4sILo": {
     "defaultMessage": "Stad afleiden",
     "description": "Label for 'deriveCity' builder field",
@@ -661,6 +666,11 @@
     "defaultMessage": "Alleen-lezen",
     "description": "Label for 'ReadOnly' builder field",
     "originalDefault": "Read only"
+  },
+  "HXxrNu": {
+    "defaultMessage": "Component acties",
+    "description": "Form designer preview component controls accessible label",
+    "originalDefault": "Component controls"
   },
   "I7lkuw": {
     "defaultMessage": "Kind 1",
@@ -717,6 +727,11 @@
     "defaultMessage": "Er ging helaas iets fout!",
     "description": "Generic error message",
     "originalDefault": "Unfortunately something went wrong!"
+  },
+  "KZSGP8": {
+    "defaultMessage": "Kopiëren",
+    "description": "Form designer preview copy component button title",
+    "originalDefault": "Copy component"
   },
   "Kdgpxf": {
     "defaultMessage": "Longitudecoordinaat waarop de kaart gecentreerd wordt.",

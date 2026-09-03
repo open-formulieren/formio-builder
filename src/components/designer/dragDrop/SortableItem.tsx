@@ -16,7 +16,7 @@ export interface SortableItemData extends Data {
 interface SortableItemProps extends React.PropsWithChildren {
   id: string;
   index: number;
-  groupName: string;
+  dropzoneId: string;
   component: AnyComponentSchema;
   hasControls?: boolean;
 }
@@ -24,7 +24,7 @@ interface SortableItemProps extends React.PropsWithChildren {
 const SortableItem: React.FC<SortableItemProps> = ({
   id,
   index,
-  groupName,
+  dropzoneId,
   component,
   hasControls = true,
   children,
@@ -34,7 +34,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
   const {ref, isDragging} = useSortable<SortableItemData>({
     id,
     index,
-    group: groupName,
+    group: dropzoneId,
     collisionPriority,
     disabled: isDraggingParent,
     data: {
@@ -43,19 +43,21 @@ const SortableItem: React.FC<SortableItemProps> = ({
     plugins: [SortableKeyboardPlugin],
   });
   return (
-    <SortableItemView
-      ref={ref}
-      testId={`sortable-item-${id}`}
-      className={clsx('offb-dnd-sortable-item', {
-        'offb-dnd-sortable-item--is-dragging': isDragging,
-      })}
-      component={component}
-      showControls={hasControls && !isDragging}
+    <SortableItemContext.Provider
+      value={{isDragging: isDragging || isDraggingParent, index, dropzoneId}}
     >
-      <SortableItemContext.Provider value={{isDragging: isDragging || isDraggingParent}}>
+      <SortableItemView
+        ref={ref}
+        testId={`sortable-item-${id}`}
+        className={clsx('offb-dnd-sortable-item', {
+          'offb-dnd-sortable-item--is-dragging': isDragging,
+        })}
+        component={component}
+        showControls={hasControls && !isDragging}
+      >
         {children}
-      </SortableItemContext.Provider>
-    </SortableItemView>
+      </SortableItemView>
+    </SortableItemContext.Provider>
   );
 };
 

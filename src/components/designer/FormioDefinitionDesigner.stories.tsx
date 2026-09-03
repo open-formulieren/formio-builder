@@ -10,7 +10,12 @@ import type {Meta, StoryObj} from '@storybook/react-vite';
 import {useState} from 'react';
 import {expect, fn, userEvent, waitFor, within} from 'storybook/test';
 
-import {BuilderContextDecorator, overrideWindowConfirm, withFormik} from '@/sb-decorators';
+import {
+  BuilderContextDecorator,
+  clearLocalStorage,
+  overrideWindowConfirm,
+  withFormik,
+} from '@/sb-decorators';
 
 import FormioDefinitionDesigner from './FormioDefinitionDesigner';
 import type {FormioDefinitionDesignerProps} from './FormioDefinitionDesigner';
@@ -116,7 +121,7 @@ const StorybookFormioDefinitionDesigner = (props: FormioDefinitionDesignerProps)
 
 export default {
   title: 'Form designer/Form designer',
-  decorators: [withFormik, BuilderContextDecorator],
+  decorators: [withFormik, clearLocalStorage, BuilderContextDecorator],
   component: FormioDefinitionDesigner,
   render: StorybookFormioDefinitionDesigner,
   parameters: {
@@ -768,5 +773,215 @@ export const DeleteComponentWithChildrenFromEditModal: Story = {
     expect(
       canvas.getByText('Drag a component in the form and release the mouse button.')
     ).toBeVisible();
+  },
+};
+
+export const CopyAndPasteComponent: Story = {
+  args: {
+    initialComponents: [
+      {
+        id: 'textfield',
+        key: 'textfield',
+        type: 'textfield',
+        label: 'Textfield',
+      } satisfies TextFieldComponentSchema,
+    ],
+  },
+  parameters: {
+    builder: {
+      uniquifyKey: true,
+    },
+  },
+  play: async ({canvasElement, args, step}) => {
+    const canvas = within(canvasElement);
+
+    const textfieldComponent = canvas.getByTestId('sortable-item-textfield');
+    expect(textfieldComponent).toBeVisible();
+
+    step('Initial state', () => {
+      // Set focus on textfield, displaying the component controls
+      within(textfieldComponent).getByLabelText('Textfield').focus();
+      const textfieldControls = within(textfieldComponent).getByRole('group', {
+        name: 'Component controls',
+      });
+      const textfieldControlButtons = within(textfieldControls).getAllByRole('button');
+
+      // Expect three component controls
+      expect(textfieldControlButtons).toHaveLength(3);
+      expect(textfieldControlButtons[0]).toHaveTextContent('Edit component');
+      expect(textfieldControlButtons[1]).toHaveTextContent('Copy component');
+      expect(textfieldControlButtons[2]).toHaveTextContent('Delete component');
+    });
+
+    await step('Copying the textfield', async () => {
+      const textfieldControls = within(textfieldComponent).getByRole('group', {
+        name: 'Component controls',
+      });
+
+      // Copy the component
+      await userEvent.click(
+        within(textfieldControls).getByRole('button', {name: 'Copy component'})
+      );
+
+      // After copying, expect a fourth control
+      expect(within(textfieldControls).getAllByRole('button')).toHaveLength(4);
+    });
+
+    await step('Pasting the textfield', async () => {
+      const textfieldControls = within(textfieldComponent).getByRole('group', {
+        name: 'Component controls',
+      });
+
+      // Paste the component
+      await userEvent.click(
+        within(textfieldControls).getByRole('button', {name: 'Paste below component'})
+      );
+
+      // After clicking the paste button, expect the button to disappear again
+      within(textfieldComponent).getByLabelText('Textfield').focus();
+      expect(within(textfieldControls).getAllByRole('button')).toHaveLength(3);
+      expect(
+        within(textfieldControls).queryByRole('button', {name: 'Paste below component'})
+      ).not.toBeInTheDocument();
+
+      // Pasting the component should trigger onChange with the new component
+      expect(args.onChange).toHaveBeenCalledWith(
+        [
+          expect.objectContaining({
+            type: 'textfield',
+            id: 'textfield',
+            key: 'textfield',
+            label: 'Textfield',
+          }),
+          // The id and key of the pasted component should be different from the id and
+          // key of the original component.
+          expect.objectContaining({
+            type: 'textfield',
+            id: expect.not.toBeOneOf(['textfield']),
+            key: expect.not.toBeOneOf(['textfield']),
+            label: 'Textfield',
+          }),
+        ],
+        expect.objectContaining({
+          type: 'created',
+          // Storybook has a hard time differentiating multiple similar objects when using
+          // `expect.objectContaining`. So let's stick to the poor man's `expect.anything`.
+          component: expect.anything(),
+        })
+      );
+    });
+
+    step('Pasted component is visible', () => {
+      const textfields = canvas.getAllByLabelText('Textfield');
+
+      expect(textfields).toHaveLength(2);
+      expect(textfields[0]).toBeVisible();
+      expect(textfields[1]).toBeVisible();
+    });
+  },
+};
+
+export const CopyAndPasteComponentWithChildren: Story = {
+  args: {
+    initialComponents: [
+      {
+        id: 'editgrid',
+        key: 'editgrid',
+        type: 'editgrid',
+        label: 'Editgrid',
+        groupLabel: 'item',
+        disableAddingRemovingRows: false,
+        components: [
+          {
+            id: 'textfield',
+            key: 'textfield',
+            type: 'textfield',
+            label: 'Textfield',
+          } satisfies TextFieldComponentSchema,
+        ],
+      } satisfies EditGridComponentSchema,
+    ],
+  },
+  parameters: {
+    builder: {
+      uniquifyKey: true,
+    },
+  },
+  play: async ({canvasElement, args, step}) => {
+    const canvas = within(canvasElement);
+
+    const editgridComponent = canvas.getByTestId('sortable-item-editgrid');
+    expect(editgridComponent).toBeVisible();
+
+    await step('Copy editgrid component', async () => {
+      // Set focus on the editgrid component, displaying the component controls
+      within(editgridComponent).getByLabelText('Textfield').focus();
+      const editgridControls = within(editgridComponent).getAllByRole('group', {
+        name: 'Component controls',
+      })[0];
+
+      // Copy the editgrid and its children
+      await userEvent.click(within(editgridControls).getByRole('button', {name: 'Copy component'}));
+    });
+
+    await step('Paste below editgrid child', async () => {
+      const textfieldComponent = within(editgridComponent).getByTestId('sortable-item-textfield');
+      // Set focus on the textfield inside the editgrid component
+      within(textfieldComponent).getByLabelText('Textfield').focus();
+
+      // Paste the copied component below the textfield
+      await userEvent.click(
+        within(textfieldComponent).getByRole('button', {name: 'Paste below component'})
+      );
+
+      // Pasting the component should trigger onChange with the new component.
+      // Both the copied component, and its children, should be added.
+      expect(args.onChange).toHaveBeenCalledWith(
+        [
+          expect.objectContaining({
+            id: 'editgrid',
+            key: 'editgrid',
+            type: 'editgrid',
+            label: 'Editgrid',
+            groupLabel: 'item',
+            disableAddingRemovingRows: false,
+            components: [
+              {
+                id: 'textfield',
+                key: 'textfield',
+                type: 'textfield',
+                label: 'Textfield',
+              } satisfies TextFieldComponentSchema,
+              {
+                // Expect the id of the pasted component to be different from the id of the
+                // original component
+                id: expect.not.toBeOneOf(['editgrid']),
+                key: expect.not.toBeOneOf(['editgrid']),
+                type: 'editgrid',
+                label: 'Editgrid',
+                groupLabel: 'item',
+                disableAddingRemovingRows: false,
+                components: [
+                  {
+                    // Expect the id of the pasted component to be different from the id of
+                    // the original component
+                    id: expect.not.toBeOneOf(['textfield']),
+                    key: expect.not.toBeOneOf(['textfield']),
+                    type: 'textfield',
+                    label: 'Textfield',
+                  } satisfies TextFieldComponentSchema,
+                ],
+              },
+            ],
+          }),
+        ],
+        expect.objectContaining({
+          type: 'created',
+          // Storybook has a hard time differentiating multiple similar objects when using
+          // `expect.objectContaining`. So let's stick to the poor man's `expect.anything`.
+          component: expect.anything(),
+        })
+      );
+    });
   },
 };

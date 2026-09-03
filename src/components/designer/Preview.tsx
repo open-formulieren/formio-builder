@@ -51,7 +51,7 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
               key={component.key}
               id={component.id}
               index={index}
-              groupName={dropzoneId}
+              dropzoneId={dropzoneId}
               component={component}
               hasControls={!withoutComponentControls}
             >
