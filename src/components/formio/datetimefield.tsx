@@ -81,5 +81,5 @@ export const DateTimeField: React.FC<JSX.IntrinsicElements['input'] & DateTimeFi
   );
 };
 
-export const DateTimeFieldMultiple = withMultiple(DateTimeField, '');
+export const DateTimeFieldMultiple = withMultiple(DateTimeField, null);
 export default DateTimeFieldMultiple;

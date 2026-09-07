@@ -27,6 +27,6 @@ export default {
       datePicker: undefined, // the DatePicker interface otherwise causes TS issues
     },
   },
-  defaultValue: '',
+  defaultValue: null,
   holdsData: true,
 } satisfies RegistryEntry<DateTimeComponentSchema>;
