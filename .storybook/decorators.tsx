@@ -77,10 +77,12 @@ export const BuilderContextDecorator: Decorator = (Story, context) => {
   const defaultFileTypes = context.parameters.builder?.defaultFileTypes || DEFAULT_FILE_TYPES;
   const regularFormType = context.parameters.builder?.formType || DEFAULT_FORM_TYPE;
 
+  const getUniqueKey = (key: string): string => `${key}-${crypto.randomUUID()}`;
+
   return (
     <BuilderContext.Provider
       value={{
-        uniquifyKey: key => key,
+        uniquifyKey: key => (context.parameters.builder?.uniquifyKey ? getUniqueKey(key) : key),
         validateRequiredDefault: validateRequiredDefault,
         supportedLanguageCodes: supportedLanguageCodes,
         richTextColors: DEFAULT_COLORS,
@@ -174,6 +176,13 @@ export const overrideWindowConfirm: Decorator = (Story, context) => {
     context.parameters?.windowConfirm?.();
     return true;
   };
+
+  return <Story />;
+};
+
+export const clearLocalStorage: Decorator = Story => {
+  // Start the story with a clear localStorage
+  window.localStorage.clear();
 
   return <Story />;
 };

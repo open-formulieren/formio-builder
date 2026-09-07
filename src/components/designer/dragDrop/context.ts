@@ -12,10 +12,14 @@ export const useDropzoneContext = () => useContext(DropzoneContext);
 
 interface SortableItemContextType {
   isDragging: boolean;
+  index?: number;
+  dropzoneId?: string;
 }
 
 export const SortableItemContext = createContext<SortableItemContextType>({
   isDragging: false,
+  index: 0,
+  dropzoneId: '',
 });
 
 export const useSortableItemContext = () => useContext(SortableItemContext);
