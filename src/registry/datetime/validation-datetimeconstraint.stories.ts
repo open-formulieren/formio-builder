@@ -1,3 +1,4 @@
+import type {DateTimeComponentSchema} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, userEvent, within} from 'storybook/test';
 
@@ -18,16 +19,9 @@ export default {
           maxDate: {mode: ''},
         },
         datePicker: {
-          showWeeks: true,
-          startingDay: 0,
-          initDate: '',
-          minMode: 'day',
-          maxMode: 'year',
-          yearRows: 4,
-          yearColumns: 5,
           minDate: null,
           maxDate: null,
-        },
+        } satisfies DateTimeComponentSchema['datePicker'],
       },
     },
   },
@@ -40,7 +34,7 @@ export default {
       control: {type: 'inline-radio'},
     },
   },
-} as Meta<typeof DateTimeConstraintValidation>;
+} satisfies Meta<typeof DateTimeConstraintValidation>;
 
 type Story = StoryObj<typeof DateTimeConstraintValidation>;
 
@@ -57,16 +51,9 @@ export const FixedValue: Story = {
           maxDate: {mode: ''},
         },
         datePicker: {
-          showWeeks: true,
-          startingDay: 0,
-          initDate: '',
-          minMode: 'day',
-          maxMode: 'year',
-          yearRows: 4,
-          yearColumns: 5,
           minDate: '2023-01-01T16:00',
           maxDate: null,
-        },
+        } satisfies DateTimeComponentSchema['datePicker'],
       },
     },
   },
@@ -93,16 +80,9 @@ export const FutureOrPast: Story = {
           maxDate: {mode: ''},
         },
         datePicker: {
-          showWeeks: true,
-          startingDay: 0,
-          initDate: '',
-          minMode: 'day',
-          maxMode: 'year',
-          yearRows: 4,
-          yearColumns: 5,
           minDate: '2023-01-01',
           maxDate: null,
-        },
+        } satisfies DateTimeComponentSchema['datePicker'],
       },
     },
   },
