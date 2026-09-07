@@ -1,6 +1,9 @@
 @use '@/scss/bem';
 
 .offb-components-list {
+  position: sticky;
+  top: 10px;
+
   @include bem.element('search-input') {
     margin-block-end: 10px;
   }
