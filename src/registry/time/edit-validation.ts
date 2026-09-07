@@ -22,7 +22,6 @@ const buildTime24hSchema = (intl: IntlShape) =>
 const buildOptionalTimeSchema = (intl: IntlShape) =>
   z.union([
     buildTime24hSchema(intl),
-    z.literal(''),
     z.undefined(), // formik (deliberately) turns empty string into undefined
     z.null(),
   ]);
@@ -43,8 +42,8 @@ const buildTimeSpecific = (intl: IntlShape) =>
   z.object({
     validate: z
       .object({
-        minTime: buildOptionalTimeSchema(intl),
-        maxTime: buildOptionalTimeSchema(intl),
+        minTime: buildOptionalTimeSchema(intl).or(z.literal('')),
+        maxTime: buildOptionalTimeSchema(intl).or(z.literal('')),
       })
       .optional(),
   });

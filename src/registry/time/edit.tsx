@@ -137,7 +137,7 @@ EditForm.defaultValues = {
   hidden: false,
   clearOnHide: true,
   isSensitiveData: false,
-  defaultValue: '',
+  defaultValue: null,
   disabled: false,
   // Advanced tab
   conditional: {

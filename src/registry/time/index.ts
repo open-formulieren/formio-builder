@@ -26,6 +26,6 @@ export default {
       ...EditForm.defaultValues,
     },
   },
-  defaultValue: '',
+  defaultValue: null,
   holdsData: true,
 } satisfies RegistryEntry<TimeComponentSchema>;
