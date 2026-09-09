@@ -1,6 +1,6 @@
 {
   "name": "@open-formulieren/formio-builder",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "An opinionated Formio webform builder for Open Forms",
   "type": "module",
   "types": "./dist/index.d.ts",
