@@ -1,5 +1,22 @@
 # Changes
 
+## 1.4.2 (2026-09-09)
+
+Feature and bugfix release.
+
+**New features**
+
+- [`#334`][#334] Implemented the copy-paste functionality in the form designer.
+
+**Bugfixes**
+
+- [`#296`][#296] Fixed various drag-and-drop interactions not working as expected.
+- [`#337`][#337] Fixed components list not sticking to the top of the screen when scrolling.
+
+[#296]: https://github.com/open-formulieren/formio-builder/issues/296
+[#334]: https://github.com/open-formulieren/formio-builder/issues/334
+[#337]: https://github.com/open-formulieren/formio-builder/issues/337
+
 ## 1.4.1 (2026-08-27)
 
 Bugfix release.
