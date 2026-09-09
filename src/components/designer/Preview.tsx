@@ -5,13 +5,14 @@ import {FormattedMessage, useIntl} from 'react-intl';
 
 import ContentPlaceholder from '@/components/ContentPlaceholder';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
+import {isPlaceholder} from '@/formio';
 import {getRegistryEntry} from '@/registry';
 import {hasOwnProperty} from '@/types';
 
 import ComponentIcon from './ComponentIcon';
 import './Preview.scss';
+import type {DraggableMenuItemData, SortableItemData} from './dragDrop';
 import {DropZone, SortableItem} from './dragDrop';
-import {getTargetDropzoneId} from './dragDrop/utils/dragTarget';
 import type {ComponentDefinition} from './types';
 import {COMPONENT_PLACEHOLDER_TYPE} from './types';
 
@@ -28,13 +29,13 @@ export const ComponentsPreview: React.FC<ComponentsPreviewProps> = ({
   hideEmptyMessage = false,
   withoutComponentControls = false,
 }) => {
-  const {target} = useDragOperation();
-  const targetDropzone = getTargetDropzoneId(target);
+  const {source} = useDragOperation<DraggableMenuItemData | SortableItemData>();
 
-  const isDraggingAboveDropzone = targetDropzone !== undefined && targetDropzone === dropzoneId;
-  // Count the number of components in the dropzone, excluding dragged components.
-  const componentCountThreshold = isDraggingAboveDropzone ? 1 : 0;
-  const hasComponents = components.length > componentCountThreshold;
+  // All components that are not placeholders and not the dragged component.
+  const nonDraggedComponents = components.filter(
+    component => !isPlaceholder(component) && component.id !== source?.data?.component?.id
+  );
+  const hasComponents = nonDraggedComponents.length > 0;
 
   return (
     <ErrorBoundary>

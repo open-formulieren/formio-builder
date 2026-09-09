@@ -6,9 +6,12 @@
   }
 
   @include bem.element('component-button') {
-    color: var(--offb-component-group-component-button-color, inherit);
     font-size: var(--offb-component-group-component-button-font-size, 0.875rem);
     cursor: grab !important; // .btn styles force cursor with more specificity
+
+    &:not(:hover) {
+      color: var(--offb-component-group-component-button-color, inherit);
+    }
   }
 
   @include bem.element('component-list') {
