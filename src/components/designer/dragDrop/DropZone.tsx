@@ -1,8 +1,10 @@
-import {useDroppable} from '@dnd-kit/react';
+import {useDragOperation, useDroppable} from '@dnd-kit/react';
+import {clsx} from 'clsx';
 
 import './DropZone.scss';
 import {collisionDetection} from './collisionDetection';
 import {DropzoneContext, useDropzoneContext, useSortableItemContext} from './context';
+import {getTargetDropzoneId} from './utils/dragTarget';
 
 export interface DropZoneProps {
   id: string;
@@ -15,6 +17,7 @@ export interface DropZoneProps {
 const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
   const {collisionPriority} = useDropzoneContext();
   const {isDragging} = useSortableItemContext();
+  const {target} = useDragOperation();
   const {ref} = useDroppable({
     id,
     collisionPriority: collisionPriority + 1,
@@ -22,8 +25,17 @@ const DropZone: React.FC<DropZoneProps> = ({id, children}) => {
     disabled: isDragging,
   });
 
+  const targetDropzone = getTargetDropzoneId(target);
+  const isDragTarget = targetDropzone === id;
+
   return (
-    <div className="offb-drop-zone" data-testid={id} ref={ref}>
+    <div
+      className={clsx('offb-drop-zone', {
+        'offb-drop-zone--drag-target': isDragTarget,
+      })}
+      data-testid={id}
+      ref={ref}
+    >
       <DropzoneContext.Provider value={{collisionPriority: collisionPriority + 2}}>
         {children}
       </DropzoneContext.Provider>
