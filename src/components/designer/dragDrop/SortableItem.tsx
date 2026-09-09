@@ -7,6 +7,7 @@ import React from 'react';
 
 import ComponentControls from './ComponentControls';
 import './SortableItem.scss';
+import {collisionDetection} from './collisionDetection';
 import {SortableItemContext, useDropzoneContext, useSortableItemContext} from './context';
 
 export interface SortableItemData extends Data {
@@ -36,19 +37,22 @@ const SortableItem: React.FC<SortableItemProps> = ({
     index,
     group: dropzoneId,
     collisionPriority,
+    collisionDetector: collisionDetection,
     disabled: isDraggingParent,
     data: {
       component,
     },
     plugins: [SortableKeyboardPlugin],
   });
+  const componentId = `sortable-item-${component.id}`;
   return (
     <SortableItemContext.Provider
       value={{isDragging: isDragging || isDraggingParent, index, dropzoneId}}
     >
       <SortableItemView
         ref={ref}
-        testId={`sortable-item-${id}`}
+        id={componentId}
+        testId={componentId}
         className={clsx('offb-dnd-sortable-item', {
           'offb-dnd-sortable-item--is-dragging': isDragging,
         })}
@@ -62,6 +66,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
 };
 
 interface SortableItemViewProps extends React.PropsWithChildren {
+  id?: string;
   testId?: string;
   component: AnyComponentSchema;
   className?: string;
@@ -70,13 +75,13 @@ interface SortableItemViewProps extends React.PropsWithChildren {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SortableItemView = React.forwardRef<any, SortableItemViewProps>(
-  ({testId, component, showControls = false, className, children}, ref) => {
+  ({id, testId, component, showControls = false, className, children}, ref) => {
     return (
       <div
         ref={ref}
-        className={clsx('offb-dnd-sortable-item-view', className)}
+        id={id}
         data-testid={testId}
-        id={`sortable-item-${component.id}`}
+        className={clsx('offb-dnd-sortable-item-view', className)}
       >
         {showControls && <ComponentControls component={component} />}
         {children}
