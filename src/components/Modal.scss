@@ -14,7 +14,7 @@
   @include bem.element('overlay') {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
 
     position: fixed;
     z-index: var(--offb-modal-overlay-z-index, 1);
