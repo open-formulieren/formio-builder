@@ -26,6 +26,7 @@ export default {
       ...EditForm.defaultValues,
     },
   },
+  isDeprecated: true,
   defaultValue: {},
   holdsData: true,
 } satisfies RegistryEntry<NpFamilyMembersComponentSchema>;
