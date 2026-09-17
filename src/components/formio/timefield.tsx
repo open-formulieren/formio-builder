@@ -81,5 +81,5 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
   );
 };
 
-export const TimeFieldMultiple = withMultiple(TimeField, '');
+export const TimeFieldMultiple = withMultiple(TimeField, null);
 export default TimeFieldMultiple;
