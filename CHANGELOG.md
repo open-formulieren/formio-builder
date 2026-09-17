@@ -1,5 +1,31 @@
 # Changes
 
+## 2.0.0-alpha.0 (2026-09-17)
+
+Preview release for the next major version.
+
+**Breaking changes**
+
+- [`OF#6563`][OF#6563] The `date`, `datetime` and `time` components now have a `defaultValue: null`
+  instead of the empty string. Ensure your backend and renderer can handle this.
+
+[OF#6563]: https://github.com/open-formulieren/open-forms/issues/6563
+
+**Deprecations**
+
+- [`#343`][#343] The `npFamilyMembers` component is marked as deprecated. Most likely it will be
+  removed in Open Forms 5.0.
+
+[#343]: https://github.com/open-formulieren/formio-builder/issues/343
+
+**Project maintenance**
+
+- Documented the version compatibility in the readme.
+- Improved type safety.
+- Deleted dead code.
+- Improved CSS compatibility.
+- Deprecated components are now moved to the bottom of each menu list.
+
 ## 1.5.0 (2026-09-09)
 
 Feature and bugfix release.
