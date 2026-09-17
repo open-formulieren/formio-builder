@@ -29,6 +29,16 @@ This library is **NOT** intended to be a competing library of Form.io's own form
 - it does not implement the Javascript API of Form.io's form builder, instead it provides the hooks
   needed by the Open Forms backend project
 
+## Supported versions and relation to Open Forms backend
+
+The table below describes which versions of the builder map to versions of the backend:
+
+| Backend version | Builder version | End of life date |
+| --------------- | --------------- | ---------------- |
+| main            | `2.x`           | -                |
+| 4.0.x           | `1.y`           | April 2027       |
+| 3.5.x           | `1.y`           | January 2027     |
+
 ## Contributing
 
 Contributions that do not provide a direct benefit to the Open Forms project will unfortunately be
