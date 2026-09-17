@@ -88,7 +88,9 @@ export const Default: Story = {
       expect(specialFieldsList.getByRole('button', {name: 'IBAN'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'License plate'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'BSN'})).toBeVisible();
-      expect(specialFieldsList.getByRole('button', {name: 'Family members'})).toBeVisible();
+      expect(
+        specialFieldsList.getByRole('button', {name: 'Family members Deprecated'})
+      ).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Signature'})).toBeVisible();
       expect(specialFieldsList.getByRole('button', {name: 'Co-sign'})).toBeVisible();
       // There should be a co-sign component with a 'deprecated' marker.
@@ -228,7 +230,7 @@ export const SearchForComponents: Story = {
       expect(specialList.getAllByRole('button')).toHaveLength(3);
       expect(specialList.getByRole('button', {name: 'IBAN'})).toBeVisible();
       expect(specialList.getByRole('button', {name: 'BSN'})).toBeVisible();
-      expect(specialList.getByRole('button', {name: 'Family members'})).toBeVisible();
+      expect(specialList.getByRole('button', {name: 'Family members Deprecated'})).toBeVisible();
 
       // Validate the components available in 'Preset' group
       const presetList = within(within(presetFieldsContainer).getByRole('list'));
