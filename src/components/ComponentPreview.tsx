@@ -1,10 +1,10 @@
-import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import {clsx} from 'clsx';
 import {Formik} from 'formik';
 import type React from 'react';
 import {useContext, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import JSONEditor from '@/components/JSONEditor';
 import PreviewModeToggle from '@/components/PreviewModeToggle';
 import type {PreviewState} from '@/components/PreviewModeToggle';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
