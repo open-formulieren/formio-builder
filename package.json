@@ -150,5 +150,10 @@
     "use-local-storage-state": "^20.0.0",
     "zod": "^3.25.76",
     "zod-formik-adapter": "^1.2.0"
+  },
+  "overrides": {
+    "monaco-editor": {
+      "dompurify": "^3.4.15"
+    }
   }
 }
