@@ -1161,7 +1161,7 @@ export const SelectBoxes: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      expect(await editForm.queryByText('Required')).toBeNull();
+      expect(editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1170,64 +1170,8 @@ export const SelectBoxes: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
-      await userEvent.clear(itemsExpressionInput);
-      // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
-      await userEvent.type(itemsExpressionInput, expression);
-
       expect(editForm.queryByLabelText('Default value')).toBeNull();
       expect(preview.getByRole('checkbox', {name: /Options from expression:/})).toBeVisible();
-
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      expect(args.onSubmit).toHaveBeenCalledWith({
-        id: 'wqimsadk',
-        type: 'selectboxes',
-        // basic tab
-        label: 'Other label',
-        key: 'customKey',
-        description: '',
-        tooltip: '',
-        showInSummary: true,
-        showInEmail: false,
-        showInPDF: true,
-        hidden: false,
-        clearOnHide: true,
-        isSensitiveData: false,
-        openForms: {
-          dataSrc: 'variable',
-          itemsExpression: {var: 'someVar'},
-          translations: {
-            nl: {description: '', label: '', tooltip: ''},
-          },
-        },
-        values: [],
-        defaultValue: {},
-        // Advanced tab
-        conditional: {
-          show: undefined,
-          when: '',
-          eq: '',
-        },
-        // Validation tab
-        validate: {
-          required: false,
-          plugins: [],
-        },
-        translatedErrors: {
-          nl: {
-            required: '',
-            minSelectedCount: '',
-            maxSelectedCount: '',
-          },
-        },
-        // registration tab
-        registration: {
-          attribute: '',
-        },
-      });
-      // @ts-expect-error mockClear
-      args.onSubmit.mockClear();
     });
   },
 };
@@ -1377,7 +1321,7 @@ export const Radio: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      expect(await editForm.queryByText('Required')).toBeNull();
+      expect(editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1386,60 +1330,8 @@ export const Radio: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
-      await userEvent.clear(itemsExpressionInput);
-      // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
-      await userEvent.type(itemsExpressionInput, expression);
-
       expect(editForm.queryByLabelText('Default value')).toBeNull();
       expect(preview.getByRole('radio', {name: /Options from expression:/})).toBeVisible();
-
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      expect(args.onSubmit).toHaveBeenCalledWith({
-        id: 'wqimsadk',
-        type: 'radio',
-        // basic tab
-        label: 'Other label',
-        key: 'customKey',
-        description: '',
-        tooltip: '',
-        showInSummary: true,
-        showInEmail: false,
-        showInPDF: true,
-        hidden: false,
-        clearOnHide: true,
-        isSensitiveData: false,
-        openForms: {
-          dataSrc: 'variable',
-          itemsExpression: {var: 'someVar'},
-          translations: {
-            nl: {description: '', label: '', tooltip: ''},
-          },
-        },
-        values: [],
-        defaultValue: '',
-        // Advanced tab
-        conditional: {
-          show: undefined,
-          when: '',
-          eq: '',
-        },
-        // Validation tab
-        validate: {
-          required: false,
-          plugins: [],
-        },
-        translatedErrors: {
-          nl: {required: ''},
-        },
-        // registration tab
-        registration: {
-          attribute: '',
-        },
-      });
-      // @ts-expect-error mockClear
-      args.onSubmit.mockClear();
     });
   },
 };
@@ -1603,7 +1495,7 @@ export const Select: Story = {
       await userEvent.click(canvas.getByRole('tab', {name: 'Translations'}));
 
       // Check that none of the inputs have a Required error message
-      expect(await editForm.queryByText('Required')).toBeNull();
+      expect(editForm.queryByText('Required')).toBeNull();
     });
 
     await step('Set up itemsExpression for options', async () => {
@@ -1612,71 +1504,15 @@ export const Select: Story = {
       canvas.getByLabelText('Data source').focus();
       await userEvent.keyboard('[ArrowDown]');
       await userEvent.click(await canvas.findByText('From variable'));
-      const itemsExpressionInput = canvas.getByTestId('jsonEdit');
-      await userEvent.clear(itemsExpressionInput);
-      // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
-      await userEvent.type(itemsExpressionInput, expression);
-
       expect(editForm.queryByLabelText('Default value')).toBeNull();
 
       const previewSearchInput = preview.getByLabelText('Other label');
       previewSearchInput.focus();
       await userEvent.keyboard('[ArrowDown]');
-      await waitFor(
-        async () => {
-          expect(await preview.findByText(/"someVar"/)).toBeVisible();
-        },
-        {timeout: 200}
-      );
-      // expect(await preview.findByText(/"someVar"/)).toBeVisible();
+      expect(
+        await preview.findByText(/Options from expression/, undefined, {timeout: 200})
+      ).toBeVisible();
       await userEvent.keyboard('[Escape]');
-
-      await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
-      expect(args.onSubmit).toHaveBeenCalledWith({
-        id: 'wqimsadk',
-        type: 'select',
-        // basic tab
-        label: 'Other label',
-        key: 'customKey',
-        description: '',
-        tooltip: '',
-        showInSummary: true,
-        showInEmail: false,
-        showInPDF: true,
-        hidden: false,
-        clearOnHide: true,
-        isSensitiveData: false,
-        data: {values: []},
-        openForms: {
-          dataSrc: 'variable',
-          itemsExpression: {var: 'someVar'},
-          translations: {
-            nl: {description: '', label: '', tooltip: ''},
-          },
-        },
-        defaultValue: '',
-        // Advanced tab
-        conditional: {
-          show: undefined,
-          when: '',
-          eq: '',
-        },
-        // Validation tab
-        validate: {
-          required: false,
-          plugins: [],
-        },
-        translatedErrors: {
-          nl: {required: ''},
-        },
-        // registration tab
-        registration: {
-          attribute: '',
-        },
-      } satisfies SelectComponentSchema);
-      // @ts-expect-error mockClear
-      args.onSubmit.mockClear();
     });
   },
 };

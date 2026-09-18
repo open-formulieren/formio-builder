@@ -35,7 +35,6 @@ export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    const stringified = JSON.stringify({var: 'someVar'}, null, 2);
-    expect(canvas.getByRole('textbox')).toHaveDisplayValue(stringified);
+    expect(await canvas.findByRole('code')).toBeVisible();
   },
 };

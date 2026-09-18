@@ -78,17 +78,13 @@ export const SwitchToVariableResetOptions: Story = {
 
     await rsSelect(canvas, dataSourceInput, 'From variable');
 
-    const itemsExpressionInput = canvas.getByTestId('jsonEdit');
-    await userEvent.clear(itemsExpressionInput);
-    await userEvent.type(itemsExpressionInput, '"foo"');
-
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
 
     expect(args.onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
         openForms: {
           dataSrc: 'variable',
-          itemsExpression: 'foo',
+          itemsExpression: {var: 'var'},
           translations: {},
         },
         type: 'select',

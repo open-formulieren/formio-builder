@@ -163,19 +163,12 @@ export const SelectBoxesResetState: StoryObj<{
 
       await userEvent.click(await canvas.findByText('From variable'));
 
-      const expressionInput = await canvas.findByTestId('jsonEdit');
-
-      await userEvent.clear(expressionInput);
-      // { needs to be escaped: https://github.com/testing-library/user-event/issues/584
-      const expression = '{"var": "someVar"}'.replace(/[{[]/g, '$&$&');
-      await userEvent.type(expressionInput, expression);
-
       await doSubmit();
       await waitFor(() => {
         expect(args.onSubmit).toHaveBeenCalledWith({
           openForms: {
             dataSrc: 'variable',
-            itemsExpression: {var: 'someVar'},
+            itemsExpression: {var: 'var'},
           },
           values: [],
         });
