@@ -1,9 +1,9 @@
-import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import type {JsonLogicExpression} from '@open-formulieren/types/dist/options';
 import {useFormikContext} from 'formik';
 import {useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import JSONEditor from '@/components/JSONEditor';
 import {Component} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
