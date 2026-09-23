@@ -4,6 +4,7 @@ import type {Preview} from '@storybook/react-vite';
 import 'leaflet/dist/leaflet.css';
 import '@/formio.scss';
 import '@/jsonEditor.scss';
+import '@open-formulieren/monaco-json-editor/style.css';
 
 import {BuilderContextDecorator, ModalDecorator} from './decorators';
 import {reactIntl} from './reactIntl';

@@ -1,9 +1,9 @@
-import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import type {SoftRequiredErrorsComponentSchema} from '@open-formulieren/types';
 import {useFormikContext} from 'formik';
 import type React from 'react';
 import {useContext, useEffect, useRef, useState} from 'react';
 
+import JSONEditor from '@/components/JSONEditor';
 import type {PreviewState} from '@/components/PreviewModeToggle';
 import PreviewModeToggle from '@/components/PreviewModeToggle';
 import {Key, RichText} from '@/components/builder';

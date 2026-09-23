@@ -129,7 +129,7 @@
     "@dnd-kit/state": "^0.4.0",
     "@floating-ui/react": "^0.27.5",
     "@open-formulieren/leaflet-tools": "^1.0.0",
-    "@open-formulieren/monaco-json-editor": "^0.2.0",
+    "@open-formulieren/monaco-json-editor": "^0.3.0",
     "@open-formulieren/types": "^1.6.0",
     "ckeditor5": "^47.6.1",
     "clsx": "^2.1.1",
@@ -150,5 +150,10 @@
     "use-local-storage-state": "^20.0.0",
     "zod": "^3.25.76",
     "zod-formik-adapter": "^1.2.0"
+  },
+  "overrides": {
+    "monaco-editor": {
+      "dompurify": "^3.4.15"
+    }
   }
 }

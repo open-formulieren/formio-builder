@@ -55,6 +55,7 @@ export function ValuesConfig<T extends SchemaWithDataSrc>({
       }
       case 'variable': {
         setFieldValue(name, []);
+        setFieldValue('openForms.itemsExpression', {var: 'var'});
         if (Object.prototype.hasOwnProperty.call(values.openForms, 'code')) {
           setFieldValue('openForms.code', undefined);
         }

@@ -1,7 +1,7 @@
-import {JSONEditor} from '@open-formulieren/monaco-json-editor';
 import type {FallbackSchema} from '@open-formulieren/types';
 import {FormattedMessage} from 'react-intl';
 
+import JSONEditor from '@/components/JSONEditor';
 import type {BuilderContextType} from '@/context';
 import {BuilderContext} from '@/context';
 import {isKnownComponentType} from '@/registry';
