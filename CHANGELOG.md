@@ -1,5 +1,19 @@
 # Changes
 
+## 2.0.0-alpha.1 (2026-09-23)
+
+Preview release for the next major version.
+
+**Features**
+
+- Upgraded our monaco-json-editor to version 0.3.0 and added lazy loading.
+
+**Project maintenance**
+
+- Removed the json editor mocks in Storybook.
+- Upgraded Storybook and vitest to their latest versions.
+- Updated dependencies to their latest security releases.
+
 ## 2.0.0-alpha.0 (2026-09-17)
 
 Preview release for the next major version.
