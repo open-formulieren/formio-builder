@@ -1,5 +1,13 @@
 # Changes
 
+## 2.0.0-alpha.2 (2026-09-24)
+
+Preview release for the next major version.
+
+**Features**
+
+- Time field values now emit RFC3339-compliant values in the `HH:mm:ss` format.
+
 ## 2.0.0-alpha.1 (2026-09-23)
 
 Preview release for the next major version.
