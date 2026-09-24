@@ -35,7 +35,7 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
 
   const htmlId = `editform-${name}`;
 
-  const {value} = getFieldProps<string | undefined | null>(name);
+  const {value, onChange: formikOnChange} = getFieldProps<string | undefined | null>(name);
 
   // let's not bother with date pickers - use the native browser date input instead.
   const inputField = (
@@ -49,6 +49,15 @@ export const TimeField: React.FC<JSX.IntrinsicElements['input'] & TimeFieldProps
       // text fallback - use HH:mm
       pattern="\d{2}:\d{2}"
       value={value ?? ''}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        // add the seconds part to make sure the value can be parsed as RFC3339 time
+        const bits = event.target.value.split(':');
+        if (bits.length === 2) {
+          bits.push('00');
+          event.target.value = bits.join(':');
+        }
+        formikOnChange(event);
+      }}
       {...props}
     />
   );
