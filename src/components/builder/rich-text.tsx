@@ -75,6 +75,7 @@ const RichText: React.FC<RichTextProps> = ({
           },
           fontColor: {
             colors: richTextColors,
+            colorPicker: false,
           },
         }}
         data={props.value || ''}

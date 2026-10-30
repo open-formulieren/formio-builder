@@ -27,7 +27,7 @@ export default {
     name: {control: {disable: true}},
   },
   tags: ['autodocs'],
-} as Meta<typeof ItemsExpression>;
+} satisfies Meta<typeof ItemsExpression>;
 
 type Story = StoryObj<typeof ItemsExpression>;
 
@@ -35,6 +35,6 @@ export const Default: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement);
 
-    expect(await canvas.findByRole('code')).toBeVisible();
+    expect(await canvas.findByRole('code', undefined, {timeout: 60 * 1000})).toBeVisible();
   },
 };

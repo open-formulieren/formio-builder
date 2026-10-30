@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/open-formulieren/formio-builder#readme",
   "peerDependencies": {
-    "@open-formulieren/formio-renderer": "^1.6.2 || ^2.0.0",
+    "@open-formulieren/formio-renderer": "^3.0.0-alpha.6",
     "leaflet-geosearch": "^4.2.0",
     "leaflet-gesture-handling": "^1.2.2",
     "react": "^18.0.0",
@@ -76,7 +76,6 @@
     "@types/react-modal": "^3.16.3",
     "@types/sanitize-html": "^2.9.0",
     "@types/signature_pad": "^2.3.6",
-    "@utrecht/component-library-react": "^14.0.2",
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/browser-playwright": "4.1.12",
     "@vitest/coverage-v8": "4.1.12",
@@ -119,7 +118,7 @@
     "yargs": "^18.0.0"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-react": "^11.0.1",
+    "@ckeditor/ckeditor5-react": "^12.0.0",
     "@dnd-kit/abstract": "^0.4.0",
     "@dnd-kit/collision": "^0.4.0",
     "@dnd-kit/dom": "^0.4.0",
@@ -131,7 +130,7 @@
     "@open-formulieren/leaflet-tools": "^1.0.0",
     "@open-formulieren/monaco-json-editor": "^0.3.0",
     "@open-formulieren/types": "^1.6.0",
-    "ckeditor5": "^47.6.1",
+    "ckeditor5": "^49.0.1",
     "clsx": "^2.1.1",
     "dompurify": "^3.3.3",
     "formik": "^2.4.5",
@@ -153,7 +152,7 @@
   },
   "overrides": {
     "monaco-editor": {
-      "dompurify": "^3.4.15"
+      "dompurify": "^3.4.17"
     }
   }
 }
