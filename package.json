@@ -78,8 +78,8 @@
     "@types/signature_pad": "^2.3.6",
     "@utrecht/component-library-react": "^14.0.2",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/browser-playwright": "4.1.11",
-    "@vitest/coverage-v8": "4.1.11",
+    "@vitest/browser-playwright": "4.1.12",
+    "@vitest/coverage-v8": "4.1.12",
     "ajv": "^8.20.0",
     "babel-plugin-formatjs": "^10.4.0",
     "bootstrap": "^4.5.2",
@@ -115,7 +115,7 @@
     "vite-plugin-dts": "^5.0.3",
     "vite-plugin-eslint2": "^5.1.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "4.1.11",
+    "vitest": "4.1.12",
     "yargs": "^18.0.0"
   },
   "dependencies": {
