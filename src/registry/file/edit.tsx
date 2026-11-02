@@ -11,7 +11,6 @@ import {
   IsSensitiveData,
   Key,
   Label,
-  Multiple,
   PresentationConfig,
   SimpleConditional,
   Tooltip,
@@ -49,7 +48,6 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
             'showInSummary',
             'showInEmail',
             'showInPDF',
-            'multiple',
             'hidden',
             'clearOnHide',
             'isSensitiveData'
@@ -60,10 +58,10 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <Tab
           hasErrors={hasAnyError(
             'file',
-            'useConfigFiletypes',
-            'of',
+            'openForms.useConfigFiletypes',
+            'openForms.image',
             'fileMaxSize',
-            'maxNumberOfFiles'
+            'validate.maxLength'
           )}
         >
           <FormattedMessage
@@ -83,7 +81,6 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<FileComponentSchema> updateDefaultValue={false} />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />

@@ -18,11 +18,12 @@ export interface NumberProps {
   description?: React.ReactNode;
   prefix?: string;
   suffix?: string;
+  emptyValue?: number | null | undefined;
 }
 
 // Preferably we'd use null instead of undefined (the latter does not get JSON serialized),
 // but form.io's schema's typically don't account for null.
-type NumberFieldValue = number | undefined;
+type NumberFieldValue = number | null | undefined;
 
 export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps> = ({
   name,
@@ -33,6 +34,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
   description = '',
   prefix = '',
   suffix = '',
+  emptyValue = undefined,
   ...props
 }) => {
   const {getFieldProps, getFieldHelpers} = useFormikContext<unknown>();
@@ -71,7 +73,7 @@ export const NumberField: React.FC<JSX.IntrinsicElements['input'] & NumberProps>
               // HTML which states that the value must be an empty string for empty inputs,
               // even if it's a number input.
               if (value === '') {
-                setValue(undefined);
+                setValue(emptyValue);
               }
             }}
           />
