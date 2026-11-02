@@ -45,7 +45,7 @@ export default {
     builder: {enableContext: true},
   },
   args: {},
-} as Meta<typeof FileTabFields>;
+} satisfies Meta<typeof FileTabFields>;
 
 type Story = StoryObj<typeof FileTabFields>;
 

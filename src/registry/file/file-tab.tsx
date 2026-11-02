@@ -23,7 +23,7 @@ const FileName: React.FC = () => {
     {
       code: chunks => <code>{chunks}</code>,
     }
-  ) as unknown as string; // library doesn't narrow the type when using template fns :(
+  );
 
   return (
     <TextField
@@ -46,7 +46,7 @@ const FileName: React.FC = () => {
 const FileTypesSelect: React.FC = () => {
   const {getFileTypes} = useContext(BuilderContext);
   const {values, initialValues, setFieldValue} = useFormikContext<FileComponentSchema>();
-  const initialImageConfiguration = initialValues.of?.image;
+  const initialImageConfiguration = initialValues.openForms?.image;
   const {value: options, loading, error} = useAsync(async () => await getFileTypes(), []);
 
   if (error) {
@@ -67,7 +67,7 @@ const FileTypesSelect: React.FC = () => {
 
     // reset the image resizing options if no image file types are allowed
     const hasImages = hasImageMimeType(fileTypes);
-    if (!hasImages && !isEqual(values.of?.image, initialImageConfiguration)) {
+    if (!hasImages && !isEqual(values.openForms?.image, initialImageConfiguration)) {
       setFieldValue('of.image', initialImageConfiguration);
     }
   };
@@ -185,7 +185,7 @@ const ImageResizeApply = () => {
 
 const ImageResizingOptions = () => {
   const {values} = useFormikContext<FileComponentSchema>();
-  const applyResize = values?.of?.image?.resize?.apply ?? false;
+  const applyResize = values?.openForms?.image?.resize?.apply ?? false;
 
   return (
     <>

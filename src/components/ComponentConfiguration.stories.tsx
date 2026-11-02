@@ -901,7 +901,6 @@ export const FileUpload: Story = {
         type: [],
         allowedTypesLabels: [],
       },
-      filePattern: '',
     },
   },
 
@@ -963,7 +962,6 @@ export const FileUpload: Story = {
         showInSummary: true,
         showInEmail: false,
         showInPDF: true,
-        multiple: false,
         hidden: false,
         clearOnHide: true,
         isSensitiveData: true,
@@ -976,6 +974,7 @@ export const FileUpload: Story = {
         // Validation tab
         validate: {
           required: false,
+          maxLength: 1,
         },
         translatedErrors: {
           nl: {required: ''},
@@ -986,9 +985,10 @@ export const FileUpload: Story = {
           type: ['image/jpeg'],
           allowedTypesLabels: ['.jpg'], // derived from file.type
         },
-        filePattern: 'image/jpeg', // derived from file.type
-        useConfigFiletypes: true,
-        of: {
+        fileMaxSize: '10MB',
+        // custom extensions
+        openForms: {
+          useConfigFiletypes: true,
           image: {
             resize: {
               apply: false,
@@ -996,11 +996,6 @@ export const FileUpload: Story = {
               height: 2000,
             },
           },
-        },
-        fileMaxSize: '10MB',
-        maxNumberOfFiles: null,
-        // custom extensions
-        openForms: {
           softRequired: false,
           translations: {},
         },
