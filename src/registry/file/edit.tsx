@@ -150,7 +150,6 @@ EditForm.defaultValues = {
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,
-  multiple: false,
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
@@ -163,21 +162,13 @@ EditForm.defaultValues = {
   // Validation tab
   validate: {
     required: false,
+    maxLength: 1, // equivalent of `multiple: false`
   },
   translatedErrors: {},
   openForms: {
+    useConfigFiletypes: true,
     softRequired: false,
     translations: {},
-  },
-  // file tab
-  file: {
-    name: '',
-    type: [],
-    allowedTypesLabels: [],
-  },
-  filePattern: '*',
-  useConfigFiletypes: true,
-  of: {
     image: {
       resize: {
         apply: false,
@@ -186,8 +177,13 @@ EditForm.defaultValues = {
       },
     },
   },
+  // file tab
+  file: {
+    name: '',
+    type: [],
+    allowedTypesLabels: [],
+  },
   fileMaxSize: '10MB',
-  maxNumberOfFiles: null,
 };
 
 export default EditForm;
