@@ -55,9 +55,6 @@ const FileTypesSelect: React.FC = () => {
 
   const onChange = (event: {target: {name: string; value: string[]}}) => {
     const {value: fileTypes} = event.target;
-    // set the filePattern 'hidden field' value - this drives the browser file picker
-    // filter
-    setFieldValue('filePattern', fileTypes.join(','));
 
     // set the human-readable labels, used in error messages
     const labels = (options || [])
@@ -100,7 +97,7 @@ const UseConfigFiletypes = () => {
   });
   return (
     <Checkbox
-      name="useConfigFiletypes"
+      name="openForms.useConfigFiletypes"
       label={
         <FormattedMessage
           description="Label for 'useConfigFiletypes' builder field"
@@ -149,7 +146,7 @@ const MaxNumberOfFiles = () => {
   });
   return (
     <NumberField
-      name="maxNumberOfFiles"
+      name="validate.maxLength"
       label={
         <FormattedMessage
           description="Label for 'maxNumberOfFiles' builder field"
@@ -159,6 +156,7 @@ const MaxNumberOfFiles = () => {
       tooltip={tooltip}
       min={1}
       step={1}
+      emptyValue={null}
     />
   );
 };
@@ -171,7 +169,7 @@ const ImageResizeApply = () => {
   });
   return (
     <Checkbox
-      name="of.image.resize.apply"
+      name="openForms.image.resize.apply"
       label={
         <FormattedMessage
           description="Label for 'of.image.resize.apply' builder field"
@@ -195,7 +193,7 @@ const ImageResizingOptions = () => {
           <div className="columns">
             <div className="column column--span-md">
               <NumberField
-                name="of.image.resize.width"
+                name="openForms.image.resize.width"
                 label={
                   <FormattedMessage
                     description="Label for 'of.image.resize.width' builder field"
@@ -208,7 +206,7 @@ const ImageResizingOptions = () => {
             </div>
             <div className="column column--span-md">
               <NumberField
-                name="of.image.resize.height"
+                name="openForms.image.resize.height"
                 label={
                   <FormattedMessage
                     description="Label for 'of.image.resize.height' builder field"

@@ -919,7 +919,6 @@ export const FileUpload: Story = {
       expect(canvas.getByLabelText('Show in email')).not.toBeChecked();
       expect(canvas.getByLabelText('Show in PDF')).toBeChecked();
 
-      expect(canvas.getByLabelText('Multiple values')).not.toBeChecked();
       expect(canvas.getByLabelText('Hidden')).not.toBeChecked();
       expect(canvas.getByLabelText('Clear on hide')).toBeChecked();
       expect(canvas.getByLabelText('Is sensitive data')).toBeChecked();
