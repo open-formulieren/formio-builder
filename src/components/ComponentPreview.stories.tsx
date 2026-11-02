@@ -648,7 +648,6 @@ export const File: Story = {
         type: [],
         allowedTypesLabels: [],
       },
-      filePattern: '*',
       description: 'A preview of the file Formio component',
       ...faqConfiguration,
     } satisfies FileComponentSchema,
