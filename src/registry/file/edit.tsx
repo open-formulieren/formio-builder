@@ -54,7 +54,9 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.Validation
+          hasErrors={hasAnyError('validate.required', 'openForms.softRequired')}
+        />
         <Tab
           hasErrors={hasAnyError(
             'file',
