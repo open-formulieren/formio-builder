@@ -97,14 +97,27 @@ const EditForm: EditFormDefinition<PartnersComponentSchema> = () => {
   );
 };
 
-const defaultValues: PartnersComponentSchema = {
-  type: 'partners',
-  id: '',
+EditForm.defaultValues = {
+  // basic tab
   label: '',
   key: '',
+  description: '',
+  tooltip: '',
+  hidden: false,
+  clearOnHide: true,
   isSensitiveData: true,
+  // Advanced tab
+  conditional: {
+    show: undefined,
+    when: '',
+    eq: '',
+  },
+  // registration tab
+  registration: {
+    attribute: '',
+  },
+  // faq items tab
+  faqItems: [],
 };
-
-EditForm.defaultValues = defaultValues;
 
 export default EditForm;
