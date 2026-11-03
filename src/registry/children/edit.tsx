@@ -100,15 +100,28 @@ const EditForm: EditFormDefinition<ChildrenComponentSchema> = () => {
   );
 };
 
-const defaultValues: ChildrenComponentSchema = {
-  type: 'children',
-  id: '',
+EditForm.defaultValues = {
+  // basic tab
   label: '',
   key: '',
+  description: '',
+  tooltip: '',
+  hidden: false,
+  clearOnHide: true,
   isSensitiveData: true,
   enableSelection: false,
+  // Advanced tab
+  conditional: {
+    show: undefined,
+    when: '',
+    eq: '',
+  },
+  // registration tab
+  registration: {
+    attribute: '',
+  },
+  // faq items tab
+  faqItems: [],
 };
-
-EditForm.defaultValues = defaultValues;
 
 export default EditForm;
