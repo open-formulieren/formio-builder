@@ -8,7 +8,7 @@ import type {EditSchema} from '../types';
 const buildTime24hSchema = (intl: IntlShape) =>
   z.string().refine(
     value => {
-      const time24hFormat = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+      const time24hFormat = /^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/;
       return time24hFormat.test(value);
     },
     {
