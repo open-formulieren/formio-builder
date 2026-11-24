@@ -27,7 +27,7 @@ const getSizeInBytes = (filesize: string): number | null => {
 
 const imgSize = z.number().int().positive();
 
-const ofSchema = z.object({
+const extensionsSchema = z.object({
   image: z
     .object({
       resize: z
@@ -70,8 +70,13 @@ const buildFileMaxSizeSchema = (intl: IntlShape, builderContext: BuilderContextT
 
 const buildFileSchema = (intl: IntlShape, builderContext: BuilderContextType) =>
   z.object({
-    of: ofSchema.optional(),
-    maxNumberOfFiles: z.union([z.null(), z.number().int().positive().optional()]),
+    openForms: extensionsSchema.optional(),
+    validate: z
+      .object({
+        required: z.boolean().optional(),
+        maxLength: z.union([z.null(), z.number().int().positive().optional()]),
+      })
+      .optional(),
     fileMaxSize: buildFileMaxSizeSchema(intl, builderContext).optional(),
   });
 

@@ -11,7 +11,6 @@ import {
   IsSensitiveData,
   Key,
   Label,
-  Multiple,
   PresentationConfig,
   SimpleConditional,
   Tooltip,
@@ -49,21 +48,22 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
             'showInSummary',
             'showInEmail',
             'showInPDF',
-            'multiple',
             'hidden',
             'clearOnHide',
             'isSensitiveData'
           )}
         />
         <BuilderTabs.Advanced hasErrors={hasAnyError('conditional')} />
-        <BuilderTabs.Validation hasErrors={hasAnyError('validate')} />
+        <BuilderTabs.Validation
+          hasErrors={hasAnyError('validate.required', 'openForms.softRequired')}
+        />
         <Tab
           hasErrors={hasAnyError(
             'file',
-            'useConfigFiletypes',
-            'of',
+            'openForms.useConfigFiletypes',
+            'openForms.image',
             'fileMaxSize',
-            'maxNumberOfFiles'
+            'validate.maxLength'
           )}
         >
           <FormattedMessage
@@ -83,7 +83,6 @@ const EditForm: EditFormDefinition<FileComponentSchema> = () => {
         <Description />
         <Tooltip />
         <PresentationConfig />
-        <Multiple<FileComponentSchema> updateDefaultValue={false} />
         <Hidden />
         <ClearOnHide />
         <IsSensitiveData />
@@ -150,7 +149,6 @@ EditForm.defaultValues = {
   showInSummary: true,
   showInEmail: false,
   showInPDF: true,
-  multiple: false,
   hidden: false,
   clearOnHide: true,
   isSensitiveData: true,
@@ -163,21 +161,13 @@ EditForm.defaultValues = {
   // Validation tab
   validate: {
     required: false,
+    maxLength: 1, // equivalent of `multiple: false`
   },
   translatedErrors: {},
   openForms: {
+    useConfigFiletypes: true,
     softRequired: false,
     translations: {},
-  },
-  // file tab
-  file: {
-    name: '',
-    type: [],
-    allowedTypesLabels: [],
-  },
-  filePattern: '*',
-  useConfigFiletypes: true,
-  of: {
     image: {
       resize: {
         apply: false,
@@ -186,8 +176,13 @@ EditForm.defaultValues = {
       },
     },
   },
+  // file tab
+  file: {
+    name: '',
+    type: [],
+    allowedTypesLabels: [],
+  },
   fileMaxSize: '10MB',
-  maxNumberOfFiles: null,
 };
 
 export default EditForm;

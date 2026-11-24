@@ -22,9 +22,6 @@ export default {
         type: [],
         allowedTypesLabels: [],
       },
-      filePattern: '',
-      // @ts-expect-error this is what is actually produced by Formio
-      defaultValue: null,
     },
     onCancel: fn(),
     onRemove: fn(),
@@ -48,9 +45,6 @@ export const ToggleToMultiple: Story = {
     // Save and check that the default value was untouched
     await userEvent.click(canvas.getByRole('button', {name: 'Save'}));
     expect(args.onSubmit).toHaveBeenCalled();
-    // @ts-expect-error mock is not covered in types
-    const {defaultValue} = args.onSubmit.mock.calls[0][0];
-    expect(defaultValue).toBeNull();
   },
 };
 

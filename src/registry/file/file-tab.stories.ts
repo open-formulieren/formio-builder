@@ -1,3 +1,4 @@
+import type {FileComponentSchema} from '@open-formulieren/types';
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {expect, fireEvent, userEvent, within} from 'storybook/test';
 
@@ -16,16 +17,13 @@ export default {
         type: 'file',
         key: 'file',
         label: 'A file field',
-        storage: 'url',
-        url: '',
         file: {
           name: '',
           type: [],
           allowedTypesLabels: [],
         },
-        filePattern: '*',
-        useConfigFiletypes: false,
-        of: {
+        openForms: {
+          useConfigFiletypes: false,
           image: {
             resize: {
               apply: false,
@@ -35,17 +33,17 @@ export default {
           },
         },
         fileMaxSize: '10MB',
-        maxNumberOfFiles: null,
         validate: {
           required: false,
+          maxLength: 1,
         },
-      },
+      } satisfies FileComponentSchema,
     },
     modal: {noModal: true},
     builder: {enableContext: true},
   },
   args: {},
-} as Meta<typeof FileTabFields>;
+} satisfies Meta<typeof FileTabFields>;
 
 type Story = StoryObj<typeof FileTabFields>;
 

@@ -21,7 +21,6 @@ export default {
         type: [],
         allowedTypesLabels: [],
       },
-      filePattern: '',
     },
     onCancel: fn(),
     onRemove: fn(),

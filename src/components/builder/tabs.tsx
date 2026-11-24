@@ -5,6 +5,8 @@ import type {ReactTabsFunctionComponent, TabProps} from 'react-tabs';
 import {Tab} from '@/components/formio';
 import {BuilderContext} from '@/context';
 
+import './tabs.scss';
+
 const HIDDEN_FORM_TYPES = new Set(['appointment', 'single_step']);
 
 type TabWithContent = ReactTabsFunctionComponent<TabProps & {hasErrors: boolean}>;
